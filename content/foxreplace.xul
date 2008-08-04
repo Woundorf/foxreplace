@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+  -   Version: MPL 1.1/GPL 2.0/LGPL 2.1
+  -
+  - The contents of this file are subject to the Mozilla Public License Version
+  - 1.1 (the "License"); you may not use this file except in compliance with
+  - the License. You may obtain a copy of the License at
+  - http://www.mozilla.org/MPL/
+  - 
+  - Software distributed under the License is distributed on an "AS IS" basis,
+  - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+  - for the specific language governing rights and limitations under the
+  - License.
+  -
+  - The Original Code is FoxReplace.
+  -
+  - The Initial Developer of the Original Code is
+  - Marc Ruiz Altisent.
+  - Portions created by the Initial Developer are Copyright (C) 2007
+  - the Initial Developer. All Rights Reserved.
+  -
+  - Contributor(s):
+  -
+  - Alternatively, the contents of this file may be used under the terms of
+  - either the GNU General Public License Version 2 or later (the "GPL"), or
+  - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+  - in which case the provisions of the GPL or the LGPL are applicable instead
+  - of those above. If you wish to allow use of your version of this file only
+  - under the terms of either the GPL or the LGPL, and not to allow others to
+  - use your version of this file under the terms of the MPL, indicate your
+  - decision by deleting the provisions above and replace them with the notice
+  - and other provisions required by the GPL or the LGPL. If you do not delete
+  - the provisions above, a recipient may use your version of this file under
+  - the terms of any one of the MPL, the GPL or the LGPL.
+  - 
+  - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://foxreplace/skin/foxreplace.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://foxreplace/locale/foxreplace.dtd">
+<overlay id="foxreplaceOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script src="defs.js"/>
+  <script src="io.js"/>
+  <script src="foxreplace.js"/>
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="fxrStrings" src="chrome://foxreplace/locale/foxreplace.properties"/>
+  </stringbundleset>
+  <commandset>
+    <command id="fxrCmdListReplace" oncommand="foxreplace.listReplace();"/>
+    <command id="fxrCmdShowReplaceBar" oncommand="foxreplace.showReplaceBar();"/>
+    <command id="fxrCmdInstantReplace" oncommand="foxreplace.instantReplace();"/>
+    <command id="fxrCmdOptions" oncommand="foxreplace.showOptions();"/>
+    <command id="fxrCmdHelp" oncommand="foxreplace.showHelp();"/>
+  </commandset>
+  <keyset id="mainKeyset">
+    <key id="fxrKeyListReplace" keycode="VK_F2" command="fxrCmdListReplace"/>
+    <key id="fxrKeyInstantReplace" modifiers="shift" keycode="VK_F2" command="fxrCmdShowReplaceBar"/>
+  </keyset>
+  <menupopup id="menu_EditPopup">
+    <menuitem id="fxrMenuEditReplace" class="menuitem-iconic" insertbefore="textfieldDirection-separator"
+              label="&menuEditReplace.label;" accesskey="&menuEditReplace.accesskey;"
+              command="fxrCmdShowReplaceBar" key="fxrKeyInstantReplace"/>
+  </menupopup>
+  <menupopup id="menu_ToolsPopup">
+    <menu id="fxrMenuToolsFoxReplace" class="menu-iconic"
+          label="&menuToolsFoxReplace.label;" accesskey="&menuToolsFoxReplace.accesskey;"
+          insertbefore="devToolsSeparator">
+      <menupopup>
+        <menuitem id="fxrMenuToolsFoxReplaceReplace"
+                  label="&listReplace.label;" accesskey="&listReplace.accesskey;"
+                  command="fxrCmdListReplace" key="fxrKeyListReplace"/>
+        <menuitem id="fxrMenuToolsFoxReplaceAutoReplaceOnLoad" type="checkbox"
+                  label="&autoReplaceOnLoad.label;" accesskey="&autoReplaceOnLoad.accesskey;"
+                  oncommand="foxreplace.toggleAutoReplaceOnLoad(this);"/>
+        <menuitem id="fxrMenuToolsFoxReplaceOptions"
+                  label="&options.label;" accesskey="&options.accesskey;"
+                  command="fxrCmdOptions"/>
+        <menuseparator/>
+        <menuitem id="fxrMenuToolsHelp"
+                  label="&help.label;" accesskey="&help.accesskey;"
+                  command="fxrCmdHelp"/>
+      </menupopup>
+    </menu>
+  </menupopup>
+  <popup id="contentAreaContextMenu">
+    <menuitem id="fxrMenuContextFoxReplace" class="menuitem-iconic"
+              label="&menuContextFoxReplace.label;" accesskey="&menuContextFoxReplace.accesskey;"
+              command="fxrCmdListReplace" key="fxrKeyListReplace"/>
+  </popup>
+  <toolbarpalette id="BrowserToolbarPalette">
+    <toolbarbutton id="fxrToolbarButton" class="toolbarbutton-1 chromeclass-toolbar-additional"
+                   type="menu-button" label="&toolbarButton.label;" tooltiptext="&toolbarButton.tooltip;"
+                   command="fxrCmdListReplace">
+      <!-- stop event propagation to avoid executing button's command -->
+      <menupopup oncommand="event.stopPropagation();">
+        <menuitem id="fxrToolbarButtonMenuReplace"
+                  label="&listReplace.label;" accesskey="&listReplace.accesskey;"
+                  command="fxrCmdListReplace" key="fxrKeyListReplace"/>
+        <menuitem id="fxrToolbarButtonMenuAutoReplaceOnLoad" type="checkbox"
+                  label="&autoReplaceOnLoad.label;" accesskey="&autoReplaceOnLoad.accesskey;"
+                  oncommand="foxreplace.toggleAutoReplaceOnLoad(this);"/>
+        <menuitem id="fxrToolbarButtonMenuOptions"
+                  label="&options.label;" accesskey="&options.accesskey;"
+                  command="fxrCmdOptions"/>
+        <menuseparator/>
+        <menuitem id="fxrToolbarMenuHelp"
+                  label="&help.label;" accesskey="&help.accesskey;"
+                  command="fxrCmdHelp"/>
+      </menupopup>
+    </toolbarbutton>
+  </toolbarpalette>
+  <window id="main-window"><!-- Firefox 2 -->
+    <vbox id="browser-bottombox" insertafter="FindToolbar"><!-- Firefox 3 -->
+      <toolbar id="fxrReplaceBar" insertafter="FindToolbar" align="center" fullscreentoolbar="true"
+               hidden="true">
+        <toolbarbutton id="fxrReplaceBarCloseButton" tooltiptext="&replaceBarClose;"
+                       oncommand="document.getElementById('fxrReplaceBar').hidden=true;"/>
+        <label id="fxrReplaceBarInputStringLabel" control="fxrReplaceBarInputStringTextBox"
+               value="&replaceBarInputString.label;" accesskey="&replaceBarInputString.accesskey;"/>
+        <textbox id="fxrReplaceBarInputStringTextBox"
+                 oninput="document.getElementById('fxrReplaceBarReplaceButton').disabled=this.value==''"/>
+        <checkbox id="fxrReplaceBarInputRegExpCheckBox"
+                  label="&replaceBarInputRegExp.label;" accesskey="&replaceBarInputRegExp.accesskey;"/>
+        <label id="fxrReplaceBarOutputStringLabel" control="fxrReplaceBarOutputStringTextBox"
+               value="&replaceBarOutputString.label;" accesskey="&replaceBarOutputString.accesskey;"/>
+        <textbox id="fxrReplaceBarOutputStringTextBox"/>
+        <checkbox id="fxrReplaceBarCaseSensitiveCheckBox"
+                  label="&replaceBarCaseSensitive.label;" accesskey="&replaceBarCaseSensitive.accesskey;"/>
+        <checkbox id="fxrReplaceBarWholeWordsCheckBox"
+                  label="&replaceBarWholeWords.label;" accesskey="&replaceBarWholeWords.accesskey;"/>
+        <button id="fxrReplaceBarReplaceButton" disabled="true"
+                label="&replaceBarReplace.label;" accesskey="&replaceBarReplace.accesskey;"
+                command="fxrCmdInstantReplace"/>
+      </toolbar>
+    </vbox>
+  </window>
+</overlay>

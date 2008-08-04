@@ -1,0 +1,9 @@
+/* override Noia fixed width/height */
+#foxreplacePreferences {
+  height: auto !important;
+  width: auto !important;
+}
+
+textbox {
+  width: 20em;
+}

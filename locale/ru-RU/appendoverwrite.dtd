@@ -1,0 +1,6 @@
+<!ENTITY dialog.title "Добавить или перезаписать?">
+<!ENTITY append.label "Добавить">
+<!ENTITY append.accesskey "Д">
+<!ENTITY overwrite.label "Перезаписать">
+<!ENTITY overwrite.accesskey "П">
+<!ENTITY question "Вы хотите добавить замещения к списку или перезаписать его?">

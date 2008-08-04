@@ -1,0 +1,36 @@
+<!ENTITY prefwindow.title "FoxReplace - opcje">
+<!ENTITY mainPane.title "Główne">
+<!ENTITY description "Wprowadź listę wyrażeń do zastąpienia. Operacje zastępowania będą przeprowadzane zgodnie z ich kolejnością na liście.">
+<!ENTITY inputString.label "Zastąp">
+<!ENTITY inputString.accesskey "Z">
+<!ENTITY inputRegExp.label "Wyrażenie regularne">
+<!ENTITY inputRegExp.accesskey "W">
+<!ENTITY outputString.label "tekstem">
+<!ENTITY outputString.accesskey "t">
+<!ENTITY caseSensitive.label "Rozróżniaj wielkość liter">
+<!ENTITY caseSensitive.accesskey "R">
+<!ENTITY wholeWords.label "Tylko całe słowa">
+<!ENTITY wholeWords.accesskey "T">
+<!ENTITY inputStringHeader "Tekst do zastąpienia">
+<!ENTITY inputRegExpHeader "Wyrażenie regularne">
+<!ENTITY outputStringHeader "Tekst zastępujący">
+<!ENTITY caseSensitiveHeader "Rozróżnianie wielkości liter">
+<!ENTITY wholeWordsHeader "Tylko całe słowa">
+<!ENTITY addButton.label "Dodaj">
+<!ENTITY addButton.accesskey "D">
+<!ENTITY upButton.label "Przenieś w górę">
+<!ENTITY upButton.accesskey "g">
+<!ENTITY downButton.label "Przenieś w dół">
+<!ENTITY downButton.accesskey "n">
+<!ENTITY deleteButton.label "Usuń">
+<!ENTITY deleteButton.accesskey "U">
+<!ENTITY clearButton.label "Wyczyść">
+<!ENTITY clearButton.accesskey "y">
+<!ENTITY importButton.label "Importuj">
+<!ENTITY importButton.accesskey "I">
+<!ENTITY exportButton.label "Eksportuj">
+<!ENTITY exportButton.accesskey "E">
+<!ENTITY autoReplaceOnLoad.label "Automatycznie zastępuj tekst na stronach podczas ich wczytywania">
+<!ENTITY autoReplaceOnLoad.accesskey "A">
+<!ENTITY replaceUrls.label "Zastępuj adresy odnośników i obrazków (ostrzeżenie: ta opcja może zmienić zachowanie stron!)">
+<!ENTITY replaceUrls.accesskey "o">

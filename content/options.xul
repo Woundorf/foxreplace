@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+  -   Version: MPL 1.1/GPL 2.0/LGPL 2.1
+  -
+  - The contents of this file are subject to the Mozilla Public License Version
+  - 1.1 (the "License"); you may not use this file except in compliance with
+  - the License. You may obtain a copy of the License at
+  - http://www.mozilla.org/MPL/
+  - 
+  - Software distributed under the License is distributed on an "AS IS" basis,
+  - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+  - for the specific language governing rights and limitations under the
+  - License.
+  -
+  - The Original Code is FoxReplace.
+  -
+  - The Initial Developer of the Original Code is
+  - Marc Ruiz Altisent.
+  - Portions created by the Initial Developer are Copyright (C) 2007
+  - the Initial Developer. All Rights Reserved.
+  -
+  - Contributor(s):
+  -
+  - Alternatively, the contents of this file may be used under the terms of
+  - either the GNU General Public License Version 2 or later (the "GPL"), or
+  - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+  - in which case the provisions of the GPL or the LGPL are applicable instead
+  - of those above. If you wish to allow use of your version of this file only
+  - under the terms of either the GPL or the LGPL, and not to allow others to
+  - use your version of this file under the terms of the MPL, indicate your
+  - decision by deleting the provisions above and replace them with the notice
+  - and other provisions required by the GPL or the LGPL. If you do not delete
+  - the provisions above, a recipient may use your version of this file under
+  - the terms of any one of the MPL, the GPL or the LGPL.
+  - 
+  - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://foxreplace/skin/options.css" type="text/css"?>
+<!DOCTYPE prefwindow SYSTEM "chrome://foxreplace/locale/options.dtd">
+<prefwindow id="foxreplacePreferences"
+            xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            title="&prefwindow.title;"
+            onload="foxreplaceOptions.deleteDumbItem();">
+  <script src="defs.js"/>
+  <script src="io.js"/>
+  <script src="options.js"/>
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="fxrStrings" src="chrome://foxreplace/locale/foxreplace.properties"/>
+  </stringbundleset>
+  <prefpane id="mainPane" label="&mainPane.title;"
+            onpaneload="foxreplaceOptions.loadSubstitutionList();">
+    <preferences>
+      <preference id="substitutionListPref"
+                  name="extensions.foxreplace.substitutionList"
+                  type="unichar"/>
+      <preference id="autoReplaceOnLoad"
+                  name="extensions.foxreplace.autoReplaceOnLoad"
+                  type="bool"/>
+      <preference id="replaceUrls"
+                  name="extensions.foxreplace.replaceUrls"
+                  type="bool"/>
+    </preferences>
+    <description id="description">&description;</description>
+    <separator/>
+    <hbox align="center">
+      <label id="inputStringLabel" control="inputStringTextBox"
+             value="&inputString.label;" accesskey="&inputString.accesskey;"/>
+      <textbox id="inputStringTextBox" flex="1"
+               oninput="document.getElementById('addButton').disabled=this.value==''"/>
+      <checkbox id="inputRegExpCheckBox" label="&inputRegExp.label;" accesskey="&inputRegExp.accesskey;"/>
+      <label id="outputStringLabel" control="outputStringTextBox"
+             value="&outputString.label;" accesskey="&outputString.accesskey;"/>
+      <textbox id="outputStringTextBox" flex="1"/>
+      <checkbox id="caseSensitiveCheckBox"
+                label="&caseSensitive.label;"
+                accesskey="&caseSensitive.accesskey;"/>
+      <checkbox id="wholeWordsCheckBox" label="&wholeWords.label;" accesskey="&wholeWords.accesskey;"/>
+      <button id="addButton" disabled="true"
+              label="&addButton.label;" accesskey="&addButton.accesskey;"
+              oncommand="foxreplaceOptions.addSubstitution();"/>
+    </hbox>
+    <separator/>
+    <hbox>
+      <listbox id="substitutionListBox" flex="1" rows="20"
+               preference-editable="true" preference="substitutionListPref"
+               onsynctopreference="return foxreplaceOptions.saveSubstitutionList();"
+               onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitution();">
+        <listhead>
+          <listheader label="&inputStringHeader;"/>
+          <listheader label="&inputRegExpHeader;"/>
+          <listheader label="&outputStringHeader;"/>
+          <listheader label="&caseSensitiveHeader;"/>
+          <listheader label="&wholeWordsHeader;"/>
+        </listhead>
+        <listcols>
+          <listcol flex="1"/>
+          <listcol/>
+          <listcol flex="1"/>
+          <listcol/>
+          <listcol/>
+        </listcols>
+        <!-- workaround for listbox height -->
+        <listitem id="dumbitem">
+          <listcell label=""/>
+          <listcell label=""/>
+          <listcell label=""/>
+          <listcell label=""/>
+          <listcell label=""/>
+        </listitem>
+      </listbox>
+      <vbox>
+        <button id="upButton" label="&upButton.label;"
+                accesskey="&upButton.accesskey;"
+                oncommand="foxreplaceOptions.moveUpSubstitution();"/>
+        <button id="downButton" label="&downButton.label;"
+                accesskey="&downButton.accesskey;"
+                oncommand="foxreplaceOptions.moveDownSubstitution();"/>
+        <button id="deleteButton" label="&deleteButton.label;"
+                accesskey="&deleteButton.accesskey;"
+                oncommand="foxreplaceOptions.deleteSubstitution();"/>
+        <button id="clearButton" label="&clearButton.label;"
+                accesskey="&clearButton.accesskey;"
+                oncommand="foxreplaceOptions.clearSubstitutions();"/>
+        <separator flex="1"/>
+        <button id="importButton" label="&importButton.label;"
+                accesskey="&importButton.accesskey;"
+                oncommand="foxreplaceOptions.importSubstitutionList();"/>
+        <button id="exportButton" label="&exportButton.label;"
+                accesskey="&exportButton.accesskey;"
+                oncommand="foxreplaceOptions.exportSubstitutionList();"/>
+      </vbox>
+    </hbox>
+    <separator/>
+    <checkbox id="autoReplaceOnLoadCheckBox" label="&autoReplaceOnLoad.label;"
+              accesskey="&autoReplaceOnLoad.accesskey;"
+              preference-editable="true" preference="autoReplaceOnLoad"/>
+    <checkbox id="replaceUrlsCheckBox" label="&replaceUrls.label;" accesskey="&replaceUrls.accesskey;"
+              preference-editable="true" preference="replaceUrls"/>
+  </prefpane>
+</prefwindow>

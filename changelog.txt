@@ -1,0 +1,118 @@
+v0.7.1 (15-7-2008)
+* URL substitutions (thanks to Lutay Sergey).
+* Replace only whole words (thanks to Пирятинский Виталий for the suggestion).
+* Entitized help (thanks to Goofy).
+* New locales:
+  - fr-FR (by Jojaba - BabelZilla).
+  - pl-PL (by Wacław Jacek).
+  - pt-BR (by Alberto Eidh).
+  - ru-RU (by Пирятинский Виталий).
+* New strings:
+  - foxreplace.dtd: replaceBarWholeWords.label, replaceBarWholeWords.accesskey.
+  - options.dtd: wholeWords.label, wholeWords.accesskey, wholeWordsHeader.
+  - help.dtd: everything (extracted from help.html).
+
+v0.7.0 (8-6-2008)
+* Support for regular expressions.
+* HTML help.
+* Own style for the close button of the replace bar.
+* Compatibility with Firefox 3.0.*.
+* New replacing system completely based on XPath.
+* "replace" method in FxRSubstitution prototype.
+* Getters in foxreplaceIO.
+
+v0.6.1 (1-5-2008)
+* Compatibility with Firefox 1.5.
+* More encoded characters ('\n', '\r') in the substitution list.
+
+v0.6.0 (30-4-2008)
+* Instant replace toolbar instead of dialog.
+* Auto width in options dialog (to override Noia 2.0 (eXtreme) fixed width).
+* "Add" button disabled in options dialog if "Replace" field is empty.
+* Updated icons for default theme.
+* Updated help.
+* Fixed bug with case sensitivity.
+* Naming changes.
+* Standard substitution prototype.
+* Use of XUL commands.
+
+v0.5.5 (23-4-2008)
+* Keyboard shortcuts fix (they didn't work in some cases).
+
+v0.5.4 (22-4-2008)
+* Compatibility with Firefox 3.0b5.
+* Case-sensitivity.
+
+v0.5.3 (30-12-2007)
+* Help.
+* Keyboard shortcut visible in context menu.
+* Better description.
+
+v0.5.2 (28-12-2007)
+* Removed toolbar button context menu. It's no longer necessary because the
+  button is now a "menu-button".
+* Bugfix on append/overwrite dialog: wrong function name.
+* Bugfix on toolbar button menu: button's oncommand was also executed.
+* Auto-replace on load now works on all tabs.
+* Revised access keys.
+* Focus returns to input string after adding a substitution in options dialog.
+* Workaroud to get correct height for listbox in the options dialog if there
+  isn't any substitution.
+* Revised coding style.
+* Better documentation.
+* Localized description.
+
+v0.5.1 (25-12-2007)
+* Cleanup of unused files.
+* Better documentation.
+* Append/overwrite dialog:
+  - Reversed button order on GNU/Linux (cancel at left).
+  - Correction in en-US localization.
+* Instant replace dialog:
+  - Corrected alignment of labels and textboxes.
+  - Textboxes width set in stylesheet.
+  - Don't accept if the input string textbox is empty.
+* Options dialog:
+  - Auto height in stylesheet to ensure visibility of all controls with themes
+    that set a fixed height (like Noia 2.0 (eXtreme)).
+* New icons based on an icon from OSX Iconset at GNOME-Look
+  (http://www.gnome-look.org/content/show.php/OSX+Iconset?content=71334) by
+  rpgmaker.
+* New keyboard shortcuts.
+* New toolbar button menu.
+* Changed some strings.
+* Two skins.
+* Tested compatibility with Firefox 3.0b2
+
+v0.5.0 (15-12-2007)
+* New FoxReplace submenu in Tools, replacing the old Replace command.
+* Replacing done only with strings (i.e. not creating a RegExp with the input
+  string).
+* Instant replace (Edit -> Replace...).
+* Import: custom append/overwrite dialog.
+* Options dialog: ListBox with 20 rows and a separator at the end (to ensure
+  visibility of the Export button with some themes (like macfoxIIgraphite).
+* Auto-replace on page load: now, this can be a filter.
+* Default filename for import and export.
+
+v0.4.0 (10-12-2007)
+* Import and export.
+
+v0.3.0 (3-12-2007)
+* Substitutions in texts of all visible form elements.
+
+v0.2.0 (2-12-2007)
+* Escaping of special characters when saving substitution list as string.
+* Replacing implementation changed. Now is based on code in
+  chrome://global/content/findBar.js. It's faster and finds only visible text.
+* Substitutions in document title.
+* Added buttons to move up, move down, delete and clear substitutions from
+  substitution list.
+
+v0.1.0 (24-11-2007)
+* Add and remove substitutions from options dialog.
+* Perform substitutions.
+* Locales: ca-AD, en-US.
+
+v0.0.0 (21-11-2007)
+* Hello world.
