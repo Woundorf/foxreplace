@@ -1,3 +1,9 @@
+v0.7.2
+* Corrected description in foxreplace.properties. It was cut with a \ at the
+  end, creating a bug that didn't allow to import a replace list.
+* Changed strings:
+  - foxreplace.properties: extensions.fox@replace.fx.description.
+
 v0.7.1 (15-7-2008)
 * URL substitutions (thanks to Lutay Sergey).
 * Replace only whole words (thanks to Пирятинский Виталий for the suggestion).
