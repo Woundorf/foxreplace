@@ -1,0 +1,6 @@
+<!ENTITY dialog.title "Dodać czy nadpisać?">
+<!ENTITY append.label "Dodaj">
+<!ENTITY append.accesskey "D">
+<!ENTITY overwrite.label "Nadpisz">
+<!ENTITY overwrite.accesskey "N">
+<!ENTITY question "Czy chcesz dodać listę wyrażen do istniejącej, czy ją nadpisać?">

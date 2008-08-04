@@ -1,0 +1,36 @@
+<!ENTITY prefwindow.title "Opções do FoxReplace">
+<!ENTITY mainPane.title "Menu Principal">
+<!ENTITY description "Entre com a lista de substituição. Substituições serão feitos na ordem que forem aparecendo na lista">
+<!ENTITY inputString.label "Substituir">
+<!ENTITY inputString.accesskey "R">
+<!ENTITY inputRegExp.label "Expressão regular">
+<!ENTITY inputRegExp.accesskey "e">
+<!ENTITY outputString.label "com">
+<!ENTITY outputString.accesskey "w">
+<!ENTITY caseSensitive.label "Coincidir palavra inteira">
+<!ENTITY caseSensitive.accesskey "M">
+<!ENTITY wholeWords.label "Only whole words">
+<!ENTITY wholeWords.accesskey "O">
+<!ENTITY inputStringHeader "Substituir">
+<!ENTITY inputRegExpHeader "Expressão regular">
+<!ENTITY outputStringHeader "Com">
+<!ENTITY caseSensitiveHeader "Coincidir palavra inteira">
+<!ENTITY wholeWordsHeader "Only whole words">
+<!ENTITY addButton.label "Adicionar">
+<!ENTITY addButton.accesskey "A">
+<!ENTITY upButton.label "Mover para cima">
+<!ENTITY upButton.accesskey "u">
+<!ENTITY downButton.label "Mover para baixo">
+<!ENTITY downButton.accesskey "d">
+<!ENTITY deleteButton.label "Excluir">
+<!ENTITY deleteButton.accesskey "l">
+<!ENTITY clearButton.label "Limpar">
+<!ENTITY clearButton.accesskey "C">
+<!ENTITY importButton.label "Importar">
+<!ENTITY importButton.accesskey "I">
+<!ENTITY exportButton.label "Exportar">
+<!ENTITY exportButton.accesskey "x">
+<!ENTITY autoReplaceOnLoad.label "Substituir automaticamente no carregamento da página">
+<!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY replaceUrls.label "Substituir endereços (links e fontes de imagem) (Aviso: isto mudará o comportamento da página!)">
+<!ENTITY replaceUrls.accesskey "p">

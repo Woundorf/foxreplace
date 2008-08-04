@@ -1,0 +1,29 @@
+<!ENTITY menuEditReplace.label "Reemplaça...">
+<!ENTITY menuEditReplace.accesskey "e">
+<!ENTITY menuToolsFoxReplace.label "FoxReplace">
+<!ENTITY menuToolsFoxReplace.accesskey "F">
+<!ENTITY menuContextFoxReplace.label "Reemplaça amb la llista de substitucions (FoxReplace)">
+<!ENTITY menuContextFoxReplace.accesskey "m">
+<!ENTITY toolbarButton.label "FoxReplace">
+<!ENTITY toolbarButton.tooltip "Reemplaça amb la llista de substitucions">
+<!ENTITY listReplace.label "Reemplaça amb la llista de substitucions">
+<!ENTITY listReplace.accesskey "R">
+<!ENTITY autoReplaceOnLoad.label "Reemplaça automàticament en carregar una pàgina">
+<!ENTITY autoReplaceOnLoad.accesskey "a">
+<!ENTITY options.label "Opcions de FoxReplace...">
+<!ENTITY options.accesskey "O">
+<!ENTITY help.label "Ajuda">
+<!ENTITY help.accesskey "j">
+<!ENTITY replaceBarClose "Tanca la barra de reemplaçament">
+<!ENTITY replaceBarInputString.label "Reemplaça">
+<!ENTITY replaceBarInputString.accesskey "R">
+<!ENTITY replaceBarInputRegExp.label "Expressió regular">
+<!ENTITY replaceBarInputRegExp.accesskey "E">
+<!ENTITY replaceBarOutputString.label "amb">
+<!ENTITY replaceBarOutputString.accesskey "a">
+<!ENTITY replaceBarCaseSensitive.label "Distingeix entre majúscules i minúscules">
+<!ENTITY replaceBarCaseSensitive.accesskey "D">
+<!ENTITY replaceBarWholeWords.label "Només paraules senceres">
+<!ENTITY replaceBarWholeWords.accesskey "N">
+<!ENTITY replaceBarReplace.label "Reemplaça">
+<!ENTITY replaceBarReplace.accesskey "m">

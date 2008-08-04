@@ -1,0 +1,6 @@
+<!ENTITY dialog.title "Ajouter ou remplacer ?">
+<!ENTITY append.label "Ajouter">
+<!ENTITY append.accesskey "A">
+<!ENTITY overwrite.label "Remplacer">
+<!ENTITY overwrite.accesskey "R">
+<!ENTITY question "Souhaitez-vous ajouter à la liste de substitution ou la remplacer ?">

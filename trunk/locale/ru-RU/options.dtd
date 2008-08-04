@@ -1,0 +1,36 @@
+<!ENTITY prefwindow.title "FoxReplace - Настройки">
+<!ENTITY mainPane.title "Общие">
+<!ENTITY description "Введите список замещения. Замещения будут сделаны в том же порядке, как они расположены в списке.">
+<!ENTITY inputString.label "Заменить">
+<!ENTITY inputString.accesskey "З">
+<!ENTITY inputRegExp.label "Регулярное выражение">
+<!ENTITY inputRegExp.accesskey "Р">
+<!ENTITY outputString.label "на">
+<!ENTITY outputString.accesskey "н">
+<!ENTITY caseSensitive.label "С учётом регистра">
+<!ENTITY caseSensitive.accesskey "ч">
+<!ENTITY wholeWords.label "Только целые слова">
+<!ENTITY wholeWords.accesskey "Т">
+<!ENTITY inputStringHeader "Заменить">
+<!ENTITY inputRegExpHeader "Регулярное выражение">
+<!ENTITY outputStringHeader "На">
+<!ENTITY caseSensitiveHeader "С учётом регистра">
+<!ENTITY wholeWordsHeader "Только целые слова">
+<!ENTITY addButton.label "Добавить">
+<!ENTITY addButton.accesskey "Д">
+<!ENTITY upButton.label "Выше">
+<!ENTITY upButton.accesskey "В">
+<!ENTITY downButton.label "Ниже">
+<!ENTITY downButton.accesskey "Н">
+<!ENTITY deleteButton.label "Удалить">
+<!ENTITY deleteButton.accesskey "л">
+<!ENTITY clearButton.label "Сбросить">
+<!ENTITY clearButton.accesskey "б">
+<!ENTITY importButton.label "Импорт">
+<!ENTITY importButton.accesskey "м">
+<!ENTITY exportButton.label "Экспорт">
+<!ENTITY exportButton.accesskey "к">
+<!ENTITY autoReplaceOnLoad.label "Автозамена при загрузке страницы">
+<!ENTITY autoReplaceOnLoad.accesskey "т">
+<!ENTITY replaceUrls.label "Заменять адреса (ссылок и изображений). ВНИМАНИЕ! Это изменит поведение страницы.">
+<!ENTITY replaceUrls.accesskey "а">

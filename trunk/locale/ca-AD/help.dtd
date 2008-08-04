@@ -1,0 +1,56 @@
+<!ENTITY title "Ajuda de FoxReplace">
+<!ENTITY h1 "Ajuda de FoxReplace">
+<!ENTITY p "Aquesta extensió permet reemplaçar fragments de text en una pàgina per altres fragments de text. El
+         sistema es basa en &lt;b&gt;substitucions&lt;/b&gt;: una substitució consisteix en un text que ha de ser reemplaçat
+         (identificat com a &quot;Reemplaça&quot;) i un text amb el qual s&apos;ha de reemplaçar el primer (identificat
+         com a &quot;Amb&quot;). Totes les substitucions s&apos;apliquen sempre sobre &lt;b&gt;tot&lt;/b&gt; el contingut d&apos;una
+         pàgina (de moment no es poden fer substitucions parcials).">
+<!ENTITY substitution "Substitució">
+<!ENTITY substitution.p "Té una cadena d&apos;entrada i una cadena de sortida, i l&apos;opció de distingir entre majúscules
+         i minúscules o no.">
+<!ENTITY substitution.inputString "Cadena d&apos;entrada: la cadena de text que serà reemplaçada. Pot ser una &lt;a href=
+         &apos;http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions&apos;
+         &gt;expressió regular&lt;/a&gt;, marcant l&apos;opció corresponent.">
+<!ENTITY substitution.outputString "Cadena de sortida: la cadena de text que reemplaçarà la d&apos;entrada. Pot tenir
+         els següents patrons especials:">
+<!ENTITY substitution.table.summary "Patrons especials de la cadena de sortida">
+<!ENTITY substitution.table.0 "Insereix un &quot;$&quot;.">
+<!ENTITY substitution.table.1 "Insereix la cadena d&apos;entrada.">
+<!ENTITY substitution.table.2 "Insereix el text d&apos;abans de la cadena d&apos;entrada dins del mateix bloc.">
+<!ENTITY substitution.table.3 "Insereix el text de després de la cadena d&apos;entrada dins del mateix bloc.">
+<!ENTITY substitution.table.4 "Si la cadena d&apos;entrada és una expressió regular, i &lt;i&gt;n&lt;/i&gt; un nombre enter decimal
+         entre 1 i 99 (inclosos), insereix la &lt;i&gt;n&lt;/i&gt;-èssima subcadena trobada.">
+<!ENTITY substitutionList "Llista de substitucions">
+<!ENTITY substitutionList.p "L&apos;extensió guarda una llista de substitucions que podeu definir i modificar en
+         qualsevol moment des de la finestra d&apos;opcions de FoxReplace. Podeu aplicar la llista de substitucions
+         quan vulgueu prement la tecla F2 o bé prement el botó de la barra d&apos;eines o activant una opció del menú.
+         Quan ho feu, les substitucions de la llista s&apos;aplicaran en l&apos;ordre en què apareixen. Podeu aplicar la
+         llista de substitucions tantes vegades com vulgueu sobre la mateixa pàgina. Les substitucions es fan
+         sobre el contingut actual de la pàgina, és a dir, que si apliqueu la llista de substitucions una segona
+         vegada, serà sobre el resultat de la primera.">
+<!ENTITY autoReplace "Reemplaça automàticament en carregar una pàgina">
+<!ENTITY autoReplace.p "Aquesta opció es pot activar o desactivar. Quan està activa, s&apos;aplica la llista de
+         substitucions automàticament quan es carrega una pàgina. D&apos;aquesta manera l&apos;extensió pot actuar com un
+         filtre: podeu fer desaparèixer les paraules que no us agraden (o no us agrada com estan escrites)
+         canviant-les per altres que trobeu més adients. I amb una mica d&apos;imaginació pot servir per fer bromes i
+         tot ;)">
+<!ENTITY newGui "Nous elements dels menús i barra d&apos;eines">
+<!ENTITY newGui.edit "Edita">
+<!ENTITY newGui.edit.replace "Reemplaça... (Maj+F2)">
+<!ENTITY newGui.edit.replace.d "Permet definir una substitució i aplicar-la a l&apos;instant.">
+<!ENTITY newGui.tools "Eines">
+<!ENTITY newGui.tools.foxreplace "FoxReplace">
+<!ENTITY newGui.tools.foxreplace.replace "Reemplaça amb la llista de substitucions (F2)">
+<!ENTITY newGui.tools.foxreplace.replace.d "Aplica la llista de substitucions actual.">
+<!ENTITY newGui.tools.foxreplace.autoReplace "Reemplaça automàticament en carregar una pàgina">
+<!ENTITY newGui.tools.foxreplace.autoReplace.d "Activa/desactiva aquesta opció.">
+<!ENTITY newGui.tools.foxreplace.options "Opcions de FoxReplace...">
+<!ENTITY newGui.tools.foxreplace.options.d "Obre la finestra d&apos;opcions de FoxReplace.">
+<!ENTITY newGui.tools.foxreplace.help "Ajuda">
+<!ENTITY newGui.tools.foxreplace.help.d "Mostra aquesta pàgina.">
+<!ENTITY newGui.toolbarButton "Botó de la barra d&apos;eines">
+<!ENTITY newGui.toolbarButton.0 "Prement-lo, aplica la llista de substitucions actual.">
+<!ENTITY newGui.toolbarButton.1 "Al costat té un menú com el FoxReplace de dalt.">
+<!ENTITY newGui.contextMenu "Menú contextual">
+<!ENTITY newGui.contextMenu.replace "Reemplaça amb la llista de substitucions (FoxReplace) (F2)">
+<!ENTITY newGui.contextMenu.replace.d "Aplica la llista de substitucions actual.">

@@ -1,0 +1,29 @@
+<!ENTITY menuEditReplace.label "Remplacer…">
+<!ENTITY menuEditReplace.accesskey "e">
+<!ENTITY menuToolsFoxReplace.label "FoxReplace">
+<!ENTITY menuToolsFoxReplace.accesskey "F">
+<!ENTITY menuContextFoxReplace.label "Remplacer par la liste de substitution (FoxReplace)">
+<!ENTITY menuContextFoxReplace.accesskey "l">
+<!ENTITY toolbarButton.label "FoxReplace">
+<!ENTITY toolbarButton.tooltip "Remplacement par la liste de substitution">
+<!ENTITY listReplace.label "Remplacer par la liste de substitution">
+<!ENTITY listReplace.accesskey "R">
+<!ENTITY autoReplaceOnLoad.label "Remplacer automatiquement lors du chargement de la page">
+<!ENTITY autoReplaceOnLoad.accesskey "a">
+<!ENTITY options.label "Options de FoxReplace…">
+<!ENTITY options.accesskey "O">
+<!ENTITY help.label "Aide">
+<!ENTITY help.accesskey "A">
+<!ENTITY replaceBarClose "Fermer la barre de remplacement">
+<!ENTITY replaceBarInputString.label "Remplacer">
+<!ENTITY replaceBarInputString.accesskey "R">
+<!ENTITY replaceBarInputRegExp.label "Expression régulière">
+<!ENTITY replaceBarInputRegExp.accesskey "E">
+<!ENTITY replaceBarOutputString.label "par">
+<!ENTITY replaceBarOutputString.accesskey "p">
+<!ENTITY replaceBarCaseSensitive.label "Casse correspondante">
+<!ENTITY replaceBarCaseSensitive.accesskey "C">
+<!ENTITY replaceBarWholeWords.label "Only whole words">
+<!ENTITY replaceBarWholeWords.accesskey "O">
+<!ENTITY replaceBarReplace.label "Remplacer">
+<!ENTITY replaceBarReplace.accesskey "p">
