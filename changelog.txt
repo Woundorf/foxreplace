@@ -1,6 +1,8 @@
-v0.7.2
+v0.7.2 (5-8-2008)
 * Corrected description in foxreplace.properties. It was cut with a \ at the
   end, creating a bug that didn't allow to import a replace list.
+* New locale:
+  - de-DE (by CosmicForce).
 * Changed strings:
   - foxreplace.properties: extensions.fox@replace.fx.description.
 

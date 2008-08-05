@@ -3,4 +3,4 @@
 <!ENTITY append.accesskey "D">
 <!ENTITY overwrite.label "Nadpisz">
 <!ENTITY overwrite.accesskey "N">
-<!ENTITY question "Czy chcesz dodać listę wyrażen do istniejącej, czy ją nadpisać?">
+<!ENTITY question "Dodać listę wyrażen do istniejącej, czy ją nadpisać?">
