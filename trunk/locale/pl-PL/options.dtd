@@ -3,7 +3,7 @@
 <!ENTITY description "Wprowadź listę wyrażeń do zastąpienia. Operacje zastępowania będą przeprowadzane zgodnie z ich kolejnością na liście.">
 <!ENTITY inputString.label "Zastąp">
 <!ENTITY inputString.accesskey "Z">
-<!ENTITY inputRegExp.label "Wyrażenie regularne">
+<!ENTITY inputRegExp.label "(wyrażenie regularne)">
 <!ENTITY inputRegExp.accesskey "W">
 <!ENTITY outputString.label "tekstem">
 <!ENTITY outputString.accesskey "t">
@@ -26,11 +26,11 @@
 <!ENTITY deleteButton.accesskey "U">
 <!ENTITY clearButton.label "Wyczyść">
 <!ENTITY clearButton.accesskey "y">
-<!ENTITY importButton.label "Importuj">
+<!ENTITY importButton.label "Zaimportuj">
 <!ENTITY importButton.accesskey "I">
-<!ENTITY exportButton.label "Eksportuj">
+<!ENTITY exportButton.label "Wyeksportuj">
 <!ENTITY exportButton.accesskey "E">
 <!ENTITY autoReplaceOnLoad.label "Automatycznie zastępuj tekst na stronach podczas ich wczytywania">
 <!ENTITY autoReplaceOnLoad.accesskey "A">
-<!ENTITY replaceUrls.label "Zastępuj adresy odnośników i obrazków (ostrzeżenie: ta opcja może zmienić zachowanie stron!)">
+<!ENTITY replaceUrls.label "Zastępuj tekst będący adresem odnośników i obrazków (ostrzeżenie: ta opcja może zmienić zachowanie stron!)">
 <!ENTITY replaceUrls.accesskey "o">

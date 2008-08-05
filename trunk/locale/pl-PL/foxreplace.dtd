@@ -10,7 +10,7 @@
 <!ENTITY listReplace.accesskey "Z">
 <!ENTITY autoReplaceOnLoad.label "Automatycznie zastępuj tekst na stronach podczas ich wczytywania">
 <!ENTITY autoReplaceOnLoad.accesskey "A">
-<!ENTITY options.label "FoxReplace - opcje...">
+<!ENTITY options.label "Opcje FoxReplace...">
 <!ENTITY options.accesskey "o">
 <!ENTITY help.label "Pomoc">
 <!ENTITY help.accesskey "P">

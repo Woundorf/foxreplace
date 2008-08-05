@@ -9,13 +9,13 @@
 <!ENTITY outputString.accesskey "w">
 <!ENTITY caseSensitive.label "Coincidir palavra inteira">
 <!ENTITY caseSensitive.accesskey "M">
-<!ENTITY wholeWords.label "Only whole words">
+<!ENTITY wholeWords.label "Somente palavra inteira">
 <!ENTITY wholeWords.accesskey "O">
 <!ENTITY inputStringHeader "Substituir">
 <!ENTITY inputRegExpHeader "Expressão regular">
 <!ENTITY outputStringHeader "Com">
 <!ENTITY caseSensitiveHeader "Coincidir palavra inteira">
-<!ENTITY wholeWordsHeader "Only whole words">
+<!ENTITY wholeWordsHeader "Somente palavras inteiras">
 <!ENTITY addButton.label "Adicionar">
 <!ENTITY addButton.accesskey "A">
 <!ENTITY upButton.label "Mover para cima">
