@@ -44,6 +44,10 @@ toolbar[iconsize="small"] #fxrToolbarButton:hover {
   width: 20em;
 }
 
+#fxrReplaceBarInputStringTextBox {
+  -moz-binding: url("chrome://foxreplace/content/bindings.xml#inputTextBox");
+}
+
 /*
 #FindToolbar {
   -moz-appearance: none !important;

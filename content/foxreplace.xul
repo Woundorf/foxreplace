@@ -118,8 +118,6 @@
                value="&replaceBarInputString.label;" accesskey="&replaceBarInputString.accesskey;"/>
         <textbox id="fxrReplaceBarInputStringTextBox"
                  oninput="document.getElementById('fxrReplaceBarReplaceButton').disabled=this.value==''"/>
-        <checkbox id="fxrReplaceBarInputRegExpCheckBox"
-                  label="&replaceBarInputRegExp.label;" accesskey="&replaceBarInputRegExp.accesskey;"/>
         <label id="fxrReplaceBarOutputStringLabel" control="fxrReplaceBarOutputStringTextBox"
                value="&replaceBarOutputString.label;" accesskey="&replaceBarOutputString.accesskey;"/>
         <textbox id="fxrReplaceBarOutputStringTextBox"/>
