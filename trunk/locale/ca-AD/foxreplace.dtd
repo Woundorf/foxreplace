@@ -17,8 +17,6 @@
 <!ENTITY replaceBarClose "Tanca la barra de reemplaçament">
 <!ENTITY replaceBarInputString.label "Reemplaça">
 <!ENTITY replaceBarInputString.accesskey "R">
-<!ENTITY replaceBarInputRegExp.label "Expressió regular">
-<!ENTITY replaceBarInputRegExp.accesskey "E">
 <!ENTITY replaceBarOutputString.label "amb">
 <!ENTITY replaceBarOutputString.accesskey "a">
 <!ENTITY replaceBarCaseSensitive.label "Distingeix entre majúscules i minúscules">

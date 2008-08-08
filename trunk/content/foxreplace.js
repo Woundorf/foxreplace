@@ -112,7 +112,7 @@ var foxreplace = {
    */
   instantReplace: function() {
     var inputString = document.getElementById("fxrReplaceBarInputStringTextBox").value;
-    var inputRegExp = document.getElementById("fxrReplaceBarInputRegExpCheckBox").checked;
+    var inputRegExp = document.getElementById("fxrReplaceBarInputStringTextBox").isRegExp;
     var outputString = document.getElementById("fxrReplaceBarOutputStringTextBox").value;
     var caseSensitive = document.getElementById("fxrReplaceBarCaseSensitiveCheckBox").checked;
     var wholeWords = document.getElementById("fxrReplaceBarWholeWordsCheckBox").checked;
