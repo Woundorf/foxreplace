@@ -3,48 +3,42 @@
 <!ENTITY p "Esta extensão permite você substituir fragmentos do texto numa página por outros fragmentos de texto. O sistema é baseado em &lt;b&gt;substituições&lt;/b&gt;: uma substituição consiste num texto que deve ser substituído (identificado como &quot;Substituir&quot;) e um texto que substituirá (Identificado como &quot;Com&quot;).
 Todas as substituições são sempre aplicados sobre &lt;b&gt;todo&lt;/b&gt; conteúdo da página (você não pode fazer substituições parciais no momento).">
 <!ENTITY substitution "Substituição">
-<!ENTITY substitution.p "Has an input string and an output string, and the option to match case or not.">
-<!ENTITY substitution.inputString "Input string: the text string that will be replaced. It can be a &lt;a href=
+<!ENTITY substitution.p "Tem uma string de entrada e uma de saída, e a opção de diferenciar maiúsc./minúsc. ou não.">
+<!ENTITY substitution.inputString "String de entrada: o texto que será substituído. Pode ser uma &lt;a href=
          &apos;http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions&apos;
-         &gt;regular expression&lt;/a&gt;, checking the corresponding option.">
-<!ENTITY substitution.outputString "Output string: the text string that will replace the input. It can have the
-         following special patterns:">
-<!ENTITY substitution.table.summary "Special patterns for the output string">
+         &gt;expressão regular&lt;/a&gt;, verificando a opção correspondente.">
+<!ENTITY substitution.outputString "String de saída: o texto que substituirá a string de entrada. Pode ter os seguintes padrões especiais:">
+<!ENTITY substitution.table.summary "Padrões especiais para a string de saída">
 <!ENTITY substitution.table.0 "Insere um &quot;$&quot;.">
-<!ENTITY substitution.table.1 "Inserts the input string.">
-<!ENTITY substitution.table.2 "Inserts the text preceding the input string inside the same block.">
-<!ENTITY substitution.table.3 "Inserts the text following the input string inside the same block.">
-<!ENTITY substitution.table.4 "If the input string is a regular expression, and &lt;i&gt;n&lt;/i&gt; a decimal integer number
-         between 1 and 99 (included), inserts the &lt;i&gt;n&lt;/i&gt;th found substring.">
+<!ENTITY substitution.table.1 "Insere uma string de entrada.">
+<!ENTITY substitution.table.2 "Insere o texto precedendo a string de entrada dentro do mesmo bloco.">
+<!ENTITY substitution.table.3 "Insere o texto seguindo a string de entrada dentro do mesmo bloco.">
+<!ENTITY substitution.table.4 "Se a string de entrada é uma expressão regular, e &lt;i&gt;n&lt;/i&gt; um número inteiro decimal entre 1 e 99 (incluindo), insere o &lt;i&gt;n&lt;/i&gt;º substring encontrado.">
 <!ENTITY substitutionList "Lista de substituição">
-<!ENTITY substitutionList.p "The extension keeps a substitution list that you can define and modify at any moment
-         from the FoxReplace options window. You can apply the substitution list when you want by pressing F2 key
-         or by pushing the toolbar button or activating a menu option. When you do, substitutions in the list will
-         be applied in the order in which they appear. You can apply the substitution list as many times as you
-         want over the same page. Substitutions are done over the current content of the page, i.e. if you apply
+<!ENTITY substitutionList.p "A extensão mantém uma lista de substituição que você pode definir e modificar a qualquer momento da janela de opções do FoxReplace. Você pode aplicar a lista de substituição quando você quiser apertando a tecla F2 ou clicando sobre o botão da barra de ferramentas ou ativando um menu de opção. Quando você fizer, substituições na lista serão aplicadas na ordem que eles aparecerem. Você pode aplicar a lista de substituição quantas vezes você quiser sobre a mesma página. Substitutions are done over the current content of the page, i.e. if you apply
          the substitution list a second time, it will be over the result of the first.">
-<!ENTITY autoReplace "Auto-replace on page load">
+<!ENTITY autoReplace "Substituição automática ao carregar a página">
 <!ENTITY autoReplace.p "This option can be activated or deactivated. When it&apos;s on, the substitution list is
          applied automatically when a page is loaded. This way the extension can work as a filter: you can make
          disappear words that you don&apos;t like (or that you don&apos;t like how they are written) replacing them by more
          suitable ones. And with some imagination it can even be useful to make jokes ;)">
-<!ENTITY newGui "New menu and toolbar elements">
+<!ENTITY newGui "Novos elementos do menu e barra de ferramentas">
 <!ENTITY newGui.edit "Editar">
 <!ENTITY newGui.edit.replace "Substituir… (Shift + F2)">
-<!ENTITY newGui.edit.replace.d "Lets you define a substitution and apply it instantly.">
+<!ENTITY newGui.edit.replace.d "Permite você definir uma substituição e aplicá-lo instantaneamente.">
 <!ENTITY newGui.tools "Ferramentas">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
 <!ENTITY newGui.tools.foxreplace.replace "Substituir com uma lista (F2)">
 <!ENTITY newGui.tools.foxreplace.replace.d "Aplicar lista de substituição atual">
 <!ENTITY newGui.tools.foxreplace.autoReplace "Substituir automaticamente ao carregar página">
-<!ENTITY newGui.tools.foxreplace.autoReplace.d "Toggles this option.">
+<!ENTITY newGui.tools.foxreplace.autoReplace.d "Abre esta opção.">
 <!ENTITY newGui.tools.foxreplace.options "Opções do FoxReplace…">
-<!ENTITY newGui.tools.foxreplace.options.d "Opens FoxReplace options window.">
+<!ENTITY newGui.tools.foxreplace.options.d "Abre a janela de opções do FoxReplace.">
 <!ENTITY newGui.tools.foxreplace.help "Ajuda">
 <!ENTITY newGui.tools.foxreplace.help.d "Exibe esta página.">
-<!ENTITY newGui.toolbarButton "Toolbar button">
-<!ENTITY newGui.toolbarButton.0 "Pressing it applies current substitution list.">
+<!ENTITY newGui.toolbarButton "Botão da barra de ferramentas">
+<!ENTITY newGui.toolbarButton.0 "Clicando sobre aplica a lista de substituição.">
 <!ENTITY newGui.toolbarButton.1 "It has a menu at side like the FoxReplace above.">
 <!ENTITY newGui.contextMenu "Menu de contexto">
-<!ENTITY newGui.contextMenu.replace "Replace with substitution list (FoxReplace) (F2)">
-<!ENTITY newGui.contextMenu.replace.d "Applies current substitution list.">
+<!ENTITY newGui.contextMenu.replace "Substituir com uma lista de substituição (FoxReplace) (F2)">
+<!ENTITY newGui.contextMenu.replace.d "Aplica a lista de substituição atual">
