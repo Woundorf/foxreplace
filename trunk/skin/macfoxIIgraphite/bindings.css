@@ -44,12 +44,12 @@
   margin-left: 0px;
   /*background-color: -moz-field;*/
 
-  -moz-appearance: none;
+  /*-moz-appearance: none;
   -moz-border-top-colors: #96969D;
   -moz-border-bottom-colors: #96969D;
   -moz-border-right-colors: #96969D;
   -moz-border-left-colors: #96969D;
-  border-width: 1px;
+  border-width: 1px;*/
 }
 
 .inputTextBox[regexp="false"] {
