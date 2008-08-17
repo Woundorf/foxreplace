@@ -60,13 +60,14 @@ var foxreplaceOptions = {
    */
   addSubstitution: function() {
     var inputStringTextBox = document.getElementById("inputStringTextBox");
-    var inputRegExpCheckBox = document.getElementById("inputRegExpCheckBox");
+    //var inputRegExpCheckBox = document.getElementById("inputRegExpCheckBox");
     var outputStringTextBox = document.getElementById("outputStringTextBox");
     var caseSensitiveCheckBox = document.getElementById("caseSensitiveCheckBox");
     var wholeWordsCheckBox = document.getElementById("wholeWordsCheckBox");
     
     var inputString = inputStringTextBox.value;
-    var inputRegExp = inputRegExpCheckBox.checked;
+    //var inputRegExp = inputRegExpCheckBox.checked;
+    var inputRegExp = inputStringTextBox.isRegExp;
     var outputString = outputStringTextBox.value;
     var caseSensitive = caseSensitiveCheckBox.checked;
     var wholeWords = wholeWordsCheckBox.checked;
@@ -108,7 +109,8 @@ var foxreplaceOptions = {
     
     // Clear fields
     inputStringTextBox.value = "";
-    inputRegExpCheckBox.checked = false;
+    //inputRegExpCheckBox.checked = false;
+    inputStringTextBox.isRegExp = false;
     outputStringTextBox.value = "";
     caseSensitiveCheckBox.checked = false;
     wholeWordsCheckBox.checked = false;

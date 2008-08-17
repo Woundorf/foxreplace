@@ -1,10 +1,12 @@
 * Less crowded replace bar (new input textbox with XBL).
+* New XBL input textbox also in options dialog.
 * Better replace bar theme for macfoxIIgraphite.
 * New strings:
   - bindings.dtd: all.
 * Removed strings:
   - foxreplace.dtd: replaceBarInputRegExp.label,
     replaceBarInputRegExp.accesskey.
+  - options.dtd: inputRegExp.label, inputRegExp.accesskey.
 
 v0.7.2 (5-8-2008)
 * Corrected description in foxreplace.properties. It was cut with a \ at the

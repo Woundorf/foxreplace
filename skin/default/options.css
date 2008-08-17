@@ -7,3 +7,7 @@
 textbox {
   width: 20em;
 }
+
+#inputStringTextBox {
+  -moz-binding: url("chrome://foxreplace/content/bindings.xml#inputTextBox");
+}
