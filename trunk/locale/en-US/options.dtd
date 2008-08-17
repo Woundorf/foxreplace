@@ -4,8 +4,6 @@
          the list.">
 <!ENTITY inputString.label "Replace">
 <!ENTITY inputString.accesskey "R">
-<!ENTITY inputRegExp.label "Regular expression">
-<!ENTITY inputRegExp.accesskey "e">
 <!ENTITY outputString.label "with">
 <!ENTITY outputString.accesskey "w">
 <!ENTITY caseSensitive.label "Match case">

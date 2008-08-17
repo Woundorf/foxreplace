@@ -68,7 +68,7 @@
              value="&inputString.label;" accesskey="&inputString.accesskey;"/>
       <textbox id="inputStringTextBox" flex="1"
                oninput="document.getElementById('addButton').disabled=this.value==''"/>
-      <checkbox id="inputRegExpCheckBox" label="&inputRegExp.label;" accesskey="&inputRegExp.accesskey;"/>
+      <!-- <checkbox id="inputRegExpCheckBox" label="&inputRegExp.label;" accesskey="&inputRegExp.accesskey;"/> -->
       <label id="outputStringLabel" control="outputStringTextBox"
              value="&outputString.label;" accesskey="&outputString.accesskey;"/>
       <textbox id="outputStringTextBox" flex="1"/>

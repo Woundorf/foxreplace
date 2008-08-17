@@ -4,8 +4,6 @@
          a la llista.">
 <!ENTITY inputString.label "Reemplaça">
 <!ENTITY inputString.accesskey "R">
-<!ENTITY inputRegExp.label "Expressió regular">
-<!ENTITY inputRegExp.accesskey "E">
 <!ENTITY outputString.label "amb">
 <!ENTITY outputString.accesskey "a">
 <!ENTITY caseSensitive.label "Distingeix entre majúscules i minúscules">
