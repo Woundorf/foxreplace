@@ -1,4 +1,5 @@
 * Less crowded replace bar (new input textbox with XBL).
+* Better replace bar theme for macfoxIIgraphite.
 * New strings:
   - bindings.dtd: all.
 * Removed strings:

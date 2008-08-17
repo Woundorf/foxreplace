@@ -23,11 +23,17 @@ toolbar[iconsize="small"] #fxrToolbarButton:hover {
 }
 
 #fxrReplaceBarCloseButton {
-  border: 0px solid transparent;
+  /*border: 0px solid transparent;*/
   /*padding: 3px 2px 4px 2px !important;*/
-  list-style-image: url("chrome://foxreplace/skin/close.png");
+  /*list-style-image: url("chrome://foxreplace/skin/close.png");
   -moz-appearance: none;
-  -moz-image-region: rect(0px, 16px, 16px, 0px);
+  -moz-image-region: rect(0px, 16px, 16px, 0px);*/
+  padding: 0px 4px 0px 0px;
+	list-style-image: none;
+	border: none;
+	background-image: none !important;
+	list-style-image: url("chrome://global/skin/icons/close.png") !important;
+ 	-moz-image-region: rect(0px, 16px, 16px, 0px) !important;
 }
 /*#fxrReplaceBarCloseButton > .toolbarbutton-icon {
   -moz-margin-end: 0px !important;
@@ -35,10 +41,12 @@ toolbar[iconsize="small"] #fxrToolbarButton:hover {
   -moz-padding-start: 2px !important;
 }*/
 #fxrReplaceBarCloseButton:hover {
-  -moz-image-region: rect(0px, 32px, 16px, 16px);
+  /*-moz-image-region: rect(0px, 32px, 16px, 16px);*/
+  -moz-image-region: rect(0px, 32px, 16px, 16px) !important;
 }
 #fxrReplaceBarCloseButton:hover:active {
-  -moz-image-region: rect(0px, 48px, 16px, 32px);
+  /*-moz-image-region: rect(0px, 48px, 16px, 32px);*/
+  -moz-image-region: rect(0px, 48px, 16px, 32px) !important;
 }
 #fxrReplaceBarInputStringTextBox, #fxrReplaceBarOutputStringTextBox {
   width: 20em;
@@ -46,4 +54,14 @@ toolbar[iconsize="small"] #fxrToolbarButton:hover {
 
 #fxrReplaceBarInputStringTextBox {
   -moz-binding: url("chrome://foxreplace/content/bindings.xml#inputTextBox");
+}
+
+#fxrReplaceBar {
+  background-image: url("chrome://global/skin/icons/white-gray-gradient.gif");
+  background-repeat: repeat-x;
+  background-position: bottom right;
+  background-color: rgb(246, 246, 246);
+  border-top: 1px solid #a3a3a3;
+  height: 28px;
+  border-bottom: none;
 }
