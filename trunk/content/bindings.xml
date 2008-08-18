@@ -75,12 +75,13 @@
           this._isRegExp = val;
           this._selectorImage.setAttribute("regexp", val);
           this._textBox.setAttribute("regexp", val);
+          if (val) this._textBox.emptyText = "&regExp;";
+          else this._textBox.emptyText = "&text;";
         </setter>
       </property>
       <method name="focus">
         <body>
-          if (this._textBox.hasAttribute("focused")) return;
-          else this._textBox.focus();
+          if (!this._textBox.hasAttribute("focused")) this._textBox.focus();
         </body>
       </method>
     </implementation>
