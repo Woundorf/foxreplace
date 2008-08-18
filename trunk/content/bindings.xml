@@ -84,5 +84,9 @@
         </body>
       </method>
     </implementation>
+    <handlers>
+      <handler event="keypress" keycode="VK_UP" action="this.isRegExp=false;"/>
+      <handler event="keypress" keycode="VK_DOWN" action="this.isRegExp=true;"/>
+    </handlers>
   </binding>
 </bindings>
