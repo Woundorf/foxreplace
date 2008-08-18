@@ -1,4 +1,4 @@
-<!ENTITY menuEditReplace.label "Replace…">
+<!ENTITY menuEditReplace.label "Substituir…">
 <!ENTITY menuEditReplace.accesskey "e">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
@@ -17,13 +17,11 @@
 <!ENTITY replaceBarClose "Fechar barra de substituição">
 <!ENTITY replaceBarInputString.label "Substituir">
 <!ENTITY replaceBarInputString.accesskey "R">
-<!ENTITY replaceBarInputRegExp.label "Expressão regular">
-<!ENTITY replaceBarInputRegExp.accesskey "e">
 <!ENTITY replaceBarOutputString.label "com">
 <!ENTITY replaceBarOutputString.accesskey "w">
 <!ENTITY replaceBarCaseSensitive.label "Diferenciar maiúsc./minúsc.">
 <!ENTITY replaceBarCaseSensitive.accesskey "M">
-<!ENTITY replaceBarWholeWords.label "Somente palavras inteiras">
+<!ENTITY replaceBarWholeWords.label "Coincidir palavras inteiras">
 <!ENTITY replaceBarWholeWords.accesskey "O">
 <!ENTITY replaceBarReplace.label "Substituir">
 <!ENTITY replaceBarReplace.accesskey "p">

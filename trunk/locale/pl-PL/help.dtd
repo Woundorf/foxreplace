@@ -15,7 +15,7 @@ Zamienniki są zastosowywane do &lt;b&gt;całych&lt;/b&gt; treści stron (w tej 
 <!ENTITY substitutionList "Lista zamienników">
 <!ENTITY substitutionList.p "FoxReplace pozwala na zarządzanie listą zamienników, które możesz dodawać i edytować w każdej chwili w oknie opcji rozszerzenia. Możesz zastąpić tekst na stronie kiedy tylko chcesz poprzez wciśnięcie klawisza F2, przycisku na pasku narzędzi lub wybranie odpowiedniego wpisu z menu. Teksty na stronie są zastępowane zgodnie z ich kolejnością na liście. Możesz wykonać operację zastępowania na jednej stronie tyle razy, ile tylko chcesz. Za każdym razem, kiedy to zrobisz, zastąpiona zostanie aktualna, a nie pierwotna zawartość strony.">
 <!ENTITY autoReplace "Automatycznie zastępuj tekst na stronach podczas ich wczytywania">
-<!ENTITY autoReplace.p "Tę opcję można włączyć lub wyłączyć. Kiedy jest ona włączona tekst na stronach zostanie automatycznie zastąpiony zgodnie z listą wyrażeń, dzięki czemu możesz korzystać z rozszerzenia jak z filtra: możesz sprawić, że znikną słowa, za którymi nie przepadasz (lub których pisownia Ci się nie podoba) zastępując je bardziej odpowiednimi. Można także użyć jej do zrobienia jakiegoś kawału ;)">
+<!ENTITY autoReplace.p "Tę opcję można włączyć lub wyłączyć. Kiedy jest ona włączona tekst na stronach zostanie automatycznie zastąpiony zgodnie z listą wyrażeń, dzięki czemu możesz korzystać z rozszerzenia jak z filtra: możesz sprawić, że znikną słowa, za którymi nie przepadasz (lub których pisownia Ci się nie podoba) zastępując je bardziej odpowiednimi. Można użyć jej również do zrobienia dowcipu ;)">
 <!ENTITY newGui "Nowe menu i elementy paska narzędzi">
 <!ENTITY newGui.edit "Edycja">
 <!ENTITY newGui.edit.replace "Zastąp... (Shift+F2)">

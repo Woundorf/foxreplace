@@ -17,8 +17,6 @@
 <!ENTITY replaceBarClose "Fermer la barre de remplacement">
 <!ENTITY replaceBarInputString.label "Remplacer">
 <!ENTITY replaceBarInputString.accesskey "R">
-<!ENTITY replaceBarInputRegExp.label "Expression régulière">
-<!ENTITY replaceBarInputRegExp.accesskey "E">
 <!ENTITY replaceBarOutputString.label "par">
 <!ENTITY replaceBarOutputString.accesskey "p">
 <!ENTITY replaceBarCaseSensitive.label "Casse correspondante">

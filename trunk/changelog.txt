@@ -1,3 +1,4 @@
+v0.7.3 (18-8-2008)
 * Less crowded replace bar (new input textbox with XBL).
 * New XBL input textbox also in options dialog.
 * Better replace bar theme for macfoxIIgraphite.

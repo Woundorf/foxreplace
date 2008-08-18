@@ -7,9 +7,9 @@
 <!ENTITY inputRegExp.accesskey "e">
 <!ENTITY outputString.label "com">
 <!ENTITY outputString.accesskey "w">
-<!ENTITY caseSensitive.label "Coincidir palavra inteira">
+<!ENTITY caseSensitive.label "Diferenciar maiúsc./minúsc.">
 <!ENTITY caseSensitive.accesskey "M">
-<!ENTITY wholeWords.label "Somente palavra inteira">
+<!ENTITY wholeWords.label "Coincidir palavras inteiras">
 <!ENTITY wholeWords.accesskey "O">
 <!ENTITY inputStringHeader "Substituir">
 <!ENTITY inputRegExpHeader "Expressão regular">

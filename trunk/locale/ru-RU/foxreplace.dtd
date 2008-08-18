@@ -17,13 +17,11 @@
 <!ENTITY replaceBarClose "Закрыть панель замены">
 <!ENTITY replaceBarInputString.label "Замена">
 <!ENTITY replaceBarInputString.accesskey "З">
-<!ENTITY replaceBarInputRegExp.label "Регулярное выражение">
-<!ENTITY replaceBarInputRegExp.accesskey "Р">
 <!ENTITY replaceBarOutputString.label "с">
 <!ENTITY replaceBarOutputString.accesskey "с">
 <!ENTITY replaceBarCaseSensitive.label "С учётом регистра">
 <!ENTITY replaceBarCaseSensitive.accesskey "ч">
-<!ENTITY replaceBarWholeWords.label "Только целые слова">
+<!ENTITY replaceBarWholeWords.label "Только слова целиком">
 <!ENTITY replaceBarWholeWords.accesskey "Т">
 <!ENTITY replaceBarReplace.label "Замена">
 <!ENTITY replaceBarReplace.accesskey "м">
