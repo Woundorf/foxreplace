@@ -17,8 +17,6 @@
 <!ENTITY replaceBarClose "Close replace bar">
 <!ENTITY replaceBarInputString.label "Replace">
 <!ENTITY replaceBarInputString.accesskey "R">
-<!ENTITY replaceBarInputRegExp.label "Regular expression">
-<!ENTITY replaceBarInputRegExp.accesskey "e">
 <!ENTITY replaceBarOutputString.label "with">
 <!ENTITY replaceBarOutputString.accesskey "w">
 <!ENTITY replaceBarCaseSensitive.label "Match case">

@@ -11,14 +11,12 @@
 <!ENTITY autoReplaceOnLoad.label "Automatycznie zastępuj tekst na stronach podczas ich wczytywania">
 <!ENTITY autoReplaceOnLoad.accesskey "A">
 <!ENTITY options.label "Opcje FoxReplace...">
-<!ENTITY options.accesskey "o">
+<!ENTITY options.accesskey "O">
 <!ENTITY help.label "Pomoc">
 <!ENTITY help.accesskey "P">
 <!ENTITY replaceBarClose "Zamknij pasek zastępowania">
 <!ENTITY replaceBarInputString.label "Zastąp">
 <!ENTITY replaceBarInputString.accesskey "Z">
-<!ENTITY replaceBarInputRegExp.label "Wyrażenie regularne">
-<!ENTITY replaceBarInputRegExp.accesskey "W">
 <!ENTITY replaceBarOutputString.label "tekstem">
 <!ENTITY replaceBarOutputString.accesskey "t">
 <!ENTITY replaceBarCaseSensitive.label "Rozróżniaj wielkość liter">
