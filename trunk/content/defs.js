@@ -35,6 +35,14 @@
  * ***** END LICENSE BLOCK ***** */
 
 /**
+ * Constants.
+ */
+const FXR_INPUT_TEXT = 0;
+const FXR_INPUT_WHOLE_WORDS = 1;
+const FXR_INPUT_REG_EXP = 2;
+const FXR_INPUT_TYPE_STRINGS = ["text", "wholewords", "regexp"];
+
+/**
  * Standard substitution prototype.
  */
 function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputRegExp, aWholeWords) {
@@ -62,16 +70,52 @@ FxRSubstitution.prototype = {
     
     if (this.inputRegExp || this.wholeWords) return aString.replace(this._regExp, this.output);
     else return aString.replace(this.input, this.output, this.caseSensitive ? "g" : "gi");
+  }
+  
+};
+
+/**
+ * New standard substitution prototype.
+ */
+function FxRSubstitution08(aInput, aOutput, aCaseSensitive, aInputType) {
+  this.input = aInput;
+  this.output = aOutput;
+  this.caseSensitive = Boolean(aCaseSensitive);
+  this.inputType = aInputType || FXR_INPUT_TEXT;
+  if (this.inputType < FXR_INPUT_TEXT || this.inputType > FXR_INPUT_REG_EXP) this.inputType = FXR_INPUT_TEXT;
+  
+  switch (this.inputType) {
+    case FXR_INPUT_WHOLE_WORDS:
+      var prefix = aInput.charAt(0).match(/\w/) ? "\\b" : "\\B";
+      var suffix = aInput.charAt(aInput.length - 1).match(/\w/) ? "\\b" : "\\B";
+      this._regExp = new RegExp(prefix + aInput.toUnicode() + suffix, aCaseSensitive ? "g" : "gi");
+      break;
+    case FXR_INPUT_REG_EXP:
+      this._regExp = new RegExp(aInput, aCaseSensitive ? "g" : "gi");
+      break;
+  }
+}
+FxRSubstitution08.prototype = {
+
+  /**
+   * Applies the substitution to aString and returns the result.
+   */
+  replace: function replace(aString) {
+    if (!aString) return aString;
+    
+    if (this._regExp) return aString.replace(this._regExp, this.output);
+    else return aString.replace(this.input, this.output, this.caseSensitive ? "g" : "gi");
   },
   
   /**
    * Returns the substitution as an XML object.
    */
   toXml: function toXml() {
-    var substitution = <substitution><input>{this.input}</input><output>{this.output}</output></substitution>
+    var substitution = <substitution>
+                         <input type={FXR_INPUT_TYPE_STRINGS[this.inputType]}>{this.input}</input>
+                         <output>{this.output}</output>
+                       </substitution>;
     if (this.caseSensitive) substitution.@casesensitive = true;
-    if (this.inputRegExp) substitution.input.@type = "regexp";
-    if (this.wholeWords) substitution.@wholewords = true;
     return substitution;
   }
   
