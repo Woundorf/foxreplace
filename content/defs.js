@@ -120,6 +120,16 @@ FxRSubstitution08.prototype = {
   }
   
 };
+/**
+ * Creates a substitution from an XML object;
+ */
+FxRSubstitution08.fromXml = function fromXml(aXml) {
+  var input = aXml.input.toString();
+  var output = aXml.output.toString();
+  var caseSensitive = Boolean(aXml.@casesensitive.toString());
+  var inputType = FXR_INPUT_TYPE_STRINGS.indexOf(aXml.input.@type.toString());
+  return new FxRSubstitution08(input, output, caseSensitive, inputType);
+};
 
 /**
  * Substitution group, including an URL list and a substitution list.
@@ -164,6 +174,16 @@ FxRSubstitutionGroup.prototype = {
     return group;
   }
 
+};
+/**
+ * Creates a substitution group from an XML object;
+ */
+FxRSubstitutionGroup.fromXml = function fromXml(aXml) {
+  var urls = [];
+  for each (var url in aXml.urls.url) urls.push(url.toString());
+  var substitutions = [];
+  for each (var substitution in aXml.substitutions.substitution) substitutions.push(FxRSubstitution08.fromXml(substitution));
+  return new FxRSubstitutionGroup(urls, substitutions);
 };
 
 /**
