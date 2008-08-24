@@ -394,6 +394,14 @@ var foxreplaceIO = {
     }
     
     return null;
+  },
+  
+  /**
+   * Converts the substitution list from the old format to the new.
+   */
+  oldSubstitutionListToNew: function(aOldSubstitutionList) {
+    var substitutions = aOldSubstitutionList.map(FxRSubstitution08.fromOldSubstitution, FxRSubstitution08);
+    return [new FxRSubstitutionGroup([], substitutions)];
   }
   
 };

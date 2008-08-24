@@ -105,8 +105,6 @@ var foxreplace = {
     replaceBar.hidden = false;
     // without the timeout it doesn't get the focus
     window.setTimeout("document.getElementById('fxrReplaceBarInputStringTextBox').focus();", 100);
-    
-    alert(foxreplaceIO.loadSubstitutionListXml());
   },
   
   /**

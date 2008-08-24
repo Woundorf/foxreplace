@@ -130,6 +130,16 @@ FxRSubstitution08.fromXml = function fromXml(aXml) {
   var inputType = FXR_INPUT_TYPE_STRINGS.indexOf(aXml.input.@type.toString());
   return new FxRSubstitution08(input, output, caseSensitive, inputType);
 };
+/**
+ * Creates a substitution from an old substitution object;
+ */
+FxRSubstitution08.fromOldSubstitution = function fromOldSubstitution(aSubstitution) {
+  var input = aSubstitution.input;
+  var output = aSubstitution.output;
+  var caseSensitive = aSubstitution.caseSensitive;
+  var inputType = aSubstitution.inputRegExp ? FXR_INPUT_REG_EXP : (aSubstitution.wholeWords ? FXR_INPUT_WHOLE_WORDS : FXR_INPUT_TEXT);
+  return new FxRSubstitution08(input, output, caseSensitive, inputType);
+};
 
 /**
  * Substitution group, including an URL list and a substitution list.
