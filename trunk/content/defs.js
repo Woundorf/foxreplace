@@ -62,6 +62,17 @@ FxRSubstitution.prototype = {
     
     if (this.inputRegExp || this.wholeWords) return aString.replace(this._regExp, this.output);
     else return aString.replace(this.input, this.output, this.caseSensitive ? "g" : "gi");
+  },
+  
+  /**
+   * Returns the substitution as an XML object.
+   */
+  toXml: function toXml() {
+    var substitution = <substitution><input>{this.input}</input><output>{this.output}</output></substitution>
+    if (this.caseSensitive) substitution.@casesensitive = true;
+    if (this.inputRegExp) substitution.input.@type = "regexp";
+    if (this.wholeWords) substitution.@wholewords = true;
+    return substitution;
   }
   
 };
@@ -97,6 +108,16 @@ FxRSubstitutionGroup.prototype = {
   applyTo: function applyTo(aUrl, aString) {
     if (this.matches(aUrl)) return this.replace(aString);
     else return aString;
+  },
+  
+  /**
+   * Returns the substitution group as an XML object.
+   */
+  toXml: function toXml() {
+    var group = <group><urls/><substitutions/></group>;
+    this.urls.forEach(function(element) { group.urls.appendChild(<url>{element}</url>); });
+    this.substitutions.forEach(function(element) { group.substitutions.appendChild(element.toXml()); });
+    return group;
   }
 
 };
