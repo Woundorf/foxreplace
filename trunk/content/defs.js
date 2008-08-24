@@ -111,10 +111,10 @@ FxRSubstitution08.prototype = {
    * Returns the substitution as an XML object.
    */
   toXml: function toXml() {
-    var substitution = <substitution>
-                         <input type={FXR_INPUT_TYPE_STRINGS[this.inputType]}>{this.input}</input>
-                         <output>{this.output}</output>
-                       </substitution>;
+    var substitution = <substitution/>;
+    substitution.input = '"' + this.input + '"';    // quotes to avoid whitespace problems
+    substitution.input.@type = FXR_INPUT_TYPE_STRINGS[this.inputType];
+    substitution.output = '"' + this.output + '"';  // quotes to avoid whitespace problems
     if (this.caseSensitive) substitution.@casesensitive = true;
     return substitution;
   }
@@ -124,8 +124,8 @@ FxRSubstitution08.prototype = {
  * Creates a substitution from an XML object;
  */
 FxRSubstitution08.fromXml = function fromXml(aXml) {
-  var input = aXml.input.toString();
-  var output = aXml.output.toString();
+  var input = aXml.input.toString().slice(1, -1);
+  var output = aXml.output.toString().slice(1, -1);
   var caseSensitive = Boolean(aXml.@casesensitive.toString());
   var inputType = FXR_INPUT_TYPE_STRINGS.indexOf(aXml.input.@type.toString());
   return new FxRSubstitution08(input, output, caseSensitive, inputType);
