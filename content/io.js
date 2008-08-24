@@ -168,6 +168,10 @@ var foxreplaceIO = {
       else listString.data += "|-|" + substitutionString.data;
     }
     
+    /////////////
+    this.saveSubstitutionListXml(this.oldSubstitutionListToNew(aSubstitutionList));
+    /////////////
+    
     return listString;
   },
   
@@ -183,6 +187,10 @@ var foxreplaceIO = {
     for (var i = 0; i < nSubstitutions; i++) listXml.appendChild(aSubstitutionList[i].toXml());
     
     listXmlString.data = listXml.toString();
+    
+    /////////////
+    this.prefs.setComplexValue("substitutionListXml", Components.interfaces.nsISupportsString, listXmlString);
+    /////////////
     
     return listXmlString;
   },
