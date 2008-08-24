@@ -77,7 +77,7 @@ FxRSubstitution.prototype = {
 /**
  * New standard substitution prototype.
  */
-function FxRSubstitution08(aInput, aOutput, aCaseSensitive, aInputType) {
+function FxRSubstitution08(aInput, aOutput, aCaseSensitive, aInputType) { // falta comprovació d'errors (aInput buit, tipus)
   this.input = aInput;
   this.output = aOutput;
   this.caseSensitive = Boolean(aCaseSensitive);
@@ -134,7 +134,7 @@ FxRSubstitution08.fromXml = function fromXml(aXml) {
 /**
  * Substitution group, including an URL list and a substitution list.
  */
-function FxRSubstitutionGroup(aUrls, aSubstitutions) {
+function FxRSubstitutionGroup(aUrls, aSubstitutions) {  // falta comprovació d'errors (tipus)
   this.urls = aUrls || [];
   this.substitutions = aSubstitutions || [];
 }
