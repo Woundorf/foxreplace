@@ -53,7 +53,10 @@ function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputRegExp, aWholeWo
   }
 }
 FxRSubstitution.prototype = {
-  
+
+  /**
+   * Applies the substitution to aString and returns the result.
+   */
   replace: function replace(aString) {
     if (!aString) return aString;
     
@@ -63,6 +66,44 @@ FxRSubstitution.prototype = {
   
 };
 
+/**
+ * Substitution group, including an URL list and a substitution list.
+ */
+function FxRSubstitutionGroup(aUrls, aSubstitutions) {
+  this.urls = aUrls || [];
+  this.substitutions = aSubstitutions || [];
+}
+FxRSubstitutionGroup.prototype = {
+
+  /**
+   * Returns true if aUrl matches any of the urls.
+   */
+  matches: function matches(aUrl) {
+    return this.urls.length == 0 || this.urls.some(function(element) { return aUrl.indexOf(element) >= 0; });
+  },
+  
+  /**
+   * Applies the substitution group to aString and returns the result.
+   */
+  replace: function replace(aString) {
+    if (!aString) return aString;
+    this.substitutions.forEach(function(element) { aString = element.replace(aString); });
+    return aString;
+  },
+  
+  /**
+   * Applies ths substitution group to aString if aUrl matches any of the urls and returns the result.
+   */
+  applyTo: function applyTo(aUrl, aString) {
+    if (this.matches(aUrl)) return this.replace(aString);
+    else return aString;
+  }
+
+};
+
+/**
+ * Converts a number to hexadecimal with aDigits digits.
+ */
 Number.prototype.toHex = function(aDigits) {
   var hex = this.toString(16);
   var digits = aDigits || 4;
@@ -73,6 +114,9 @@ Number.prototype.toHex = function(aDigits) {
   return hex;
 };
 
+/**
+ * Converts all the characters of the string to escaped unicode notation.
+ */
 String.prototype.toUnicode = function() {
   var result = "";
   var length = this.length;
