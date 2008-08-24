@@ -124,6 +124,23 @@ var foxreplaceIO = {
   },
   
   /**
+   * Loads substitution list in XML from preferences and returns it.
+   */
+  loadSubstitutionListXml: function() {
+    // falta la conversió des de l'altre la primera vegada
+    var substitutionList = [];
+    var listXmlString = this.prefs.getComplexValue("substitutionListXml", Components.interfaces.nsISupportsString).data;
+    var listXml = new XML(listXmlString);
+    
+    for each (var group in listXml.group) {
+      // falta comprovació d'errors
+      substitutionList.push(FxRSubstitutionGroup.fromXml(group));
+    }
+    
+    return substitutionList;
+  },
+  
+  /**
    * Returns substitution list encoded as a string to save to preferences.
    */
   saveSubstitutionList: function(aSubstitutionList) {
@@ -152,6 +169,22 @@ var foxreplaceIO = {
     }
     
     return listString;
+  },
+  
+  /**
+   * Returns substitution list in XML encoded as a string to save to preferences.
+   */
+  saveSubstitutionListXml: function(aSubstitutionList) {
+    var listXmlString = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+    var listXml = <substitutionlist/>;
+    
+    var nSubstitutions = aSubstitutionList.length;
+    
+    for (var i = 0; i < nSubstitutions; i++) listXml.appendChild(aSubstitutionList[i].toXml());
+    
+    listXmlString.data = listXml.toString();
+    
+    return listXmlString;
   },
   
   /**
@@ -222,6 +255,42 @@ var foxreplaceIO = {
   },
   
   /**
+   * Imports the substitution list in XML from a file (shows a file dialog to the
+   * user) and returns it.
+   */
+  importSubstitutionListXml: function() {
+    var file = this.showFileDialog("import", true);
+    if (!file) return;
+    
+    var fileInputStream = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
+    var stream = Components.classes["@mozilla.org/scriptableinputstream;1"].createInstance(Components.interfaces.nsIScriptableInputStream);
+    
+    fileInputStream.init(file, 0x01, 0444, 0);  // read
+    stream.init(fileInputStream);
+    
+    var listXmlString = "";
+    var data = stream.read(4096);
+    
+    while (data.length > 0) {
+      listXmlString += data;
+      data = stream.read(4096);
+    }
+    
+    stream.close();
+    fileInputStream.close();
+    
+    var listXml = new XML(listXmlString);
+    var substitutionList = [];
+    
+    for each (var group in listXml.group) {
+      // falta comprovació d'errors
+      substitutionList.push(FxRSubstitutionGroup.fromXml(group));
+    }
+    
+    return substitutionList;
+  },
+  
+  /**
    * Exports the substitution list to a file (shows a file dialog to the user).
    * The parameter is a function to get the substitution list that is called
    * only if it's needed (it's not called if the user cancels the export).
@@ -256,6 +325,32 @@ var foxreplaceIO = {
   },
   
   /**
+   * Exports the substitution list in XML to a file (shows a file dialog to the user).
+   * The parameter is a function to get the substitution list that is called
+   * only if it's needed (it's not called if the user cancels the export).
+   */
+  exportSubstitutionListXml: function(getSubstitutionList) {
+    var file = this.showFileDialog("export", true);
+    if (!file) return;
+    
+    var substitutionList = getSubstitutionList();
+    var listXml = <substitutionlist/>;
+    
+    var nSubstitutions = aSubstitutionList.length;
+    
+    for (var i = 0; i < nSubstitutions; i++) listXml.appendChild(aSubstitutionList[i].toXml());
+    
+    var data = listXml.toString();
+    
+    var fileOutputStream = Components.classes["@mozilla.org/network/file-output-stream;1"]
+                                     .createInstance(Components.interfaces.nsIFileOutputStream);
+    // write, create, truncate
+    fileOutputStream.init(file, 0x02 | 0x08 | 0x20, 0666, 0);
+    fileOutputStream.write(data, data.length);
+    fileOutputStream.close();
+  },
+  
+  /**
    * Converts special characters (%, \n, \r, <, >, |) in a string to %XX format. Returns the encoded string.
    */
   encode: function(aString) {
@@ -275,7 +370,7 @@ var foxreplaceIO = {
    * Shows the file dialog in the passed mode (import or export) and returns the
    * file selected by the user.
    */
-  showFileDialog: function(aMode) {
+  showFileDialog: function(aMode, aXml) {
     var title = this.strings.getString(aMode == "import" ? "importTitle" : "exportTitle");
     
     try {
@@ -286,8 +381,8 @@ var foxreplaceIO = {
       fileDialog.appendFilters(nsIFP.filterText);
       fileDialog.appendFilters(nsIFP.filterAll);
       fileDialog.filterIndex = 0;
-      fileDialog.defaultExtension = ".txt";
-      fileDialog.defaultString = "FoxReplace.txt";
+      fileDialog.defaultExtension = aXml ? ".xml" : ".txt";
+      fileDialog.defaultString = aXml ? "FoxReplace.xml" : "FoxReplace.txt";
       
       var ret = fileDialog.show();
       
