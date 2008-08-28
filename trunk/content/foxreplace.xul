@@ -38,9 +38,9 @@
 <?xml-stylesheet href="chrome://foxreplace/skin/foxreplace.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://foxreplace/locale/foxreplace.dtd">
 <overlay id="foxreplaceOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <script src="defs.js"/>
-  <script src="io.js"/>
-  <script src="foxreplace.js"/>
+  <script src="chrome://foxreplace/content/defs.js"/>
+  <script src="chrome://foxreplace/content/io.js"/>
+  <script src="chrome://foxreplace/content/foxreplace.js"/>
   <stringbundleset id="stringbundleset">
     <stringbundle id="fxrStrings" src="chrome://foxreplace/locale/foxreplace.properties"/>
   </stringbundleset>
@@ -123,8 +123,6 @@
         <textbox id="fxrReplaceBarOutputStringTextBox"/>
         <checkbox id="fxrReplaceBarCaseSensitiveCheckBox"
                   label="&replaceBarCaseSensitive.label;" accesskey="&replaceBarCaseSensitive.accesskey;"/>
-        <checkbox id="fxrReplaceBarWholeWordsCheckBox"
-                  label="&replaceBarWholeWords.label;" accesskey="&replaceBarWholeWords.accesskey;"/>
         <button id="fxrReplaceBarReplaceButton" disabled="true"
                 label="&replaceBarReplace.label;" accesskey="&replaceBarReplace.accesskey;"
                 command="fxrCmdInstantReplace"/>

@@ -105,7 +105,7 @@ var foxreplaceIO = {
       for (var i = 0; i < nSubstitutions; i++) {
         var substitution = substitutions[i].split("<->");
         try {
-          var objSubstitution = new FxRSubstitution(this.decode(substitution[0]),
+          var objSubstitution = new FxROldSubstitution(this.decode(substitution[0]),
                                                     this.decode(substitution[1]),
                                                     Boolean(parseInt(substitution[2])),
                                                     Boolean(parseInt(substitution[3])),
@@ -138,6 +138,17 @@ var foxreplaceIO = {
     }
     
     return substitutionList;
+  },
+  
+  /**
+   * Loads substitution list in XML from preferences and returns it.
+   */
+  loadSubstitutionListXml2: function() {
+    // falta la conversió des de l'altre la primera vegada
+    var substitutionList = [];
+    var listXmlString = this.prefs.getComplexValue("substitutionListXml", Components.interfaces.nsISupportsString).data;
+    var listXml = new XML(listXmlString);
+    return listXml;
   },
   
   /**
@@ -184,12 +195,15 @@ var foxreplaceIO = {
     
     var nSubstitutions = aSubstitutionList.length;
     
-    for (var i = 0; i < nSubstitutions; i++) listXml.appendChild(aSubstitutionList[i].toXml());
+    for (var i = 0; i < nSubstitutions; i++) {
+      // s'ha de cridar el toXml així perquè funcioni (per l'scope) ?!?!?!?!?!?!?!?!?!?!?!?!?!???!!!!!!!!!?!!?!!?!!???!??
+      listXml.appendChild(FxRSubstitutionGroup.prototype.toXml.call(aSubstitutionList[i]));
+    }
     
     listXmlString.data = listXml.toString();
     
     /////////////
-    this.prefs.setComplexValue("substitutionListXml", Components.interfaces.nsISupportsString, listXmlString);
+    //this.prefs.setComplexValue("substitutionListXml", Components.interfaces.nsISupportsString, listXmlString);
     /////////////
     
     return listXmlString;
@@ -243,7 +257,7 @@ var foxreplaceIO = {
       hasMore = fileInputStream.readLine(line);
       var substitution = line.value.split("<->");
       try {
-        var objSubstitution = new FxRSubstitution(this.decode(substitution[0]),
+        var objSubstitution = new FxROldSubstitution(this.decode(substitution[0]),
                                                   this.decode(substitution[1]),
                                                   Boolean(parseInt(substitution[2])),
                                                   Boolean(parseInt(substitution[3])),
@@ -408,7 +422,7 @@ var foxreplaceIO = {
    * Converts the substitution list from the old format to the new.
    */
   oldSubstitutionListToNew: function(aOldSubstitutionList) {
-    var substitutions = aOldSubstitutionList.map(FxRSubstitution08.fromOldSubstitution, FxRSubstitution08);
+    var substitutions = aOldSubstitutionList.map(FxRSubstitution.fromOldSubstitution, FxRSubstitution);
     return [new FxRSubstitutionGroup([], substitutions)];
   }
   
