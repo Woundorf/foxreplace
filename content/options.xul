@@ -49,10 +49,10 @@
     <stringbundle id="fxrStrings" src="chrome://foxreplace/locale/foxreplace.properties"/>
   </stringbundleset>
   <prefpane id="mainPane" label="&mainPane.title;"
-            onpaneload="foxreplaceOptions.loadSubstitutionList();">
+            onpaneload="foxreplaceOptions.loadSubstitutionListXml();">
     <preferences>
-      <preference id="substitutionListPref"
-                  name="extensions.foxreplace.substitutionList"
+      <preference id="substitutionListXml"
+                  name="extensions.foxreplace.substitutionListXml"
                   type="unichar"/>
       <preference id="autoReplaceOnLoad"
                   name="extensions.foxreplace.autoReplaceOnLoad"
@@ -63,65 +63,57 @@
     </preferences>
     <description id="description">&description;</description>
     <separator/>
-    <hbox align="center">
-      <label id="inputStringLabel" control="inputStringTextBox"
-             value="&inputString.label;" accesskey="&inputString.accesskey;"/>
-      <textbox id="inputStringTextBox" flex="1"
-               oninput="document.getElementById('addButton').disabled=this.value==''"/>
-      <!-- <checkbox id="inputRegExpCheckBox" label="&inputRegExp.label;" accesskey="&inputRegExp.accesskey;"/> -->
-      <label id="outputStringLabel" control="outputStringTextBox"
-             value="&outputString.label;" accesskey="&outputString.accesskey;"/>
-      <textbox id="outputStringTextBox" flex="1"/>
-      <checkbox id="caseSensitiveCheckBox"
-                label="&caseSensitive.label;"
-                accesskey="&caseSensitive.accesskey;"/>
-      <checkbox id="wholeWordsCheckBox" label="&wholeWords.label;" accesskey="&wholeWords.accesskey;"/>
-      <button id="addButton" disabled="true"
-              label="&addButton.label;" accesskey="&addButton.accesskey;"
-              oncommand="foxreplaceOptions.addSubstitution();"/>
-    </hbox>
-    <separator/>
     <hbox>
-      <listbox id="substitutionListBox" flex="1" rows="20"
-               preference-editable="true" preference="substitutionListPref"
-               onsynctopreference="return foxreplaceOptions.saveSubstitutionList();"
-               onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitution();">
+      <listbox id="substitutionListBox" flex="1" rows="10"
+               preference-editable="true" preference="substitutionListXml"
+               onsynctopreference="return foxreplaceOptions.saveSubstitutionListXml();"
+               onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitutionGroup();">
         <listhead>
+          <listheader label="URL"/>
           <listheader label="&inputStringHeader;"/>
-          <listheader label="&inputRegExpHeader;"/>
           <listheader label="&outputStringHeader;"/>
-          <listheader label="&caseSensitiveHeader;"/>
-          <listheader label="&wholeWordsHeader;"/>
         </listhead>
         <listcols>
           <listcol flex="1"/>
-          <listcol/>
           <listcol flex="1"/>
-          <listcol/>
-          <listcol/>
+          <listcol flex="1"/>
         </listcols>
         <!-- workaround for listbox height -->
-        <listitem id="dumbitem">
-          <listcell label=""/>
-          <listcell label=""/>
-          <listcell label=""/>
-          <listcell label=""/>
-          <listcell label=""/>
+        <listitem id="dumbItem">
+          <listcell orient="vertical">
+            <label value=""/>
+            <label value=""/>
+          </listcell>
+          <listcell orient="vertical">
+            <label value=""/>
+            <label value=""/>
+          </listcell>
+          <listcell orient="vertical">
+            <label value=""/>
+            <label value=""/>
+          </listcell>
         </listitem>
       </listbox>
       <vbox>
-        <button id="upButton" label="&upButton.label;"
-                accesskey="&upButton.accesskey;"
-                oncommand="foxreplaceOptions.moveUpSubstitution();"/>
-        <button id="downButton" label="&downButton.label;"
-                accesskey="&downButton.accesskey;"
-                oncommand="foxreplaceOptions.moveDownSubstitution();"/>
+        <button id="addButton" label="&addButton.label;"
+                accesskey="&addButton.accesskey;"
+                oncommand="foxreplaceOptions.addSubstitutionGroup();"/>
+        <button id="editButton" label="Edita"
+                accesskey=""
+                oncommand="foxreplaceOptions.editSubstitutionGroup();"/>
         <button id="deleteButton" label="&deleteButton.label;"
                 accesskey="&deleteButton.accesskey;"
-                oncommand="foxreplaceOptions.deleteSubstitution();"/>
+                oncommand="foxreplaceOptions.deleteSubstitutionGroup();"/>
         <button id="clearButton" label="&clearButton.label;"
                 accesskey="&clearButton.accesskey;"
-                oncommand="foxreplaceOptions.clearSubstitutions();"/>
+                oncommand="foxreplaceOptions.clearSubstitutionGroups();"/>
+        <separator/>
+        <button id="upButton" label="&upButton.label;"
+                accesskey="&upButton.accesskey;"
+                oncommand="foxreplaceOptions.moveUpSubstitutionGroup();"/>
+        <button id="downButton" label="&downButton.label;"
+                accesskey="&downButton.accesskey;"
+                oncommand="foxreplaceOptions.moveDownSubstitutionGroup();"/>
         <separator flex="1"/>
         <button id="importButton" label="&importButton.label;"
                 accesskey="&importButton.accesskey;"
@@ -138,4 +130,5 @@
     <checkbox id="replaceUrlsCheckBox" label="&replaceUrls.label;" accesskey="&replaceUrls.accesskey;"
               preference-editable="true" preference="replaceUrls"/>
   </prefpane>
+  <box id="xmlHolder" hidden="true"/>
 </prefwindow>

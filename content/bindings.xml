@@ -39,6 +39,7 @@
 <bindings xmlns="http://www.mozilla.org/xbl" xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <binding id="inputTextBox">
     <resources>
+      <script src="chrome://foxreplace/content/defs.js"/>
       <stylesheet src="chrome://foxreplace/skin/bindings.css"/>
     </resources>
     <content onfocus="this.focus();">
@@ -48,9 +49,11 @@
           <xul:image class="inputTextBoxSelectorDropmarker"/>
           <xul:menupopup position="before_start">
             <xul:menuitem class="menuitem-iconic inputTextBoxSelectorMenuItem" anonid="itemText" label="&text;"
-                          oncommand="document.getBindingParent(this).isRegExp=false;"/>
+                          oncommand="document.getBindingParent(this).inputType=FXR_INPUT_TEXT;"/>
+            <xul:menuitem class="menuitem-iconic inputTextBoxSelectorMenuItem" anonid="itemWholeWords" label="&wholeWords;"
+                          oncommand="document.getBindingParent(this).inputType=FXR_INPUT_WHOLE_WORDS;"/>
             <xul:menuitem class="menuitem-iconic inputTextBoxSelectorMenuItem" anonid="itemRegExp" label="&regExp;"
-                          oncommand="document.getBindingParent(this).isRegExp=true;"/>
+                          oncommand="document.getBindingParent(this).inputType=FXR_INPUT_REG_EXP;"/>
           </xul:menupopup>
         </xul:hbox>
         <xul:textbox class="inputTextBox" anonid="textBox" flex="1"/>
@@ -58,7 +61,7 @@
     </content>
     <implementation>
       <constructor>
-        this.isRegExp = false;
+        this.inputType = FXR_INPUT_TEXT;
       </constructor>
       <field name="_selectorImage" readonly="true">
         document.getAnonymousElementByAttribute(this, "anonid", "selectorImage")
@@ -66,17 +69,24 @@
       <field name="_textBox" readonly="true">
         document.getAnonymousElementByAttribute(this, "anonid", "textBox")
       </field>
-      <field name="_isRegExp">
-        false
+      <field name="_inputType">
+        FXR_INPUT_TEXT
       </field>
       <property name="value" onget="return this._textBox.value;" onset="this._textBox.value=val;"/>
-      <property name="isRegExp" onget="return this._isRegExp;">
+      <property name="inputType" onget="return this._inputType;">
         <setter>
-          this._isRegExp = val;
-          this._selectorImage.setAttribute("regexp", val);
-          this._textBox.setAttribute("regexp", val);
-          if (val) this._textBox.emptyText = "&regExp;";
-          else this._textBox.emptyText = "&text;";
+          <![CDATA[
+            if (val < FXR_INPUT_TEXT) val = FXR_INPUT_TEXT;
+            if (val > FXR_INPUT_REG_EXP) val = FXR_INPUT_REG_EXP;
+          ]]>
+          this._inputType = val;
+          this._selectorImage.setAttribute("inputtype", val);
+          this._textBox.setAttribute("inputtype", val);
+          switch (val) {
+            case FXR_INPUT_TEXT: this._textBox.emptyText = "&text;"; break;
+            case FXR_INPUT_WHOLE_WORDS: this._textBox.emptyText = "&wholeWords;"; break;
+            case FXR_INPUT_REG_EXP: this._textBox.emptyText = "&regExp;"; break;
+          }
         </setter>
       </property>
       <method name="focus">
@@ -86,8 +96,153 @@
       </method>
     </implementation>
     <handlers>
-      <handler event="keypress" keycode="VK_UP" action="this.isRegExp=false;"/>
-      <handler event="keypress" keycode="VK_DOWN" action="this.isRegExp=true;"/>
+      <handler event="keypress" keycode="VK_UP" action="this.inputType--;"/>
+      <handler event="keypress" keycode="VK_DOWN" action="this.inputType++;"/>
     </handlers>
+  </binding>
+  <binding id="substitutionGroupListItem" extends="chrome://global/content/bindings/listbox.xml#listitem">
+    <resources>
+      <script src="chrome://foxreplace/content/defs.js"/>
+    </resources>
+    <content>
+      <xul:listcell align="start">
+        <xul:vbox anonid="urlsVbox">
+          <xul:label value="adfasddfssf"/>
+        </xul:vbox>
+      </xul:listcell>
+      <xul:listcell align="start">
+        <xul:vbox anonid="inputsVbox"/>
+      </xul:listcell>
+      <xul:listcell align="start">
+        <xul:vbox anonid="outputsVbox"/>
+      </xul:listcell>
+    </content>
+    <implementation>
+      <field name="_urlsVbox" readonly="true">
+        document.getAnonymousElementByAttribute(this, "anonid", "urlsVbox")
+      </field>
+      <field name="_inputsVbox" readonly="true">
+        document.getAnonymousElementByAttribute(this, "anonid", "inputsVbox")
+      </field>
+      <field name="_outputsVbox" readonly="true">
+        document.getAnonymousElementByAttribute(this, "anonid", "outputsVbox")
+      </field>
+      <field name="_substitutionGroup">
+        null
+      </field>
+      <property name="substitutionGroup" onget="return this._substitutionGroup;">
+        <setter>
+          <![CDATA[
+            this._substitutionGroup = val;
+            
+            alert("eeeeeeeeeee");
+            
+            // urls
+            while (this._urlsVbox.firstChild) this._urlsVbox.removeChild(this._urlsVbox.firstChild);
+            var urls = val.urls;
+            var nUrls = urls.length;
+            for (var i = 0; i < nUrls; i++) {
+              var label = document.createElement("label");
+              label.setAttribute("class", "substitutionGroupListItemLabel");
+              label.setAttribute("value", urls[i]);
+              this._urlsVbox.appendChild(label);
+            }
+            
+            // inputs and outputs
+            while (this._inputsVbox.firstChild) this._inputsVbox.removeChild(this._inputsVbox.firstChild);
+            while (this._outputsVbox.firstChild) this._outputsVbox.removeChild(this._outputsVbox.firstChild);
+            var substitutions = val.substitutions;
+            var nSubstitutions = substitutions.length;
+            for (var i = 0; i < nSubstitutions; i++) {
+              var inputLabel = document.createElement("label");
+              inputLabel.setAttribute("class", "substitutionGroupListItemLabel");
+              inputLabel.setAttribute("value", substitutions[i].input);
+              this._inputsVbox.appendChild(inputLabel);
+              var outputLabel = document.createElement("label");
+              outputLabel.setAttribute("class", "substitutionGroupListItemLabel");
+              outputLabel.setAttribute("value", substitutions[i].output);
+              this._outputsVbox.appendChild(outputLabel);
+            }
+          ]]>
+        </setter>
+      </property>
+    </implementation>
+  </binding>
+  <binding id="abcdef" extends="chrome://global/content/bindings/listbox.xml#listbox">
+    <resources>
+      <script src="chrome://foxreplace/content/defs.js"/>
+    </resources>
+    <content>
+      <xul:listhead>
+        <xul:listheader label="url"/>
+        <xul:listheader label="input"/>
+        <xul:listheader label="output"/>
+      </xul:listhead>
+      <xul:listcols>
+        <xul:listcol flex="1"/>
+        <xul:listcol flex="1"/>
+        <xul:listcol flex="1"/>
+      </xul:listcols>
+      <xul:listitem label="aaaaaaaaa"/>
+    </content>
+    <implementation>
+      <field name="_substitutionList">
+        null
+      </field>
+      <property name="substitutionList" onget="return this._substitutionList;">
+        <setter>
+          <![CDATA[
+            this._substitutionList = val;
+            
+            alert("si");
+            
+            // remove old items
+            for (var i = this.getRowCount() - 1; i >= 0; i--) {
+              this.removeItemAt(i);
+            }
+            
+            var nGroups = val.length;
+            for (var i = 0; i < nGroups; i++) {
+              // create item
+              var listItem = document.createElement("listitem");
+              this.appendChild(listItem);
+              
+              var group = val[i];
+              
+              // urls
+              var urlsCell = document.createElement("listcell");
+              listItem.appendChild(urlsCell);
+              var urlsVbox = document.createElement("vbox");
+              urlsCell.appendChild(urlsVbox);
+              var urls = group.urls;
+              var nUrls = urls.length;
+              for (var j = 0; j < nUrls; j++) {
+                var label = document.createElement("label");
+                label.setAttribute("class", "substitutionGroupListItemLabel");
+                label.setAttribute("value", urls[j]);
+                urlsVbox.appendChild(label);
+              }
+              /*
+              // inputs and outputs
+              while (this._inputsVbox.firstChild) this._inputsVbox.removeChild(this._inputsVbox.firstChild);
+              while (this._outputsVbox.firstChild) this._outputsVbox.removeChild(this._outputsVbox.firstChild);
+              var substitutions = val.substitutions;
+              var nSubstitutions = substitutions.length;
+              for (var i = 0; i < nSubstitutions; i++) {
+                var inputLabel = document.createElement("label");
+                inputLabel.setAttribute("class", "substitutionGroupListItemLabel");
+                inputLabel.setAttribute("value", substitutions[i].input);
+                this._inputsVbox.appendChild(inputLabel);
+                var outputLabel = document.createElement("label");
+                outputLabel.setAttribute("class", "substitutionGroupListItemLabel");
+                outputLabel.setAttribute("value", substitutions[i].output);
+                this._outputsVbox.appendChild(outputLabel);
+              }
+              */
+            }
+          ]]>
+        </setter>
+      </property>
+    </implementation>
   </binding>
 </bindings>

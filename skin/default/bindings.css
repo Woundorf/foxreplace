@@ -28,12 +28,16 @@
   list-style-image: url("chrome://foxreplace/skin/inputtextbox-icons.png");
 }
 
-.inputTextBoxSelectorImage[regexp="false"], .inputTextBoxSelectorMenuItem[anonid="itemText"] {
+.inputTextBoxSelectorImage[inputtype="0"], .inputTextBoxSelectorMenuItem[anonid="itemText"] {
   -moz-image-region: rect(0px, 16px, 16px, 0px);
 }
 
-.inputTextBoxSelectorImage[regexp="true"], .inputTextBoxSelectorMenuItem[anonid="itemRegExp"] {
+.inputTextBoxSelectorImage[inputtype="1"], .inputTextBoxSelectorMenuItem[anonid="itemWholeWords"] {
   -moz-image-region: rect(0px, 32px, 16px, 16px);
+}
+
+.inputTextBoxSelectorImage[inputtype="2"], .inputTextBoxSelectorMenuItem[anonid="itemRegExp"] {
+  -moz-image-region: rect(0px, 48px, 16px, 32px);
 }
 
 .inputTextBox {
@@ -52,10 +56,14 @@
   border-width: 1px;
 }
 
-.inputTextBox[regexp="false"] {
+.inputTextBox[inputtype="0"] {
   background-color: white;
 }
 
-.inputTextBox[regexp="true"] {
+.inputTextBox[inputtype="1"] {
+  background-color: lime;
+}
+
+.inputTextBox[inputtype="2"] {
   background-color: yellow;
 }

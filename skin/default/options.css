@@ -11,3 +11,8 @@ textbox {
 #inputStringTextBox {
   -moz-binding: url("chrome://foxreplace/content/bindings.xml#inputTextBox");
 }
+/*
+listitem.substitutionGroup {
+  -moz-binding: url("chrome://foxreplace/content/bindings.xml#substitutionGroupListItem");
+}
+*/

@@ -1,0 +1,3 @@
+#inputStringTextBox {
+  -moz-binding: url("chrome://foxreplace/content/bindings.xml#inputTextBox");
+}
