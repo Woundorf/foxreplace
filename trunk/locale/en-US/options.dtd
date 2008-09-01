@@ -1,30 +1,24 @@
 <!ENTITY prefwindow.title "FoxReplace options">
 <!ENTITY mainPane.title "Main">
-<!ENTITY description "Enter the substitution list. Substitutions will be done in the order in which they appear on
-         the list.">
-<!ENTITY inputString.label "Replace">
-<!ENTITY inputString.accesskey "R">
-<!ENTITY outputString.label "with">
-<!ENTITY outputString.accesskey "w">
-<!ENTITY caseSensitive.label "Match case">
-<!ENTITY caseSensitive.accesskey "M">
-<!ENTITY wholeWords.label "Only whole words">
-<!ENTITY wholeWords.accesskey "O">
+<!ENTITY description "Enter the substitution list. The list is composed of substitution groups, where the substitutions of each group are applied if
+         any of the group URLs is part of the address of the loaded page (for exemple, if one URL was &quot;google.com&quot;, it would affect
+         &quot;http://www.google.com/&quot;, but also &quot;http://mail.google.com/&quot;, etc.; if the group has no URLs its substitutions are
+         applied to any page. Groups are checked in the order they appear.">
+<!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Replace">
-<!ENTITY inputRegExpHeader "Regular expression">
 <!ENTITY outputStringHeader "With">
-<!ENTITY caseSensitiveHeader "Match case">
-<!ENTITY wholeWordsHeader "Only whole words">
 <!ENTITY addButton.label "Add">
 <!ENTITY addButton.accesskey "A">
-<!ENTITY upButton.label "Move up">
-<!ENTITY upButton.accesskey "u">
-<!ENTITY downButton.label "Move down">
-<!ENTITY downButton.accesskey "d">
+<!ENTITY editButton.label "Edit">
+<!ENTITY editButton.accesskey "E">
 <!ENTITY deleteButton.label "Delete">
-<!ENTITY deleteButton.accesskey "l">
+<!ENTITY deleteButton.accesskey "D">
 <!ENTITY clearButton.label "Clear">
 <!ENTITY clearButton.accesskey "C">
+<!ENTITY moveUpButton.label "Move up">
+<!ENTITY moveUpButton.accesskey "u">
+<!ENTITY moveDownButton.label "Move down">
+<!ENTITY moveDownButton.accesskey "o">
 <!ENTITY importButton.label "Import">
 <!ENTITY importButton.accesskey "I">
 <!ENTITY exportButton.label "Export">
@@ -32,4 +26,4 @@
 <!ENTITY autoReplaceOnLoad.label "Auto-replace on page load">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
 <!ENTITY replaceUrls.label "Replace URLs (links and image sources) (Warning: this will change page behaviour!)">
-<!ENTITY replaceUrls.accesskey "p">
+<!ENTITY replaceUrls.accesskey "R">

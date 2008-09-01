@@ -16,7 +16,7 @@
   -
   - The Initial Developer of the Original Code is
   - Marc Ruiz Altisent.
-  - Portions created by the Initial Developer are Copyright (C) 2007
+  - Portions created by the Initial Developer are Copyright (C) 2007-2008
   - the Initial Developer. All Rights Reserved.
   -
   - Contributor(s):
@@ -69,7 +69,7 @@
                onsynctopreference="return foxreplaceOptions.saveSubstitutionListXml();"
                onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitutionGroup();">
         <listhead>
-          <listheader label="URL"/>
+          <listheader label="&urlHeader;"/>
           <listheader label="&inputStringHeader;"/>
           <listheader label="&outputStringHeader;"/>
         </listhead>
@@ -98,8 +98,8 @@
         <button id="addButton" label="&addButton.label;"
                 accesskey="&addButton.accesskey;"
                 oncommand="foxreplaceOptions.addSubstitutionGroup();"/>
-        <button id="editButton" label="Edita"
-                accesskey=""
+        <button id="editButton" label="&editButton.label;"
+                accesskey="&editButton.accesskey;"
                 oncommand="foxreplaceOptions.editSubstitutionGroup();"/>
         <button id="deleteButton" label="&deleteButton.label;"
                 accesskey="&deleteButton.accesskey;"
@@ -108,11 +108,11 @@
                 accesskey="&clearButton.accesskey;"
                 oncommand="foxreplaceOptions.clearSubstitutionGroups();"/>
         <separator/>
-        <button id="upButton" label="&upButton.label;"
-                accesskey="&upButton.accesskey;"
+        <button id="upButton" label="&moveUpButton.label;"
+                accesskey="&moveUpButton.accesskey;"
                 oncommand="foxreplaceOptions.moveUpSubstitutionGroup();"/>
-        <button id="downButton" label="&downButton.label;"
-                accesskey="&downButton.accesskey;"
+        <button id="downButton" label="&moveDownButton.label;"
+                accesskey="&moveDownButton.accesskey;"
                 oncommand="foxreplaceOptions.moveDownSubstitutionGroup();"/>
         <separator flex="1"/>
         <button id="importButton" label="&importButton.label;"

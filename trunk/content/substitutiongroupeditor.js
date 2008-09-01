@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007
+ * Portions created by the Initial Developer are Copyright (C) 2008
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -120,8 +120,7 @@ var foxreplaceSubstitutionGroupEditor = {
     substitutionItem.appendChild(inputStringCell);
     
     var inputTypeCell = document.createElement("listcell");
-    //inputTypeCell.setAttribute("label", foxreplaceIO.strings.getString(FXR_INPUT_TYPE_STRINGS[inputType]));
-    inputTypeCell.setAttribute("label", FXR_INPUT_TYPE_STRINGS[inputType]);
+    inputTypeCell.setAttribute("label", foxreplaceIO.strings.getString(FxRSubstitution.INPUT_TYPE_STRINGS[inputType]));
     substitutionItem.appendChild(inputTypeCell);
     
     var outputStringCell = document.createElement("listcell");
@@ -231,10 +230,9 @@ var foxreplaceSubstitutionGroupEditor = {
     var nSubstitutions = substitutionsListBox.getRowCount();
     
     if (nSubstitutions == 0) {
-      //foxreplaceIO.promptService.alert(window, foxreplaceIO.strings.getString("noSubstitutionsTitle"), foxreplaceIO.strings.getString("noSubstitutionsText"));
       foxreplaceIO.promptService.alert(window,
-                                       "No hi ha substitucions",
-                                       "Posa'n alguna o elimina directament el grup.");
+                                       foxreplaceIO.strings.getString("noSubstitutionsTitle"),
+                                       foxreplaceIO.strings.getString("noSubstitutionsDescription"));
       
       return false;
     }

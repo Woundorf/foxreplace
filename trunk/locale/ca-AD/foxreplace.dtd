@@ -21,7 +21,5 @@
 <!ENTITY replaceBarOutputString.accesskey "a">
 <!ENTITY replaceBarCaseSensitive.label "Distingeix entre majúscules i minúscules">
 <!ENTITY replaceBarCaseSensitive.accesskey "D">
-<!ENTITY replaceBarWholeWords.label "Només paraules senceres">
-<!ENTITY replaceBarWholeWords.accesskey "N">
 <!ENTITY replaceBarReplace.label "Reemplaça">
-<!ENTITY replaceBarReplace.accesskey "m">
+<!ENTITY replaceBarReplace.accesskey "e">

@@ -1,36 +1,29 @@
 <!ENTITY prefwindow.title "Opcions de FoxReplace">
 <!ENTITY mainPane.title "Principal">
-<!ENTITY description "Introduïu la llista de substitucions. Les substitucions es faran en l&apos;ordre en què apareixen
-         a la llista.">
-<!ENTITY inputString.label "Reemplaça">
-<!ENTITY inputString.accesskey "R">
-<!ENTITY outputString.label "amb">
-<!ENTITY outputString.accesskey "a">
-<!ENTITY caseSensitive.label "Distingeix entre majúscules i minúscules">
-<!ENTITY caseSensitive.accesskey "D">
-<!ENTITY wholeWords.label "Només paraules senceres">
-<!ENTITY wholeWords.accesskey "N">
+<!ENTITY description "Introduïu la llista de substitucions. La llista es compon de grups de substitucions, on les substitucions de cada grup
+         s'apliquen si alguna de les URLs del grup és part de l'adreça de la pàgina carregada (per exemple, si una URL fos &quot;google.com&quot;,
+         afectaria a &quot;http://www.google.com/&quot;, però també a &quot;http://mail.google.com/&quot;, etc.; si el grup no té cap URL les
+         substituticions s'apliquen a qualsevol pàgina. Els grups es comproven en l'ordre en què apareixen.">
+<!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Reemplaça">
-<!ENTITY inputRegExpHeader "Expressió regular">
 <!ENTITY outputStringHeader "Amb">
-<!ENTITY caseSensitiveHeader "Distingeix entre majúscules i minúscules">
-<!ENTITY wholeWordsHeader "Només paraules senceres">
 <!ENTITY addButton.label "Afegeix">
-<!ENTITY addButton.accesskey "f">
-<!ENTITY upButton.label "Mou amunt">
-<!ENTITY upButton.accesskey "m">
-<!ENTITY downButton.label "Mou avall">
-<!ENTITY downButton.accesskey "v">
+<!ENTITY addButton.accesskey "A">
+<!ENTITY editButton.label "Edita">
+<!ENTITY editButton.accesskey "E">
 <!ENTITY deleteButton.label "Elimina">
 <!ENTITY deleteButton.accesskey "l">
 <!ENTITY clearButton.label "Buida">
 <!ENTITY clearButton.accesskey "B">
+<!ENTITY moveUpButton.label "Mou amunt">
+<!ENTITY moveUpButton.accesskey "m">
+<!ENTITY moveDownButton.label "Mou avall">
+<!ENTITY moveDownButton.accesskey "v">
 <!ENTITY importButton.label "Importa">
 <!ENTITY importButton.accesskey "I">
 <!ENTITY exportButton.label "Exporta">
 <!ENTITY exportButton.accesskey "x">
 <!ENTITY autoReplaceOnLoad.label "Reemplaça automàticament en carregar una pàgina">
 <!ENTITY autoReplaceOnLoad.accesskey "u">
-<!ENTITY replaceUrls.label "Reemplaça les URLs (enllaços i fonts de les imatges) (Atenció: això modificarà el
-         comportament de les pàgines!)">
-<!ENTITY replaceUrls.accesskey "p">
+<!ENTITY replaceUrls.label "Reemplaça les URLs (enllaços i fonts de les imatges) (Atenció: això modificarà el comportament de les pàgines!)">
+<!ENTITY replaceUrls.accesskey "R">

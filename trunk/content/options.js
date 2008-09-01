@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007
+ * Portions created by the Initial Developer are Copyright (C) 2007-2008
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -92,6 +92,7 @@ var foxreplaceOptions = {
   editSubstitutionGroup: function() {
     var substitutionListBox = document.getElementById("substitutionListBox");
     var selectedItem = substitutionListBox.selectedItem;
+    if (!selectedItem) return;
     var params = { "in": { group: selectedItem.substitutionGroup } };
     
     window.openDialog("chrome://foxreplace/content/substitutiongroupeditor.xul", "", "chrome,titlebar,toolbar,centerscreen,modal", params);
@@ -187,7 +188,7 @@ var foxreplaceOptions = {
    * Imports the substitution list from a file.
    */
   importSubstitutionList: function() {
-    var substitutionList = foxreplaceIO.importSubstitutionList();
+    var substitutionList = foxreplaceIO.importSubstitutionListXml();
     
     if (substitutionList) {
       var params = { out: null };
@@ -206,7 +207,7 @@ var foxreplaceOptions = {
    */
   exportSubstitutionList: function() {
     // pass the function (for deferred execution)
-    foxreplaceIO.exportSubstitutionList(this.substitutionListToArray);
+    foxreplaceIO.exportSubstitutionListXml(this.substitutionListToArray);
   },
   
   /**
