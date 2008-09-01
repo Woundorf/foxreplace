@@ -127,13 +127,13 @@ var foxreplaceIO = {
    * Loads substitution list in XML from preferences and returns it.
    */
   loadSubstitutionListXml: function() {
-    // falta la conversi� des de l'altre la primera vegada
+    // falta la conversió des de l'altre la primera vegada
     var substitutionList = [];
     var listXmlString = this.prefs.getComplexValue("substitutionListXml", Components.interfaces.nsISupportsString).data;
     var listXml = new XML(listXmlString);
     
     for each (var group in listXml.group) {
-      // falta comprovaci� d'errors
+      // falta comprovació d'errors
       substitutionList.push(FxRSubstitutionGroup.fromXml(group));
     }
     
@@ -275,27 +275,26 @@ var foxreplaceIO = {
     if (!file) return;
     
     var fileInputStream = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
-    var stream = Components.classes["@mozilla.org/scriptableinputstream;1"].createInstance(Components.interfaces.nsIScriptableInputStream);
-    
+    var converterInputStream = Components.classes["@mozilla.org/intl/converter-input-stream;1"]
+                                         .createInstance(Components.interfaces.nsIConverterInputStream);
     fileInputStream.init(file, 0x01, 0444, 0);  // read
-    stream.init(fileInputStream);
+    converterInputStream.init(fileInputStream, "UTF-8", 4096, 0x0000);
     
     var listXmlString = "";
-    var data = stream.read(4096);
+    var string = {};
     
-    while (data.length > 0) {
-      listXmlString += data;
-      data = stream.read(4096);
+    while (converterInputStream.readString(4096, string) > 0) { // atenció: pot llançar excepció
+      listXmlString += string.value;
     }
     
-    stream.close();
+    converterInputStream.close();
     fileInputStream.close();
     
     var listXml = new XML(listXmlString);
     var substitutionList = [];
     
     for each (var group in listXml.group) {
-      // falta comprovaci� d'errors
+      // falta comprovació d'errors
       substitutionList.push(FxRSubstitutionGroup.fromXml(group));
     }
     
@@ -353,12 +352,15 @@ var foxreplaceIO = {
     for (var i = 0; i < nSubstitutions; i++) listXml.appendChild(substitutionList[i].toXml());
     
     var data = listXml.toString();
-    
     var fileOutputStream = Components.classes["@mozilla.org/network/file-output-stream;1"]
                                      .createInstance(Components.interfaces.nsIFileOutputStream);
     // write, create, truncate
     fileOutputStream.init(file, 0x02 | 0x08 | 0x20, 0666, 0);
-    fileOutputStream.write(data, data.length);
+    var converterOutputStream = Components.classes["@mozilla.org/intl/converter-output-stream;1"]
+                                          .createInstance(Components.interfaces.nsIConverterOutputStream);
+    converterOutputStream.init(fileOutputStream, "UTF-8", 4096, 0x0000);
+    converterOutputStream.writeString(data);  // atenció: pot llançar una excepció
+    converterOutputStream.close();
     fileOutputStream.close();
   },
   
@@ -390,7 +392,7 @@ var foxreplaceIO = {
       var fileDialog = Components.classes["@mozilla.org/filepicker;1"]
                                  .createInstance(nsIFP);
       fileDialog.init(window, title, aMode == "import" ? nsIFP.modeOpen : nsIFP.modeSave);
-      fileDialog.appendFilters(nsIFP.filterText); // s'ha de posar XML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      fileDialog.appendFilters(aXml ? nsIFP.filterXML : nsIFP.filterText);
       fileDialog.appendFilters(nsIFP.filterAll);
       fileDialog.filterIndex = 0;
       fileDialog.defaultExtension = aXml ? ".xml" : ".txt";
