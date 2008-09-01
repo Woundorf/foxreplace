@@ -1,0 +1,32 @@
+<!ENTITY description "Introdueix la llista d'URLs i la llista de substitucions. La llista d'URLs pot ser buida, i llavors s'apliquen les
+         substitucions a qualsevol pàgina. La llista de substitucions ha de tenir com a mínim una substitució.">
+<!ENTITY urls "URLs">
+<!ENTITY url.label "URL">
+<!ENTITY url.accesskey "U">
+<!ENTITY addUrlButton.label "Afegeix">
+<!ENTITY addUrlButton.accesskey "A">
+<!ENTITY deleteUrlButton.label "Elimina">
+<!ENTITY deleteUrlButton.accesskey "E">
+<!ENTITY clearUrlsButton.label "Buida">
+<!ENTITY clearUrlsButton.accesskey "B">
+<!ENTITY substitutions "Substitucions">
+<!ENTITY inputString.label "Reeemplaça">
+<!ENTITY inputString.accesskey "R">
+<!ENTITY outputString.label "amb">
+<!ENTITY outputString.accesskey "m">
+<!ENTITY caseSensitive.label "Distingeix entre majúscules i minúscules">
+<!ENTITY caseSensitive.accesskey "D">
+<!ENTITY addSubstitutionButton.label "Afegeix">
+<!ENTITY addSubstitutionButton.accesskey "f">
+<!ENTITY moveUpSubstitutionButton.label "Mou amunt">
+<!ENTITY moveUpSubstitutionButton.accesskey "n">
+<!ENTITY moveDownSubstitutionButton.label "Mou avall">
+<!ENTITY moveDownSubstitutionButton.accesskey "v">
+<!ENTITY deleteSubstitutionButton.label "Elimina">
+<!ENTITY deleteSubstitutionButton.accesskey "l">
+<!ENTITY clearSubstitutionsButton.label "Buida">
+<!ENTITY clearSubstitutionsButton.accesskey "i">
+<!ENTITY inputStringHeader "Reemplaça">
+<!ENTITY inputTypeHeader "Tipus">
+<!ENTITY outputStringHeader "Amb">
+<!ENTITY caseSensitiveHeader "Distingeix entre majúscules i minúscules">

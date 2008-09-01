@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007
+ * Portions created by the Initial Developer are Copyright (C) 2007-2008
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -299,26 +299,9 @@ var foxreplace = {
       var nValueNodes = valueNodes.snapshotLength;
       for (var i = 0; i < nValueNodes; i++) {
         var valueNode = valueNodes.snapshotItem(i);
-        //valueNode.value = this.replaceString(valueNode.value);
         valueNode.value = group.replace(valueNode.value);
       }
     }
-  },
-  
-  /**
-   * Performs susbstitutions from the substitution list in the passed string and
-   * returns the resulting string.
-   */
-   // ja no es fa servir ////////////////////////////////////////////////////////
-  replaceString: function(aString) {
-    var result = aString;
-    var nSubstitutions = this._substitutionList.length;
-    
-    for (var i = 0; i < nSubstitutions; i++) {
-      result = this._substitutionList[i].replace(result);
-    }
-    
-    return result;
   }
   
 };

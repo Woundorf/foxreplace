@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007
+ * Portions created by the Initial Developer are Copyright (C) 2007-2008
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -141,17 +141,6 @@ var foxreplaceIO = {
   },
   
   /**
-   * Loads substitution list in XML from preferences and returns it.
-   */
-  loadSubstitutionListXml2: function() {
-    // falta la conversió des de l'altre la primera vegada
-    var substitutionList = [];
-    var listXmlString = this.prefs.getComplexValue("substitutionListXml", Components.interfaces.nsISupportsString).data;
-    var listXml = new XML(listXmlString);
-    return listXml;
-  },
-  
-  /**
    * Returns substitution list encoded as a string to save to preferences.
    */
   saveSubstitutionList: function(aSubstitutionList) {
@@ -196,11 +185,12 @@ var foxreplaceIO = {
     var nSubstitutions = aSubstitutionList.length;
     
     for (var i = 0; i < nSubstitutions; i++) {
-      // s'ha de cridar el toXml així perquè funcioni (per l'scope) ?!?!?!?!?!?!?!?!?!?!?!?!?!???!!!!!!!!!?!!?!!?!!???!??
-      listXml.appendChild(FxRSubstitutionGroup.prototype.toXml.call(aSubstitutionList[i]));
+      listXml.appendChild(aSubstitutionList[i].toXml());
     }
     
+    XML.prettyPrinting = false;
     listXmlString.data = listXml.toString();
+    XML.prettyPrinting = true;
     
     /////////////
     //this.prefs.setComplexValue("substitutionListXml", Components.interfaces.nsISupportsString, listXmlString);
@@ -358,9 +348,9 @@ var foxreplaceIO = {
     var substitutionList = getSubstitutionList();
     var listXml = <substitutionlist/>;
     
-    var nSubstitutions = aSubstitutionList.length;
+    var nSubstitutions = substitutionList.length;
     
-    for (var i = 0; i < nSubstitutions; i++) listXml.appendChild(aSubstitutionList[i].toXml());
+    for (var i = 0; i < nSubstitutions; i++) listXml.appendChild(substitutionList[i].toXml());
     
     var data = listXml.toString();
     
@@ -400,7 +390,7 @@ var foxreplaceIO = {
       var fileDialog = Components.classes["@mozilla.org/filepicker;1"]
                                  .createInstance(nsIFP);
       fileDialog.init(window, title, aMode == "import" ? nsIFP.modeOpen : nsIFP.modeSave);
-      fileDialog.appendFilters(nsIFP.filterText);
+      fileDialog.appendFilters(nsIFP.filterText); // s'ha de posar XML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       fileDialog.appendFilters(nsIFP.filterAll);
       fileDialog.filterIndex = 0;
       fileDialog.defaultExtension = aXml ? ".xml" : ".txt";

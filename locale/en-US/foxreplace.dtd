@@ -21,7 +21,5 @@
 <!ENTITY replaceBarOutputString.accesskey "w">
 <!ENTITY replaceBarCaseSensitive.label "Match case">
 <!ENTITY replaceBarCaseSensitive.accesskey "M">
-<!ENTITY replaceBarWholeWords.label "Only whole words">
-<!ENTITY replaceBarWholeWords.accesskey "O">
 <!ENTITY replaceBarReplace.label "Replace">
-<!ENTITY replaceBarReplace.accesskey "p">
+<!ENTITY replaceBarReplace.accesskey "e">

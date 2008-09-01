@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007
+ * Portions created by the Initial Developer are Copyright (C) 2007-2008
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -35,15 +35,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 /**
- * Constants.
- */
-const FXR_INPUT_TEXT = 0;
-const FXR_INPUT_WHOLE_WORDS = 1;
-const FXR_INPUT_REG_EXP = 2;
-const FXR_INPUT_TYPE_STRINGS = ["text", "wholewords", "regexp"];
-
-/**
- * Standard substitution prototype.
+ * Old substitution.
  */
 function FxROldSubstitution(aInput, aOutput, aCaseSensitive, aInputRegExp, aWholeWords) {
   this.input = aInput;
@@ -75,26 +67,54 @@ FxROldSubstitution.prototype = {
 };
 
 /**
- * New standard substitution prototype.
+ * New substitution.
  */
-function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) { // falta comprovació d'errors (aInput buit, tipus)
+function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) { // falta comprovaciÃ³ d'errors (aInput buit, tipus)
   this.input = aInput;
   this.output = aOutput;
   this.caseSensitive = Boolean(aCaseSensitive);
-  this.inputType = aInputType || FXR_INPUT_TEXT;
-  if (this.inputType < FXR_INPUT_TEXT || this.inputType > FXR_INPUT_REG_EXP) this.inputType = FXR_INPUT_TEXT;
+  this.inputType = aInputType || FxRSubstitution.INPUT_TEXT;
+  if (this.inputType < FxRSubstitution.INPUT_TEXT || this.inputType > FxRSubstitution.INPUT_REG_EXP) this.inputType = FxRSubstitution.INPUT_TEXT;
   
   switch (this.inputType) {
-    case FXR_INPUT_WHOLE_WORDS:
+    case FxRSubstitution.INPUT_WHOLE_WORDS:
       var prefix = aInput.charAt(0).match(/\w/) ? "\\b" : "\\B";
       var suffix = aInput.charAt(aInput.length - 1).match(/\w/) ? "\\b" : "\\B";
       this._regExp = new RegExp(prefix + aInput.toUnicode() + suffix, aCaseSensitive ? "g" : "gi");
       break;
-    case FXR_INPUT_REG_EXP:
+    case FxRSubstitution.INPUT_REG_EXP:
       this._regExp = new RegExp(aInput, aCaseSensitive ? "g" : "gi");
       break;
   }
 }
+/**
+ * Constants.
+ */
+FxRSubstitution.INPUT_TEXT = 0;
+FxRSubstitution.INPUT_WHOLE_WORDS = 1;
+FxRSubstitution.INPUT_REG_EXP = 2;
+FxRSubstitution.INPUT_TYPE_STRINGS = ["text", "wholewords", "regexp"];
+/**
+ * Creates a substitution from an XML object;
+ */
+FxRSubstitution.fromXml = function(aXml) {
+  var input = aXml.input.toString().slice(1, -1);
+  var output = aXml.output.toString().slice(1, -1);
+  var caseSensitive = aXml.@casesensitive.toString() == "true";
+  var inputType = FxRSubstitution.INPUT_TYPE_STRINGS.indexOf(aXml.input.@type.toString());
+  return new FxRSubstitution(input, output, caseSensitive, inputType);
+};
+/**
+ * Creates a substitution from an old substitution object;
+ */
+FxRSubstitution.fromOldSubstitution = function(aSubstitution) {
+  var input = aSubstitution.input;
+  var output = aSubstitution.output;
+  var caseSensitive = aSubstitution.caseSensitive;
+  var inputType = aSubstitution.inputRegExp ? FxRSubstitution.INPUT_REG_EXP :
+                                              (aSubstitution.wholeWords ? FxRSubstitution.INPUT_WHOLE_WORDS : FxRSubstitution.INPUT_TEXT);
+  return new FxRSubstitution(input, output, caseSensitive, inputType);
+};
 FxRSubstitution.prototype = {
 
   /**
@@ -113,38 +133,18 @@ FxRSubstitution.prototype = {
   toXml: function() {
     var substitution = <substitution/>;
     substitution.input = '"' + this.input + '"';    // quotes to avoid whitespace problems
-    substitution.input.@type = FXR_INPUT_TYPE_STRINGS[this.inputType];
+    substitution.input.@type = FxRSubstitution.INPUT_TYPE_STRINGS[this.inputType];
     substitution.output = '"' + this.output + '"';  // quotes to avoid whitespace problems
     if (this.caseSensitive) substitution.@casesensitive = true;
     return substitution;
   }
   
 };
-/**
- * Creates a substitution from an XML object;
- */
-FxRSubstitution.fromXml = function(aXml) {
-  var input = aXml.input.toString().slice(1, -1);
-  var output = aXml.output.toString().slice(1, -1);
-  var caseSensitive = Boolean(aXml.@casesensitive.toString());
-  var inputType = FXR_INPUT_TYPE_STRINGS.indexOf(aXml.input.@type.toString());
-  return new FxRSubstitution(input, output, caseSensitive, inputType);
-};
-/**
- * Creates a substitution from an old substitution object;
- */
-FxRSubstitution.fromOldSubstitution = function(aSubstitution) {
-  var input = aSubstitution.input;
-  var output = aSubstitution.output;
-  var caseSensitive = aSubstitution.caseSensitive;
-  var inputType = aSubstitution.inputRegExp ? FXR_INPUT_REG_EXP : (aSubstitution.wholeWords ? FXR_INPUT_WHOLE_WORDS : FXR_INPUT_TEXT);
-  return new FxRSubstitution(input, output, caseSensitive, inputType);
-};
 
 /**
  * Substitution group, including an URL list and a substitution list.
  */
-function FxRSubstitutionGroup(aUrls, aSubstitutions) {  // falta comprovació d'errors (tipus)
+function FxRSubstitutionGroup(aUrls, aSubstitutions) {  // falta comprovaciÃ³ d'errors (tipus)
   this.urls = aUrls || [];
   this.substitutions = aSubstitutions || [];
 }
@@ -178,11 +178,9 @@ FxRSubstitutionGroup.prototype = {
    * Returns the substitution group as an XML object.
    */
   toXml: function() {
-    if (FXR_INPUT_TYPE_STRINGS[0]);
     var group = <group><urls/><substitutions/></group>;
     this.urls.forEach(function(element) { group.urls.appendChild(<url>{element}</url>); });
-    // s'ha de cridar el toXml així perquè funcioni (per l'scope) ?!?!?!?!?!?!?!?!?!?!?!?!?!???!!!!!!!!!?!!?!!?!!???!??
-    this.substitutions.forEach(function(element) { group.substitutions.appendChild(FxRSubstitution.prototype.toXml.call(element)); });
+    this.substitutions.forEach(function(element) { group.substitutions.appendChild(element.toXml()); });
     return group;
   }
 

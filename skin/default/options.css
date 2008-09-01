@@ -2,6 +2,11 @@
 #foxreplacePreferences {
   height: auto !important;
   width: auto !important;
+  max-width: 800px;
+}
+
+#mainPane > vbox {
+  overflow: visible;  /* perquè no quedin amagats els checkboxs de baix */
 }
 
 textbox {

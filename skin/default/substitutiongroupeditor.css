@@ -1,3 +1,7 @@
+#foxreplaceDialogSubstitutionGroupEditor {
+  max-width: 800px;
+}
+
 #inputStringTextBox {
   -moz-binding: url("chrome://foxreplace/content/bindings.xml#inputTextBox");
 }

@@ -16,7 +16,7 @@
   -
   - The Initial Developer of the Original Code is
   - Marc Ruiz Altisent.
-  - Portions created by the Initial Developer are Copyright (C) 2007
+  - Portions created by the Initial Developer are Copyright (C) 2008
   - the Initial Developer. All Rights Reserved.
   -
   - Contributor(s):
@@ -37,7 +37,7 @@
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://foxreplace/skin/substitutiongroupeditor.css" type="text/css"?>
-<!-- <!DOCTYPE dialog SYSTEM "chrome://foxreplace/locale/substitutiongroupeditor.dtd"> -->
+<!DOCTYPE dialog SYSTEM "chrome://foxreplace/locale/substitutiongroupeditor.dtd">
 <dialog id="foxreplaceDialogSubstitutionGroupEditor" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         title="Title" onload="foxreplaceSubstitutionGroupEditor.onLoad();" ondialogaccept="return foxreplaceSubstitutionGroupEditor.onAccept();">
   <script src="defs.js"/>
@@ -46,13 +46,14 @@
   <stringbundleset id="stringbundleset">
     <stringbundle id="fxrStrings" src="chrome://foxreplace/locale/foxreplace.properties"/>
   </stringbundleset>
-  <description>Description.</description>
+  <description>&description;</description>
   <groupbox id="urlsGroupBox">
-    <caption label="URLs"/>
+    <caption label="&urls;"/>
     <hbox align="center">
-      <label id="urlLabel" control="urlTextBox" value="URL" accesskey=""/>
+      <label id="urlLabel" control="urlTextBox" value="&url.label;" accesskey="&url.accesskey;"/>
       <textbox id="urlTextBox" flex="1" oninput="document.getElementById('addUrlButton').disabled=this.value==''"/>
-      <button id="addUrlButton" disabled="true" label="Add" accesskey="" oncommand="foxreplaceSubstitutionGroupEditor.addUrl();"/>
+      <button id="addUrlButton" disabled="true" label="&addUrlButton.label;" accesskey="&addUrlButton.accesskey;"
+              oncommand="foxreplaceSubstitutionGroupEditor.addUrl();"/>
     </hbox>
     <hbox>
       <listbox id="urlsListBox" flex="1" rows="10"
@@ -61,30 +62,32 @@
         <listitem id="urlDumbItem" label=""/>
       </listbox>
       <vbox>
-        <button id="deleteUrlButton" label="Delete" accesskey="" oncommand="foxreplaceSubstitutionGroupEditor.deleteUrl();"/>
-        <button id="clearUrlsButton" label="Clear" accesskey="" oncommand="foxreplaceSubstitutionGroupEditor.clearUrls();"/>
+        <button id="deleteUrlButton" label="&deleteUrlButton.label;" accesskey="&deleteUrlButton.accesskey;"
+                oncommand="foxreplaceSubstitutionGroupEditor.deleteUrl();"/>
+        <button id="clearUrlsButton" label="&clearUrlsButton.label;" accesskey="&clearUrlsButton.accesskey;"
+                oncommand="foxreplaceSubstitutionGroupEditor.clearUrls();"/>
       </vbox>
     </hbox>
   </groupbox>
   <groupbox id="substitutionsGroupBox">
-    <caption label="Substitutions"/>
+    <caption label="&substitutions;"/>
     <hbox align="center">
-      <label id="inputStringLabel" control="inputStringTextBox" value="Input" accesskey=""/>
+      <label id="inputStringLabel" control="inputStringTextBox" value="&inputString.label;" accesskey="&inputString.accesskey;"/>
       <textbox id="inputStringTextBox" flex="1" oninput="document.getElementById('addSubstitutionButton').disabled=this.value==''"/>
-      <label id="outputStringLabel" control="outputStringTextBox" value="Output" accesskey=""/>
+      <label id="outputStringLabel" control="outputStringTextBox" value="&outputString.label;" accesskey="&outputString.accesskey;"/>
       <textbox id="outputStringTextBox" flex="1"/>
-      <checkbox id="caseSensitiveCheckBox" label="Case sensitive" accesskey=""/>
-      <button id="addSubstitutionButton" disabled="true" label="Add" accesskey=""
+      <checkbox id="caseSensitiveCheckBox" label="&caseSensitive.label;" accesskey="&caseSensitive.accesskey;"/>
+      <button id="addSubstitutionButton" disabled="true" label="&addSubstitutionButton.label;" accesskey="&addSubstitutionButton.accesskey;"
               oncommand="foxreplaceSubstitutionGroupEditor.addSubstitution();"/>
     </hbox>
     <hbox>
       <listbox id="substitutionsListBox" flex="1" rows="10"
                onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceSubstitutionGroupEditor.deleteSubstitution();">
         <listhead>
-          <listheader label="Input"/>
-          <listheader label="Input type"/>
-          <listheader label="Output"/>
-          <listheader label="Case sensitive"/>
+          <listheader label="&inputStringHeader;"/>
+          <listheader label="&inputTypeHeader;"/>
+          <listheader label="&outputStringHeader;"/>
+          <listheader label="&caseSensitiveHeader;"/>
         </listhead>
         <listcols>
           <listcol flex="1"/>
@@ -101,12 +104,15 @@
         </listitem>
       </listbox>
       <vbox>
-        <button id="moveUpSubstitutionButton" label="Move up" accesskey="" oncommand="foxreplaceSubstitutionGroupEditor.moveUpSubstitution();"/>
-        <button id="moveDownSubstitutionButton" label="Move down" accesskey=""
+        <button id="moveUpSubstitutionButton" label="&moveUpSubstitutionButton.label;" accesskey="&moveUpSubstitutionButton.accesskey;"
+                oncommand="foxreplaceSubstitutionGroupEditor.moveUpSubstitution();"/>
+        <button id="moveDownSubstitutionButton" label="&moveDownSubstitutionButton.label;" accesskey="&moveDownSubstitutionButton.accesskey;"
                 oncommand="foxreplaceSubstitutionGroupEditor.moveDownSubstitution();"/>
         <separator/>
-        <button id="deleteSubstitutionButton" label="Delete" accesskey="" oncommand="foxreplaceSubstitutionGroupEditor.deleteSubstitution();"/>
-        <button id="clearSubstitutionsButton" label="Clear" accesskey="" oncommand="foxreplaceSubstitutionGroupEditor.clearSubstitutions();"/>
+        <button id="deleteSubstitutionButton" label="&deleteSubstitutionButton.label;" accesskey="&deleteSubstitutionButton.accesskey;"
+                oncommand="foxreplaceSubstitutionGroupEditor.deleteSubstitution();"/>
+        <button id="clearSubstitutionsButton" label="&clearSubstitutionsButton.label;" accesskey="&clearSubstitutionsButton.accesskey;"
+                oncommand="foxreplaceSubstitutionGroupEditor.clearSubstitutions();"/>
       </vbox>
     </hbox>
   </groupbox>

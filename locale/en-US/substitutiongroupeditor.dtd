@@ -1,0 +1,32 @@
+<!ENTITY description "Enter the URL list and the substitution list. The URL list can be empty, and then the substitutions will be applied to any
+         page. The substitution list must have at least one substitution.">
+<!ENTITY urls "URLs">
+<!ENTITY url.label "URL">
+<!ENTITY url.accesskey "U">
+<!ENTITY addUrlButton.label "Add">
+<!ENTITY addUrlButton.accesskey "A">
+<!ENTITY deleteUrlButton.label "Delete">
+<!ENTITY deleteUrlButton.accesskey "e">
+<!ENTITY clearUrlsButton.label "Clear">
+<!ENTITY clearUrlsButton.accesskey "C">
+<!ENTITY substitutions "Substitutions">
+<!ENTITY inputString.label "Replace">
+<!ENTITY inputString.accesskey "R">
+<!ENTITY outputString.label "with">
+<!ENTITY outputString.accesskey "w">
+<!ENTITY caseSensitive.label "Match case">
+<!ENTITY caseSensitive.accesskey "M">
+<!ENTITY addSubstitutionButton.label "Add">
+<!ENTITY addSubstitutionButton.accesskey "d">
+<!ENTITY moveUpSubstitutionButton.label "Move up">
+<!ENTITY moveUpSubstitutionButton.accesskey "p">
+<!ENTITY moveDownSubstitutionButton.label "Move down">
+<!ENTITY moveDownSubstitutionButton.accesskey "o">
+<!ENTITY deleteSubstitutionButton.label "Delete">
+<!ENTITY deleteSubstitutionButton.accesskey "t">
+<!ENTITY clearSubstitutionsButton.label "Clear">
+<!ENTITY clearSubstitutionsButton.accesskey "l">
+<!ENTITY inputStringHeader "Replace">
+<!ENTITY inputTypeHeader "Type">
+<!ENTITY outputStringHeader "With">
+<!ENTITY caseSensitiveHeader "Match case">
