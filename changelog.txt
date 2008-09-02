@@ -5,11 +5,13 @@ v0.8.0
   applied only if the URL of the current page matches one of the URLs in the
   list or if the list is empty.
 * Substitution list stored in XML.
+* Updated help.
 * New prototypes for FxRSubstitution and FxRSubstitutionGroup.
 * String changes:
   - bindings.dtd: new: wholeWords.
   - foxreplace.dtd: removed: replaceBarWholeWords.label,
     replaceBarWholeWords.accesskey.
+  - help.dtd: several new, modified and removed strings.
   - options.dtd: lots of changes.
   - substitutiongroupeditor.dtd: all new.
   - foxreplace.properties: new: text, wholewords, regexp, noSubstitutionsTitle,

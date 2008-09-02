@@ -1,43 +1,55 @@
 <!ENTITY title "Ajuda de FoxReplace">
 <!ENTITY h1 "Ajuda de FoxReplace">
-<!ENTITY p "Aquesta extensió permet reemplaçar fragments de text en una pàgina per altres fragments de text. El
-         sistema es basa en &lt;b&gt;substitucions&lt;/b&gt;: una substitució consisteix en un text que ha de ser reemplaçat
-         (identificat com a &quot;Reemplaça&quot;) i un text amb el qual s&apos;ha de reemplaçar el primer (identificat
-         com a &quot;Amb&quot;). Totes les substitucions s&apos;apliquen sempre sobre &lt;b&gt;tot&lt;/b&gt; el contingut d&apos;una
-         pàgina (de moment no es poden fer substitucions parcials).">
+<!ENTITY p "Aquesta extensió permet reemplaçar fragments de text (cadenes) en una pàgina per altres fragments de text. El sistema es basa en
+         substitucions, on cada substitució té un text d'entrada que ha de ser reemplaçat (el camp &quot;Reemplaça&quot;) i un text de sortida amb
+         el qual s'ha de reemplaçar el primer (el camp &quot;Amb&quot;). Hi ha opcions addicionals per a les substitucions que s'expliquen més
+         avall. Quan s'aplica una substitució sempre és sobre tot el contingut de la pàgina (de moment no es poden fer substitucions parcials).">
 <!ENTITY substitution "Substitució">
-<!ENTITY substitution.p "Té una cadena d&apos;entrada i una cadena de sortida, i l&apos;opció de distingir entre majúscules
-         i minúscules o no.">
-<!ENTITY substitution.inputString "Cadena d&apos;entrada: la cadena de text que serà reemplaçada. Pot ser una &lt;a href=
-         &apos;http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions&apos;
-         &gt;expressió regular&lt;/a&gt;, marcant l&apos;opció corresponent.">
-<!ENTITY substitution.outputString "Cadena de sortida: la cadena de text que reemplaçarà la d&apos;entrada. Pot tenir
-         els següents patrons especials:">
+<!ENTITY substitution.p "Sempre té una cadena d'entrada i una cadena de sortida. La cadena de sortida pot ser buida (per eliminar text), però la
+         d'entrada ha de tenir com a mínim un caràcter. Opcionalment la substitució pot distingir entre majúscules i minúscules.">
+<!ENTITY substitution.inputString "Cadena d'entrada: la cadena de text que serà reemplaçada. No pot ser buida. Pot ser d'un d'aquests 3 tipus:">
+<!ENTITY substitution.inputString.text "Text: s'interpreta com una cadena de caràcters sense més particularitats.">
+<!ENTITY substitution.inputString.wholeWords "Paraules senceres: s'interpreta com una o més paraules senceres. Per exemple, &quot;actiu&quot; no
+         coincidiria amb &quot;interactiu&quot; (sí que ho faria si fos text normal).">
+<!ENTITY substitution.inputString.regExp.0 "Expressió regular: s'interpreta com una ">
+<!ENTITY regExpLink
+         "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions">
+<!ENTITY substitution.inputString.regExp.1 "expressió regular">
+<!ENTITY substitution.inputString.regExp.2 ". Si no és vàlida, saltarà un error de sintaxi.">
+<!ENTITY substitution.outputString "Cadena de sortida: la cadena de text que reemplaçarà la d'entrada. Pot tenir els següents patrons especials:">
 <!ENTITY substitution.table.summary "Patrons especials de la cadena de sortida">
 <!ENTITY substitution.table.0 "Insereix un &quot;$&quot;.">
-<!ENTITY substitution.table.1 "Insereix la cadena d&apos;entrada.">
-<!ENTITY substitution.table.2 "Insereix el text d&apos;abans de la cadena d&apos;entrada dins del mateix bloc.">
-<!ENTITY substitution.table.3 "Insereix el text de després de la cadena d&apos;entrada dins del mateix bloc.">
-<!ENTITY substitution.table.4 "Si la cadena d&apos;entrada és una expressió regular, i &lt;i&gt;n&lt;/i&gt; un nombre enter decimal
-         entre 1 i 99 (inclosos), insereix la &lt;i&gt;n&lt;/i&gt;-èssima subcadena trobada.">
+<!ENTITY substitution.table.1 "Insereix la cadena d'entrada.">
+<!ENTITY substitution.table.2 "Insereix el text d'abans de la cadena d'entrada dins del mateix bloc.">
+<!ENTITY substitution.table.3 "Insereix el text de després de la cadena d'entrada dins del mateix bloc.">
+<!ENTITY substitution.table.4.0 "Si la cadena d'entrada és una expressió regular, i ">
+<!ENTITY substitution.table.4.1 " un nombre enter decimal entre 1 i 99 (inclosos), insereix la ">
+<!ENTITY substitution.table.4.2 "-èssima subcadena trobada.">
 <!ENTITY substitutionList "Llista de substitucions">
-<!ENTITY substitutionList.p "L&apos;extensió guarda una llista de substitucions que podeu definir i modificar en
-         qualsevol moment des de la finestra d&apos;opcions de FoxReplace. Podeu aplicar la llista de substitucions
-         quan vulgueu prement la tecla F2 o bé prement el botó de la barra d&apos;eines o activant una opció del menú.
-         Quan ho feu, les substitucions de la llista s&apos;aplicaran en l&apos;ordre en què apareixen. Podeu aplicar la
-         llista de substitucions tantes vegades com vulgueu sobre la mateixa pàgina. Les substitucions es fan
-         sobre el contingut actual de la pàgina, és a dir, que si apliqueu la llista de substitucions una segona
-         vegada, serà sobre el resultat de la primera.">
+<!ENTITY substitutionList.p "FoxReplace guarda una llista de substitucions que podeu definir i modificar en qualsevol moment des de la finestra
+         d'opcions de FoxReplace. Podeu aplicar la llista de substitucions quan vulgueu prement la tecla F2 o bé prement el botó de la barra
+         d'eines o activant una opció del menú. Quan ho feu, les substitucions de la llista s'aplicaran en l'ordre en què apareixen. Podeu aplicar
+         la llista de substitucions tantes vegades com vulgueu sobre la mateixa pàgina. Les substitucions es fan sobre el contingut actual de la
+         pàgina, és a dir, que si apliqueu la llista de substitucions una segona vegada, serà sobre el resultat de la primera. En aquesta llista
+         de substitució, no hi ha les substitucions directament sinó que hi ha grups de substitucions, on s'associa una llista d'adreces (URLs)
+         amb una llista de substitucions que s'apliquen en pàgines l'adreça de les quals coincideixi amb alguna de les URLs.">
+<!ENTITY substitutionGroup "Grup de substitucions">
+<!ENTITY substitutionGroup.p "Està format per una llista d'URLs i una llista de substitucions. Les substitucions s'apliquen sobre una pàgina si la
+         seva adreça coincideix amb una de les URLs, i s'apliquen en l'ordre en què apareixen. Es considera que una URL d'una pàgina coincideix
+         una URL del grup si la URL del grup és una part de la URL de la pàgina. Si la llista d'URLs és buida, les substitucions s'apliquen a
+         qualsevol pàgina. La llista de substitucions ha de tenir com a mínim un element.">
 <!ENTITY autoReplace "Reemplaça automàticament en carregar una pàgina">
-<!ENTITY autoReplace.p "Aquesta opció es pot activar o desactivar. Quan està activa, s&apos;aplica la llista de
-         substitucions automàticament quan es carrega una pàgina. D&apos;aquesta manera l&apos;extensió pot actuar com un
-         filtre: podeu fer desaparèixer les paraules que no us agraden (o no us agrada com estan escrites)
-         canviant-les per altres que trobeu més adients. I amb una mica d&apos;imaginació pot servir per fer bromes i
-         tot ;)">
-<!ENTITY newGui "Nous elements dels menús i barra d&apos;eines">
+<!ENTITY autoReplace.p "Aquesta opció es pot activar o desactivar. Quan està activa, s'aplica la llista de substitucions automàticament quan es
+         carrega una pàgina, aplicant-se les substitucions dels grups amb una URL coincident. D'aquesta manera l'extensió pot actuar com un
+         filtre per a les pàgines que vulgueu.">
+<!ENTITY replaceUrls "Reemplaça les URLs">
+<!ENTITY replaceUrls.p "Aquesta opció està desactivada per defecte. Si s'activa les substitucions també s'apliquen sobre les URLs que hi hagi a la
+         pàgina (enllaços, fonts d'imatges, etc.), de manera que pot canviar el comportament de la pàgina. Utilitzeu-la sota la vostra pròpia
+         responsabilitat.">
+<!ENTITY newGui "Nous elements dels menús i barra d'eines">
 <!ENTITY newGui.edit "Edita">
 <!ENTITY newGui.edit.replace "Reemplaça... (Maj+F2)">
-<!ENTITY newGui.edit.replace.d "Permet definir una substitució i aplicar-la a l&apos;instant.">
+<!ENTITY newGui.edit.replace.d "Mostra la barra de substitucions.">
 <!ENTITY newGui.tools "Eines">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
 <!ENTITY newGui.tools.foxreplace.replace "Reemplaça amb la llista de substitucions (F2)">
@@ -45,12 +57,15 @@
 <!ENTITY newGui.tools.foxreplace.autoReplace "Reemplaça automàticament en carregar una pàgina">
 <!ENTITY newGui.tools.foxreplace.autoReplace.d "Activa/desactiva aquesta opció.">
 <!ENTITY newGui.tools.foxreplace.options "Opcions de FoxReplace...">
-<!ENTITY newGui.tools.foxreplace.options.d "Obre la finestra d&apos;opcions de FoxReplace.">
+<!ENTITY newGui.tools.foxreplace.options.d "Obre la finestra d'opcions de FoxReplace.">
 <!ENTITY newGui.tools.foxreplace.help "Ajuda">
 <!ENTITY newGui.tools.foxreplace.help.d "Mostra aquesta pàgina.">
-<!ENTITY newGui.toolbarButton "Botó de la barra d&apos;eines">
+<!ENTITY newGui.toolbarButton "Botó de la barra d'eines">
 <!ENTITY newGui.toolbarButton.0 "Prement-lo, aplica la llista de substitucions actual.">
 <!ENTITY newGui.toolbarButton.1 "Al costat té un menú com el FoxReplace de dalt.">
 <!ENTITY newGui.contextMenu "Menú contextual">
 <!ENTITY newGui.contextMenu.replace "Reemplaça amb la llista de substitucions (FoxReplace) (F2)">
 <!ENTITY newGui.contextMenu.replace.d "Aplica la llista de substitucions actual.">
+<!ENTITY newGui.replaceBar "Barra de substitucions">
+<!ENTITY newGui.replaceBar.0 "Apareix sota la barra de cerca.">
+<!ENTITY newGui.replaceBar.1 "Permet definir una substitució i aplicar-la a l'instant.">

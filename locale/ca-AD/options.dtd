@@ -25,5 +25,5 @@
 <!ENTITY exportButton.accesskey "x">
 <!ENTITY autoReplaceOnLoad.label "Reemplaça automàticament en carregar una pàgina">
 <!ENTITY autoReplaceOnLoad.accesskey "u">
-<!ENTITY replaceUrls.label "Reemplaça les URLs (enllaços i fonts de les imatges) (Atenció: això modificarà el comportament de les pàgines!)">
+<!ENTITY replaceUrls.label "Reemplaça les URLs (enllaços i fonts de les imatges) (Atenció: això pot modificar el comportament de les pàgines!)">
 <!ENTITY replaceUrls.accesskey "R">
