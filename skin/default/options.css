@@ -5,8 +5,8 @@
   max-width: 800px;
 }
 
-#mainPane > vbox {
-  overflow: visible;  /* perquè no quedin amagats els checkboxs de baix */
+.paneDeckContainer, .content-box {
+  overflow: visible;  /* to avoid that some checkboxes get hidden */
 }
 
 textbox {
@@ -16,8 +16,3 @@ textbox {
 #inputStringTextBox {
   -moz-binding: url("chrome://foxreplace/content/bindings.xml#inputTextBox");
 }
-/*
-listitem.substitutionGroup {
-  -moz-binding: url("chrome://foxreplace/content/bindings.xml#substitutionGroupListItem");
-}
-*/
