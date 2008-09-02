@@ -127,7 +127,8 @@ var foxreplaceIO = {
    * Loads substitution list in XML from preferences and returns it.
    */
   loadSubstitutionListXml: function() {
-    // falta la conversió des de l'altre la primera vegada
+    this.upgradePreferencesFrom07To08();
+    
     var substitutionList = [];
     var listXmlString = this.prefs.getComplexValue("substitutionListXml", Components.interfaces.nsISupportsString).data;
     var listXml = new XML(listXmlString);
@@ -416,6 +417,18 @@ var foxreplaceIO = {
   oldSubstitutionListToNew: function(aOldSubstitutionList) {
     var substitutions = aOldSubstitutionList.map(FxRSubstitution.fromOldSubstitution, FxRSubstitution);
     return [new FxRSubstitutionGroup([], substitutions)];
+  },
+  
+  upgradePreferencesFrom07To08: function() {
+    // check if exists a substitution list in the old format
+    if (this.prefs.prefHasUserValue("substitutionList")) {
+      // load the old list, convert it to the new format, save the new and delete the old
+      var oldSubstitutionList = this.loadSubstitutionList();
+      var newSubstitutionList = this.oldSubstitutionListToNew(oldSubstitutionList);
+      var newListXmlString = this.saveSubstitutionListXml(newSubstitutionList);
+      this.prefs.setComplexValue("substitutionListXml", Components.interfaces.nsISupportsString, newListXmlString);
+      this.prefs.clearUserPref("substitutionList");
+    }
   }
   
 };

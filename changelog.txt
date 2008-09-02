@@ -1,6 +1,3 @@
-Quan s'exporta en xml es guarda el resultat en ANSI.
-
-
 v0.8.0
 * Whole words option integrated in the XBL input textbox.
 * Per-site substitution: now you can define a list of substitution groups, where
@@ -9,16 +6,14 @@ v0.8.0
   list or if the list is empty.
 * Substitution list stored in XML.
 * New prototypes for FxRSubstitution and FxRSubstitutionGroup.
-* New strings:
-  - bindings.dtd: wholeWords.
-  - options.dtd: urlHeader, editButton.label, editButton.accesskey.
-* Removed strings:
-  - foxreplace.dtd: replaceBarWholeWords.label, replaceBarWholeWords.accesskey.
-  - options.dtd: inputString.label, inputString.accesskey, outputString.label,
-    outputString.accesskey, caseSensitive.label, caseSensitive.accesskey,
-    wholeWords.label, wholeWords.accesskey, inputRegExpHeader,
-    caseSensitiveHeader, wholeWordsHeader.
-
+* String changes:
+  - bindings.dtd: new: wholeWords.
+  - foxreplace.dtd: removed: replaceBarWholeWords.label,
+    replaceBarWholeWords.accesskey.
+  - options.dtd: lots of changes.
+  - substitutiongroupeditor.dtd: all new.
+  - foxreplace.properties: new: text, wholewords, regexp, noSubstitutionsTitle,
+    noSubstitutionsDescription.
 
 v0.7.3 (18-8-2008)
 * Less crowded replace bar (new input textbox with XBL).
