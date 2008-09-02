@@ -7,6 +7,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>&title;</title>
+<link rel="shortcut icon" href="chrome://foxreplace/content/foxreplace.png"/>
 </head>
 <body>
 
@@ -19,7 +20,13 @@
 <p>&substitution.p;</p>
 
 <ul>
-  <li>&substitution.inputString;</li>
+  <li>&substitution.inputString;
+    <ul>
+      <li>&substitution.inputString.text;</li>
+      <li>&substitution.inputString.wholeWords;</li>
+      <li>&substitution.inputString.regExp.0;<a href="&regExpLink;">&substitution.inputString.regExp.1;</a>&substitution.inputString.regExp.2;</li>
+    </ul>
+  </li>
   <li>&substitution.outputString;
     <table summary="&substitution.table.summary;">
       <tr>
@@ -40,7 +47,7 @@
       </tr>
       <tr>
         <td>$<i>n</i></td>
-        <td>&substitution.table.4;</td>
+        <td>&substitution.table.4.0;<i>n</i>&substitution.table.4.1;<i>n</i>&substitution.table.4.2;</td>
       </tr>
     </table>
   </li>
@@ -50,9 +57,17 @@
 
 <p>&substitutionList.p;</p>
 
+<h2>&substitutionGroup;</h2>
+
+<p>&substitutionGroup.p;</p>
+
 <h2>&autoReplace;</h2>
 
 <p>&autoReplace.p;</p>
+
+<h2>&replaceUrls;</h2>
+
+<p>&replaceUrls.p;</p>
 
 <h2>&newGui;</h2>
 
@@ -101,6 +116,12 @@
         <dt>&newGui.contextMenu.replace;</dt>
         <dd>&newGui.contextMenu.replace.d;</dd>
       </dl></li>
+    </ul>
+  </li>
+  <li>&newGui.replaceBar;
+    <ul>
+      <li>&newGui.replaceBar.0;</li>
+      <li>&newGui.replaceBar.1;</li>
     </ul>
   </li>
 </ul>
