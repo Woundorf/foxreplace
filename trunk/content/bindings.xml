@@ -49,11 +49,11 @@
           <xul:image class="inputTextBoxSelectorDropmarker"/>
           <xul:menupopup position="before_start">
             <xul:menuitem class="menuitem-iconic inputTextBoxSelectorMenuItem" anonid="itemText" label="&text;"
-                          oncommand="document.getBindingParent(this).inputType=FxRSubstitution.INPUT_TEXT;"/>
+                          oncommand="document.getBindingParent(this).inputType=FxRSubstitution.prototype.INPUT_TEXT;"/>
             <xul:menuitem class="menuitem-iconic inputTextBoxSelectorMenuItem" anonid="itemWholeWords" label="&wholeWords;"
-                          oncommand="document.getBindingParent(this).inputType=FxRSubstitution.INPUT_WHOLE_WORDS;"/>
+                          oncommand="document.getBindingParent(this).inputType=FxRSubstitution.prototype.INPUT_WHOLE_WORDS;"/>
             <xul:menuitem class="menuitem-iconic inputTextBoxSelectorMenuItem" anonid="itemRegExp" label="&regExp;"
-                          oncommand="document.getBindingParent(this).inputType=FxRSubstitution.INPUT_REG_EXP;"/>
+                          oncommand="document.getBindingParent(this).inputType=FxRSubstitution.prototype.INPUT_REG_EXP;"/>
           </xul:menupopup>
         </xul:hbox>
         <xul:textbox class="inputTextBox" anonid="textBox" flex="1"/>
@@ -61,7 +61,7 @@
     </content>
     <implementation>
       <constructor>
-        this.inputType = FxRSubstitution.INPUT_TEXT;
+        this.inputType = FxRSubstitution.prototype.INPUT_TEXT;
       </constructor>
       <field name="_selectorImage" readonly="true">
         document.getAnonymousElementByAttribute(this, "anonid", "selectorImage")
@@ -70,22 +70,22 @@
         document.getAnonymousElementByAttribute(this, "anonid", "textBox")
       </field>
       <field name="_inputType">
-        FxRSubstitution.INPUT_TEXT
+        FxRSubstitution.prototype.INPUT_TEXT
       </field>
       <property name="value" onget="return this._textBox.value;" onset="this._textBox.value=val;"/>
       <property name="inputType" onget="return this._inputType;">
         <setter>
           <![CDATA[
-            if (val < FxRSubstitution.INPUT_TEXT) val = FxRSubstitution.INPUT_TEXT;
-            if (val > FxRSubstitution.INPUT_REG_EXP) val = FxRSubstitution.INPUT_REG_EXP;
+            if (val < FxRSubstitution.prototype.INPUT_TEXT) val = FxRSubstitution.prototype.INPUT_TEXT;
+            if (val > FxRSubstitution.prototype.INPUT_REG_EXP) val = FxRSubstitution.prototype.INPUT_REG_EXP;
           ]]>
           this._inputType = val;
           this._selectorImage.setAttribute("inputtype", val);
           this._textBox.setAttribute("inputtype", val);
           switch (val) {
-            case FxRSubstitution.INPUT_TEXT: this._textBox.emptyText = "&text;"; break;
-            case FxRSubstitution.INPUT_WHOLE_WORDS: this._textBox.emptyText = "&wholeWords;"; break;
-            case FxRSubstitution.INPUT_REG_EXP: this._textBox.emptyText = "&regExp;"; break;
+            case FxRSubstitution.prototype.INPUT_TEXT: this._textBox.emptyText = "&text;"; break;
+            case FxRSubstitution.prototype.INPUT_WHOLE_WORDS: this._textBox.emptyText = "&wholeWords;"; break;
+            case FxRSubstitution.prototype.INPUT_REG_EXP: this._textBox.emptyText = "&regExp;"; break;
           }
         </setter>
       </property>

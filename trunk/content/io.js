@@ -181,7 +181,7 @@ var foxreplaceIO = {
    */
   saveSubstitutionListXml: function(aSubstitutionList) {
     var listXmlString = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-    var listXml = <substitutionlist/>;
+    var listXml = <substitutionlist version="0.8"/>;
     
     var nSubstitutions = aSubstitutionList.length;
     
@@ -346,7 +346,7 @@ var foxreplaceIO = {
     if (!file) return;
     
     var substitutionList = getSubstitutionList();
-    var listXml = <substitutionlist/>;
+    var listXml = <substitutionlist version="0.8"/>;
     
     var nSubstitutions = substitutionList.length;
     
