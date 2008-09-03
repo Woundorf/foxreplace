@@ -73,27 +73,21 @@ function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) { // falta
   this.input = aInput;
   this.output = aOutput;
   this.caseSensitive = Boolean(aCaseSensitive);
-  this.inputType = aInputType || FxRSubstitution.INPUT_TEXT;
-  if (this.inputType < FxRSubstitution.INPUT_TEXT || this.inputType > FxRSubstitution.INPUT_REG_EXP) this.inputType = FxRSubstitution.INPUT_TEXT;
+  this.inputType = aInputType || this.INPUT_TEXT;
+  if (this.inputType < this.INPUT_TEXT || this.inputType > this.INPUT_REG_EXP) this.inputType = this.INPUT_TEXT;
   
   switch (this.inputType) {
-    case FxRSubstitution.INPUT_WHOLE_WORDS:
+    case this.INPUT_WHOLE_WORDS:
       var prefix = aInput.charAt(0).match(/\w/) ? "\\b" : "\\B";
       var suffix = aInput.charAt(aInput.length - 1).match(/\w/) ? "\\b" : "\\B";
       this._regExp = new RegExp(prefix + aInput.toUnicode() + suffix, aCaseSensitive ? "g" : "gi");
       break;
-    case FxRSubstitution.INPUT_REG_EXP:
+    case this.INPUT_REG_EXP:
       this._regExp = new RegExp(aInput, aCaseSensitive ? "g" : "gi");
       break;
   }
 }
-/**
- * Constants.
- */
-FxRSubstitution.INPUT_TEXT = 0;
-FxRSubstitution.INPUT_WHOLE_WORDS = 1;
-FxRSubstitution.INPUT_REG_EXP = 2;
-FxRSubstitution.INPUT_TYPE_STRINGS = ["text", "wholewords", "regexp"];
+
 /**
  * Creates a substitution from an XML object;
  */
@@ -101,7 +95,7 @@ FxRSubstitution.fromXml = function(aXml) {
   var input = aXml.input.toString().slice(1, -1);
   var output = aXml.output.toString().slice(1, -1);
   var caseSensitive = aXml.@casesensitive.toString() == "true";
-  var inputType = FxRSubstitution.INPUT_TYPE_STRINGS.indexOf(aXml.input.@type.toString());
+  var inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(aXml.input.@type.toString());
   return new FxRSubstitution(input, output, caseSensitive, inputType);
 };
 /**
@@ -111,11 +105,19 @@ FxRSubstitution.fromOldSubstitution = function(aSubstitution) {
   var input = aSubstitution.input;
   var output = aSubstitution.output;
   var caseSensitive = aSubstitution.caseSensitive;
-  var inputType = aSubstitution.inputRegExp ? FxRSubstitution.INPUT_REG_EXP :
-                                              (aSubstitution.wholeWords ? FxRSubstitution.INPUT_WHOLE_WORDS : FxRSubstitution.INPUT_TEXT);
+  var inputType = aSubstitution.inputRegExp ? this.INPUT_REG_EXP :
+                                              (aSubstitution.wholeWords ? this.INPUT_WHOLE_WORDS : this.INPUT_TEXT);
   return new FxRSubstitution(input, output, caseSensitive, inputType);
 };
 FxRSubstitution.prototype = {
+
+  /**
+   * Constants.
+   */
+  INPUT_TEXT: 0,
+  INPUT_WHOLE_WORDS: 1,
+  INPUT_REG_EXP: 2,
+  INPUT_TYPE_STRINGS: ["text", "wholewords", "regexp"],
 
   /**
    * Applies the substitution to aString and returns the result.
@@ -133,7 +135,7 @@ FxRSubstitution.prototype = {
   toXml: function() {
     var substitution = <substitution/>;
     substitution.input = '"' + this.input + '"';    // quotes to avoid whitespace problems
-    substitution.input.@type = FxRSubstitution.INPUT_TYPE_STRINGS[this.inputType];
+    substitution.input.@type = this.INPUT_TYPE_STRINGS[this.inputType];
     substitution.output = '"' + this.output + '"';  // quotes to avoid whitespace problems
     if (this.caseSensitive) substitution.@casesensitive = true;
     return substitution;

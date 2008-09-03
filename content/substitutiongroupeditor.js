@@ -120,7 +120,7 @@ var foxreplaceSubstitutionGroupEditor = {
     substitutionItem.appendChild(inputStringCell);
     
     var inputTypeCell = document.createElement("listcell");
-    inputTypeCell.setAttribute("label", foxreplaceIO.strings.getString(FxRSubstitution.INPUT_TYPE_STRINGS[inputType]));
+    inputTypeCell.setAttribute("label", foxreplaceIO.strings.getString(FxRSubstitution.prototype.INPUT_TYPE_STRINGS[inputType]));
     substitutionItem.appendChild(inputTypeCell);
     
     var outputStringCell = document.createElement("listcell");
