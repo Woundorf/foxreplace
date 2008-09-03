@@ -56,14 +56,14 @@
   border-width: 1px;
 }
 
-.inputTextBox[inputtype="0"] {
+.inputTextBox[inputtype="0"], .inputTextBox[inputtype="0"] .textbox-input {
   background-color: white;
 }
 
-.inputTextBox[inputtype="1"] {
+.inputTextBox[inputtype="1"], .inputTextBox[inputtype="1"] .textbox-input {
   background-color: lime;
 }
 
-.inputTextBox[inputtype="2"] {
+.inputTextBox[inputtype="2"], .inputTextBox[inputtype="2"] .textbox-input {
   background-color: yellow;
 }
