@@ -90,6 +90,10 @@ var foxreplaceIO = {
     return this._promptService;
   },
   
+  alert: function(aTitle, aText) {
+    this.promptService.alert(window, aTitle, aText);
+  },
+  
   /**
    * Loads substitution list from preferences and returns it.
    */

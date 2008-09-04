@@ -6,6 +6,7 @@ v0.8.0
   list or if the list is empty.
 * Substitution list stored in XML.
 * Updated help.
+* Some skin changes.
 * New prototypes for FxRSubstitution and FxRSubstitutionGroup.
 * String changes:
   - bindings.dtd: new: wholeWords.
@@ -15,7 +16,7 @@ v0.8.0
   - options.dtd: lots of changes.
   - substitutiongroupeditor.dtd: all new.
   - foxreplace.properties: new: text, wholewords, regexp, noSubstitutionsTitle,
-    noSubstitutionsDescription.
+    noSubstitutionsDescription, xmlErrorTitle, xmlErrorText.
 
 v0.7.3 (18-8-2008)
 * Less crowded replace bar (new input textbox with XBL).
