@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2008
+ * Portions created by the Initial Developer are Copyright (C) 2008
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -35,7 +35,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 /**
- * Old substitution.
+ * Old substitution (until 0.7)
  */
 function FxROldSubstitution(aInput, aOutput, aCaseSensitive, aInputRegExp, aWholeWords) {
   this.input = aInput;
@@ -67,9 +67,9 @@ FxROldSubstitution.prototype = {
 };
 
 /**
- * New substitution.
+ * New substitution (since 0.8)
  */
-function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) { // falta comprovació d'errors (aInput buit, tipus)
+function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) {
   this.input = aInput;
   this.output = aOutput;
   this.caseSensitive = Boolean(aCaseSensitive);
@@ -87,16 +87,22 @@ function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) { // falta
       break;
   }
 }
-
 /**
  * Creates a substitution from an XML object;
  */
 FxRSubstitution.fromXml = function(aXml) {
-  var input = aXml.input.toString().slice(1, -1);
-  var output = aXml.output.toString().slice(1, -1);
+  var input = aXml.input.toString().slice(1, -1);   // to remove quotes
+  var output = aXml.output.toString().slice(1, -1); // to remove quotes
   var caseSensitive = aXml.@casesensitive.toString() == "true";
   var inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(aXml.input.@type.toString());
-  return new FxRSubstitution(input, output, caseSensitive, inputType);
+  
+  try {
+    return new FxRSubstitution(input, output, caseSensitive, inputType);
+  }
+  catch (e if e instanceof SyntaxError) {
+    e.message = '"' + input + '": ' + e.message;
+    throw e;
+  }
 };
 /**
  * Creates a substitution from an old substitution object;
@@ -105,8 +111,7 @@ FxRSubstitution.fromOldSubstitution = function(aSubstitution) {
   var input = aSubstitution.input;
   var output = aSubstitution.output;
   var caseSensitive = aSubstitution.caseSensitive;
-  var inputType = aSubstitution.inputRegExp ? this.INPUT_REG_EXP :
-                                              (aSubstitution.wholeWords ? this.INPUT_WHOLE_WORDS : this.INPUT_TEXT);
+  var inputType = aSubstitution.inputRegExp ? this.INPUT_REG_EXP : (aSubstitution.wholeWords ? this.INPUT_WHOLE_WORDS : this.INPUT_TEXT);
   return new FxRSubstitution(input, output, caseSensitive, inputType);
 };
 FxRSubstitution.prototype = {
@@ -123,7 +128,7 @@ FxRSubstitution.prototype = {
    * Applies the substitution to aString and returns the result.
    */
   replace: function(aString) {
-    if (!aString) return aString;
+    if (aString == undefined || aString == null) return aString;
     
     if (this._regExp) return aString.replace(this._regExp, this.output);
     else return aString.replace(this.input, this.output, this.caseSensitive ? "g" : "gi");
@@ -146,7 +151,7 @@ FxRSubstitution.prototype = {
 /**
  * Substitution group, including an URL list and a substitution list.
  */
-function FxRSubstitutionGroup(aUrls, aSubstitutions) {  // falta comprovació d'errors (tipus)
+function FxRSubstitutionGroup(aUrls, aSubstitutions) {
   this.urls = aUrls || [];
   this.substitutions = aSubstitutions || [];
 }
@@ -193,8 +198,21 @@ FxRSubstitutionGroup.prototype = {
 FxRSubstitutionGroup.fromXml = function(aXml) {
   var urls = [];
   for each (var url in aXml.urls.url) urls.push(url.toString());
+  
   var substitutions = [];
-  for each (var substitution in aXml.substitutions.substitution) substitutions.push(FxRSubstitution.fromXml(substitution));
+  var errors = "";
+  for each (var substitution in aXml.substitutions.substitution) {
+    try {
+      substitutions.push(FxRSubstitution.fromXml(substitution));
+    }
+    catch (e) {
+      XML.prettyPrinting = false;
+      errors += e + "\n";
+    }
+  }
+  
+  if (errors) foxreplaceIO.alert(foxreplaceIO.strings.getString("xmlErrorTitle"), foxreplaceIO.strings.getString("xmlErrorText") + "\n" + errors);
+  
   return new FxRSubstitutionGroup(urls, substitutions);
 };
 
