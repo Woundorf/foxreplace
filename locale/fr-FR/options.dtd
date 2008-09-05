@@ -3,8 +3,6 @@
 <!ENTITY description "Veuillez saisir la liste de substitution. Les substitutions seront effectuées dans l&apos;ordre proposé dans cette liste.">
 <!ENTITY inputString.label "Remplacer">
 <!ENTITY inputString.accesskey "R">
-<!ENTITY inputRegExp.label "Expression régulière">
-<!ENTITY inputRegExp.accesskey "e">
 <!ENTITY outputString.label "par">
 <!ENTITY outputString.accesskey "p">
 <!ENTITY caseSensitive.label "Casse correspondante">

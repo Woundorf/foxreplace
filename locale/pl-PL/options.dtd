@@ -3,8 +3,6 @@
 <!ENTITY description "Wprowadź listę wyrażeń do zastąpienia. Operacje zastępowania będą przeprowadzane zgodnie z ich kolejnością na liście.">
 <!ENTITY inputString.label "Zastąp">
 <!ENTITY inputString.accesskey "Z">
-<!ENTITY inputRegExp.label "Wyrażenie regularne">
-<!ENTITY inputRegExp.accesskey "W">
 <!ENTITY outputString.label "tekstem">
 <!ENTITY outputString.accesskey "t">
 <!ENTITY caseSensitive.label "Rozróżniaj wielkość liter">
