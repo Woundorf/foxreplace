@@ -3,8 +3,6 @@
 <!ENTITY description "Entre com a lista de substituição. Substituições serão feitos na ordem que forem aparecendo na lista.">
 <!ENTITY inputString.label "Substituir">
 <!ENTITY inputString.accesskey "R">
-<!ENTITY inputRegExp.label "Expressão regular">
-<!ENTITY inputRegExp.accesskey "e">
 <!ENTITY outputString.label "com">
 <!ENTITY outputString.accesskey "w">
 <!ENTITY caseSensitive.label "Diferenciar maiúsc./minúsc.">

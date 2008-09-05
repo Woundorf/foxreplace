@@ -3,19 +3,17 @@
 <!ENTITY description "Введите список замещения. Замещения будут сделаны в том же порядке, как они расположены в списке.">
 <!ENTITY inputString.label "Заменить">
 <!ENTITY inputString.accesskey "З">
-<!ENTITY inputRegExp.label "Регулярное выражение">
-<!ENTITY inputRegExp.accesskey "Р">
 <!ENTITY outputString.label "на">
 <!ENTITY outputString.accesskey "н">
 <!ENTITY caseSensitive.label "С учётом регистра">
 <!ENTITY caseSensitive.accesskey "ч">
-<!ENTITY wholeWords.label "Только целые слова">
+<!ENTITY wholeWords.label "Только слова целиком">
 <!ENTITY wholeWords.accesskey "Т">
 <!ENTITY inputStringHeader "Заменить">
 <!ENTITY inputRegExpHeader "Регулярное выражение">
 <!ENTITY outputStringHeader "На">
 <!ENTITY caseSensitiveHeader "С учётом регистра">
-<!ENTITY wholeWordsHeader "Только целые слова">
+<!ENTITY wholeWordsHeader "Только слова целиком">
 <!ENTITY addButton.label "Добавить">
 <!ENTITY addButton.accesskey "Д">
 <!ENTITY upButton.label "Выше">
