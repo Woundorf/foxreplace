@@ -38,8 +38,8 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://foxreplace/skin/substitutiongroupeditor.css" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://foxreplace/locale/substitutiongroupeditor.dtd">
-<dialog id="foxreplaceDialogSubstitutionGroupEditor" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="Title" onload="foxreplaceSubstitutionGroupEditor.onLoad();" ondialogaccept="return foxreplaceSubstitutionGroupEditor.onAccept();">
+<dialog id="foxreplaceDialogSubstitutionGroupEditor" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&title;"
+        onload="foxreplaceSubstitutionGroupEditor.onLoad();" ondialogaccept="return foxreplaceSubstitutionGroupEditor.onAccept();">
   <script src="defs.js"/>
   <script src="io.js"/>
   <script src="substitutiongroupeditor.js"/>

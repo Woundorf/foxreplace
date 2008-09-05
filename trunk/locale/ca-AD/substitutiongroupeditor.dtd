@@ -1,3 +1,4 @@
+<!ENTITY title "Editor del grup de substitucions">
 <!ENTITY description "Introdueix la llista d'URLs i la llista de substitucions. La llista d'URLs pot ser buida, i llavors s'apliquen les
          substitucions a qualsevol pàgina. La llista de substitucions ha de tenir com a mínim una substitució.">
 <!ENTITY urls "URLs">

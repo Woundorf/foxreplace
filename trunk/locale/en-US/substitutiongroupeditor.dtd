@@ -1,3 +1,4 @@
+<!ENTITY title "Substitution group editor">
 <!ENTITY description "Enter the URL list and the substitution list. The URL list can be empty, and then the substitutions will be applied to any
          page. The substitution list must have at least one substitution.">
 <!ENTITY urls "URLs">
