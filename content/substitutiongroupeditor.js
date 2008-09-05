@@ -35,10 +35,13 @@
  * ***** END LICENSE BLOCK ***** */
 
 /**
- * ...
+ * Object to manage the substitution group editor.
  */
 var foxreplaceSubstitutionGroupEditor = {
   
+  /**
+   * Deletes the dumb items and fills the listboxes.
+   */
   onLoad: function() {
     this.deleteDumbItems();
     

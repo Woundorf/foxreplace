@@ -40,39 +40,21 @@
 var foxreplaceOptions = {
   
   /**
-   * Called when the options window is loaded. Loads the substitution list from
-   * preferences and fills the listbox.
-   */
-  loadSubstitutionList: function() {
-    this.substitutionListFromArray(foxreplaceIO.loadSubstitutionList());
-  },
-  
-  /**
-   * Called when the options window is loaded. Loads the substitution list in XML from
-   * preferences and fills the listbox.
+   * Called when the options window is loaded. Loads the substitution list in XML from preferences and fills the listbox.
    */
   loadSubstitutionListXml: function() {
     this.substitutionListFromArray(foxreplaceIO.loadSubstitutionListXml());
   },
   
   /**
-   * Called when there's a change in the listbox. Saves the substitution list to
-   * preferences.
-   */
-  saveSubstitutionList: function() {
-    return foxreplaceIO.saveSubstitutionList(this.substitutionListToArray());
-  },
-  
-  /**
-   * Called when there's a change in the listbox. Saves the substitution list to
-   * preferences.
+   * Called when there's a change in the listbox. Saves the substitution list in XML to preferences.
    */
   saveSubstitutionListXml: function() {
     return foxreplaceIO.saveSubstitutionListXml(this.substitutionListToArray());
   },
   
   /**
-   * Adds a new substitution to the listbox.
+   * Adds a new substitution group to the listbox.
    */
   addSubstitutionGroup: function() {
     var params = {};
@@ -89,6 +71,9 @@ var foxreplaceOptions = {
     }
   },
   
+  /**
+   * Shows the dialog to edit the selected substitution group in the listbox.
+   */
   editSubstitutionGroup: function() {
     var substitutionListBox = document.getElementById("substitutionListBox");
     var selectedItem = substitutionListBox.selectedItem;
@@ -107,7 +92,7 @@ var foxreplaceOptions = {
   },
   
   /**
-   * Removes the selected substitution from the listbox.
+   * Removes the selected substitution group from the listbox.
    */
   deleteSubstitutionGroup: function() {
     var substitutionListBox = document.getElementById("substitutionListBox");
@@ -122,7 +107,7 @@ var foxreplaceOptions = {
   },
   
   /**
-   * Deletes all substitutions from the listbox.
+   * Deletes all substitution groups from the listbox.
    */
   clearSubstitutionGroups: function() {
     var substitutionListBox = document.getElementById("substitutionListBox");
@@ -137,7 +122,7 @@ var foxreplaceOptions = {
   },
   
   /**
-   * Moves up the selected substitution.
+   * Moves up the selected substitution group.
    */
   moveUpSubstitutionGroup: function() {
     var substitutionListBox = document.getElementById("substitutionListBox");
@@ -158,7 +143,7 @@ var foxreplaceOptions = {
   },
   
   /**
-   * Moves down the selected substitution.
+   * Moves down the selected substitution group.
    */
   moveDownSubstitutionGroup: function() {
     var substitutionListBox = document.getElementById("substitutionListBox");
@@ -191,9 +176,9 @@ var foxreplaceOptions = {
     var substitutionList = foxreplaceIO.importSubstitutionListXml();
     
     if (substitutionList) {
-      var params = { out: null };
-      window.openDialog("chrome://foxreplace/content/appendoverwrite.xul","",
-                        "chrome,titlebar,toolbar,centerscreen,modal", params);
+      var params = { };
+      window.openDialog("chrome://foxreplace/content/appendoverwrite.xul","", "chrome,titlebar,toolbar,centerscreen,modal", params);
+      
       if (params.out) {
         this.substitutionListFromArray(substitutionList, params.out.button == "overwrite");
         
@@ -218,9 +203,7 @@ var foxreplaceOptions = {
     
     var nSubstitutions = aSubstitutionList.length
 
-    for (var i = 0; i < nSubstitutions; i++) {
-      this.createListItemForSubstitutionGroup(aSubstitutionList[i]);
-    }
+    for (var i = 0; i < nSubstitutions; i++) this.createListItemForSubstitutionGroup(aSubstitutionList[i]);
   },
   
   /**
@@ -240,13 +223,12 @@ var foxreplaceOptions = {
   },
   
   /**
-   * Deletes the "dumbitem" (workaround for listbox height).
+   * Deletes the "dumbItem" (workaround for listbox height).
    */
   deleteDumbItem: function() {
     var substitutionListBox = document.getElementById("substitutionListBox");
     
-    if (document.getElementById("dumbItem"))
-      substitutionListBox.removeItemAt(0);  // dumbitem is the first
+    if (document.getElementById("dumbItem")) substitutionListBox.removeItemAt(0); // dumbItem is the first
   },
   
   /**
@@ -258,6 +240,9 @@ var foxreplaceOptions = {
     aObject.dispatchEvent(event);
   },
   
+  /**
+   * Creates a new list item in the listbox given a substitution group.
+   */
   createListItemForSubstitutionGroup: function(aSubstitutionGroup) {
     const MAX_LABELS = 2;
     
@@ -268,10 +253,12 @@ var foxreplaceOptions = {
     urlsCell.align = "start";
     urlsCell.orient = "vertical";
     
-    for (var j = 0; j < aSubstitutionGroup.urls.length && j < MAX_LABELS; j++) {
-      var ellipsis = j == MAX_LABELS - 1 && j < aSubstitutionGroup.urls.length - 1;
+    var nUrls = aSubstitutionGroup.urls.length;
+    
+    for (var i = 0; i < nUrls && i < MAX_LABELS; i++) {
+      var ellipsis = i == MAX_LABELS - 1 && i < nUrls - 1;
       var urlLabel = document.createElement("label");
-      urlLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.urls[j]);
+      urlLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.urls[i]);
       urlsCell.appendChild(urlLabel);
     }
     
@@ -284,13 +271,15 @@ var foxreplaceOptions = {
     outputsCell.align = "start";
     outputsCell.orient = "vertical";
     
-    for (var j = 0; j < aSubstitutionGroup.substitutions.length && j < MAX_LABELS; j++) {
-      var ellipsis = j == MAX_LABELS - 1 && j < aSubstitutionGroup.substitutions.length - 1;
+    var nSubstitutions = aSubstitutionGroup.substitutions.length;
+    
+    for (var i = 0; i < nSubstitutions && i < MAX_LABELS; i++) {
+      var ellipsis = i == MAX_LABELS - 1 && i < nSubstitutions - 1;
       var inputLabel = document.createElement("label");
-      inputLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.substitutions[j].input);
+      inputLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.substitutions[i].input);
       inputsCell.appendChild(inputLabel);
       var outputLabel = document.createElement("label");
-      outputLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.substitutions[j].output);
+      outputLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.substitutions[i].output);
       outputsCell.appendChild(outputLabel);
     }
     
@@ -300,6 +289,9 @@ var foxreplaceOptions = {
     document.getElementById("substitutionListBox").appendChild(groupItem);
   },
   
+  /**
+   * Edits a list item in the listbox to represent a new substitution group.
+   */
   editListItemForSubstitutionGroup: function(aListItem, aSubstitutionGroup) {
     const MAX_LABELS = 2;
     
@@ -309,10 +301,12 @@ var foxreplaceOptions = {
     
     while (urlsCell.hasChildNodes()) urlsCell.removeChild(urlsCell.firstChild);
     
-    for (var j = 0; j < aSubstitutionGroup.urls.length && j < MAX_LABELS; j++) {
-      var ellipsis = j == MAX_LABELS - 1 && j < aSubstitutionGroup.urls.length - 1;
+    var nUrls = aSubstitutionGroup.urls.length;
+    
+    for (var i = 0; i < nUrls && i < MAX_LABELS; i++) {
+      var ellipsis = i == MAX_LABELS - 1 && i < nUrls - 1;
       var urlLabel = document.createElement("label");
-      urlLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.urls[j]);
+      urlLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.urls[i]);
       urlsCell.appendChild(urlLabel);
     }
     
@@ -324,13 +318,15 @@ var foxreplaceOptions = {
       outputsCell.removeChild(outputsCell.firstChild);
     }
     
-    for (var j = 0; j < aSubstitutionGroup.substitutions.length && j < MAX_LABELS; j++) {
-      var ellipsis = j == MAX_LABELS - 1 && j < aSubstitutionGroup.substitutions.length - 1;
+    var nSubstitutions = aSubstitutionGroup.substitutions.length;
+    
+    for (var i = 0; i < nSubstitutions && i < MAX_LABELS; i++) {
+      var ellipsis = i == MAX_LABELS - 1 && i < nSubstitutions - 1;
       var inputLabel = document.createElement("label");
-      inputLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.substitutions[j].input);
+      inputLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.substitutions[i].input);
       inputsCell.appendChild(inputLabel);
       var outputLabel = document.createElement("label");
-      outputLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.substitutions[j].output);
+      outputLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.substitutions[i].output);
       outputsCell.appendChild(outputLabel);
     }
   }

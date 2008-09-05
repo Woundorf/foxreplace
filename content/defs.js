@@ -35,9 +35,9 @@
  * ***** END LICENSE BLOCK ***** */
 
 /**
- * Old substitution (until 0.7)
+ * Substitution (until 0.7)
  */
-function FxROldSubstitution(aInput, aOutput, aCaseSensitive, aInputRegExp, aWholeWords) {
+function FxRSubstitution07(aInput, aOutput, aCaseSensitive, aInputRegExp, aWholeWords) {
   this.input = aInput;
   this.inputRegExp = Boolean(aInputRegExp);
   this.output = aOutput;
@@ -52,7 +52,7 @@ function FxROldSubstitution(aInput, aOutput, aCaseSensitive, aInputRegExp, aWhol
     this._regExp = new RegExp(prefix + aInput.toUnicode() + suffix, aCaseSensitive ? "g" : "gi");
   }
 }
-FxROldSubstitution.prototype = {
+FxRSubstitution07.prototype = {
 
   /**
    * Applies the substitution to aString and returns the result.
@@ -67,7 +67,7 @@ FxROldSubstitution.prototype = {
 };
 
 /**
- * New substitution (since 0.8)
+ * Substitution (since 0.8)
  */
 function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) {
   this.input = aInput;
@@ -105,13 +105,13 @@ FxRSubstitution.fromXml = function(aXml) {
   }
 };
 /**
- * Creates a substitution from an old substitution object;
+ * Creates a substitution from a FxRSubstitution07 object;
  */
-FxRSubstitution.fromOldSubstitution = function(aSubstitution) {
-  var input = aSubstitution.input;
-  var output = aSubstitution.output;
-  var caseSensitive = aSubstitution.caseSensitive;
-  var inputType = aSubstitution.inputRegExp ? this.INPUT_REG_EXP : (aSubstitution.wholeWords ? this.INPUT_WHOLE_WORDS : this.INPUT_TEXT);
+FxRSubstitution.fromSubstitution07 = function(aSubstitution07) {
+  var input = aSubstitution07.input;
+  var output = aSubstitution07.output;
+  var caseSensitive = aSubstitution07.caseSensitive;
+  var inputType = aSubstitution07.inputRegExp ? this.INPUT_REG_EXP : (aSubstitution07.wholeWords ? this.INPUT_WHOLE_WORDS : this.INPUT_TEXT);
   return new FxRSubstitution(input, output, caseSensitive, inputType);
 };
 FxRSubstitution.prototype = {
@@ -154,6 +154,7 @@ FxRSubstitution.prototype = {
 function FxRSubstitutionGroup(aUrls, aSubstitutions) {
   this.urls = aUrls || [];
   this.substitutions = aSubstitutions || [];
+  this.urls.sort();
 }
 FxRSubstitutionGroup.prototype = {
 
@@ -211,7 +212,8 @@ FxRSubstitutionGroup.fromXml = function(aXml) {
     }
   }
   
-  if (errors) foxreplaceIO.alert(foxreplaceIO.strings.getString("xmlErrorTitle"), foxreplaceIO.strings.getString("xmlErrorText") + "\n" + errors);
+  if (errors) foxreplaceIO.alert(foxreplaceIO.strings.getString("xmlErrorTitle"),
+                                 foxreplaceIO.strings.getString("xmlGroupErrorText") + "\n" + errors);
   
   return new FxRSubstitutionGroup(urls, substitutions);
 };
