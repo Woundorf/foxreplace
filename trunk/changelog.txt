@@ -7,6 +7,8 @@ v0.8.0
 * Substitution list stored in XML.
 * Updated help.
 * Some skin changes.
+* Removed special skin for macfoxIIgraphite because it's not compatible with
+  Firefox 3.
 * New prototypes for FxRSubstitution and FxRSubstitutionGroup.
 * String changes:
   - bindings.dtd: new: wholeWords.
