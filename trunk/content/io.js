@@ -82,25 +82,25 @@ var foxreplaceIO = {
    * Returns the prompt service.
    */
   get promptService() {
-    if (!this._promptService) {
-      this._promptService = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
-                                      .getService(Components.interfaces.nsIPromptService);
-    }
+    if (!this._promptService)
+      this._promptService = Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService);
     
     return this._promptService;
   },
   
+  /**
+   * Shows an alert using the prompt service.
+   */
   alert: function(aTitle, aText) {
     this.promptService.alert(window, aTitle, aText);
   },
   
   /**
-   * Loads substitution list from preferences and returns it.
+   * Loads the substitution list from preferences and returns it.
    */
   loadSubstitutionList: function() {
     var substitutionList = [];
-    var listString = this.prefs.getComplexValue("substitutionList",
-                                                Components.interfaces.nsISupportsString).data;
+    var listString = this.prefs.getComplexValue("substitutionList", Components.interfaces.nsISupportsString).data;
     
     if (listString != "") {
       var substitutions = listString.split("|-|");
@@ -108,18 +108,17 @@ var foxreplaceIO = {
       
       for (var i = 0; i < nSubstitutions; i++) {
         var substitution = substitutions[i].split("<->");
+        
         try {
-          var objSubstitution = new FxROldSubstitution(this.decode(substitution[0]),
-                                                    this.decode(substitution[1]),
-                                                    Boolean(parseInt(substitution[2])),
-                                                    Boolean(parseInt(substitution[3])),
-                                                    Boolean(parseInt(substitution[4])));
+          var objSubstitution = new FxRSubstitution07(this.decode(substitution[0]),
+                                                      this.decode(substitution[1]),
+                                                      Boolean(parseInt(substitution[2])),
+                                                      Boolean(parseInt(substitution[3])),
+                                                      Boolean(parseInt(substitution[4])));
           substitutionList.push(objSubstitution);
         }
         catch (se) {  // SyntaxError
-          this.promptService.alert(window,
-                                   foxreplaceIO.strings.getString("regExpError"),
-                                   substitution[0] + "\n" + se);
+          this.alert(this.strings.getString("regExpError"), substitution[0] + "\n" + se);
         }
       }
     }
@@ -128,78 +127,24 @@ var foxreplaceIO = {
   },
   
   /**
-   * Loads substitution list in XML from preferences and returns it.
+   * Loads the substitution list in XML from preferences and returns it.
    */
   loadSubstitutionListXml: function() {
-    this.upgradePreferencesFrom07To08();
+    this.upgradePreferencesFrom07To08();  // upgrade if necessary
     
-    var substitutionList = [];
     var listXmlString = this.prefs.getComplexValue("substitutionListXml", Components.interfaces.nsISupportsString).data;
-    var listXml = new XML(listXmlString);
     
-    for each (var group in listXml.group) {
-      // falta comprovació d'errors
-      substitutionList.push(FxRSubstitutionGroup.fromXml(group));
-    }
-    
-    return substitutionList;
-  },
-  
-  /**
-   * Returns substitution list encoded as a string to save to preferences.
-   */
-  saveSubstitutionList: function(aSubstitutionList) {
-    var listString = Components.classes["@mozilla.org/supports-string;1"]
-                               .createInstance(Components.interfaces.nsISupportsString);
-    listString.data = "";
-    
-    var nSubstitutions = aSubstitutionList.length;
-    
-    for (var i = 0; i < nSubstitutions; i++) {
-      var substitution = aSubstitutionList[i];
-      var substitutionString = Components.classes["@mozilla.org/supports-string;1"]
-                                         .createInstance(Components.interfaces.nsISupportsString);
-      substitutionString.data = this.encode(substitution.input)
-                              + "<->"
-                              + this.encode(substitution.output)
-                              + "<->"
-                              + (substitution.caseSensitive ? "1" : "0")
-                              + "<->"
-                              + (substitution.inputRegExp ? "1" : "0")
-                              + "<->"
-                              + (substitution.wholeWords ? "1" : "0");
-      
-      if (listString.data == "") listString.data = substitutionString.data;
-      else listString.data += "|-|" + substitutionString.data;
-    }
-    
-    /////////////
-    this.saveSubstitutionListXml(this.oldSubstitutionListToNew(aSubstitutionList));
-    /////////////
-    
-    return listString;
+    return this.substitutionListFromXml(listXmlString);
   },
   
   /**
    * Returns substitution list in XML encoded as a string to save to preferences.
    */
   saveSubstitutionListXml: function(aSubstitutionList) {
+    var listXml = this.substitutionListToXml(aSubstitutionList);
     var listXmlString = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
-    var listXml = <substitutionlist version="0.8"/>;
-    
-    var nSubstitutions = aSubstitutionList.length;
-    
-    for (var i = 0; i < nSubstitutions; i++) {
-      listXml.appendChild(aSubstitutionList[i].toXml());
-    }
-    
     XML.prettyPrinting = false;
     listXmlString.data = listXml.toString();
-    XML.prettyPrinting = true;
-    
-    /////////////
-    //this.prefs.setComplexValue("substitutionListXml", Components.interfaces.nsISupportsString, listXmlString);
-    /////////////
     
     return listXmlString;
   },
@@ -233,16 +178,11 @@ var foxreplaceIO = {
   },
   
   /**
-   * Imports the substitution list from a file (shows a file dialog to the
-   * user) and returns it.
+   * Imports the substitution list from aFile and returns it.
    */
-  importSubstitutionList: function() {
-    var file = this.showFileDialog("import");
-    if (!file) return;
-    
-    var fileInputStream = Components.classes["@mozilla.org/network/file-input-stream;1"]
-                                    .createInstance(Components.interfaces.nsIFileInputStream);
-    fileInputStream.init(file, 0x01, 0444, 0);  // read
+  importSubstitutionList: function(aFile) {
+    var fileInputStream = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
+    fileInputStream.init(aFile, 0x01, 0444, 0);  // read
     fileInputStream.QueryInterface(Components.interfaces.nsILineInputStream);
     
     var line = {}, hasMore;
@@ -251,18 +191,17 @@ var foxreplaceIO = {
     do {
       hasMore = fileInputStream.readLine(line);
       var substitution = line.value.split("<->");
+      
       try {
-        var objSubstitution = new FxROldSubstitution(this.decode(substitution[0]),
-                                                  this.decode(substitution[1]),
-                                                  Boolean(parseInt(substitution[2])),
-                                                  Boolean(parseInt(substitution[3])),
-                                                  Boolean(parseInt(substitution[4])));
+        var objSubstitution = new FxRSubstitution07(this.decode(substitution[0]),
+                                                    this.decode(substitution[1]),
+                                                    Boolean(parseInt(substitution[2])),
+                                                    Boolean(parseInt(substitution[3])),
+                                                    Boolean(parseInt(substitution[4])));
         substitutionList.push(objSubstitution);
       }
       catch (se) {  // SyntaxError
-        this.promptService.alert(window,
-                                 foxreplaceIO.strings.getString("regExpError"),
-                                 substitution[0] + "\n" + se);
+        this.alert(this.strings.getString("regExpError"), substitution[0] + "\n" + se);
       }
     } while (hasMore);
     
@@ -272,12 +211,13 @@ var foxreplaceIO = {
   },
   
   /**
-   * Imports the substitution list in XML from a file (shows a file dialog to the
-   * user) and returns it.
+   * Imports the substitution list in XML from a file (shows a file dialog to the user) and returns it.
    */
   importSubstitutionListXml: function() {
-    var file = this.showFileDialog("import", true);
+    var file = this.showFileDialog("import");
     if (!file) return;
+    
+    if (/.*\.txt/i.test(file.leafName)) return this.substitutionList07To08(this.importSubstitutionList(file));
     
     var fileInputStream = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
     var converterInputStream = Components.classes["@mozilla.org/intl/converter-input-stream;1"]
@@ -288,74 +228,35 @@ var foxreplaceIO = {
     var listXmlString = "";
     var string = {};
     
-    while (converterInputStream.readString(4096, string) > 0) { // atenció: pot llançar excepció
-      listXmlString += string.value;
+    try {
+      while (converterInputStream.readString(4096, string) > 0) listXmlString += string.value;
+    }
+    catch (e) {
+      converterInputStream.close();
+      fileInputStream.close();
+      
+      this.alert(this.getStrings("importTitle"), e);
+      
+      return [];
     }
     
     converterInputStream.close();
     fileInputStream.close();
     
-    var listXml = new XML(listXmlString);
-    var substitutionList = [];
-    
-    for each (var group in listXml.group) {
-      // falta comprovació d'errors
-      substitutionList.push(FxRSubstitutionGroup.fromXml(group));
-    }
-    
-    return substitutionList;
+    return this.substitutionListFromXml(listXmlString);
   },
   
   /**
-   * Exports the substitution list to a file (shows a file dialog to the user).
-   * The parameter is a function to get the substitution list that is called
-   * only if it's needed (it's not called if the user cancels the export).
+   * Exports the substitution list in XML to a file (shows a file dialog to the user). The parameter is a function to get the substitution list
+   * that is called only if it's needed (it's not called if the user cancels the export).
    */
-  exportSubstitutionList: function(getSubstitutionList) {
+  exportSubstitutionListXml: function(getSubstitutionList) {
     var file = this.showFileDialog("export");
     if (!file) return;
     
     var substitutionList = getSubstitutionList();
-    var data = "";
-    
-    for (var i = 0; i < substitutionList.length; i++) {
-      var substitution = substitutionList[i];
-      var substitutionString = this.encode(substitution.input)
-                             + "<->"
-                             + this.encode(substitution.output)
-                             + "<->"
-                             + (substitution.caseSensitive ? "1" : "0")
-                             + "<->"
-                             + (substitution.inputRegExp ? "1" : "0")
-                             + "<->"
-                             + (substitution.wholeWords ? "1" : "0");
-      data += substitutionString + "\n";
-    }
-    
-    var fileOutputStream = Components.classes["@mozilla.org/network/file-output-stream;1"]
-                                     .createInstance(Components.interfaces.nsIFileOutputStream);
-    // write, create, truncate
-    fileOutputStream.init(file, 0x02 | 0x08 | 0x20, 0666, 0);
-    fileOutputStream.write(data, data.length);
-    fileOutputStream.close();
-  },
-  
-  /**
-   * Exports the substitution list in XML to a file (shows a file dialog to the user).
-   * The parameter is a function to get the substitution list that is called
-   * only if it's needed (it's not called if the user cancels the export).
-   */
-  exportSubstitutionListXml: function(getSubstitutionList) {
-    var file = this.showFileDialog("export", true);
-    if (!file) return;
-    
-    var substitutionList = getSubstitutionList();
-    var listXml = <substitutionlist version="0.8"/>;
-    
-    var nSubstitutions = substitutionList.length;
-    
-    for (var i = 0; i < nSubstitutions; i++) listXml.appendChild(substitutionList[i].toXml());
-    
+    var listXml = this.substitutionListToXml(substitutionList);
+    XML.prettyPrinting = true;
     var data = listXml.toString();
     var fileOutputStream = Components.classes["@mozilla.org/network/file-output-stream;1"]
                                      .createInstance(Components.interfaces.nsIFileOutputStream);
@@ -364,17 +265,17 @@ var foxreplaceIO = {
     var converterOutputStream = Components.classes["@mozilla.org/intl/converter-output-stream;1"]
                                           .createInstance(Components.interfaces.nsIConverterOutputStream);
     converterOutputStream.init(fileOutputStream, "UTF-8", 4096, 0x0000);
-    converterOutputStream.writeString(data);  // atenció: pot llançar una excepció
-    converterOutputStream.close();
-    fileOutputStream.close();
-  },
-  
-  /**
-   * Converts special characters (%, \n, \r, <, >, |) in a string to %XX format. Returns the encoded string.
-   */
-  encode: function(aString) {
-    return aString.replace("%", "%25", "g").replace("\n", "%0A", "g").replace("\r", "%0D", "g")
-                  .replace("<", "%3C", "g").replace(">", "%3E", "g").replace("|", "%7C", "g");
+    
+    try {
+      converterOutputStream.writeString(data);
+    }
+    catch (e) {
+      this.alert(this.strings.getString.("exportTitle"), e);
+    }
+    finally {
+      converterOutputStream.close();
+      fileOutputStream.close();
+    }
   },
   
   /**
@@ -386,22 +287,21 @@ var foxreplaceIO = {
   },
   
   /**
-   * Shows the file dialog in the passed mode (import or export) and returns the
-   * file selected by the user.
+   * Shows the file dialog in the passed mode (import or export) and returns the file selected by the user.
    */
-  showFileDialog: function(aMode, aXml) {
+  showFileDialog: function(aMode) {
     var title = this.strings.getString(aMode == "import" ? "importTitle" : "exportTitle");
     
     try {
       const nsIFP = Components.interfaces.nsIFilePicker;
-      var fileDialog = Components.classes["@mozilla.org/filepicker;1"]
-                                 .createInstance(nsIFP);
+      var fileDialog = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFP);
       fileDialog.init(window, title, aMode == "import" ? nsIFP.modeOpen : nsIFP.modeSave);
-      fileDialog.appendFilters(aXml ? nsIFP.filterXML : nsIFP.filterText);
+      fileDialog.appendFilters(nsIFP.filterXML)
+      if (aMode == "import") fileDialog.appendFilters(nsIFP.filterText);
       fileDialog.appendFilters(nsIFP.filterAll);
       fileDialog.filterIndex = 0;
-      fileDialog.defaultExtension = aXml ? ".xml" : ".txt";
-      fileDialog.defaultString = aXml ? "FoxReplace.xml" : "FoxReplace.txt";
+      fileDialog.defaultExtension = ".xml";
+      fileDialog.defaultString = "FoxReplace.xml";
       
       var ret = fileDialog.show();
       
@@ -409,30 +309,64 @@ var foxreplaceIO = {
         return fileDialog.file;
     }
     catch (e) {
-      this.promptService.alert(window, title, e);
+      this.alert(title, e);
     }
     
     return null;
   },
   
   /**
-   * Converts the substitution list from the old format to the new.
+   * Upgrades the substitution list from format in 0.7 to format in 0.8.
    */
-  oldSubstitutionListToNew: function(aOldSubstitutionList) {
-    var substitutions = aOldSubstitutionList.map(FxRSubstitution.fromOldSubstitution, FxRSubstitution);
-    return [new FxRSubstitutionGroup([], substitutions)];
-  },
-  
   upgradePreferencesFrom07To08: function() {
     // check if exists a substitution list in the old format
     if (this.prefs.prefHasUserValue("substitutionList")) {
       // load the old list, convert it to the new format, save the new and delete the old
       var oldSubstitutionList = this.loadSubstitutionList();
-      var newSubstitutionList = this.oldSubstitutionListToNew(oldSubstitutionList);
+      var newSubstitutionList = this.substitutionList07To08(oldSubstitutionList);
       var newListXmlString = this.saveSubstitutionListXml(newSubstitutionList);
       this.prefs.setComplexValue("substitutionListXml", Components.interfaces.nsISupportsString, newListXmlString);
       this.prefs.clearUserPref("substitutionList");
     }
+  },
+  
+  /**
+   * Converts the substitution list from the old format to the new.
+   */
+  substitutionList07To08: function(aSubstitutionList07) {
+    var substitutions = aSubstitutionList07.map(FxRSubstitution.fromSubstitution07, FxRSubstitution);
+    return [new FxRSubstitutionGroup([], substitutions)];
+  },
+  
+  /**
+   * Creates the substitution list from an XML string.
+   */
+  substitutionListFromXml: function(aXmlString) {
+    var substitutionList = [];
+    
+    try {
+      var listXml = new XML(aXmlString);
+      
+      for each (var group in listXml.group) substitutionList.push(FxRSubstitutionGroup.fromXml(group));
+    }
+    catch (e) {
+      this.alert(this.strings.getString("xmlErrorTitle"), this.strings.getString("xmlErrorText") + "\n" + e);
+    }
+    
+    return substitutionList;
+  },
+  
+  /**
+   * Creates an XML object from the substitution list.
+   */
+  substitutionListToXml: function(aSubstitutionList) {
+    var listXml = <substitutionlist version="0.8"/>;
+    
+    var nSubstitutions = aSubstitutionList.length;
+    
+    for (var i = 0; i < nSubstitutions; i++) listXml.appendChild(aSubstitutionList[i].toXml());
+    
+    return listXml;
   }
   
 };
