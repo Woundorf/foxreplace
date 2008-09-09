@@ -2,26 +2,24 @@
   -moz-appearance: none;
   width: 20px;
   height: 20px;
-  /*margin: 0px;*/
-  margin: 2px 0px 2px 0px;
-  -moz-margin-end: -1px;
-  /*padding: 0px;*/             /* extern */
-  /*padding: 2px 0px 2px 0px;*/ /* intern */
-  border: #96969D 1px solid;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  -moz-margin-start: 4px; /* margin-left */
+  -moz-margin-end: -1px;  /* margin-right */
+  /*padding: 0;*/
+  border: 1px solid ThreeDDarkShadow;
 }
 
 .inputTextBoxSelectorImage {
-  height: 16px;
   width: 16px;
+  height: 16px;
   list-style-image: url("chrome://foxreplace/skin/inputtextbox-icons.png");
-  -moz-margin-start: 4px;
-  margin: 0px;
+  /*margin: 0;*/
 }
 
 .inputTextBoxSelectorDropmarker {
   list-style-image: url("chrome://global/skin/arrow/arrow-dn.gif");
-  -moz-margin-start: 3px;
-  margin: 0px;
+  /*margin: 0;*/
 }
 
 .inputTextBoxSelectorMenuItem {
@@ -41,19 +39,13 @@
 }
 
 .inputTextBox {
-  /*min-height: 22px;*/
-  /*width: 4em;*/
-  /*min-width: 4em;*/
-  margin-right: 0px;
-  margin-left: 0px;
-  /*background-color: -moz-field;*/
-
   -moz-appearance: none;
-  -moz-border-top-colors: #96969D;
-  -moz-border-bottom-colors: #96969D;
-  -moz-border-right-colors: #96969D;
-  -moz-border-left-colors: #96969D;
+  -moz-margin-start: 0; /* margin-left */
   border-width: 1px;
+  -moz-border-top-colors: ThreeDDarkShadow;
+  -moz-border-bottom-colors: ThreeDDarkShadow;
+  -moz-border-left-colors: ThreeDDarkShadow;
+  -moz-border-right-colors: ThreeDDarkShadow;
 }
 
 .inputTextBox[inputtype="0"], .inputTextBox[inputtype="0"] .textbox-input {
