@@ -1,6 +1,9 @@
 <!ENTITY title "Editor del grup de substitucions">
 <!ENTITY description "Introdueix la llista d'URLs i la llista de substitucions. La llista d'URLs pot ser buida, i llavors s'apliquen les
-         substitucions a qualsevol pàgina. La llista de substitucions ha de tenir com a mínim una substitució.">
+         substitucions a qualsevol pàgina; altrament s'apliquen només quan una de les URLs coincideix amb l'adreça de la pàgina. Podeu fer servir
+         &quot;*&quot; perquè coincideixi amb 0 o més caràcters qualssevol (al principi i al final no cal) i &quot;|&quot; perquè coincideixi amb
+         l'inici o el final de la URL. Per exemple, &quot;http://*.exemple.cat/|&quot; coincidiria amb &quot;http://www.exemple.cat/&quot; però no
+         amb &quot;http://www.exemple.cat/elquesigui&quot;. La llista de substitucions ha de tenir com a mínim una substitució.">
 <!ENTITY urls "URLs">
 <!ENTITY url.label "URL">
 <!ENTITY url.accesskey "U">

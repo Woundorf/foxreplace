@@ -36,8 +36,9 @@
 <!ENTITY substitutionGroup "Grup de substitucions">
 <!ENTITY substitutionGroup.p "Està format per una llista d'URLs i una llista de substitucions. Les substitucions s'apliquen sobre una pàgina si la
          seva adreça coincideix amb una de les URLs, i s'apliquen en l'ordre en què apareixen. Es considera que una URL d'una pàgina coincideix
-         una URL del grup si la URL del grup és una part de la URL de la pàgina. Si la llista d'URLs és buida, les substitucions s'apliquen a
-         qualsevol pàgina. La llista de substitucions ha de tenir com a mínim un element.">
+         una URL del grup si la URL del grup és una part de la URL de la pàgina. Podeu fer servir els caràcters especials &quot;*&quot; perquè
+         coincideixi amb 0 o més caràcters qualssevol i &quot;|&quot; perquè coincideixi amb l'inici o el final de la URL. Si la llista d'URLs és
+         buida, les substitucions s'apliquen a qualsevol pàgina. La llista de substitucions ha de tenir com a mínim un element.">
 <!ENTITY autoReplace "Reemplaça automàticament en carregar una pàgina">
 <!ENTITY autoReplace.p "Aquesta opció es pot activar o desactivar. Quan està activa, s'aplica la llista de substitucions automàticament quan es
          carrega una pàgina, aplicant-se les substitucions dels grups amb una URL coincident. D'aquesta manera l'extensió pot actuar com un

@@ -155,6 +155,15 @@ function FxRSubstitutionGroup(aUrls, aSubstitutions) {
   this.urls = aUrls || [];
   this.substitutions = aSubstitutions || [];
   this.urls.sort();
+  this.urlRegExps = this.urls.map(function(element) {
+                                    return new RegExp(element.replace(/\*+/g, "*")      // remove multiple wildcards
+                                                             .replace(/(\W)/g, "\\$1")  // escape special symbols
+                                                             .replace(/\\\*/g, ".*")    // replace wildcards by .*
+                                                             .replace(/^\\\|/, "^")     // process anchor at expression start
+                                                             .replace(/\\\|$/, "$")     // process anchor at expression end
+                                                             .replace(/^(\.\*)/,"")     // remove leading wildcards
+                                                             .replace(/(\.\*)$/,""));   // remove trailing wildcards
+                                  });
 }
 FxRSubstitutionGroup.prototype = {
 
@@ -162,7 +171,7 @@ FxRSubstitutionGroup.prototype = {
    * Returns true if aUrl matches any of the urls.
    */
   matches: function(aUrl) {
-    return this.urls.length == 0 || this.urls.some(function(element) { return aUrl.indexOf(element) >= 0; });
+    return this.urls.length == 0 || this.urlRegExps.some(function(element) { return element.test(aUrl); });
   },
   
   /**
