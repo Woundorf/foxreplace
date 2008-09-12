@@ -1,6 +1,6 @@
 <!ENTITY title "Substitution group editor">
 <!ENTITY description "Enter the URL list and the substitution list. The URL list can be empty, and then the substitutions will be applied to any
-         page; otherwise they will be applied only when one of the URLs matches he page address. You may use &quot;*&quot; to match 0 or more random
+         page; otherwise they will be applied only when one of the URLs matches he page address. You may use &quot;*&quot; to match any 0 or more
          characters (not needed at the beginning and the end) and &quot;|&quot; to match the beginning or the end of the URL. For example,
          &quot;http://*.example.com/|&quot; would match &quot;http://www.example.com/&quot; but not &quot;http://www.example.com/whatever&quot;. The
          substitution list must have at least one substitution.">

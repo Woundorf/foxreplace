@@ -1,25 +1,10 @@
 <!ENTITY prefwindow.title "Opções do FoxReplace">
 <!ENTITY mainPane.title "Menu principal">
 <!ENTITY description "Entre com a lista de substituição. Substituições serão feitos na ordem que forem aparecendo na lista.">
-<!ENTITY inputString.label "Substituir">
-<!ENTITY inputString.accesskey "R">
-<!ENTITY outputString.label "com">
-<!ENTITY outputString.accesskey "w">
-<!ENTITY caseSensitive.label "Diferenciar maiúsc./minúsc.">
-<!ENTITY caseSensitive.accesskey "M">
-<!ENTITY wholeWords.label "Coincidir palavras inteiras">
-<!ENTITY wholeWords.accesskey "O">
 <!ENTITY inputStringHeader "Substituir">
-<!ENTITY inputRegExpHeader "Expressão regular">
 <!ENTITY outputStringHeader "Com">
-<!ENTITY caseSensitiveHeader "Coincidir palavra inteira">
-<!ENTITY wholeWordsHeader "Somente palavras inteiras">
 <!ENTITY addButton.label "Adicionar">
 <!ENTITY addButton.accesskey "A">
-<!ENTITY upButton.label "Mover para cima">
-<!ENTITY upButton.accesskey "u">
-<!ENTITY downButton.label "Mover para baixo">
-<!ENTITY downButton.accesskey "d">
 <!ENTITY deleteButton.label "Excluir">
 <!ENTITY deleteButton.accesskey "l">
 <!ENTITY clearButton.label "Limpar">

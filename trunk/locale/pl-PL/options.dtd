@@ -1,25 +1,10 @@
 <!ENTITY prefwindow.title "FoxReplace - opcje">
 <!ENTITY mainPane.title "Główne">
 <!ENTITY description "Wprowadź listę wyrażeń do zastąpienia. Operacje zastępowania będą przeprowadzane zgodnie z ich kolejnością na liście.">
-<!ENTITY inputString.label "Zastąp">
-<!ENTITY inputString.accesskey "Z">
-<!ENTITY outputString.label "tekstem">
-<!ENTITY outputString.accesskey "t">
-<!ENTITY caseSensitive.label "Rozróżniaj wielkość liter">
-<!ENTITY caseSensitive.accesskey "R">
-<!ENTITY wholeWords.label "Tylko całe słowa">
-<!ENTITY wholeWords.accesskey "T">
 <!ENTITY inputStringHeader "Tekst do zastąpienia">
-<!ENTITY inputRegExpHeader "Wyrażenie regularne">
 <!ENTITY outputStringHeader "Tekst zastępujący">
-<!ENTITY caseSensitiveHeader "Rozróżnianie wielkości liter">
-<!ENTITY wholeWordsHeader "Tylko całe słowa">
 <!ENTITY addButton.label "Dodaj">
 <!ENTITY addButton.accesskey "D">
-<!ENTITY upButton.label "Przenieś w górę">
-<!ENTITY upButton.accesskey "g">
-<!ENTITY downButton.label "Przenieś w dół">
-<!ENTITY downButton.accesskey "n">
 <!ENTITY deleteButton.label "Usuń">
 <!ENTITY deleteButton.accesskey "U">
 <!ENTITY clearButton.label "Wyczyść">

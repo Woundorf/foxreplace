@@ -21,7 +21,5 @@
 <!ENTITY replaceBarOutputString.accesskey "с">
 <!ENTITY replaceBarCaseSensitive.label "С учётом регистра">
 <!ENTITY replaceBarCaseSensitive.accesskey "ч">
-<!ENTITY replaceBarWholeWords.label "Только слова целиком">
-<!ENTITY replaceBarWholeWords.accesskey "Т">
 <!ENTITY replaceBarReplace.label "Замена">
 <!ENTITY replaceBarReplace.accesskey "м">

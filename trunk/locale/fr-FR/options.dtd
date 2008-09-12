@@ -1,25 +1,10 @@
 <!ENTITY prefwindow.title "Options de FoxReplace">
 <!ENTITY mainPane.title "Principales">
 <!ENTITY description "Veuillez saisir la liste de substitution. Les substitutions seront effectuées dans l&apos;ordre proposé dans cette liste.">
-<!ENTITY inputString.label "Remplacer">
-<!ENTITY inputString.accesskey "R">
-<!ENTITY outputString.label "par">
-<!ENTITY outputString.accesskey "p">
-<!ENTITY caseSensitive.label "Casse correspondante">
-<!ENTITY caseSensitive.accesskey "c">
-<!ENTITY wholeWords.label "Only whole words">
-<!ENTITY wholeWords.accesskey "O">
 <!ENTITY inputStringHeader "Remplacer">
-<!ENTITY inputRegExpHeader "Expression régulière">
 <!ENTITY outputStringHeader "Par">
-<!ENTITY caseSensitiveHeader "Casse correspondante">
-<!ENTITY wholeWordsHeader "Only whole words">
 <!ENTITY addButton.label "Ajouter">
 <!ENTITY addButton.accesskey "A">
-<!ENTITY upButton.label "Monter">
-<!ENTITY upButton.accesskey "M">
-<!ENTITY downButton.label "Descendre">
-<!ENTITY downButton.accesskey "D">
 <!ENTITY deleteButton.label "Supprimer">
 <!ENTITY deleteButton.accesskey "S">
 <!ENTITY clearButton.label "Effacer">

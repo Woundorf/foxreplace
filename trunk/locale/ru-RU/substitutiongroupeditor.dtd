@@ -1,0 +1,32 @@
+<!ENTITY title "Редактор групп замещений">
+<!ENTITY description "Введите список адресов и список замещений. Список адресов может быть пустым и тогда замещения будут применяться к любой странице. Список замещений должен содержать хотя бы одно замещение.">
+<!ENTITY urls "Адреса">
+<!ENTITY url.label "Адрес">
+<!ENTITY url.accesskey "д">
+<!ENTITY addUrlButton.label "Добавить">
+<!ENTITY addUrlButton.accesskey "б">
+<!ENTITY deleteUrlButton.label "Удалить">
+<!ENTITY deleteUrlButton.accesskey "л">
+<!ENTITY clearUrlsButton.label "Очистить">
+<!ENTITY clearUrlsButton.accesskey "ч">
+<!ENTITY substitutions "Замещения">
+<!ENTITY inputString.label "Заменить">
+<!ENTITY inputString.accesskey "З">
+<!ENTITY outputString.label "на">
+<!ENTITY outputString.accesskey "н">
+<!ENTITY caseSensitive.label "с учётом регистра">
+<!ENTITY caseSensitive.accesskey "с">
+<!ENTITY addSubstitutionButton.label "Добавить">
+<!ENTITY addSubstitutionButton.accesskey "Д">
+<!ENTITY moveUpSubstitutionButton.label "Выше">
+<!ENTITY moveUpSubstitutionButton.accesskey "В">
+<!ENTITY moveDownSubstitutionButton.label "Ниже">
+<!ENTITY moveDownSubstitutionButton.accesskey "Н">
+<!ENTITY deleteSubstitutionButton.label "Удалить">
+<!ENTITY deleteSubstitutionButton.accesskey "л">
+<!ENTITY clearSubstitutionsButton.label "Очистить">
+<!ENTITY clearSubstitutionsButton.accesskey "ч">
+<!ENTITY inputStringHeader "Замена">
+<!ENTITY inputTypeHeader "Тип">
+<!ENTITY outputStringHeader "На">
+<!ENTITY caseSensitiveHeader "Только слова целиком">

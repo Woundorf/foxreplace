@@ -2,25 +2,10 @@
 <!ENTITY mainPane.title "Main">
 <!ENTITY description "Enter the substitution list. Substitutions will be done in the order in which they appear on
          the list.">
-<!ENTITY inputString.label "Replace">
-<!ENTITY inputString.accesskey "R">
-<!ENTITY outputString.label "with">
-<!ENTITY outputString.accesskey "w">
-<!ENTITY caseSensitive.label "Match case">
-<!ENTITY caseSensitive.accesskey "M">
-<!ENTITY wholeWords.label "Only whole words">
-<!ENTITY wholeWords.accesskey "O">
 <!ENTITY inputStringHeader "Replace">
-<!ENTITY inputRegExpHeader "Regular expression">
 <!ENTITY outputStringHeader "With">
-<!ENTITY caseSensitiveHeader "Match case">
-<!ENTITY wholeWordsHeader "Only whole words">
 <!ENTITY addButton.label "Add">
 <!ENTITY addButton.accesskey "A">
-<!ENTITY upButton.label "Move up">
-<!ENTITY upButton.accesskey "u">
-<!ENTITY downButton.label "Move down">
-<!ENTITY downButton.accesskey "d">
 <!ENTITY deleteButton.label "Delete">
 <!ENTITY deleteButton.accesskey "l">
 <!ENTITY clearButton.label "Clear">
