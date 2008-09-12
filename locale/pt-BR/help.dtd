@@ -13,7 +13,6 @@ Todas as substituições são sempre aplicados sobre &lt;b&gt;todo&lt;/b&gt; con
 <!ENTITY substitution.table.1 "Insere uma string de entrada.">
 <!ENTITY substitution.table.2 "Insere o texto precedendo a string de entrada dentro do mesmo bloco.">
 <!ENTITY substitution.table.3 "Insere o texto seguindo a string de entrada dentro do mesmo bloco.">
-<!ENTITY substitution.table.4 "Se a string de entrada é uma expressão regular, e &lt;i&gt;n&lt;/i&gt; um número inteiro decimal entre 1 e 99 (incluindo), insere o &lt;i&gt;n&lt;/i&gt;º substring encontrado.">
 <!ENTITY substitutionList "Lista de substituição">
 <!ENTITY substitutionList.p "A extensão mantém uma lista de substituição que você pode definir e modificar a qualquer momento da janela de opções do FoxReplace. Você pode aplicar a lista de substituição quando você quiser apertando a tecla F2 ou clicando sobre o botão da barra de ferramentas ou ativando um menu de opção. Quando você fizer, substituições na lista serão aplicadas na ordem que eles aparecerem. Você pode aplicar a lista de substituição quantas vezes você quiser sobre a mesma página. Substitutions are done over the current content of the page, i.e. if you apply
          the substitution list a second time, it will be over the result of the first.">

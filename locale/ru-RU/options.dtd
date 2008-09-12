@@ -1,29 +1,21 @@
 <!ENTITY prefwindow.title "FoxReplace - Настройки">
 <!ENTITY mainPane.title "Общие">
-<!ENTITY description "Введите список замещения. Замещения будут сделаны в том же порядке, как они расположены в списке.">
-<!ENTITY inputString.label "Заменить">
-<!ENTITY inputString.accesskey "З">
-<!ENTITY outputString.label "на">
-<!ENTITY outputString.accesskey "н">
-<!ENTITY caseSensitive.label "С учётом регистра">
-<!ENTITY caseSensitive.accesskey "ч">
-<!ENTITY wholeWords.label "Только слова целиком">
-<!ENTITY wholeWords.accesskey "Т">
+<!ENTITY description "Введите список замещения. Список состоит из групп замещений, где замещения каждой группы применяются, если любой адрес из группы является частью адреса загруженной страницы (например, если один из адресов группы «google.com», то замещение применяется к «http://www.google.com», а также к «http://mail.google.com», и т.д.; если в группе нет никаких адресов, её замещения применяются к любой странице. Группы проверяются в порядке их ввода.">
+<!ENTITY urlHeader "Адрес">
 <!ENTITY inputStringHeader "Заменить">
-<!ENTITY inputRegExpHeader "Регулярное выражение">
 <!ENTITY outputStringHeader "На">
-<!ENTITY caseSensitiveHeader "С учётом регистра">
-<!ENTITY wholeWordsHeader "Только слова целиком">
 <!ENTITY addButton.label "Добавить">
 <!ENTITY addButton.accesskey "Д">
-<!ENTITY upButton.label "Выше">
-<!ENTITY upButton.accesskey "В">
-<!ENTITY downButton.label "Ниже">
-<!ENTITY downButton.accesskey "Н">
+<!ENTITY editButton.label "Изменить">
+<!ENTITY editButton.accesskey "з">
 <!ENTITY deleteButton.label "Удалить">
 <!ENTITY deleteButton.accesskey "л">
-<!ENTITY clearButton.label "Сбросить">
-<!ENTITY clearButton.accesskey "б">
+<!ENTITY clearButton.label "Очистить">
+<!ENTITY clearButton.accesskey "ч">
+<!ENTITY moveUpButton.label "Выше">
+<!ENTITY moveUpButton.accesskey "В">
+<!ENTITY moveDownButton.label "Ниже">
+<!ENTITY moveDownButton.accesskey "Н">
 <!ENTITY importButton.label "Импорт">
 <!ENTITY importButton.accesskey "м">
 <!ENTITY exportButton.label "Экспорт">
@@ -31,4 +23,4 @@
 <!ENTITY autoReplaceOnLoad.label "Автозамена при загрузке страницы">
 <!ENTITY autoReplaceOnLoad.accesskey "т">
 <!ENTITY replaceUrls.label "Заменять адреса (ссылок и изображений). ВНИМАНИЕ! Это изменит поведение страницы.">
-<!ENTITY replaceUrls.accesskey "а">
+<!ENTITY replaceUrls.accesskey "т">

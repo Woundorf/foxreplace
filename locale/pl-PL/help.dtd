@@ -11,7 +11,6 @@ Zamienniki są zastosowywane do &lt;b&gt;całych&lt;/b&gt; treści stron (w tej 
 <!ENTITY substitution.table.1 "Wstawia tekst zamiennika.">
 <!ENTITY substitution.table.2 "Wstawia tekst poprzedzający dany ciąg znaków zawarty w tym samym bloku tekstu.">
 <!ENTITY substitution.table.3 "Wstawia tekst następujący po danym ciąg znaków zawarty w tym samym bloku tekstu.">
-<!ENTITY substitution.table.4 "Jeżeli dany ciąg znaków jest wyrażeniem regularnym i &lt;i&gt;n&lt;/i&gt; jest liczbą dziesiętną z przedziału od 1 do 99 (włącznie) ta zmienna wstawi &lt;i&gt;n&lt;/i&gt;-tą odnalezioną w tekście zmienną.">
 <!ENTITY substitutionList "Lista zamienników">
 <!ENTITY substitutionList.p "FoxReplace pozwala na zarządzanie listą zamienników, które możesz dodawać i edytować w każdej chwili w oknie opcji rozszerzenia. Możesz zastąpić tekst na stronie kiedy tylko chcesz poprzez wciśnięcie klawisza F2, przycisku na pasku narzędzi lub wybranie odpowiedniego wpisu z menu. Teksty na stronie są zastępowane zgodnie z ich kolejnością na liście. Możesz wykonać operację zastępowania na jednej stronie tyle razy, ile tylko chcesz. Za każdym razem, kiedy to zrobisz, zastąpiona zostanie aktualna, a nie pierwotna zawartość strony.">
 <!ENTITY autoReplace "Automatycznie zastępuj tekst na stronach podczas ich wczytywania">

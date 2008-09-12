@@ -17,8 +17,6 @@
 <!ENTITY substitution.table.1 "Inserts the input string.">
 <!ENTITY substitution.table.2 "Inserts the text preceding the input string inside the same block.">
 <!ENTITY substitution.table.3 "Inserts the text following the input string inside the same block.">
-<!ENTITY substitution.table.4 "If the input string is a regular expression, and &lt;i&gt;n&lt;/i&gt; a decimal integer number
-         between 1 and 99 (included), inserts the &lt;i&gt;n&lt;/i&gt;th found substring.">
 <!ENTITY substitutionList "Substitution list">
 <!ENTITY substitutionList.p "The extension keeps a substitution list that you can define and modify at any moment
          from the FoxReplace options window. You can apply the substitution list when you want by pressing F2 key

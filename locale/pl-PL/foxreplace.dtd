@@ -21,7 +21,5 @@
 <!ENTITY replaceBarOutputString.accesskey "t">
 <!ENTITY replaceBarCaseSensitive.label "Rozróżniaj wielkość liter">
 <!ENTITY replaceBarCaseSensitive.accesskey "R">
-<!ENTITY replaceBarWholeWords.label "Tylko całe słowa">
-<!ENTITY replaceBarWholeWords.accesskey "T">
 <!ENTITY replaceBarReplace.label "Zastąp">
 <!ENTITY replaceBarReplace.accesskey "s">

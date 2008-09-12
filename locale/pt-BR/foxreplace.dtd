@@ -21,7 +21,5 @@
 <!ENTITY replaceBarOutputString.accesskey "w">
 <!ENTITY replaceBarCaseSensitive.label "Diferenciar maiúsc./minúsc.">
 <!ENTITY replaceBarCaseSensitive.accesskey "M">
-<!ENTITY replaceBarWholeWords.label "Coincidir palavras inteiras">
-<!ENTITY replaceBarWholeWords.accesskey "O">
 <!ENTITY replaceBarReplace.label "Substituir">
 <!ENTITY replaceBarReplace.accesskey "p">
