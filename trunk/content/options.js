@@ -247,6 +247,7 @@ var foxreplaceOptions = {
     const MAX_LABELS = 2;
     
     var groupItem = document.createElement("listitem");
+    groupItem.setAttribute("ondblclick", "foxreplaceOptions.editSubstitutionGroup();");
     groupItem.substitutionGroup = aSubstitutionGroup;
     
     var urlsCell = document.createElement("listcell");
