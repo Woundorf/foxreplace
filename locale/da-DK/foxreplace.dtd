@@ -1,0 +1,25 @@
+<!ENTITY menuEditReplace.label "Replace...">
+<!ENTITY menuEditReplace.accesskey "e">
+<!ENTITY menuToolsFoxReplace.label "FoxReplace">
+<!ENTITY menuToolsFoxReplace.accesskey "F">
+<!ENTITY menuContextFoxReplace.label "Replace with substitution list (FoxReplace)">
+<!ENTITY menuContextFoxReplace.accesskey "l">
+<!ENTITY toolbarButton.label "FoxReplace">
+<!ENTITY toolbarButton.tooltip "Replace with substitution list">
+<!ENTITY listReplace.label "Replace with substitution list">
+<!ENTITY listReplace.accesskey "R">
+<!ENTITY autoReplaceOnLoad.label "Auto-replace on page load">
+<!ENTITY autoReplaceOnLoad.accesskey "A">
+<!ENTITY options.label "FoxReplace options...">
+<!ENTITY options.accesskey "o">
+<!ENTITY help.label "Help">
+<!ENTITY help.accesskey "H">
+<!ENTITY replaceBarClose "Close replace bar">
+<!ENTITY replaceBarInputString.label "Replace">
+<!ENTITY replaceBarInputString.accesskey "R">
+<!ENTITY replaceBarOutputString.label "with">
+<!ENTITY replaceBarOutputString.accesskey "w">
+<!ENTITY replaceBarCaseSensitive.label "Match case">
+<!ENTITY replaceBarCaseSensitive.accesskey "M">
+<!ENTITY replaceBarReplace.label "Replace">
+<!ENTITY replaceBarReplace.accesskey "e">
