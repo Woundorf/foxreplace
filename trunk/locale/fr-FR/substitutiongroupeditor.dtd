@@ -1,0 +1,32 @@
+<!ENTITY title "Éditeur de groupe de substitution">
+<!ENTITY description "Indiquez la liste des URLs et des substitutions. La liste d&apos;URLs est facultative, dans ce cas, la liste de substitution sera appliquée à toutes les pages ; sinon, les substitutions s&apos;appliqueront uniquement lorsque l&apos;adresse de la page correspond à une des URLs. Vous pouvez utiliser le caractère « * » pour faire correspondre aucun ou plusieurs caractères (inutile au début ou à la fin) et « | » pour faire correspondre le début ou la fin de l&apos;URL. Par exemple, « http://*.exemple.com/| » correspondra à « http://www.exemple.com/ » mais pas à « http://www.exemple.com/autrechose ». La liste doit comporter au moins un élément de substitution.">
+<!ENTITY urls "URLs">
+<!ENTITY url.label "URL">
+<!ENTITY url.accesskey "U">
+<!ENTITY addUrlButton.label "Ajouter">
+<!ENTITY addUrlButton.accesskey "A">
+<!ENTITY deleteUrlButton.label "Supprimer">
+<!ENTITY deleteUrlButton.accesskey "S">
+<!ENTITY clearUrlsButton.label "Effacer">
+<!ENTITY clearUrlsButton.accesskey "f">
+<!ENTITY substitutions "Substitutions">
+<!ENTITY inputString.label "Remplacer">
+<!ENTITY inputString.accesskey "R">
+<!ENTITY outputString.label "par">
+<!ENTITY outputString.accesskey "p">
+<!ENTITY caseSensitive.label "Sensible à la casse">
+<!ENTITY caseSensitive.accesskey "c">
+<!ENTITY addSubstitutionButton.label "Ajouter">
+<!ENTITY addSubstitutionButton.accesskey "j">
+<!ENTITY moveUpSubstitutionButton.label "Monter">
+<!ENTITY moveUpSubstitutionButton.accesskey "M">
+<!ENTITY moveDownSubstitutionButton.label "Descendre">
+<!ENTITY moveDownSubstitutionButton.accesskey "D">
+<!ENTITY deleteSubstitutionButton.label "Supprimer">
+<!ENTITY deleteSubstitutionButton.accesskey "u">
+<!ENTITY clearSubstitutionsButton.label "Effacer">
+<!ENTITY clearSubstitutionsButton.accesskey "c">
+<!ENTITY inputStringHeader "Remplacer">
+<!ENTITY inputTypeHeader "Type">
+<!ENTITY outputStringHeader "Par">
+<!ENTITY caseSensitiveHeader "Sensible à la casse">

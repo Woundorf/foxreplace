@@ -1,4 +1,4 @@
-v0.8.0
+v0.8.0 (20-9-2008)
 * Whole words option integrated in the XBL input textbox.
 * Per-site substitution: now you can define a list of substitution groups, where
   every group has an URL list and a substitution list; the substitutions are

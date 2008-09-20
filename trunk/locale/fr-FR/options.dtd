@@ -1,14 +1,21 @@
 <!ENTITY prefwindow.title "Options de FoxReplace">
 <!ENTITY mainPane.title "Principales">
-<!ENTITY description "Veuillez saisir la liste de substitution. Les substitutions seront effectuées dans l&apos;ordre proposé dans cette liste.">
+<!ENTITY description "Veuillez saisir la liste de substitution. Cette liste est composée de groupes de substitution pour lesquels les substitutions sont appliquées si une des URLs associées au groupe correspond à l&apos;adresse de la page chargée. Si le groupe n&apos;a pas d&apos;URL associée, ses substitutions sont appliquées pour toutes les pages. Les groupes sont passés en revue dans l&apos;ordre d&apos;apparition.">
+<!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Remplacer">
 <!ENTITY outputStringHeader "Par">
 <!ENTITY addButton.label "Ajouter">
 <!ENTITY addButton.accesskey "A">
+<!ENTITY editButton.label "Éditer">
+<!ENTITY editButton.accesskey "E">
 <!ENTITY deleteButton.label "Supprimer">
 <!ENTITY deleteButton.accesskey "S">
 <!ENTITY clearButton.label "Effacer">
 <!ENTITY clearButton.accesskey "f">
+<!ENTITY moveUpButton.label "Monter">
+<!ENTITY moveUpButton.accesskey "M">
+<!ENTITY moveDownButton.label "Descendre">
+<!ENTITY moveDownButton.accesskey "D">
 <!ENTITY importButton.label "Importer">
 <!ENTITY importButton.accesskey "I">
 <!ENTITY exportButton.label "Exporter">
