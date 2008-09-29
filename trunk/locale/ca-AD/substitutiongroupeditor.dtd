@@ -8,26 +8,38 @@
 <!ENTITY url.label "URL">
 <!ENTITY url.accesskey "U">
 <!ENTITY addUrlButton.label "Afegeix">
-<!ENTITY addUrlButton.accesskey "A">
+<!ENTITY addUrlButton.accesskey "f">
+<!ENTITY editUrlButton.label "Edita">
+<!ENTITY editUrlButton.accesskey "E">
+<!ENTITY okEditUrlButton.label "D'acord">
+<!ENTITY okEditUrlButton.accesskey "D">
+<!ENTITY cancelEditUrlButton.label "Cancel·la">
+<!ENTITY cancelEditUrlButton.accesskey "C">
 <!ENTITY deleteUrlButton.label "Elimina">
-<!ENTITY deleteUrlButton.accesskey "E">
+<!ENTITY deleteUrlButton.accesskey "l">
 <!ENTITY clearUrlsButton.label "Buida">
 <!ENTITY clearUrlsButton.accesskey "B">
 <!ENTITY substitutions "Substitucions">
-<!ENTITY inputString.label "Reeemplaça">
-<!ENTITY inputString.accesskey "R">
+<!ENTITY inputString.label "Reemplaça">
+<!ENTITY inputString.accesskey "p">
 <!ENTITY outputString.label "amb">
 <!ENTITY outputString.accesskey "m">
 <!ENTITY caseSensitive.label "Distingeix entre majúscules i minúscules">
-<!ENTITY caseSensitive.accesskey "D">
+<!ENTITY caseSensitive.accesskey "s">
 <!ENTITY addSubstitutionButton.label "Afegeix">
-<!ENTITY addSubstitutionButton.accesskey "f">
+<!ENTITY addSubstitutionButton.accesskey "g">
 <!ENTITY moveUpSubstitutionButton.label "Mou amunt">
-<!ENTITY moveUpSubstitutionButton.accesskey "n">
+<!ENTITY moveUpSubstitutionButton.accesskey "o">
 <!ENTITY moveDownSubstitutionButton.label "Mou avall">
 <!ENTITY moveDownSubstitutionButton.accesskey "v">
+<!ENTITY editSubstitutionButton.label "Edita">
+<!ENTITY editSubstitutionButton.accesskey "t">
+<!ENTITY okEditSubstitutionButton.label "D'acord">
+<!ENTITY okEditSubstitutionButton.accesskey "r">
+<!ENTITY cancelEditSubstitutionButton.label "Cancel·la">
+<!ENTITY cancelEditSubstitutionButton.accesskey "a">
 <!ENTITY deleteSubstitutionButton.label "Elimina">
-<!ENTITY deleteSubstitutionButton.accesskey "l">
+<!ENTITY deleteSubstitutionButton.accesskey "n">
 <!ENTITY clearSubstitutionsButton.label "Buida">
 <!ENTITY clearSubstitutionsButton.accesskey "i">
 <!ENTITY inputStringHeader "Reemplaça">

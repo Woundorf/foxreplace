@@ -40,6 +40,12 @@
 var foxreplaceSubstitutionGroupEditor = {
   
   /**
+   * Easy access to most used controls.
+   */
+  get _urlsListBox() { return document.getElementById("urlsListBox"); },
+  get _substitutionsListBox() { return document.getElementById("substitutionsListBox"); },
+  
+  /**
    * Deletes the dumb items and fills the listboxes.
    */
   onLoad: function() {
@@ -53,44 +59,171 @@ var foxreplaceSubstitutionGroupEditor = {
     }
   },
   
+  /**
+   * Adds a new URL to the URLs listbox. It can be aUrl or taken from the URL textbox.
+   */
   addUrl: function(aUrl) {
+    if (this._urlsListBox.disabled) return;
+    
     var urlTextBox = document.getElementById("urlTextBox");
     var url = aUrl || urlTextBox.value;
     
     if (!url) return; // this shouldn't happen
     
-    document.getElementById("urlsListBox").appendItem(url);
+    var urlItem = this._urlsListBox.appendItem(url);
+    urlItem.ondblclick = function() { foxreplaceSubstitutionGroupEditor.startEditUrl(); }
     
     if (!aUrl) {
       urlTextBox.value = "";
       urlTextBox.focus();
+      document.getElementById("addUrlButton").disabled = true;
     }
   },
   
+  /**
+   * Deletes the selected URL from the URLs listbox.
+   */
   deleteUrl: function() {
-    var urlsListBox = document.getElementById("urlsListBox");
-    var selectedIndex = urlsListBox.selectedIndex;
+    if (this._urlsListBox.disabled) return;
+    
+    var selectedIndex = this._urlsListBox.selectedIndex;
     
     if (selectedIndex >= 0) {
-      urlsListBox.removeItemAt(selectedIndex);
-      urlsListBox.selectedIndex = Math.min(selectedIndex, urlsListBox.getRowCount() - 1);
+      this._urlsListBox.removeItemAt(selectedIndex);
+      this._urlsListBox.selectedIndex = Math.min(selectedIndex, this._urlsListBox.getRowCount() - 1);
     }
   },
   
+  /**
+   * Deletes all URLs from the URLs listbox.
+   */
   clearUrls: function() {
-    var urlsListBox = document.getElementById("urlsListBox");
-    var i = urlsListBox.getRowCount() - 1;
+    if (this._urlsListBox.disabled) return;
+    
+    var i = this._urlsListBox.getRowCount() - 1;
     
     while (i >= 0) {
-      urlsListBox.removeItemAt(i);
+      this._urlsListBox.removeItemAt(i);
       i--;
     }
   },
   
   /**
-   * Adds a new substitution to the listbox.
+   * Starts to edit the selected URL.
+   */
+  startEditUrl: function() {
+    if (this._urlsListBox.disabled) return;
+    
+    var urlItem = this._urlsListBox.selectedItem;
+    
+    if (urlItem) {
+      var urlTextBox = document.getElementById("urlTextBox");
+      urlTextBox.value = urlItem.label;
+      document.getElementById("addUrlButton").hidden = true;
+      document.getElementById("okEditUrlButton").hidden = false;
+      document.getElementById("cancelEditUrlButton").hidden = false;
+      this.disableUrlsListBox(true);
+      urlTextBox.focus();
+    }
+  },
+  
+  /**
+   * Confirms the edit to the selected URL.
+   */
+  okEditUrl: function() {
+    if (!this._urlsListBox.disabled) return;
+    
+    var urlItem = this._urlsListBox.selectedItem;
+    var urlTextBox = document.getElementById("urlTextBox");
+    
+    if (!urlTextBox.value) return;  // this shouldn't happen
+    
+    urlItem.label = urlTextBox.value;
+    urlTextBox.value = "";
+    document.getElementById("addUrlButton").disabled = true;
+    document.getElementById("addUrlButton").hidden = false;
+    document.getElementById("okEditUrlButton").hidden = true;
+    document.getElementById("cancelEditUrlButton").hidden = true;
+    this.disableUrlsListBox(false);
+    this._urlsListBox.focus();
+  },
+  
+  /**
+   * Cancels the edit to the selected URL.
+   */
+  cancelEditUrl: function() {
+    if (!this._urlsListBox.disabled) return;
+    
+    document.getElementById("urlTextBox").value = "";
+    document.getElementById("addUrlButton").disabled = true;
+    document.getElementById("addUrlButton").hidden = false;
+    document.getElementById("okEditUrlButton").hidden = true;
+    document.getElementById("cancelEditUrlButton").hidden = true;
+    this.disableUrlsListBox(false);
+    this._urlsListBox.focus();
+  },
+  
+  /**
+   * Sets the disabled property of the URLs listbox and related controls to aBoolean.
+   */
+  disableUrlsListBox: function(aBoolean) {
+    this._urlsListBox.disabled = aBoolean;
+    document.getElementById("editUrlButton").disabled = aBoolean;
+    document.getElementById("deleteUrlButton").disabled = aBoolean;
+    document.getElementById("clearUrlsButton").disabled = aBoolean;
+  },
+  
+  /**
+   * Enables or disables some buttons when an URL item is selected or deselected.
+   */
+  onSelectUrl: function() {
+    if (this._urlsListBox.selectedItem) {
+      document.getElementById("editUrlButton").disabled = false;
+      document.getElementById("deleteUrlButton").disabled = false;
+    }
+    else {
+      document.getElementById("editUrlButton").disabled = true;
+      document.getElementById("deleteUrlButton").disabled = true;
+    }
+  },
+  
+  /**
+   * Changes default actions of return and escape keys when focus is on the URL textbox.
+   */
+  onUrlKeyPress: function(aEvent) {
+    if (!this._urlsListBox.disabled) {
+      if (aEvent.keyCode == aEvent.DOM_VK_RETURN) {
+        this.addUrl();
+        aEvent.preventDefault();
+      }
+    }
+    else {
+      if (aEvent.keyCode == aEvent.DOM_VK_RETURN) {
+        this.okEditUrl();
+        aEvent.preventDefault();
+      }
+      else if (aEvent.keyCode == aEvent.DOM_VK_ESCAPE) {
+        this.cancelEditUrl();
+        aEvent.preventDefault();
+      }
+    }
+  },
+  
+  /**
+   * Enables or disables some buttons when the URL textbox changes.
+   */
+  onUrlInput: function() {
+    var empty = document.getElementById("urlTextBox").value == "";
+    document.getElementById("addUrlButton").disabled = empty;
+    document.getElementById("okEditUrlButton").disabled = empty;
+  },
+  
+  /**
+   * Adds a new substitution to the substitutions listbox. It can be aSubstitution or taken from the substitution controls.
    */
   addSubstitution: function(aSubstitution) {
+    if (this._substitutionsListBox.disabled) return;
+    
     var inputStringTextBox = document.getElementById("inputStringTextBox");
     var outputStringTextBox = document.getElementById("outputStringTextBox");
     var caseSensitiveCheckBox = document.getElementById("caseSensitiveCheckBox");
@@ -110,13 +243,14 @@ var foxreplaceSubstitutionGroupEditor = {
         substitution = new FxRSubstitution(inputString, outputString, caseSensitive, inputType);
       }
       catch (se) {  // SyntaxError
-        foxreplaceIO.promptService.alert(window, foxreplaceIO.strings.getString("regExpError"), se);
+        foxreplaceIO.alert(foxreplaceIO.strings.getString("regExpError"), se);
         return;
       }
     }
     
     var substitutionItem = document.createElement("listitem");
     substitutionItem.substitution = substitution;
+    substitutionItem.ondblclick = function() { foxreplaceSubstitutionGroupEditor.startEditSubstitution(); }
     
     var inputStringCell = document.createElement("listcell");
     inputStringCell.setAttribute("label", inputString);
@@ -134,8 +268,7 @@ var foxreplaceSubstitutionGroupEditor = {
     caseSensitiveCell.setAttribute("label", foxreplaceIO.strings.getString(caseSensitive ? "yes" : "no"));
     substitutionItem.appendChild(caseSensitiveCell);
     
-    var substitutionsListBox = document.getElementById("substitutionsListBox");
-    substitutionsListBox.appendChild(substitutionItem);
+    this._substitutionsListBox.appendChild(substitutionItem);
     
     if (!aSubstitution) {
       // Clear fields
@@ -145,6 +278,7 @@ var foxreplaceSubstitutionGroupEditor = {
       
       // Set focus to input
       inputStringTextBox.focus();
+      document.getElementById("addSubstitutionButton").disabled = true;
     }
   },
   
@@ -152,16 +286,17 @@ var foxreplaceSubstitutionGroupEditor = {
    * Moves up the selected substitution.
    */
   moveUpSubstitution: function() {
-    var substitutionsListBox = document.getElementById("substitutionsListBox");
-    var selectedItem = substitutionsListBox.selectedItem;
+    if (this._substitutionsListBox.disabled) return;
+    
+    var selectedItem = this._substitutionsListBox.selectedItem;
     
     if (selectedItem) {
-      var previousItem = substitutionsListBox.getPreviousItem(selectedItem, 1);
+      var previousItem = this._substitutionsListBox.getPreviousItem(selectedItem, 1);
       
       if (previousItem) {
-        substitutionsListBox.removeChild(selectedItem);
-        substitutionsListBox.insertBefore(selectedItem, previousItem);
-        substitutionsListBox.selectedItem = selectedItem;
+        this._substitutionsListBox.removeChild(selectedItem);
+        this._substitutionsListBox.insertBefore(selectedItem, previousItem);
+        this._substitutionsListBox.selectedItem = selectedItem;
       }
     }
   },
@@ -170,85 +305,239 @@ var foxreplaceSubstitutionGroupEditor = {
    * Moves down the selected substitution.
    */
   moveDownSubstitution: function() {
-    var substitutionsListBox = document.getElementById("substitutionsListBox");
-    var selectedItem = substitutionsListBox.selectedItem;
+    if (this._substitutionsListBox.disabled) return;
+    
+    var selectedItem = this._substitutionsListBox.selectedItem;
     
     if (selectedItem) {
-      var nextItem = substitutionsListBox.getNextItem(selectedItem, 1);
+      var nextItem = this._substitutionsListBox.getNextItem(selectedItem, 1);
       
       if (nextItem) {
-        var nextNextItem = substitutionsListBox.getNextItem(selectedItem, 2);
+        var nextNextItem = this._substitutionsListBox.getNextItem(selectedItem, 2);
         
-        substitutionsListBox.removeChild(selectedItem);
+        this._substitutionsListBox.removeChild(selectedItem);
         
         if (nextNextItem)
-          substitutionsListBox.insertBefore(selectedItem, nextNextItem);
+          this._substitutionsListBox.insertBefore(selectedItem, nextNextItem);
         else
-          substitutionsListBox.appendChild(selectedItem);
+          this._substitutionsListBox.appendChild(selectedItem);
         
-        substitutionsListBox.selectedItem = selectedItem;
+        this._substitutionsListBox.selectedItem = selectedItem;
       }
     }
   },
   
   /**
-   * Removes the selected substitution from the listbox.
+   * Removes the selected substitution from the substitutions listbox.
    */
   deleteSubstitution: function() {
-    var substitutionsListBox = document.getElementById("substitutionsListBox");
-    var selectedIndex = substitutionsListBox.selectedIndex;
+    if (this._substitutionsListBox.disabled) return;
+    
+    var selectedIndex = this._substitutionsListBox.selectedIndex;
     
     if (selectedIndex >= 0) {
-      substitutionsListBox.removeItemAt(selectedIndex);
-      substitutionsListBox.selectedIndex = Math.min(selectedIndex, substitutionsListBox.getRowCount() - 1);
+      this._substitutionsListBox.removeItemAt(selectedIndex);
+      this._substitutionsListBox.selectedIndex = Math.min(selectedIndex, this._substitutionsListBox.getRowCount() - 1);
     }
   },
     
   /**
-   * Deletes all substitutions from the listbox.
+   * Deletes all substitutions from the substitutions listbox.
    */
   clearSubstitutions: function() {
-    var substitutionsListBox = document.getElementById("substitutionsListBox");
-    var i = substitutionsListBox.getRowCount() - 1;
+    if (this._substitutionsListBox.disabled) return;
+    
+    var i = this._substitutionsListBox.getRowCount() - 1;
     
     while (i >= 0) {
-      substitutionsListBox.removeItemAt(i);
+      this._substitutionsListBox.removeItemAt(i);
       i--;
     }
   },
   
   /**
-   * Deletes the "dumbitem" (workaround for listbox height).
+   * Starts to edit the selected substitution.
+   */
+  startEditSubstitution: function() {
+    if (this._substitutionsListBox.disabled) return;
+    
+    var substitutionItem = this._substitutionsListBox.selectedItem;
+    
+    if (substitutionItem) {
+      var substitution = substitutionItem.substitution;
+      var inputStringTextBox = document.getElementById("inputStringTextBox");
+      var outputStringTextBox = document.getElementById("outputStringTextBox");
+      var caseSensitiveCheckBox = document.getElementById("caseSensitiveCheckBox");
+      inputStringTextBox.value = substitution.input;
+      inputStringTextBox.inputType = substitution.inputType
+      outputStringTextBox.value = substitution.output;
+      caseSensitiveCheckBox.checked = substitution.caseSensitive;
+      document.getElementById("addSubstitutionButton").hidden = true;
+      document.getElementById("okEditSubstitutionButton").hidden = false;
+      document.getElementById("cancelEditSubstitutionButton").hidden = false;
+      this.disableSubstitutionsListBox(true);
+      inputStringTextBox.focus();
+    }
+  },
+  
+  /**
+   * Confirms the edit to the selected substitution.
+   */
+  okEditSubstitution: function() {
+    if (!this._substitutionsListBox.disabled) return;
+    
+    var inputStringTextBox = document.getElementById("inputStringTextBox");
+    var outputStringTextBox = document.getElementById("outputStringTextBox");
+    var caseSensitiveCheckBox = document.getElementById("caseSensitiveCheckBox");
+    
+    var inputString = inputStringTextBox.value;
+    var inputType = inputStringTextBox.inputType;
+    var outputString = outputStringTextBox.value;
+    var caseSensitive = caseSensitiveCheckBox.checked;
+    
+    if (!inputString) return; // this shouldn't happen
+    
+    var substitution;
+    
+    try {
+      substitution = new FxRSubstitution(inputString, outputString, caseSensitive, inputType);
+    }
+    catch (se) {  // SyntaxError
+      foxreplaceIO.alert(foxreplaceIO.strings.getString("regExpError"), se);
+      return;
+    }
+    
+    var substitutionItem = this._substitutionsListBox.selectedItem;
+    substitutionItem.substitution = substitution;
+    substitutionItem.childNodes[0].setAttribute("label", inputString);
+    substitutionItem.childNodes[1].setAttribute("label", foxreplaceIO.strings.getString(FxRSubstitution.prototype.INPUT_TYPE_STRINGS[inputType]));
+    substitutionItem.childNodes[2].setAttribute("label", outputString);
+    substitutionItem.childNodes[3].setAttribute("label", foxreplaceIO.strings.getString(caseSensitive ? "yes" : "no"));
+    
+    // Clear fields
+    inputStringTextBox.value = "";
+    outputStringTextBox.value = "";
+    caseSensitiveCheckBox.checked = false;
+    
+    document.getElementById("addSubstitutionButton").disabled = true;
+    document.getElementById("addSubstitutionButton").hidden = false;
+    document.getElementById("okEditSubstitutionButton").hidden = true;
+    document.getElementById("cancelEditSubstitutionButton").hidden = true;
+    this.disableSubstitutionsListBox(false);
+    this._substitutionsListBox.focus();
+  },
+  
+  /**
+   * Cancels the edit to the selected substitution.
+   */
+  cancelEditSubstitution: function() {
+    if (!this._substitutionsListBox.disabled) return;
+    
+    // Clear fields
+    document.getElementById("inputStringTextBox").value = "";
+    document.getElementById("outputStringTextBox").value = "";
+    document.getElementById("caseSensitiveCheckBox").checked = false;
+    
+    document.getElementById("addSubstitutionButton").disabled = true;
+    document.getElementById("addSubstitutionButton").hidden = false;
+    document.getElementById("okEditSubstitutionButton").hidden = true;
+    document.getElementById("cancelEditSubstitutionButton").hidden = true;
+    this.disableSubstitutionsListBox(false);
+    this._substitutionsListBox.focus();
+  },
+  
+  /**
+   * Sets the disabled property of the substitutions listbox and related controls to aBoolean.
+   */
+  disableSubstitutionsListBox: function(aBoolean) {
+    this._substitutionsListBox.disabled = aBoolean;
+    document.getElementById("moveUpSubstitutionButton").disabled = aBoolean;
+    document.getElementById("moveDownSubstitutionButton").disabled = aBoolean;
+    document.getElementById("editSubstitutionButton").disabled = aBoolean;
+    document.getElementById("deleteSubstitutionButton").disabled = aBoolean;
+    document.getElementById("clearSubstitutionsButton").disabled = aBoolean;
+  },
+  
+  /**
+   * Enables or disables some buttons when a substitution item is selected or deselected.
+   */
+  onSelectSubstitution: function() {
+    if (this._substitutionsListBox.selectedItem) {
+      document.getElementById("moveUpSubstitutionButton").disabled = false;
+      document.getElementById("moveDownSubstitutionButton").disabled = false;
+      document.getElementById("editSubstitutionButton").disabled = false;
+      document.getElementById("deleteSubstitutionButton").disabled = false;
+    }
+    else {
+      document.getElementById("moveUpSubstitutionButton").disabled = true;
+      document.getElementById("moveDownSubstitutionButton").disabled = true;
+      document.getElementById("editSubstitutionButton").disabled = true;
+      document.getElementById("deleteSubstitutionButton").disabled = true;
+    }
+  },
+  
+  /**
+   * Changes default actions of return and escape keys when focus is on a substitution control.
+   */
+  onSubstitutionKeyPress: function(aEvent) {
+    if (!this._substitutionsListBox.disabled) {
+      if (aEvent.keyCode == aEvent.DOM_VK_RETURN) {
+        this.addSubstitution();
+        aEvent.preventDefault();
+      }
+    }
+    else {
+      if (aEvent.keyCode == aEvent.DOM_VK_RETURN) {
+        this.okEditSubstitution();
+        aEvent.preventDefault();
+      }
+      else if (aEvent.keyCode == aEvent.DOM_VK_ESCAPE) {
+        this.cancelEditSubstitution();
+        aEvent.preventDefault();
+      }
+    }
+  },
+  
+  /**
+   * Enables or disables some buttons when the substitution input textbox changes.
+   */
+  onSubstitutionInput: function() {
+    var empty = document.getElementById("inputStringTextBox").value == "";
+    document.getElementById("addSubstitutionButton").disabled = empty;
+    document.getElementById("okEditSubstitutionButton").disabled = empty;
+  },
+  
+  /**
+   * Deletes the dumb items (workaround for listbox height).
    */
   deleteDumbItems: function() {
     if (document.getElementById("urlDumbItem"))
-      document.getElementById("urlsListBox").removeItemAt(0); // urlDumbItem is the first
+      this._urlsListBox.removeItemAt(0);  // urlDumbItem is the first
     
     if (document.getElementById("substitutionDumbItem"))
-      document.getElementById("substitutionsListBox").removeItemAt(0);  // urlDumbItem is the first
+      this._substitutionsListBox.removeItemAt(0); // urlDumbItem is the first
   },
   
+  /**
+   * If everything is correct puts the edited substitution group in the out argument and returns.
+   */
   onAccept: function () {
-    var substitutionsListBox = document.getElementById("substitutionsListBox");
-    var nSubstitutions = substitutionsListBox.getRowCount();
+    var nSubstitutions = this._substitutionsListBox.getRowCount();
     
     if (nSubstitutions == 0) {
-      foxreplaceIO.promptService.alert(window,
-                                       foxreplaceIO.strings.getString("noSubstitutionsTitle"),
-                                       foxreplaceIO.strings.getString("noSubstitutionsDescription"));
+      foxreplaceIO.alert(foxreplaceIO.strings.getString("noSubstitutionsTitle"), foxreplaceIO.strings.getString("noSubstitutionsDescription"));
       
       return false;
     }
     
     var substitutions = new Array(nSubstitutions);
     
-    for (var i = 0; i < nSubstitutions; i++) substitutions[i] = substitutionsListBox.getItemAtIndex(i).substitution;
+    for (var i = 0; i < nSubstitutions; i++) substitutions[i] = this._substitutionsListBox.getItemAtIndex(i).substitution;
     
-    var urlsListBox = document.getElementById("urlsListBox");
-    var nUrls = urlsListBox.getRowCount();
+    var nUrls = this._urlsListBox.getRowCount();
     var urls = new Array(nUrls);
     
-    for (var i = 0; i < nUrls; i++) urls[i] = urlsListBox.getItemAtIndex(i).getAttribute("label");
+    for (var i = 0; i < nUrls; i++) urls[i] = this._urlsListBox.getItemAtIndex(i).label;
     
     var group = new FxRSubstitutionGroup(urls, substitutions);
     
