@@ -49,7 +49,7 @@ function FxRSubstitution07(aInput, aOutput, aCaseSensitive, aInputRegExp, aWhole
   else if (this.wholeWords) {
     var prefix = aInput.charAt(0).match(/\w/) ? "\\b" : "\\B";
     var suffix = aInput.charAt(aInput.length - 1).match(/\w/) ? "\\b" : "\\B";
-    this._regExp = new RegExp(prefix + aInput.toUnicode() + suffix, aCaseSensitive ? "g" : "gi");
+    this._regExp = new RegExp(prefix + fxrStringToUnicode(aInput) + suffix, aCaseSensitive ? "g" : "gi");
   }
 }
 FxRSubstitution07.prototype = {
@@ -80,7 +80,7 @@ function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) {
     case this.INPUT_WHOLE_WORDS:
       var prefix = aInput.charAt(0).match(/\w/) ? "\\b" : "\\B";
       var suffix = aInput.charAt(aInput.length - 1).match(/\w/) ? "\\b" : "\\B";
-      this._regExp = new RegExp(prefix + aInput.toUnicode() + suffix, aCaseSensitive ? "g" : "gi");
+      this._regExp = new RegExp(prefix + fxrStringToUnicode(aInput) + suffix, aCaseSensitive ? "g" : "gi");
       break;
     case this.INPUT_REG_EXP:
       this._regExp = new RegExp(aInput, aCaseSensitive ? "g" : "gi");
@@ -228,10 +228,10 @@ FxRSubstitutionGroup.fromXml = function(aXml) {
 };
 
 /**
- * Converts a number to hexadecimal with aDigits digits.
+ * Converts aNumber to hexadecimal with aDigits digits.
  */
-Number.prototype.toHex = function(aDigits) {
-  var hex = this.toString(16);
+function fxrNumberToHex(aNumber, aDigits) {
+  var hex = aNumber.toString(16);
   var digits = aDigits || 4;
   var length = hex.length;
   
@@ -241,13 +241,13 @@ Number.prototype.toHex = function(aDigits) {
 };
 
 /**
- * Converts all the characters of the string to escaped unicode notation.
+ * Converts all the characters of aString to escaped unicode notation.
  */
-String.prototype.toUnicode = function() {
+function fxrStringToUnicode(aString) {
   var result = "";
-  var length = this.length;
+  var length = aString.length;
   
-  for (var i = 0; i < length; i++) result += "\\u" + this.charCodeAt(i).toHex();
+  for (var i = 0; i < length; i++) result += "\\u" + fxrNumberToHex(aString.charCodeAt(i));
   
   return result;
 };
