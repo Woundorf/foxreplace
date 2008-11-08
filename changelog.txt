@@ -1,3 +1,4 @@
+* HTML substitutions.
 * Editable URLs and substitutions.
 * No methods added to prototypes of standard global objects (to avoid possible
   conflicts).

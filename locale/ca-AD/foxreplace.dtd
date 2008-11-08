@@ -21,5 +21,7 @@
 <!ENTITY replaceBarOutputString.accesskey "a">
 <!ENTITY replaceBarCaseSensitive.label "Distingeix entre majúscules i minúscules">
 <!ENTITY replaceBarCaseSensitive.accesskey "D">
+<!ENTITY replaceBarHtml.label "HTML">
+<!ENTITY replaceBarHtml.accesskey "H">
 <!ENTITY replaceBarReplace.label "Reemplaça">
 <!ENTITY replaceBarReplace.accesskey "e">

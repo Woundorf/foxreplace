@@ -72,11 +72,13 @@
           <listheader label="&urlHeader;"/>
           <listheader label="&inputStringHeader;"/>
           <listheader label="&outputStringHeader;"/>
+          <listheader label="&htmlHeader;"/>
         </listhead>
         <listcols>
           <listcol flex="1"/>
           <listcol flex="1"/>
           <listcol flex="1"/>
+          <listcol/>
         </listcols>
         <!-- workaround for listbox height -->
         <listitem id="dumbItem">
@@ -92,6 +94,7 @@
             <label value=""/>
             <label value=""/>
           </listcell>
+          <listcell/>
         </listitem>
       </listbox>
       <vbox>

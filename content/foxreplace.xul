@@ -123,6 +123,7 @@
         <textbox id="fxrReplaceBarOutputStringTextBox"/>
         <checkbox id="fxrReplaceBarCaseSensitiveCheckBox"
                   label="&replaceBarCaseSensitive.label;" accesskey="&replaceBarCaseSensitive.accesskey;"/>
+        <checkbox id="fxrReplaceBarHtmlCheckBox" label="&replaceBarHtml.label;" accesskey="&replaceBarHtml.accesskey;"/>
         <button id="fxrReplaceBarReplaceButton" disabled="true"
                 label="&replaceBarReplace.label;" accesskey="&replaceBarReplace.accesskey;"
                 command="fxrCmdInstantReplace"/>
