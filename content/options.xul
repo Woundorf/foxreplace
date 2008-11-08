@@ -67,7 +67,8 @@
       <listbox id="substitutionListBox" flex="1" rows="10"
                preference-editable="true" preference="substitutionListXml"
                onsynctopreference="return foxreplaceOptions.saveSubstitutionListXml();"
-               onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitutionGroup();">
+               onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitutionGroup();"
+               onselect="foxreplaceOptions.onSelectSubstitutionGroup();">
         <listhead>
           <listheader label="&urlHeader;"/>
           <listheader label="&inputStringHeader;"/>
@@ -101,21 +102,17 @@
         <button id="addButton" label="&addButton.label;"
                 accesskey="&addButton.accesskey;"
                 oncommand="foxreplaceOptions.addSubstitutionGroup();"/>
-        <button id="editButton" label="&editButton.label;"
-                accesskey="&editButton.accesskey;"
+        <button id="editButton" disabled="true" label="&editButton.label;" accesskey="&editButton.accesskey;"
                 oncommand="foxreplaceOptions.editSubstitutionGroup();"/>
-        <button id="deleteButton" label="&deleteButton.label;"
-                accesskey="&deleteButton.accesskey;"
+        <button id="deleteButton" disabled="true" label="&deleteButton.label;" accesskey="&deleteButton.accesskey;"
                 oncommand="foxreplaceOptions.deleteSubstitutionGroup();"/>
         <button id="clearButton" label="&clearButton.label;"
                 accesskey="&clearButton.accesskey;"
                 oncommand="foxreplaceOptions.clearSubstitutionGroups();"/>
         <separator/>
-        <button id="upButton" label="&moveUpButton.label;"
-                accesskey="&moveUpButton.accesskey;"
+        <button id="moveUpButton" disabled="true" label="&moveUpButton.label;" accesskey="&moveUpButton.accesskey;"
                 oncommand="foxreplaceOptions.moveUpSubstitutionGroup();"/>
-        <button id="downButton" label="&moveDownButton.label;"
-                accesskey="&moveDownButton.accesskey;"
+        <button id="moveDownButton" disabled="true" label="&moveDownButton.label;" accesskey="&moveDownButton.accesskey;"
                 oncommand="foxreplaceOptions.moveDownSubstitutionGroup();"/>
         <separator flex="1"/>
         <button id="importButton" label="&importButton.label;"

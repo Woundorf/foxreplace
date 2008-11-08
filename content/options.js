@@ -196,6 +196,24 @@ var foxreplaceOptions = {
   },
   
   /**
+   * Enables or disables some buttons when an substitution group item is selected or deselected.
+   */
+  onSelectSubstitutionGroup: function() {
+    if (document.getElementById("substitutionListBox").selectedItem) {
+      document.getElementById("editButton").disabled = false;
+      document.getElementById("deleteButton").disabled = false;
+      document.getElementById("moveUpButton").disabled = false;
+      document.getElementById("moveDownButton").disabled = false;
+    }
+    else {
+      document.getElementById("editButton").disabled = true;
+      document.getElementById("deleteButton").disabled = true;
+      document.getElementById("moveUpButton").disabled = true;
+      document.getElementById("moveDownButton").disabled = true;
+    }
+  },
+  
+  /**
    * Fills the listbox from an array of substitutions.
    */
   substitutionListFromArray: function(aSubstitutionList, aOverwrite) {
