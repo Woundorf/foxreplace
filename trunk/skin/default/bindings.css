@@ -3,15 +3,19 @@
   -moz-user-focus: ignore;
 }
 
-.inputTextBoxButton[inputtype="0"] {
+.inputTextBoxButtonMenuItem {
+  list-style-image: url("chrome://foxreplace/skin/inputtextbox-icons.png");
+}
+
+.inputTextBoxButton[inputtype="0"], .inputTextBoxButtonMenuItem[anonid="itemText"] {
   -moz-image-region: rect(0px, 16px, 16px, 0px);
 }
 
-.inputTextBoxButton[inputtype="1"] {
+.inputTextBoxButton[inputtype="1"], .inputTextBoxButtonMenuItem[anonid="itemWholeWords"] {
   -moz-image-region: rect(0px, 32px, 16px, 16px);
 }
 
-.inputTextBoxButton[inputtype="2"] {
+.inputTextBoxButton[inputtype="2"], .inputTextBoxButtonMenuItem[anonid="itemRegExp"] {
   -moz-image-region: rect(0px, 48px, 16px, 32px);
 }
 
