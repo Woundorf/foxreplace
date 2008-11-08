@@ -133,4 +133,5 @@
       </vbox>
     </hbox>
   </groupbox>
+  <checkbox id="htmlCheckBox" label="&html.label;" accesskey="&html.accesskey;"/>
 </dialog>

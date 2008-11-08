@@ -287,6 +287,10 @@ var foxreplaceOptions = {
     groupItem.appendChild(inputsCell);
     groupItem.appendChild(outputsCell);
     
+    var htmlCell = document.createElement("listcell");
+    htmlCell.setAttribute("label", foxreplaceIO.strings.getString(aSubstitutionGroup.html ? "yes" : "no"));
+    groupItem.appendChild(htmlCell);
+    
     document.getElementById("substitutionListBox").appendChild(groupItem);
   },
   
@@ -330,6 +334,9 @@ var foxreplaceOptions = {
       outputLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.substitutions[i].output);
       outputsCell.appendChild(outputLabel);
     }
+    
+    var htmlCell = outputsCell.nextSibling;
+    htmlCell.setAttribute("label", foxreplaceIO.strings.getString(aSubstitutionGroup.html ? "yes" : "no"));
   }
   
 };

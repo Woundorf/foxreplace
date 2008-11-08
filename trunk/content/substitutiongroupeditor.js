@@ -44,6 +44,7 @@ var foxreplaceSubstitutionGroupEditor = {
    */
   get _urlsListBox() { return document.getElementById("urlsListBox"); },
   get _substitutionsListBox() { return document.getElementById("substitutionsListBox"); },
+  get _htmlCheckBox() { return document.getElementById("htmlCheckBox"); },
   
   /**
    * Deletes the dumb items and fills the listboxes.
@@ -56,6 +57,7 @@ var foxreplaceSubstitutionGroupEditor = {
       
       for (var i = 0; i < group.urls.length; i++) this.addUrl(group.urls[i]);
       for (var i = 0; i < group.substitutions.length; i++) this.addSubstitution(group.substitutions[i]);
+      this._htmlCheckBox.checked = group.html;
     }
   },
   
@@ -539,7 +541,9 @@ var foxreplaceSubstitutionGroupEditor = {
     
     for (var i = 0; i < nUrls; i++) urls[i] = this._urlsListBox.getItemAtIndex(i).label;
     
-    var group = new FxRSubstitutionGroup(urls, substitutions);
+    var html = this._htmlCheckBox.checked;
+    
+    var group = new FxRSubstitutionGroup(urls, substitutions, html);
     
     window.arguments[0].out = { group: group };
     

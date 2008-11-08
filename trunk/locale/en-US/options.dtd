@@ -6,6 +6,7 @@
 <!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Replace">
 <!ENTITY outputStringHeader "With">
+<!ENTITY htmlHeader "HTML">
 <!ENTITY addButton.label "Add">
 <!ENTITY addButton.accesskey "A">
 <!ENTITY editButton.label "Edit">

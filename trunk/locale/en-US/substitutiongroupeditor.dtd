@@ -46,3 +46,5 @@
 <!ENTITY inputTypeHeader "Type">
 <!ENTITY outputStringHeader "With">
 <!ENTITY caseSensitiveHeader "Match case">
+<!ENTITY html.label "Replace HTML">
+<!ENTITY html.accesskey "H">

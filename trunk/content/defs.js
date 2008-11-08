@@ -149,11 +149,12 @@ FxRSubstitution.prototype = {
 };
 
 /**
- * Substitution group, including an URL list and a substitution list.
+ * Substitution group, including an URL list and a substitution list. If aHtml is true, substitutions are done in HTML.
  */
-function FxRSubstitutionGroup(aUrls, aSubstitutions) {
+function FxRSubstitutionGroup(aUrls, aSubstitutions, aHtml) {
   this.urls = aUrls || [];
   this.substitutions = aSubstitutions || [];
+  this.html = Boolean(aHtml);
   this.urls.sort();
   this.urlRegExps = this.urls.map(function(element) {
                                     return new RegExp(element.replace(/\*+/g, "*")      // remove multiple wildcards
@@ -198,6 +199,7 @@ FxRSubstitutionGroup.prototype = {
     var group = <group><urls/><substitutions/></group>;
     this.urls.forEach(function(element) { group.urls.appendChild(<url>{element}</url>); });
     this.substitutions.forEach(function(element) { group.substitutions.appendChild(element.toXml()); });
+    if (this.html) group.@html = true;
     return group;
   }
 
@@ -221,10 +223,12 @@ FxRSubstitutionGroup.fromXml = function(aXml) {
     }
   }
   
+  var html = aXml.@html.toString() == "true";
+  
   if (errors) foxreplaceIO.alert(foxreplaceIO.strings.getString("xmlErrorTitle"),
                                  foxreplaceIO.strings.getString("xmlGroupErrorText") + "\n" + errors);
   
-  return new FxRSubstitutionGroup(urls, substitutions);
+  return new FxRSubstitutionGroup(urls, substitutions, html);
 };
 
 /**

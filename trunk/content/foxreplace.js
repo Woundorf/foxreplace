@@ -115,6 +115,7 @@ var foxreplace = {
     var inputType = document.getElementById("fxrReplaceBarInputStringTextBox").inputType;
     var outputString = document.getElementById("fxrReplaceBarOutputStringTextBox").value;
     var caseSensitive = document.getElementById("fxrReplaceBarCaseSensitiveCheckBox").checked;
+    var html = document.getElementById("fxrReplaceBarHtmlCheckBox").checked;
     
     if (inputString == "") return;  // this should not happen
     
@@ -124,12 +125,12 @@ var foxreplace = {
     try {
       // new temporal substitution list with only one item
       this._substitutionList =
-        [new FxRSubstitutionGroup([], [new FxRSubstitution(inputString, outputString, caseSensitive, inputType)])];
+        [new FxRSubstitutionGroup([], [new FxRSubstitution(inputString, outputString, caseSensitive, inputType)], html)];
       // perform substitutions
       this.replaceDocXpath();
     }
     catch (se) {  // SyntaxError
-      foxreplaceIO.promptService.alert(window, foxreplaceIO.strings.getString("regExpError"), se);
+      foxreplaceIO.alert(foxreplaceIO.strings.getString("regExpError"), se);
     }
     
     // restore substitution list
@@ -208,100 +209,114 @@ var foxreplace = {
       
       if (!group.matches(url)) continue;
       
-      // Replace title
-      //doc.title = this.replaceString(doc.title);
-      doc.title = group.replace(doc.title);
-      
-      // selection string possibilities
-      /* //text()[name(parent::*)!='script']  :( name can be upper or lower */
-      /* ... empty(index-of(('style'),lower-case(name(parent::*))))  :( functions not supported */
-      /* //body//text()[string-length(normalize-space())>0] */
-      
-      // TODO any other xml document won't be replaced
-      
-      // Replace text nodes
-      var textNodesXpath = "/html/head/title/text()"
-                         + "|/html/body//div/text()"
-                         + "|/html/body//span/text()"
-                         + "|/html/body//h1/text()"
-                         + "|/html/body//h2/text()"
-                         + "|/html/body//h3/text()"
-                         + "|/html/body//h4/text()"
-                         + "|/html/body//h5/text()"
-                         + "|/html/body//h6/text()"
-                         + "|/html/body//address/text()"
-                         + "|/html/body//bdo/text()"
-                         + "|/html/body//em/text()"
-                         + "|/html/body//strong/text()"
-                         + "|/html/body//dfn/text()"
-                         + "|/html/body//code/text()"
-                         + "|/html/body//samp/text()"
-                         + "|/html/body//kbd/text()"
-                         + "|/html/body//var/text()"
-                         + "|/html/body//cite/text()"
-                         + "|/html/body//abbr/text()"
-                         + "|/html/body//acronym/text()"
-                         + "|/html/body//q/text()"
-                         + "|/html/body//sub/text()"
-                         + "|/html/body//sup/text()"
-                         + "|/html/body//p/text()"
-                         + "|/html/body//pre/text()"
-                         + "|/html/body//ins/text()"
-                         + "|/html/body//del/text()"
-                         + "|/html/body//li/text()"
-                         + "|/html/body//dt/text()"
-                         + "|/html/body//dd/text()"
-                         + "|/html/body//caption/text()"
-                         + "|/html/body//th/text()"
-                         + "|/html/body//td/text()"
-                         + "|/html/body//a/text()"
-                         + "|/html/body//object/text()"
-                         + "|/html/body//tt/text()"
-                         + "|/html/body//i/text()"
-                         + "|/html/body//b/text()"
-                         + "|/html/body//big/text()"
-                         + "|/html/body//small/text()"
-                         + "|/html/body//noframes/text()"
-                         + "|/html/body//iframe/text()"
-                         + "|/html/body//button/text()"
-                         + "|/html/body//option/text()"
-                         + "|/html/body//textarea/text()"
-                         + "|/html/body//label/text()"
-                         + "|/html/body//fieldset/text()"
-                         + "|/html/body//legend/text()"
-                         + "|/html/body//font/text()";
-      var textNodes = doc.evaluate(textNodesXpath, doc, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-      var nTextNodes = textNodes.snapshotLength;
-      for (var i = 0; i < nTextNodes; i++) {
-        var textNode = textNodes.snapshotItem(i);
-        //textNode.textContent = this.replaceString(textNode.textContent);
-        textNode.textContent = group.replace(textNode.textContent);
-      }
-      
-      // Replace nodes with a "value" property
-      var valueNodesXpath = "/html/body//input[@type='text']"
-                          + "|/html/body//textarea"
-                          + "|/html/body//@abbr"
-                          + "|/html/body//@abbr"
-                          + "|/html/body//@alt"
-                          + "|/html/body//@label"
-                          + "|/html/body//@standby"
-                          + "|/html/body//@summary"
-                          + "|/html/body//@title"
-                          + "|/html/body//input[@type!='hidden']/@value"
-                          + "|/html/body//option/@value"
-                          + "|/html/body//button/@value";
-      if (foxreplaceIO.loadReplaceUrls()) {
-        valueNodesXpath += "|/html/body//a/@href"
-                         + "|/html/body//img/@src";
-      }
-      var valueNodes = doc.evaluate(valueNodesXpath, doc, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-      var nValueNodes = valueNodes.snapshotLength;
-      for (var i = 0; i < nValueNodes; i++) {
-        var valueNode = valueNodes.snapshotItem(i);
-        valueNode.value = group.replace(valueNode.value);
-      }
+      if (group.html) this.replaceHtml(doc, group);
+      else this.replaceText(doc, group);
     }
+  },
+  
+  /**
+   * Applies substitutions from aGroup to aDocument on text.
+   */
+  replaceText: function(aDocument, aGroup) {
+    // Replace title
+    aDocument.title = aGroup.replace(aDocument.title);
+    
+    // selection string possibilities
+    /* //text()[name(parent::*)!='script']  :( name can be upper or lower */
+    /* ... empty(index-of(('style'),lower-case(name(parent::*))))  :( functions not supported */
+    /* //body//text()[string-length(normalize-space())>0] */
+    
+    // TODO any other xml document won't be replaced
+    
+    // Replace text nodes
+    var textNodesXpath = "/html/head/title/text()"
+                       + "|/html/body//div/text()"
+                       + "|/html/body//span/text()"
+                       + "|/html/body//h1/text()"
+                       + "|/html/body//h2/text()"
+                       + "|/html/body//h3/text()"
+                       + "|/html/body//h4/text()"
+                       + "|/html/body//h5/text()"
+                       + "|/html/body//h6/text()"
+                       + "|/html/body//address/text()"
+                       + "|/html/body//bdo/text()"
+                       + "|/html/body//em/text()"
+                       + "|/html/body//strong/text()"
+                       + "|/html/body//dfn/text()"
+                       + "|/html/body//code/text()"
+                       + "|/html/body//samp/text()"
+                       + "|/html/body//kbd/text()"
+                       + "|/html/body//var/text()"
+                       + "|/html/body//cite/text()"
+                       + "|/html/body//abbr/text()"
+                       + "|/html/body//acronym/text()"
+                       + "|/html/body//q/text()"
+                       + "|/html/body//sub/text()"
+                       + "|/html/body//sup/text()"
+                       + "|/html/body//p/text()"
+                       + "|/html/body//pre/text()"
+                       + "|/html/body//ins/text()"
+                       + "|/html/body//del/text()"
+                       + "|/html/body//li/text()"
+                       + "|/html/body//dt/text()"
+                       + "|/html/body//dd/text()"
+                       + "|/html/body//caption/text()"
+                       + "|/html/body//th/text()"
+                       + "|/html/body//td/text()"
+                       + "|/html/body//a/text()"
+                       + "|/html/body//object/text()"
+                       + "|/html/body//tt/text()"
+                       + "|/html/body//i/text()"
+                       + "|/html/body//b/text()"
+                       + "|/html/body//big/text()"
+                       + "|/html/body//small/text()"
+                       + "|/html/body//noframes/text()"
+                       + "|/html/body//iframe/text()"
+                       + "|/html/body//button/text()"
+                       + "|/html/body//option/text()"
+                       + "|/html/body//textarea/text()"
+                       + "|/html/body//label/text()"
+                       + "|/html/body//fieldset/text()"
+                       + "|/html/body//legend/text()"
+                       + "|/html/body//font/text()";
+    var textNodes = aDocument.evaluate(textNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+    var nTextNodes = textNodes.snapshotLength;
+    for (var i = 0; i < nTextNodes; i++) {
+      var textNode = textNodes.snapshotItem(i);
+      textNode.textContent = aGroup.replace(textNode.textContent);
+    }
+    
+    // Replace nodes with a "value" property
+    var valueNodesXpath = "/html/body//input[@type='text']"
+                        + "|/html/body//textarea"
+                        + "|/html/body//@abbr"
+                        + "|/html/body//@abbr"
+                        + "|/html/body//@alt"
+                        + "|/html/body//@label"
+                        + "|/html/body//@standby"
+                        + "|/html/body//@summary"
+                        + "|/html/body//@title"
+                        + "|/html/body//input[@type!='hidden']/@value"
+                        + "|/html/body//option/@value"
+                        + "|/html/body//button/@value";
+    if (foxreplaceIO.loadReplaceUrls()) {
+      valueNodesXpath += "|/html/body//a/@href"
+                       + "|/html/body//img/@src";
+    }
+    var valueNodes = aDocument.evaluate(valueNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+    var nValueNodes = valueNodes.snapshotLength;
+    for (var i = 0; i < nValueNodes; i++) {
+      var valueNode = valueNodes.snapshotItem(i);
+      valueNode.value = aGroup.replace(valueNode.value);
+    }
+  },
+  
+  /**
+   * Applies substitutions from aGroup to aDocument on HTML.
+   */
+  replaceHtml: function(aDocument, aGroup) {
+    var body = aDocument.evaluate("/html/body", aDocument, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+    body.singleNodeValue.innerHTML = aGroup.replace(body.singleNodeValue.innerHTML);
   }
   
 };

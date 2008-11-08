@@ -46,3 +46,5 @@
 <!ENTITY inputTypeHeader "Tipus">
 <!ENTITY outputStringHeader "Amb">
 <!ENTITY caseSensitiveHeader "Distingeix entre majúscules i minúscules">
+<!ENTITY html.label "Substitueix l'HTML">
+<!ENTITY html.accesskey "H">
