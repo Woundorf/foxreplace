@@ -46,11 +46,11 @@
     <content onfocus="this.focus();">
       <xul:toolbarbutton anonid="button" class="inputTextBoxButton" type="menu">
         <xul:menupopup inherits="position=menuposition">
-          <xul:menuitem class="menuitem-iconic inputTextBoxSelectorMenuItem" anonid="itemText" label="&text;"
+          <xul:menuitem class="menuitem-iconic inputTextBoxButtonMenuItem" anonid="itemText" label="&text;"
                         oncommand="document.getBindingParent(this).inputType=FxRSubstitution.prototype.INPUT_TEXT;"/>
-          <xul:menuitem class="menuitem-iconic inputTextBoxSelectorMenuItem" anonid="itemWholeWords" label="&wholeWords;"
+          <xul:menuitem class="menuitem-iconic inputTextBoxButtonMenuItem" anonid="itemWholeWords" label="&wholeWords;"
                         oncommand="document.getBindingParent(this).inputType=FxRSubstitution.prototype.INPUT_WHOLE_WORDS;"/>
-          <xul:menuitem class="menuitem-iconic inputTextBoxSelectorMenuItem" anonid="itemRegExp" label="&regExp;"
+          <xul:menuitem class="menuitem-iconic inputTextBoxButtonMenuItem" anonid="itemRegExp" label="&regExp;"
                         oncommand="document.getBindingParent(this).inputType=FxRSubstitution.prototype.INPUT_REG_EXP;"/>
         </xul:menupopup>
       </xul:toolbarbutton>
