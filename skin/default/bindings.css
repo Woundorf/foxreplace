@@ -1,61 +1,38 @@
-.inputTextBoxSelector {
-  -moz-appearance: none;
-  width: 20px;
-  height: 20px;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  -moz-margin-start: 4px; /* margin-left */
-  -moz-margin-end: -1px;  /* margin-right */
-  /*padding: 0;*/
-  border: 1px solid ThreeDDarkShadow;
-}
-
-.inputTextBoxSelectorImage {
-  width: 16px;
-  height: 16px;
+.inputTextBoxButton {
   list-style-image: url("chrome://foxreplace/skin/inputtextbox-icons.png");
-  /*margin: 0;*/
+  -moz-user-focus: ignore;
 }
 
-.inputTextBoxSelectorDropmarker {
-  list-style-image: url("chrome://global/skin/arrow/arrow-dn.gif");
-  /*margin: 0;*/
-}
-
-.inputTextBoxSelectorMenuItem {
-  list-style-image: url("chrome://foxreplace/skin/inputtextbox-icons.png");
-}
-
-.inputTextBoxSelectorImage[inputtype="0"], .inputTextBoxSelectorMenuItem[anonid="itemText"] {
+.inputTextBoxButton[inputtype="0"] {
   -moz-image-region: rect(0px, 16px, 16px, 0px);
 }
 
-.inputTextBoxSelectorImage[inputtype="1"], .inputTextBoxSelectorMenuItem[anonid="itemWholeWords"] {
+.inputTextBoxButton[inputtype="1"] {
   -moz-image-region: rect(0px, 32px, 16px, 16px);
 }
 
-.inputTextBoxSelectorImage[inputtype="2"], .inputTextBoxSelectorMenuItem[anonid="itemRegExp"] {
+.inputTextBoxButton[inputtype="2"] {
   -moz-image-region: rect(0px, 48px, 16px, 32px);
+}
+
+.inputTextBoxHBox {
+  -moz-appearance: textfield;
 }
 
 .inputTextBox {
   -moz-appearance: none;
-  -moz-margin-start: 0; /* margin-left */
-  border-width: 1px;
-  -moz-border-top-colors: ThreeDDarkShadow;
-  -moz-border-bottom-colors: ThreeDDarkShadow;
-  -moz-border-left-colors: ThreeDDarkShadow;
-  -moz-border-right-colors: ThreeDDarkShadow;
+  border: none;
+  margin: 0;
 }
 
-.inputTextBox[inputtype="0"], .inputTextBox[inputtype="0"] .textbox-input {
+.inputTextBox[inputtype="0"] {
   background-color: white;
 }
 
-.inputTextBox[inputtype="1"], .inputTextBox[inputtype="1"] .textbox-input {
+.inputTextBox[inputtype="1"] {
   background-color: lime;
 }
 
-.inputTextBox[inputtype="2"], .inputTextBox[inputtype="2"] .textbox-input {
+.inputTextBox[inputtype="2"] {
   background-color: yellow;
 }

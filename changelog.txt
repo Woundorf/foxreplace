@@ -1,6 +1,7 @@
 * Editable URLs and substitutions.
 * No methods added to prototypes of standard global objects (to avoid possible
   conflicts).
+* Revised binding for input textbox.
 * String changes:
   - substitutiongroupeditor.dtd: new: editUrlButton.label,
     editUrlButton.accesskey, okEditUrlButton.label, okEditUrlButton.accesskey,
