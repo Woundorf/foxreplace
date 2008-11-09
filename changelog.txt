@@ -6,6 +6,7 @@
 * No methods added to prototypes of standard global objects (to avoid possible
   conflicts).
 * Revised binding for input textbox.
+* Compatibility with Firefox 3.1b1.
 * String changes:
   - foxreplace.dtd: new: replaceBarHtml.label, replaceBarHtml.accesskey.
   - options.dtd: new: htmlHeader.
