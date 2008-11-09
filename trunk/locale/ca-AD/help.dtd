@@ -39,6 +39,10 @@
          una URL del grup si la URL del grup és una part de la URL de la pàgina. Podeu fer servir els caràcters especials &quot;*&quot; perquè
          coincideixi amb 0 o més caràcters qualssevol i &quot;|&quot; perquè coincideixi amb l'inici o el final de la URL. Si la llista d'URLs és
          buida, les substitucions s'apliquen a qualsevol pàgina. La llista de substitucions ha de tenir com a mínim un element.">
+<!ENTITY replaceHtml "Substituir HTML">
+<!ENTITY replaceHtml.p "Normalment les substitucions s'apliquen només sobre el text, però també hi ha l'opció de fer-ho sobre el codi HTML de la
+         pàgina. Això permet modificar el format o l'estructura de la pàgina. A la llista de substitucions es pot activar o desactivar aquesta
+         opció per cada grup.">
 <!ENTITY autoReplace "Reemplaça automàticament en carregar una pàgina">
 <!ENTITY autoReplace.p "Aquesta opció es pot activar o desactivar. Quan està activa, s'aplica la llista de substitucions automàticament quan es
          carrega una pàgina, aplicant-se les substitucions dels grups amb una URL coincident. D'aquesta manera l'extensió pot actuar com un
@@ -46,7 +50,7 @@
 <!ENTITY replaceUrls "Reemplaça les URLs">
 <!ENTITY replaceUrls.p "Aquesta opció està desactivada per defecte. Si s'activa les substitucions també s'apliquen sobre les URLs que hi hagi a la
          pàgina (enllaços, fonts d'imatges, etc.), de manera que pot canviar el comportament de la pàgina. Utilitzeu-la sota la vostra pròpia
-         responsabilitat.">
+         responsabilitat. No té cap efecte quan les substitucions són a l'HTML, perquè llavors les URLs poden ser modificades sempre.">
 <!ENTITY newGui "Nous elements dels menús i barra d'eines">
 <!ENTITY newGui.edit "Edita">
 <!ENTITY newGui.edit.replace "Reemplaça... (Maj+F2)">
