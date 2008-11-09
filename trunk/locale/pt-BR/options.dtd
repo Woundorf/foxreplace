@@ -1,21 +1,18 @@
 <!ENTITY prefwindow.title "Opções do FoxReplace">
 <!ENTITY mainPane.title "Menu principal">
 <!ENTITY description "Entre com a lista de substituição. Substituições serão feitos na ordem que forem aparecendo na lista.">
-<!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Substituir">
 <!ENTITY outputStringHeader "Com">
 <!ENTITY addButton.label "Adicionar">
 <!ENTITY addButton.accesskey "A">
-<!ENTITY editButton.label "Edit">
+<!ENTITY editButton.label "Editar">
 <!ENTITY editButton.accesskey "E">
 <!ENTITY deleteButton.label "Excluir">
 <!ENTITY deleteButton.accesskey "l">
 <!ENTITY clearButton.label "Limpar">
 <!ENTITY clearButton.accesskey "C">
-<!ENTITY moveUpButton.label "Move up">
-<!ENTITY moveUpButton.accesskey "u">
-<!ENTITY moveDownButton.label "Move down">
-<!ENTITY moveDownButton.accesskey "o">
+<!ENTITY moveUpButton.label "Mover para cima">
+<!ENTITY moveDownButton.label "Mover para baixo">
 <!ENTITY importButton.label "Importar">
 <!ENTITY importButton.accesskey "I">
 <!ENTITY exportButton.label "Exportar">

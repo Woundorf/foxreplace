@@ -2,21 +2,14 @@
 <!ENTITY mainPane.title "Main">
 <!ENTITY description "Enter the substitution list. Substitutions will be done in the order in which they appear on
          the list.">
-<!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Replace">
 <!ENTITY outputStringHeader "With">
 <!ENTITY addButton.label "Add">
 <!ENTITY addButton.accesskey "A">
-<!ENTITY editButton.label "Edit">
-<!ENTITY editButton.accesskey "E">
 <!ENTITY deleteButton.label "Delete">
 <!ENTITY deleteButton.accesskey "l">
 <!ENTITY clearButton.label "Clear">
 <!ENTITY clearButton.accesskey "C">
-<!ENTITY moveUpButton.label "Move up">
-<!ENTITY moveUpButton.accesskey "u">
-<!ENTITY moveDownButton.label "Move down">
-<!ENTITY moveDownButton.accesskey "o">
 <!ENTITY importButton.label "Import">
 <!ENTITY importButton.accesskey "I">
 <!ENTITY exportButton.label "Export">
