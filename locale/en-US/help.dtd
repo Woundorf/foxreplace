@@ -39,12 +39,16 @@
          URL of the group is part of the URL of the page. You may use special characters &quot;*&quot; to match any 0 or more characters and
          &quot;|&quot; to match the beginning or the end of the URL. If the URL list is empty, the substitutions are applied to any page. The
          substitution list must have at least one item.">
+<!ENTITY replaceHtml "Replace HTML">
+<!ENTITY replaceHtml.p "Substitutions are usually applied only to the text, but there's also the option of doing it to the HTML code of the page.
+         This allows to modify the format or the page structure. You can set or unset this option for every group in the substitution list.">
 <!ENTITY autoReplace "Auto-replace on page load">
 <!ENTITY autoReplace.p "This option can be activated or deactivated. When it's on, the substitution list is applied automatically when a page is
          loaded, applying the substitutions of the groups with a matching URL. This way the extension can work as a filter for the pages you want.">
 <!ENTITY replaceUrls "Replace URLs">
 <!ENTITY replaceUrls.p "This option is off by default. It it's on, substitutions are also applied to the URLs in the page (links, image sources,
-         etc.), so it may change the behaviour of the page. Use it under your own responsibility.">
+         etc.), so it may change the behaviour of the page. Use it under your own responsibility. This has no effect in HTML substitutions, because
+         then URLs can be modified always.">
 <!ENTITY newGui "New menu and toolbar elements">
 <!ENTITY newGui.edit "Edit">
 <!ENTITY newGui.edit.replace "Replace... (Shift+F2)">

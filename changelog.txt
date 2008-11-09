@@ -2,17 +2,21 @@
 * Editable URLs and substitutions.
 * Edit, delete and move buttons in options dialog disabled when there is no item
   selected.
+* Updated help.
 * No methods added to prototypes of standard global objects (to avoid possible
   conflicts).
 * Revised binding for input textbox.
 * String changes:
+  - foxreplace.dtd: new: replaceBarHtml.label, replaceBarHtml.accesskey.
+  - options.dtd: new: htmlHeader.
   - substitutiongroupeditor.dtd: new: editUrlButton.label,
     editUrlButton.accesskey, okEditUrlButton.label, okEditUrlButton.accesskey,
     cancelEditUrlButton.label, cancelEditUrlButton.accesskey,
     editSubstitutionButton.label, editSubstitutionButton.accesskey,
     okEditSubstitutionButton.label, okEditSubstitutionButton.accesskey,
-    cancelEditSubstitutionButton.label, cancelEditSubstitutionButton.accesskey;
-    other accesskeys changed.
+    cancelEditSubstitutionButton.label, cancelEditSubstitutionButton.accesskey,
+    html.label, html.accesskey; other accesskeys changed.
+  - help.dtd: new: replaceHtml, replaceHtml.p; changed: replaceUrls.p.
 
 v0.8.0 (20-9-2008)
 * Whole words option integrated in the XBL input textbox.
