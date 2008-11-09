@@ -5,35 +5,16 @@ Zamienniki są zastosowywane do &lt;b&gt;całych&lt;/b&gt; treści stron (w tej 
 <!ENTITY substitution "Zastępowanie">
 <!ENTITY substitution.p "Proces zastępowania polega na zamianie kolejnych wyrażeń z listy tekstów do zastąpienia na ich zamienniki. Rozszerzenie pozwala zadecydować czy wielkość znaków ma znaczenie.">
 <!ENTITY substitution.inputString "Tekst do zastąpienia: ciąg znaków, który ma zostać zastąpiony. Może być przedstawiony w postaci &lt;a href=&apos;http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions&apos;&gt;wyrażenia regularnego&lt;/a&gt;, lecz fakt ten musi zostać odnotowany poprzez zaznaczenie stosownego pola.">
-<!ENTITY substitution.inputString.text "Text: it&apos;s interpreted as a character string without any particularities.">
-<!ENTITY substitution.inputString.wholeWords "Whole words: it&apos;s interpreted as one or more whole words. For example, &quot;active&quot; wouldn&apos;t
-         match &quot;interactive&quot; (it would match if it was normal text).">
-<!ENTITY substitution.inputString.regExp.0 "Regular expression: it&apos;s interpreted as a ">
-<!ENTITY regExpLink "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions">
-<!ENTITY substitution.inputString.regExp.1 "regular expression">
-<!ENTITY substitution.inputString.regExp.2 ". If it isn&apos;t valid, a syntax error will be shown.">
 <!ENTITY substitution.outputString "Zamiennik: ciąg znaków, którym zastąpiony ma zostać dany tekst. Do jego określenia może zostać użyty jeden z poniższych schematów:">
 <!ENTITY substitution.table.summary "Schematy dla zamienników">
 <!ENTITY substitution.table.0 "Wstawia znak &quot;$&quot;.">
 <!ENTITY substitution.table.1 "Wstawia tekst zamiennika.">
 <!ENTITY substitution.table.2 "Wstawia tekst poprzedzający dany ciąg znaków zawarty w tym samym bloku tekstu.">
 <!ENTITY substitution.table.3 "Wstawia tekst następujący po danym ciąg znaków zawarty w tym samym bloku tekstu.">
-<!ENTITY substitution.table.4.0 "If the input string is a regular expression, and ">
-<!ENTITY substitution.table.4.1 " a decimal integer number between 1 and 99 (included), inserts the ">
-<!ENTITY substitution.table.4.2 "th found substring.">
 <!ENTITY substitutionList "Lista zamienników">
 <!ENTITY substitutionList.p "FoxReplace pozwala na zarządzanie listą zamienników, które możesz dodawać i edytować w każdej chwili w oknie opcji rozszerzenia. Możesz zastąpić tekst na stronie kiedy tylko chcesz poprzez wciśnięcie klawisza F2, przycisku na pasku narzędzi lub wybranie odpowiedniego wpisu z menu. Teksty na stronie są zastępowane zgodnie z ich kolejnością na liście. Możesz wykonać operację zastępowania na jednej stronie tyle razy, ile tylko chcesz. Za każdym razem, kiedy to zrobisz, zastąpiona zostanie aktualna, a nie pierwotna zawartość strony.">
-<!ENTITY substitutionGroup "Substitution group">
-<!ENTITY substitutionGroup.p "It&apos;s formed by an URL list and a substitution list. The substitutions are applied to a page if its address matches
-         an URL in the list, and they are applied in the order they appear. The URL of a page is considered to match an URL of the group if the
-         URL of the group is part of the URL of the page. You may use special characters &quot;*&quot; to match any 0 or more characters and
-         &quot;|&quot; to match the beginning or the end of the URL. If the URL list is empty, the substitutions are applied to any page. The
-         substitution list must have at least one item.">
 <!ENTITY autoReplace "Automatycznie zastępuj tekst na stronach podczas ich wczytywania">
 <!ENTITY autoReplace.p "Tę opcję można włączyć lub wyłączyć. Kiedy jest ona włączona tekst na stronach zostanie automatycznie zastąpiony zgodnie z listą wyrażeń, dzięki czemu możesz korzystać z rozszerzenia jak z filtra: możesz sprawić, że znikną słowa, za którymi nie przepadasz (lub których pisownia Ci się nie podoba) zastępując je bardziej odpowiednimi. Można użyć jej również do zrobienia dowcipu ;)">
-<!ENTITY replaceUrls "Replace URLs">
-<!ENTITY replaceUrls.p "This option is off by default. It it&apos;s on, substitutions are also applied to the URLs in the page (links, image sources,
-         etc.), so it may change the behaviour of the page. Use it under your own responsibility.">
 <!ENTITY newGui "Nowe menu i elementy paska narzędzi">
 <!ENTITY newGui.edit "Edycja">
 <!ENTITY newGui.edit.replace "Zastąp... (Shift+F2)">
@@ -54,6 +35,3 @@ Zamienniki są zastosowywane do &lt;b&gt;całych&lt;/b&gt; treści stron (w tej 
 <!ENTITY newGui.contextMenu "Menu kontekstowe">
 <!ENTITY newGui.contextMenu.replace "Zastąp tekst na stronie zgodnie z listą wyrażeń (FoxReplace) (F2)">
 <!ENTITY newGui.contextMenu.replace.d "Jak wyżej.">
-<!ENTITY newGui.replaceBar "Replace bar">
-<!ENTITY newGui.replaceBar.0 "Appears below the find bar.">
-<!ENTITY newGui.replaceBar.1 "Lets you define a substitution and apply it instantly.">

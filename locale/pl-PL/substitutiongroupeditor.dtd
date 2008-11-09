@@ -1,36 +1,31 @@
-<!ENTITY title "Substitution group editor">
-<!ENTITY description "Enter the URL list and the substitution list. The URL list can be empty, and then the substitutions will be applied to any
-         page; otherwise they will be applied only when one of the URLs matches he page address. You may use &quot;*&quot; to match any 0 or more
-         characters (not needed at the beginning and the end) and &quot;|&quot; to match the beginning or the end of the URL. For example,
-         &quot;http://*.example.com/|&quot; would match &quot;http://www.example.com/&quot; but not &quot;http://www.example.com/whatever&quot;. The
-         substitution list must have at least one substitution.">
-<!ENTITY urls "URLs">
-<!ENTITY url.label "URL">
-<!ENTITY url.accesskey "U">
-<!ENTITY addUrlButton.label "Add">
-<!ENTITY addUrlButton.accesskey "A">
-<!ENTITY deleteUrlButton.label "Delete">
-<!ENTITY deleteUrlButton.accesskey "e">
-<!ENTITY clearUrlsButton.label "Clear">
-<!ENTITY clearUrlsButton.accesskey "C">
-<!ENTITY substitutions "Substitutions">
-<!ENTITY inputString.label "Replace">
-<!ENTITY inputString.accesskey "R">
-<!ENTITY outputString.label "with">
-<!ENTITY outputString.accesskey "w">
-<!ENTITY caseSensitive.label "Match case">
-<!ENTITY caseSensitive.accesskey "M">
-<!ENTITY addSubstitutionButton.label "Add">
-<!ENTITY addSubstitutionButton.accesskey "d">
-<!ENTITY moveUpSubstitutionButton.label "Move up">
-<!ENTITY moveUpSubstitutionButton.accesskey "p">
-<!ENTITY moveDownSubstitutionButton.label "Move down">
-<!ENTITY moveDownSubstitutionButton.accesskey "o">
-<!ENTITY deleteSubstitutionButton.label "Delete">
-<!ENTITY deleteSubstitutionButton.accesskey "t">
-<!ENTITY clearSubstitutionsButton.label "Clear">
-<!ENTITY clearSubstitutionsButton.accesskey "l">
-<!ENTITY inputStringHeader "Replace">
-<!ENTITY inputTypeHeader "Type">
-<!ENTITY outputStringHeader "With">
-<!ENTITY caseSensitiveHeader "Match case">
+<!ENTITY title "Edytor grup zamienników">
+<!ENTITY urls "Adresy URL">
+<!ENTITY url.label "Adres URL">
+<!ENTITY url.accesskey "A">
+<!ENTITY addUrlButton.label "Dodaj">
+<!ENTITY addUrlButton.accesskey "D">
+<!ENTITY deleteUrlButton.label "Usuń">
+<!ENTITY deleteUrlButton.accesskey "U">
+<!ENTITY clearUrlsButton.label "Wyczyść">
+<!ENTITY clearUrlsButton.accesskey "W">
+<!ENTITY substitutions "Zamienniki">
+<!ENTITY inputString.label "Zastąp">
+<!ENTITY inputString.accesskey "Z">
+<!ENTITY outputString.label "tekstem">
+<!ENTITY outputString.accesskey "t">
+<!ENTITY caseSensitive.label "Rozróżniaj wielkość znaków">
+<!ENTITY caseSensitive.accesskey "R">
+<!ENTITY addSubstitutionButton.label "Dodaj">
+<!ENTITY addSubstitutionButton.accesskey "o">
+<!ENTITY moveUpSubstitutionButton.label "Przenieś w górę">
+<!ENTITY moveUpSubstitutionButton.accesskey "g">
+<!ENTITY moveDownSubstitutionButton.label "Przenieś w dół">
+<!ENTITY moveDownSubstitutionButton.accesskey "P">
+<!ENTITY deleteSubstitutionButton.label "Usuń">
+<!ENTITY deleteSubstitutionButton.accesskey "s">
+<!ENTITY clearSubstitutionsButton.label "Wyczyść">
+<!ENTITY clearSubstitutionsButton.accesskey "y">
+<!ENTITY inputStringHeader "Zastąp">
+<!ENTITY inputTypeHeader "Typ">
+<!ENTITY outputStringHeader "tekstem">
+<!ENTITY caseSensitiveHeader "Rozróżniaj wielkość znaków">
