@@ -21,5 +21,7 @@
 <!ENTITY replaceBarOutputString.accesskey "p">
 <!ENTITY replaceBarCaseSensitive.label "Sensible à la casse">
 <!ENTITY replaceBarCaseSensitive.accesskey "C">
+<!ENTITY replaceBarHtml.label "HTML">
+<!ENTITY replaceBarHtml.accesskey "H">
 <!ENTITY replaceBarReplace.label "Remplacer">
 <!ENTITY replaceBarReplace.accesskey "p">

@@ -21,5 +21,7 @@
 <!ENTITY replaceBarOutputString.accesskey "w">
 <!ENTITY replaceBarCaseSensitive.label "Diferenciar maiúsc./minúsc.">
 <!ENTITY replaceBarCaseSensitive.accesskey "M">
+<!ENTITY replaceBarHtml.label "HTML">
+<!ENTITY replaceBarHtml.accesskey "H">
 <!ENTITY replaceBarReplace.label "Substituir">
 <!ENTITY replaceBarReplace.accesskey "p">

@@ -17,7 +17,9 @@
     okEditSubstitutionButton.label, okEditSubstitutionButton.accesskey,
     cancelEditSubstitutionButton.label, cancelEditSubstitutionButton.accesskey,
     html.label, html.accesskey; other accesskeys changed.
-  - help.dtd: new: replaceHtml, replaceHtml.p; changed: replaceUrls.p.
+  - help.dtd: new: replaceHtml, replaceHtml.p; changed: replaceUrls.p,
+    substitution.inputString.regExp.0, substitution.table.4.0,
+    substitution.table.4.1.
 
 v0.8.0 (20-9-2008)
 * Whole words option integrated in the XBL input textbox.
