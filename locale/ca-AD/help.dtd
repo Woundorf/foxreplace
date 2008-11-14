@@ -11,7 +11,7 @@
 <!ENTITY substitution.inputString.text "Text: s'interpreta com una cadena de caràcters sense més particularitats.">
 <!ENTITY substitution.inputString.wholeWords "Paraules senceres: s'interpreta com una o més paraules senceres. Per exemple, &quot;actiu&quot; no
          coincidiria amb &quot;interactiu&quot; (sí que ho faria si fos text normal).">
-<!ENTITY substitution.inputString.regExp.0 "Expressió regular: s'interpreta com una ">
+<!ENTITY substitution.inputString.regExp.0 "Expressió regular: s'interpreta com una">
 <!ENTITY regExpLink
          "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions">
 <!ENTITY substitution.inputString.regExp.1 "expressió regular">
@@ -22,8 +22,8 @@
 <!ENTITY substitution.table.1 "Insereix la cadena d'entrada.">
 <!ENTITY substitution.table.2 "Insereix el text d'abans de la cadena d'entrada dins del mateix bloc.">
 <!ENTITY substitution.table.3 "Insereix el text de després de la cadena d'entrada dins del mateix bloc.">
-<!ENTITY substitution.table.4.0 "Si la cadena d'entrada és una expressió regular, i ">
-<!ENTITY substitution.table.4.1 " un nombre enter decimal entre 1 i 99 (inclosos), insereix la ">
+<!ENTITY substitution.table.4.0 "Si la cadena d'entrada és una expressió regular, i">
+<!ENTITY substitution.table.4.1 "un nombre enter decimal entre 1 i 99 (inclosos), insereix la">
 <!ENTITY substitution.table.4.2 "-èssima subcadena trobada.">
 <!ENTITY substitutionList "Llista de substitucions">
 <!ENTITY substitutionList.p "FoxReplace guarda una llista de substitucions que podeu definir i modificar en qualsevol moment des de la finestra

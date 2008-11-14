@@ -4,6 +4,7 @@
 <!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Remplacer">
 <!ENTITY outputStringHeader "Par">
+<!ENTITY htmlHeader "HTML">
 <!ENTITY addButton.label "Ajouter">
 <!ENTITY addButton.accesskey "A">
 <!ENTITY editButton.label "Éditer">

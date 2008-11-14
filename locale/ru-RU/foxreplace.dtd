@@ -21,5 +21,7 @@
 <!ENTITY replaceBarOutputString.accesskey "с">
 <!ENTITY replaceBarCaseSensitive.label "С учётом регистра">
 <!ENTITY replaceBarCaseSensitive.accesskey "ч">
+<!ENTITY replaceBarHtml.label "HTML">
+<!ENTITY replaceBarHtml.accesskey "H">
 <!ENTITY replaceBarReplace.label "Замена">
 <!ENTITY replaceBarReplace.accesskey "м">

@@ -1,10 +1,16 @@
 <!ENTITY title "Редактор групп замещений">
-<!ENTITY description "Введите список адресов и список замещений. Список адресов может быть пустым и тогда замещения будут применяться к любой странице. Список замещений должен содержать хотя бы одно замещение.">
+<!ENTITY description "Введите список адресов и список замещений. Список адресов может быть пустым — тогда замещения будут применяться к любой странице; иначе они будут применены только в том случае, когда один из адресов будет совпадать с адресом страницы. При написании адресов можно использовать шаблоны. Символ «*» обозначает 0 или нескольких любых символов (бессмысленно использовать в начале или в конце адреса). Символ «|» служит для указания начала или конца адреса. Например, шаблону «http://*.example.com/|» будет соответствовать адрес «http://www.example.com/», но не «http://www.example.com/whatever». Список замещений должен содержать хотя бы одно замещение.">
 <!ENTITY urls "Адреса">
 <!ENTITY url.label "Адрес">
 <!ENTITY url.accesskey "д">
 <!ENTITY addUrlButton.label "Добавить">
 <!ENTITY addUrlButton.accesskey "б">
+<!ENTITY editUrlButton.label "Изменить">
+<!ENTITY editUrlButton.accesskey "з">
+<!ENTITY okEditUrlButton.label "OK">
+<!ENTITY okEditUrlButton.accesskey "K">
+<!ENTITY cancelEditUrlButton.label "Отмена">
+<!ENTITY cancelEditUrlButton.accesskey "т">
 <!ENTITY deleteUrlButton.label "Удалить">
 <!ENTITY deleteUrlButton.accesskey "л">
 <!ENTITY clearUrlsButton.label "Очистить">
@@ -22,6 +28,12 @@
 <!ENTITY moveUpSubstitutionButton.accesskey "В">
 <!ENTITY moveDownSubstitutionButton.label "Ниже">
 <!ENTITY moveDownSubstitutionButton.accesskey "Н">
+<!ENTITY editSubstitutionButton.label "Изменить">
+<!ENTITY editSubstitutionButton.accesskey "м">
+<!ENTITY okEditSubstitutionButton.label "OK">
+<!ENTITY okEditSubstitutionButton.accesskey "K">
+<!ENTITY cancelEditSubstitutionButton.label "Отмена">
+<!ENTITY cancelEditSubstitutionButton.accesskey "н">
 <!ENTITY deleteSubstitutionButton.label "Удалить">
 <!ENTITY deleteSubstitutionButton.accesskey "л">
 <!ENTITY clearSubstitutionsButton.label "Очистить">
@@ -30,3 +42,5 @@
 <!ENTITY inputTypeHeader "Тип">
 <!ENTITY outputStringHeader "На">
 <!ENTITY caseSensitiveHeader "Только слова целиком">
+<!ENTITY html.label "Заменять HTML">
+<!ENTITY html.accesskey "H">

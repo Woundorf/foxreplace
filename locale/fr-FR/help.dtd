@@ -6,7 +6,7 @@
 <!ENTITY substitution.inputString "Texte à remplacer : le texte qui sera remplacé. Doit être défini. Peut être des 3 types suivants :">
 <!ENTITY substitution.inputString.text "Texte : interprété comme une chaîne de caractères sans aucune particularité.">
 <!ENTITY substitution.inputString.wholeWords "Mots entiers : interprété comme un ou plusieurs mots entiers. Par exemple : « actif » ne correspondra pas à « interactif » (mais en mode texte, la correspondance serait effective).">
-<!ENTITY substitution.inputString.regExp.0 "Expression régulière : interprétée comme une ">
+<!ENTITY substitution.inputString.regExp.0 "Expression régulière : interprétée comme une">
 <!ENTITY regExpLink "http://fr.wikipedia.org/wiki/Expression_rationnelle">
 <!ENTITY substitution.inputString.regExp.1 "expression régulière">
 <!ENTITY substitution.inputString.regExp.2 ". Une erreur de syntaxe s&apos;affichera si elle n&apos;est pas valide.">
@@ -17,12 +17,14 @@
 <!ENTITY substitution.table.2 "Insère le texte précédant le texte à remplacer dans le même bloc.">
 <!ENTITY substitution.table.3 "Insère le texte suivant le texte à remplacer dans le même bloc.">
 <!ENTITY substitution.table.4.0 "Si le texte à remplacer est une expression régulière et">
-<!ENTITY substitution.table.4.1 "un nombre entier décimal entre 1 et 99 (inclus), insère la ">
+<!ENTITY substitution.table.4.1 "un nombre entier décimal entre 1 et 99 (inclus), insère la">
 <!ENTITY substitution.table.4.2 "e sous-chaîne trouvée.">
 <!ENTITY substitutionList "Liste de substitution">
 <!ENTITY substitutionList.p "FoxReplace conserve une liste de substitution que vous pouvez définir et modifier à n&apos;importe quel moment à partir de la fenêtre des options FoxReplace. Vous pouvez appliquer ces substitutions en appuyant sur la touche F2, en cliquant sur le bouton de la barre d&apos;outils ou en activant une entrée de menu. Les substitutions se feront dans l&apos;ordre dans lequel elles apparaissent. Vous pouvez appliquer autant de fois que vous le voulez la liste de substitution sur la même page. Les substitutions se feront sur le contenu de la page courante, c -à-d. si vous appliquez une seconde fois la liste de substitution, cela se fera sur le résultat de la première substitution. On ne trouve pas directement les substitutions dans cette liste mais des groupes de substitution contenant une liste d&apos;adresses (URL) associées à une liste de substitution qui sont appliquées aux pages dont l&apos;adresse correspond à une des URL de la liste.">
 <!ENTITY substitutionGroup "Groupe de substitution">
 <!ENTITY substitutionGroup.p "Il est constitué d&apos;une liste d&apos;URLs et d&apos;une liste de substitution. Les substitutions sont appliquées lorsque l&apos;adresse de la page correspond à une URL de la liste et dans l&apos;ordre d&apos;apparition. L&apos;URL d&apos;une page est considérée comme correspondant à l&apos;URL d&apos;un groupe si l&apos;URL de ce groupe est contenue dans l&apos;URL de la page. Vous pouvez utiliser des caractères spéciaux « * » pour correspondance avec tout, 0 ou plusieurs caractères et « | » pour correspondance avec le début ou la fin de l&apos;URL. Si aucun élément n&apos;est présent dans la liste d&apos;URL, les substitutions seront appliquées à toutes les pages. La liste de substitution doit comporter au moins un élément.">
+<!ENTITY replaceHtml "Remplacer le code HTML">
+<!ENTITY replaceHtml.p "Les substitutions sont habituellement appliquées au texte, mais vous pouvez également opter pour la substitution de code HTML de la page. Cela permet de modifier le format ou la structure de la page. Vous pouvez activer ou désactiver cette option pour chaque groupe dans la liste de substitution.">
 <!ENTITY autoReplace "Remplacement automatique au chargement de la page">
 <!ENTITY autoReplace.p "Cette option peut être activée ou désactivée. Lorsqu&apos;elle est activée, la liste de substitution est appliquée automatiquement lors du chargement d&apos;une page, les substitutions des groupes dont l&apos;URL correspond seront appliquées. Ainsi, l&apos;extension pourra être utilisée en guise de filtre pour les pages que vous souhaitez assainir.">
 <!ENTITY replaceUrls "Remplacer les URLs">

@@ -5,6 +5,12 @@
 <!ENTITY url.accesskey "E">
 <!ENTITY addUrlButton.label "Adicionar">
 <!ENTITY addUrlButton.accesskey "A">
+<!ENTITY editUrlButton.label "Editar">
+<!ENTITY editUrlButton.accesskey "E">
+<!ENTITY okEditUrlButton.label "OK">
+<!ENTITY okEditUrlButton.accesskey "O">
+<!ENTITY cancelEditUrlButton.label "Cancelar">
+<!ENTITY cancelEditUrlButton.accesskey "n">
 <!ENTITY deleteUrlButton.label "Excluir">
 <!ENTITY deleteUrlButton.accesskey "x">
 <!ENTITY clearUrlsButton.label "Limpar">
@@ -13,12 +19,28 @@
 <!ENTITY inputString.label "Substituir">
 <!ENTITY inputString.accesskey "S">
 <!ENTITY outputString.label "com">
+<!ENTITY outputString.accesskey "m">
 <!ENTITY caseSensitive.label "Diferenciar maiúsc./minúsc.">
+<!ENTITY caseSensitive.accesskey "f">
 <!ENTITY addSubstitutionButton.label "Adicionar">
+<!ENTITY addSubstitutionButton.accesskey "d">
 <!ENTITY moveUpSubstitutionButton.label "Mover para cima">
+<!ENTITY moveUpSubstitutionButton.accesskey "v">
 <!ENTITY moveDownSubstitutionButton.label "Mover para baixo">
+<!ENTITY moveDownSubstitutionButton.accesskey "b">
+<!ENTITY editSubstitutionButton.label "Editar">
+<!ENTITY editSubstitutionButton.accesskey "i">
+<!ENTITY okEditSubstitutionButton.label "OK">
+<!ENTITY okEditSubstitutionButton.accesskey "O">
+<!ENTITY cancelEditSubstitutionButton.label "Cancelar">
+<!ENTITY cancelEditSubstitutionButton.accesskey "n">
 <!ENTITY deleteSubstitutionButton.label "Excluir">
+<!ENTITY deleteSubstitutionButton.accesskey "x">
 <!ENTITY clearSubstitutionsButton.label "Limpar">
+<!ENTITY clearSubstitutionsButton.accesskey "r">
 <!ENTITY inputStringHeader "Substituir">
 <!ENTITY inputTypeHeader "Tipo">
 <!ENTITY outputStringHeader "Com">
+<!ENTITY caseSensitiveHeader "Diferenciar maiúsc./minúsc.">
+<!ENTITY html.label "Substituir HTML">
+<!ENTITY html.accesskey "H">
