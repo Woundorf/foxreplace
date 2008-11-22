@@ -1,14 +1,22 @@
 <!ENTITY prefwindow.title "FoxReplace - opcje">
 <!ENTITY mainPane.title "Główne">
 <!ENTITY description "Wprowadź listę wyrażeń do zastąpienia. Operacje zastępowania będą przeprowadzane zgodnie z ich kolejnością na liście.">
+<!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Tekst do zastąpienia">
 <!ENTITY outputStringHeader "Tekst zastępujący">
+<!ENTITY htmlHeader "HTML">
 <!ENTITY addButton.label "Dodaj">
 <!ENTITY addButton.accesskey "D">
+<!ENTITY editButton.label "Edit">
+<!ENTITY editButton.accesskey "E">
 <!ENTITY deleteButton.label "Usuń">
 <!ENTITY deleteButton.accesskey "U">
 <!ENTITY clearButton.label "Wyczyść">
 <!ENTITY clearButton.accesskey "y">
+<!ENTITY moveUpButton.label "Move up">
+<!ENTITY moveUpButton.accesskey "u">
+<!ENTITY moveDownButton.label "Move down">
+<!ENTITY moveDownButton.accesskey "o">
 <!ENTITY importButton.label "Zaimportuj">
 <!ENTITY importButton.accesskey "I">
 <!ENTITY exportButton.label "Wyeksportuj">
