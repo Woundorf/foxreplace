@@ -1,3 +1,4 @@
+v0.9.0 (22-11-2008)
 * HTML substitutions.
 * Editable URLs and substitutions.
 * Edit, delete and move buttons in options dialog disabled when there is no item

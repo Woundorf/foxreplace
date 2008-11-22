@@ -26,13 +26,23 @@ Todas as substituições são sempre aplicados sobre &lt;b&gt;todo&lt;/b&gt; con
 <!ENTITY substitutionList.p "A extensão mantém uma lista de substituição que você pode definir e modificar a qualquer momento da janela de opções do FoxReplace. Você pode aplicar a lista de substituição quando você quiser apertando a tecla F2 ou clicando sobre o botão da barra de ferramentas ou ativando um menu de opção. Quando você fizer, substituições na lista serão aplicadas na ordem que eles aparecerem. Você pode aplicar a lista de substituição quantas vezes você quiser sobre a mesma página. Substitutions are done over the current content of the page, i.e. if you apply
          the substitution list a second time, it will be over the result of the first.">
 <!ENTITY substitutionGroup "Grupo de substituição">
+<!ENTITY substitutionGroup.p "It&apos;s formed by an URL list and a substitution list. The substitutions are applied to a page if its address matches
+         an URL in the list, and they are applied in the order they appear. The URL of a page is considered to match an URL of the group if the
+         URL of the group is part of the URL of the page. You may use special characters &quot;*&quot; to match any 0 or more characters and
+         &quot;|&quot; to match the beginning or the end of the URL. If the URL list is empty, the substitutions are applied to any page. The
+         substitution list must have at least one item.">
 <!ENTITY replaceHtml "Substituir HTML">
+<!ENTITY replaceHtml.p "Substitutions are usually applied only to the text, but there&apos;s also the option of doing it to the HTML code of the page.
+         This allows to modify the format or the page structure. You can set or unset this option for every group in the substitution list.">
 <!ENTITY autoReplace "Substituição automática ao carregar a página">
 <!ENTITY autoReplace.p "This option can be activated or deactivated. When it&apos;s on, the substitution list is
          applied automatically when a page is loaded. This way the extension can work as a filter: you can make
          disappear words that you don&apos;t like (or that you don&apos;t like how they are written) replacing them by more
          suitable ones. And with some imagination it can even be useful to make jokes ;)">
 <!ENTITY replaceUrls "Substituir Endereços">
+<!ENTITY replaceUrls.p "This option is off by default. It it&apos;s on, substitutions are also applied to the URLs in the page (links, image sources,
+         etc.), so it may change the behaviour of the page. Use it under your own responsibility. This has no effect in HTML substitutions, because
+         then URLs can be modified always.">
 <!ENTITY newGui "Novos elementos do menu e barra de ferramentas">
 <!ENTITY newGui.edit "Editar">
 <!ENTITY newGui.edit.replace "Substituir… (Shift + F2)">
