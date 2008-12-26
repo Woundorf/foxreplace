@@ -1,0 +1,27 @@
+<!ENTITY prefwindow.title "FoxReplace 선택사항">
+<!ENTITY mainPane.title "주요">
+<!ENTITY description "대체어 목록을 입력합니다. 목록은 로드된 페이지의 주소와 그룹 URL의 일부가 일치하는 경우 각 그룹의 교체어를 적용하는 대체어 그룹들로 구성되어 있습니다.만약 그룹이 URL을 가지고 있지 않다면 대체어들은 아무 페이지에나 적용됩니다. 그룹들은 자신들이 표현될 순서를 확인합니다.">
+<!ENTITY urlHeader "URL">
+<!ENTITY inputStringHeader "대체">
+<!ENTITY outputStringHeader "-&gt;">
+<!ENTITY htmlHeader "HTML">
+<!ENTITY addButton.label "추가">
+<!ENTITY addButton.accesskey "A">
+<!ENTITY editButton.label "편집">
+<!ENTITY editButton.accesskey "E">
+<!ENTITY deleteButton.label "삭제">
+<!ENTITY deleteButton.accesskey "D">
+<!ENTITY clearButton.label "모두 제거">
+<!ENTITY clearButton.accesskey "C">
+<!ENTITY moveUpButton.label "위로 이동">
+<!ENTITY moveUpButton.accesskey "u">
+<!ENTITY moveDownButton.label "아래로 이동">
+<!ENTITY moveDownButton.accesskey "o">
+<!ENTITY importButton.label "들여오기">
+<!ENTITY importButton.accesskey "I">
+<!ENTITY exportButton.label "내보내기">
+<!ENTITY exportButton.accesskey "x">
+<!ENTITY autoReplaceOnLoad.label "페이지 로드시 자동 대체">
+<!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY replaceUrls.label "URL 대체(링크와 이미지 소스들)(주의:페이지 동작까지 변경시킬 수 있습니다!)">
+<!ENTITY replaceUrls.accesskey "R">

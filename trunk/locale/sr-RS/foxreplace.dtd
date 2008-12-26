@@ -1,0 +1,27 @@
+<!ENTITY menuEditReplace.label "Замени...">
+<!ENTITY menuEditReplace.accesskey "е">
+<!ENTITY menuToolsFoxReplace.label "FoxReplace">
+<!ENTITY menuToolsFoxReplace.accesskey "Ф">
+<!ENTITY menuContextFoxReplace.label "Замењује коришћењем списка за замену (FoxReplace)">
+<!ENTITY menuContextFoxReplace.accesskey "И">
+<!ENTITY toolbarButton.label "FoxReplace">
+<!ENTITY toolbarButton.tooltip "Замењује коришћењем списка за замену">
+<!ENTITY listReplace.label "Замењује коришћењем списка за замену">
+<!ENTITY listReplace.accesskey "Р">
+<!ENTITY autoReplaceOnLoad.label "Аутоматски замени приликом учитавања странице">
+<!ENTITY autoReplaceOnLoad.accesskey "А">
+<!ENTITY options.label "FoxReplace опције...">
+<!ENTITY options.accesskey "О">
+<!ENTITY help.label "Помоћ">
+<!ENTITY help.accesskey "Х">
+<!ENTITY replaceBarClose "Затвори траку за замењивање">
+<!ENTITY replaceBarInputString.label "Замени">
+<!ENTITY replaceBarInputString.accesskey "Р">
+<!ENTITY replaceBarOutputString.label "са">
+<!ENTITY replaceBarOutputString.accesskey "Њ">
+<!ENTITY replaceBarCaseSensitive.label "Подударање малих и великих слова">
+<!ENTITY replaceBarCaseSensitive.accesskey "М">
+<!ENTITY replaceBarHtml.label "HTML">
+<!ENTITY replaceBarHtml.accesskey "Х">
+<!ENTITY replaceBarReplace.label "Замени">
+<!ENTITY replaceBarReplace.accesskey "е">

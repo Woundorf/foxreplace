@@ -1,0 +1,28 @@
+<!ENTITY prefwindow.title "Opțiuni FoxReplace">
+<!ENTITY mainPane.title "General">
+<!ENTITY description "Introduceți lista de substituții. Lista e compusă din grupuri de substituții, substituții care sunt aplicate dacă regulile de potrivire a adreselor din grup 
+         se potrivesc cu adresa paginii curente. Dacă grupul nu are definite adrese, substituțiile lui sunt aplicate oricărei pagini. Grupurile sunt verificate în ordinea apariției.">
+<!ENTITY urlHeader "Adresă">
+<!ENTITY inputStringHeader "Înlocuiește">
+<!ENTITY outputStringHeader "Cu">
+<!ENTITY htmlHeader "HTML">
+<!ENTITY addButton.label "Adaugă">
+<!ENTITY addButton.accesskey "A">
+<!ENTITY editButton.label "Editează">
+<!ENTITY editButton.accesskey "E">
+<!ENTITY deleteButton.label "Șterge">
+<!ENTITY deleteButton.accesskey "g">
+<!ENTITY clearButton.label "Curăță">
+<!ENTITY clearButton.accesskey "C">
+<!ENTITY moveUpButton.label "Mută în sus">
+<!ENTITY moveUpButton.accesskey "u">
+<!ENTITY moveDownButton.label "Mută în jos">
+<!ENTITY moveDownButton.accesskey "j">
+<!ENTITY importButton.label "Importă">
+<!ENTITY importButton.accesskey "I">
+<!ENTITY exportButton.label "Exportă">
+<!ENTITY exportButton.accesskey "x">
+<!ENTITY autoReplaceOnLoad.label "Înlocuire automată la încărcarea paginii">
+<!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY replaceUrls.label "Înlocuiește și adresele (legăturile și sursele imaginilor) (Avertisment: acest lucru ar putea altera comportamentul paginii!)">
+<!ENTITY replaceUrls.accesskey "R">
