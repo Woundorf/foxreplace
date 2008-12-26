@@ -1,0 +1,6 @@
+<!ENTITY dialog.title "Adăugare sau suprascriere?">
+<!ENTITY append.label "Adaugă">
+<!ENTITY append.accesskey "A">
+<!ENTITY overwrite.label "Suprascrie">
+<!ENTITY overwrite.accesskey "S">
+<!ENTITY question "Doriți să adăugați substituțiile la listă sau să o suprascrieți?">

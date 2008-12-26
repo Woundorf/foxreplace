@@ -1,0 +1,49 @@
+<!ENTITY title "Editor de grup de substituții">
+<!ENTITY description "Introduceți lista de adrese și lista de substituții. Lista de adrese poate fi goală, în acest caz substituțiile se vor aplica la orice pagină; altfel 
+         vor fi aplicate doar când adresa vizitată se potrivește cu regula înscrisă. Puteți folosi * pentru a potrivi 0 sau mai multe caractere (nu e necesar acest 
+         lucru la început sau la sfârșit) și „|” pentru a potrivi începutul sau sfârșitul unei adrese. De exemplu, „http://*.exemplu.ro|” va găsi „http://www.exemplu.ro” 
+         dar nu va găsi „http://www.exemplu.ro/ceva”. Lista de substituții trebuie să aibă cel puțin o substituție.">
+<!ENTITY urls "Adrese">
+<!ENTITY url.label "Adresă">
+<!ENTITY url.accesskey "A">
+<!ENTITY addUrlButton.label "Adaugă">
+<!ENTITY addUrlButton.accesskey "d">
+<!ENTITY editUrlButton.label "Editează">
+<!ENTITY editUrlButton.accesskey "E">
+<!ENTITY okEditUrlButton.label "OK">
+<!ENTITY okEditUrlButton.accesskey "O">
+<!ENTITY cancelEditUrlButton.label "Renunță">
+<!ENTITY cancelEditUrlButton.accesskey "n">
+<!ENTITY deleteUrlButton.label "Șterge">
+<!ENTITY deleteUrlButton.accesskey "r">
+<!ENTITY clearUrlsButton.label "Curăță">
+<!ENTITY clearUrlsButton.accesskey "C">
+<!ENTITY substitutions "Substituții">
+<!ENTITY inputString.label "Înlocuiește">
+<!ENTITY inputString.accesskey "c">
+<!ENTITY outputString.label "cu">
+<!ENTITY outputString.accesskey "c">
+<!ENTITY caseSensitive.label "Majusculele contează">
+<!ENTITY caseSensitive.accesskey "m">
+<!ENTITY addSubstitutionButton.label "Adaugă">
+<!ENTITY addSubstitutionButton.accesskey "d">
+<!ENTITY moveUpSubstitutionButton.label "Mută în sus">
+<!ENTITY moveUpSubstitutionButton.accesskey "M">
+<!ENTITY moveDownSubstitutionButton.label "Mută în jos">
+<!ENTITY moveDownSubstitutionButton.accesskey "j">
+<!ENTITY editSubstitutionButton.label "Editează">
+<!ENTITY editSubstitutionButton.accesskey "i">
+<!ENTITY okEditSubstitutionButton.label "OK">
+<!ENTITY okEditSubstitutionButton.accesskey "O">
+<!ENTITY cancelEditSubstitutionButton.label "Renunță">
+<!ENTITY cancelEditSubstitutionButton.accesskey "n">
+<!ENTITY deleteSubstitutionButton.label "Șterge">
+<!ENTITY deleteSubstitutionButton.accesskey "t">
+<!ENTITY clearSubstitutionsButton.label "Curăță">
+<!ENTITY clearSubstitutionsButton.accesskey "r">
+<!ENTITY inputStringHeader "Înlocuiește">
+<!ENTITY inputTypeHeader "Tip">
+<!ENTITY outputStringHeader "Cu">
+<!ENTITY caseSensitiveHeader "Majusculele contează">
+<!ENTITY html.label "Înlocuiește HTML">
+<!ENTITY html.accesskey "H">

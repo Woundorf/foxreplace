@@ -1,0 +1,46 @@
+<!ENTITY title "대체어 그룹 편집기">
+<!ENTITY description "URL 목록 및 대체어 목록 입력. URL 목록은 비어 있을 수 있고, 대체어는 어느 페이지에나 적용할 수 있습니다; 그렇지 않으면 URL의 하나와 페이지 주소가 일치할때에만 적용됩니다. 어떤 문자와도 일치하기 위한 &quot;*&quot;(시작 또는 끝에 있을 필요 없음)와 URL의 시작 또는 끝과 일치하기 위해 &quot;|&quot;를 사용할 수 있습니다.예를 들어,&quot;http://*.example.com/|&quot;는 &quot;http://www.example.com/&quot;과 일치하지만 &quot;http://www.example.com/whatever&quot;와는 아닙니다. 대체어 목록은 1개이상의 대체어를 가지고 있어야 합니다.">
+<!ENTITY urls "URL">
+<!ENTITY url.label "URL">
+<!ENTITY url.accesskey "U">
+<!ENTITY addUrlButton.label "추가">
+<!ENTITY addUrlButton.accesskey "A">
+<!ENTITY editUrlButton.label "편집기">
+<!ENTITY editUrlButton.accesskey "E">
+<!ENTITY okEditUrlButton.label "확인">
+<!ENTITY okEditUrlButton.accesskey "O">
+<!ENTITY cancelEditUrlButton.label "취소">
+<!ENTITY cancelEditUrlButton.accesskey "n">
+<!ENTITY deleteUrlButton.label "삭제">
+<!ENTITY deleteUrlButton.accesskey "l">
+<!ENTITY clearUrlsButton.label "모두 제거">
+<!ENTITY clearUrlsButton.accesskey "C">
+<!ENTITY substitutions "대체어">
+<!ENTITY inputString.label "대체">
+<!ENTITY inputString.accesskey "p">
+<!ENTITY outputString.label "-&gt;">
+<!ENTITY outputString.accesskey "w">
+<!ENTITY caseSensitive.label "대/소문자 구분">
+<!ENTITY caseSensitive.accesskey "h">
+<!ENTITY addSubstitutionButton.label "추가">
+<!ENTITY addSubstitutionButton.accesskey "d">
+<!ENTITY moveUpSubstitutionButton.label "위로 이동">
+<!ENTITY moveUpSubstitutionButton.accesskey "M">
+<!ENTITY moveDownSubstitutionButton.label "아래로 이동">
+<!ENTITY moveDownSubstitutionButton.accesskey "v">
+<!ENTITY editSubstitutionButton.label "편집">
+<!ENTITY editSubstitutionButton.accesskey "i">
+<!ENTITY okEditSubstitutionButton.label "확인">
+<!ENTITY okEditSubstitutionButton.accesskey "O">
+<!ENTITY cancelEditSubstitutionButton.label "취소">
+<!ENTITY cancelEditSubstitutionButton.accesskey "n">
+<!ENTITY deleteSubstitutionButton.label "삭제">
+<!ENTITY deleteSubstitutionButton.accesskey "t">
+<!ENTITY clearSubstitutionsButton.label "모두 제거">
+<!ENTITY clearSubstitutionsButton.accesskey "r">
+<!ENTITY inputStringHeader "대체">
+<!ENTITY inputTypeHeader "형식">
+<!ENTITY outputStringHeader "-&gt;">
+<!ENTITY caseSensitiveHeader "대/소문자 구분">
+<!ENTITY html.label "HTML 대체">
+<!ENTITY html.accesskey "H">

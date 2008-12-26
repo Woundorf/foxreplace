@@ -4,9 +4,12 @@ locale	foxreplace	da-DK locale/da-DK/
 locale	foxreplace	de-DE	locale/de-DE/
 locale	foxreplace	en-US	locale/en-US/
 locale	foxreplace	fr-FR	locale/fr-FR/
+locale	foxreplace	ko-KR	locale/ko-KR/
 locale	foxreplace	pl-PL	locale/pl-PL/
 locale	foxreplace	pt-BR	locale/pt-BR/
+locale	foxreplace	ro-RO	locale/ro-RO/
 locale	foxreplace	ru-RU	locale/ru-RU/
+locale	foxreplace	sr-RS	locale/sr-RS/
 skin	foxreplace	classic/1.0	skin/default/
 overlay	chrome://browser/content/browser.xul	chrome://foxreplace/content/foxreplace.xul
 style	chrome://global/content/customizeToolbar.xul	chrome://foxreplace/skin/foxreplace.css

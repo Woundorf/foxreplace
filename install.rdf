@@ -2,14 +2,14 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$HPCxJ2"
+  <RDF:Description RDF:about="rdf:#$mVUNH1"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="1.5"
-                   em:maxVersion="3.1b1" />
+                   em:maxVersion="3.1b2" />
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="fox@replace.fx"
                    em:name="FoxReplace"
-                   em:version="0.9.0"
+                   em:version="0.9.1"
                    em:creator="Marc Ruiz Altisent"
                    em:description="Lets you replace text in web pages. You can define a substitution list and apply it automatically or at your own discretion, or make individual substitutions. You can use this as a filter, or just for fun :)"
                    em:homepageURL="http://code.google.com/p/foxreplace/"
@@ -20,9 +20,12 @@
     <em:contributor>Mobleman (da-DK)</em:contributor>
     <em:contributor>CosmicForce (de-DE)</em:contributor>
     <em:contributor>Jojaba - BabelZilla (fr-FR)</em:contributor>
+    <em:contributor>용오름(Wtspout) (ko-KR)</em:contributor>
     <em:contributor>Wacław Jacek (pl-PL)</em:contributor>
     <em:contributor>Alberto Eidh (pt-BR)</em:contributor>
+    <em:contributor>alexxed (ro-RO)</em:contributor>
     <em:contributor>Пирятинский Виталий (ru-RU)</em:contributor>
-    <em:targetApplication RDF:resource="rdf:#$HPCxJ2"/>
+    <em:contributor>Касперски ~ РС (sr-RS)</em:contributor>
+    <em:targetApplication RDF:resource="rdf:#$mVUNH1"/>
   </RDF:Description>
 </RDF:RDF>

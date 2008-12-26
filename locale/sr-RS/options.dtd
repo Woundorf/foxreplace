@@ -1,0 +1,27 @@
+<!ENTITY prefwindow.title "FoxReplace опције">
+<!ENTITY mainPane.title "Главно">
+<!ENTITY description "Направите списак за замену. Листа садржи групе са замењивање, где је свака група примењена ако се група адреса подудара са адресом учитане странице. Ако група нема адресу, њене замене су примењене на било који страницу. Групе се проверавају оним редом којим се појављују.">
+<!ENTITY urlHeader "Адреса">
+<!ENTITY inputStringHeader "Замени">
+<!ENTITY outputStringHeader "са">
+<!ENTITY htmlHeader "HTML">
+<!ENTITY addButton.label "Додај">
+<!ENTITY addButton.accesskey "А">
+<!ENTITY editButton.label "Уреди">
+<!ENTITY editButton.accesskey "Е">
+<!ENTITY deleteButton.label "Обриши">
+<!ENTITY deleteButton.accesskey "Д">
+<!ENTITY clearButton.label "Очисти">
+<!ENTITY clearButton.accesskey "Ц">
+<!ENTITY moveUpButton.label "Помери горе">
+<!ENTITY moveUpButton.accesskey "у">
+<!ENTITY moveDownButton.label "Помери доле">
+<!ENTITY moveDownButton.accesskey "о">
+<!ENTITY importButton.label "Увожење">
+<!ENTITY importButton.accesskey "И">
+<!ENTITY exportButton.label "Извожење">
+<!ENTITY exportButton.accesskey "Џ">
+<!ENTITY autoReplaceOnLoad.label "Аутоматски замени приликом учитавања странице">
+<!ENTITY autoReplaceOnLoad.accesskey "т">
+<!ENTITY replaceUrls.label "Замени адресе (везе и изворе слика) (Упозорење: ово може утицати на понашање странице!)">
+<!ENTITY replaceUrls.accesskey "Р">
