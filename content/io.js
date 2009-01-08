@@ -346,8 +346,9 @@ var foxreplaceIO = {
     
     try {
       var listXml = new XML(aXmlString);
+      var noExclusions = listXml.@version == "0.8";
       
-      for each (var group in listXml.group) substitutionList.push(FxRSubstitutionGroup.fromXml(group));
+      for each (var group in listXml.group) substitutionList.push(FxRSubstitutionGroup.fromXml(group, noExclusions));
     }
     catch (e) {
       this.alert(this.strings.getString("xmlErrorTitle"), this.strings.getString("xmlErrorText") + "\n" + e);
@@ -360,7 +361,7 @@ var foxreplaceIO = {
    * Creates an XML object from the substitution list.
    */
   substitutionListToXml: function(aSubstitutionList) {
-    var listXml = <substitutionlist version="0.8"/>;
+    var listXml = <substitutionlist version="0.10"/>;
     
     var nSubstitutions = aSubstitutionList.length;
     

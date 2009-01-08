@@ -278,6 +278,7 @@ var foxreplaceOptions = {
       var ellipsis = i == MAX_LABELS - 1 && i < nUrls - 1;
       var urlLabel = document.createElement("label");
       urlLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.urls[i]);
+      if (fxrIsExclusionUrl(aSubstitutionGroup.urls[i])) urlLabel.setAttribute("class", "exclusionUrl");
       urlsCell.appendChild(urlLabel);
     }
     
@@ -330,6 +331,7 @@ var foxreplaceOptions = {
       var ellipsis = i == MAX_LABELS - 1 && i < nUrls - 1;
       var urlLabel = document.createElement("label");
       urlLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.urls[i]);
+      if (fxrIsExclusionUrl(aSubstitutionGroup.urls[i])) urlLabel.setAttribute("class", "exclusionUrl");
       urlsCell.appendChild(urlLabel);
     }
     

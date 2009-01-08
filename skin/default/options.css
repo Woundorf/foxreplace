@@ -9,10 +9,6 @@
   overflow: visible;  /* to avoid that some checkboxes get hidden */
 }
 
-textbox {
-  width: 20em;
-}
-
-#inputStringTextBox {
-  -moz-binding: url("chrome://foxreplace/content/bindings.xml#inputTextBox");
+#substitutionListBox .exclusionUrl {
+  color: red;
 }

@@ -1,9 +1,11 @@
 <!ENTITY title "Editor del grup de substitucions">
-<!ENTITY description "Introdueix la llista d'URLs i la llista de substitucions. La llista d'URLs pot ser buida, i llavors s'apliquen les
-         substitucions a qualsevol pàgina; altrament s'apliquen només quan una de les URLs coincideix amb l'adreça de la pàgina. Podeu fer servir
-         &quot;*&quot; perquè coincideixi amb 0 o més caràcters qualssevol (al principi i al final no cal) i &quot;|&quot; perquè coincideixi amb
-         l'inici o el final de la URL. Per exemple, &quot;http://*.exemple.cat/|&quot; coincidiria amb &quot;http://www.exemple.cat/&quot; però no
-         amb &quot;http://www.exemple.cat/elquesigui&quot;. La llista de substitucions ha de tenir com a mínim una substitució.">
+<!ENTITY description "Introdueix la llista d'URLs i la llista de substitucions. La llista de substitucions ha de tenir com a mínim una substitució.
+         La llista d'URLs pot ser buida, i llavors s'apliquen les substitucions a qualsevol pàgina; altrament s'apliquen només quan l'adreça de la
+         pàgina coincideix amb una de les URLs normals però no coincideix amb cap de les URLs d'exclusió. Les URLs d'exclusió són les que comencen
+         amb un guionet (&quot;-&quot;), i es mostren en vermell. Podeu fer servir &quot;*&quot; perquè coincideixi amb 0 o més caràcters qualssevol
+         (al principi i al final no cal) i &quot;|&quot; perquè coincideixi amb l'inici o el final de la URL. Per exemple,
+         &quot;http://*.exemple.cat/|&quot; coincidiria amb &quot;http://www.exemple.cat/&quot; però no amb
+         &quot;http://www.exemple.cat/elquesigui&quot;.">
 <!ENTITY urls "URLs">
 <!ENTITY url.label "URL">
 <!ENTITY url.accesskey "U">
