@@ -34,11 +34,17 @@
          de substitució, no hi ha les substitucions directament sinó que hi ha grups de substitucions, on s'associa una llista d'adreces (URLs)
          amb una llista de substitucions que s'apliquen en pàgines l'adreça de les quals coincideixi amb alguna de les URLs.">
 <!ENTITY substitutionGroup "Grup de substitucions">
-<!ENTITY substitutionGroup.p "Està format per una llista d'URLs i una llista de substitucions. Les substitucions s'apliquen sobre una pàgina si la
-         seva adreça coincideix amb una de les URLs, i s'apliquen en l'ordre en què apareixen. Es considera que una URL d'una pàgina coincideix
-         una URL del grup si la URL del grup és una part de la URL de la pàgina. Podeu fer servir els caràcters especials &quot;*&quot; perquè
-         coincideixi amb 0 o més caràcters qualssevol i &quot;|&quot; perquè coincideixi amb l'inici o el final de la URL. Si la llista d'URLs és
-         buida, les substitucions s'apliquen a qualsevol pàgina. La llista de substitucions ha de tenir com a mínim un element.">
+<!ENTITY substitutionGroup.p0 "Està format per una llista d'URLs i una llista de substitucions. Les substitucions s'apliquen en l'ordre en què
+         apareixen, i n'hi ha d'haver una com a mínim. La llista d'URLs serveix per definir a quines pàgines s'apliquen les substitucions. Si la
+         llista és buida, les substitucions s'apliquen a qualsevol pàgina. S'hi poden afegir URLs i llavors les substitucions s'apliquen només si
+         l'adreça de la pàgina coincideix amb una de les URLs. Finalment també hi pot haver URLs d'exclusió que tenen l'efecte contrari, fan que no
+         s'apliquin les substitucions si l'adreça de la pàgina coincideix amb una d'aquestes. Per tant, si la llista d'URLs no és buida, s'apliquen
+         les substitucions si l'adreça de la pàgina no coincideix amb cap URL d'exclusió i coincideix amb una de les URLs normals. Es considera que
+         una URL d'una pàgina coincideix una URL del grup si la URL del grup és una part de la URL de la pàgina.">
+<!ENTITY substitutionGroup.p1 "Les URLs d'exclusió són les que comencen amb un guionet (&quot;-&quot;), i es mostren en vermell; la resta són URLs
+         normals. Podeu fer servir els caràcters especials &quot;*&quot; perquè coincideixi amb 0 o més caràcters qualssevol i &quot;|&quot; perquè
+         coincideixi amb l'inici o el final de la URL. Si voleu definir una URL que comenci amb guionet (per exemple &quot;-abc&quot;) i no sigui
+         d'exclusió podeu fer servir la forma equivalent &quot;|*-abc&quot;.">
 <!ENTITY replaceHtml "Substituir HTML">
 <!ENTITY replaceHtml.p "Normalment les substitucions s'apliquen només sobre el text, però també hi ha l'opció de fer-ho sobre el codi HTML de la
          pàgina. Això permet modificar el format o l'estructura de la pàgina. A la llista de substitucions es pot activar o desactivar aquesta

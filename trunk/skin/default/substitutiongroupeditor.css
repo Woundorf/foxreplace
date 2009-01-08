@@ -2,6 +2,10 @@
   max-width: 1024px;
 }
 
+#urlsListBox .exclusionUrl {
+  color: red;
+}
+
 #inputStringTextBox {
   -moz-binding: url("chrome://foxreplace/content/bindings.xml#inputTextBox");
 }

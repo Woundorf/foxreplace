@@ -75,6 +75,8 @@ var foxreplaceSubstitutionGroupEditor = {
     var urlItem = this._urlsListBox.appendItem(url);
     urlItem.ondblclick = function() { foxreplaceSubstitutionGroupEditor.startEditUrl(); }
     
+    if (fxrIsExclusionUrl(url)) urlItem.setAttribute("class", "exclusionUrl");
+    
     if (!aUrl) {
       urlTextBox.value = "";
       urlTextBox.focus();

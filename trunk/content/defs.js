@@ -35,7 +35,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 /**
- * Substitution (until 0.7)
+ * Substitution (until 0.7).
  */
 function FxRSubstitution07(aInput, aOutput, aCaseSensitive, aInputRegExp, aWholeWords) {
   this.input = aInput;
@@ -67,7 +67,7 @@ FxRSubstitution07.prototype = {
 };
 
 /**
- * Substitution (since 0.8)
+ * Substitution (since 0.8).
  */
 function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) {
   this.input = aInput;
@@ -88,7 +88,7 @@ function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) {
   }
 }
 /**
- * Creates a substitution from an XML object;
+ * Creates a substitution from an XML object.
  */
 FxRSubstitution.fromXml = function(aXml) {
   var input = aXml.input.toString().slice(1, -1);   // to remove quotes
@@ -105,7 +105,7 @@ FxRSubstitution.fromXml = function(aXml) {
   }
 };
 /**
- * Creates a substitution from a FxRSubstitution07 object;
+ * Creates a substitution from a FxRSubstitution07 object.
  */
 FxRSubstitution.fromSubstitution07 = function(aSubstitution07) {
   var input = aSubstitution07.input;
@@ -149,22 +149,38 @@ FxRSubstitution.prototype = {
 };
 
 /**
- * Substitution group, including an URL list and a substitution list. If aHtml is true, substitutions are done in HTML.
+ * Substitution group, including an URL list and a substitution list. If aHtml is true, substitutions are done in HTML. If aNoExclusions is true,
+ * URLs won't be interpreted as exclusion URLs.
  */
-function FxRSubstitutionGroup(aUrls, aSubstitutions, aHtml) {
+function FxRSubstitutionGroup(aUrls, aSubstitutions, aHtml, aNoExclusions) {
   this.urls = aUrls || [];
   this.substitutions = aSubstitutions || [];
   this.html = Boolean(aHtml);
+  var noExclusions = Boolean(aNoExclusions);
+  if (noExclusions) this.urls = this.urls.map(function(element) { return fxrCleanNoExclusionUrl(element); });
   this.urls.sort();
-  this.urlRegExps = this.urls.map(function(element) {
-                                    return new RegExp(element.replace(/\*+/g, "*")      // remove multiple wildcards
-                                                             .replace(/(\W)/g, "\\$1")  // escape special symbols
-                                                             .replace(/\\\*/g, ".*")    // replace wildcards by .*
-                                                             .replace(/^\\\|/, "^")     // process anchor at expression start
-                                                             .replace(/\\\|$/, "$")     // process anchor at expression end
-                                                             .replace(/^(\.\*)/,"")     // remove leading wildcards
-                                                             .replace(/(\.\*)$/,""));   // remove trailing wildcards
-                                  });
+  this.urlRegExps = [];
+  this.exclusionUrlRegExps = [];
+  this.urls.forEach(function(element) {
+                      var url, exclusion;
+                      if (fxrIsExclusionUrl(element)) {
+                        url = fxrCleanExclusionUrl(element);
+                        exclusion = true;
+                      }
+                      else {
+                        url = element;
+                        exclusion = false;
+                      }
+                      var regExp = new RegExp(url.replace(/\*+/g, "*")      // remove multiple wildcards
+                                                 .replace(/(\W)/g, "\\$1")  // escape special symbols
+                                                 .replace(/\\\*/g, ".*")    // replace wildcards by .*
+                                                 .replace(/^\\\|/, "^")     // process anchor at expression start
+                                                 .replace(/\\\|$/, "$")     // process anchor at expression end
+                                                 .replace(/^(\.\*)/,"")     // remove leading wildcards
+                                                 .replace(/(\.\*)$/,""));   // remove trailing wildcards
+                      if (exclusion) this.exclusionUrlRegExps.push(regExp);
+                      else this.urlRegExps.push(regExp);
+                    }, this);
 }
 FxRSubstitutionGroup.prototype = {
 
@@ -172,7 +188,9 @@ FxRSubstitutionGroup.prototype = {
    * Returns true if aUrl matches any of the urls.
    */
   matches: function(aUrl) {
-    return this.urls.length == 0 || this.urlRegExps.some(function(element) { return element.test(aUrl); });
+    return this.urls.length == 0
+        || (!this.exclusionUrlRegExps.some(function(element) { return element.test(aUrl); })
+         && this.urlRegExps.some(function(element) { return element.test(aUrl); }));
   },
   
   /**
@@ -205,9 +223,9 @@ FxRSubstitutionGroup.prototype = {
 
 };
 /**
- * Creates a substitution group from an XML object;
+ * Creates a substitution group from an XML object. If aNoExclusions is true, URLs won't be interpreted as exclusion URLs.
  */
-FxRSubstitutionGroup.fromXml = function(aXml) {
+FxRSubstitutionGroup.fromXml = function(aXml, aNoExclusions) {
   var urls = [];
   for each (var url in aXml.urls.url) urls.push(url.toString());
   
@@ -228,7 +246,7 @@ FxRSubstitutionGroup.fromXml = function(aXml) {
   if (errors) foxreplaceIO.alert(foxreplaceIO.strings.getString("xmlErrorTitle"),
                                  foxreplaceIO.strings.getString("xmlGroupErrorText") + "\n" + errors);
   
-  return new FxRSubstitutionGroup(urls, substitutions, html);
+  return new FxRSubstitutionGroup(urls, substitutions, html, aNoExclusions);
 };
 
 /**
@@ -255,3 +273,26 @@ function fxrStringToUnicode(aString) {
   
   return result;
 };
+
+/**
+ * Returns whether aUrl is an exclusion URL or not (it is an exclusion URL if it starts with "-").
+ */
+function fxrIsExclusionUrl(aUrl) {
+  return /^-.*/.test(aUrl);
+}
+
+/**
+ * Returns aUrl removing the exclusion part.
+ */
+function fxrCleanExclusionUrl(aUrl) {
+  if (fxrIsExclusionUrl(aUrl)) return aUrl.slice(1);
+  else return aUrl;
+}
+
+/**
+ * Returns aUrl transformed so it isn't interpreted as an exclusion URL.
+ */
+function fxrCleanNoExclusionUrl(aUrl) {
+  if (fxrIsExclusionUrl(aUrl)) return "|*" + aUrl;
+  else return aUrl;
+}
