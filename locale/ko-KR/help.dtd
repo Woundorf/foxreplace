@@ -1,9 +1,5 @@
 <!ENTITY title "FoxReplace 도움말">
 <!ENTITY h1 "FoxReplace 도움말">
-<!ENTITY p "This extension allows you to replace text fragments (strings) in a page by other text fragments. The system is based on substitutions,
-         where each substitution has an input text which has to be replaced (the &quot;Replace&quot; field) and an output text by which the first
-         has to be replaced (the &quot;With&quot; field). There are additional options for the substitutions that are explained below. When a
-         substitution is applied it&apos;s over the whole content of a page (you can&apos;t do partial substitutions at the moment).">
 <!ENTITY substitution "대체어">
 <!ENTITY substitution.p "언제나 입력 문자열과 출력 문자열을 가집니다. 출력 문자열은 (글자를 지워)비어 있을수 있지만, 입력 문자열은 반드시 최소 1글자라도 가지고 있어야 합니다. 선택적으로 대체어는 대소문자를 구분할 수 있습니다.">
 <!ENTITY substitution.inputString "입력 문자열: 텍스트 문자열을 대체합니다. 비어 있어선 안됩니다. 3가지 방식 중 하나를 택할 수 있습니다:">
@@ -23,25 +19,9 @@
 <!ENTITY substitution.table.4.1 "이 1에서 99사이의 정수라면,">
 <!ENTITY substitution.table.4.2 "번째 찾은 문자열을 삽입합니다.">
 <!ENTITY substitutionList "대체어 목록">
-<!ENTITY substitutionList.p "FoxReplace keeps a substitution list that you can define and modify at any moment from the FoxReplace options window.
-         You can apply the substitution list when you want by pressing the F2 key or by pushing the toolbar button or activating a menu option.
-         When you do, substitutions in the list will be applied in the order in which they appear. You can apply the substitution list as many
-         times as you want over the same page. Substitutions are done over the current content of the page, i.e. if you apply the substitution
-         list a second time, it will be over the result of the first. In this substitution list there aren&apos;t the substitutions directly, but there
-         are substitution groups, where a list of addresses (URLs) is associated with a list of substitutions which are applied to pages whose
-         address matches one of the URLs in the list.">
 <!ENTITY substitutionGroup "대체어 그룹">
-<!ENTITY substitutionGroup.p "It&apos;s formed by an URL list and a substitution list. The substitutions are applied to a page if its address matches
-         an URL in the list, and they are applied in the order they appear. The URL of a page is considered to match an URL of the group if the
-         URL of the group is part of the URL of the page. You may use special characters &quot;*&quot; to match any 0 or more characters and
-         &quot;|&quot; to match the beginning or the end of the URL. If the URL list is empty, the substitutions are applied to any page. The
-         substitution list must have at least one item.">
 <!ENTITY replaceHtml "HTML 대체">
-<!ENTITY replaceHtml.p "Substitutions are usually applied only to the text, but there&apos;s also the option of doing it to the HTML code of the page.
-         This allows to modify the format or the page structure. You can set or unset this option for every group in the substitution list.">
 <!ENTITY autoReplace "페이지 로드시 자동 대체">
-<!ENTITY autoReplace.p "This option can be activated or deactivated. When it&apos;s on, the substitution list is applied automatically when a page is
-         loaded, applying the substitutions of the groups with a matching URL. This way the extension can work as a filter for the pages you want.">
 <!ENTITY replaceUrls "URL 대체">
 <!ENTITY replaceUrls.p "이 선택사항 꺼짐이 기본값입니다. 켜지면 대체어는 페이지(링크, 이미지 소스, 등) 내 URL에도 적용되어서 해당페이지의 동작을 변경시킬수도 있습니다. 자신의 책임하에서 사용하십시오. 이것은 URL이 언제나 수정할 수 있기 때문에 HTML 대체어 안에선 효과가 없습니다.">
 <!ENTITY newGui "새 메뉴 및 도구막대 요소">

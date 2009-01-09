@@ -21,7 +21,5 @@
 <!ENTITY replaceBarOutputString.accesskey "t">
 <!ENTITY replaceBarCaseSensitive.label "Rozróżniaj wielkość liter">
 <!ENTITY replaceBarCaseSensitive.accesskey "R">
-<!ENTITY replaceBarHtml.label "HTML">
-<!ENTITY replaceBarHtml.accesskey "H">
 <!ENTITY replaceBarReplace.label "Zastąp">
 <!ENTITY replaceBarReplace.accesskey "s">
