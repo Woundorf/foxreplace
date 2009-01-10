@@ -34,11 +34,6 @@
          are substitution groups, where a list of addresses (URLs) is associated with a list of substitutions which are applied to pages whose
          address matches one of the URLs in the list.">
 <!ENTITY substitutionGroup "Substitution group">
-<!ENTITY substitutionGroup.p "It's formed by an URL list and a substitution list. The substitutions are applied to a page if its address matches
-         an URL in the list, and they are applied in the order they appear. The URL of a page is considered to match an URL of the group if the
-         URL of the group is part of the URL of the page. You may use special characters &quot;*&quot; to match any 0 or more characters and
-         &quot;|&quot; to match the beginning or the end of the URL. If the URL list is empty, the substitutions are applied to any page. The
-         substitution list must have at least one item.">
 <!ENTITY substitutionGroup.p0 "It's formed by an URL list and a substitution list. The substitutions are applied in the order they appear, and there
          must be one at least. With the URL list you can define to which pages the substitutions are applied. If the list is empty, the
          substitutions are applied to any page. You can add URLs and then the substitutions are applied only if the page address matches one of the
