@@ -1,9 +1,21 @@
 <!ENTITY title "Edytor grup zamienników">
+<!ENTITY description "Enter the URL list and the substitution list. The substitution list must have at least one substitution. The URL list can be
+         empty, and then the substitutions will be applied to any page; otherwise they will be applied only when the page address matches one of the
+         normal URLs but doesn&apos;t match any of the exclusion URLs. The exclusion URLs are the ones that start with a hyphen (&quot;-&quot;), and they
+         are displayed in red. You may use &quot;*&quot; to match any 0 or more characters (not needed at the beginning and the end) and
+         &quot;|&quot; to match the beginning or the end of the URL. For example, &quot;http://*.example.com/|&quot; would match
+         &quot;http://www.example.com/&quot; but not &quot;http://www.example.com/whatever&quot;.">
 <!ENTITY urls "Adresy URL">
 <!ENTITY url.label "Adres URL">
 <!ENTITY url.accesskey "A">
 <!ENTITY addUrlButton.label "Dodaj">
 <!ENTITY addUrlButton.accesskey "D">
+<!ENTITY editUrlButton.label "Edytuj">
+<!ENTITY editUrlButton.accesskey "E">
+<!ENTITY okEditUrlButton.label "OK">
+<!ENTITY okEditUrlButton.accesskey "O">
+<!ENTITY cancelEditUrlButton.label "Anuluj">
+<!ENTITY cancelEditUrlButton.accesskey "A">
 <!ENTITY deleteUrlButton.label "Usuń">
 <!ENTITY deleteUrlButton.accesskey "U">
 <!ENTITY clearUrlsButton.label "Wyczyść">
@@ -21,6 +33,12 @@
 <!ENTITY moveUpSubstitutionButton.accesskey "g">
 <!ENTITY moveDownSubstitutionButton.label "Przenieś w dół">
 <!ENTITY moveDownSubstitutionButton.accesskey "P">
+<!ENTITY editSubstitutionButton.label "Edytuj">
+<!ENTITY editSubstitutionButton.accesskey "y">
+<!ENTITY okEditSubstitutionButton.label "OK">
+<!ENTITY okEditSubstitutionButton.accesskey "O">
+<!ENTITY cancelEditSubstitutionButton.label "Anuluj">
+<!ENTITY cancelEditSubstitutionButton.accesskey "A">
 <!ENTITY deleteSubstitutionButton.label "Usuń">
 <!ENTITY deleteSubstitutionButton.accesskey "s">
 <!ENTITY clearSubstitutionsButton.label "Wyczyść">
@@ -29,3 +47,5 @@
 <!ENTITY inputTypeHeader "Typ">
 <!ENTITY outputStringHeader "tekstem">
 <!ENTITY caseSensitiveHeader "Rozróżniaj wielkość znaków">
+<!ENTITY html.label "Zastąp HTML">
+<!ENTITY html.accesskey "H">

@@ -31,11 +31,6 @@
         În lista aceasta de substituții nu sunt direct substituții, ci grupuri de substituții unde o listă de adrese este asociată cu o listă de substituții care sunt aplicate
         paginilor care se potrivesc cu lista de adrese.">
 <!ENTITY substitutionGroup "Grup de substituții">
-<!ENTITY substitutionGroup.p "E format dintr-o listă de adrese și o listă de substituții. Substituțiile sunt aplicate unei pagini dacă adresa se potrivește cu o regulă
-        din listă și sunt aplicate în ordinea apariției. Adresa unei pagini este considerată potrivită cu cea a grupului dacă orice parte din ea se regăsește
-        în adresa definită în grup. Puteți folosi caractere speciale, cum ar fi „*” pentru a potrivi 0 sau mai multe caractere și „|” pentru a potrivi începutul 
-        și sfârșitul unei adrese. Dacă lista de adrese e goală, substituțiile sunt aplicate paginii întregi. Lista de substituții trebuie să aibă cel puțin un 
-        element.">
 <!ENTITY substitutionGroup.p0 "Se compune dintr-o listă de adrese și o listă de substituții. Substituțiile sunt aplicate în ordinea în care apar și trebuie să fie cel puțin una. Cu lista de adrese puteți defini căror pagini le sunt aplicate substituțiile. Dacă lista e goală, substituțiile sunt aplicate tuturor paginilor. Puteți adăuga adrese pentru a limita paginile pe care sunt aplicate substituțiile. În fine, puteți și să adăugați excepții, care au efectul invers, adică substituțiile nu sunt aplicate dacă pagina adresei se potrivește cu una dintre adrese.  Deci dacă lista de adrese nu e goală, substituțiile sunt aplicate dacă adresa paginii nu se potrivește cu oricare din adresele de excludere și se potrivește cu una dintre adresele normale. Adresa unei pagini este considerată potrivită cu o adresă dintr-un grup dacă adresa din grup este parte a adresei paginii.">
 <!ENTITY substitutionGroup.p1 "Adresele de excludere sunt cele care încep cu linuță de despărțire „-”) și sunt afișate cu roșu; restul sunt adrese normale. Puteți folosi caractere speciale ca „*” pentru a potrivi 0 sau mai multe caractere și „|” pentru a potrivi începutul sau sfârșitul adresei. Dacă doriți să definiți o adresă care începe cu o liniuță de despărțire (ex: „-abc”) și nu este o adresă de excludere, puteți folosi forma echivalentă „|*-abc”.">
 <!ENTITY replaceHtml "Înlocuiește HTML">
