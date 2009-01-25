@@ -1,5 +1,7 @@
 <!ENTITY title "FoxReplace 도움말">
 <!ENTITY h1 "FoxReplace 도움말">
+<!ENTITY p "이 확장기능은 페이지 내 문서 단편(문자열)을 다른 문서 단편으로 대체를 허용합니다. 이 체계는 대체어를 기반으로 합니다.
+   각 대체어는">
 <!ENTITY substitution "대체어">
 <!ENTITY substitution.p "언제나 입력 문자열과 출력 문자열을 가집니다. 출력 문자열은 (글자를 지워)비어 있을수 있지만, 입력 문자열은 반드시 최소 1글자라도 가지고 있어야 합니다. 선택적으로 대체어는 대소문자를 구분할 수 있습니다.">
 <!ENTITY substitution.inputString "입력 문자열: 텍스트 문자열을 대체합니다. 비어 있어선 안됩니다. 3가지 방식 중 하나를 택할 수 있습니다:">
@@ -19,11 +21,33 @@
 <!ENTITY substitution.table.4.1 "이 1에서 99사이의 정수라면,">
 <!ENTITY substitution.table.4.2 "번째 찾은 문자열을 삽입합니다.">
 <!ENTITY substitutionList "대체어 목록">
+<!ENTITY substitutionList.p "FoxReplace keeps a substitution list that you can define and modify at any moment from the FoxReplace options window.
+         You can apply the substitution list when you want by pressing the F2 key or by pushing the toolbar button or activating a menu option.
+         When you do, substitutions in the list will be applied in the order in which they appear. You can apply the substitution list as many
+         times as you want over the same page. Substitutions are done over the current content of the page, i.e. if you apply the substitution
+         list a second time, it will be over the result of the first. In this substitution list there aren&apos;t the substitutions directly, but there
+         are substitution groups, where a list of addresses (URLs) is associated with a list of substitutions which are applied to pages whose
+         address matches one of the URLs in the list.">
 <!ENTITY substitutionGroup "대체어 그룹">
+<!ENTITY substitutionGroup.p0 "It&apos;s formed by an URL list and a substitution list. The substitutions are applied in the order they appear, and there
+         must be one at least. With the URL list you can define to which pages the substitutions are applied. If the list is empty, the
+         substitutions are applied to any page. You can add URLs and then the substitutions are applied only if the page address matches one of the
+         URLs. Finally, you can also add exclusion URLs which have the opposite effect, the substitutions aren&apos;t applied if the page address matches
+         one of them. So, if the URL list isn&apos;t empty, the substitutions are applied if the page address doesn&apos;t match any of the exclusion URLs and
+         matches one of the normal URLs. The URL of a page is considered to match an URL of the group if the URL of the group is part of the URL of
+         the page.">
+<!ENTITY substitutionGroup.p1 "The exclusion URLs are the ones that start with a hyphen (&quot;-&quot;), and they are displayed in red; the rest are
+         normal URLs. You may use special characters &quot;*&quot; to match any 0 or more characters and &quot;|&quot; to match the beginning or the
+         end of the URL. If you want to define an URL that starts with a hyphen (i.e. &quot;-abc&quot;) and it isn&apos;t an exclusion URL, you may use
+         the equivalent form &quot;|*-abc&quot;.">
 <!ENTITY replaceHtml "HTML 대체">
+<!ENTITY replaceHtml.p "대체어는 일반적으로 문서에만 적용됩니다만, 페이지의 HTML 코드에 사용하는 선택사항입니다.
+  이 것은 형식 또는 페이지 구조를 수정하도록 허용합니다. 대체어 목록 안에 모든 그룹에 이 선택사항을 설정하거나 설정 취소를 할 수 있습니다.">
 <!ENTITY autoReplace "페이지 로드시 자동 대체">
+<!ENTITY autoReplace.p "이 선택사항은 활성화하거나 비활성화 할 수 있습니다. 켜져 있으면, URL과 일치하는 그룹의 대체어가 
+   적용중인 페이지가 불려져 있을때 대체어 목록이 자동으로 적용됩니다.">
 <!ENTITY replaceUrls "URL 대체">
-<!ENTITY replaceUrls.p "이 선택사항 꺼짐이 기본값입니다. 켜지면 대체어는 페이지(링크, 이미지 소스, 등) 내 URL에도 적용되어서 해당페이지의 동작을 변경시킬수도 있습니다. 자신의 책임하에서 사용하십시오. 이것은 URL이 언제나 수정할 수 있기 때문에 HTML 대체어 안에선 효과가 없습니다.">
+<!ENTITY replaceUrls.p "이 선택사항은 꺼짐이 기본값입니다. 켜지면 대체어는 페이지(링크, 이미지 소스, 등) 내 URL에도 적용되어서 해당 페이지의 동작을 변경시킬수도 있습니다. 자신의 책임하에 사용하십시오. 이것은 URL이 언제나 수정될 수 있기 때문에 HTML 대체어 안에선 효과가 없습니다.">
 <!ENTITY newGui "새 메뉴 및 도구막대 요소">
 <!ENTITY newGui.edit "편집">
 <!ENTITY newGui.edit.replace "대체... (Shift+F2)">

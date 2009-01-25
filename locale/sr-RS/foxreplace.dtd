@@ -2,15 +2,15 @@
 <!ENTITY menuEditReplace.accesskey "е">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "Ф">
-<!ENTITY menuContextFoxReplace.label "Замењује коришћењем списка за замену (FoxReplace)">
+<!ENTITY menuContextFoxReplace.label "Замени коришћењем списка за замену (ФоксЗамењивач)">
 <!ENTITY menuContextFoxReplace.accesskey "И">
-<!ENTITY toolbarButton.label "FoxReplace">
+<!ENTITY toolbarButton.label "ФоксЗамењивач">
 <!ENTITY toolbarButton.tooltip "Замењује коришћењем списка за замену">
 <!ENTITY listReplace.label "Замењује коришћењем списка за замену">
 <!ENTITY listReplace.accesskey "Р">
 <!ENTITY autoReplaceOnLoad.label "Аутоматски замени приликом учитавања странице">
 <!ENTITY autoReplaceOnLoad.accesskey "А">
-<!ENTITY options.label "FoxReplace опције...">
+<!ENTITY options.label "Опције ФоксЗамењивача...">
 <!ENTITY options.accesskey "О">
 <!ENTITY help.label "Помоћ">
 <!ENTITY help.accesskey "Х">

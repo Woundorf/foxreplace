@@ -1,4 +1,4 @@
-v0.10.0
+v0.10.0 (25-1-2008)
 * Exclusion URLs.
 * String changes:
   - help.dtd: new: substitutionGroup.p0, substitutionGroup.p1; removed:
