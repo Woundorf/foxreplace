@@ -1,4 +1,6 @@
-v0.10.0 (25-1-2008)
+* Removed compatibility with the substitution list in the old 0.7 format.
+
+v0.10.0 (25-1-2009)
 * Exclusion URLs.
 * String changes:
   - help.dtd: new: substitutionGroup.p0, substitutionGroup.p1; removed:
