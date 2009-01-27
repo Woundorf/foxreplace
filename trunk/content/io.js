@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2008
+ * Portions created by the Initial Developer are Copyright (C) 2007-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -96,42 +96,9 @@ var foxreplaceIO = {
   },
   
   /**
-   * Loads the substitution list from preferences and returns it.
-   */
-  loadSubstitutionList: function() {
-    var substitutionList = [];
-    var listString = this.prefs.getComplexValue("substitutionList", Components.interfaces.nsISupportsString).data;
-    
-    if (listString != "") {
-      var substitutions = listString.split("|-|");
-      var nSubstitutions = substitutions.length;
-      
-      for (var i = 0; i < nSubstitutions; i++) {
-        var substitution = substitutions[i].split("<->");
-        
-        try {
-          var objSubstitution = new FxRSubstitution07(this.decode(substitution[0]),
-                                                      this.decode(substitution[1]),
-                                                      Boolean(parseInt(substitution[2])),
-                                                      Boolean(parseInt(substitution[3])),
-                                                      Boolean(parseInt(substitution[4])));
-          substitutionList.push(objSubstitution);
-        }
-        catch (se) {  // SyntaxError
-          this.alert(this.strings.getString("regExpError"), substitution[0] + "\n" + se);
-        }
-      }
-    }
-    
-    return substitutionList;
-  },
-  
-  /**
    * Loads the substitution list in XML from preferences and returns it.
    */
   loadSubstitutionListXml: function() {
-    this.upgradePreferencesFrom07To08();  // upgrade if necessary
-    
     var listXmlString = this.prefs.getComplexValue("substitutionListXml", Components.interfaces.nsISupportsString).data;
     
     return this.substitutionListFromXml(listXmlString);
@@ -178,46 +145,11 @@ var foxreplaceIO = {
   },
   
   /**
-   * Imports the substitution list from aFile and returns it.
-   */
-  importSubstitutionList: function(aFile) {
-    var fileInputStream = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
-    fileInputStream.init(aFile, 0x01, 0444, 0);  // read
-    fileInputStream.QueryInterface(Components.interfaces.nsILineInputStream);
-    
-    var line = {}, hasMore;
-    var substitutionList = [];
-    
-    do {
-      hasMore = fileInputStream.readLine(line);
-      var substitution = line.value.split("<->");
-      
-      try {
-        var objSubstitution = new FxRSubstitution07(this.decode(substitution[0]),
-                                                    this.decode(substitution[1]),
-                                                    Boolean(parseInt(substitution[2])),
-                                                    Boolean(parseInt(substitution[3])),
-                                                    Boolean(parseInt(substitution[4])));
-        substitutionList.push(objSubstitution);
-      }
-      catch (se) {  // SyntaxError
-        this.alert(this.strings.getString("regExpError"), substitution[0] + "\n" + se);
-      }
-    } while (hasMore);
-    
-    fileInputStream.close();
-    
-    return substitutionList;
-  },
-  
-  /**
    * Imports the substitution list in XML from a file (shows a file dialog to the user) and returns it.
    */
   importSubstitutionListXml: function() {
     var file = this.showFileDialog("import");
     if (!file) return;
-    
-    if (/.*\.txt/i.test(file.leafName)) return this.substitutionList07To08(this.importSubstitutionList(file));
     
     var fileInputStream = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
     var converterInputStream = Components.classes["@mozilla.org/intl/converter-input-stream;1"]
@@ -279,14 +211,6 @@ var foxreplaceIO = {
   },
   
   /**
-   * Converts characters in a string in %XX format to the real characters.
-   * Returns the decoded string.
-   */
-  decode: function(aString) {
-    return unescape(aString);
-  },
-  
-  /**
    * Shows the file dialog in the passed mode (import or export) and returns the file selected by the user.
    */
   showFileDialog: function(aMode) {
@@ -296,8 +220,7 @@ var foxreplaceIO = {
       const nsIFP = Components.interfaces.nsIFilePicker;
       var fileDialog = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFP);
       fileDialog.init(window, title, aMode == "import" ? nsIFP.modeOpen : nsIFP.modeSave);
-      fileDialog.appendFilters(nsIFP.filterXML)
-      if (aMode == "import") fileDialog.appendFilters(nsIFP.filterText);
+      fileDialog.appendFilters(nsIFP.filterXML);
       fileDialog.appendFilters(nsIFP.filterAll);
       fileDialog.filterIndex = 0;
       fileDialog.defaultExtension = ".xml";
@@ -313,29 +236,6 @@ var foxreplaceIO = {
     }
     
     return null;
-  },
-  
-  /**
-   * Upgrades the substitution list from format in 0.7 to format in 0.8.
-   */
-  upgradePreferencesFrom07To08: function() {
-    // check if exists a substitution list in the old format
-    if (this.prefs.prefHasUserValue("substitutionList")) {
-      // load the old list, convert it to the new format, save the new and delete the old
-      var oldSubstitutionList = this.loadSubstitutionList();
-      var newSubstitutionList = this.substitutionList07To08(oldSubstitutionList);
-      var newListXmlString = this.saveSubstitutionListXml(newSubstitutionList);
-      this.prefs.setComplexValue("substitutionListXml", Components.interfaces.nsISupportsString, newListXmlString);
-      this.prefs.clearUserPref("substitutionList");
-    }
-  },
-  
-  /**
-   * Converts the substitution list from the old format to the new.
-   */
-  substitutionList07To08: function(aSubstitutionList07) {
-    var substitutions = aSubstitutionList07.map(FxRSubstitution.fromSubstitution07, FxRSubstitution);
-    return [new FxRSubstitutionGroup([], substitutions)];
   },
   
   /**

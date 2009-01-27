@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2008
+ * Portions created by the Initial Developer are Copyright (C) 2008-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -35,39 +35,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 /**
- * Substitution (until 0.7).
- */
-function FxRSubstitution07(aInput, aOutput, aCaseSensitive, aInputRegExp, aWholeWords) {
-  this.input = aInput;
-  this.inputRegExp = Boolean(aInputRegExp);
-  this.output = aOutput;
-  this.caseSensitive = Boolean(aCaseSensitive);
-  this.wholeWords = Boolean(aWholeWords);
-  
-  if (this.inputRegExp)
-    this._regExp = new RegExp(aInput, aCaseSensitive ? "g" : "gi");
-  else if (this.wholeWords) {
-    var prefix = aInput.charAt(0).match(/\w/) ? "\\b" : "\\B";
-    var suffix = aInput.charAt(aInput.length - 1).match(/\w/) ? "\\b" : "\\B";
-    this._regExp = new RegExp(prefix + fxrStringToUnicode(aInput) + suffix, aCaseSensitive ? "g" : "gi");
-  }
-}
-FxRSubstitution07.prototype = {
-
-  /**
-   * Applies the substitution to aString and returns the result.
-   */
-  replace: function(aString) {
-    if (!aString) return aString;
-    
-    if (this.inputRegExp || this.wholeWords) return aString.replace(this._regExp, this.output);
-    else return aString.replace(this.input, this.output, this.caseSensitive ? "g" : "gi");
-  }
-  
-};
-
-/**
- * Substitution (since 0.8).
+ * Substitution.
  */
 function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) {
   this.input = aInput;
@@ -103,16 +71,6 @@ FxRSubstitution.fromXml = function(aXml) {
     e.message = '"' + input + '": ' + e.message;
     throw e;
   }
-};
-/**
- * Creates a substitution from a FxRSubstitution07 object.
- */
-FxRSubstitution.fromSubstitution07 = function(aSubstitution07) {
-  var input = aSubstitution07.input;
-  var output = aSubstitution07.output;
-  var caseSensitive = aSubstitution07.caseSensitive;
-  var inputType = aSubstitution07.inputRegExp ? this.INPUT_REG_EXP : (aSubstitution07.wholeWords ? this.INPUT_WHOLE_WORDS : this.INPUT_TEXT);
-  return new FxRSubstitution(input, output, caseSensitive, inputType);
 };
 FxRSubstitution.prototype = {
 
