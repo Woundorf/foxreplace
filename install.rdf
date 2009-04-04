@@ -9,7 +9,7 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="fox@replace.fx"
                    em:name="FoxReplace"
-                   em:version="0.10.0"
+                   em:version="0.11.0"
                    em:creator="Marc Ruiz Altisent"
                    em:description="Lets you replace text in web pages. You can define a substitution list and apply it automatically or at your own discretion, or make individual substitutions. You can use this as a filter, or just for fun :)"
                    em:homepageURL="http://code.google.com/p/foxreplace/"

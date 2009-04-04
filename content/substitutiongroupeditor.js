@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2008
+ * Portions created by the Initial Developer are Copyright (C) 2008-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -82,6 +82,8 @@ var foxreplaceSubstitutionGroupEditor = {
       urlTextBox.focus();
       document.getElementById("addUrlButton").disabled = true;
     }
+    
+    document.getElementById("clearUrlsButton").disabled = false;
   },
   
   /**
@@ -95,6 +97,8 @@ var foxreplaceSubstitutionGroupEditor = {
     if (selectedIndex >= 0) {
       this._urlsListBox.removeItemAt(selectedIndex);
       this._urlsListBox.selectedIndex = Math.min(selectedIndex, this._urlsListBox.getRowCount() - 1);
+      
+      if (this._urlsListBox.getRowCount() == 0) document.getElementById("clearUrlsButton").disabled = true;
     }
   },
   
@@ -110,6 +114,8 @@ var foxreplaceSubstitutionGroupEditor = {
       this._urlsListBox.removeItemAt(i);
       i--;
     }
+    
+    document.getElementById("clearUrlsButton").disabled = true;
   },
   
   /**
@@ -284,6 +290,8 @@ var foxreplaceSubstitutionGroupEditor = {
       inputStringTextBox.focus();
       document.getElementById("addSubstitutionButton").disabled = true;
     }
+    
+    document.getElementById("clearSubstitutionsButton").disabled = false;
   },
   
   /**
@@ -342,6 +350,8 @@ var foxreplaceSubstitutionGroupEditor = {
     if (selectedIndex >= 0) {
       this._substitutionsListBox.removeItemAt(selectedIndex);
       this._substitutionsListBox.selectedIndex = Math.min(selectedIndex, this._substitutionsListBox.getRowCount() - 1);
+      
+      if (this._substitutionsListBox.getRowCount() == 0) document.getElementById("clearSubstitutionsButton").disabled = true;
     }
   },
     
@@ -357,6 +367,8 @@ var foxreplaceSubstitutionGroupEditor = {
       this._substitutionsListBox.removeItemAt(i);
       i--;
     }
+    
+    document.getElementById("clearSubstitutionsButton").disabled = true;
   },
   
   /**

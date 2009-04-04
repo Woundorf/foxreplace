@@ -32,18 +32,18 @@
          la llista de substitucions tantes vegades com vulgueu sobre la mateixa pàgina. Les substitucions es fan sobre el contingut actual de la
          pàgina, és a dir, que si apliqueu la llista de substitucions una segona vegada, serà sobre el resultat de la primera. En aquesta llista
          de substitució, no hi ha les substitucions directament sinó que hi ha grups de substitucions, on s'associa una llista d'adreces (URLs)
-         amb una llista de substitucions que s'apliquen en pàgines l'adreça de les quals coincideixi amb alguna de les URLs.">
+         amb una llista de substitucions que s'apliquen en pàgines l'adreça de les quals coincideixi amb algun dels URLs.">
 <!ENTITY substitutionGroup "Grup de substitucions">
 <!ENTITY substitutionGroup.p0 "Està format per una llista d'URLs i una llista de substitucions. Les substitucions s'apliquen en l'ordre en què
          apareixen, i n'hi ha d'haver una com a mínim. La llista d'URLs serveix per definir a quines pàgines s'apliquen les substitucions. Si la
          llista és buida, les substitucions s'apliquen a qualsevol pàgina. S'hi poden afegir URLs i llavors les substitucions s'apliquen només si
-         l'adreça de la pàgina coincideix amb una de les URLs. Finalment també hi pot haver URLs d'exclusió que tenen l'efecte contrari, fan que no
+         l'adreça de la pàgina coincideix amb un dels URLs. Finalment també hi pot haver URLs d'exclusió que tenen l'efecte contrari, fan que no
          s'apliquin les substitucions si l'adreça de la pàgina coincideix amb una d'aquestes. Per tant, si la llista d'URLs no és buida, s'apliquen
-         les substitucions si l'adreça de la pàgina no coincideix amb cap URL d'exclusió i coincideix amb una de les URLs normals. Es considera que
-         una URL d'una pàgina coincideix una URL del grup si la URL del grup és una part de la URL de la pàgina.">
-<!ENTITY substitutionGroup.p1 "Les URLs d'exclusió són les que comencen amb un guionet (&quot;-&quot;), i es mostren en vermell; la resta són URLs
+         les substitucions si l'adreça de la pàgina no coincideix amb cap URL d'exclusió i coincideix amb un dels URLs normals. Es considera que un
+         URL d'una pàgina coincideix un URL del grup si l'URL del grup és una part de l'URL de la pàgina.">
+<!ENTITY substitutionGroup.p1 "Els URLs d'exclusió són els que comencen amb un guionet (&quot;-&quot;), i es mostren en vermell; la resta són URLs
          normals. Podeu fer servir els caràcters especials &quot;*&quot; perquè coincideixi amb 0 o més caràcters qualssevol i &quot;|&quot; perquè
-         coincideixi amb l'inici o el final de la URL. Si voleu definir una URL que comenci amb guionet (per exemple &quot;-abc&quot;) i no sigui
+         coincideixi amb l'inici o el final de l'URL. Si voleu definir un URL que comenci amb guionet (per exemple &quot;-abc&quot;) i no sigui
          d'exclusió podeu fer servir la forma equivalent &quot;|*-abc&quot;.">
 <!ENTITY replaceHtml "Substituir HTML">
 <!ENTITY replaceHtml.p "Normalment les substitucions s'apliquen només sobre el text, però també hi ha l'opció de fer-ho sobre el codi HTML de la
@@ -51,12 +51,12 @@
          opció per cada grup.">
 <!ENTITY autoReplace "Reemplaça automàticament en carregar una pàgina">
 <!ENTITY autoReplace.p "Aquesta opció es pot activar o desactivar. Quan està activa, s'aplica la llista de substitucions automàticament quan es
-         carrega una pàgina, aplicant-se les substitucions dels grups amb una URL coincident. D'aquesta manera l'extensió pot actuar com un
+         carrega una pàgina, aplicant-se les substitucions dels grups amb un URL coincident. D'aquesta manera l'extensió pot actuar com un
          filtre per a les pàgines que vulgueu.">
-<!ENTITY replaceUrls "Reemplaça les URLs">
-<!ENTITY replaceUrls.p "Aquesta opció està desactivada per defecte. Si s'activa les substitucions també s'apliquen sobre les URLs que hi hagi a la
+<!ENTITY replaceUrls "Reemplaça els URLs">
+<!ENTITY replaceUrls.p "Aquesta opció està desactivada per defecte. Si s'activa les substitucions també s'apliquen sobre els URLs que hi hagi a la
          pàgina (enllaços, fonts d'imatges, etc.), de manera que pot canviar el comportament de la pàgina. Utilitzeu-la sota la vostra pròpia
-         responsabilitat. No té cap efecte quan les substitucions són a l'HTML, perquè llavors les URLs poden ser modificades sempre.">
+         responsabilitat. No té cap efecte quan les substitucions són a l'HTML, perquè llavors els URLs poden ser modificats sempre.">
 <!ENTITY newGui "Nous elements dels menús i barra d'eines">
 <!ENTITY newGui.edit "Edita">
 <!ENTITY newGui.edit.replace "Reemplaça... (Maj+F2)">
