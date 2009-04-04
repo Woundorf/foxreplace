@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2008
+ * Portions created by the Initial Developer are Copyright (C) 2007-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -102,6 +102,8 @@ var foxreplaceOptions = {
       substitutionListBox.removeItemAt(selectedIndex);
       substitutionListBox.selectedIndex = Math.min(selectedIndex, substitutionListBox.getRowCount() - 1);
       
+      if (substitutionListBox.getRowCount() == 0) document.getElementById("clearButton").disabled = true;
+      
       this.fireChangeEvent(substitutionListBox);
     }
   },
@@ -117,6 +119,8 @@ var foxreplaceOptions = {
       substitutionListBox.removeItemAt(i);
       i--;
     }
+    
+    document.getElementById("clearButton").disabled = true;
     
     this.fireChangeEvent(substitutionListBox);
   },
@@ -174,6 +178,24 @@ var foxreplaceOptions = {
    */
   importSubstitutionList: function() {
     var substitutionList = foxreplaceIO.importSubstitutionListXml();
+    
+    if (substitutionList) {
+      var params = { };
+      window.openDialog("chrome://foxreplace/content/appendoverwrite.xul","", "chrome,titlebar,toolbar,centerscreen,modal", params);
+      
+      if (params.out) {
+        this.substitutionListFromArray(substitutionList, params.out.button == "overwrite");
+        
+        this.fireChangeEvent(document.getElementById("substitutionListBox"));
+      }
+    }
+  },
+  
+  /**
+   * Imports the substitution list from an URL.
+   */
+  importSubstitutionListFromUrl: function() {
+    var substitutionList = foxreplaceIO.importSubstitutionListFromUrl();
     
     if (substitutionList) {
       var params = { };
@@ -311,6 +333,8 @@ var foxreplaceOptions = {
     groupItem.appendChild(htmlCell);
     
     document.getElementById("substitutionListBox").appendChild(groupItem);
+    
+    document.getElementById("clearButton").disabled = false;
   },
   
   /**

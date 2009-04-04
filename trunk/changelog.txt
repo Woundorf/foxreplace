@@ -1,4 +1,14 @@
+v0.11.0
+* Import from URL.
+* "Clear" buttons in all dialogs disabled if their respective lists are empty.
 * Removed compatibility with the substitution list in the old 0.7 format.
+* Compatibility with Firefox 3.1b3.
+* Removed unneeded box "xmlHolder" in options.xul.
+* String changes:
+  - options.dtd: new: importFromUrlButton.label, importFromUrlButton.accesskey.
+  - foxreplace.properties: new: importFromUrlTitle, importFromUrlText, nonSupportedProtocol,
+    onlyHttp, httpError, cantConnectToServerTitle, cantConnectToServerText, unexpectedError.
+  - Misc. changes in the Catalan locale.
 
 v0.10.0 (25-1-2009)
 * Exclusion URLs.

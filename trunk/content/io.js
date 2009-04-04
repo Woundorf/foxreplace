@@ -169,13 +169,45 @@ var foxreplaceIO = {
       
       this.alert(this.getStrings("importTitle"), e);
       
-      return [];
+      return;
     }
     
     converterInputStream.close();
     fileInputStream.close();
     
     return this.substitutionListFromXml(listXmlString);
+  },
+  
+  /**
+   * Imports the substitution list in XML from an URL (shows a dialog to the user) and returns it.
+   */
+  importSubstitutionListFromUrl: function() {
+    var input = { value: "" };
+    
+    if (!this.promptService.prompt(window, this.strings.getString("importFromUrlTitle"), this.strings.getString("importFromUrlText"), input, null,
+                                   {})) return;
+    
+    var url = input.value;
+    
+    if (!/https?\:\/\//.test(url)) {
+      this.alert(this.strings.getString("nonSupportedProtocol"), this.strings.getString("onlyHttp"));
+      return;
+    }
+    
+    try {
+      var request = new XMLHttpRequest();
+      request.open("GET", url, false);
+      request.send(null);
+      
+      if (request.status == 200) return this.substitutionListFromXml(request.responseText.replace(/<\?.*\?>/, ""));
+      else this.alert(this.strings.getString("httpError"), request.status + " " + request.statusText);
+    }
+    catch (e if e.result == Components.results.NS_ERROR_FAILURE) {
+      this.alert(this.strings.getString("cantConnectToServerTitle"), this.strings.getFormattedString("cantConnectToServerText", [url]));
+    }
+    catch (e) {
+      this.alert(this.strings.getString("unexpectedError"), e);
+    }
   },
   
   /**
@@ -252,6 +284,7 @@ var foxreplaceIO = {
     }
     catch (e) {
       this.alert(this.strings.getString("xmlErrorTitle"), this.strings.getString("xmlErrorText") + "\n" + e);
+      return;
     }
     
     return substitutionList;

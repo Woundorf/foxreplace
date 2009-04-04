@@ -16,7 +16,7 @@
   -
   - The Initial Developer of the Original Code is
   - Marc Ruiz Altisent.
-  - Portions created by the Initial Developer are Copyright (C) 2007-2008
+  - Portions created by the Initial Developer are Copyright (C) 2007-2009
   - the Initial Developer. All Rights Reserved.
   -
   - Contributor(s):
@@ -106,8 +106,7 @@
                 oncommand="foxreplaceOptions.editSubstitutionGroup();"/>
         <button id="deleteButton" disabled="true" label="&deleteButton.label;" accesskey="&deleteButton.accesskey;"
                 oncommand="foxreplaceOptions.deleteSubstitutionGroup();"/>
-        <button id="clearButton" label="&clearButton.label;"
-                accesskey="&clearButton.accesskey;"
+        <button id="clearButton" disabled="true" label="&clearButton.label;" accesskey="&clearButton.accesskey;"
                 oncommand="foxreplaceOptions.clearSubstitutionGroups();"/>
         <separator/>
         <button id="moveUpButton" disabled="true" label="&moveUpButton.label;" accesskey="&moveUpButton.accesskey;"
@@ -118,6 +117,8 @@
         <button id="importButton" label="&importButton.label;"
                 accesskey="&importButton.accesskey;"
                 oncommand="foxreplaceOptions.importSubstitutionList();"/>
+        <button id="importFromUrlButton" label="&importFromUrlButton.label;" accesskey="&importFromUrlButton.accesskey;"
+                oncommand="foxreplaceOptions.importSubstitutionListFromUrl();"/>
         <button id="exportButton" label="&exportButton.label;"
                 accesskey="&exportButton.accesskey;"
                 oncommand="foxreplaceOptions.exportSubstitutionList();"/>
@@ -130,5 +131,4 @@
     <checkbox id="replaceUrlsCheckBox" label="&replaceUrls.label;" accesskey="&replaceUrls.accesskey;"
               preference-editable="true" preference="replaceUrls"/>
   </prefpane>
-  <box id="xmlHolder" hidden="true"/>
 </prefwindow>
