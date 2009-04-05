@@ -6,22 +6,22 @@
 <!ENTITY outputStringHeader "са">
 <!ENTITY htmlHeader "HTML">
 <!ENTITY addButton.label "Додај">
-<!ENTITY addButton.accesskey "А">
+<!ENTITY addButton.accesskey "Д">
 <!ENTITY editButton.label "Уреди">
-<!ENTITY editButton.accesskey "Е">
+<!ENTITY editButton.accesskey "У">
 <!ENTITY deleteButton.label "Обриши">
-<!ENTITY deleteButton.accesskey "Д">
+<!ENTITY deleteButton.accesskey "О">
 <!ENTITY clearButton.label "Очисти">
-<!ENTITY clearButton.accesskey "Ц">
+<!ENTITY clearButton.accesskey "Ч">
 <!ENTITY moveUpButton.label "Помери горе">
-<!ENTITY moveUpButton.accesskey "у">
+<!ENTITY moveUpButton.accesskey "г">
 <!ENTITY moveDownButton.label "Помери доле">
-<!ENTITY moveDownButton.accesskey "о">
+<!ENTITY moveDownButton.accesskey "л">
 <!ENTITY importButton.label "Увоз">
 <!ENTITY importButton.accesskey "И">
 <!ENTITY exportButton.label "Извоз">
-<!ENTITY exportButton.accesskey "Џ">
+<!ENTITY exportButton.accesskey "з">
 <!ENTITY autoReplaceOnLoad.label "Аутоматски замени приликом учитавања странице">
 <!ENTITY autoReplaceOnLoad.accesskey "т">
 <!ENTITY replaceUrls.label "Замени адресе (везе и изворе слика) (Упозорење: ово може утицати на понашање странице!)">
-<!ENTITY replaceUrls.accesskey "Р">
+<!ENTITY replaceUrls.accesskey "З">
