@@ -21,25 +21,7 @@
 <!ENTITY substitution.table.4.1 "이 1에서 99사이의 정수라면,">
 <!ENTITY substitution.table.4.2 "번째 찾은 문자열을 삽입합니다.">
 <!ENTITY substitutionList "대체어 목록">
-<!ENTITY substitutionList.p "FoxReplace keeps a substitution list that you can define and modify at any moment from the FoxReplace options window.
-         You can apply the substitution list when you want by pressing the F2 key or by pushing the toolbar button or activating a menu option.
-         When you do, substitutions in the list will be applied in the order in which they appear. You can apply the substitution list as many
-         times as you want over the same page. Substitutions are done over the current content of the page, i.e. if you apply the substitution
-         list a second time, it will be over the result of the first. In this substitution list there aren&apos;t the substitutions directly, but there
-         are substitution groups, where a list of addresses (URLs) is associated with a list of substitutions which are applied to pages whose
-         address matches one of the URLs in the list.">
 <!ENTITY substitutionGroup "대체어 그룹">
-<!ENTITY substitutionGroup.p0 "It&apos;s formed by an URL list and a substitution list. The substitutions are applied in the order they appear, and there
-         must be one at least. With the URL list you can define to which pages the substitutions are applied. If the list is empty, the
-         substitutions are applied to any page. You can add URLs and then the substitutions are applied only if the page address matches one of the
-         URLs. Finally, you can also add exclusion URLs which have the opposite effect, the substitutions aren&apos;t applied if the page address matches
-         one of them. So, if the URL list isn&apos;t empty, the substitutions are applied if the page address doesn&apos;t match any of the exclusion URLs and
-         matches one of the normal URLs. The URL of a page is considered to match an URL of the group if the URL of the group is part of the URL of
-         the page.">
-<!ENTITY substitutionGroup.p1 "The exclusion URLs are the ones that start with a hyphen (&quot;-&quot;), and they are displayed in red; the rest are
-         normal URLs. You may use special characters &quot;*&quot; to match any 0 or more characters and &quot;|&quot; to match the beginning or the
-         end of the URL. If you want to define an URL that starts with a hyphen (i.e. &quot;-abc&quot;) and it isn&apos;t an exclusion URL, you may use
-         the equivalent form &quot;|*-abc&quot;.">
 <!ENTITY replaceHtml "HTML 대체">
 <!ENTITY replaceHtml.p "대체어는 일반적으로 문서에만 적용됩니다만, 페이지의 HTML 코드에 사용하는 선택사항입니다.
   이 것은 형식 또는 페이지 구조를 수정하도록 허용합니다. 대체어 목록 안에 모든 그룹에 이 선택사항을 설정하거나 설정 취소를 할 수 있습니다.">

@@ -10,13 +10,6 @@
 <!ENTITY substitution.inputString "Input string: the text string that will be replaced. It can be a &lt;a href=
          &apos;http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions&apos;
          &gt;regular expression&lt;/a&gt;, checking the corresponding option.">
-<!ENTITY substitution.inputString.text "Text: it&apos;s interpreted as a character string without any particularities.">
-<!ENTITY substitution.inputString.wholeWords "Whole words: it&apos;s interpreted as one or more whole words. For example, &quot;active&quot; wouldn&apos;t
-         match &quot;interactive&quot; (it would match if it was normal text).">
-<!ENTITY substitution.inputString.regExp.0 "Regular expression: it&apos;s interpreted as a">
-<!ENTITY regExpLink "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions">
-<!ENTITY substitution.inputString.regExp.1 "regular expression">
-<!ENTITY substitution.inputString.regExp.2 ". If it isn&apos;t valid, a syntax error will be shown.">
 <!ENTITY substitution.outputString "Output string: the text string that will replace the input. It can have the
          following special patterns:">
 <!ENTITY substitution.table.summary "Special patterns for the output string">
@@ -24,9 +17,6 @@
 <!ENTITY substitution.table.1 "Inserts the input string.">
 <!ENTITY substitution.table.2 "Inserts the text preceding the input string inside the same block.">
 <!ENTITY substitution.table.3 "Inserts the text following the input string inside the same block.">
-<!ENTITY substitution.table.4.0 "If the input string is a regular expression, and">
-<!ENTITY substitution.table.4.1 "a decimal integer number between 1 and 99 (included), inserts the">
-<!ENTITY substitution.table.4.2 "th found substring.">
 <!ENTITY substitutionList "Substitution list">
 <!ENTITY substitutionList.p "The extension keeps a substitution list that you can define and modify at any moment
          from the FoxReplace options window. You can apply the substitution list when you want by pressing F2 key
@@ -34,30 +24,11 @@
          be applied in the order in which they appear. You can apply the substitution list as many times as you
          want over the same page. Substitutions are done over the current content of the page, i.e. if you apply
          the substitution list a second time, it will be over the result of the first.">
-<!ENTITY substitutionGroup "Substitution group">
-<!ENTITY substitutionGroup.p0 "It&apos;s formed by an URL list and a substitution list. The substitutions are applied in the order they appear, and there
-         must be one at least. With the URL list you can define to which pages the substitutions are applied. If the list is empty, the
-         substitutions are applied to any page. You can add URLs and then the substitutions are applied only if the page address matches one of the
-         URLs. Finally, you can also add exclusion URLs which have the opposite effect, the substitutions aren&apos;t applied if the page address matches
-         one of them. So, if the URL list isn&apos;t empty, the substitutions are applied if the page address doesn&apos;t match any of the exclusion URLs and
-         matches one of the normal URLs. The URL of a page is considered to match an URL of the group if the URL of the group is part of the URL of
-         the page.">
-<!ENTITY substitutionGroup.p1 "The exclusion URLs are the ones that start with a hyphen (&quot;-&quot;), and they are displayed in red; the rest are
-         normal URLs. You may use special characters &quot;*&quot; to match any 0 or more characters and &quot;|&quot; to match the beginning or the
-         end of the URL. If you want to define an URL that starts with a hyphen (i.e. &quot;-abc&quot;) and it isn&apos;t an exclusion URL, you may use
-         the equivalent form &quot;|*-abc&quot;.">
-<!ENTITY replaceHtml "Replace HTML">
-<!ENTITY replaceHtml.p "Substitutions are usually applied only to the text, but there&apos;s also the option of doing it to the HTML code of the page.
-         This allows to modify the format or the page structure. You can set or unset this option for every group in the substitution list.">
 <!ENTITY autoReplace "Auto-replace on page load">
 <!ENTITY autoReplace.p "This option can be activated or deactivated. When it&apos;s on, the substitution list is
          applied automatically when a page is loaded. This way the extension can work as a filter: you can make
          disappear words that you don&apos;t like (or that you don&apos;t like how they are written) replacing them by more
          suitable ones. And with some imagination it can even be useful to make jokes ;)">
-<!ENTITY replaceUrls "Replace URLs">
-<!ENTITY replaceUrls.p "This option is off by default. It it&apos;s on, substitutions are also applied to the URLs in the page (links, image sources,
-         etc.), so it may change the behaviour of the page. Use it under your own responsibility. This has no effect in HTML substitutions, because
-         then URLs can be modified always.">
 <!ENTITY newGui "New menu and toolbar elements">
 <!ENTITY newGui.edit "Edit">
 <!ENTITY newGui.edit.replace "Replace... (Shift+F2)">
@@ -78,6 +49,3 @@
 <!ENTITY newGui.contextMenu "Context menu">
 <!ENTITY newGui.contextMenu.replace "Replace with substitution list (FoxReplace) (F2)">
 <!ENTITY newGui.contextMenu.replace.d "Applies current substitution list.">
-<!ENTITY newGui.replaceBar "Replace bar">
-<!ENTITY newGui.replaceBar.0 "Appears below the find bar.">
-<!ENTITY newGui.replaceBar.1 "Lets you define a substitution and apply it instantly.">

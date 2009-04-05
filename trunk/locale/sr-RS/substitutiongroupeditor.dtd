@@ -1,25 +1,25 @@
 <!ENTITY title "Уређивање групе за замену">
-<!ENTITY description "Унесите списак адреса. Овај списак може бити празан и тада ће замене бити примењене на све станице; иначе се примењују само на ове адресе које су наведене, Можете користити „*” за било који знак или (није потребно на почетку, ни на крају) и „|” за почетак или крај URL-а. Нпр. „http://*.primer.com/|” ће одговарати за „http://www.primer.com/”, али не и за „http://www.primer.com/proba”. Списак за замењивање мора имати барем једну замену">
+<!ENTITY description "Унесите списак адреса. Овај списак може бити празан и тада ће замене бити примењене на све станице; иначе се примењују само на ове адресе које су наведене, Можете користити „*” за било који знак или (није потребно на почетку, ни на крају) и „|” за почетак или крај URL-а. Нпр. „http://*.primer.com/|” ће одговарати за „http://www.primer.com/”, али не и за „http://www.primer.com/proba”. Списак за замењивање мора имати барем једну замену.">
 <!ENTITY urls "Адресе">
 <!ENTITY url.label "Адреса">
-<!ENTITY url.accesskey "У">
+<!ENTITY url.accesskey "А">
 <!ENTITY addUrlButton.label "Додај">
-<!ENTITY addUrlButton.accesskey "А">
+<!ENTITY addUrlButton.accesskey "Д">
 <!ENTITY editUrlButton.label "Уреди">
-<!ENTITY editUrlButton.accesskey "Е">
+<!ENTITY editUrlButton.accesskey "У">
 <!ENTITY okEditUrlButton.label "У реду">
-<!ENTITY okEditUrlButton.accesskey "О">
+<!ENTITY okEditUrlButton.accesskey "Р">
 <!ENTITY cancelEditUrlButton.label "Откажи">
-<!ENTITY cancelEditUrlButton.accesskey "н">
+<!ENTITY cancelEditUrlButton.accesskey "о">
 <!ENTITY deleteUrlButton.label "Обриши">
 <!ENTITY deleteUrlButton.accesskey "и">
 <!ENTITY clearUrlsButton.label "Очисти">
-<!ENTITY clearUrlsButton.accesskey "Ц">
+<!ENTITY clearUrlsButton.accesskey "О">
 <!ENTITY substitutions "Замене">
 <!ENTITY inputString.label "Замени">
 <!ENTITY inputString.accesskey "п">
 <!ENTITY outputString.label "са">
-<!ENTITY outputString.accesskey "њ">
+<!ENTITY outputString.accesskey "с">
 <!ENTITY caseSensitive.label "Подударање малих и великих слова">
 <!ENTITY caseSensitive.accesskey "х">
 <!ENTITY addSubstitutionButton.label "Додај">
