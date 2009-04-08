@@ -1,7 +1,5 @@
 <!ENTITY prefwindow.title "FoxReplace options">
 <!ENTITY mainPane.title "Main">
-<!ENTITY description "Enter the substitution list. Substitutions will be done in the order in which they appear on
-         the list.">
 <!ENTITY inputStringHeader "Replace">
 <!ENTITY outputStringHeader "With">
 <!ENTITY addButton.label "Add">

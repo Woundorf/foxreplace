@@ -1,7 +1,6 @@
 <!ENTITY title "FoxReplace - pomoc">
 <!ENTITY h1 "FoxReplace - pomoc">
-<!ENTITY p "To rozszerzenie pozwala na zastępowanie fragmentów tekstu na stronie innym tekstem. Jego działanie oparte jest na &lt;b&gt;zamiennikach&lt;/b&gt;: zamiennik składa się z tekstu, który ma zostać zastąpiony (wprowadzanego w polu &quot;Zastąp&quot;) oraz tekstu, który zostać być wstawiony w miejsce poprzedniego (wprowadzanego w polu &quot;tekstem&quot;).
-Zamienniki są zastosowywane do &lt;b&gt;całych&lt;/b&gt; treści stron (w tej chwili zastępowanie ich fragmentów nie jest możliwe).">
+<!ENTITY p "To rozszerzenie pozwala na zastępowanie fragmentów tekstu na stronie innym tekstem. Jego działanie oparte jest na &lt;b&gt;zamiennikach&lt;/b&gt;: zamiennik składa się z tekstu, który ma zostać zastąpiony (wprowadzanego w polu &quot;Zastąp&quot;) oraz tekstu, który zostać być wstawiony w miejsce poprzedniego (wprowadzanego w polu &quot;tekstem&quot;). Zamienniki są zastosowywane do &lt;b&gt;całych&lt;/b&gt; treści stron (w tej chwili zastępowanie ich fragmentów nie jest możliwe).">
 <!ENTITY substitution "Zastępowanie">
 <!ENTITY substitution.p "Proces zastępowania polega na zamianie kolejnych wyrażeń z listy tekstów do zastąpienia na ich zamienniki. Rozszerzenie pozwala zadecydować czy wielkość znaków ma znaczenie.">
 <!ENTITY substitution.inputString "Tekst do zastąpienia: ciąg znaków, który ma zostać zastąpiony. Może być przedstawiony w postaci &lt;a href=&apos;http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions&apos;&gt;wyrażenia regularnego&lt;/a&gt;, lecz fakt ten musi zostać odnotowany poprzez zaznaczenie stosownego pola.">

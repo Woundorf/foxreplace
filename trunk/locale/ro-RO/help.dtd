@@ -1,15 +1,11 @@
 <!ENTITY title "Ajutor pentru FoxReplace">
 <!ENTITY h1 "Ajutor pentru FoxReplace">
-<!ENTITY p "Această extensie vă permite să înlocuiți fragmente de text într-o pagină cu alte fragmente de text. Sistemul e bazat pe substituții, fiecare substituție având un 
-         text de căutat (câmpul „Înlocuiește”) și un text cu care este înlocuit (câmpul „Cu”). Există opțiuni adiționale care sunt explicate mai jos. Substituțiile sunt 
-         aplicate întregii pagini, momentan nu se poate aplica o substituție doar unei porțiuni.">
+<!ENTITY p "Această extensie vă permite să înlocuiți fragmente de text într-o pagină cu alte fragmente de text. Sistemul e bazat pe substituții, fiecare substituție având un text de căutat (câmpul „Înlocuiește”) și un text cu care este înlocuit (câmpul „Cu”). Există opțiuni adiționale care sunt explicate mai jos. Substituțiile sunt aplicate întregii pagini, momentan nu se poate aplica o substituție doar unei porțiuni.">
 <!ENTITY substitution "Substituție">
-<!ENTITY substitution.p "Are întotdeauna un text de intrare și unul de ieșire. Textul de ieșire poate fi gol (pentru a elimina textul), dar textul de intrare trebuie să aibă 
-        cel puțin un caracter. Opțional, substituția poate ține cont de majuscule.">
+<!ENTITY substitution.p "Are întotdeauna un text de intrare și unul de ieșire. Textul de ieșire poate fi gol (pentru a elimina textul), dar textul de intrare trebuie să aibă cel puțin un caracter. Opțional, substituția poate ține cont de majuscule.">
 <!ENTITY substitution.inputString "Text de intrare: textul care va fi înlocuit. Nu poate fi gol. Trebuie să fie de unul dintre următoarele 3 tipuri:">
 <!ENTITY substitution.inputString.text "Text: e interpretat ca un șir de caractere fără nicio particularitate">
-<!ENTITY substitution.inputString.wholeWords "Cuvinte întregi: e interpretat ca unul sau mai multe cuvinte întregi. De exemplu „activ” nu va potrivi și 
-        „interactiv” (acest lucru s-ar întâmpla la text normal).">
+<!ENTITY substitution.inputString.wholeWords "Cuvinte întregi: e interpretat ca unul sau mai multe cuvinte întregi. De exemplu „activ” nu va potrivi și „interactiv” (acest lucru s-ar întâmpla la text normal).">
 <!ENTITY substitution.inputString.regExp.0 "Expresie regulată: este interpretată ca o">
 <!ENTITY regExpLink "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions">
 <!ENTITY substitution.inputString.regExp.1 "expresie regulată">
@@ -24,25 +20,16 @@
 <!ENTITY substitution.table.4.1 "un întreg zecimal între 1 și 99 (inclusiv), inserează">
 <!ENTITY substitution.table.4.2 "textul găsit.">
 <!ENTITY substitutionList "Lista de substituții">
-<!ENTITY substitutionList.p "FoxReplace păstrează o listă de substituții pe care o puteți defini și modifica oricând din fereastra de opțiuni pentru FoxReplace.
-        Puteți aplica lista de substituții oricând doriți apăsând tasta F2 sau apăsând butonul din bara de unelte sau activând o opțiune din meniu.
-        Când faceți asta, substituțiile din listă vor fi aplicate în ordinea în care apar. Puteți aplica lista de substituții de câte ori doriți pe aceeași pagină.
-        Substituțiile sunt făcute pe conținutul curent al paginii, adică dacă aplicați substituțiile a doua oară, acest lucru se va face pe rezultatul primei aplicări.
-        În lista aceasta de substituții nu sunt direct substituții, ci grupuri de substituții unde o listă de adrese este asociată cu o listă de substituții care sunt aplicate
-        paginilor care se potrivesc cu lista de adrese.">
+<!ENTITY substitutionList.p "FoxReplace păstrează o listă de substituții pe care o puteți defini și modifica oricând din fereastra de opțiuni pentru FoxReplace. Puteți aplica lista de substituții oricând doriți apăsând tasta F2 sau apăsând butonul din bara de unelte sau activând o opțiune din meniu. Când faceți asta, substituțiile din listă vor fi aplicate în ordinea în care apar. Puteți aplica lista de substituții de câte ori doriți pe aceeași pagină. Substituțiile sunt făcute pe conținutul curent al paginii, adică dacă aplicați substituțiile a doua oară, acest lucru se va face pe rezultatul primei aplicări. În lista aceasta de substituții nu sunt direct substituții, ci grupuri de substituții unde o listă de adrese este asociată cu o listă de substituții care sunt aplicate paginilor care se potrivesc cu lista de adrese.">
 <!ENTITY substitutionGroup "Grup de substituții">
 <!ENTITY substitutionGroup.p0 "Se compune dintr-o listă de adrese și o listă de substituții. Substituțiile sunt aplicate în ordinea în care apar și trebuie să fie cel puțin una. Cu lista de adrese puteți defini căror pagini le sunt aplicate substituțiile. Dacă lista e goală, substituțiile sunt aplicate tuturor paginilor. Puteți adăuga adrese pentru a limita paginile pe care sunt aplicate substituțiile. În fine, puteți și să adăugați excepții, care au efectul invers, adică substituțiile nu sunt aplicate dacă pagina adresei se potrivește cu una dintre adrese.  Deci dacă lista de adrese nu e goală, substituțiile sunt aplicate dacă adresa paginii nu se potrivește cu oricare din adresele de excludere și se potrivește cu una dintre adresele normale. Adresa unei pagini este considerată potrivită cu o adresă dintr-un grup dacă adresa din grup este parte a adresei paginii.">
 <!ENTITY substitutionGroup.p1 "Adresele de excludere sunt cele care încep cu linuță de despărțire „-”) și sunt afișate cu roșu; restul sunt adrese normale. Puteți folosi caractere speciale ca „*” pentru a potrivi 0 sau mai multe caractere și „|” pentru a potrivi începutul sau sfârșitul adresei. Dacă doriți să definiți o adresă care începe cu o liniuță de despărțire (ex: „-abc”) și nu este o adresă de excludere, puteți folosi forma echivalentă „|*-abc”.">
 <!ENTITY replaceHtml "Înlocuiește HTML">
-<!ENTITY replaceHtml.p "Substituțiile sunt aplicate de regulă doar textului, dar există și opțiunea de aplicare pe codul HTML dintr-o pagină.
-         Acest lucru vă permite să modificați formatul sau structura paginii. Puteți seta această opțiune separat pentru orice grup din lista de substituții.">
+<!ENTITY replaceHtml.p "Substituțiile sunt aplicate de regulă doar textului, dar există și opțiunea de aplicare pe codul HTML dintr-o pagină. Acest lucru vă permite să modificați formatul sau structura paginii. Puteți seta această opțiune separat pentru orice grup din lista de substituții.">
 <!ENTITY autoReplace "Înlocuire automată la încărcarea paginii">
-<!ENTITY autoReplace.p "Această opțiune poate fi activată sau nu. Când este activată, lista de substituții este aplicată automat la încărcarea paginii,
-        substituțiile grupului fiind aplicate dacă se potrivesc regulile definite pentru adrese. În acest fel, extensia poate funcționa ca un filtru.">
+<!ENTITY autoReplace.p "Această opțiune poate fi activată sau nu. Când este activată, lista de substituții este aplicată automat la încărcarea paginii, substituțiile grupului fiind aplicate dacă se potrivesc regulile definite pentru adrese. În acest fel, extensia poate funcționa ca un filtru.">
 <!ENTITY replaceUrls "Înlocuiește adresele">
-<!ENTITY replaceUrls.p "Această opțiune este implicit dezactivată. Dacă este activată, substituțiile sunt aplicate și adreselor din pagină (legături, sursele 
-         imaginilor, etc) și astfel poate modifica comportamentul paginii. Folosiți această opțiune cu responsabilitate. Aceasta nu are efect în substituții HTML pentru că astfel
-         adresele ar putea fi modificate oricând.">
+<!ENTITY replaceUrls.p "Această opțiune este implicit dezactivată. Dacă este activată, substituțiile sunt aplicate și adreselor din pagină (legături, sursele imaginilor, etc) și astfel poate modifica comportamentul paginii. Folosiți această opțiune cu responsabilitate. Aceasta nu are efect în substituții HTML pentru că astfel adresele ar putea fi modificate oricând.">
 <!ENTITY newGui "Meniul nou și elementele barei de unelte">
 <!ENTITY newGui.edit "Editează">
 <!ENTITY newGui.edit.replace "Înlocuiește...(Shift+F2)">
