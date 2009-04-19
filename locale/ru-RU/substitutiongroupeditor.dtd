@@ -41,6 +41,6 @@
 <!ENTITY inputStringHeader "Замена">
 <!ENTITY inputTypeHeader "Тип">
 <!ENTITY outputStringHeader "На">
-<!ENTITY caseSensitiveHeader "Только слова целиком">
+<!ENTITY caseSensitiveHeader "Учитывать регистр">
 <!ENTITY html.label "Заменять HTML">
 <!ENTITY html.accesskey "H">
