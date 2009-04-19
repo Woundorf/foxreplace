@@ -46,9 +46,10 @@ function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) {
   
   switch (this.inputType) {
     case this.INPUT_WHOLE_WORDS:
-      var prefix = aInput.charAt(0).match(/\w/) ? "\\b" : "\\B";
-      var suffix = aInput.charAt(aInput.length - 1).match(/\w/) ? "\\b" : "\\B";
-      this._regExp = new RegExp(prefix + fxrStringToUnicode(aInput) + suffix, aCaseSensitive ? "g" : "gi");
+      //var suffix = aInput.charAt(aInput.length - 1).match(this.WW_REGEXP_WORD_CHAR) ? this.WW_REGEXP_WORD_END : this.WW_REGEXP_NONWORD_END;
+      var suffix = this.WW_REGEXP_WORD_CHAR.test(aInput.charAt(aInput.length - 1)) ? this.WW_REGEXP_WORD_END : this.WW_REGEXP_NONWORD_END;
+      this._regExp = new RegExp(fxrStringToUnicode(aInput) + suffix, aCaseSensitive ? "g" : "gi");
+      this._firstCharIsWordChar = this.WW_REGEXP_WORD_CHAR.test(aInput.charAt(0));
       break;
     case this.INPUT_REG_EXP:
       this._regExp = new RegExp(aInput, aCaseSensitive ? "g" : "gi");
@@ -73,23 +74,40 @@ FxRSubstitution.fromXml = function(aXml) {
   }
 };
 FxRSubstitution.prototype = {
-
-  /**
-   * Constants.
-   */
-  INPUT_TEXT: 0,
-  INPUT_WHOLE_WORDS: 1,
-  INPUT_REG_EXP: 2,
-  INPUT_TYPE_STRINGS: ["text", "wholewords", "regexp"],
-
+  
   /**
    * Applies the substitution to aString and returns the result.
    */
   replace: function(aString) {
     if (aString == undefined || aString == null) return aString;
     
-    if (this._regExp) return aString.replace(this._regExp, this.output);
-    else return aString.replace(this.input, this.output, this.caseSensitive ? "g" : "gi");
+    switch (this.inputType) {
+      case this.INPUT_TEXT: return aString.replace(this.input, this.output, this.caseSensitive ? "g" : "gi");
+      case this.INPUT_WHOLE_WORDS:
+        var self = this;
+        function replaceWholeWord(aWord, aIndex, aString) {
+          if (aIndex == 0 || self._firstCharIsWordChar != self.WW_REGEXP_WORD_CHAR.test(aString.charAt(aIndex - 1))) {
+            var re = /\$[\$\&\`\']/g;
+            var fragments = self.output.split(re);
+            var nFragments = fragments.length;
+            var result = fragments[0];
+            var i = fragments[0].length + 1;    // index of the char after the $
+            for (var j = 1; j < nFragments; j++) {
+              var c = self.output.charAt(i);
+              if (c == "$") result += "$";
+              else if (c == "&") result += aWord;
+              else if (c == "`") result += aString.slice(0, aIndex);
+              else if (c == "'") result += aString.slice(aIndex + aWord.length);
+              result += fragments[j];
+              i += 2 + fragments[j].length;
+            }
+            return result;
+          }
+          else return aWord;
+        }
+        return aString.replace(this._regExp, replaceWholeWord);
+      case this.INPUT_REG_EXP: return aString.replace(this._regExp, this.output);
+    }
   },
   
   /**
@@ -105,6 +123,17 @@ FxRSubstitution.prototype = {
   }
   
 };
+/**
+ * Constants.
+ */
+FxRSubstitution.prototype.INPUT_TEXT = 0;
+FxRSubstitution.prototype.INPUT_WHOLE_WORDS = 1;
+FxRSubstitution.prototype.INPUT_REG_EXP = 2;
+FxRSubstitution.prototype.INPUT_TYPE_STRINGS = ["text", "wholewords", "regexp"];
+FxRSubstitution.prototype.WW_REGEXP_WORD_CHAR = /[0-9A-Z_a-z\xC0-\xD6\xD8-\xF6\xF8-\u02AF\u0386-\u03CE\u03D8-\u03EF\u03F3\u03F7\u03F8\u03FA\u03FB\u0400-\u0481\u048A-\u0513]/;
+//                                                          <- Latin + IPA extensions --><------------------- Greek + Coptic -------------------><------- Cyrillic ------->
+FxRSubstitution.prototype.WW_REGEXP_WORD_END = "(?!" + FxRSubstitution.prototype.WW_REGEXP_WORD_CHAR.source + ")";
+FxRSubstitution.prototype.WW_REGEXP_NONWORD_END = "(?![^" + FxRSubstitution.prototype.WW_REGEXP_WORD_CHAR.source.slice(1) + ")";
 
 /**
  * Substitution group, including an URL list and a substitution list. If aHtml is true, substitutions are done in HTML. If aNoExclusions is true,
