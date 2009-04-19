@@ -19,6 +19,8 @@
 <!ENTITY moveDownButton.accesskey "j">
 <!ENTITY importButton.label "Importă">
 <!ENTITY importButton.accesskey "I">
+<!ENTITY importFromUrlButton.label "Importă de la o adresă">
+<!ENTITY importFromUrlButton.accesskey "m">
 <!ENTITY exportButton.label "Exportă">
 <!ENTITY exportButton.accesskey "x">
 <!ENTITY autoReplaceOnLoad.label "Înlocuire automată la încărcarea paginii">

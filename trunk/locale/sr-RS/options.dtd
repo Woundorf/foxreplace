@@ -19,6 +19,8 @@
 <!ENTITY moveDownButton.accesskey "л">
 <!ENTITY importButton.label "Увоз">
 <!ENTITY importButton.accesskey "И">
+<!ENTITY importFromUrlButton.label "Увези са адресе">
+<!ENTITY importFromUrlButton.accesskey "а">
 <!ENTITY exportButton.label "Извоз">
 <!ENTITY exportButton.accesskey "з">
 <!ENTITY autoReplaceOnLoad.label "Аутоматски замени приликом учитавања странице">

@@ -1,0 +1,19 @@
+<!ENTITY inputStringHeader "Değiştir">
+<!ENTITY outputStringHeader "ile">
+<!ENTITY htmlHeader "HTML">
+<!ENTITY addButton.accesskey "A">
+<!ENTITY editButton.label "Düzenle">
+<!ENTITY editButton.accesskey "E">
+<!ENTITY deleteButton.label "Sil">
+<!ENTITY deleteButton.accesskey "D">
+<!ENTITY clearButton.label "Temizle">
+<!ENTITY clearButton.accesskey "C">
+<!ENTITY moveUpButton.accesskey "u">
+<!ENTITY moveDownButton.accesskey "o">
+<!ENTITY importButton.label "dosya al">
+<!ENTITY importButton.accesskey "I">
+<!ENTITY importFromUrlButton.accesskey "m">
+<!ENTITY exportButton.label "dosya ver">
+<!ENTITY exportButton.accesskey "x">
+<!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY replaceUrls.accesskey "R">

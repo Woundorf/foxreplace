@@ -19,6 +19,8 @@
 <!ENTITY moveDownButton.accesskey "D">
 <!ENTITY importButton.label "Importer">
 <!ENTITY importButton.accesskey "I">
+<!ENTITY importFromUrlButton.label "Importer à partir de l&apos;URL">
+<!ENTITY importFromUrlButton.accesskey "r">
 <!ENTITY exportButton.label "Exporter">
 <!ENTITY exportButton.accesskey "x">
 <!ENTITY autoReplaceOnLoad.label "Remplacer automatiquement lors du chargement de la page">

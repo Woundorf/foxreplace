@@ -1,0 +1,5 @@
+<!ENTITY substitution.inputString.regExp.1 "düzenli ifade">
+<!ENTITY replaceHtml "HTML&apos;yi değiştir">
+<!ENTITY newGui.edit "Düzenle">
+<!ENTITY newGui.tools "Araçlar">
+<!ENTITY newGui.tools.foxreplace.help "Yardım">
