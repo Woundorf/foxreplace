@@ -26,17 +26,22 @@
 .inputTextBox {
   -moz-appearance: none;
   border: none;
+  color: black !important;
   margin: 0;
 }
 
+.inputTextBox[empty="true"] {
+  color: gray !important;
+}
+
 .inputTextBox[inputtype="0"] {
-  background-color: white;
+  background-color: white !important;
 }
 
 .inputTextBox[inputtype="1"] {
-  background-color: lime;
+  background-color: lime !important;
 }
 
 .inputTextBox[inputtype="2"] {
-  background-color: yellow;
+  background-color: yellow !important;
 }

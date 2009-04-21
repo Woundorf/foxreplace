@@ -3,6 +3,7 @@ v0.11.0
 * Whole words substitutions now support the extended Latin alphabet, IPA extensions, and the Greek,
   Coptic and Cyrillic alphabets.
 * "Clear" buttons in all dialogs disabled if their respective lists are empty.
+* Forced text color of input textbox so it's visible with dark themes.
 * Removed compatibility with the substitution list in the old 0.7 format.
 * Compatibility with Firefox 3.1b3.
 * Removed unneeded box "xmlHolder" in options.xul.
