@@ -19,6 +19,8 @@
 <!ENTITY moveDownButton.accesskey "r">
 <!ENTITY importButton.label "Zaimportuj">
 <!ENTITY importButton.accesskey "I">
+<!ENTITY importFromUrlButton.label "Import from URL">
+<!ENTITY importFromUrlButton.accesskey "m">
 <!ENTITY exportButton.label "Wyeksportuj">
 <!ENTITY exportButton.accesskey "E">
 <!ENTITY autoReplaceOnLoad.label "Automatycznie zastępuj tekst na stronach podczas ich wczytywania">
