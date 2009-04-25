@@ -3,3 +3,4 @@
 <!ENTITY append.accesskey "A">
 <!ENTITY overwrite.label "Üzerine">
 <!ENTITY overwrite.accesskey "O">
+<!ENTITY question "Do you want to append substitutions to the list or overwrite it?">

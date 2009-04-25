@@ -1,3 +1,5 @@
+<!ENTITY title "Substitution group editor">
+<!ENTITY description "Enter the URL list and the substitution list. The substitution list must have at least one substitution. The URL list can be empty, and then the substitutions will be applied to any page; otherwise they will be applied only when the page address matches one of the normal URLs but doesn&apos;t match any of the exclusion URLs. The exclusion URLs are the ones that start with a hyphen (&quot;-&quot;), and they are displayed in red. You may use &quot;*&quot; to match any 0 or more characters (not needed at the beginning and the end) and &quot;|&quot; to match the beginning or the end of the URL. For example, &quot;http://*.example.com/|&quot; would match &quot;http://www.example.com/&quot; but not &quot;http://www.example.com/whatever&quot;.">
 <!ENTITY urls "URLs">
 <!ENTITY url.label "URL">
 <!ENTITY url.accesskey "U">
@@ -11,16 +13,20 @@
 <!ENTITY cancelEditUrlButton.accesskey "n">
 <!ENTITY deleteUrlButton.label "Sil">
 <!ENTITY deleteUrlButton.accesskey "l">
+<!ENTITY clearUrlsButton.label "Clear">
 <!ENTITY clearUrlsButton.accesskey "C">
 <!ENTITY substitutions "Değiştirmelerin">
 <!ENTITY inputString.label "Değiştir">
 <!ENTITY inputString.accesskey "p">
 <!ENTITY outputString.label "ile">
 <!ENTITY outputString.accesskey "w">
+<!ENTITY caseSensitive.label "Match case">
 <!ENTITY caseSensitive.accesskey "h">
 <!ENTITY addSubstitutionButton.label "Ekle">
 <!ENTITY addSubstitutionButton.accesskey "d">
+<!ENTITY moveUpSubstitutionButton.label "Move up">
 <!ENTITY moveUpSubstitutionButton.accesskey "M">
+<!ENTITY moveDownSubstitutionButton.label "Move down">
 <!ENTITY moveDownSubstitutionButton.accesskey "v">
 <!ENTITY editSubstitutionButton.label "Düzenle">
 <!ENTITY editSubstitutionButton.accesskey "i">
@@ -35,4 +41,6 @@
 <!ENTITY inputStringHeader "Değiştir">
 <!ENTITY inputTypeHeader "Tür">
 <!ENTITY outputStringHeader "İle">
+<!ENTITY caseSensitiveHeader "Match case">
+<!ENTITY html.label "Replace HTML">
 <!ENTITY html.accesskey "H">
