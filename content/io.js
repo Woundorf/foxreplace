@@ -181,13 +181,15 @@ var foxreplaceIO = {
   /**
    * Imports the substitution list in XML from an URL (shows a dialog to the user) and returns it.
    */
-  importSubstitutionListFromUrl: function() {
-    var input = { value: "" };
+  importSubstitutionListFromUrl: function(aUrl) {
+    if (!aUrl) {
+      var input = { value: "" };
+      if (!this.promptService.prompt(window, this.strings.getString("importFromUrlTitle"),
+                                     this.strings.getString("importFromUrlText"), input, null, {})) return;
+      aUrl = input.value;
+    }
     
-    if (!this.promptService.prompt(window, this.strings.getString("importFromUrlTitle"), this.strings.getString("importFromUrlText"), input, null,
-                                   {})) return;
-    
-    var url = input.value;
+    var url = aUrl;
     
     if (!/https?\:\/\//.test(url)) {
       this.alert(this.strings.getString("nonSupportedProtocol"), this.strings.getString("onlyHttp"));
