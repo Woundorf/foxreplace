@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2008
+ * Portions created by the Initial Developer are Copyright (C) 2007-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -56,6 +56,10 @@ var foxreplace = {
     
     this._substitutionList = foxreplaceIO.loadSubstitutionListXml();
     this.setAutoReplaceOnLoad(foxreplaceIO.loadAutoReplaceOnLoad());
+    
+    var subscriptionUrl = this.prefs.subscriptionUrl;
+    var subscriptionPeriod = this.prefs.subscriptionPeriod;
+    if (subscriptionUrl && subscriptionPeriod > 0) fxrSubscription.start(subscriptionUrl, subscriptionPeriod);
   },
   
   /**
@@ -320,6 +324,9 @@ var foxreplace = {
   }
   
 };
+
+Components.utils.import("resource://foxreplace/subscription.js");
+Components.utils.import("resource://foxreplace/prefs.js", foxreplace);
 
 window.addEventListener("load", function() { foxreplace.onLoad(); }, false);
 window.addEventListener("unload", function() { foxreplace.onUnload(); }, false);
