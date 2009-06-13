@@ -23,7 +23,13 @@
 <!ENTITY importFromUrlButton.accesskey "p">
 <!ENTITY exportButton.label "Exporta">
 <!ENTITY exportButton.accesskey "x">
+<!ENTITY subscriptionCheckBox.label "Actualitza des d'un URL">
+<!ENTITY subscriptionCheckBox.accesskey "c">
+<!ENTITY subscriptionUrl.label "URL">
+<!ENTITY subscriptionUrl.accesskey "U">
+<!ENTITY subscriptionPeriod.label "Període (minuts)">
+<!ENTITY subscriptionPeriod.accesskey "r">
 <!ENTITY autoReplaceOnLoad.label "Reemplaça automàticament en carregar una pàgina">
-<!ENTITY autoReplaceOnLoad.accesskey "u">
+<!ENTITY autoReplaceOnLoad.accesskey "t">
 <!ENTITY replaceUrls.label "Reemplaça els URLs (enllaços i fonts de les imatges) (Atenció: això pot modificar el comportament de les pàgines!)">
-<!ENTITY replaceUrls.accesskey "R">
+<!ENTITY replaceUrls.accesskey "s">

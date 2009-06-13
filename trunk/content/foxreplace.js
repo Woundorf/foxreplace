@@ -57,9 +57,11 @@ var foxreplace = {
     this._substitutionList = foxreplaceIO.loadSubstitutionListXml();
     this.setAutoReplaceOnLoad(foxreplaceIO.loadAutoReplaceOnLoad());
     
+    var enableSubscription = this.prefs.enableSubscription;
     var subscriptionUrl = this.prefs.subscriptionUrl;
     var subscriptionPeriod = this.prefs.subscriptionPeriod;
-    if (subscriptionUrl && subscriptionPeriod > 0) fxrSubscription.start(subscriptionUrl, subscriptionPeriod);
+    if (enableSubscription && subscriptionUrl && subscriptionPeriod > 0)
+      fxrSubscription.start(subscriptionUrl, subscriptionPeriod);
   },
   
   /**
@@ -85,6 +87,18 @@ var foxreplace = {
       
       case "autoReplaceOnLoad":
         this.setAutoReplaceOnLoad(foxreplaceIO.loadAutoReplaceOnLoad());
+        break;
+        
+      case "enableSubscription":
+      case "subscriptionUrl":
+      case "subscriptionPeriod":
+        var enableSubscription = this.prefs.enableSubscription;
+        var subscriptionUrl = this.prefs.subscriptionUrl;
+        var subscriptionPeriod = this.prefs.subscriptionPeriod;
+        if (enableSubscription && subscriptionUrl && subscriptionPeriod > 0)
+          fxrSubscription.restart(subscriptionUrl, subscriptionPeriod);
+        else
+          fxrSubscription.stop();
         break;
     }
   },

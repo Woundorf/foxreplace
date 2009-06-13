@@ -126,6 +126,8 @@ var fxrSubscription = {
    * Stops the subscription service.
    */
   stop: function() {
+    if (!this._timerOn) return;
+    
     this.timer.cancel();
     this._timerOn = false;
   }

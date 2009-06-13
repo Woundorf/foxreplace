@@ -125,7 +125,21 @@ var prefs = {
   },
   
   /**
-   * Loads the subscription URL from preferences.
+   * Loads the enable subscription setting from preferences and returns it.
+   */
+  get enableSubscription() {
+    return this.service.getBoolPref("enableSubscription");
+  },
+  
+  /**
+   * Saves the enable subscription setting to preferences.
+   */
+  set enableSubscription(aBool) {
+    this.service.setBoolPref("enableSubscription", aBool);
+  },
+  
+  /**
+   * Loads the subscription URL from preferences and returns it.
    */
   get subscriptionUrl() {
     return this.service.getComplexValue("subscriptionUrl", Components.interfaces.nsISupportsString).data;
