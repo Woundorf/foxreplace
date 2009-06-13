@@ -60,6 +60,9 @@
       <preference id="replaceUrls"
                   name="extensions.foxreplace.replaceUrls"
                   type="bool"/>
+      <preference id="enableSubscription" name="extensions.foxreplace.enableSubscription" type="bool"/>
+      <preference id="subscriptionUrl" name="extensions.foxreplace.subscriptionUrl" type="unichar"/>
+      <preference id="subscriptionPeriod" name="extensions.foxreplace.subscriptionPeriod" type="int"/>
     </preferences>
     <description id="description">&description;</description>
     <separator/>
@@ -123,6 +126,18 @@
                 accesskey="&exportButton.accesskey;"
                 oncommand="foxreplaceOptions.exportSubstitutionList();"/>
       </vbox>
+    </hbox>
+    <separator/>
+    <hbox align="center">
+      <checkbox id="subscriptionCheckBox" label="&subscriptionCheckBox.label;"
+                accesskey="&subscriptionCheckBox.accesskey;" preference-editable="true" preference="enableSubscription"/>
+      <label id="subscriptionUrlLabel" control="subscriptionUrlTextBox" value="&subscriptionUrl.label;"
+             accesskey="&subscriptionUrl.accesskey;"/>
+      <textbox id="subscriptionUrlTextBox" flex="1" preference-editable="true" preference="subscriptionUrl"/>
+      <label id="subscriptionPeriodLabel" control="subscriptionPeriodTextBox" value="&subscriptionPeriod.label;"
+             accesskey="&subscriptionPeriod.accesskey;"/>
+      <textbox id="subscriptionPeriodTextBox" type="number" min="1" max="1440" maxlength="4" size="4"
+               preference-editable="true" preference="subscriptionPeriod"/>
     </hbox>
     <separator/>
     <checkbox id="autoReplaceOnLoadCheckBox" label="&autoReplaceOnLoad.label;"
