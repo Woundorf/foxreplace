@@ -50,16 +50,18 @@ var foxreplace = {
     //                          function() { foxreplace.onShowContextMenu(); },
     //                          false);
     
-    foxreplaceIO.prefs.addObserver("", this, false);
+    this.prefs.service.addObserver("", this, false);
     
     gBrowser.addEventListener("DOMContentLoaded", this.onPageLoad, true);
     
-    this._substitutionList = foxreplaceIO.loadSubstitutionListXml();
-    this.setAutoReplaceOnLoad(foxreplaceIO.loadAutoReplaceOnLoad());
+    this._substitutionList = this.prefs.substitutionListXml;
+    this.setAutoReplaceOnLoad(this.prefs.autoReplaceOnLoad);
     
+    // subscription
     var enableSubscription = this.prefs.enableSubscription;
     var subscriptionUrl = this.prefs.subscriptionUrl;
     var subscriptionPeriod = this.prefs.subscriptionPeriod;
+    
     if (enableSubscription && subscriptionUrl && subscriptionPeriod > 0)
       fxrSubscription.start(subscriptionUrl, subscriptionPeriod);
   },
@@ -68,7 +70,7 @@ var foxreplace = {
    * Finalization code.
    */
   onUnload: function() {
-    foxreplaceIO.prefs.removeObserver("", this);
+    this.prefs.service.removeObserver("", this);
   },
   
   /**
@@ -82,11 +84,11 @@ var foxreplace = {
     
     switch (aData) {
       case "substitutionListXml":
-        this._substitutionList = foxreplaceIO.loadSubstitutionListXml();
+        this._substitutionList = this.prefs.substitutionListXml;
         break;
       
       case "autoReplaceOnLoad":
-        this.setAutoReplaceOnLoad(foxreplaceIO.loadAutoReplaceOnLoad());
+        this.setAutoReplaceOnLoad(this.prefs.autoReplaceOnLoad);
         break;
         
       case "enableSubscription":
@@ -107,8 +109,7 @@ var foxreplace = {
    * Sets auto-replace on load setting.
    */
   setAutoReplaceOnLoad: function(aAutoReplaceOnLoad) {
-    document.getElementById("fxrMenuToolsFoxReplaceAutoReplaceOnLoad")
-            .setAttribute("checked", aAutoReplaceOnLoad);
+    document.getElementById("fxrMenuToolsFoxReplaceAutoReplaceOnLoad").setAttribute("checked", aAutoReplaceOnLoad);
     var menuItem = document.getElementById("fxrToolbarButtonMenuAutoReplaceOnLoad");
     if (menuItem) menuItem.setAttribute("checked", aAutoReplaceOnLoad);
     
@@ -143,12 +144,14 @@ var foxreplace = {
     try {
       // new temporal substitution list with only one item
       this._substitutionList =
-        [new FxRSubstitutionGroup([], [new FxRSubstitution(inputString, outputString, caseSensitive, inputType)], html)];
+        [new FxRSubstitutionGroup([],
+                                  [new FxRSubstitution(inputString, outputString, caseSensitive, inputType)],
+                                  html)];
       // perform substitutions
       this.replaceDocXpath();
     }
     catch (se) {  // SyntaxError
-      foxreplaceIO.alert(foxreplaceIO.strings.getString("regExpError"), se);
+      this.prompts.alert(this.getLocalizedString("regExpError"), se);
     }
     
     // restore substitution list
@@ -168,15 +171,14 @@ var foxreplace = {
   toggleAutoReplaceOnLoad: function(aMenuItem) {
     // aMenuItem has already toggled its checked attribute
     var autoReplaceOnLoad = Boolean(aMenuItem.getAttribute("checked"));
-    foxreplaceIO.saveAutoReplaceOnLoad(autoReplaceOnLoad);
+    this.prefs.autoReplaceOnLoad = autoReplaceOnLoad;
   },
   
   /**
    * Shows options dialog.
    */
   showOptions: function() {
-    window.openDialog("chrome://foxreplace/content/options.xul", "",
-                      "chrome,titlebar,toolbar,centerscreen,modal");
+    window.openDialog("chrome://foxreplace/content/options.xul", "", "chrome,titlebar,toolbar,centerscreen,modal");
   },
   
   /**
@@ -184,8 +186,7 @@ var foxreplace = {
    */
   showHelp: function() {
     // Add tab, then make active
-    gBrowser.selectedTab =
-      gBrowser.addTab("chrome://foxreplace/content/help.xhtml");
+    gBrowser.selectedTab = gBrowser.addTab("chrome://foxreplace/content/help.xhtml");
   },
   
   /**
@@ -317,11 +318,12 @@ var foxreplace = {
                         + "|/html/body//input[@type!='hidden']/@value"
                         + "|/html/body//option/@value"
                         + "|/html/body//button/@value";
-    if (foxreplaceIO.loadReplaceUrls()) {
+    if (this.prefs.replaceUrls) {
       valueNodesXpath += "|/html/body//a/@href"
                        + "|/html/body//img/@src";
     }
-    var valueNodes = aDocument.evaluate(valueNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+    var valueNodes =
+        aDocument.evaluate(valueNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
     var nValueNodes = valueNodes.snapshotLength;
     for (var i = 0; i < nValueNodes; i++) {
       var valueNode = valueNodes.snapshotItem(i);
@@ -341,6 +343,7 @@ var foxreplace = {
 
 Components.utils.import("resource://foxreplace/subscription.js");
 Components.utils.import("resource://foxreplace/prefs.js", foxreplace);
+Components.utils.import("resource://foxreplace/services.js", foxreplace);
 
 window.addEventListener("load", function() { foxreplace.onLoad(); }, false);
 window.addEventListener("unload", function() { foxreplace.onUnload(); }, false);

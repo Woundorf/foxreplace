@@ -43,14 +43,14 @@ var foxreplaceOptions = {
    * Called when the options window is loaded. Loads the substitution list in XML from preferences and fills the listbox.
    */
   loadSubstitutionListXml: function() {
-    this.substitutionListFromArray(foxreplaceIO.loadSubstitutionListXml());
+    this.substitutionListFromArray(this.prefs.substitutionListXml);
   },
   
   /**
    * Called when there's a change in the listbox. Saves the substitution list in XML to preferences.
    */
   saveSubstitutionListXml: function() {
-    return foxreplaceIO.saveSubstitutionListXml(this.substitutionListToArray());
+    return this.prefs.substitutionListToXmlString(this.substitutionListToArray());
   },
   
   /**
@@ -59,7 +59,8 @@ var foxreplaceOptions = {
   addSubstitutionGroup: function() {
     var params = {};
     
-    window.openDialog("chrome://foxreplace/content/substitutiongroupeditor.xul", "", "chrome,titlebar,toolbar,centerscreen,modal", params);
+    window.openDialog("chrome://foxreplace/content/substitutiongroupeditor.xul", "",
+                      "chrome,titlebar,toolbar,centerscreen,modal", params);
     
     if (params.out) {
       var substitutionGroup = params.out.group;
@@ -80,7 +81,8 @@ var foxreplaceOptions = {
     if (!selectedItem) return;
     var params = { "in": { group: selectedItem.substitutionGroup } };
     
-    window.openDialog("chrome://foxreplace/content/substitutiongroupeditor.xul", "", "chrome,titlebar,toolbar,centerscreen,modal", params);
+    window.openDialog("chrome://foxreplace/content/substitutiongroupeditor.xul", "",
+                      "chrome,titlebar,toolbar,centerscreen,modal", params);
     
     if (params.out) {
       var substitutionGroup = params.out.group;
@@ -177,11 +179,12 @@ var foxreplaceOptions = {
    * Imports the substitution list from a file.
    */
   importSubstitutionList: function() {
-    var substitutionList = foxreplaceIO.importSubstitutionListXml();
+    var substitutionList = fxrIO.importSubstitutionList();
     
     if (substitutionList) {
-      var params = { };
-      window.openDialog("chrome://foxreplace/content/appendoverwrite.xul","", "chrome,titlebar,toolbar,centerscreen,modal", params);
+      var params = {};
+      window.openDialog("chrome://foxreplace/content/appendoverwrite.xul", "",
+                        "chrome,titlebar,toolbar,centerscreen,modal", params);
       
       if (params.out) {
         this.substitutionListFromArray(substitutionList, params.out.button == "overwrite");
@@ -195,11 +198,12 @@ var foxreplaceOptions = {
    * Imports the substitution list from an URL.
    */
   importSubstitutionListFromUrl: function() {
-    var substitutionList = foxreplaceIO.importSubstitutionListFromUrl();
+    var substitutionList = fxrIO.importSubstitutionListFromUrl();
     
     if (substitutionList) {
-      var params = { };
-      window.openDialog("chrome://foxreplace/content/appendoverwrite.xul","", "chrome,titlebar,toolbar,centerscreen,modal", params);
+      var params = {};
+      window.openDialog("chrome://foxreplace/content/appendoverwrite.xul", "",
+                        "chrome,titlebar,toolbar,centerscreen,modal", params);
       
       if (params.out) {
         this.substitutionListFromArray(substitutionList, params.out.button == "overwrite");
@@ -214,7 +218,7 @@ var foxreplaceOptions = {
    */
   exportSubstitutionList: function() {
     // pass the function (for deferred execution)
-    foxreplaceIO.exportSubstitutionListXml(this.substitutionListToArray);
+    fxrIO.exportSubstitutionList(this.substitutionListToArray);
   },
   
   /**
@@ -329,7 +333,7 @@ var foxreplaceOptions = {
     groupItem.appendChild(outputsCell);
     
     var htmlCell = document.createElement("listcell");
-    htmlCell.setAttribute("label", foxreplaceIO.strings.getString(aSubstitutionGroup.html ? "yes" : "no"));
+    htmlCell.setAttribute("label", this.getLocalizedString(aSubstitutionGroup.html ? "yes" : "no"));
     groupItem.appendChild(htmlCell);
     
     document.getElementById("substitutionListBox").appendChild(groupItem);
@@ -380,7 +384,12 @@ var foxreplaceOptions = {
     }
     
     var htmlCell = outputsCell.nextSibling;
-    htmlCell.setAttribute("label", foxreplaceIO.strings.getString(aSubstitutionGroup.html ? "yes" : "no"));
+    htmlCell.setAttribute("label", this.getLocalizedString(aSubstitutionGroup.html ? "yes" : "no"));
   }
   
 };
+
+Components.utils.import("resource://foxreplace/defs.js");
+Components.utils.import("resource://foxreplace/io.js");
+Components.utils.import("resource://foxreplace/prefs.js", foxreplaceOptions);
+Components.utils.import("resource://foxreplace/services.js", foxreplaceOptions);

@@ -40,7 +40,6 @@
           xmlns:html="http://www.w3.org/1999/xhtml">
   <binding id="inputTextBox">
     <resources>
-      <script src="chrome://foxreplace/content/defs.js"/>
       <stylesheet src="chrome://foxreplace/skin/bindings.css"/>
     </resources>
     <content onfocus="this.focus();">
@@ -62,6 +61,7 @@
     </content>
     <implementation>
       <constructor>
+        Components.utils.import("resource://foxreplace/defs.js");
         this.inputType = FxRSubstitution.prototype.INPUT_TEXT;
       </constructor>
       <field name="_button" readonly="true">

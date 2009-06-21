@@ -38,14 +38,11 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://foxreplace/skin/substitutiongroupeditor.css" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://foxreplace/locale/substitutiongroupeditor.dtd">
-<dialog id="foxreplaceDialogSubstitutionGroupEditor" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&title;"
-        onload="foxreplaceSubstitutionGroupEditor.onLoad();" ondialogaccept="return foxreplaceSubstitutionGroupEditor.onAccept();">
-  <script src="defs.js"/>
-  <script src="io.js"/>
+<dialog id="foxreplaceDialogSubstitutionGroupEditor"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&title;"
+        onload="foxreplaceSubstitutionGroupEditor.onLoad();"
+        ondialogaccept="return foxreplaceSubstitutionGroupEditor.onAccept();">
   <script src="substitutiongroupeditor.js"/>
-  <stringbundleset id="stringbundleset">
-    <stringbundle id="fxrStrings" src="chrome://foxreplace/locale/foxreplace.properties"/>
-  </stringbundleset>
   <description>&description;</description>
   <groupbox id="urlsGroupBox">
     <caption label="&urls;"/>
@@ -57,7 +54,8 @@
               oncommand="foxreplaceSubstitutionGroupEditor.addUrl();"/>
       <button id="okEditUrlButton" hidden="true" label="&okEditUrlButton.label;" accesskey="&okEditUrlButton.accesskey;"
               oncommand="foxreplaceSubstitutionGroupEditor.okEditUrl();"/>
-      <button id="cancelEditUrlButton" hidden="true" label="&cancelEditUrlButton.label;" accesskey="&cancelEditUrlButton.accesskey;"
+      <button id="cancelEditUrlButton" hidden="true" label="&cancelEditUrlButton.label;"
+              accesskey="&cancelEditUrlButton.accesskey;"
               oncommand="foxreplaceSubstitutionGroupEditor.cancelEditUrl();"/>
     </hbox>
     <hbox>
@@ -70,29 +68,35 @@
       <vbox>
         <button id="editUrlButton" disabled="true" label="&editUrlButton.label;" accesskey="&editUrlButton.accesskey;"
                 oncommand="foxreplaceSubstitutionGroupEditor.startEditUrl();"/>
-        <button id="deleteUrlButton" disabled="true" label="&deleteUrlButton.label;" accesskey="&deleteUrlButton.accesskey;"
-                oncommand="foxreplaceSubstitutionGroupEditor.deleteUrl();"/>
-        <button id="clearUrlsButton" disabled="true" label="&clearUrlsButton.label;" accesskey="&clearUrlsButton.accesskey;"
-                oncommand="foxreplaceSubstitutionGroupEditor.clearUrls();"/>
+        <button id="deleteUrlButton" disabled="true" label="&deleteUrlButton.label;"
+                accesskey="&deleteUrlButton.accesskey;" oncommand="foxreplaceSubstitutionGroupEditor.deleteUrl();"/>
+        <button id="clearUrlsButton" disabled="true" label="&clearUrlsButton.label;"
+                accesskey="&clearUrlsButton.accesskey;" oncommand="foxreplaceSubstitutionGroupEditor.clearUrls();"/>
       </vbox>
     </hbox>
   </groupbox>
   <groupbox id="substitutionsGroupBox">
     <caption label="&substitutions;"/>
     <hbox align="center">
-      <label id="inputStringLabel" control="inputStringTextBox" value="&inputString.label;" accesskey="&inputString.accesskey;"/>
+      <label id="inputStringLabel" control="inputStringTextBox" value="&inputString.label;"
+             accesskey="&inputString.accesskey;"/>
       <textbox id="inputStringTextBox" flex="1" oninput="foxreplaceSubstitutionGroupEditor.onSubstitutionInput();"
                onkeypress="foxreplaceSubstitutionGroupEditor.onSubstitutionKeyPress(event);"/>
-      <label id="outputStringLabel" control="outputStringTextBox" value="&outputString.label;" accesskey="&outputString.accesskey;"/>
-      <textbox id="outputStringTextBox" flex="1" onkeypress="foxreplaceSubstitutionGroupEditor.onSubstitutionKeyPress(event);"/>
+      <label id="outputStringLabel" control="outputStringTextBox" value="&outputString.label;"
+             accesskey="&outputString.accesskey;"/>
+      <textbox id="outputStringTextBox" flex="1"
+               onkeypress="foxreplaceSubstitutionGroupEditor.onSubstitutionKeyPress(event);"/>
       <checkbox id="caseSensitiveCheckBox" label="&caseSensitive.label;" accesskey="&caseSensitive.accesskey;"
                 onkeypress="foxreplaceSubstitutionGroupEditor.onSubstitutionKeyPress(event);"/>
-      <button id="addSubstitutionButton" disabled="true" label="&addSubstitutionButton.label;" accesskey="&addSubstitutionButton.accesskey;"
+      <button id="addSubstitutionButton" disabled="true" label="&addSubstitutionButton.label;"
+              accesskey="&addSubstitutionButton.accesskey;"
               oncommand="foxreplaceSubstitutionGroupEditor.addSubstitution();"/>
       <button id="okEditSubstitutionButton" hidden="true" label="&okEditSubstitutionButton.label;"
-              accesskey="&okEditSubstitutionButton.accesskey;" oncommand="foxreplaceSubstitutionGroupEditor.okEditSubstitution();"/>
+              accesskey="&okEditSubstitutionButton.accesskey;"
+              oncommand="foxreplaceSubstitutionGroupEditor.okEditSubstitution();"/>
       <button id="cancelEditSubstitutionButton" hidden="true" label="&cancelEditSubstitutionButton.label;"
-              accesskey="&cancelEditSubstitutionButton.accesskey;" oncommand="foxreplaceSubstitutionGroupEditor.cancelEditSubstitution();"/>
+              accesskey="&cancelEditSubstitutionButton.accesskey;"
+              oncommand="foxreplaceSubstitutionGroupEditor.cancelEditSubstitution();"/>
     </hbox>
     <hbox>
       <listbox id="substitutionsListBox" flex="1" rows="10"
@@ -120,16 +124,21 @@
       </listbox>
       <vbox>
         <button id="moveUpSubstitutionButton" disabled="true" label="&moveUpSubstitutionButton.label;"
-                accesskey="&moveUpSubstitutionButton.accesskey;" oncommand="foxreplaceSubstitutionGroupEditor.moveUpSubstitution();"/>
+                accesskey="&moveUpSubstitutionButton.accesskey;"
+                oncommand="foxreplaceSubstitutionGroupEditor.moveUpSubstitution();"/>
         <button id="moveDownSubstitutionButton" disabled="true" label="&moveDownSubstitutionButton.label;"
-                accesskey="&moveDownSubstitutionButton.accesskey;" oncommand="foxreplaceSubstitutionGroupEditor.moveDownSubstitution();"/>
+                accesskey="&moveDownSubstitutionButton.accesskey;"
+                oncommand="foxreplaceSubstitutionGroupEditor.moveDownSubstitution();"/>
         <separator/>
-        <button id="editSubstitutionButton" disabled="true" label="&editSubstitutionButton.label;" accesskey="&editSubstitutionButton.accesskey;"
+        <button id="editSubstitutionButton" disabled="true" label="&editSubstitutionButton.label;"
+                accesskey="&editSubstitutionButton.accesskey;"
                 oncommand="foxreplaceSubstitutionGroupEditor.startEditSubstitution();"/>
         <button id="deleteSubstitutionButton" disabled="true" label="&deleteSubstitutionButton.label;"
-                accesskey="&deleteSubstitutionButton.accesskey;" oncommand="foxreplaceSubstitutionGroupEditor.deleteSubstitution();"/>
+                accesskey="&deleteSubstitutionButton.accesskey;"
+                oncommand="foxreplaceSubstitutionGroupEditor.deleteSubstitution();"/>
         <button id="clearSubstitutionsButton" disabled="true" label="&clearSubstitutionsButton.label;"
-                accesskey="&clearSubstitutionsButton.accesskey;" oncommand="foxreplaceSubstitutionGroupEditor.clearSubstitutions();"/>
+                accesskey="&clearSubstitutionsButton.accesskey;"
+                oncommand="foxreplaceSubstitutionGroupEditor.clearSubstitutions();"/>
       </vbox>
     </hbox>
   </groupbox>

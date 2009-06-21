@@ -253,7 +253,7 @@ var foxreplaceSubstitutionGroupEditor = {
         substitution = new FxRSubstitution(inputString, outputString, caseSensitive, inputType);
       }
       catch (se) {  // SyntaxError
-        foxreplaceIO.alert(foxreplaceIO.strings.getString("regExpError"), se);
+        this.prompts.alert(this.getLocalizedString("regExpError"), se);
         return;
       }
     }
@@ -267,7 +267,7 @@ var foxreplaceSubstitutionGroupEditor = {
     substitutionItem.appendChild(inputStringCell);
     
     var inputTypeCell = document.createElement("listcell");
-    inputTypeCell.setAttribute("label", foxreplaceIO.strings.getString(FxRSubstitution.prototype.INPUT_TYPE_STRINGS[inputType]));
+    inputTypeCell.setAttribute("label", this.getLocalizedString(FxRSubstitution.prototype.INPUT_TYPE_STRINGS[inputType]));
     substitutionItem.appendChild(inputTypeCell);
     
     var outputStringCell = document.createElement("listcell");
@@ -275,7 +275,7 @@ var foxreplaceSubstitutionGroupEditor = {
     substitutionItem.appendChild(outputStringCell);
     
     var caseSensitiveCell = document.createElement("listcell");
-    caseSensitiveCell.setAttribute("label", foxreplaceIO.strings.getString(caseSensitive ? "yes" : "no"));
+    caseSensitiveCell.setAttribute("label", this.getLocalizedString(caseSensitive ? "yes" : "no"));
     substitutionItem.appendChild(caseSensitiveCell);
     
     this._substitutionsListBox.appendChild(substitutionItem);
@@ -419,16 +419,16 @@ var foxreplaceSubstitutionGroupEditor = {
       substitution = new FxRSubstitution(inputString, outputString, caseSensitive, inputType);
     }
     catch (se) {  // SyntaxError
-      foxreplaceIO.alert(foxreplaceIO.strings.getString("regExpError"), se);
+      this.prompts.alert(this.getLocalizedString("regExpError"), se);
       return;
     }
     
     var substitutionItem = this._substitutionsListBox.selectedItem;
     substitutionItem.substitution = substitution;
     substitutionItem.childNodes[0].setAttribute("label", inputString);
-    substitutionItem.childNodes[1].setAttribute("label", foxreplaceIO.strings.getString(FxRSubstitution.prototype.INPUT_TYPE_STRINGS[inputType]));
+    substitutionItem.childNodes[1].setAttribute("label", this.getLocalizedString(FxRSubstitution.prototype.INPUT_TYPE_STRINGS[inputType]));
     substitutionItem.childNodes[2].setAttribute("label", outputString);
-    substitutionItem.childNodes[3].setAttribute("label", foxreplaceIO.strings.getString(caseSensitive ? "yes" : "no"));
+    substitutionItem.childNodes[3].setAttribute("label", this.getLocalizedString(caseSensitive ? "yes" : "no"));
     
     // Clear fields
     inputStringTextBox.value = "";
@@ -541,7 +541,7 @@ var foxreplaceSubstitutionGroupEditor = {
     var nSubstitutions = this._substitutionsListBox.getRowCount();
     
     if (nSubstitutions == 0) {
-      foxreplaceIO.alert(foxreplaceIO.strings.getString("noSubstitutionsTitle"), foxreplaceIO.strings.getString("noSubstitutionsDescription"));
+      this.prompts.alert(this.getLocalizedString("noSubstitutionsTitle"), this.getLocalizedString("noSubstitutionsDescription"));
       
       return false;
     }
@@ -565,3 +565,6 @@ var foxreplaceSubstitutionGroupEditor = {
   }
   
 };
+
+Components.utils.import("resource://foxreplace/defs.js");
+Components.utils.import("resource://foxreplace/services.js", foxreplaceSubstitutionGroupEditor);
