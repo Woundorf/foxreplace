@@ -113,14 +113,14 @@ var prefs = {
   /**
    * Loads the replace URLs setting from preferences and returns it.
    */
-  get loadReplaceUrls() {
+  get replaceUrls() {
     return this.service.getBoolPref("replaceUrls");
   },
   
   /**
    * Saves the replace URLs setting to preferences.
    */
-  set saveReplaceUrls(aReplaceUrls) {
+  set replaceUrls(aReplaceUrls) {
     this.service.setBoolPref("replaceUrls", aReplaceUrls);
   },
   

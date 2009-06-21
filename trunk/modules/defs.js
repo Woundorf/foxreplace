@@ -39,7 +39,7 @@
  */
 
 var EXPORTED_SYMBOLS = ["FxRSubstitution", "FxRSubstitutionGroup",
-                        "fxrSubstitutionListFromXml", "fxrSubstitutionListToXml"];
+                        "fxrSubstitutionListFromXml", "fxrSubstitutionListToXml", "fxrIsExclusionUrl"];
 
 /**
  * Substitution.
@@ -262,6 +262,13 @@ function fxrSubstitutionListToXml(aSubstitutionList) {
   return listXml;
 }
 
+/**
+ * Returns whether aUrl is an exclusion URL or not (it is an exclusion URL if it starts with "-").
+ */
+function fxrIsExclusionUrl(aUrl) {
+  return /^-.*/.test(aUrl);
+}
+
 ////////////////////////////////////// Non-exported functions ////////////////////////////////////// 
 
 /**
@@ -295,13 +302,6 @@ function fxrNumberToHex(aNumber, aDigits) {
   
   return hex;
 };
-
-/**
- * Returns whether aUrl is an exclusion URL or not (it is an exclusion URL if it starts with "-").
- */
-function fxrIsExclusionUrl(aUrl) {
-  return /^-.*/.test(aUrl);
-}
 
 /**
  * Returns aUrl removing the exclusion part.
