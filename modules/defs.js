@@ -54,10 +54,11 @@ function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) {
   
   switch (this.inputType) {
     case this.INPUT_WHOLE_WORDS:
-      var suffix = fxrIsWordChar(aInput.charAt(aInput.length - 1)) ? this.WW_REGEXP_WORD_END
-                                                                   : this.WW_REGEXP_NONWORD_END;
-      this._regExp = new RegExp(fxrStringToUnicode(aInput) + suffix, aCaseSensitive ? "g" : "gi");
-      this._firstCharIsWordChar = fxrIsWordChar(aInput.charAt(0));
+      var unescapedInput = fxrUnescape(aInput);
+      var suffix = fxrIsWordChar(unescapedInput.charAt(unescapedInput.length - 1)) ? this.WW_REGEXP_WORD_END
+                                                                                   : this.WW_REGEXP_NONWORD_END;
+      this._regExp = new RegExp(fxrStringToUnicode(unescapedInput) + suffix, aCaseSensitive ? "g" : "gi");
+      this._firstCharIsWordChar = fxrIsWordChar(unescapedInput.charAt(0));
       break;
     case this.INPUT_REG_EXP:
       this._regExp = new RegExp(aInput, aCaseSensitive ? "g" : "gi");
@@ -89,18 +90,20 @@ FxRSubstitution.prototype = {
     if (aString == undefined || aString == null) return aString;
     
     switch (this.inputType) {
-      case this.INPUT_TEXT: return aString.replace(this.input, this.output, this.caseSensitive ? "g" : "gi");
+      case this.INPUT_TEXT:
+        return aString.replace(fxrUnescape(this.input), fxrUnescape(this.output), this.caseSensitive ? "g" : "gi");
       case this.INPUT_WHOLE_WORDS:
         var self = this;
         function replaceWholeWord(aWord, aIndex, aString) {
           if (aIndex == 0 || self._firstCharIsWordChar != fxrIsWordChar(aString.charAt(aIndex - 1))) {
+            var output = fxrUnescape(self.output);
             var re = /\$[\$\&\`\']/g;
-            var fragments = self.output.split(re);
+            var fragments = output.split(re);
             var nFragments = fragments.length;
             var result = fragments[0];
             var i = fragments[0].length + 1;    // index of the char after the $
             for (var j = 1; j < nFragments; j++) {
-              var c = self.output.charAt(i);
+              var c = output.charAt(i);
               if (c == "$") result += "$";
               else if (c == "&") result += aWord;
               else if (c == "`") result += aString.slice(0, aIndex);
@@ -113,7 +116,7 @@ FxRSubstitution.prototype = {
           else return aWord;
         }
         return aString.replace(this._regExp, replaceWholeWord);
-      case this.INPUT_REG_EXP: return aString.replace(this._regExp, this.output);
+      case this.INPUT_REG_EXP: return aString.replace(this._regExp, fxrUnescape(this.output));
     }
   },
   /**
@@ -270,6 +273,19 @@ function fxrIsExclusionUrl(aUrl) {
 }
 
 ////////////////////////////////////// Non-exported functions ////////////////////////////////////// 
+
+/**
+ * Unescapes backslash-escaped special characters in aString.
+ */
+function fxrUnescape(aString) {
+  return aString.replace(/\\./g, function(str) {
+                                   if (str == "\\\\") return "\\";
+                                   if (str == "\\n") return "\n";
+                                   if (str == "\\r") return "\r";
+                                   if (str == "\\t") return "\t";
+                                   return str;
+                                 });
+}
 
 /**
  * Returns true if aChar is a word char and false otherwise.
