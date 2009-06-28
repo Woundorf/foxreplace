@@ -1,8 +1,9 @@
 /* rect(top, right, bottom, left) */
-/*
+
 @import url("chrome://global/skin/findBar.css");
-amb això i posant que el botó de tancar sigui de la classe findbar-closebutton
-es resol bastant el tema de l'aparença, però només per Firefox 3
+/*
+amb aixÃ² i posant que el botÃ³ de tancar sigui de la classe findbar-closebutton
+es resol bastant el tema de l'aparenÃ§a, perÃ² nomÃ©s per Firefox 3
 */
 
 #fxrMenuEditReplace, #fxrMenuToolsFoxReplace, #fxrMenuContextFoxReplace {
@@ -32,7 +33,7 @@ toolbar[iconsize="small"] #fxrToolbarButton:hover {
   -moz-border-bottom-colors: transparent;
   min-width: 1px;
 }
-
+/*
 #fxrReplaceBarCloseButton {
   border: 1px solid transparent;
   padding: 3px 2px 4px 2px !important;
@@ -50,7 +51,7 @@ toolbar[iconsize="small"] #fxrToolbarButton:hover {
 }
 #fxrReplaceBarCloseButton:hover:active {
   -moz-image-region: rect(0px, 42px, 14px, 28px);
-}
+}*/
 #fxrReplaceBarInputStringTextBox, #fxrReplaceBarOutputStringTextBox {
   width: 20em;
 }
