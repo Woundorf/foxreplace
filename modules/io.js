@@ -181,6 +181,9 @@ function fxrShowFileDialog(aMode) {
   try {
     const nsIFP = Components.interfaces.nsIFilePicker;
     var fileDialog = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFP);
+    var windowMediator = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                                   .getService(Components.interfaces.nsIWindowMediator);
+    var window = windowMediator.getMostRecentWindow("");
     fileDialog.init(window, title, aMode == "import" ? nsIFP.modeOpen : nsIFP.modeSave);
     fileDialog.appendFilters(nsIFP.filterXML);
     fileDialog.appendFilters(nsIFP.filterAll);
