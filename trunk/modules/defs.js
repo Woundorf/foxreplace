@@ -66,13 +66,18 @@ function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) {
   }
 }
 /**
- * Creates a substitution from an XML object.
+ * Creates a substitution from an XML object. If aEscape is true, input and output strings will be backslash-escaped.
  */
-FxRSubstitution.fromXml = function(aXml) {
+FxRSubstitution.fromXml = function(aXml, aEscape) {
   var input = aXml.input.toString().slice(1, -1);   // to remove quotes
   var output = aXml.output.toString().slice(1, -1); // to remove quotes
   var caseSensitive = aXml.@casesensitive.toString() == "true";
   var inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(aXml.input.@type.toString());
+  
+  if (aEscape) {
+    if (inputType != this.prototype.INPUT_REG_EXP) input = fxrEscape(input);
+    output = fxrEscape(output);
+  }
   
   try {
     return new FxRSubstitution(input, output, caseSensitive, inputType);
@@ -145,15 +150,11 @@ FxRSubstitution.prototype.WW_REGEXP_NONWORD_END = "(?![^" + FxRSubstitution.prot
 
 /**
  * Substitution group, including an URL list and a substitution list. If aHtml is true, substitutions are done in HTML.
- * If aNoExclusions is true, URLs won't be interpreted as exclusion URLs.
  */
-function FxRSubstitutionGroup(aUrls, aSubstitutions, aHtml, aNoExclusions) {
+function FxRSubstitutionGroup(aUrls, aSubstitutions, aHtml) {
   this.urls = aUrls || [];
   this.substitutions = aSubstitutions || [];
   this.html = Boolean(aHtml);
-  var noExclusions = Boolean(aNoExclusions);
-  // transform URLs that would be interpreted as exclusions to clean equivalents
-  if (noExclusions) this.urls = this.urls.map(function(element) { return fxrCleanNoExclusionUrl(element); });
   this.urls.sort();
   this.urlRegExps = [];
   this.exclusionUrlRegExps = [];
@@ -214,10 +215,10 @@ FxRSubstitutionGroup.prototype = {
   }
 };
 /**
- * Creates a substitution group from an XML object. If aNoExclusions is true, URLs won't be interpreted as exclusion
- * URLs.
+ * Creates a substitution group from an XML object. If aEscape is true, input and output strings will be
+ * backslash-escaped.
  */
-FxRSubstitutionGroup.fromXml = function(aXml, aNoExclusions) {
+FxRSubstitutionGroup.fromXml = function(aXml, aEscape) {
   var urls = [];
   for each (var url in aXml.urls.url) urls.push(url.toString());
   
@@ -225,7 +226,7 @@ FxRSubstitutionGroup.fromXml = function(aXml, aNoExclusions) {
   var errors = "";
   for each (var substitution in aXml.substitutions.substitution) {
     try {
-      substitutions.push(FxRSubstitution.fromXml(substitution));
+      substitutions.push(FxRSubstitution.fromXml(substitution, aEscape));
     }
     catch (e) {
       XML.prettyPrinting = false;
@@ -238,7 +239,7 @@ FxRSubstitutionGroup.fromXml = function(aXml, aNoExclusions) {
   if (errors) foxreplaceIO.alert(foxreplaceIO.strings.getString("xmlErrorTitle"),
                                  foxreplaceIO.strings.getString("xmlGroupErrorText") + "\n" + errors);
   
-  return new FxRSubstitutionGroup(urls, substitutions, html, aNoExclusions);
+  return new FxRSubstitutionGroup(urls, substitutions, html);
 };
 
 /**
@@ -246,9 +247,9 @@ FxRSubstitutionGroup.fromXml = function(aXml, aNoExclusions) {
  */
 function fxrSubstitutionListFromXml(aListXml) {
   var substitutionList = [];
-  var noExclusions = aListXml.@version == "0.8";
+  var escape = aListXml.@version == "0.10";
   
-  for each (var group in aListXml.group) substitutionList.push(FxRSubstitutionGroup.fromXml(group, noExclusions));
+  for each (var group in aListXml.group) substitutionList.push(FxRSubstitutionGroup.fromXml(group, escape));
   
   return substitutionList;
 }
@@ -257,7 +258,7 @@ function fxrSubstitutionListFromXml(aListXml) {
  * Creates an XML object from the substitution list.
  */
 function fxrSubstitutionListToXml(aSubstitutionList) {
-  var listXml = <substitutionlist version="0.10"/>;
+  var listXml = <substitutionlist version="0.12"/>;
   var nSubstitutions = aSubstitutionList.length;
   
   for (var i = 0; i < nSubstitutions; i++) listXml.appendChild(aSubstitutionList[i].toXml());
@@ -273,6 +274,13 @@ function fxrIsExclusionUrl(aUrl) {
 }
 
 ////////////////////////////////////// Non-exported functions ////////////////////////////////////// 
+
+/**
+ * Escapes special characters in aString with a backslash combination.
+ */
+function fxrEscape(aString) {
+  return aString.replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t");
+}
 
 /**
  * Unescapes backslash-escaped special characters in aString.
@@ -324,13 +332,5 @@ function fxrNumberToHex(aNumber, aDigits) {
  */
 function fxrCleanExclusionUrl(aUrl) {
   if (fxrIsExclusionUrl(aUrl)) return aUrl.slice(1);
-  else return aUrl;
-}
-
-/**
- * Returns aUrl transformed so it isn't interpreted as an exclusion URL.
- */
-function fxrCleanNoExclusionUrl(aUrl) {
-  if (fxrIsExclusionUrl(aUrl)) return "|*" + aUrl;
   else return aUrl;
 }
