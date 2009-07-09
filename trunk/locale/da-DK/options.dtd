@@ -19,8 +19,6 @@
 <!ENTITY moveDownButton.accesskey "n">
 <!ENTITY importButton.label "Importer">
 <!ENTITY importButton.accesskey "I">
-<!ENTITY importFromUrlButton.label "Import from URL">
-<!ENTITY importFromUrlButton.accesskey "m">
 <!ENTITY exportButton.label "Eksporter">
 <!ENTITY exportButton.accesskey "E">
 <!ENTITY autoReplaceOnLoad.label "Auto-erstat ved sideindlæsning">
