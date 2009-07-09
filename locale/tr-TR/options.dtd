@@ -1,11 +1,11 @@
-<!ENTITY prefwindow.title "FoxReplace options">
-<!ENTITY mainPane.title "Main">
-<!ENTITY description "Enter the substitution list. The list is composed of substitution groups, where the substitutions of each group are applied if any of the group URLs matches the address of the loaded page. If the group has no URLs its substitutions are applied to any page. Groups are checked in the order they appear.">
+<!ENTITY prefwindow.title "FoxReplace ayarları">
+<!ENTITY mainPane.title "menü">
+<!ENTITY description "Değiştirmede listesine girin. Bu liste ikame gruplar, burada her grup ve değiştirmelerin uygulanır oluşmaktadır varsa URL&apos;lerin yüklü sayfasının adresini eşleşen grup. Eğer grup onun yerine herhangi bir sayfaya uygulanır hiçbir URL&apos;leri vardır. Grup görünmesini sırayla kontrol edilir.">
 <!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Değiştir">
 <!ENTITY outputStringHeader "ile">
 <!ENTITY htmlHeader "HTML">
-<!ENTITY addButton.label "Add">
+<!ENTITY addButton.label "Ekle">
 <!ENTITY addButton.accesskey "A">
 <!ENTITY editButton.label "Düzenle">
 <!ENTITY editButton.accesskey "E">
@@ -13,17 +13,17 @@
 <!ENTITY deleteButton.accesskey "D">
 <!ENTITY clearButton.label "Temizle">
 <!ENTITY clearButton.accesskey "C">
-<!ENTITY moveUpButton.label "Move up">
+<!ENTITY moveUpButton.label "Yukarı kaydır">
 <!ENTITY moveUpButton.accesskey "u">
-<!ENTITY moveDownButton.label "Move down">
+<!ENTITY moveDownButton.label "aşağı kaydır">
 <!ENTITY moveDownButton.accesskey "o">
 <!ENTITY importButton.label "dosya al">
 <!ENTITY importButton.accesskey "I">
-<!ENTITY importFromUrlButton.label "Import from URL">
+<!ENTITY importFromUrlButton.label "URL&apos;den al">
 <!ENTITY importFromUrlButton.accesskey "m">
 <!ENTITY exportButton.label "dosya ver">
 <!ENTITY exportButton.accesskey "x">
-<!ENTITY autoReplaceOnLoad.label "Auto-replace on page load">
+<!ENTITY autoReplaceOnLoad.label "Otomatik sayfa yük üzerinde yerini">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
-<!ENTITY replaceUrls.label "Replace URLs (links and image sources) (Warning: this may change page behaviour!)">
+<!ENTITY replaceUrls.label "Bu sayfa davranışlarını değiştirebilir (Uyarı: URL&apos;ler (link ve resim kaynakları değiştirin!)">
 <!ENTITY replaceUrls.accesskey "R">
