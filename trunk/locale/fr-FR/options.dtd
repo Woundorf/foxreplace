@@ -23,6 +23,12 @@
 <!ENTITY importFromUrlButton.accesskey "r">
 <!ENTITY exportButton.label "Exporter">
 <!ENTITY exportButton.accesskey "x">
+<!ENTITY subscriptionCheckBox.label "Mettre à jour à partir de l&apos;URL">
+<!ENTITY subscriptionCheckBox.accesskey "p">
+<!ENTITY subscriptionUrl.label "URL">
+<!ENTITY subscriptionUrl.accesskey "R">
+<!ENTITY subscriptionPeriod.label "Intervalle (minutes)">
+<!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "Remplacer automatiquement lors du chargement de la page">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
 <!ENTITY replaceUrls.label "Remplacer les URLs (liens et sources des images) - Avertissement : cela modifiera le comportement de la page !">
