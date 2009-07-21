@@ -2,7 +2,7 @@
 <!ENTITY h1 "FoxReplace help">
 <!ENTITY p "This extension allows you to replace text fragments (strings) in a page by other text fragments. The system is based on substitutions, where each substitution has an input text which has to be replaced (the &quot;Replace&quot; field) and an output text by which the first has to be replaced (the &quot;With&quot; field). There are additional options for the substitutions that are explained below. When a substitution is applied it&apos;s over the whole content of a page (you can&apos;t do partial substitutions at the moment).">
 <!ENTITY substitution "Substitution">
-<!ENTITY substitution.p "Has an input string and an output string, and the option to match case or not.">
+<!ENTITY substitution.p "It always has an input string and an output string. The output string can be empty (to remove text), but the input string must have at least one character. Optionally the substitution can be case-sensitive.">
 <!ENTITY substitution.inputString "Input string: the text string that will be replaced. It can&apos;t be empty. It can have of one of these 3 types:">
 <!ENTITY substitution.inputString.text "Text: it&apos;s interpreted as a character string without any particularities.">
 <!ENTITY substitution.inputString.wholeWords "Whole words: it&apos;s interpreted as one or more whole words. For example, &quot;active&quot; wouldn&apos;t match &quot;interactive&quot; (it would match if it was normal text).">
@@ -33,7 +33,7 @@
 <!ENTITY newGui "New menu and toolbar elements">
 <!ENTITY newGui.edit "Edit">
 <!ENTITY newGui.edit.replace "Replace... (Shift+F2)">
-<!ENTITY newGui.edit.replace.d "Lets you define a substitution and apply it instantly.">
+<!ENTITY newGui.edit.replace.d "Shows the replace bar.">
 <!ENTITY newGui.tools "Tools">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
 <!ENTITY newGui.tools.foxreplace.replace "Replace with substitution list (F2)">
