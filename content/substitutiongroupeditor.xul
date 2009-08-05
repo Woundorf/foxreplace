@@ -109,9 +109,9 @@
           <listheader label="&caseSensitiveHeader;"/>
         </listhead>
         <listcols>
-          <listcol flex="1"/>
+          <listcol flex="1" minwidth="64"/>
           <listcol/>
-          <listcol flex="1"/>
+          <listcol flex="1" minwidth="64"/>
           <listcol/>
         </listcols>
         <!-- workaround for listbox height -->
