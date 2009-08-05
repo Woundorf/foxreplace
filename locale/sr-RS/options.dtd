@@ -23,12 +23,12 @@
 <!ENTITY importFromUrlButton.accesskey "а">
 <!ENTITY exportButton.label "Извоз">
 <!ENTITY exportButton.accesskey "з">
-<!ENTITY subscriptionCheckBox.label "Update from URL">
-<!ENTITY subscriptionCheckBox.accesskey "p">
-<!ENTITY subscriptionUrl.label "URL">
-<!ENTITY subscriptionUrl.accesskey "R">
-<!ENTITY subscriptionPeriod.label "Period (minutes)">
-<!ENTITY subscriptionPeriod.accesskey "n">
+<!ENTITY subscriptionCheckBox.label "Ажурирање са адресе">
+<!ENTITY subscriptionCheckBox.accesskey "п">
+<!ENTITY subscriptionUrl.label "Адреса">
+<!ENTITY subscriptionUrl.accesskey "А">
+<!ENTITY subscriptionPeriod.label "Период (минута)">
+<!ENTITY subscriptionPeriod.accesskey "д">
 <!ENTITY autoReplaceOnLoad.label "Аутоматски замени приликом учитавања странице">
 <!ENTITY autoReplaceOnLoad.accesskey "т">
 <!ENTITY replaceUrls.label "Замени адресе (везе и изворе слика) (Упозорење: ово може утицати на понашање странице!)">

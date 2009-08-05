@@ -1,0 +1,3 @@
+<!ENTITY text "文本">
+<!ENTITY wholeWords "全词匹配">
+<!ENTITY regExp "正则表达式">
