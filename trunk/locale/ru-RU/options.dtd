@@ -23,13 +23,13 @@
 <!ENTITY importFromUrlButton.accesskey "п">
 <!ENTITY exportButton.label "Экспорт">
 <!ENTITY exportButton.accesskey "к">
-<!ENTITY subscriptionCheckBox.label "Update from URL">
-<!ENTITY subscriptionCheckBox.accesskey "p">
-<!ENTITY subscriptionUrl.label "URL">
-<!ENTITY subscriptionUrl.accesskey "R">
-<!ENTITY subscriptionPeriod.label "Period (minutes)">
-<!ENTITY subscriptionPeriod.accesskey "n">
+<!ENTITY subscriptionCheckBox.label "Обновить с адреса">
+<!ENTITY subscriptionCheckBox.accesskey "б">
+<!ENTITY subscriptionUrl.label "Адрес">
+<!ENTITY subscriptionUrl.accesskey "р">
+<!ENTITY subscriptionPeriod.label "Промежуток (минуты)">
+<!ENTITY subscriptionPeriod.accesskey "ж">
 <!ENTITY autoReplaceOnLoad.label "Автозамена при загрузке страницы">
 <!ENTITY autoReplaceOnLoad.accesskey "т">
 <!ENTITY replaceUrls.label "Заменять адреса (ссылок и изображений). ВНИМАНИЕ! Это изменит поведение страницы.">
-<!ENTITY replaceUrls.accesskey "т">
+<!ENTITY replaceUrls.accesskey "с">

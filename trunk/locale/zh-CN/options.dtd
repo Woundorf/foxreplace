@@ -1,0 +1,35 @@
+<!ENTITY prefwindow.title "FoxReplace 选项">
+<!ENTITY mainPane.title "主要">
+<!ENTITY description "输入替换列表。这份名单是由替代群体，在每个小组都适用，如果任何组的URL匹配的地址加载页面。如果该组没有网址将适用于任何网页。按组的顺序检查。">
+<!ENTITY urlHeader "URL">
+<!ENTITY inputStringHeader "替换">
+<!ENTITY outputStringHeader "用">
+<!ENTITY htmlHeader "HTML">
+<!ENTITY addButton.label "添加">
+<!ENTITY addButton.accesskey "A">
+<!ENTITY editButton.label "编辑">
+<!ENTITY editButton.accesskey "E">
+<!ENTITY deleteButton.label "删除">
+<!ENTITY deleteButton.accesskey "D">
+<!ENTITY clearButton.label "高处">
+<!ENTITY clearButton.accesskey "C">
+<!ENTITY moveUpButton.label "上移">
+<!ENTITY moveUpButton.accesskey "u">
+<!ENTITY moveDownButton.label "下移">
+<!ENTITY moveDownButton.accesskey "o">
+<!ENTITY importButton.label "导入">
+<!ENTITY importButton.accesskey "I">
+<!ENTITY importFromUrlButton.label "从 URL 导入">
+<!ENTITY importFromUrlButton.accesskey "m">
+<!ENTITY exportButton.label "导出">
+<!ENTITY exportButton.accesskey "x">
+<!ENTITY subscriptionCheckBox.label "从 URL 更新">
+<!ENTITY subscriptionCheckBox.accesskey "p">
+<!ENTITY subscriptionUrl.label "URL">
+<!ENTITY subscriptionUrl.accesskey "R">
+<!ENTITY subscriptionPeriod.label "周期(分钟)">
+<!ENTITY subscriptionPeriod.accesskey "n">
+<!ENTITY autoReplaceOnLoad.label "在网页加载时自动替换">
+<!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY replaceUrls.label "替换网址（链接和图片来源）（警告：这可能改变网页的运行！）">
+<!ENTITY replaceUrls.accesskey "I">
