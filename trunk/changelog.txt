@@ -1,3 +1,6 @@
+v0.12.1
+* Added minimum width to some columns in the options and substitution group editor dialogs.
+
 v0.12.0 (21-7-2009)
 * Subscription to update the substitution list periodically from an URL.
 * Ability to use backslash-escaped characters in input (text and whole words) and output. Supported
