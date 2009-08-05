@@ -1,5 +1,6 @@
-v0.12.1
+v0.12.1 (5-8-2009)
 * Added minimum width to some columns in the options and substitution group editor dialogs.
+* Substitution group editor modified to reduce height.
 * New locale:
   - zh-CN (by yfdyh000).
 
