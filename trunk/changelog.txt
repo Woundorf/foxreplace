@@ -1,3 +1,6 @@
+v0.12.2 (10-8-2009)
+* Bugfix: the modules directory wasn't included in the XPI.
+
 v0.12.1 (5-8-2009)
 * Added minimum width to some columns in the options and substitution group editor dialogs.
 * Substitution group editor modified to reduce height.
