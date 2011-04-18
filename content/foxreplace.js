@@ -249,6 +249,8 @@ var foxreplace = {
     
     // Replace text nodes
     var textNodesXpath = "/html/head/title/text()"
+                       + "|/html/body/text()"
+                       + "|/html/body//body/text()" // this happens in Gmail (//iframe/html/body/text())
                        + "|/html/body//div/text()"
                        + "|/html/body//span/text()"
                        + "|/html/body//h1/text()"
