@@ -16,7 +16,7 @@
   -
   - The Initial Developer of the Original Code is
   - Marc Ruiz Altisent.
-  - Portions created by the Initial Developer are Copyright (C) 2007-2009
+  - Portions created by the Initial Developer are Copyright (C) 2007-2011
   - the Initial Developer. All Rights Reserved.
   -
   - Contributor(s):
@@ -40,51 +40,56 @@
 <overlay id="foxreplaceOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script src="chrome://foxreplace/content/foxreplace.js"/>
   <commandset>
-    <command id="fxrCmdListReplace" oncommand="foxreplace.listReplace();"/>
     <command id="fxrCmdShowReplaceBar" oncommand="foxreplace.showReplaceBar();"/>
-    <command id="fxrCmdInstantReplace" oncommand="foxreplace.instantReplace();"/>
+    <command id="fxrCmdBarReplace" oncommand="foxreplace.instantReplace();"/>
+    <command id="fxrCmdListReplace" oncommand="foxreplace.listReplace();"/>
+    <command id="fxrCmdToggleAutoReplaceOnLoad" oncommand="foxreplace.toggleAutoReplaceOnLoad();"/>
     <command id="fxrCmdOptions" oncommand="foxreplace.showOptions();"/>
     <command id="fxrCmdHelp" oncommand="foxreplace.showHelp();"/>
   </commandset>
   <keyset id="mainKeyset">
     <key id="fxrKeyListReplace" keycode="VK_F2" command="fxrCmdListReplace"/>
-    <key id="fxrKeyInstantReplace" modifiers="shift" keycode="VK_F2" command="fxrCmdShowReplaceBar"/>
+    <key id="fxrKeyShowReplaceBar" modifiers="shift" keycode="VK_F2" command="fxrCmdShowReplaceBar"/>
   </keyset>
+  <vbox id="appmenuPrimaryPane">
+    <splitmenu id="fxrAppMenuReplace" iconic="true" insertafter="appmenu_find" label="&menuReplace.label;" command="fxrCmdShowReplaceBar">
+      <menupopup>
+        <menuitem id="fxrAppMenuReplaceReplace" label="&menuReplace.label;" command="fxrCmdShowReplaceBar" key="fxrKeyShowReplaceBar"/>
+        <menuitem id="fxrAppMenuReplaceListReplace" label="&listReplace.label;" command="fxrCmdListReplace" key="fxrKeyListReplace"/>
+        <menuitem id="fxrAppMenuReplaceAutoReplaceOnLoad" label="&autoReplaceOnLoad.label;" command="fxrCmdToggleAutoReplaceOnLoad"/>
+        <menuitem id="fxrAppMenuReplaceOptions" label="&options.label;" command="fxrCmdOptions"/>
+        <menuseparator/>
+        <menuitem id="fxrAppMenuReplaceHelp" label="&help.label;" command="fxrCmdHelp"/>
+      </menupopup>
+    </splitmenu>
+  </vbox>
   <menupopup id="menu_EditPopup">
-    <menuitem id="fxrMenuEditReplace" class="menuitem-iconic" insertbefore="textfieldDirection-separator"
-              label="&menuEditReplace.label;" accesskey="&menuEditReplace.accesskey;" command="fxrCmdShowReplaceBar"
-              key="fxrKeyInstantReplace"/>
+    <menuitem id="fxrMenuEditReplace" class="menuitem-iconic" insertafter="menu_findAgain" label="&menuReplace.label;" accesskey="&menuReplace.accesskey;"
+              command="fxrCmdShowReplaceBar" key="fxrKeyShowReplaceBar"/>
   </menupopup>
   <menupopup id="menu_ToolsPopup">
-    <menu id="fxrMenuToolsFoxReplace" class="menu-iconic" label="&menuToolsFoxReplace.label;"
-          accesskey="&menuToolsFoxReplace.accesskey;" insertbefore="devToolsSeparator">
+    <menu id="fxrMenuToolsFoxReplace" class="menu-iconic" label="&menuToolsFoxReplace.label;" accesskey="&menuToolsFoxReplace.accesskey;" insertbefore="devToolsSeparator">
       <menupopup>
-        <menuitem id="fxrMenuToolsFoxReplaceReplace" label="&listReplace.label;" accesskey="&listReplace.accesskey;"
-                  command="fxrCmdListReplace" key="fxrKeyListReplace"/>
-        <menuitem id="fxrMenuToolsFoxReplaceAutoReplaceOnLoad" type="checkbox" label="&autoReplaceOnLoad.label;"
-                  accesskey="&autoReplaceOnLoad.accesskey;" oncommand="foxreplace.toggleAutoReplaceOnLoad(this);"/>
-        <menuitem id="fxrMenuToolsFoxReplaceOptions" label="&options.label;" accesskey="&options.accesskey;"
-                  command="fxrCmdOptions"/>
+        <menuitem id="fxrMenuToolsFoxReplaceReplace" label="&listReplace.label;" accesskey="&listReplace.accesskey;" command="fxrCmdListReplace" key="fxrKeyListReplace"/>
+        <menuitem id="fxrMenuToolsFoxReplaceAutoReplaceOnLoad" type="checkbox" label="&autoReplaceOnLoad.label;" accesskey="&autoReplaceOnLoad.accesskey;" command="fxrCmdToggleAutoReplaceOnLoad"/>
+        <menuitem id="fxrMenuToolsFoxReplaceOptions" label="&options.label;" accesskey="&options.accesskey;" command="fxrCmdOptions"/>
         <menuseparator/>
         <menuitem id="fxrMenuToolsHelp" label="&help.label;" accesskey="&help.accesskey;" command="fxrCmdHelp"/>
       </menupopup>
     </menu>
   </menupopup>
   <popup id="contentAreaContextMenu">
-    <menuitem id="fxrMenuContextFoxReplace" class="menuitem-iconic" label="&menuContextFoxReplace.label;"
-              accesskey="&menuContextFoxReplace.accesskey;" command="fxrCmdListReplace" key="fxrKeyListReplace"/>
+    <menuitem id="fxrContextMenuFoxReplace" class="menuitem-iconic" label="&contextMenuFoxReplace.label;" accesskey="&contextMenuFoxReplace.accesskey;"
+              command="fxrCmdListReplace" key="fxrKeyListReplace"/>
   </popup>
   <toolbarpalette id="BrowserToolbarPalette">
-    <toolbarbutton id="fxrToolbarButton" class="toolbarbutton-1 chromeclass-toolbar-additional" type="menu-button"
-                   label="&toolbarButton.label;" tooltiptext="&toolbarButton.tooltip;" command="fxrCmdListReplace">
+    <toolbarbutton id="fxrToolbarButton" class="toolbarbutton-1 chromeclass-toolbar-additional" type="menu-button" label="&toolbarButton.label;" tooltiptext="&toolbarButton.tooltip;"
+                   command="fxrCmdListReplace">
       <!-- stop event propagation to avoid executing button's command -->
       <menupopup oncommand="event.stopPropagation();">
-        <menuitem id="fxrToolbarButtonMenuReplace" label="&listReplace.label;" accesskey="&listReplace.accesskey;"
-                  command="fxrCmdListReplace" key="fxrKeyListReplace"/>
-        <menuitem id="fxrToolbarButtonMenuAutoReplaceOnLoad" type="checkbox" label="&autoReplaceOnLoad.label;"
-                  accesskey="&autoReplaceOnLoad.accesskey;" oncommand="foxreplace.toggleAutoReplaceOnLoad(this);"/>
-        <menuitem id="fxrToolbarButtonMenuOptions" label="&options.label;" accesskey="&options.accesskey;"
-                  command="fxrCmdOptions"/>
+        <menuitem id="fxrToolbarButtonMenuReplace" label="&listReplace.label;" accesskey="&listReplace.accesskey;" command="fxrCmdListReplace" key="fxrKeyListReplace"/>
+        <menuitem id="fxrToolbarButtonMenuAutoReplaceOnLoad" type="checkbox" label="&autoReplaceOnLoad.label;" accesskey="&autoReplaceOnLoad.accesskey;" command="fxrCmdToggleAutoReplaceOnLoad"/>
+        <menuitem id="fxrToolbarButtonMenuOptions" label="&options.label;" accesskey="&options.accesskey;" command="fxrCmdOptions"/>
         <menuseparator/>
         <menuitem id="fxrToolbarMenuHelp" label="&help.label;" accesskey="&help.accesskey;" command="fxrCmdHelp"/>
       </menupopup>
@@ -92,20 +97,14 @@
   </toolbarpalette>
   <vbox id="browser-bottombox">
     <toolbar id="fxrReplaceBar" insertafter="FindToolbar" align="center" fullscreentoolbar="true" hidden="true">
-      <toolbarbutton id="fxrReplaceBarCloseButton" class="findbar-closebutton" tooltiptext="&replaceBarClose;"
-                     oncommand="document.getElementById('fxrReplaceBar').hidden=true;"/>
-      <label id="fxrReplaceBarInputStringLabel" control="fxrReplaceBarInputStringTextBox"
-             value="&replaceBarInputString.label;" accesskey="&replaceBarInputString.accesskey;"/>
-      <textbox id="fxrReplaceBarInputStringTextBox"
-               oninput="document.getElementById('fxrReplaceBarReplaceButton').disabled=this.value==''"/>
-      <label id="fxrReplaceBarOutputStringLabel" control="fxrReplaceBarOutputStringTextBox"
-             value="&replaceBarOutputString.label;" accesskey="&replaceBarOutputString.accesskey;"/>
+      <toolbarbutton id="fxrReplaceBarCloseButton" class="findbar-closebutton" tooltiptext="&replaceBarClose;" oncommand="document.getElementById('fxrReplaceBar').hidden=true;"/>
+      <label id="fxrReplaceBarInputStringLabel" control="fxrReplaceBarInputStringTextBox" value="&replaceBarInputString.label;" accesskey="&replaceBarInputString.accesskey;"/>
+      <textbox id="fxrReplaceBarInputStringTextBox" oninput="document.getElementById('fxrReplaceBarReplaceButton').disabled=this.value==''"/>
+      <label id="fxrReplaceBarOutputStringLabel" control="fxrReplaceBarOutputStringTextBox" value="&replaceBarOutputString.label;" accesskey="&replaceBarOutputString.accesskey;"/>
       <textbox id="fxrReplaceBarOutputStringTextBox"/>
-      <checkbox id="fxrReplaceBarCaseSensitiveCheckBox" label="&replaceBarCaseSensitive.label;"
-                accesskey="&replaceBarCaseSensitive.accesskey;"/>
+      <checkbox id="fxrReplaceBarCaseSensitiveCheckBox" label="&replaceBarCaseSensitive.label;" accesskey="&replaceBarCaseSensitive.accesskey;"/>
       <checkbox id="fxrReplaceBarHtmlCheckBox" label="&replaceBarHtml.label;" accesskey="&replaceBarHtml.accesskey;"/>
-      <button id="fxrReplaceBarReplaceButton" disabled="true" label="&replaceBarReplace.label;"
-              accesskey="&replaceBarReplace.accesskey;" command="fxrCmdInstantReplace"/>
+      <button id="fxrReplaceBarReplaceButton" disabled="true" label="&replaceBarReplace.label;" accesskey="&replaceBarReplace.accesskey;" command="fxrCmdBarReplace"/>
     </toolbar>
   </vbox>
 </overlay>
