@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2009
+ * Portions created by the Initial Developer are Copyright (C) 2007-2011
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -166,12 +166,10 @@ var foxreplace = {
   },
   
   /**
-   * Sets auto-replace on load setting after toggling corresponding menu item.
+   * Toggles auto-replace on load setting.
    */
-  toggleAutoReplaceOnLoad: function(aMenuItem) {
-    // aMenuItem has already toggled its checked attribute
-    var autoReplaceOnLoad = Boolean(aMenuItem.getAttribute("checked"));
-    this.prefs.autoReplaceOnLoad = autoReplaceOnLoad;
+  toggleAutoReplaceOnLoad: function() {
+    this.prefs.autoReplaceOnLoad = !this.prefs.autoReplaceOnLoad;
   },
   
   /**

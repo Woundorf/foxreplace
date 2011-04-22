@@ -1,5 +1,6 @@
 * Added two new XPaths to select text nodes (fixes issue 35).
-* Compatibility with Firefox 4.0
+* Compatibility with Firefox 4.0.
+* Integration with the Firefox 4 app menu.
 
 v0.12.2 (10-8-2009)
 * Bugfix: the modules directory wasn't included in the XPI.

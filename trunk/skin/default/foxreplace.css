@@ -6,7 +6,7 @@ amb això i posant que el botó de tancar sigui de la classe findbar-closebutton
 es resol bastant el tema de l'aparença, però només per Firefox 3
 */
 
-#fxrMenuEditReplace, #fxrMenuToolsFoxReplace, #fxrMenuContextFoxReplace {
+#fxrAppMenuReplace, #fxrMenuEditReplace, #fxrMenuToolsFoxReplace, #fxrContextMenuFoxReplace {
   list-style-image: url("chrome://foxreplace/skin/foxreplace-icons.png");
   -moz-image-region: rect(0px, 40px, 16px, 24px);
 }

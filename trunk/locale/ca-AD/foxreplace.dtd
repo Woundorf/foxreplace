@@ -1,9 +1,9 @@
-<!ENTITY menuEditReplace.label "Reemplaça...">
-<!ENTITY menuEditReplace.accesskey "e">
+<!ENTITY menuReplace.label "Reemplaça...">
+<!ENTITY menuReplace.accesskey "e">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
-<!ENTITY menuContextFoxReplace.label "Reemplaça amb la llista de substitucions (FoxReplace)">
-<!ENTITY menuContextFoxReplace.accesskey "m">
+<!ENTITY contextMenuFoxReplace.label "Reemplaça amb la llista de substitucions (FoxReplace)">
+<!ENTITY contextMenuFoxReplace.accesskey "m">
 <!ENTITY toolbarButton.label "FoxReplace">
 <!ENTITY toolbarButton.tooltip "Reemplaça amb la llista de substitucions">
 <!ENTITY listReplace.label "Reemplaça amb la llista de substitucions">
