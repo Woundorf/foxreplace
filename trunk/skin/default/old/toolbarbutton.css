@@ -1,0 +1,13 @@
+#fxrToolbarButton {
+  list-style-image: url("chrome://foxreplace-os/skin/foxreplace-icons.png");
+  -moz-image-region: rect(0px, 24px, 24px, 0px);
+}
+#fxrToolbarButton:hover {
+  -moz-image-region: rect(24px, 24px, 48px, 0px);
+}
+toolbar[iconsize="small"] #fxrToolbarButton {
+  -moz-image-region: rect(0px, 40px, 16px, 24px);
+}
+toolbar[iconsize="small"] #fxrToolbarButton:hover {
+  -moz-image-region: rect(16px, 40px, 32px, 24px);
+}

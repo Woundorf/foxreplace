@@ -1,5 +1,7 @@
 /* rect(top, right, bottom, left) */
 
+@import url("chrome://foxreplace-os/skin/toolbarbutton.css");
+
 @import url("chrome://global/skin/findBar.css");
 /*
 amb això i posant que el botó de tancar sigui de la classe findbar-closebutton
@@ -7,22 +9,7 @@ es resol bastant el tema de l'aparença, però només per Firefox 3
 */
 
 #fxrAppMenuReplace, #fxrMenuEditReplace, #fxrMenuToolsFoxReplace, #fxrContextMenuFoxReplace {
-  list-style-image: url("chrome://foxreplace/skin/foxreplace-icons.png");
-  -moz-image-region: rect(0px, 40px, 16px, 24px);
-}
-
-#fxrToolbarButton {
-  list-style-image: url("chrome://foxreplace/skin/foxreplace-icons.png");
-  -moz-image-region: rect(0px, 24px, 24px, 0px);
-}
-#fxrToolbarButton:hover {
-  -moz-image-region: rect(24px, 24px, 48px, 0px);
-}
-toolbar[iconsize="small"] #fxrToolbarButton {
-  -moz-image-region: rect(0px, 40px, 16px, 24px);
-}
-toolbar[iconsize="small"] #fxrToolbarButton:hover {
-  -moz-image-region: rect(16px, 40px, 32px, 24px);
+  list-style-image: url("chrome://foxreplace/skin/menu-icon.png");
 }
 
 #fxrReplaceBar {
