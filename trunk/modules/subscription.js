@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009
+ * Portions created by the Initial Developer are Copyright (C) 2009-2011
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -52,13 +52,15 @@ var fxrSubscription = {
    */
   _callback: {
     notify: function(aTimer) {
+      var http = /https?\:\/\//.test(fxrSubscription.url);
+      
       try {
         var request = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
                                 .createInstance(Components.interfaces.nsIXMLHttpRequest);
         request.open("GET", fxrSubscription.url);
         request.onreadystatechange = function() {  
           if (request.readyState == 4) {
-            if (request.status == 200) {  
+            if ((http && request.status == 200) || (!http && request.status == 0)) {
               try {
                 var listXml = new XML(request.responseText.replace(/<\?.*\?>/, ""));
                 prefs.substitutionListXml = fxrSubstitutionListFromXml(listXml);
@@ -68,7 +70,7 @@ var fxrSubscription = {
                   prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlErrorText") + "\n" + e);
               }
             }
-            else if (request.status == 0 && prefs.debug)
+            else if (http && request.status == 0 && prefs.debug)
               prompts.alert(getLocalizedString("cantConnectToServerTitle"),
                             getLocalizedString("cantConnectToServerText", [fxrSubscription.url]));
             else if (prefs.debug)
@@ -76,6 +78,9 @@ var fxrSubscription = {
           }
         };
         request.send(null);
+      }
+      catch (e if e.name == "NS_ERROR_FILE_NOT_FOUND") {
+        if (prefs.debug) prompts.alert(getLocalizedString("fileNotFoundTitle"), getLocalizedString("fileNotFoundText", [fxrSubscription.url]));
       }
       catch (e) {
         if (prefs.debug) prompts.alert(getLocalizedString("unexpectedError"), e);
@@ -101,11 +106,6 @@ var fxrSubscription = {
    * Starts the subscription service.
    */
   start: function(aUrl, aPeriod) {
-    if (!/https?\:\/\//.test(aUrl)) {
-      prompts.alert(getLocalizedString("invalidSubscriptionUrl"), getLocalizedString("onlyHttp"));
-      return;
-    }
-    
     if (this._timerOn) return;
     
     this._timerOn = true;
