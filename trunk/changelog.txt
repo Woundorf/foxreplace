@@ -1,7 +1,8 @@
 * Added two new XPaths to select text nodes (issue 35).
-* Compatibility with Firefox 4.0.
-* Integration with the Firefox 4 app menu.
+* Compatibility with Firefox 8.
+* Integration with the Firefox app menu.
 * Subscription works from local files (URL file://...) (issue 25).
+* Fixed instantiation of XMLHttpRequest for import from URL.
 * String changes:
   - foxreplace.dtd: changed name: menuEditReplace -> menuReplace, menuContextFoxReplace -> contextMenuFoxReplace.
   - foxreplace.properties: new: fileNotFoundTitle, fileNotFoundText; removed: onlyHttp.
