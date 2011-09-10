@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2009
+ * Portions created by the Initial Developer are Copyright (C) 2007-2011
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -385,11 +385,26 @@ var foxreplaceOptions = {
     
     var htmlCell = outputsCell.nextSibling;
     htmlCell.setAttribute("label", this.getLocalizedString(aSubstitutionGroup.html ? "yes" : "no"));
+  },
+  
+  updateSubscriptionStatus: function() {
+    document.getElementById("subscriptionStatusTextBox").setAttribute("value", fxrSubscription.status);
   }
   
 };
 
-Components.utils.import("resource://foxreplace/defs.js");
-Components.utils.import("resource://foxreplace/io.js");
-Components.utils.import("resource://foxreplace/prefs.js", foxreplaceOptions);
-Components.utils.import("resource://foxreplace/services.js", foxreplaceOptions);
+const Cu = Components.utils;
+
+Cu.import("resource://foxreplace/defs.js");
+Cu.import("resource://foxreplace/io.js");
+Cu.import("resource://foxreplace/Observers.js", foxreplaceOptions);
+Cu.import("resource://foxreplace/prefs.js", foxreplaceOptions);
+Cu.import("resource://foxreplace/services.js", foxreplaceOptions);
+Cu.import("resource://foxreplace/subscription.js");
+
+window.addEventListener("load",
+                        function() {
+                          foxreplaceOptions.Observers.add("fxrSubscriptionStatusChanged", foxreplaceOptions.updateSubscriptionStatus);
+                          foxreplaceOptions.updateSubscriptionStatus();
+                        },
+                        false);

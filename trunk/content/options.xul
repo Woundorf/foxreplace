@@ -16,7 +16,7 @@
   -
   - The Initial Developer of the Original Code is
   - Marc Ruiz Altisent.
-  - Portions created by the Initial Developer are Copyright (C) 2007-2009
+  - Portions created by the Initial Developer are Copyright (C) 2007-2011
   - the Initial Developer. All Rights Reserved.
   -
   - Contributor(s):
@@ -110,18 +110,22 @@
       </vbox>
     </hbox>
     <separator/>
-    <hbox align="center">
-      <checkbox id="subscriptionCheckBox" label="&subscriptionCheckBox.label;"
-                accesskey="&subscriptionCheckBox.accesskey;" preference-editable="true"
-                preference="enableSubscription"/>
-      <label id="subscriptionUrlLabel" control="subscriptionUrlTextBox" value="&subscriptionUrl.label;"
-             accesskey="&subscriptionUrl.accesskey;"/>
-      <textbox id="subscriptionUrlTextBox" flex="1" preference-editable="true" preference="subscriptionUrl"/>
-      <label id="subscriptionPeriodLabel" control="subscriptionPeriodTextBox" value="&subscriptionPeriod.label;"
-             accesskey="&subscriptionPeriod.accesskey;"/>
-      <textbox id="subscriptionPeriodTextBox" type="number" min="1" max="1440" maxlength="4" size="4"
-               preference-editable="true" preference="subscriptionPeriod"/>
-    </hbox>
+    <groupbox id="subscriptionGroupBox">
+      <caption label="&subscriptionGroupBoxCaption;"/>
+      <checkbox id="subscriptionEnableCheckBox" label="&subscriptionEnableCheckBox.label;" accesskey="&subscriptionEnableCheckBox.accesskey;"
+                preference-editable="true" preference="enableSubscription"/>
+      <hbox align="center">
+        <label id="subscriptionUrlLabel" control="subscriptionUrlTextBox" value="&subscriptionUrl.label;" accesskey="&subscriptionUrl.accesskey;"/>
+        <textbox id="subscriptionUrlTextBox" flex="1" preference-editable="true" preference="subscriptionUrl"/>
+        <label id="subscriptionPeriodLabel" control="subscriptionPeriodTextBox" value="&subscriptionPeriod.label;" accesskey="&subscriptionPeriod.accesskey;"/>
+        <textbox id="subscriptionPeriodTextBox" type="number" min="1" max="1440" maxlength="4" size="4"
+                 preference-editable="true" preference="subscriptionPeriod"/>
+      </hbox>
+      <hbox align="center">
+        <label id="subscriptionStatusLabel" value="&subscriptionStatus.label;"/>
+        <label id="subscriptionStatusTextBox" flex="1" disabled="true"/>
+      </hbox>
+    </groupbox>
     <separator/>
     <checkbox id="autoReplaceOnLoadCheckBox" label="&autoReplaceOnLoad.label;" accesskey="&autoReplaceOnLoad.accesskey;"
               preference-editable="true" preference="autoReplaceOnLoad"/>
