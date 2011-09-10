@@ -1,5 +1,5 @@
 content foxreplace  content/
-locale  foxreplace  ca-AD   locale/ca-AD/
+locale  foxreplace  ca  locale/ca/
 locale  foxreplace  da-DK   locale/da-DK/
 locale  foxreplace  de-DE   locale/de-DE/
 locale  foxreplace  en-US   locale/en-US/
