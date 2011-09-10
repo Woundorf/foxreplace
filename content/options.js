@@ -404,7 +404,12 @@ Cu.import("resource://foxreplace/subscription.js");
 
 window.addEventListener("load",
                         function() {
-                          foxreplaceOptions.Observers.add("fxrSubscriptionStatusChanged", foxreplaceOptions.updateSubscriptionStatus);
+                          foxreplaceOptions.Observers.add("fxrSubscriptionStatusChanged", foxreplaceOptions.updateSubscriptionStatus, foxreplaceOptions);
                           foxreplaceOptions.updateSubscriptionStatus();
+                        },
+                        false);
+window.addEventListener("unload",
+                        function() {
+                          foxreplaceOptions.Observers.remove("fxrSubscriptionStatusChanged", foxreplaceOptions.updateSubscriptionStatus, foxreplaceOptions);
                         },
                         false);
