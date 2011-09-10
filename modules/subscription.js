@@ -34,10 +34,15 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://foxreplace/defs.js");
-Components.utils.import("resource://foxreplace/io.js");
-Components.utils.import("resource://foxreplace/prefs.js");
-Components.utils.import("resource://foxreplace/services.js");
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+const Cu = Components.utils;
+
+Cu.import("resource://foxreplace/defs.js");
+Cu.import("resource://foxreplace/io.js");
+Cu.import("resource://foxreplace/Observers.js");
+Cu.import("resource://foxreplace/prefs.js");
+Cu.import("resource://foxreplace/services.js");
 
 /**
  * Updates the substitution list from a subscription URL.
@@ -55,8 +60,7 @@ var fxrSubscription = {
       var http = /https?\:\/\//.test(fxrSubscription.url);
       
       try {
-        var request = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
-                                .createInstance(Components.interfaces.nsIXMLHttpRequest);
+        var request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
         request.open("GET", fxrSubscription.url);
         request.onreadystatechange = function() {  
           if (request.readyState == 4) {
@@ -64,26 +68,24 @@ var fxrSubscription = {
               try {
                 var listXml = new XML(request.responseText.replace(/<\?.*\?>/, ""));
                 prefs.substitutionListXml = fxrSubstitutionListFromXml(listXml);
+                fxrSubscription.status = getLocalizedString("subscriptionStatusLastUpdated", [new Date().toLocaleString()]);
               }
               catch (e) {
-                if (prefs.debug)
-                  prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlErrorText") + "\n" + e);
+                fxrSubscription.status = getLocalizedString("xmlError", [e]);
               }
             }
-            else if (http && request.status == 0 && prefs.debug)
-              prompts.alert(getLocalizedString("cantConnectToServerTitle"),
-                            getLocalizedString("cantConnectToServerText", [fxrSubscription.url]));
-            else if (prefs.debug)
-              prompts.alert(getLocalizedString("httpError"), request.status + " " + request.statusText);
+            else if (http && request.status == 0) fxrSubscription.status = getLocalizedString("cantConnectToServer", [fxrSubscription.url]);
+            else fxrSubscription.status = getLocalizedString("httpError", [request.status + " " + request.statusText]);
           }
         };
         request.send(null);
+        fxrSubscription.status = getLocalizedString("subscriptionStatusUpdating");
       }
       catch (e if e.name == "NS_ERROR_FILE_NOT_FOUND") {
-        if (prefs.debug) prompts.alert(getLocalizedString("fileNotFoundTitle"), getLocalizedString("fileNotFoundText", [fxrSubscription.url]));
+        fxrSubscription.status = getLocalizedString("fileNotFound", [fxrSubscription.url]);
       }
       catch (e) {
-        if (prefs.debug) prompts.alert(getLocalizedString("unexpectedError"), e);
+        fxrSubscription.status = getLocalizedString("unexpectedError", [e]);
       }
     }
   },
@@ -98,8 +100,28 @@ var fxrSubscription = {
    */
   get timer() {
     if (!this._timer)
-      this._timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+      this._timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
     return this._timer;
+  },
+  
+  /**
+   * String that describes the status of the subscription.
+   */
+  _status: getLocalizedString("subscriptionStatusDisabled"),
+  
+  /**
+   * Returns the status of the subscription.
+   */
+  get status() {
+    return this._status;
+  },
+  
+  /**
+   * Sets the status of the subscription.
+   */
+  set status(aStatus) {
+    this._status = aStatus;
+    Observers.notify("fxrSubscriptionStatusChanged", aStatus);
   },
   
   /**
@@ -111,7 +133,7 @@ var fxrSubscription = {
     this._timerOn = true;
     this.url = aUrl;
     this._callback.notify();  // first call
-    this.timer.initWithCallback(this._callback, aPeriod * 60000, Components.interfaces.nsITimer.TYPE_REPEATING_SLACK);
+    this.timer.initWithCallback(this._callback, aPeriod * 60000, Ci.nsITimer.TYPE_REPEATING_SLACK);
   },
   
   /**
@@ -130,6 +152,7 @@ var fxrSubscription = {
     
     this.timer.cancel();
     this._timerOn = false;
+    this.status = getLocalizedString("subscriptionStatusDisabled");
   }
   
 };

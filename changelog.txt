@@ -2,10 +2,15 @@
 * Compatibility with Firefox 8.
 * Integration with the Firefox app menu.
 * Subscription works from local files (URL file://...) (issue 25).
+* Status of subscription displayed in options window.
 * Fixed instantiation of XMLHttpRequest for import from URL.
 * String changes:
   - foxreplace.dtd: changed name: menuEditReplace -> menuReplace, menuContextFoxReplace -> contextMenuFoxReplace.
-  - foxreplace.properties: new: fileNotFoundTitle, fileNotFoundText; removed: onlyHttp.
+  - foxreplace.properties: new: subscriptionStatusDisabled, subscriptionStatusUpdating, subscriptionStatusLastUpdated, xmlError, fileNotFound; changed name:
+    cantConnectToServerText -> cantConnectToServer; changed: httpError, unexpectedError; removed: xmlErrorTitle, xmlErrorText,
+    cantConnectToServerTitle, invalidSubscriptionUrl
+  - options.dtd: new: subscriptionGroupBoxCaption, subscriptionEnableCheckBox.label, subscriptionEnableCheckBox.accesskey, subscriptionStatus.label; removed:
+    subscriptionCheckBox.label, subscriptionCheckBox.accesskey.
 
 v0.12.2 (10-8-2009)
 * Bugfix: the modules directory wasn't included in the XPI.
