@@ -388,7 +388,7 @@ var foxreplaceOptions = {
   },
   
   updateSubscriptionStatus: function() {
-    document.getElementById("subscriptionStatusTextBox").setAttribute("value", fxrSubscription.status);
+    document.getElementById("subscriptionStatusTextBox").value = fxrSubscription.status;
   }
   
 };
