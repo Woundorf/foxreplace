@@ -5,7 +5,7 @@
  * 1.1 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS" basis,
  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
  * for the specific language governing rights and limitations under the
@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009
+ * Portions created by the Initial Developer are Copyright (C) 2009-2011
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -31,11 +31,16 @@
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
  * the terms of any one of the MPL, the GPL or the LGPL.
- * 
+ *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://foxreplace/defs.js");
-Components.utils.import("resource://foxreplace/services.js");
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+const Cu = Components.utils;
+
+Cu.import("resource://foxreplace/defs.js");
+Cu.import("resource://foxreplace/Preferences.js");
+Cu.import("resource://foxreplace/services.js");
 
 /**
  * Easy access to preferences.
@@ -44,28 +49,30 @@ Components.utils.import("resource://foxreplace/services.js");
 var EXPORTED_SYMBOLS = ["prefs"];
 
 var prefs = {
-  
+
+  /**
+   * Preferences object referencing FoxReplace branch.
+   */
+  _preferences: new Preferences("extensions.foxreplace."),
+
   /**
    * Returns the preferences service.
    */
   get service() {
     if (!this._service) {
-      this._service = Components.classes["@mozilla.org/preferences-service;1"]
-                                .getService(Components.interfaces.nsIPrefService)
-                                .getBranch("extensions.foxreplace.");
-      this._service.QueryInterface(Components.interfaces.nsIPrefBranch2);
+      this._service = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService).getBranch("extensions.foxreplace.");
+      this._service.QueryInterface(Ci.nsIPrefBranch2);
     }
-    
+
     return this._service;
   },
-  
+
   /**
    * Loads the substitution list from preferences and returns it.
    */
-  get substitutionListXml() {
+  get substitutionList() {
     try {
-      var listXmlString = this.service.getComplexValue("substitutionListXml", Components.interfaces.nsISupportsString)
-                                      .data;
+      var listXmlString = this._preferences.get("substitutionListXml");
       var listXml = new XML(listXmlString);
       return fxrSubstitutionListFromXml(listXml);
     }
@@ -74,122 +81,119 @@ var prefs = {
       return;
     }
   },
-  
+
+  /**
+   * Saves the substitution list to preferences.
+   */
+  set substitutionList(aSubstitutionList) {
+    this._preferences.set("substitutionListXml", this.substitutionListToXmlString(aSubstitutionList));
+  },
+
+  /**
+   * Loads the substitution list from preferences and returns it.
+   */
+  get substitutionListXml() {
+    return this.substitutionList;
+  },
+
   /**
    * Saves the substitution list to preferences.
    */
   set substitutionListXml(aSubstitutionList) {
-    this.service.setComplexValue("substitutionListXml", Components.interfaces.nsISupportsString,
-                                 this.substitutionListToXmlString(aSubstitutionList));
+    this.substitutionList = aSubstitutionList;
   },
-  
+
   /**
    * Returns the substitution list encoded as a string to save to preferences.
    */
   substitutionListToXmlString: function(aSubstitutionList) {
     var listXml = fxrSubstitutionListToXml(aSubstitutionList);
-    var listXmlString = Components.classes["@mozilla.org/supports-string;1"]
-                                  .createInstance(Components.interfaces.nsISupportsString);
     XML.prettyPrinting = false;
-    listXmlString.data = listXml.toString();
-    
-    return listXmlString;
+    return listXml.toString();
   },
-  
+
   /**
    * Loads the auto-replace on load setting from preferences and returns it.
    */
   get autoReplaceOnLoad() {
-    return this.service.getBoolPref("autoReplaceOnLoad");
+    return this._preferences.get("autoReplaceOnLoad");
   },
-  
+
   /**
    * Saves the auto-replace on load setting to preferences.
    */
   set autoReplaceOnLoad(aAutoReplaceOnLoad) {
-    this.service.setBoolPref("autoReplaceOnLoad", aAutoReplaceOnLoad);
+    this._preferences.set("autoReplaceOnLoad", aAutoReplaceOnLoad);
   },
-  
+
   /**
    * Loads the replace URLs setting from preferences and returns it.
    */
   get replaceUrls() {
-    return this.service.getBoolPref("replaceUrls");
+    return this._preferences.get("replaceUrls");
   },
-  
+
   /**
    * Saves the replace URLs setting to preferences.
    */
   set replaceUrls(aReplaceUrls) {
-    this.service.setBoolPref("replaceUrls", aReplaceUrls);
+    this._preferences.set("replaceUrls", aReplaceUrls);
   },
-  
+
   /**
    * Loads the enable subscription setting from preferences and returns it.
    */
   get enableSubscription() {
-    return this.service.getBoolPref("enableSubscription");
+    return this._preferences.get("enableSubscription");
   },
-  
+
   /**
    * Saves the enable subscription setting to preferences.
    */
   set enableSubscription(aBool) {
-    this.service.setBoolPref("enableSubscription", aBool);
+    this._preferences.set("enableSubscription", aBool);
   },
-  
+
   /**
    * Loads the subscription URL from preferences and returns it.
    */
   get subscriptionUrl() {
-    return this.service.getComplexValue("subscriptionUrl", Components.interfaces.nsISupportsString).data;
+    return this._preferences.get("subscriptionUrl");
   },
-  
+
   /**
    * Saves the subscription URL to preferences.
    */
   set subscriptionUrl(aUrl) {
-    this.service.setComplexValue("subscriptionUrl", Components.interfaces.nsISupportsString,
-                                 this.subscriptionUrlToString(aUrl));
+    this._preferences.set("subscriptionUrl", aUrl);
   },
-  
-  /**
-   * Returns the subscription URL as a string to save to preferences.
-   */
-  subscriptionUrlToString: function (aUrl) {
-    var urlString = Components.classes["@mozilla.org/supports-string;1"]
-                              .createInstance(Components.interfaces.nsISupportsString);
-    urlString.data = aUrl;
-    
-    return urlString;
-  },
-  
+
   /**
    * Loads the subscription period from preferences and returns it.
    */
   get subscriptionPeriod() {
-    return this.service.getIntPref("subscriptionPeriod");
+    return this._preferences.get("subscriptionPeriod");
   },
-  
+
   /**
    * Saves the subscription period to preferences.
    */
   set subscriptionPeriod(aPeriod) {
-    this.service.setIntPref("subscriptionPeriod", aPeriod);
+    this._preferences.set("subscriptionPeriod", aPeriod);
   },
-  
+
   /**
    * Loads the debug setting from preferences and returns it.
    */
   get debug() {
-    return this.service.getBoolPref("debug");
+    return this._preferences.get("debug");
   },
-  
+
   /**
    * Saves the debug setting to preferences.
    */
   set debug(aBool) {
-    this.service.setBoolPref("debug", aBool);
+    this._preferences.set("debug", aBool);
   }
-  
+
 };
