@@ -71,15 +71,18 @@ var prefs = {
    * Loads the substitution list from preferences and returns it.
    */
   get substitutionList() {
-    try {
-      var listXmlString = this._preferences.get("substitutionListXml");
-      var listXml = new XML(listXmlString);
-      return fxrSubstitutionListFromXml(listXml);
+    if (!this._substitutionList || this._substitutionListXmlString != this._preferences.get("substitutionListXml")) {
+      try {
+        this._substitutionListXmlString = this._preferences.get("substitutionListXml");
+        var listXml = new XML(this._substitutionListXmlString);
+        this._substitutionList = fxrSubstitutionListFromXml(listXml);
+      }
+      catch (e) {
+        prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlErrorText") + "\n" + e);
+        return undefined;
+      }
     }
-    catch (e) {
-      prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlErrorText") + "\n" + e);
-      return;
-    }
+    return this._substitutionList;
   },
 
   /**
@@ -101,6 +104,13 @@ var prefs = {
    */
   set substitutionListXml(aSubstitutionList) {
     this.substitutionList = aSubstitutionList;
+  },
+
+  /**
+   * Deletes the cached substitution list.
+   */
+  onSubstitutionListXmlChange: function() {
+    this._substitutionList = null;
   },
 
   /**
@@ -194,6 +204,22 @@ var prefs = {
    */
   set debug(aBool) {
     this._preferences.set("debug", aBool);
+  },
+
+  /**
+   * Start observing a preference.
+   */
+  observe: function(aPrefName, aCallback, aThisObject) {
+    this._preferences.observe(aPrefName, aCallback, aThisObject);
+  },
+
+  /**
+   * Stop observing a preference.
+   */
+  ignore: function(aPrefName, aCallback, aThisObject) {
+    this._preferences.ignore(aPrefName, aCallback, aThisObject);
   }
 
 };
+
+prefs.observe("substitutionListXml", prefs.onSubstitutionListXmlChange, prefs);
