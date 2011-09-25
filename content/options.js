@@ -44,6 +44,7 @@ var foxreplaceOptions = {
    */
   onLoad: function() {
     this.Observers.add("fxrSubscriptionStatusChanged", this.updateSubscriptionStatus, this);
+    this.prefs.observe("substitutionListXml", this.loadSubstitutionListXml, this);
     this.updateSubscriptionStatus();
   },
 
@@ -52,13 +53,14 @@ var foxreplaceOptions = {
    */
   onUnload: function() {
     this.Observers.remove("fxrSubscriptionStatusChanged", this.updateSubscriptionStatus, this);
+    this.prefs.ignore("substitutionListXml", this.loadSubstitutionListXml, this);
   },
 
   /**
    * Called when the options window is loaded. Loads the substitution list in XML from preferences and fills the listbox.
    */
   loadSubstitutionListXml: function() {
-    this.substitutionListFromArray(this.prefs.substitutionListXml);
+    this.substitutionListFromArray(this.prefs.substitutionListXml, true);
   },
 
   /**
@@ -128,7 +130,7 @@ var foxreplaceOptions = {
   /**
    * Deletes all substitution groups from the listbox.
    */
-  clearSubstitutionGroups: function() {
+  clearSubstitutionGroups: function(aDontFireChangeEvent) {
     var substitutionListBox = document.getElementById("substitutionListBox");
     var i = substitutionListBox.getRowCount() - 1;
 
@@ -139,7 +141,7 @@ var foxreplaceOptions = {
 
     document.getElementById("clearButton").disabled = true;
 
-    this.fireChangeEvent(substitutionListBox);
+    if (!aDontFireChangeEvent) this.fireChangeEvent(substitutionListBox);
   },
 
   /**
@@ -258,7 +260,7 @@ var foxreplaceOptions = {
    * Fills the listbox from an array of substitutions.
    */
   substitutionListFromArray: function(aSubstitutionList, aOverwrite) {
-    if (aOverwrite) this.clearSubstitutionGroups();
+    if (aOverwrite && !document.getElementById("dumbItem")) this.clearSubstitutionGroups(true);
 
     var nSubstitutions = aSubstitutionList.length
 
