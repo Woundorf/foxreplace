@@ -3,6 +3,7 @@
 * Integration with the Firefox app menu.
 * Subscription works from local files (URL file://...) (issue 25).
 * Status of subscription displayed in options window.
+* Display of substitution list is updated after each subscription update.
 * Fixed instantiation of XMLHttpRequest for import from URL.
 * String changes:
   - foxreplace.dtd: changed name: menuEditReplace -> menuReplace, menuContextFoxReplace -> contextMenuFoxReplace.
@@ -26,7 +27,7 @@ v0.12.0 (21-7-2009)
 * Ability to use backslash-escaped characters in input (text and whole words) and output. Supported
   characters are \\ (backslash), \n (new line), \r (carriage return) and \t (tab).
 * New list format 0.12 with the new interpretation of the backslash-escaped characters.
-* Removed compatibility with the substitution list in the 0.8 format. 
+* Removed compatibility with the substitution list in the 0.8 format.
 * Removed compatibility with Firefox 1.5 and 2.
 * Compatibility with Firefox 3.5.
 * New locale:
