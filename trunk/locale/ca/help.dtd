@@ -7,7 +7,7 @@
 <!ENTITY substitution.inputString.text "Text: s'interpreta com una cadena de caràcters sense més particularitats.">
 <!ENTITY substitution.inputString.wholeWords "Paraules senceres: s'interpreta com una o més paraules senceres. Per exemple, &quot;actiu&quot; no coincidiria amb &quot;interactiu&quot; (sí que ho faria si fos text normal).">
 <!ENTITY substitution.inputString.regExp.0 "Expressió regular: s'interpreta com una">
-<!ENTITY regExpLink "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions">
+<!ENTITY regExpLink "https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/RegExp#Special_characters_in_regular_expressions">
 <!ENTITY substitution.inputString.regExp.1 "expressió regular">
 <!ENTITY substitution.inputString.regExp.2 ". Si no és vàlida, saltarà un error de sintaxi.">
 <!ENTITY substitution.outputString "Cadena de sortida: la cadena de text que reemplaçarà la d'entrada. Pot tenir els següents patrons especials:">
