@@ -7,7 +7,7 @@
 <!ENTITY substitution.inputString.text "Text: it's interpreted as a character string without any particularities.">
 <!ENTITY substitution.inputString.wholeWords "Whole words: it's interpreted as one or more whole words. For example, &quot;active&quot; wouldn't match &quot;interactive&quot; (it would match if it was normal text).">
 <!ENTITY substitution.inputString.regExp.0 "Regular expression: it's interpreted as a">
-<!ENTITY regExpLink "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions">
+<!ENTITY regExpLink "https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/RegExp#Special_characters_in_regular_expressions">
 <!ENTITY substitution.inputString.regExp.1 "regular expression">
 <!ENTITY substitution.inputString.regExp.2 ". If it isn't valid, a syntax error will be shown.">
 <!ENTITY substitution.outputString "Output string: the text string that will replace the input. It can have the following special patterns:">
