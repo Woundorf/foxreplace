@@ -38,7 +38,7 @@ const Cc = Components.classes;
 const Ci = Components.interfaces;
 const Cu = Components.utils;
 
-Cu.import("resource://foxreplace/defs.js");
+Cu.import("resource://foxreplace/core.js");
 Cu.import("resource://foxreplace/io.js");
 Cu.import("resource://foxreplace/Observers.js");
 Cu.import("resource://foxreplace/prefs.js");

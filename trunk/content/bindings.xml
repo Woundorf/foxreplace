@@ -61,7 +61,7 @@
     </content>
     <implementation>
       <constructor>
-        Components.utils.import("resource://foxreplace/defs.js");
+        Components.utils.import("resource://foxreplace/core.js");
         this.inputType = FxRSubstitution.prototype.INPUT_TEXT;
       </constructor>
       <field name="_button" readonly="true">
