@@ -34,7 +34,7 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://foxreplace/defs.js");
+Components.utils.import("resource://foxreplace/core.js");
 Components.utils.import("resource://foxreplace/services.js");
 
 /**
