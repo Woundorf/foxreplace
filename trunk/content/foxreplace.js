@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2011
+ * Portions created by the Initial Developer are Copyright (C) 2007-2012
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -40,6 +40,8 @@
  * manages the main UI.
  */
 var foxreplace = {
+
+  core: {},
 
   /**
    * Initialization code.
@@ -145,8 +147,8 @@ var foxreplace = {
     try {
       // new temporal substitution list with only one item
       this._substitutionList =
-        [new FxRSubstitutionGroup([],
-                                  [new FxRSubstitution(inputString, outputString, caseSensitive, inputType)],
+        [new this.core.FxRSubstitutionGroup([],
+                                  [new this.core.FxRSubstitution(inputString, outputString, caseSensitive, inputType)],
                                   html)];
       // perform substitutions
       this.replaceDocXpath();
@@ -342,6 +344,7 @@ var foxreplace = {
 
 };
 
+Components.utils.import("resource://foxreplace/core.js", foxreplace.core);
 Components.utils.import("resource://foxreplace/subscription.js");
 Components.utils.import("resource://foxreplace/prefs.js", foxreplace);
 Components.utils.import("resource://foxreplace/services.js", foxreplace);
