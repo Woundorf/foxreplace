@@ -46,11 +46,11 @@
       <xul:toolbarbutton anonid="button" class="inputTextBoxButton" type="menu">
         <xul:menupopup inherits="position=menuposition">
           <xul:menuitem class="menuitem-iconic inputTextBoxButtonMenuItem" anonid="itemText" label="&text;"
-                        oncommand="document.getBindingParent(this).inputType=this._fxrCore.Substitution.prototype.INPUT_TEXT;"/>
+                        oncommand="document.getBindingParent(this).inputType=document.getBindingParent(this)._fxrCore.Substitution.prototype.INPUT_TEXT;"/>
           <xul:menuitem class="menuitem-iconic inputTextBoxButtonMenuItem" anonid="itemWholeWords" label="&wholeWords;"
-                        oncommand="document.getBindingParent(this).inputType=this._fxrCore.Substitution.prototype.INPUT_WHOLE_WORDS;"/>
+                        oncommand="document.getBindingParent(this).inputType=document.getBindingParent(this)._fxrCore.Substitution.prototype.INPUT_WHOLE_WORDS;"/>
           <xul:menuitem class="menuitem-iconic inputTextBoxButtonMenuItem" anonid="itemRegExp" label="&regExp;"
-                        oncommand="document.getBindingParent(this).inputType=this._fxrCore.Substitution.prototype.INPUT_REG_EXP;"/>
+                        oncommand="document.getBindingParent(this).inputType=document.getBindingParent(this)._fxrCore.Substitution.prototype.INPUT_REG_EXP;"/>
         </xul:menupopup>
       </xul:toolbarbutton>
       <xul:vbox pack="center" flex="1">
