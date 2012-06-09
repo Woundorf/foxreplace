@@ -147,8 +147,8 @@ var foxreplace = {
     try {
       // new temporal substitution list with only one item
       this._substitutionList =
-        [new this.core.FxRSubstitutionGroup([],
-                                  [new this.core.FxRSubstitution(inputString, outputString, caseSensitive, inputType)],
+        [new this.core.SubstitutionGroup([],
+                                  [new this.core.Substitution(inputString, outputString, caseSensitive, inputType)],
                                   html)];
       // perform substitutions
       this.replaceDocXpath();

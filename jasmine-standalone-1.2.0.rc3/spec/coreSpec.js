@@ -5,7 +5,7 @@ describe("Substitution", function() {
     var substitution;
 
     beforeEach(function() {
-      substitution = new FxRSubstitution("a", "@");
+      substitution = new Substitution("a", "@");
     });
 
     it("should return a replaced string", function() {
@@ -38,13 +38,13 @@ describe("Substitution", function() {
   describe("case-sensitive", function() {
 
     it("should return a replaced string (lower case)", function() {
-      var substitution = new FxRSubstitution("a", "@", true);
+      var substitution = new Substitution("a", "@", true);
       var result = substitution.replace("asdf ASDF");
       expect(result).toEqual("@sdf ASDF");
     });
 
     it("should return a replaced string (upper case)", function() {
-      var substitution = new FxRSubstitution("A", "@", true);
+      var substitution = new Substitution("A", "@", true);
       var result = substitution.replace("asdf ASDF");
       expect(result).toEqual("asdf @SDF");
     });

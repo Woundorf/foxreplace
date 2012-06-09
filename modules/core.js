@@ -5,7 +5,7 @@
  * 1.1 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS" basis,
  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
  * for the specific language governing rights and limitations under the
@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009
+ * Portions created by the Initial Developer are Copyright (C) 2009-2012
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -31,27 +31,27 @@
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
  * the terms of any one of the MPL, the GPL or the LGPL.
- * 
+ *
  * ***** END LICENSE BLOCK ***** */
 
 /**
  * Definitions of substitution and substitution group.
  */
 
-var EXPORTED_SYMBOLS = ["FxRSubstitution", "FxRSubstitutionGroup",
+var EXPORTED_SYMBOLS = ["Substitution", "SubstitutionGroup",
                         "fxrSubstitutionListFromXml", "fxrSubstitutionListToXml", "fxrIsExclusionUrl"];
 
 /**
  * Substitution.
  */
-function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) {
+function Substitution(aInput, aOutput, aCaseSensitive, aInputType) {
   this.input = aInput;
   this.output = aOutput;
   this.caseSensitive = Boolean(aCaseSensitive);
   this.inputType = aInputType || this.INPUT_TEXT;
   // avoid invalid values
   if (this.inputType < this.INPUT_TEXT || this.inputType > this.INPUT_REG_EXP) this.inputType = this.INPUT_TEXT;
-  
+
   switch (this.inputType) {
     case this.INPUT_WHOLE_WORDS:
       var unescapedInput = fxrUnescape(aInput);
@@ -68,32 +68,32 @@ function FxRSubstitution(aInput, aOutput, aCaseSensitive, aInputType) {
 /**
  * Creates a substitution from an XML object. If aEscape is true, input and output strings will be backslash-escaped.
  */
-FxRSubstitution.fromXml = function(aXml, aEscape) {
+Substitution.fromXml = function(aXml, aEscape) {
   var input = aXml.input.toString().slice(1, -1);   // to remove quotes
   var output = aXml.output.toString().slice(1, -1); // to remove quotes
   var caseSensitive = aXml.@casesensitive.toString() == "true";
   var inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(aXml.input.@type.toString());
-  
+
   if (aEscape) {
     if (inputType != this.prototype.INPUT_REG_EXP) input = fxrEscape(input);
     output = fxrEscape(output);
   }
-  
+
   try {
-    return new FxRSubstitution(input, output, caseSensitive, inputType);
+    return new Substitution(input, output, caseSensitive, inputType);
   }
   catch (e if e instanceof SyntaxError) {
     e.message = '"' + input + '": ' + e.message;
     throw e;
   }
 };
-FxRSubstitution.prototype = {
+Substitution.prototype = {
   /**
    * Applies the substitution to aString and returns the result.
    */
   replace: function(aString) {
     if (aString == undefined || aString == null) return aString;
-    
+
     switch (this.inputType) {
       case this.INPUT_TEXT:
         return aString.replace(fxrUnescape(this.input), fxrUnescape(this.output), this.caseSensitive ? "g" : "gi");
@@ -139,19 +139,19 @@ FxRSubstitution.prototype = {
 /**
  * Constants.
  */
-FxRSubstitution.prototype.INPUT_TEXT = 0;
-FxRSubstitution.prototype.INPUT_WHOLE_WORDS = 1;
-FxRSubstitution.prototype.INPUT_REG_EXP = 2;
-FxRSubstitution.prototype.INPUT_TYPE_STRINGS = ["text", "wholewords", "regexp"];
-FxRSubstitution.prototype.WW_REGEXP_WORD_CHAR = /[0-9A-Z_a-z\xC0-\xD6\xD8-\xF6\xF8-\u02AF\u0386-\u03CE\u03D8-\u03EF\u03F3\u03F7\u03F8\u03FA\u03FB\u0400-\u0481\u048A-\u0513]/;
+Substitution.prototype.INPUT_TEXT = 0;
+Substitution.prototype.INPUT_WHOLE_WORDS = 1;
+Substitution.prototype.INPUT_REG_EXP = 2;
+Substitution.prototype.INPUT_TYPE_STRINGS = ["text", "wholewords", "regexp"];
+Substitution.prototype.WW_REGEXP_WORD_CHAR = /[0-9A-Z_a-z\xC0-\xD6\xD8-\xF6\xF8-\u02AF\u0386-\u03CE\u03D8-\u03EF\u03F3\u03F7\u03F8\u03FA\u03FB\u0400-\u0481\u048A-\u0513]/;
 //                                                          <- Latin + IPA extensions --><------------------- Greek + Coptic -------------------><------- Cyrillic ------->
-FxRSubstitution.prototype.WW_REGEXP_WORD_END = "(?!" + FxRSubstitution.prototype.WW_REGEXP_WORD_CHAR.source + ")";
-FxRSubstitution.prototype.WW_REGEXP_NONWORD_END = "(?![^" + FxRSubstitution.prototype.WW_REGEXP_WORD_CHAR.source.slice(1) + ")";
+Substitution.prototype.WW_REGEXP_WORD_END = "(?!" + Substitution.prototype.WW_REGEXP_WORD_CHAR.source + ")";
+Substitution.prototype.WW_REGEXP_NONWORD_END = "(?![^" + Substitution.prototype.WW_REGEXP_WORD_CHAR.source.slice(1) + ")";
 
 /**
  * Substitution group, including an URL list and a substitution list. If aHtml is true, substitutions are done in HTML.
  */
-function FxRSubstitutionGroup(aUrls, aSubstitutions, aHtml) {
+function SubstitutionGroup(aUrls, aSubstitutions, aHtml) {
   this.urls = aUrls || [];
   this.substitutions = aSubstitutions || [];
   this.html = Boolean(aHtml);
@@ -179,7 +179,7 @@ function FxRSubstitutionGroup(aUrls, aSubstitutions, aHtml) {
                       else this.urlRegExps.push(regExp);
                     }, this);
 }
-FxRSubstitutionGroup.prototype = {
+SubstitutionGroup.prototype = {
   /**
    * Returns true if aUrl matches any of the urls.
    */
@@ -187,7 +187,7 @@ FxRSubstitutionGroup.prototype = {
     return this.urls.length == 0
         || (!this.exclusionUrlRegExps.some(function(element) { return element.test(aUrl); })
         && this.urlRegExps.some(function(element) { return element.test(aUrl); }));
-  },  
+  },
   /**
    * Applies the substitution group to aString and returns the result.
    */
@@ -218,28 +218,28 @@ FxRSubstitutionGroup.prototype = {
  * Creates a substitution group from an XML object. If aEscape is true, input and output strings will be
  * backslash-escaped.
  */
-FxRSubstitutionGroup.fromXml = function(aXml, aEscape) {
+SubstitutionGroup.fromXml = function(aXml, aEscape) {
   var urls = [];
   for each (var url in aXml.urls.url) urls.push(url.toString());
-  
+
   var substitutions = [];
   var errors = "";
   for each (var substitution in aXml.substitutions.substitution) {
     try {
-      substitutions.push(FxRSubstitution.fromXml(substitution, aEscape));
+      substitutions.push(Substitution.fromXml(substitution, aEscape));
     }
     catch (e) {
       XML.prettyPrinting = false;
       errors += e + "\n";
     }
   }
-  
+
   var html = aXml.@html.toString() == "true";
-  
+
   if (errors) foxreplaceIO.alert(foxreplaceIO.strings.getString("xmlErrorTitle"),
                                  foxreplaceIO.strings.getString("xmlGroupErrorText") + "\n" + errors);
-  
-  return new FxRSubstitutionGroup(urls, substitutions, html);
+
+  return new SubstitutionGroup(urls, substitutions, html);
 };
 
 /**
@@ -248,9 +248,9 @@ FxRSubstitutionGroup.fromXml = function(aXml, aEscape) {
 function fxrSubstitutionListFromXml(aListXml) {
   var substitutionList = [];
   var escape = aListXml.@version == "0.10";
-  
-  for each (var group in aListXml.group) substitutionList.push(FxRSubstitutionGroup.fromXml(group, escape));
-  
+
+  for each (var group in aListXml.group) substitutionList.push(SubstitutionGroup.fromXml(group, escape));
+
   return substitutionList;
 }
 
@@ -260,9 +260,9 @@ function fxrSubstitutionListFromXml(aListXml) {
 function fxrSubstitutionListToXml(aSubstitutionList) {
   var listXml = <substitutionlist version="0.12"/>;
   var nSubstitutions = aSubstitutionList.length;
-  
+
   for (var i = 0; i < nSubstitutions; i++) listXml.appendChild(aSubstitutionList[i].toXml());
-  
+
   return listXml;
 }
 
@@ -273,7 +273,7 @@ function fxrIsExclusionUrl(aUrl) {
   return /^-.*/.test(aUrl);
 }
 
-////////////////////////////////////// Non-exported functions ////////////////////////////////////// 
+////////////////////////////////////// Non-exported functions //////////////////////////////////////
 
 /**
  * Escapes special characters in aString with a backslash combination.
@@ -299,7 +299,7 @@ function fxrUnescape(aString) {
  * Returns true if aChar is a word char and false otherwise.
  */
 function fxrIsWordChar(aChar) {
-  return FxRSubstitution.prototype.WW_REGEXP_WORD_CHAR.test(aChar);
+  return Substitution.prototype.WW_REGEXP_WORD_CHAR.test(aChar);
 }
 
 /**
@@ -308,9 +308,9 @@ function fxrIsWordChar(aChar) {
 function fxrStringToUnicode(aString) {
   var result = "";
   var length = aString.length;
-  
+
   for (var i = 0; i < length; i++) result += "\\u" + fxrNumberToHex(aString.charCodeAt(i));
-  
+
   return result;
 };
 
@@ -321,9 +321,9 @@ function fxrNumberToHex(aNumber, aDigits) {
   var hex = aNumber.toString(16);
   var digits = aDigits || 4;
   var length = hex.length;
-  
+
   for (var i = length; i < digits; i++) hex = "0" + hex;
-  
+
   return hex;
 };
 
