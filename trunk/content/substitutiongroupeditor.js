@@ -252,7 +252,7 @@ var foxreplaceSubstitutionGroupEditor = {
     if (aSubstitution) substitution = aSubstitution;
     else {
       try {
-        substitution = new this.core.FxRSubstitution(inputString, outputString, caseSensitive, inputType);
+        substitution = new this.core.Substitution(inputString, outputString, caseSensitive, inputType);
       }
       catch (se) {  // SyntaxError
         this.prompts.alert(this.getLocalizedString("regExpError"), se);
@@ -269,7 +269,7 @@ var foxreplaceSubstitutionGroupEditor = {
     substitutionItem.appendChild(inputStringCell);
 
     var inputTypeCell = document.createElement("listcell");
-    inputTypeCell.setAttribute("label", this.getLocalizedString(this.core.FxRSubstitution.prototype.INPUT_TYPE_STRINGS[inputType]));
+    inputTypeCell.setAttribute("label", this.getLocalizedString(this.core.Substitution.prototype.INPUT_TYPE_STRINGS[inputType]));
     substitutionItem.appendChild(inputTypeCell);
 
     var outputStringCell = document.createElement("listcell");
@@ -418,7 +418,7 @@ var foxreplaceSubstitutionGroupEditor = {
     var substitution;
 
     try {
-      substitution = new this.core.FxRSubstitution(inputString, outputString, caseSensitive, inputType);
+      substitution = new this.core.Substitution(inputString, outputString, caseSensitive, inputType);
     }
     catch (se) {  // SyntaxError
       this.prompts.alert(this.getLocalizedString("regExpError"), se);
@@ -428,7 +428,7 @@ var foxreplaceSubstitutionGroupEditor = {
     var substitutionItem = this._substitutionsListBox.selectedItem;
     substitutionItem.substitution = substitution;
     substitutionItem.childNodes[0].setAttribute("label", inputString);
-    substitutionItem.childNodes[1].setAttribute("label", this.getLocalizedString(this.core.FxRSubstitution.prototype.INPUT_TYPE_STRINGS[inputType]));
+    substitutionItem.childNodes[1].setAttribute("label", this.getLocalizedString(this.core.Substitution.prototype.INPUT_TYPE_STRINGS[inputType]));
     substitutionItem.childNodes[2].setAttribute("label", outputString);
     substitutionItem.childNodes[3].setAttribute("label", this.getLocalizedString(caseSensitive ? "yes" : "no"));
 
@@ -559,7 +559,7 @@ var foxreplaceSubstitutionGroupEditor = {
 
     var html = this._htmlCheckBox.checked;
 
-    var group = new this.core.FxRSubstitutionGroup(urls, substitutions, html);
+    var group = new this.core.SubstitutionGroup(urls, substitutions, html);
 
     window.arguments[0].out = { group: group };
 

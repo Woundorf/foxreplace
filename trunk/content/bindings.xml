@@ -46,11 +46,11 @@
       <xul:toolbarbutton anonid="button" class="inputTextBoxButton" type="menu">
         <xul:menupopup inherits="position=menuposition">
           <xul:menuitem class="menuitem-iconic inputTextBoxButtonMenuItem" anonid="itemText" label="&text;"
-                        oncommand="document.getBindingParent(this).inputType=this._fxrCore.FxRSubstitution.prototype.INPUT_TEXT;"/>
+                        oncommand="document.getBindingParent(this).inputType=this._fxrCore.Substitution.prototype.INPUT_TEXT;"/>
           <xul:menuitem class="menuitem-iconic inputTextBoxButtonMenuItem" anonid="itemWholeWords" label="&wholeWords;"
-                        oncommand="document.getBindingParent(this).inputType=this._fxrCore.FxRSubstitution.prototype.INPUT_WHOLE_WORDS;"/>
+                        oncommand="document.getBindingParent(this).inputType=this._fxrCore.Substitution.prototype.INPUT_WHOLE_WORDS;"/>
           <xul:menuitem class="menuitem-iconic inputTextBoxButtonMenuItem" anonid="itemRegExp" label="&regExp;"
-                        oncommand="document.getBindingParent(this).inputType=this._fxrCore.FxRSubstitution.prototype.INPUT_REG_EXP;"/>
+                        oncommand="document.getBindingParent(this).inputType=this._fxrCore.Substitution.prototype.INPUT_REG_EXP;"/>
         </xul:menupopup>
       </xul:toolbarbutton>
       <xul:vbox pack="center" flex="1">
@@ -63,7 +63,7 @@
       <constructor>
         this._fxrCore = {};
         Components.utils.import("resource://foxreplace/core.js", this._fxrCore);
-        this.inputType = this._fxrCore.FxRSubstitution.prototype.INPUT_TEXT;
+        this.inputType = this._fxrCore.Substitution.prototype.INPUT_TEXT;
       </constructor>
       <field name="_button" readonly="true">
         document.getAnonymousElementByAttribute(this, "anonid", "button")
@@ -72,22 +72,22 @@
         document.getAnonymousElementByAttribute(this, "anonid", "textBox")
       </field>
       <field name="_inputType">
-        this._fxrCore.FxRSubstitution.prototype.INPUT_TEXT
+        this._fxrCore.Substitution.prototype.INPUT_TEXT
       </field>
       <property name="value" onget="return this._textBox.value;" onset="this._textBox.value=val;"/>
       <property name="inputType" onget="return this._inputType;">
         <setter>
           <![CDATA[
-            if (val < this._fxrCore.FxRSubstitution.prototype.INPUT_TEXT) val = this._fxrCore.FxRSubstitution.prototype.INPUT_TEXT;
-            if (val > this._fxrCore.FxRSubstitution.prototype.INPUT_REG_EXP) val = this._fxrCore.FxRSubstitution.prototype.INPUT_REG_EXP;
+            if (val < this._fxrCore.Substitution.prototype.INPUT_TEXT) val = this._fxrCore.Substitution.prototype.INPUT_TEXT;
+            if (val > this._fxrCore.Substitution.prototype.INPUT_REG_EXP) val = this._fxrCore.Substitution.prototype.INPUT_REG_EXP;
           ]]>
           this._inputType = val;
           this._button.setAttribute("inputtype", val);
           this._textBox.setAttribute("inputtype", val);
           switch (val) {
-            case this._fxrCore.FxRSubstitution.prototype.INPUT_TEXT: this._textBox.emptyText = "&text;"; break;
-            case this._fxrCore.FxRSubstitution.prototype.INPUT_WHOLE_WORDS: this._textBox.emptyText = "&wholeWords;"; break;
-            case this._fxrCore.FxRSubstitution.prototype.INPUT_REG_EXP: this._textBox.emptyText = "&regExp;"; break;
+            case this._fxrCore.Substitution.prototype.INPUT_TEXT: this._textBox.emptyText = "&text;"; break;
+            case this._fxrCore.Substitution.prototype.INPUT_WHOLE_WORDS: this._textBox.emptyText = "&wholeWords;"; break;
+            case this._fxrCore.Substitution.prototype.INPUT_REG_EXP: this._textBox.emptyText = "&regExp;"; break;
           }
         </setter>
       </property>
