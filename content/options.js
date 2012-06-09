@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2011
+ * Portions created by the Initial Developer are Copyright (C) 2007-2012
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -38,6 +38,8 @@
  * Object to manage FoxReplace options.
  */
 var foxreplaceOptions = {
+
+  core: {},
 
   /**
    * Initialization code.
@@ -321,7 +323,7 @@ var foxreplaceOptions = {
       var ellipsis = i == MAX_LABELS - 1 && i < nUrls - 1;
       var urlLabel = document.createElement("label");
       urlLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.urls[i]);
-      if (fxrIsExclusionUrl(aSubstitutionGroup.urls[i])) urlLabel.setAttribute("class", "exclusionUrl");
+      if (this.core.fxrIsExclusionUrl(aSubstitutionGroup.urls[i])) urlLabel.setAttribute("class", "exclusionUrl");
       urlsCell.appendChild(urlLabel);
     }
 
@@ -376,7 +378,7 @@ var foxreplaceOptions = {
       var ellipsis = i == MAX_LABELS - 1 && i < nUrls - 1;
       var urlLabel = document.createElement("label");
       urlLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.urls[i]);
-      if (fxrIsExclusionUrl(aSubstitutionGroup.urls[i])) urlLabel.setAttribute("class", "exclusionUrl");
+      if (this.core.fxrIsExclusionUrl(aSubstitutionGroup.urls[i])) urlLabel.setAttribute("class", "exclusionUrl");
       urlsCell.appendChild(urlLabel);
     }
 
@@ -412,7 +414,7 @@ var foxreplaceOptions = {
 
 const Cu = Components.utils;
 
-Cu.import("resource://foxreplace/core.js");
+Cu.import("resource://foxreplace/core.js, foxreplaceOptions.core");
 Cu.import("resource://foxreplace/io.js");
 Cu.import("resource://foxreplace/Observers.js", foxreplaceOptions);
 Cu.import("resource://foxreplace/prefs.js", foxreplaceOptions);

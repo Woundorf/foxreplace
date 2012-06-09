@@ -6,7 +6,7 @@
   - 1.1 (the "License"); you may not use this file except in compliance with
   - the License. You may obtain a copy of the License at
   - http://www.mozilla.org/MPL/
-  - 
+  -
   - Software distributed under the License is distributed on an "AS IS" basis,
   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
   - for the specific language governing rights and limitations under the
@@ -16,7 +16,7 @@
   -
   - The Initial Developer of the Original Code is
   - Marc Ruiz Altisent.
-  - Portions created by the Initial Developer are Copyright (C) 2008
+  - Portions created by the Initial Developer are Copyright (C) 2008-2012
   - the Initial Developer. All Rights Reserved.
   -
   - Contributor(s):
@@ -32,7 +32,7 @@
   - and other provisions required by the GPL or the LGPL. If you do not delete
   - the provisions above, a recipient may use your version of this file under
   - the terms of any one of the MPL, the GPL or the LGPL.
-  - 
+  -
   - ***** END LICENSE BLOCK ***** -->
 
 <!DOCTYPE bindings SYSTEM "chrome://foxreplace/locale/bindings.dtd">
@@ -46,11 +46,11 @@
       <xul:toolbarbutton anonid="button" class="inputTextBoxButton" type="menu">
         <xul:menupopup inherits="position=menuposition">
           <xul:menuitem class="menuitem-iconic inputTextBoxButtonMenuItem" anonid="itemText" label="&text;"
-                        oncommand="document.getBindingParent(this).inputType=FxRSubstitution.prototype.INPUT_TEXT;"/>
+                        oncommand="document.getBindingParent(this).inputType=this._fxrCore.FxRSubstitution.prototype.INPUT_TEXT;"/>
           <xul:menuitem class="menuitem-iconic inputTextBoxButtonMenuItem" anonid="itemWholeWords" label="&wholeWords;"
-                        oncommand="document.getBindingParent(this).inputType=FxRSubstitution.prototype.INPUT_WHOLE_WORDS;"/>
+                        oncommand="document.getBindingParent(this).inputType=this._fxrCore.FxRSubstitution.prototype.INPUT_WHOLE_WORDS;"/>
           <xul:menuitem class="menuitem-iconic inputTextBoxButtonMenuItem" anonid="itemRegExp" label="&regExp;"
-                        oncommand="document.getBindingParent(this).inputType=FxRSubstitution.prototype.INPUT_REG_EXP;"/>
+                        oncommand="document.getBindingParent(this).inputType=this._fxrCore.FxRSubstitution.prototype.INPUT_REG_EXP;"/>
         </xul:menupopup>
       </xul:toolbarbutton>
       <xul:vbox pack="center" flex="1">
@@ -61,8 +61,9 @@
     </content>
     <implementation>
       <constructor>
-        Components.utils.import("resource://foxreplace/core.js");
-        this.inputType = FxRSubstitution.prototype.INPUT_TEXT;
+        this._fxrCore = {};
+        Components.utils.import("resource://foxreplace/core.js", this._fxrCore);
+        this.inputType = this._fxrCore.FxRSubstitution.prototype.INPUT_TEXT;
       </constructor>
       <field name="_button" readonly="true">
         document.getAnonymousElementByAttribute(this, "anonid", "button")
@@ -71,22 +72,22 @@
         document.getAnonymousElementByAttribute(this, "anonid", "textBox")
       </field>
       <field name="_inputType">
-        FxRSubstitution.prototype.INPUT_TEXT
+        this._fxrCore.FxRSubstitution.prototype.INPUT_TEXT
       </field>
       <property name="value" onget="return this._textBox.value;" onset="this._textBox.value=val;"/>
       <property name="inputType" onget="return this._inputType;">
         <setter>
           <![CDATA[
-            if (val < FxRSubstitution.prototype.INPUT_TEXT) val = FxRSubstitution.prototype.INPUT_TEXT;
-            if (val > FxRSubstitution.prototype.INPUT_REG_EXP) val = FxRSubstitution.prototype.INPUT_REG_EXP;
+            if (val < this._fxrCore.FxRSubstitution.prototype.INPUT_TEXT) val = this._fxrCore.FxRSubstitution.prototype.INPUT_TEXT;
+            if (val > this._fxrCore.FxRSubstitution.prototype.INPUT_REG_EXP) val = this._fxrCore.FxRSubstitution.prototype.INPUT_REG_EXP;
           ]]>
           this._inputType = val;
           this._button.setAttribute("inputtype", val);
           this._textBox.setAttribute("inputtype", val);
           switch (val) {
-            case FxRSubstitution.prototype.INPUT_TEXT: this._textBox.emptyText = "&text;"; break;
-            case FxRSubstitution.prototype.INPUT_WHOLE_WORDS: this._textBox.emptyText = "&wholeWords;"; break;
-            case FxRSubstitution.prototype.INPUT_REG_EXP: this._textBox.emptyText = "&regExp;"; break;
+            case this._fxrCore.FxRSubstitution.prototype.INPUT_TEXT: this._textBox.emptyText = "&text;"; break;
+            case this._fxrCore.FxRSubstitution.prototype.INPUT_WHOLE_WORDS: this._textBox.emptyText = "&wholeWords;"; break;
+            case this._fxrCore.FxRSubstitution.prototype.INPUT_REG_EXP: this._textBox.emptyText = "&regExp;"; break;
           }
         </setter>
       </property>
