@@ -568,5 +568,5 @@ var foxreplaceSubstitutionGroupEditor = {
 
 };
 
-Components.utils.import("resource://foxreplace/core.js, foxreplaceSubstitutionGroupEditor.core");
+Components.utils.import("resource://foxreplace/core.js", foxreplaceSubstitutionGroupEditor.core);
 Components.utils.import("resource://foxreplace/services.js", foxreplaceSubstitutionGroupEditor);
