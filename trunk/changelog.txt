@@ -1,4 +1,4 @@
-* Added two new XPaths to select text nodes (issue 35).
+* Added new XPaths to select text nodes (issues 35, 53).
 * Compatibility with Firefox 8.
 * Integration with the Firefox app menu.
 * Subscription works from local files (URL file://...) (issue 25).
