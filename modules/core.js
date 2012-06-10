@@ -197,7 +197,7 @@ SubstitutionGroup.prototype = {
     return aString;
   },
   /**
-   * Applies ths substitution group to aString if aUrl matches any of the urls and returns the result.
+   * Applies the substitution group to aString if aUrl matches any of the urls and returns the result.
    */
   applyTo: function(aUrl, aString) {
     if (this.matches(aUrl)) return this.replace(aString);
