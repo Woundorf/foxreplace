@@ -300,7 +300,8 @@ var foxreplace = {
                        + "|/html/body//label/text()"
                        + "|/html/body//fieldset/text()"
                        + "|/html/body//legend/text()"
-                       + "|/html/body//font/text()";
+                       + "|/html/body//font/text()"
+                       + "|/html/body//blockquote/text()";
     var textNodes = aDocument.evaluate(textNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
     var nTextNodes = textNodes.snapshotLength;
     for (var i = 0; i < nTextNodes; i++) {
