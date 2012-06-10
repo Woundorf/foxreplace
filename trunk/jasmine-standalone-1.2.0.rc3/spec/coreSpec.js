@@ -52,3 +52,77 @@ describe("Substitution", function() {
   });
 
 });
+
+describe("SubstitutionGroup", function() {
+
+  describe("matches()", function() {
+
+    it("should work with no URLs", function() {
+      var group = new SubstitutionGroup();
+      expect(group.matches("http://www.example.com/")).toBe(true);
+    });
+
+    it("should work with one URL", function() {
+      var urls = ["www.example.com"];
+      var group = new SubstitutionGroup(urls);
+      expect(group.matches("www.example.com")).toBe(true);
+      expect(group.matches("http://www.example.com/")).toBe(true);
+      expect(group.matches("http://www.example.com/foo")).toBe(true);
+      expect(group.matches("http://example.com/")).toBe(false);
+    });
+
+    it("should work with more than one URL", function() {
+      var urls = ["example.com", "foo.net"];
+      var group = new SubstitutionGroup(urls);
+      expect(group.matches("http://www.example.com/")).toBe(true);
+      expect(group.matches("http://foo.net/")).toBe(true);
+      expect(group.matches("http://bar.org/")).toBe(false);
+    });
+
+    it("should work with wildcards", function() {
+      var urls = ["http://*.example.com", "http*://foo.*/fu*.html", "http://**.bar.org"];
+      var group = new SubstitutionGroup(urls);
+      expect(group.matches("http://www.example.com/")).toBe(true);
+      expect(group.matches("http://ex.example.com/")).toBe(true);
+      expect(group.matches("http://example.com/")).toBe(false);
+      expect(group.matches("http://foo.net/fu.html")).toBe(true);
+      expect(group.matches("https://foo.net/fu.html")).toBe(true);
+      expect(group.matches("http://foo.info/fuuu.html")).toBe(true);
+      expect(group.matches("ftp://foo.net/fun.html")).toBe(false);
+      expect(group.matches("http://foo.bar.org/")).toBe(true);
+      expect(group.matches("http://bar.org/")).toBe(false);
+    });
+
+    it("should work with special characters", function() {
+      var urls = ["el-guió.cat/falç?v=%4Fg+42&x=_26"];
+      var group = new SubstitutionGroup(urls);
+      expect(group.matches("http://www.el-guió.cat/falç?v=%4Fg+42&x=_26")).toBe(true);
+    });
+
+    it("should work with anchors", function() {
+      var urls = ["|ftp://www.example1.com/", "ftp://www.example2.com/|", "|ftp://www.example3.com/|"];
+      var group = new SubstitutionGroup(urls);
+      expect(group.matches("ftp://www.example1.com/")).toBe(true);
+      expect(group.matches("ftp://www.example1.com/foo")).toBe(true);
+      expect(group.matches("sftp://www.example1.com/")).toBe(false);
+      expect(group.matches("ftp://www.example2.com/")).toBe(true);
+      expect(group.matches("sftp://www.example2.com/")).toBe(true);
+      expect(group.matches("ftp://www.example2.com/foo")).toBe(false);
+      expect(group.matches("ftp://www.example3.com/")).toBe(true);
+      expect(group.matches("sftp://www.example3.com/")).toBe(false);
+      expect(group.matches("ftp://www.example3.com/foo")).toBe(false);
+      expect(group.matches("sftp://www.example3.com/foo")).toBe(false);
+    });
+
+    it("should work with exclusion URLs", function() {
+      var urls = ["example.com", "-example.com/bar"];
+      var group = new SubstitutionGroup(urls);
+      expect(group.matches("http://www.example.com/")).toBe(true);
+      expect(group.matches("http://www.example.com/foo")).toBe(true);
+      expect(group.matches("http://www.example.com/bar")).toBe(false);
+      expect(group.matches("http://foo.net/")).toBe(false);
+    });
+
+  });
+
+});
