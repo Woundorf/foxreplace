@@ -414,7 +414,7 @@ var foxreplaceOptions = {
 
 const Cu = Components.utils;
 
-Cu.import("resource://foxreplace/core.js, foxreplaceOptions.core");
+Cu.import("resource://foxreplace/core.js", foxreplaceOptions.core);
 Cu.import("resource://foxreplace/io.js");
 Cu.import("resource://foxreplace/Observers.js", foxreplaceOptions);
 Cu.import("resource://foxreplace/prefs.js", foxreplaceOptions);
