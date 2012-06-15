@@ -46,7 +46,7 @@ var foxreplaceOptions = {
    */
   onLoad: function() {
     this.Observers.add("fxrSubscriptionStatusChanged", this.updateSubscriptionStatus, this);
-    this.prefs.observe("substitutionListXml", this.loadSubstitutionListXml, this);
+    this.prefs.observe("substitutionListJSON", this.loadSubstitutionList, this);
     this.updateSubscriptionStatus();
   },
 
@@ -55,21 +55,21 @@ var foxreplaceOptions = {
    */
   onUnload: function() {
     this.Observers.remove("fxrSubscriptionStatusChanged", this.updateSubscriptionStatus, this);
-    this.prefs.ignore("substitutionListXml", this.loadSubstitutionListXml, this);
+    this.prefs.ignore("substitutionListJSON", this.loadSubstitutionList, this);
   },
 
   /**
-   * Called when the options window is loaded. Loads the substitution list in XML from preferences and fills the listbox.
+   * Called when the options window is loaded. Loads the substitution list from preferences and fills the listbox.
    */
-  loadSubstitutionListXml: function() {
-    this.substitutionListFromArray(this.prefs.substitutionListXml, true);
+  loadSubstitutionList: function() {
+    this.substitutionListFromArray(this.prefs.substitutionList, true);
   },
 
   /**
-   * Called when there's a change in the listbox. Saves the substitution list in XML to preferences.
+   * Called when there's a change in the listbox. Saves the substitution list to preferences.
    */
-  saveSubstitutionListXml: function() {
-    return this.prefs.substitutionListToXmlString(this.substitutionListToArray());
+  saveSubstitutionList: function() {
+    return JSON.stringify(this.core.substitutionListToJSON(this.substitutionListToArray()));
   },
 
   /**

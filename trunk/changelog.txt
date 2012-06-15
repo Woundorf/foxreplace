@@ -1,3 +1,4 @@
+* Substitution list stored and exported as JSON (0.13) instead of XML (issue 67). XML kept as read-only.
 * Added new XPaths to select text nodes (issues 35, 53).
 * Compatibility with Firefox 8.
 * Integration with the Firefox app menu.

@@ -5,7 +5,7 @@
  * 1.1 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS" basis,
  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
  * for the specific language governing rights and limitations under the
@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009-2011
+ * Portions created by the Initial Developer are Copyright (C) 2009-2012
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -31,7 +31,7 @@
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
  * the terms of any one of the MPL, the GPL or the LGPL.
- * 
+ *
  * ***** END LICENSE BLOCK ***** */
 
 const Cc = Components.classes;
@@ -51,27 +51,37 @@ Cu.import("resource://foxreplace/services.js");
 var EXPORTED_SYMBOLS = ["fxrSubscription"];
 
 var fxrSubscription = {
-  
+
   /**
    * Callback that will be called by the timer after every period.
    */
   _callback: {
     notify: function(aTimer) {
       var http = /https?\:\/\//.test(fxrSubscription.url);
-      
+
       try {
         var request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
         request.open("GET", fxrSubscription.url);
-        request.onreadystatechange = function() {  
+        request.onreadystatechange = function() {
           if (request.readyState == 4) {
             if ((http && request.status == 200) || (!http && request.status == 0)) {
-              try {
-                var listXml = new XML(request.responseText.replace(/<\?.*\?>/, ""));
-                prefs.substitutionListXml = fxrSubstitutionListFromXml(listXml);
+              if (request.responseText.charAt(0) == '{') {  // JSON
+                let listJSON = JSON.parse(request.responseText);
+                prefs.substitutionList = substitutionListFromJSON(listJSON);
                 fxrSubscription.status = getLocalizedString("subscriptionStatusLastUpdated", [new Date().toLocaleString()]);
               }
-              catch (e) {
-                fxrSubscription.status = getLocalizedString("xmlError", [e]);
+              else if (request.responseText.charAt(0) == '<') { // XML
+                try {
+                  let listXml = request.responseXML;
+                  prefs.substitutionList = fxrSubstitutionListFromXml(listXml);
+                  fxrSubscription.status = getLocalizedString("subscriptionStatusLastUpdated", [new Date().toLocaleString()]);
+                }
+                catch (e) {
+                  fxrSubscription.status = getLocalizedString("xmlError", [e]);
+                }
+              }
+              else {  // unknown format
+                fxrSubscription.status = getLocalizedString("unrecognizedFormat");
               }
             }
             else if (http && request.status == 0) fxrSubscription.status = getLocalizedString("cantConnectToServer", [fxrSubscription.url]);
@@ -89,12 +99,12 @@ var fxrSubscription = {
       }
     }
   },
-  
+
   /**
    * True if timer is on, false otherwise.
    */
   _timerOn: false,
-  
+
   /**
    * Returns the timer.
    */
@@ -103,19 +113,19 @@ var fxrSubscription = {
       this._timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
     return this._timer;
   },
-  
+
   /**
    * String that describes the status of the subscription.
    */
   _status: getLocalizedString("subscriptionStatusDisabled"),
-  
+
   /**
    * Returns the status of the subscription.
    */
   get status() {
     return this._status;
   },
-  
+
   /**
    * Sets the status of the subscription.
    */
@@ -123,19 +133,19 @@ var fxrSubscription = {
     this._status = aStatus;
     Observers.notify("fxrSubscriptionStatusChanged", aStatus);
   },
-  
+
   /**
    * Starts the subscription service.
    */
   start: function(aUrl, aPeriod) {
     if (this._timerOn) return;
-    
+
     this._timerOn = true;
     this.url = aUrl;
     this._callback.notify();  // first call
     this.timer.initWithCallback(this._callback, aPeriod * 60000, Ci.nsITimer.TYPE_REPEATING_SLACK);
   },
-  
+
   /**
    * Restarts the subscription service with possibly new parameters.
    */
@@ -143,16 +153,16 @@ var fxrSubscription = {
     this.stop();
     this.start(aUrl, aPeriod);
   },
-  
+
   /**
    * Stops the subscription service.
    */
   stop: function() {
     if (!this._timerOn) return;
-    
+
     this.timer.cancel();
     this._timerOn = false;
     this.status = getLocalizedString("subscriptionStatusDisabled");
   }
-  
+
 };
