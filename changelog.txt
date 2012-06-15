@@ -1,6 +1,6 @@
 * Substitution list stored and exported as JSON (0.13) instead of XML (issue 67). XML kept as read-only.
 * Added new XPaths to select text nodes (issues 35, 53).
-* Compatibility with Firefox 8.
+* Compatibility with Firefox 15.
 * Integration with the Firefox app menu.
 * Subscription works from local files (URL file://...) (issue 25).
 * Status of subscription displayed in options window.
