@@ -34,12 +34,15 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+Components.utils.import("resource://foxreplace/jxon.js");
+Components.utils.import("resource://foxreplace/services.js");
+
 /**
  * Definitions of substitution and substitution group.
  */
 
 var EXPORTED_SYMBOLS = ["Substitution", "SubstitutionGroup",
-                        "fxrSubstitutionListFromXml", "fxrSubstitutionListToXml", "fxrIsExclusionUrl"];
+                        "fxrSubstitutionListFromXml", "fxrIsExclusionUrl", "substitutionListToJSON", "substitutionListFromJSON"];
 
 /**
  * Substitution.
@@ -69,10 +72,10 @@ function Substitution(aInput, aOutput, aCaseSensitive, aInputType) {
  * Creates a substitution from an XML object. If aEscape is true, input and output strings will be backslash-escaped.
  */
 Substitution.fromXml = function(aXml, aEscape) {
-  var input = aXml.input.toString().slice(1, -1);   // to remove quotes
-  var output = aXml.output.toString().slice(1, -1); // to remove quotes
-  var caseSensitive = aXml.@casesensitive.toString() == "true";
-  var inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(aXml.input.@type.toString());
+  var input = aXml.input.slice(1, -1);   // to remove quotes
+  var output = aXml.output.slice(1, -1); // to remove quotes
+  var caseSensitive = aXml["@casesensitive"] == true;
+  var inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(aXml.input["@type"]);
 
   if (aEscape) {
     if (inputType != this.prototype.INPUT_REG_EXP) input = fxrEscape(input);
@@ -87,6 +90,15 @@ Substitution.fromXml = function(aXml, aEscape) {
     throw e;
   }
 };
+
+/**
+ * Returns the substitution represented by aSubstitutionJSON.
+ */
+Substitution.fromJSON = function(aSubstitutionJSON) {
+  let inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(aSubstitutionJSON.inputType);
+  return new Substitution(aSubstitutionJSON.input, aSubstitutionJSON.output, aSubstitutionJSON.caseSensitive, aSubstitutionJSON.inputType);
+};
+
 Substitution.prototype = {
   /**
    * Applies the substitution to aString and returns the result.
@@ -124,17 +136,19 @@ Substitution.prototype = {
       case this.INPUT_REG_EXP: return aString.replace(this._regExp, fxrUnescape(this.output));
     }
   },
+
   /**
-   * Returns the substitution as an XML object.
+   * Returns the substitution as a simple object that can be serialized as JSON.
    */
-  toXml: function() {
-    var substitution = <substitution/>;
-    substitution.input = '"' + this.input + '"';    // quotes to avoid whitespace problems
-    substitution.input.@type = this.INPUT_TYPE_STRINGS[this.inputType];
-    substitution.output = '"' + this.output + '"';  // quotes to avoid whitespace problems
-    if (this.caseSensitive) substitution.@casesensitive = true;
-    return substitution;
+  toJSON: function() {
+    return {
+      input: this.input,
+      inputType: this.INPUT_TYPE_STRINGS[this.inputType],
+      output: this.output,
+      caseSensitive: this.caseSensitive
+    };
   }
+
 };
 /**
  * Constants.
@@ -203,16 +217,18 @@ SubstitutionGroup.prototype = {
     if (this.matches(aUrl)) return this.replace(aString);
     else return aString;
   },
+
   /**
-   * Returns the substitution group as an XML object.
+   * Returns the substitution group as a simple object that can be serialized as JSON.
    */
-  toXml: function() {
-    var group = <group><urls/><substitutions/></group>;
-    this.urls.forEach(function(element) { group.urls.appendChild(<url>{element}</url>); });
-    this.substitutions.forEach(function(element) { group.substitutions.appendChild(element.toXml()); });
-    if (this.html) group.@html = true;
-    return group;
+  toJSON: function() {
+    return {
+      urls: this.urls,
+      substitutions: this.substitutions,
+      html: this.html
+    };
   }
+
 };
 /**
  * Creates a substitution group from an XML object. If aEscape is true, input and output strings will be
@@ -220,50 +236,71 @@ SubstitutionGroup.prototype = {
  */
 SubstitutionGroup.fromXml = function(aXml, aEscape) {
   var urls = [];
-  for each (var url in aXml.urls.url) urls.push(url.toString());
+  let urlsJxon = aXml.urls;
+  if (urlsJxon == true) urlsJxon = [];  // special case when there are no urls
+  if (!Array.isArray(urlsJxon)) urlsJxon = [urlsJxon];
+  for each (let url in urlsJxon) urls.push(url.url);
 
   var substitutions = [];
+  let substitutionsJxon;
+
+  if (aXml.substitutions == true) substitutionsJxon = []; // special case when there are no substitutions (should not happen)
+  else substitutionsJxon = aXml.substitutions.substitution;
+
+  if (!Array.isArray(substitutionsJxon)) substitutionsJxon = [substitutionsJxon];
+
   var errors = "";
-  for each (var substitution in aXml.substitutions.substitution) {
+  for each (let substitution in substitutionsJxon) {
     try {
       substitutions.push(Substitution.fromXml(substitution, aEscape));
     }
     catch (e) {
-      XML.prettyPrinting = false;
       errors += e + "\n";
     }
   }
 
-  var html = aXml.@html.toString() == "true";
+  var html = aXml["@html"] == true;
 
-  if (errors) foxreplaceIO.alert(foxreplaceIO.strings.getString("xmlErrorTitle"),
-                                 foxreplaceIO.strings.getString("xmlGroupErrorText") + "\n" + errors);
+  if (errors) prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlGroupErrorText") + "\n" + errors);
 
   return new SubstitutionGroup(urls, substitutions, html);
+};
+
+/**
+ * Returns the substitution group represented by aGroupJSON.
+ */
+SubstitutionGroup.fromJSON = function(aGroupJSON) {
+  let substitutions = [];
+
+  for each (let substitutionJSON in aGroupJSON.substitutions) substitutions.push(Substitution.fromJSON(substitutionJSON));
+
+  return new SubstitutionGroup(aGroupJSON.urls, substitutions, aGroupJSON.html);
 };
 
 /**
  * Creates the substitution list from an XML object.
  */
 function fxrSubstitutionListFromXml(aListXml) {
+  let listJxon = JXON.build(aListXml, 0);
+  //prompts.alert("JXON", JSON.stringify(listJxon));
   var substitutionList = [];
-  var escape = aListXml.@version == "0.10";
 
-  for each (var group in aListXml.group) substitutionList.push(SubstitutionGroup.fromXml(group, escape));
+  if (listJxon.substitutionlist) {  // necessary when receiving empty string
+    var escape = listJxon.substitutionlist["@version"] == "0.10";
+    //prompts.alert("version", listJxon.substitutionlist["@version"]);
+
+    let groups = listJxon.substitutionlist.group;
+    if (groups === undefined) groups = [];  // special case when there are no groups
+    if (!Array.isArray(groups)) groups = [groups];
+
+    for each (let group in groups) {
+      substitutionList.push(SubstitutionGroup.fromXml(group, escape));
+    }
+  }
+
+  //prompts.alert("json", JSON.stringify(substitutionListToJSON(substitutionList)));
 
   return substitutionList;
-}
-
-/**
- * Creates an XML object from the substitution list.
- */
-function fxrSubstitutionListToXml(aSubstitutionList) {
-  var listXml = <substitutionlist version="0.12"/>;
-  var nSubstitutions = aSubstitutionList.length;
-
-  for (var i = 0; i < nSubstitutions; i++) listXml.appendChild(aSubstitutionList[i].toXml());
-
-  return listXml;
 }
 
 /**
@@ -271,6 +308,29 @@ function fxrSubstitutionListToXml(aSubstitutionList) {
  */
 function fxrIsExclusionUrl(aUrl) {
   return /^-.*/.test(aUrl);
+}
+
+/**
+ * Returns aSubstitutionList as a simple object that can be serialized as JSON.
+ */
+function substitutionListToJSON(aSubstitutionList) {
+  return {
+    version: "0.13",
+    groups: aSubstitutionList
+  };
+}
+
+/**
+ * Returns the substitution list represented by aListJSON.
+ */
+function substitutionListFromJSON(aListJSON) {
+  // if (aListJSON.version ... // possible version check
+
+  let list = [];
+
+  for each (let groupJSON in aListJSON.groups) list.push(SubstitutionGroup.fromJSON(groupJSON));
+
+  return list;
 }
 
 ////////////////////////////////////// Non-exported functions //////////////////////////////////////

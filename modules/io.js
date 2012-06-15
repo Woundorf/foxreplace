@@ -5,7 +5,7 @@
  * 1.1 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS" basis,
  * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
  * for the specific language governing rights and limitations under the
@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009-2011
+ * Portions created by the Initial Developer are Copyright (C) 2009-2012
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -31,11 +31,15 @@
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
  * the terms of any one of the MPL, the GPL or the LGPL.
- * 
+ *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://foxreplace/core.js");
-Components.utils.import("resource://foxreplace/services.js");
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+const Cu = Components.utils;
+
+Cu.import("resource://foxreplace/core.js");
+Cu.import("resource://foxreplace/services.js");
 
 /**
  * Functions for input/output.
@@ -44,81 +48,99 @@ Components.utils.import("resource://foxreplace/services.js");
 var EXPORTED_SYMBOLS = ["fxrIO"];
 
 var fxrIO = {
-  
+
   /**
-   * Imports the substitution list from a file (selected by parameter or by an user in a dialog) and returns it.
+   * Imports the substitution list from a file (selected by parameter or by a user in a dialog) and returns it.
    */
   importSubstitutionList: function(aFile) {
     if (!aFile) {
       var file = fxrShowFileDialog("import");
-      
-      if (!file) return;
+
+      if (!file) return null;
       else aFile = file;
     }
-    
-    var fileInputStream = Components.classes["@mozilla.org/network/file-input-stream;1"]
-                                    .createInstance(Components.interfaces.nsIFileInputStream);
-    var converterInputStream = Components.classes["@mozilla.org/intl/converter-input-stream;1"]
-                                         .createInstance(Components.interfaces.nsIConverterInputStream);
+
+    var fileInputStream = Cc["@mozilla.org/network/file-input-stream;1"].createInstance(Ci.nsIFileInputStream);
+    var converterInputStream = Cc["@mozilla.org/intl/converter-input-stream;1"].createInstance(Ci.nsIConverterInputStream);
     fileInputStream.init(aFile, 0x01, 0444, 0); // read
     converterInputStream.init(fileInputStream, "UTF-8", 4096, 0x0000);
-    
-    var listXmlString = "";
+
+    var listString = "";
     var string = {};
-    
+
     try {
-      while (converterInputStream.readString(4096, string) > 0) listXmlString += string.value;
+      while (converterInputStream.readString(4096, string) > 0) listString += string.value;
     }
     catch (e) {
       converterInputStream.close();
       fileInputStream.close();
-      
+
       prompts.alert(getLocalizedString("importTitle"), e);
-      
-      return;
+
+      return null;
     }
-    
+
     converterInputStream.close();
     fileInputStream.close();
-    
-    try {
-      var listXml = new XML(listXmlString);
-      return fxrSubstitutionListFromXml(listXml);
+
+    if (listString.charAt(0) == '{') {  // JSON
+      let listJSON = JSON.parse(listString);
+      return substitutionListFromJSON(listJSON);
     }
-    catch (e) {
-      prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlErrorText") + "\n" + e);
+    else if (listString.charAt(0) == '<') { // XML
+      try {
+        let parser = Cc["@mozilla.org/xmlextras/domparser;1"].createInstance(Ci.nsIDOMParser);
+        let listXml = parser.parseFromString(listString, "text/xml");
+        return fxrSubstitutionListFromXml(listXml);
+      }
+      catch (e) {
+        prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlErrorText") + "\n" + e);
+      }
     }
+    else {  // unknown format
+      prompts.alert(getLocalizedString("unrecognizedFormatTitle"), getLocalizedString("unrecognizedFormatText"));
+    }
+
+    return null;
   },
-  
+
   /**
    * Imports the substitution list from an URL (selected by parameter or by an user in a dialog) and returns it.
    */
   importSubstitutionListFromUrl: function(aUrl) {
     if (!aUrl) {
       var input = { value: "" };
-      
-      if (!prompts.prompt(getLocalizedString("importFromUrlTitle"), getLocalizedString("importFromUrlText"), input))
-        return;
+
+      if (!prompts.prompt(getLocalizedString("importFromUrlTitle"), getLocalizedString("importFromUrlText"), input)) return null;
       else aUrl = input.value;
     }
-    
+
     if (!/https?\:\/\//.test(aUrl)) {
       prompts.alert(getLocalizedString("nonSupportedProtocol"), getLocalizedString("onlyHttp"));
-      return;
+      return null;
     }
-    
+
     try {
-      var request = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Components.interfaces.nsIXMLHttpRequest);
+      var request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
       request.open("GET", aUrl, false);
       request.send(null);
-      
+
       if (request.status == 200) {
-        try {
-          var listXml = new XML(request.responseText.replace(/<\?.*\?>/, ""));
-          return fxrSubstitutionListFromXml(listXml);
+        if (request.responseText.charAt(0) == '{') {  // JSON
+          let listJSON = JSON.parse(request.responseText);
+          return substitutionListFromJSON(listJSON);
         }
-        catch (e) {
-          prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlErrorText") + "\n" + e);
+        else if (request.responseText.charAt(0) == '<') { // XML
+          try {
+            let listXml = request.responseXML;
+            return fxrSubstitutionListFromXml(listXml);
+          }
+          catch (e) {
+            prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlErrorText") + "\n" + e);
+          }
+        }
+        else {  // unknown format
+          prompts.alert(getLocalizedString("unrecognizedFormatTitle"), getLocalizedString("unrecognizedFormatText"));
         }
       }
       else prompts.alert(getLocalizedString("httpError"), request.status + " " + request.statusText);
@@ -130,8 +152,10 @@ var fxrIO = {
     catch (e) {
       prompts.alert(getLocalizedString("unexpectedError"), e);
     }
+
+    return null;
   },
-  
+
   /**
    * Exports the substitution list to a file (selected by parameter or by an user in a dialog). The parameter is a
    * function to get the substitution list that is called only if it's needed (it's not called if the user cancels the
@@ -140,22 +164,19 @@ var fxrIO = {
   exportSubstitutionList: function(getSubstitutionList, aFile) {
     if (!aFile) {
       var file = fxrShowFileDialog("export");
-      
+
       if (!file) return;
       else aFile = file;
     }
-    
+
     var substitutionList = getSubstitutionList();
-    var listXml = fxrSubstitutionListToXml(substitutionList);
-    XML.prettyPrinting = true;
-    var data = listXml.toString();
-    var fileOutputStream = Components.classes["@mozilla.org/network/file-output-stream;1"]
-                                     .createInstance(Components.interfaces.nsIFileOutputStream);
+    var listJSON = substitutionListToJSON(substitutionList);
+    var data = JSON.stringify(listJSON);
+    var fileOutputStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
     fileOutputStream.init(aFile, 0x02 | 0x08 | 0x20, 0666, 0);  // write, create, truncate
-    var converterOutputStream = Components.classes["@mozilla.org/intl/converter-output-stream;1"]
-                                          .createInstance(Components.interfaces.nsIConverterOutputStream);
+    var converterOutputStream = Cc["@mozilla.org/intl/converter-output-stream;1"].createInstance(Ci.nsIConverterOutputStream);
     converterOutputStream.init(fileOutputStream, "UTF-8", 4096, 0x0000);
-    
+
     try {
       converterOutputStream.writeString(data);
     }
@@ -167,7 +188,7 @@ var fxrIO = {
       fileOutputStream.close();
     }
   }
-  
+
 };
 
 ////////////////////////////////////// Non-exported functions //////////////////////////////////////
@@ -177,27 +198,27 @@ var fxrIO = {
  */
 function fxrShowFileDialog(aMode) {
   var title = getLocalizedString(aMode == "import" ? "importTitle" : "exportTitle");
-  
+
   try {
-    const nsIFP = Components.interfaces.nsIFilePicker;
-    var fileDialog = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFP);
-    var windowMediator = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-                                   .getService(Components.interfaces.nsIWindowMediator);
+    const nsIFP = Ci.nsIFilePicker;
+    var fileDialog = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFP);
+    var windowMediator = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
     var window = windowMediator.getMostRecentWindow("");
     fileDialog.init(window, title, aMode == "import" ? nsIFP.modeOpen : nsIFP.modeSave);
-    fileDialog.appendFilters(nsIFP.filterXML);
+    fileDialog.appendFilter(getLocalizedString("jsonFiles"), "*.json");
+    if (aMode == "import") fileDialog.appendFilters(nsIFP.filterXML);
     fileDialog.appendFilters(nsIFP.filterAll);
     fileDialog.filterIndex = 0;
-    fileDialog.defaultExtension = ".xml";
-    fileDialog.defaultString = "FoxReplace.xml";
-    
+    fileDialog.defaultExtension = ".json";
+    fileDialog.defaultString = "FoxReplace.json";
+
     var ret = fileDialog.show();
-    
+
     if (ret == nsIFP.returnOK || ret == nsIFP.returnReplace) return fileDialog.file;
   }
   catch (e) {
     prompts.alert(title, e);
   }
-  
+
   return null;
 }

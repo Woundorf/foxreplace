@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009-2011
+ * Portions created by the Initial Developer are Copyright (C) 2009-2012
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -71,14 +71,15 @@ var prefs = {
    * Loads the substitution list from preferences and returns it.
    */
   get substitutionList() {
-    if (!this._substitutionList || this._substitutionListXmlString != this._preferences.get("substitutionListXml")) {
+    if (!this._substitutionList || this._substitutionListJSONString != this._preferences.get("substitutionListJSON")) {
+      this.upgradeListToJSON();
       try {
-        this._substitutionListXmlString = this._preferences.get("substitutionListXml");
-        var listXml = new XML(this._substitutionListXmlString);
-        this._substitutionList = fxrSubstitutionListFromXml(listXml);
+        this._substitutionListJSONString = this._preferences.get("substitutionListJSON");
+        let substitutionListJSON = JSON.parse(this._substitutionListJSONString);
+        this._substitutionList = substitutionListFromJSON(substitutionListJSON);
       }
       catch (e) {
-        prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlErrorText") + "\n" + e);
+        prompts.alert(getLocalizedString("jsonErrorTitle"), getLocalizedString("jsonErrorText") + "\n" + e);
         return undefined;
       }
     }
@@ -89,37 +90,31 @@ var prefs = {
    * Saves the substitution list to preferences.
    */
   set substitutionList(aSubstitutionList) {
-    this._preferences.set("substitutionListXml", this.substitutionListToXmlString(aSubstitutionList));
+    this._preferences.set("substitutionListJSON", JSON.stringify(substitutionListToJSON(aSubstitutionList)));
   },
 
   /**
    * Loads the substitution list from preferences and returns it.
    */
   get substitutionListXml() {
-    return this.substitutionList;
-  },
-
-  /**
-   * Saves the substitution list to preferences.
-   */
-  set substitutionListXml(aSubstitutionList) {
-    this.substitutionList = aSubstitutionList;
+    try {
+      let substitutionListXmlString = this._preferences.get("substitutionListXml");
+      let parser = Cc["@mozilla.org/xmlextras/domparser;1"].createInstance(Ci.nsIDOMParser);
+      let listXml = parser.parseFromString(substitutionListXmlString, "text/xml");
+      let substitutionList = fxrSubstitutionListFromXml(listXml);
+      return substitutionList;
+    }
+    catch (e) {
+      prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlErrorText") + "\n" + e);
+      return undefined;
+    }
   },
 
   /**
    * Deletes the cached substitution list.
    */
-  onSubstitutionListXmlChange: function() {
+  onSubstitutionListJSONChange: function() {
     this._substitutionList = null;
-  },
-
-  /**
-   * Returns the substitution list encoded as a string to save to preferences.
-   */
-  substitutionListToXmlString: function(aSubstitutionList) {
-    var listXml = fxrSubstitutionListToXml(aSubstitutionList);
-    XML.prettyPrinting = false;
-    return listXml.toString();
   },
 
   /**
@@ -218,8 +213,19 @@ var prefs = {
    */
   ignore: function(aPrefName, aCallback, aThisObject) {
     this._preferences.ignore(aPrefName, aCallback, aThisObject);
+  },
+
+  /**
+   * Upgrades the substitution list preference from the old XML format (0.12) to the new JSON format (0.13), if necessary.
+   */
+  upgradeListToJSON: function() {
+    if (this._preferences.has("substitutionListXml")) {
+      let substitutionList = this.substitutionListXml;
+      this._preferences.reset("substitutionListXml");
+      this.substitutionList = substitutionList;
+    }
   }
 
 };
 
-prefs.observe("substitutionListXml", prefs.onSubstitutionListXmlChange, prefs);
+prefs.observe("substitutionListJSON", prefs.onSubstitutionListJSONChange, prefs);

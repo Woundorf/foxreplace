@@ -56,7 +56,7 @@ var foxreplace = {
 
     gBrowser.addEventListener("DOMContentLoaded", this.onPageLoad, true);
 
-    this._substitutionList = this.prefs.substitutionListXml;
+    this._substitutionList = this.prefs.substitutionList;
     this.setAutoReplaceOnLoad(this.prefs.autoReplaceOnLoad);
 
     // subscription
@@ -85,8 +85,8 @@ var foxreplace = {
     if (aTopic != "nsPref:changed") return;
 
     switch (aData) {
-      case "substitutionListXml":
-        this._substitutionList = this.prefs.substitutionListXml;
+      case "substitutionListJSON":
+        this._substitutionList = this.prefs.substitutionList;
         break;
 
       case "autoReplaceOnLoad":

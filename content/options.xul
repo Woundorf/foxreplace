@@ -6,7 +6,7 @@
   - 1.1 (the "License"); you may not use this file except in compliance with
   - the License. You may obtain a copy of the License at
   - http://www.mozilla.org/MPL/
-  - 
+  -
   - Software distributed under the License is distributed on an "AS IS" basis,
   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
   - for the specific language governing rights and limitations under the
@@ -16,7 +16,7 @@
   -
   - The Initial Developer of the Original Code is
   - Marc Ruiz Altisent.
-  - Portions created by the Initial Developer are Copyright (C) 2007-2011
+  - Portions created by the Initial Developer are Copyright (C) 2007-2012
   - the Initial Developer. All Rights Reserved.
   -
   - Contributor(s):
@@ -32,7 +32,7 @@
   - and other provisions required by the GPL or the LGPL. If you do not delete
   - the provisions above, a recipient may use your version of this file under
   - the terms of any one of the MPL, the GPL or the LGPL.
-  - 
+  -
   - ***** END LICENSE BLOCK ***** -->
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
@@ -41,9 +41,9 @@
 <prefwindow id="foxreplacePreferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
             title="&prefwindow.title;" onload="foxreplaceOptions.deleteDumbItem();">
   <script src="options.js"/>
-  <prefpane id="mainPane" label="&mainPane.title;" onpaneload="foxreplaceOptions.loadSubstitutionListXml();">
+  <prefpane id="mainPane" label="&mainPane.title;" onpaneload="foxreplaceOptions.loadSubstitutionList();">
     <preferences>
-      <preference id="substitutionListXml" name="extensions.foxreplace.substitutionListXml" type="unichar"/>
+      <preference id="substitutionListJSON" name="extensions.foxreplace.substitutionListJSON" type="unichar"/>
       <preference id="autoReplaceOnLoad" name="extensions.foxreplace.autoReplaceOnLoad" type="bool"/>
       <preference id="replaceUrls" name="extensions.foxreplace.replaceUrls" type="bool"/>
       <preference id="enableSubscription" name="extensions.foxreplace.enableSubscription" type="bool"/>
@@ -53,8 +53,8 @@
     <description id="description">&description;</description>
     <separator/>
     <hbox>
-      <listbox id="substitutionListBox" flex="1" rows="10" preference-editable="true" preference="substitutionListXml"
-               onsynctopreference="return foxreplaceOptions.saveSubstitutionListXml();"
+      <listbox id="substitutionListBox" flex="1" rows="10" preference-editable="true" preference="substitutionListJSON"
+               onsynctopreference="return foxreplaceOptions.saveSubstitutionList();"
                onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitutionGroup();"
                onselect="foxreplaceOptions.onSelectSubstitutionGroup();">
         <listhead>
