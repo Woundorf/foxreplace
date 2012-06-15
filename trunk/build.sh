@@ -24,11 +24,11 @@
 # ./$APP_NAME.jar  (only if $KEEP_JAR=1)
 # ./files -- the list of packaged files
 #
-# Note: It modifies chrome.manifest when packaging so that it points to 
+# Note: It modifies chrome.manifest when packaging so that it points to
 #       chrome/$APP_NAME.jar!/*
 
 #
-# default configuration file is ./config_build.sh, unless another file is 
+# default configuration file is ./config_build.sh, unless another file is
 # specified in command-line. Available config variables:
 APP_NAME=          # short-name, jar and xpi files name. Must be lowercase with no spaces
 CHROME_PROVIDERS=  # which chrome providers we have (space-separated list)
@@ -71,9 +71,9 @@ for CHROME_SUBDIR in $CHROME_PROVIDERS; do
   find $CHROME_SUBDIR -path '*.svn*' -prune -o -type f -print | grep -v \~ >> files
 done
 
-zip -0 -r $JAR_FILE `cat files`
+#zip -0 -r $JAR_FILE `cat files`
 # The following statement should be used instead if you don't wish to use the JAR file
-#cp --verbose --parents `cat files` $TMP_DIR/chrome
+cp --verbose --parents `cat files` $TMP_DIR/chrome
 
 # prepare components and defaults
 echo "Copying various files to $TMP_DIR folder..."
@@ -94,18 +94,19 @@ done
 
 cd $TMP_DIR
 
-if [ -f "chrome.manifest" ]; then
-  echo "Preprocessing chrome.manifest..."
-  # You think this is scary?
-  #s/^(content\s+\S*\s+)(\S*\/)$/\1jar:chrome\/$APP_NAME\.jar!\/\2/
-  #s/^(skin|locale)(\s+\S*\s+\S*\s+)(.*\/)$/\1\2jar:chrome\/$APP_NAME\.jar!\/\3/
-  #
-  # Then try this! (Same, but with characters escaped for bash :)
-  sed -i -r s/^\(content\\s+\\S*\\s+\)\(\\S*\\/\)$/\\1jar:chrome\\/$APP_NAME\\.jar!\\/\\2/ chrome.manifest
-  sed -i -r s/^\(skin\|locale\)\(\\s+\\S*\\s+\\S*\\s+\)\(.*\\/\)$/\\1\\2jar:chrome\\/$APP_NAME\\.jar!\\/\\3/ chrome.manifest
-
-  # (it simply adds jar:chrome/whatever.jar!/ at appropriate positions of chrome.manifest)
-fi
+# Uncomment to use the JAR file
+#if [ -f "chrome.manifest" ]; then
+#  echo "Preprocessing chrome.manifest..."
+#  # You think this is scary?
+#  #s/^(content\s+\S*\s+)(\S*\/)$/\1jar:chrome\/$APP_NAME\.jar!\/\2/
+#  #s/^(skin|locale)(\s+\S*\s+\S*\s+)(.*\/)$/\1\2jar:chrome\/$APP_NAME\.jar!\/\3/
+#  #
+#  # Then try this! (Same, but with characters escaped for bash :)
+#  sed -i -r s/^\(content\\s+\\S*\\s+\)\(\\S*\\/\)$/\\1jar:chrome\\/$APP_NAME\\.jar!\\/\\2/ chrome.manifest
+#  sed -i -r s/^\(skin\|locale\)\(\\s+\\S*\\s+\\S*\\s+\)\(.*\\/\)$/\\1\\2jar:chrome\\/$APP_NAME\\.jar!\\/\\3/ chrome.manifest
+#
+#  # (it simply adds jar:chrome/whatever.jar!/ at appropriate positions of chrome.manifest)
+#fi
 
 # generate the XPI file
 echo "Generating $APP_NAME.xpi..."
