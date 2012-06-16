@@ -23,11 +23,11 @@
 <!ENTITY importFromUrlButton.accesskey "m">
 <!ENTITY exportButton.label "내보내기">
 <!ENTITY exportButton.accesskey "x">
-<!ENTITY subscriptionCheckBox.label "Update from URL">
+<!ENTITY subscriptionCheckBox.label "URL로 부터 업데이트">
 <!ENTITY subscriptionCheckBox.accesskey "p">
 <!ENTITY subscriptionUrl.label "URL">
 <!ENTITY subscriptionUrl.accesskey "R">
-<!ENTITY subscriptionPeriod.label "Period (minutes)">
+<!ENTITY subscriptionPeriod.label "주기(분)">
 <!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "페이지 로드시 자동 대체">
 <!ENTITY autoReplaceOnLoad.accesskey "t">

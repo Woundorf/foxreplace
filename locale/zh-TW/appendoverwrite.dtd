@@ -1,0 +1,6 @@
+<!ENTITY dialog.title "追加或覆蓋？">
+<!ENTITY append.label "追加">
+<!ENTITY append.accesskey "A">
+<!ENTITY overwrite.label "覆蓋">
+<!ENTITY overwrite.accesskey "O">
+<!ENTITY question "您想追加列表或是覆蓋它？">

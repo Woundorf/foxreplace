@@ -1,0 +1,29 @@
+<!ENTITY prefwindow.title "FoxReplace ayarları">
+<!ENTITY mainPane.title "menü">
+<!ENTITY description "Değiştirmede listesine girin. Bu liste ikame gruplar, burada her grup ve değiştirmelerin uygulanır oluşmaktadır varsa URL&apos;lerin yüklü sayfasının adresini eşleşen grup. Eğer grup onun yerine herhangi bir sayfaya uygulanır hiçbir URL&apos;leri vardır. Grup görünmesini sırayla kontrol edilir.">
+<!ENTITY urlHeader "URL">
+<!ENTITY inputStringHeader "Değiştir">
+<!ENTITY outputStringHeader "ile">
+<!ENTITY htmlHeader "HTML">
+<!ENTITY addButton.label "Ekle">
+<!ENTITY addButton.accesskey "A">
+<!ENTITY editButton.label "Düzenle">
+<!ENTITY editButton.accesskey "E">
+<!ENTITY deleteButton.label "Sil">
+<!ENTITY deleteButton.accesskey "D">
+<!ENTITY clearButton.label "Temizle">
+<!ENTITY clearButton.accesskey "C">
+<!ENTITY moveUpButton.label "Yukarı kaydır">
+<!ENTITY moveUpButton.accesskey "u">
+<!ENTITY moveDownButton.label "aşağı kaydır">
+<!ENTITY moveDownButton.accesskey "o">
+<!ENTITY importButton.label "dosya al">
+<!ENTITY importButton.accesskey "I">
+<!ENTITY importFromUrlButton.label "URL&apos;den al">
+<!ENTITY importFromUrlButton.accesskey "m">
+<!ENTITY exportButton.label "dosya ver">
+<!ENTITY exportButton.accesskey "x">
+<!ENTITY autoReplaceOnLoad.label "Otomatik sayfa yük üzerinde yerini">
+<!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY replaceUrls.label "Bu sayfa davranışlarını değiştirebilir (Uyarı: URL&apos;ler (link ve resim kaynakları değiştirin!)">
+<!ENTITY replaceUrls.accesskey "R">

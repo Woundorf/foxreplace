@@ -1,0 +1,31 @@
+<!ENTITY title "FoxReplace help">
+<!ENTITY h1 "FoxReplace help">
+<!ENTITY substitution "Substitution">
+<!ENTITY substitution.p "Has an input string and an output string, and the option to match case or not.">
+<!ENTITY substitution.table.summary "Special patterns for the output string">
+<!ENTITY substitution.table.0 "Inserts a &quot;$&quot;.">
+<!ENTITY substitution.table.1 "Inserts the input string.">
+<!ENTITY substitution.table.2 "Inserts the text preceding the input string inside the same block.">
+<!ENTITY substitution.table.3 "Inserts the text following the input string inside the same block.">
+<!ENTITY substitutionList "Substitution list">
+<!ENTITY autoReplace "Auto-replace on page load">
+<!ENTITY newGui "New menu and toolbar elements">
+<!ENTITY newGui.edit "Edit">
+<!ENTITY newGui.edit.replace "Replace... (Shift+F2)">
+<!ENTITY newGui.edit.replace.d "Lets you define a substitution and apply it instantly.">
+<!ENTITY newGui.tools "Tools">
+<!ENTITY newGui.tools.foxreplace "FoxReplace">
+<!ENTITY newGui.tools.foxreplace.replace "Replace with substitution list (F2)">
+<!ENTITY newGui.tools.foxreplace.replace.d "Applies current substitution list.">
+<!ENTITY newGui.tools.foxreplace.autoReplace "Auto-replace on page load">
+<!ENTITY newGui.tools.foxreplace.autoReplace.d "Toggles this option.">
+<!ENTITY newGui.tools.foxreplace.options "FoxReplace options...">
+<!ENTITY newGui.tools.foxreplace.options.d "Opens FoxReplace options window.">
+<!ENTITY newGui.tools.foxreplace.help "Help">
+<!ENTITY newGui.tools.foxreplace.help.d "Shows this page.">
+<!ENTITY newGui.toolbarButton "Toolbar button">
+<!ENTITY newGui.toolbarButton.0 "Pressing it applies current substitution list.">
+<!ENTITY newGui.toolbarButton.1 "It has a menu at side like the FoxReplace above.">
+<!ENTITY newGui.contextMenu "Context menu">
+<!ENTITY newGui.contextMenu.replace "Replace with substitution list (FoxReplace) (F2)">
+<!ENTITY newGui.contextMenu.replace.d "Applies current substitution list.">

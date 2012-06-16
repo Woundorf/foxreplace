@@ -1,0 +1,6 @@
+<!ENTITY dialog.title "Toevoegen of overschijven?">
+<!ENTITY append.label "Toevoegen">
+<!ENTITY append.accesskey "T">
+<!ENTITY overwrite.label "Overschrijven">
+<!ENTITY overwrite.accesskey "O">
+<!ENTITY question "Wilt u vervangingen aan de lijst toevoegen of deze overschrijven?">

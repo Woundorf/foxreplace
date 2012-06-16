@@ -1,0 +1,8 @@
+<!ENTITY editUrlButton.label "Bearbeiten">
+<!ENTITY okEditUrlButton.label "OK">
+<!ENTITY okEditUrlButton.accesskey "O">
+<!ENTITY cancelEditUrlButton.label "Abbrechen">
+<!ENTITY deleteUrlButton.label "Löschen">
+<!ENTITY inputString.label "Ersetzen">
+<!ENTITY okEditSubstitutionButton.label "OK">
+<!ENTITY okEditSubstitutionButton.accesskey "O">

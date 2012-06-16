@@ -1,0 +1,41 @@
+<!ENTITY title "FoxReplace - pomoc">
+<!ENTITY h1 "FoxReplace - pomoc">
+<!ENTITY p "To rozszerzenie pozwala na zastępowanie fragmentów tekstu na stronie innym tekstem. Jego działanie oparte jest na <b>zamiennikach</b>: zamiennik składa się z tekstu, który ma zostać zastąpiony (wprowadzanego w polu &quot;Zastąp&quot;) oraz tekstu, który zostać być wstawiony w miejsce poprzedniego (wprowadzanego w polu &quot;tekstem&quot;). Zamienniki są zastosowywane do <b>całych</b> treści stron (w tej chwili zastępowanie ich fragmentów nie jest możliwe).">
+<!ENTITY substitution "Zastępowanie">
+<!ENTITY substitution.p "Proces zastępowania polega na zamianie kolejnych wyrażeń z listy tekstów do zastąpienia na ich zamienniki. Rozszerzenie pozwala zadecydować czy wielkość znaków ma znaczenie.">
+<!ENTITY substitution.inputString "Tekst do zastąpienia: ciąg znaków, który ma zostać zastąpiony. Może być przedstawiony w postaci <a href=&apos;http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions&apos;>wyrażenia regularnego</a>, lecz fakt ten musi zostać odnotowany poprzez zaznaczenie stosownego pola.">
+<!ENTITY regExpLink "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions">
+<!ENTITY substitution.inputString.regExp.1 "wyrażenie regularne">
+<!ENTITY substitution.outputString "Zamiennik: ciąg znaków, którym zastąpiony ma zostać dany tekst. Do jego określenia może zostać użyty jeden z poniższych schematów:">
+<!ENTITY substitution.table.summary "Schematy dla zamienników">
+<!ENTITY substitution.table.0 "Wstawia znak &quot;$&quot;.">
+<!ENTITY substitution.table.1 "Wstawia tekst zamiennika.">
+<!ENTITY substitution.table.2 "Wstawia tekst poprzedzający dany ciąg znaków zawarty w tym samym bloku tekstu.">
+<!ENTITY substitution.table.3 "Wstawia tekst następujący po danym ciąg znaków zawarty w tym samym bloku tekstu.">
+<!ENTITY substitutionList "Lista zamienników">
+<!ENTITY substitutionList.p "FoxReplace pozwala na zarządzanie listą zamienników, które możesz dodawać i edytować w każdej chwili w oknie opcji rozszerzenia. Możesz zastąpić tekst na stronie kiedy tylko chcesz poprzez wciśnięcie klawisza F2, przycisku na pasku narzędzi lub wybranie odpowiedniego wpisu z menu. Teksty na stronie są zastępowane zgodnie z ich kolejnością na liście. Możesz wykonać operację zastępowania na jednej stronie tyle razy, ile tylko chcesz. Za każdym razem, kiedy to zrobisz, zastąpiona zostanie aktualna, a nie pierwotna zawartość strony.">
+<!ENTITY substitutionGroup "Grupa zamienników">
+<!ENTITY replaceHtml "Zastąp HTML">
+<!ENTITY autoReplace "Automatycznie zastępuj tekst na stronach podczas ich wczytywania">
+<!ENTITY autoReplace.p "Tę opcję można włączyć lub wyłączyć. Kiedy jest ona włączona tekst na stronach zostanie automatycznie zastąpiony zgodnie z listą wyrażeń, dzięki czemu możesz korzystać z rozszerzenia jak z filtra: możesz sprawić, że znikną słowa, za którymi nie przepadasz (lub których pisownia Ci się nie podoba) zastępując je bardziej odpowiednimi. Można użyć jej również do zrobienia dowcipu ;)">
+<!ENTITY replaceUrls "Zastąp adresy URL">
+<!ENTITY newGui "Nowe menu i elementy paska narzędzi">
+<!ENTITY newGui.edit "Edycja">
+<!ENTITY newGui.edit.replace "Zastąp... (Shift+F2)">
+<!ENTITY newGui.edit.replace.d "Pozwala na określenie zamiennika i natychmiastowe jego zastosowanie.">
+<!ENTITY newGui.tools "Narzędzia">
+<!ENTITY newGui.tools.foxreplace "FoxReplace">
+<!ENTITY newGui.tools.foxreplace.replace "Zastąp tekst na stronie zgodnie z listą wyrażeń (F2)">
+<!ENTITY newGui.tools.foxreplace.replace.d "Jak wyżej.">
+<!ENTITY newGui.tools.foxreplace.autoReplace "Automatycznie zastępuj tekst na stronach podczas ich wczytywania">
+<!ENTITY newGui.tools.foxreplace.autoReplace.d "Przełącza tę opcję.">
+<!ENTITY newGui.tools.foxreplace.options "Opcje FoxReplace...">
+<!ENTITY newGui.tools.foxreplace.options.d "Otwiera okno opcji FoxReplace.">
+<!ENTITY newGui.tools.foxreplace.help "Pomoc">
+<!ENTITY newGui.tools.foxreplace.help.d "Wyświetla tę stronę">
+<!ENTITY newGui.toolbarButton "Przycisk na pasku narzędzi">
+<!ENTITY newGui.toolbarButton.0 "Wciśnięcie tego przycisku zastępuje tekst na stronie zgodnie z listą wyrażeń.">
+<!ENTITY newGui.toolbarButton.1 "Zawiera rozwijalne menu takie, jak to w menu Narzędzia.">
+<!ENTITY newGui.contextMenu "Menu kontekstowe">
+<!ENTITY newGui.contextMenu.replace "Zastąp tekst na stronie zgodnie z listą wyrażeń (FoxReplace) (F2)">
+<!ENTITY newGui.contextMenu.replace.d "Jak wyżej.">

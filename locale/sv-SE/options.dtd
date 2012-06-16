@@ -1,0 +1,35 @@
+<!ENTITY prefwindow.title "Inställningar för FoxReplace">
+<!ENTITY mainPane.title "Allmänt">
+<!ENTITY description "Ange ersättningslistan. Listan består av ersättningsgrupper, där ersättningarna för en grupp tillämpas om någon av gruppens URL:er matchar den inlästa sidans adress. Om gruppen inte har några URL:er, så tillämpas dess ersättningar på alla sidor. Grupperna kontrolleras i den ordning de står.">
+<!ENTITY urlHeader "URL">
+<!ENTITY inputStringHeader "Ersätt">
+<!ENTITY outputStringHeader "Med">
+<!ENTITY htmlHeader "HTML">
+<!ENTITY addButton.label "Lägg till">
+<!ENTITY addButton.accesskey "L">
+<!ENTITY editButton.label "Redigera">
+<!ENTITY editButton.accesskey "R">
+<!ENTITY deleteButton.label "Ta bort">
+<!ENTITY deleteButton.accesskey "T">
+<!ENTITY clearButton.label "Rensa">
+<!ENTITY clearButton.accesskey "e">
+<!ENTITY moveUpButton.label "Flytta uppåt">
+<!ENTITY moveUpButton.accesskey "F">
+<!ENTITY moveDownButton.label "Flytta nedåt">
+<!ENTITY moveDownButton.accesskey "n">
+<!ENTITY importButton.label "Importera">
+<!ENTITY importButton.accesskey "I">
+<!ENTITY importFromUrlButton.label "Importera från URL">
+<!ENTITY importFromUrlButton.accesskey "m">
+<!ENTITY exportButton.label "Exportera">
+<!ENTITY exportButton.accesskey "x">
+<!ENTITY subscriptionCheckBox.label "Uppdatera från URL">
+<!ENTITY subscriptionCheckBox.accesskey "p">
+<!ENTITY subscriptionUrl.label "URL">
+<!ENTITY subscriptionUrl.accesskey "U">
+<!ENTITY subscriptionPeriod.label "Intervall (minuter)">
+<!ENTITY subscriptionPeriod.accesskey "v">
+<!ENTITY autoReplaceOnLoad.label "Ersätt automatiskt när sidan läses in">
+<!ENTITY autoReplaceOnLoad.accesskey "ä">
+<!ENTITY replaceUrls.label "Ersätt URL:er (länkar och bildkällor) (Varning: Kan förändra sidans beteende!)">
+<!ENTITY replaceUrls.accesskey "s">

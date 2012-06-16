@@ -1,0 +1,6 @@
+<!ENTITY dialog.title "Bifoga eller ersätta?">
+<!ENTITY append.label "Bifoga">
+<!ENTITY append.accesskey "B">
+<!ENTITY overwrite.label "Ersätt">
+<!ENTITY overwrite.accesskey "E">
+<!ENTITY question "Vill du bifoga ersättningarna till listan eller ersätta listan?">

@@ -1,0 +1,35 @@
+<!ENTITY prefwindow.title "FoxReplace opties">
+<!ENTITY mainPane.title "Hoofdpaneel">
+<!ENTITY description "Voer de vervangingslijst in. De lijst is opgebouwd uit vervangingsgroepen, waarbij de vervangingen van elke groep worden toegepast als één van de groeps-URL’s overeenkomt met het adres van de geladen pagina. Indien de groep geen URL’s bevat worden de vervangingen toegepast op alle pagina’s. Groepen worden nagelopen in volgorde van opsomming.">
+<!ENTITY urlHeader "URL">
+<!ENTITY inputStringHeader "Vervangen">
+<!ENTITY outputStringHeader "Door">
+<!ENTITY htmlHeader "HTML">
+<!ENTITY addButton.label "Toevoegen">
+<!ENTITY addButton.accesskey "T">
+<!ENTITY editButton.label "Bewerken">
+<!ENTITY editButton.accesskey "B">
+<!ENTITY deleteButton.label "Verwijderen">
+<!ENTITY deleteButton.accesskey "V">
+<!ENTITY clearButton.label "Wissen">
+<!ENTITY clearButton.accesskey "W">
+<!ENTITY moveUpButton.label "Omhoog">
+<!ENTITY moveUpButton.accesskey "h">
+<!ENTITY moveDownButton.label "Omlaag">
+<!ENTITY moveDownButton.accesskey "l">
+<!ENTITY importButton.label "Importeren">
+<!ENTITY importButton.accesskey "I">
+<!ENTITY importFromUrlButton.label "Van URL importeren">
+<!ENTITY importFromUrlButton.accesskey "m">
+<!ENTITY exportButton.label "Exporteren">
+<!ENTITY exportButton.accesskey "x">
+<!ENTITY subscriptionCheckBox.label "Van URL bijwerken">
+<!ENTITY subscriptionCheckBox.accesskey "j">
+<!ENTITY subscriptionUrl.label "URL">
+<!ENTITY subscriptionUrl.accesskey "R">
+<!ENTITY subscriptionPeriod.label "Periode (minuten)">
+<!ENTITY subscriptionPeriod.accesskey "n">
+<!ENTITY autoReplaceOnLoad.label "Automatisch vervangen bij laden pagina">
+<!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY replaceUrls.label "URL’s vervangen (koppelingen en afbeeldingsbronnen) (Waarschuwing: hierdoor kan het gedrag van de pagina wijzigen)">
+<!ENTITY replaceUrls.accesskey "a">
