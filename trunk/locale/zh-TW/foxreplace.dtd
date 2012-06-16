@@ -1,0 +1,27 @@
+<!ENTITY menuEditReplace.label "取代...">
+<!ENTITY menuEditReplace.accesskey "e">
+<!ENTITY menuToolsFoxReplace.label "FoxReplace">
+<!ENTITY menuToolsFoxReplace.accesskey "F">
+<!ENTITY menuContextFoxReplace.label "取代 (FoxReplace)">
+<!ENTITY menuContextFoxReplace.accesskey "l">
+<!ENTITY toolbarButton.label "FoxReplace">
+<!ENTITY toolbarButton.tooltip "以取代列表執行取代">
+<!ENTITY listReplace.label "以取代列表執行取代">
+<!ENTITY listReplace.accesskey "R">
+<!ENTITY autoReplaceOnLoad.label "網頁載入時自動取代">
+<!ENTITY autoReplaceOnLoad.accesskey "A">
+<!ENTITY options.label "FoxReplace 選項...">
+<!ENTITY options.accesskey "o">
+<!ENTITY help.label "說明">
+<!ENTITY help.accesskey "H">
+<!ENTITY replaceBarClose "關閉取代工具列">
+<!ENTITY replaceBarInputString.label "尋找目標">
+<!ENTITY replaceBarInputString.accesskey "R">
+<!ENTITY replaceBarOutputString.label "取代為">
+<!ENTITY replaceBarOutputString.accesskey "w">
+<!ENTITY replaceBarCaseSensitive.label "符合大小寫">
+<!ENTITY replaceBarCaseSensitive.accesskey "M">
+<!ENTITY replaceBarHtml.label "HTML">
+<!ENTITY replaceBarHtml.accesskey "H">
+<!ENTITY replaceBarReplace.label "取代">
+<!ENTITY replaceBarReplace.accesskey "e">

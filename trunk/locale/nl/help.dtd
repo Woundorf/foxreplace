@@ -1,0 +1,55 @@
+<!ENTITY title "FoxReplace help">
+<!ENTITY h1 "FoxReplace help">
+<!ENTITY p "Deze extensie stelt u in staat om tekstfragmenten (zinsdelen) op een pagina te vervangen door andere tekstfragmenten. Het systeem is gebaseerd op vervangingen, waarbij elke vervanging een invoertekst kent die vervangen dient te worden (het veld ‘Vervangen’) en een uitvoertekst die de eerste vervangt (het veld ‘Met’). Er zijn aanvullende opties voor vervanging die hieronder worden uitgelegd. Als een vervanging wordt toegepast geldt dat voor de gehele inhoud van een pagina (op dit moment kunt u nog geen gedeeltelijke vervangingen uitvoeren).">
+<!ENTITY substitution "Vervanging">
+<!ENTITY substitution.p "Deze heeft altijd een invoertekst en een uitvoertekst. De uitvoertekst kan leeg zijn (om tekst te verwijderen), maar de invoertekst dient ten minste uit één karakter te bestaan. Optioneel kan de vervanging hoofdlettergevoelig zijn.">
+<!ENTITY substitution.inputString "Invoertekst: het tekstgedeelte dat wordt vervangen. Dit kan niet leeg zijn. Het kan bestaan uit één van deze drie typen:">
+<!ENTITY substitution.inputString.text "Tekst: wordt geïnterpreteerd als een karaktercombinatie zonder verdere bijzonderheden.">
+<!ENTITY substitution.inputString.wholeWords "Hele woorden: wordt geïnterpreteerd als één of meerdere woorden. Zo komt bijvoorbeeld ‘actief’ niet overeen met ‘interactief’ (wat wel het geval zou zijn als het normale tekst was).">
+<!ENTITY substitution.inputString.regExp.0 "Reguliere expressie: wordt geïnterpreteerd als een">
+<!ENTITY regExpLink "https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Regular_Expressions">
+<!ENTITY substitution.inputString.regExp.1 "reguliere expressie">
+<!ENTITY substitution.inputString.regExp.2 ". Indien ongeldig wordt een foutmelding weergegeven.">
+<!ENTITY substitution.outputString "Uitvoertekst: het tekstgedeelte dat de invoertekst zal vervangen. Deze kan de volgende speciale patronen bevatten:">
+<!ENTITY substitution.table.summary "Speciale patronen voor de uitvoertekst">
+<!ENTITY substitution.table.0 "Voegt een ‘$’ in.">
+<!ENTITY substitution.table.1 "Voegt de invoertekst in.">
+<!ENTITY substitution.table.2 "Voegt de tekst voorafgaand aan de invoertekst in binnen hetzelfde blok.">
+<!ENTITY substitution.table.3 "Voegt de tekst volgend op de invoertekst in binnen hetzelfde blok.">
+<!ENTITY substitution.table.4.0 "Indien de invoertekst een reguliere expressie is, en">
+<!ENTITY substitution.table.4.1 "een decimaal geheel getal tussen 1 en 99, dan wordt de">
+<!ENTITY substitution.table.4.2 "gevonden subtekst ingevoegd.">
+<!ENTITY substitutionList "Vervangingslijst">
+<!ENTITY substitutionList.p "FoxReplace houdt een vervangingslijst bij die u op elk moment kunt definiëren en aanpassen vanuit het optiesvenster van FoxReplace. U kunt de vervangingslijst toepassen wanneer u dat wilt door op F2 te drukken, door op de werkbalkknop te drukken of door een menuoptie te activeren. Wanneer u dit doet, zullen vervangingen in de lijst worden toegepast in volgorde van opsomming. U kunt de vervangingslijst zo vaak u wilt toepassen op dezelfde pagina. Vervangingen worden toegepast op de huidige inhoud van de pagina, d.w.z. dat als u de vervangingslijst nogmaals toepast dit gebeurt op het resultaat van de voorgaande keer. In deze vervangingslijst staan niet meteen de vervangingen, maar vervangingsgroepen, waarin een lijst met adressen (URL’s) is geassocieerd met een lijst van vervangingen die worden toegepast op pagina’s waarvan het adres overeenkomt met één van de URL’s in de lijst.">
+<!ENTITY substitutionGroup "Vervangingsgroep">
+<!ENTITY substitutionGroup.p0 "Deze bestaat uit een URL-lijst en een vervangingslijst. De vervangingen worden toegepast in de volgorde van opsomming, en er dient er ten minste één te zijn. Met de URL-lijst kunt u opgeven bij welke pagina’s de vervangingen worden toegepast. Als de lijst leeg is worden de vervangingen op alle pagina’s toegepast. U kunt URL’s toevoegen, waarna de vervangingen alleen worden toegepast indien het adres van de pagina overeenkomt met één van de URL’s. Tenslotte kunt u ook uitzonderings-URL’s toevoegen diet het tegenovergestelde effect hebben: de vervangingen worden niet toegepast als het adres overeenkomt met een URL. Als deze lijst dus niet leeg is worden de vervangingen toegepast als het adres van de pagina niet overeenkomt met één van de uitzonderings-URL’s en overeenkomt met één van de normale URL’s. De URL van een pagina wordt beschouwd als overeenkomend met een groeps-URL als de groeps-URL een deel is van de URL van de pagina.">
+<!ENTITY substitutionGroup.p1 "De uitzonderings-URL’s zijn die URL’s die starten met een minusteken (‘-’) en ze worden weergegeven in rood; de overige zijn normale URL’s. U kunt speciale karakters gebruiken: ‘*’ om 0 of meer karakters te matchen en ‘|’ om het begin of het einde van een URl te matchen. Als u een URL wilt definiëren die begint met een minusteken (b.v. ‘-abc’) en dit geen uitzonderings-URL is, kunt u als alternatief het equivalent ‘|*-abc’ gebruiken.">
+<!ENTITY replaceHtml "HTML vervangen">
+<!ENTITY replaceHtml.p "Vervangingen worden normaliter alleen op de tekst toegepast, maar er bestaat ook een mogelijkheid om ze toe te passen op de HTML-code van een pagina. Hiermee kunt u de opmaak of de paginastructuur wijzigen. U kunt deze optie instellen of uitschakelen voor elke groep in de vervangingslijst.">
+<!ENTITY autoReplace "Automatisch vervangen bij pagina laden">
+<!ENTITY autoReplace.p "Deze optie kan worden in- of uitgeschakeld. Indien ingeschakeld wordt de vervangingslijst automatisch toegepast wanneer een pagina wordt geladen, waardoor de vervangingen worden toegepast op de groepen met een overeenkomende URL. Op deze manier kan de extensie als filter werken voor de pagina’s waar u dit bij wilt.">
+<!ENTITY replaceUrls "URL’s vervangen">
+<!ENTITY replaceUrls.p "Deze optie staat standaard uit. Indien ingeschakeld worden vervangingen ook toegepast op de URL’s in de pagina (koppelingen, afbeeldingsbronnen, enz.), dus het gedrag van de pagina kan wijzigen. Gebruik deze optie naar eigen inzicht. Dit heeft geen effect in HTML-vervangingen, omdat dan URL’s altijd kunnen worden aangepast.">
+<!ENTITY newGui "Nieuwe menu- en werkbalkelementen">
+<!ENTITY newGui.edit "Bewerken">
+<!ENTITY newGui.edit.replace "Vervangen… (Shift+F2)">
+<!ENTITY newGui.edit.replace.d "Geeft de vervangingsbalk weer.">
+<!ENTITY newGui.tools "Extra">
+<!ENTITY newGui.tools.foxreplace "FoxReplace">
+<!ENTITY newGui.tools.foxreplace.replace "Vervangen met vervangingslijst (F2)">
+<!ENTITY newGui.tools.foxreplace.replace.d "Past de huidige vervangingslijst toe.">
+<!ENTITY newGui.tools.foxreplace.autoReplace "Automatisch vervangen bij pagina laden">
+<!ENTITY newGui.tools.foxreplace.autoReplace.d "Schakelt deze optie in of uit.">
+<!ENTITY newGui.tools.foxreplace.options "FoxReplace opties…">
+<!ENTITY newGui.tools.foxreplace.options.d "Opent het optiesvenster van FoxReplace.">
+<!ENTITY newGui.tools.foxreplace.help "Help">
+<!ENTITY newGui.tools.foxreplace.help.d "Geeft deze pagina weer.">
+<!ENTITY newGui.toolbarButton "Werkbalkknop">
+<!ENTITY newGui.toolbarButton.0 "Door hierop te drukken wordt de huidige vervangingslijst toegepast.">
+<!ENTITY newGui.toolbarButton.1 "Het bevat een zijmenu zoals het FoxReplace-menu hierboven.">
+<!ENTITY newGui.contextMenu "Contextmenu">
+<!ENTITY newGui.contextMenu.replace "Vervangen met vervangingslijst (FoxReplace) (F2)">
+<!ENTITY newGui.contextMenu.replace.d "Past de huidige vervangingslijst toe.">
+<!ENTITY newGui.replaceBar "Vervanginsbalk">
+<!ENTITY newGui.replaceBar.0 "Verschijnt onder de zoekbalk.">
+<!ENTITY newGui.replaceBar.1 "Laat u een vervanging definiëren en direct toepassen.">

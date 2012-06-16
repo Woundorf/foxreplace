@@ -1,0 +1,55 @@
+<!ENTITY title "Hjälp om FoxReplace">
+<!ENTITY h1 "Hjälp om FoxReplace">
+<!ENTITY p "Detta tillägg låter dig ersätta textfragment (strängar) på en webbsida med andra textfragment. Systemet är baserat på ersättningar, där varje ersättning har en indatatext som skall bytas ut (fältet &quot;Ersätt&quot;) och en utdatatext som indatatexten skall bytas ut mot (fältet &quot;Med&quot;). Det finns ytterligare alternativ för ersättningarna som förklaras nedan. När en ersättning tillämpas, så görs det på hela innehållet på en sida (du kan inte göra partiella ersättningar för närvarande).">
+<!ENTITY substitution "Ersättning">
+<!ENTITY substitution.p "Ersättningen har alltid en indatasträng och en utdatasträng. Utdatasträngen kan vara tom (för att ta bort text), men indatasträngen måste ha åtminstone ett tecken. Ersättningen kan också vara skiftlägeskänslig (valfritt).">
+<!ENTITY substitution.inputString "Indatasträng: Textsträngen som kommer att ersättas. Den kan inte vara tom. Den kan behandlas inom ett av följande 3 söklägen:">
+<!ENTITY substitution.inputString.text "Text: Indatasträngen tolkas som en teckensträng utan särskilda egenskaper.">
+<!ENTITY substitution.inputString.wholeWords "Hela ord: Indatasträngen tolkas som ett eller flera fullständiga ord. Till exempel kommer inte &quot;aktiv&quot; att matcha &quot;interaktiv&quot; (däremot skulle de matcha varandra i sökläget Text).">
+<!ENTITY substitution.inputString.regExp.0 "Reguljärt uttryck: Indatasträngen tolkas som ett">
+<!ENTITY regExpLink "https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/regexp#Special_characters_in_regular_expressions">
+<!ENTITY substitution.inputString.regExp.1 "reguljärt uttryck">
+<!ENTITY substitution.inputString.regExp.2 ". Om det är ogiltigt, så kommer ett syntaxfel att visas.">
+<!ENTITY substitution.outputString "Utdatasträng: Textsträngen som kommer att ersätta indatan. Det kan ha följande specialmönster:">
+<!ENTITY substitution.table.summary "Specialmönster för utdatasträngen">
+<!ENTITY substitution.table.0 "Infogar ett &quot;$&quot; (dollartecken).">
+<!ENTITY substitution.table.1 "Infogar indatasträngen.">
+<!ENTITY substitution.table.2 "Infogar texten som föregår indatasträngen inuti samma block.">
+<!ENTITY substitution.table.3 "Infogar texten som följer på indatasträngen inuti samma block.">
+<!ENTITY substitution.table.4.0 "Om indatasträngen är ett reguljärt uttryck och">
+<!ENTITY substitution.table.4.1 "är ett heltal mellan 1 och 99 (inkluderat), så infogas den">
+<!ENTITY substitution.table.4.2 ":e hittade delsträngen.">
+<!ENTITY substitutionList "Ersättningslista">
+<!ENTITY substitutionList.p "FoxReplace har en ersättningslista som du kan definiera och ändra när du vill i FoxReplaces inställningar. Du kan tillämpa ersättningslistan när du vill genom att trycka ned F2-tangenten, genom att klicka på verktygsfältsknappen eller genom att välja ett menyalternativ. När du gör det kommer ersättningarna i listan att tillämpas i den ordning de står, med början längst upp. Du kan tillämpa ersättningslistan så många gånger du vill på samma sida. Ersättningar görs i det aktuella innehållet på sidan, d.v.s. om du tillämpar ersättningslistan en andra gång, så kommer det att göras ovanpå resultatet av den första tillämpningen. I ersättningslistan finns inte de direkta ersättningarna, utan ersättningsgrupper som består av en lista över adresser (URL:er) som associeras med en lista över ersättningar. Dessa ersättningar tillämpas på sidor vilkas adresser matchar URL:erna i listan.">
+<!ENTITY substitutionGroup "Ersättningsgrupp">
+<!ENTITY substitutionGroup.p0 "Ersättningsgruppen utgörs av en URL-lista och en ersättningslista. Ersättningarna tillämpas i den ordning de står och det måste finnas åtminstone en. I URL-listan kan du definiera på vilka sidor ersättningarna tillämpas. Om listan är tom, så tillämpas ersättningarna på alla sidor. Du kan lägga till URL:er så att ersättningarna endast tillämpas om sidans adress matchar en av URL:erna i listan. Slutligen kan du även lägga till undantagna URL:er som har motsatt effekt, ersättningarna tillämpas inte om sidans adress matchar en av dem. Så, om URL-listan inte är tom, tillämpas ersättningarna om sidans adress inte matchar någon av de undantagna URL:erna och matchar en av de normala URL:erna. URL:en för en sida anses matcha en URL i gruppen om URL:en i gruppen är en del av sidans URL:en.">
+<!ENTITY substitutionGroup.p1 "De undantagna URL:erna är de som börjar med ett bindestreck (&quot;-&quot;) och de visas i rött; resten är normala URL:er. Du kan använda jokertecknen &quot;*&quot; (asterisk) för att matcha 0 eller fler godtyckliga tecken och &quot;|&quot; (lodrätt streck) för att matcha början eller slutet av URL:en. Om du vill definiera en URL som börjar med ett bindestreck (d.v.s. &quot;-abc&quot;) och den inte är en undantagen URL, så kan du använda kombinationen &quot;|*-abc&quot;.">
+<!ENTITY replaceHtml "Ersätt HTML">
+<!ENTITY replaceHtml.p "Ersättningar tillämpas vanligtvis endast på texten, men det finns också ett alternativ att göra det på sidans HTML-kod. Det gör att du kan ändra formatet eller strukturen för sidan. Du kan aktivera eller inaktivera detta alternativ för varje enskild grupp i ersättningslistan.">
+<!ENTITY autoReplace "Ersätt automatiskt när sidan läses in">
+<!ENTITY autoReplace.p "Detta alternativ kan aktiveras eller inaktiveras. När det är aktiverat, så tillämpas ersättningslistan tillämpas automatiskt när en sida har lästs in, genom att tillämpa ersättningarna för grupperna med en matchande URL. På så sätt kan tillägget fungera som ett filter för sidor du själv väljer.">
+<!ENTITY replaceUrls "Ersätt URL:er">
+<!ENTITY replaceUrls.p "Detta alternativ är inaktiverat som standard. När det är aktiverat, så tillämpas ersättningar även på URL:erna på sidan (länkar, bildkällor, o.s.v.), så att sidans beteende kan ändras. Använd alternativet under eget ansvar. Detta påverkar inte HTML-ersättningar, eftersom URL:er alltid kan ändras vid sådana.">
+<!ENTITY newGui "Nya meny- och verktygsfältselement">
+<!ENTITY newGui.edit "Redigera-menyn">
+<!ENTITY newGui.edit.replace "Ersätt... (Skift+F2)">
+<!ENTITY newGui.edit.replace.d "Visar ersättningsfältet.">
+<!ENTITY newGui.tools "Verktyg-menyn">
+<!ENTITY newGui.tools.foxreplace "FoxReplace">
+<!ENTITY newGui.tools.foxreplace.replace "Ersätt med ersättningslistan (F2)">
+<!ENTITY newGui.tools.foxreplace.replace.d "Tillämpar aktuell ersättningslista.">
+<!ENTITY newGui.tools.foxreplace.autoReplace "Ersätt automatiskt när sidan läses in">
+<!ENTITY newGui.tools.foxreplace.autoReplace.d "Växlar detta alternativ.">
+<!ENTITY newGui.tools.foxreplace.options "Inställningar för FoxReplace...">
+<!ENTITY newGui.tools.foxreplace.options.d "Öppnar fönstret &quot;Inställningar för FoxReplace&quot;.">
+<!ENTITY newGui.tools.foxreplace.help "Hjälp">
+<!ENTITY newGui.tools.foxreplace.help.d "Visar denna sida.">
+<!ENTITY newGui.toolbarButton "Verktygsfältsknapp">
+<!ENTITY newGui.toolbarButton.0 "Ett klick på knappen tillämpar aktuell ersättningslista.">
+<!ENTITY newGui.toolbarButton.1 "Knappen har en meny vid sidan av sig, som FoxReplace-menyn ovan.">
+<!ENTITY newGui.contextMenu "Snabbmenyn">
+<!ENTITY newGui.contextMenu.replace "Ersätt med ersättningslistan (FoxReplace) (F2)">
+<!ENTITY newGui.contextMenu.replace.d "Tillämpar aktuell ersättningslista.">
+<!ENTITY newGui.replaceBar "Ersättningsfältet">
+<!ENTITY newGui.replaceBar.0 "Visas nedanför söklisten.">
+<!ENTITY newGui.replaceBar.1 "Låter dig definiera en ersättning och tillämpa den omedelbart.">

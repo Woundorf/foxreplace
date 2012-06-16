@@ -1,0 +1,27 @@
+<!ENTITY menuEditReplace.label "Ersätt...">
+<!ENTITY menuEditReplace.accesskey "E">
+<!ENTITY menuToolsFoxReplace.label "FoxReplace">
+<!ENTITY menuToolsFoxReplace.accesskey "F">
+<!ENTITY menuContextFoxReplace.label "Ersätt med ersättningslistan (FoxReplace)">
+<!ENTITY menuContextFoxReplace.accesskey "l">
+<!ENTITY toolbarButton.label "FoxReplace">
+<!ENTITY toolbarButton.tooltip "Ersätt med ersättningslistan">
+<!ENTITY listReplace.label "Ersätt med ersättningslistan">
+<!ENTITY listReplace.accesskey "r">
+<!ENTITY autoReplaceOnLoad.label "Ersätt automatiskt när sidan läses in">
+<!ENTITY autoReplaceOnLoad.accesskey "a">
+<!ENTITY options.label "Inställningar för FoxReplace...">
+<!ENTITY options.accesskey "I">
+<!ENTITY help.label "Hjälp">
+<!ENTITY help.accesskey "H">
+<!ENTITY replaceBarClose "Stäng ersättningsfältet">
+<!ENTITY replaceBarInputString.label "Ersätt">
+<!ENTITY replaceBarInputString.accesskey "E">
+<!ENTITY replaceBarOutputString.label "med">
+<!ENTITY replaceBarOutputString.accesskey "m">
+<!ENTITY replaceBarCaseSensitive.label "Skiftlägeskänslig">
+<!ENTITY replaceBarCaseSensitive.accesskey "S">
+<!ENTITY replaceBarHtml.label "HTML">
+<!ENTITY replaceBarHtml.accesskey "H">
+<!ENTITY replaceBarReplace.label "Ersätt">
+<!ENTITY replaceBarReplace.accesskey "r">

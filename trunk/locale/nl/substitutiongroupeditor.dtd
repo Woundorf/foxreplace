@@ -1,0 +1,46 @@
+<!ENTITY title "Vervangingsgroep bewerken">
+<!ENTITY description "Voer de URL-lijst en de vervangingslijst in. De vervangingslijst dient ten minste één vervanging te bevatten. De URL-lijst mag leeg zijn; in dat geval worden de vervagingen toegepast op alle pagina’s. Anders worden ze alleen toegepast wanneer het adres van de pagina overeenkomt met één van de normale URL’s maar niet overeenkomt met één van de uitzonderings-URL’s. Uitzonderings-URL’s berginnen met een minusteken (‘-’) en worden weergegeven in rood. U kunt ‘*’ gebruiken om 0 of meer karakters te matchen (niet nodig ana het begin en het einde) en ‘|’ om het begin of het einde van de URL te matchen. Zo komt bijvoorbeeld ‘http://*.voorbeeld.com/|’ overeen met ‘http://www.voorbeeld.com/’ maar niet met ‘http://www.voorbeeld.com/watdanook’.">
+<!ENTITY urls "URL’s">
+<!ENTITY url.label "URL">
+<!ENTITY url.accesskey "U">
+<!ENTITY addUrlButton.label "Toevoegen">
+<!ENTITY addUrlButton.accesskey "T">
+<!ENTITY editUrlButton.label "Bewerken">
+<!ENTITY editUrlButton.accesskey "B">
+<!ENTITY okEditUrlButton.label "OK">
+<!ENTITY okEditUrlButton.accesskey "O">
+<!ENTITY cancelEditUrlButton.label "Annuleren">
+<!ENTITY cancelEditUrlButton.accesskey "n">
+<!ENTITY deleteUrlButton.label "Verwijderen">
+<!ENTITY deleteUrlButton.accesskey "j">
+<!ENTITY clearUrlsButton.label "Wissen">
+<!ENTITY clearUrlsButton.accesskey "W">
+<!ENTITY substitutions "Vervangingen">
+<!ENTITY inputString.label "Vervangen">
+<!ENTITY inputString.accesskey "V">
+<!ENTITY outputString.label "door">
+<!ENTITY outputString.accesskey "o">
+<!ENTITY caseSensitive.label "Hoofdlettergevoelig">
+<!ENTITY caseSensitive.accesskey "f">
+<!ENTITY addSubstitutionButton.label "Toevoegen">
+<!ENTITY addSubstitutionButton.accesskey "e">
+<!ENTITY moveUpSubstitutionButton.label "Omhoog">
+<!ENTITY moveUpSubstitutionButton.accesskey "h">
+<!ENTITY moveDownSubstitutionButton.label "Omlaag">
+<!ENTITY moveDownSubstitutionButton.accesskey "l">
+<!ENTITY editSubstitutionButton.label "Bewerken">
+<!ENTITY editSubstitutionButton.accesskey "r">
+<!ENTITY okEditSubstitutionButton.label "OK">
+<!ENTITY okEditSubstitutionButton.accesskey "O">
+<!ENTITY cancelEditSubstitutionButton.label "Annuleren">
+<!ENTITY cancelEditSubstitutionButton.accesskey "n">
+<!ENTITY deleteSubstitutionButton.label "Verwijderen">
+<!ENTITY deleteSubstitutionButton.accesskey "i">
+<!ENTITY clearSubstitutionsButton.label "Wissen">
+<!ENTITY clearSubstitutionsButton.accesskey "s">
+<!ENTITY inputStringHeader "Vervangen">
+<!ENTITY inputTypeHeader "Type">
+<!ENTITY outputStringHeader "Door">
+<!ENTITY caseSensitiveHeader "Hoofdlettergevoelig">
+<!ENTITY html.label "HTML vervangen">
+<!ENTITY html.accesskey "H">

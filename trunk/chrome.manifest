@@ -1,18 +1,21 @@
 content foxreplace  content/
+locale  foxreplace  ar  locale/ar/
 locale  foxreplace  ca  locale/ca/
-locale  foxreplace  da-DK   locale/da-DK/
-locale  foxreplace  de-DE   locale/de-DE/
+locale  foxreplace  da  locale/da/
+locale  foxreplace  de  locale/de/
 locale  foxreplace  en-US   locale/en-US/
-locale  foxreplace  fr-FR   locale/fr-FR/
+locale  foxreplace  fr  locale/fr/
 locale  foxreplace  ko-KR   locale/ko-KR/
-locale  foxreplace  nl-NL   locale/nl-NL/
-locale  foxreplace  pl-PL   locale/pl-PL/
+locale  foxreplace  nl  locale/nl/
+locale  foxreplace  pl  locale/pl/
 locale  foxreplace  pt-BR   locale/pt-BR/
 locale  foxreplace  ro-RO   locale/ro-RO/
 locale  foxreplace  ru-RU   locale/ru-RU/
-locale  foxreplace  sr-RS   locale/sr-RS/
-locale  foxreplace  tr-TR   locale/tr-TR/
+locale  foxreplace  sr  locale/sr/
+locale  foxreplace  sv-SE   locale/sv-SE/
+locale  foxreplace  tr  locale/tr/
 locale  foxreplace  zh-CN   locale/zh-CN/
+locale  foxreplace  zh-TW   locale/zh-TW/
 resource foxreplace modules/
 skin    foxreplace  classic/1.0 skin/default/
 skin    foxreplace-os   classic/1.0 skin/default/old/   appversion<4.0

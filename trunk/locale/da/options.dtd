@@ -1,0 +1,35 @@
+<!ENTITY prefwindow.title "FoxReplace indstillinger">
+<!ENTITY mainPane.title "Overordnet">
+<!ENTITY description "Indtast udskiftningslisten. Listen består af udskiftningsgrupper, hvor udskiftningerne for hver gruppe anvendes hvis en af gruppe-URLerne matcher adressen for den indlæste side. Hvis gruppen ikke har nogen URLer bruges dens udskiftninger på enhver side. Grupper tjekkes i den rækkefølge de optræder i.">
+<!ENTITY urlHeader "URL">
+<!ENTITY inputStringHeader "Erstat">
+<!ENTITY outputStringHeader "Med">
+<!ENTITY htmlHeader "HTML">
+<!ENTITY addButton.label "Tilføj">
+<!ENTITY addButton.accesskey "T">
+<!ENTITY editButton.label "Rediger">
+<!ENTITY editButton.accesskey "R">
+<!ENTITY deleteButton.label "Slet">
+<!ENTITY deleteButton.accesskey "S">
+<!ENTITY clearButton.label "Ryd">
+<!ENTITY clearButton.accesskey "y">
+<!ENTITY moveUpButton.label "Flyt op">
+<!ENTITY moveUpButton.accesskey "o">
+<!ENTITY moveDownButton.label "Flyt ned">
+<!ENTITY moveDownButton.accesskey "n">
+<!ENTITY importButton.label "Importer">
+<!ENTITY importButton.accesskey "I">
+<!ENTITY importFromUrlButton.label "Importer fra URL">
+<!ENTITY importFromUrlButton.accesskey "m">
+<!ENTITY exportButton.label "Eksporter">
+<!ENTITY exportButton.accesskey "E">
+<!ENTITY subscriptionCheckBox.label "Opdater fra URL">
+<!ENTITY subscriptionCheckBox.accesskey "p">
+<!ENTITY subscriptionUrl.label "URL">
+<!ENTITY subscriptionUrl.accesskey "L">
+<!ENTITY subscriptionPeriod.label "Periode (minutter)">
+<!ENTITY subscriptionPeriod.accesskey "d">
+<!ENTITY autoReplaceOnLoad.label "Auto-erstat ved sideindlæsning">
+<!ENTITY autoReplaceOnLoad.accesskey "A">
+<!ENTITY replaceUrls.label "Erstat URLer (links og billedkilder) (Advarsel: dette kan ændre sidens opførsel!)">
+<!ENTITY replaceUrls.accesskey "U">

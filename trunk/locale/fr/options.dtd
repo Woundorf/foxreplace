@@ -1,0 +1,35 @@
+<!ENTITY prefwindow.title "Options de FoxReplace">
+<!ENTITY mainPane.title "Principales">
+<!ENTITY description "Veuillez saisir la liste de substitution. Cette liste est composée de groupes de substitution pour lesquels les substitutions sont appliquées si une des URLs associées au groupe correspond à l'adresse de la page chargée. Si le groupe n'a pas d'URL associée, ses substitutions sont appliquées pour toutes les pages. Les groupes sont passés en revue dans l'ordre d'apparition.">
+<!ENTITY urlHeader "URL">
+<!ENTITY inputStringHeader "Remplacer">
+<!ENTITY outputStringHeader "Par">
+<!ENTITY htmlHeader "HTML">
+<!ENTITY addButton.label "Ajouter">
+<!ENTITY addButton.accesskey "A">
+<!ENTITY editButton.label "Éditer">
+<!ENTITY editButton.accesskey "E">
+<!ENTITY deleteButton.label "Supprimer">
+<!ENTITY deleteButton.accesskey "S">
+<!ENTITY clearButton.label "Effacer">
+<!ENTITY clearButton.accesskey "f">
+<!ENTITY moveUpButton.label "Monter">
+<!ENTITY moveUpButton.accesskey "M">
+<!ENTITY moveDownButton.label "Descendre">
+<!ENTITY moveDownButton.accesskey "D">
+<!ENTITY importButton.label "Importer">
+<!ENTITY importButton.accesskey "I">
+<!ENTITY importFromUrlButton.label "Importer à partir de l'URL">
+<!ENTITY importFromUrlButton.accesskey "r">
+<!ENTITY exportButton.label "Exporter">
+<!ENTITY exportButton.accesskey "x">
+<!ENTITY subscriptionCheckBox.label "Mettre à jour à partir de l'URL">
+<!ENTITY subscriptionCheckBox.accesskey "p">
+<!ENTITY subscriptionUrl.label "URL">
+<!ENTITY subscriptionUrl.accesskey "R">
+<!ENTITY subscriptionPeriod.label "Intervalle (minutes)">
+<!ENTITY subscriptionPeriod.accesskey "n">
+<!ENTITY autoReplaceOnLoad.label "Remplacer automatiquement lors du chargement de la page">
+<!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY replaceUrls.label "Remplacer les URLs (liens et sources des images) - Avertissement : cela modifiera le comportement de la page !">
+<!ENTITY replaceUrls.accesskey "p">

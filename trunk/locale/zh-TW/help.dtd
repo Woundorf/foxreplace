@@ -1,0 +1,55 @@
+<!ENTITY title "FoxReplace 說明">
+<!ENTITY h1 "FoxReplace 說明">
+<!ENTITY p "這個擴充套件支援你取代文字片段(字串)。取代系統基於取代詞組。一個詞組包含輸入文字(&quot;尋找目標&quot; 區)，與輸出文字(&quot;取代為&quot; 區)。詞組會在整個頁面執行取代 (你無法只限定在局部頁面)。取代詞組的相關選項於下文說明。">
+<!ENTITY substitution "取代詞組">
+<!ENTITY substitution.p "一個詞組包含輸入文字與輸出文字。輸出文字可以留空(意即刪除文字)，但輸入文字必須至少含有一個字元。符合大小寫為可選項。">
+<!ENTITY substitution.inputString "輸入文字：被取代的文字。可以留空。它有三種類型：">
+<!ENTITY substitution.inputString.text "字串：單純由字元所組成。">
+<!ENTITY substitution.inputString.wholeWords "全詞匹配：由一個或多個單詞所組成。例： &quot;active&quot; 不匹配 &quot;interactive&quot; (如果是字串類型，則匹配)。">
+<!ENTITY substitution.inputString.regExp.0 "正規表示式：說明見">
+<!ENTITY regExpLink "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions">
+<!ENTITY substitution.inputString.regExp.1 "正規表示式">
+<!ENTITY substitution.inputString.regExp.2 "。如果它無效，將顯示語法錯誤。">
+<!ENTITY substitution.outputString "輸出文字：取代的文字。它可以有以下特殊樣式：">
+<!ENTITY substitution.table.summary "輸出文字的特殊樣式">
+<!ENTITY substitution.table.0 "插入一個 &quot;$&quot;。">
+<!ENTITY substitution.table.1 "插入輸入文字。">
+<!ENTITY substitution.table.2 "插入在輸入文字前同區塊的文字。">
+<!ENTITY substitution.table.3 "插入在輸入文字後同區塊的文字。">
+<!ENTITY substitution.table.4.0 "如果輸入的是正規表示式，而且">
+<!ENTITY substitution.table.4.1 "是一個十進位整數 1 至 99 (含)，插入第">
+<!ENTITY substitution.table.4.2 "個匹配的子字串。">
+<!ENTITY substitutionList "取代列表">
+<!ENTITY substitutionList.p "FoxReplace 儲存一個取代列表，你可以從 FoxReplace 選項視窗對列表做設定和修改，並經由手動按下 F2 鍵或工具列按鈕，或是設定選項自動執行取代。詞組依順序執行。你可以在同一頁面重複執行；再次地執行會覆蓋前一次執行的結果。取代列表由詞組清單所構成；詞組清單由網址和取代詞組所構成；詞組會在其指定的網址執行取代。">
+<!ENTITY substitutionGroup "詞組清單">
+<!ENTITY substitutionGroup.p0 "詞組清單由網址和取代詞組所構成。詞組依順序執行；詞組必須至少含有一個取代詞。你可以設定套用的網址列表，如果網址列表留空，那將會在所有頁面執行詞組取代。你也可以設定例外網址，取代詞組不會在例外網址執行。所以，如果網址列表非空，取代詞組會在其匹配且非例外網址上執行。">
+<!ENTITY substitutionGroup.p1 "例外網址以連字號(&quot;-&quot;)開頭，並以紅字顯示。你可以使用萬用字元(&quot;*&quot;)匹配零到多個字元，管線符號(&quot;|&quot;)匹配網址開頭或結尾。如果你想要設定一個以連字號開頭的網址(如： &quot;-abc&quot;)，而且希望它不是例外網址，你可以使用格式： &quot;|*-abc&quot;。">
+<!ENTITY replaceHtml "取代 HTML">
+<!ENTITY replaceHtml.p "取代通常只作用於文字，但這個選項可以使之作用於 HTML 原始碼，它支援修改頁面的格式或結構。對於每一份詞組清單，你可以啟用或停用此選項。">
+<!ENTITY autoReplace "網頁載入時自動取代">
+<!ENTITY autoReplace.p "你可以啟用或停用此選項。如果啟用此選項，取代列表將於網頁載入時，在其指定的網址自動執行；在你指定的頁面，這可作為一個過濾器。">
+<!ENTITY replaceUrls "取代網址">
+<!ENTITY replaceUrls.p "此選項預設停用。如果啟用此選項，取代將作用於頁面上的網址 (連結、圖片網址...等)；這有可能改變網頁行為，請自負責任。此選項不作用於 HTML 取代。">
+<!ENTITY newGui "新選單和工具列元件">
+<!ENTITY newGui.edit "編輯">
+<!ENTITY newGui.edit.replace "取代... (Shift+F2)">
+<!ENTITY newGui.edit.replace.d "顯示取代列。">
+<!ENTITY newGui.tools "工具">
+<!ENTITY newGui.tools.foxreplace "FoxReplace">
+<!ENTITY newGui.tools.foxreplace.replace "以取代列表執行取代 (F2)">
+<!ENTITY newGui.tools.foxreplace.replace.d "套用目前的取代列表">
+<!ENTITY newGui.tools.foxreplace.autoReplace "網頁載入時自動取代">
+<!ENTITY newGui.tools.foxreplace.autoReplace.d "切換這個選項。">
+<!ENTITY newGui.tools.foxreplace.options "FoxReplace 選項。">
+<!ENTITY newGui.tools.foxreplace.options.d "開啟 FoxReplace 選項視窗。">
+<!ENTITY newGui.tools.foxreplace.help "說明">
+<!ENTITY newGui.tools.foxreplace.help.d "顯示此頁面。">
+<!ENTITY newGui.toolbarButton "工具列按鈕">
+<!ENTITY newGui.toolbarButton.0 "按下此按鈕，將以目前的取代列表執行取代。">
+<!ENTITY newGui.toolbarButton.1 "按鈕側邊有一個選單，該選單內容同上述工具中的 FoxReplace 的選單。">
+<!ENTITY newGui.contextMenu "右鍵選單">
+<!ENTITY newGui.contextMenu.replace "以取代列表執行取代 (FoxReplace) (F2)">
+<!ENTITY newGui.contextMenu.replace.d "執行目前的取代列表。">
+<!ENTITY newGui.replaceBar "取代列">
+<!ENTITY newGui.replaceBar.0 "顯示在文字尋找列下方。">
+<!ENTITY newGui.replaceBar.1 "讓你設定取代詞組並立即執行。">

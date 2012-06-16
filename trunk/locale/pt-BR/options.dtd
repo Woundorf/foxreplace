@@ -19,16 +19,8 @@
 <!ENTITY moveDownButton.accesskey "b">
 <!ENTITY importButton.label "Importar">
 <!ENTITY importButton.accesskey "I">
-<!ENTITY importFromUrlButton.label "Import from URL">
-<!ENTITY importFromUrlButton.accesskey "m">
 <!ENTITY exportButton.label "Exportar">
 <!ENTITY exportButton.accesskey "x">
-<!ENTITY subscriptionCheckBox.label "Update from URL">
-<!ENTITY subscriptionCheckBox.accesskey "p">
-<!ENTITY subscriptionUrl.label "URL">
-<!ENTITY subscriptionUrl.accesskey "R">
-<!ENTITY subscriptionPeriod.label "Period (minutes)">
-<!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "Substituir automaticamente no carregamento da página">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
 <!ENTITY replaceUrls.label "Substituir endereços (links e fontes de imagem) (Aviso: isto mudará o comportamento da página!)">

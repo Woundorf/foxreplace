@@ -1,0 +1,27 @@
+<!ENTITY menuEditReplace.label "Vervangen…">
+<!ENTITY menuEditReplace.accesskey "e">
+<!ENTITY menuToolsFoxReplace.label "FoxReplace">
+<!ENTITY menuToolsFoxReplace.accesskey "F">
+<!ENTITY menuContextFoxReplace.label "Vervangen met vervangingslijst (FoxReplace)">
+<!ENTITY menuContextFoxReplace.accesskey "l">
+<!ENTITY toolbarButton.label "FoxReplace">
+<!ENTITY toolbarButton.tooltip "Vervangen met vervangingslijst">
+<!ENTITY listReplace.label "Vervangen met vervangingslijst">
+<!ENTITY listReplace.accesskey "V">
+<!ENTITY autoReplaceOnLoad.label "Automatisch vervangen bij laden pagina">
+<!ENTITY autoReplaceOnLoad.accesskey "A">
+<!ENTITY options.label "FoxReplace opties…">
+<!ENTITY options.accesskey "o">
+<!ENTITY help.label "Help">
+<!ENTITY help.accesskey "H">
+<!ENTITY replaceBarClose "Vervangingsbalk sluiten">
+<!ENTITY replaceBarInputString.label "Vervangen">
+<!ENTITY replaceBarInputString.accesskey "V">
+<!ENTITY replaceBarOutputString.label "door">
+<!ENTITY replaceBarOutputString.accesskey "d">
+<!ENTITY replaceBarCaseSensitive.label "Hoofdlettergevoelig">
+<!ENTITY replaceBarCaseSensitive.accesskey "g">
+<!ENTITY replaceBarHtml.label "HTML">
+<!ENTITY replaceBarHtml.accesskey "H">
+<!ENTITY replaceBarReplace.label "Vervangen">
+<!ENTITY replaceBarReplace.accesskey "e">
