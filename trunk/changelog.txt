@@ -7,7 +7,7 @@ v0.13.0
 * Display of substitution list is updated after each subscription update.
 * Status of subscription displayed in options window.
 * Fixed instantiation of XMLHttpRequest for import from URL.
-* Compatibility with Firefox 15.
+* Compatibility with Firefox 4 to 15.
 
 v0.12.2 (10-8-2009)
 * Bugfix: the modules directory wasn't included in the XPI.

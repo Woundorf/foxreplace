@@ -18,10 +18,9 @@ locale  foxreplace  zh-CN   locale/zh-CN/
 locale  foxreplace  zh-TW   locale/zh-TW/
 resource foxreplace modules/
 skin    foxreplace  classic/1.0 skin/default/
-skin    foxreplace-os   classic/1.0 skin/default/old/   appversion<4.0
-skin    foxreplace-os   classic/1.0 skin/default/unix/  appversion>=4.0
-skin    foxreplace-os   classic/1.0 skin/default/win/   appversion>=4.0 os=WINNT
-skin    foxreplace-os   classic/1.0 skin/default/mac/   appversion>=4.0 os=Darwin
+skin    foxreplace-os   classic/1.0 skin/default/unix/
+skin    foxreplace-os   classic/1.0 skin/default/win/   os=WINNT
+skin    foxreplace-os   classic/1.0 skin/default/mac/   os=Darwin
 overlay chrome://browser/content/browser.xul    chrome://foxreplace/content/foxreplace.xul
 style   chrome://global/content/customizeToolbar.xul    chrome://foxreplace/skin/foxreplace.css
 
