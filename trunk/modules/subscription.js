@@ -62,6 +62,7 @@ var fxrSubscription = {
       try {
         var request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
         request.open("GET", fxrSubscription.url);
+        request.responseType = "text";
         request.onreadystatechange = function() {
           if (request.readyState == 4) {
             if ((http && request.status == 200) || (!http && request.status == 0)) {
@@ -72,7 +73,8 @@ var fxrSubscription = {
               }
               else if (request.responseText.charAt(0) == '<') { // XML
                 try {
-                  let listXml = request.responseXML;
+                  let parser = Cc["@mozilla.org/xmlextras/domparser;1"].createInstance(Ci.nsIDOMParser);
+                  let listXml = parser.parseFromString(request.responseText, "text/xml");
                   prefs.substitutionList = fxrSubstitutionListFromXml(listXml);
                   fxrSubscription.status = getLocalizedString("subscriptionStatusLastUpdated", [new Date().toLocaleString()]);
                 }
