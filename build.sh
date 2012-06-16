@@ -108,6 +108,12 @@ cd $TMP_DIR
 #  # (it simply adds jar:chrome/whatever.jar!/ at appropriate positions of chrome.manifest)
 #fi
 
+# Remove the line to register test code in chrome
+if [ -f "chrome.manifest" ]; then
+  echo "Removing test registration from chrome.manifest..."
+  sed -i -r s/^.*foxreplace-test.*$// chrome.manifest
+fi
+
 # generate the XPI file
 echo "Generating $APP_NAME.xpi..."
 zip -r ../$APP_NAME.xpi *
