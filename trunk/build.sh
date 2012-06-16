@@ -71,9 +71,9 @@ for CHROME_SUBDIR in $CHROME_PROVIDERS; do
   find $CHROME_SUBDIR -path '*.svn*' -prune -o -type f -print | grep -v \~ >> files
 done
 
-#zip -0 -r $JAR_FILE `cat files`
+zip -0 -r $JAR_FILE `cat files`
 # The following statement should be used instead if you don't wish to use the JAR file
-cp --verbose --parents `cat files` $TMP_DIR/chrome
+#cp --verbose --parents `cat files` $TMP_DIR/chrome
 
 # prepare components and defaults
 echo "Copying various files to $TMP_DIR folder..."
@@ -95,18 +95,18 @@ done
 cd $TMP_DIR
 
 # Uncomment to use the JAR file
-#if [ -f "chrome.manifest" ]; then
-#  echo "Preprocessing chrome.manifest..."
-#  # You think this is scary?
-#  #s/^(content\s+\S*\s+)(\S*\/)$/\1jar:chrome\/$APP_NAME\.jar!\/\2/
-#  #s/^(skin|locale)(\s+\S*\s+\S*\s+)(.*\/)$/\1\2jar:chrome\/$APP_NAME\.jar!\/\3/
-#  #
-#  # Then try this! (Same, but with characters escaped for bash :)
-#  sed -i -r s/^\(content\\s+\\S*\\s+\)\(\\S*\\/\)$/\\1jar:chrome\\/$APP_NAME\\.jar!\\/\\2/ chrome.manifest
-#  sed -i -r s/^\(skin\|locale\)\(\\s+\\S*\\s+\\S*\\s+\)\(.*\\/\)$/\\1\\2jar:chrome\\/$APP_NAME\\.jar!\\/\\3/ chrome.manifest
-#
-#  # (it simply adds jar:chrome/whatever.jar!/ at appropriate positions of chrome.manifest)
-#fi
+if [ -f "chrome.manifest" ]; then
+  echo "Preprocessing chrome.manifest..."
+  # You think this is scary?
+  #s/^(content\s+\S*\s+)(\S*\/)$/\1jar:chrome\/$APP_NAME\.jar!\/\2/
+  #s/^(skin|locale)(\s+\S*\s+\S*\s+)(.*\/)$/\1\2jar:chrome\/$APP_NAME\.jar!\/\3/
+  #
+  # Then try this! (Same, but with characters escaped for bash :)
+  sed -i -r s/^\(content\\s+\\S*\\s+\)\(\\S*\\/\)$/\\1jar:chrome\\/$APP_NAME\\.jar!\\/\\2/ chrome.manifest
+  sed -i -r s/^\(skin\|locale\)\(\\s+\\S*\\s+\\S*\\s+\)\(.*\\/\)$/\\1\\2jar:chrome\\/$APP_NAME\\.jar!\\/\\3/ chrome.manifest
+
+  # (it simply adds jar:chrome/whatever.jar!/ at appropriate positions of chrome.manifest)
+fi
 
 # Remove the line to register test code in chrome
 if [ -f "chrome.manifest" ]; then
