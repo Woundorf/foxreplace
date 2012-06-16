@@ -123,6 +123,13 @@ describe("SubstitutionGroup", function() {
       expect(group.matches("http://foo.net/")).toBe(false);
     });
 
+    it("should work with URLs starting with hyphens", function() {
+      var urls = ["|*-example.com"];
+      var group = new SubstitutionGroup(urls);
+      expect(group.matches("http://-example.com/")).toBe(true);
+      expect(group.matches("http://some-example.com/")).toBe(true);
+    });
+
   });
 
 });
