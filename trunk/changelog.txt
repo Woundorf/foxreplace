@@ -1,20 +1,13 @@
-* Substitution list stored and exported as JSON (0.13) instead of XML (issue 67). XML kept as read-only.
-* Added new XPaths to select text nodes (issues 35, 53).
-* Compatibility with Firefox 15.
-* Integration with the Firefox app menu.
+v0.13.0
 * Subscription works from local files (URL file://...) (issue 25).
-* Status of subscription displayed in options window.
-* Display of substitution list is updated after each subscription update.
-* Fixed instantiation of XMLHttpRequest for import from URL.
 * Updated RegExp link in help file (issue 28).
-* String changes:
-  - foxreplace.dtd: changed name: menuEditReplace -> menuReplace, menuContextFoxReplace -> contextMenuFoxReplace.
-  - foxreplace.properties: new: subscriptionStatusDisabled, subscriptionStatusUpdating, subscriptionStatusLastUpdated, xmlError, fileNotFound; changed name:
-    cantConnectToServerText -> cantConnectToServer; changed: httpError, unexpectedError; removed: xmlErrorTitle, xmlErrorText,
-    cantConnectToServerTitle, invalidSubscriptionUrl.
-  - help.dtd: changed: regExpLink.
-  - options.dtd: new: subscriptionGroupBoxCaption, subscriptionEnableCheckBox.label, subscriptionEnableCheckBox.accesskey, subscriptionStatus.label; removed:
-    subscriptionCheckBox.label, subscriptionCheckBox.accesskey.
+* Added new XPaths to select text nodes (issues 35, 53).
+* Substitution list stored and exported as JSON (0.13) instead of XML (issue 67). XML kept as read-only.
+* Integration with the Firefox app menu.
+* Display of substitution list is updated after each subscription update.
+* Status of subscription displayed in options window.
+* Fixed instantiation of XMLHttpRequest for import from URL.
+* Compatibility with Firefox 15.
 
 v0.12.2 (10-8-2009)
 * Bugfix: the modules directory wasn't included in the XPI.
