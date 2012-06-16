@@ -31,19 +31,20 @@
 <!ENTITY replaceUrls "Reemplaça els URLs">
 <!ENTITY replaceUrls.p "Aquesta opció està desactivada per defecte. Si s'activa les substitucions també s'apliquen sobre els URLs que hi hagi a la pàgina (enllaços, fonts d'imatges, etc.), de manera que pot canviar el comportament de la pàgina. Utilitzeu-la sota la vostra pròpia responsabilitat. No té cap efecte quan les substitucions són a l'HTML, perquè llavors els URLs poden ser modificats sempre.">
 <!ENTITY newGui "Nous elements dels menús i barra d'eines">
+<!ENTITY newGui.app "Menú Firefox">
 <!ENTITY newGui.edit "Edita">
-<!ENTITY newGui.edit.replace "Reemplaça... (Maj+F2)">
-<!ENTITY newGui.edit.replace.d "Mostra la barra de substitucions.">
+<!ENTITY newGui.menu.replace "Reemplaça... (Maj+F2)">
+<!ENTITY newGui.menu.replace.d "Mostra la barra de substitucions.">
 <!ENTITY newGui.tools "Eines">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.tools.foxreplace.replace "Reemplaça amb la llista de substitucions (F2)">
-<!ENTITY newGui.tools.foxreplace.replace.d "Aplica la llista de substitucions actual.">
-<!ENTITY newGui.tools.foxreplace.autoReplace "Reemplaça automàticament en carregar una pàgina">
-<!ENTITY newGui.tools.foxreplace.autoReplace.d "Activa/desactiva aquesta opció.">
-<!ENTITY newGui.tools.foxreplace.options "Opcions de FoxReplace...">
-<!ENTITY newGui.tools.foxreplace.options.d "Obre la finestra d'opcions de FoxReplace.">
-<!ENTITY newGui.tools.foxreplace.help "Ajuda">
-<!ENTITY newGui.tools.foxreplace.help.d "Mostra aquesta pàgina.">
+<!ENTITY newGui.menu.replaceWithList "Reemplaça amb la llista de substitucions (F2)">
+<!ENTITY newGui.menu.replaceWithList.d "Aplica la llista de substitucions actual.">
+<!ENTITY newGui.menu.autoReplace "Reemplaça automàticament en carregar una pàgina">
+<!ENTITY newGui.menu.autoReplace.d "Activa/desactiva aquesta opció.">
+<!ENTITY newGui.menu.options "Opcions de FoxReplace...">
+<!ENTITY newGui.menu.options.d "Obre la finestra d'opcions de FoxReplace.">
+<!ENTITY newGui.menu.help "Ajuda">
+<!ENTITY newGui.menu.help.d "Mostra aquesta pàgina.">
 <!ENTITY newGui.toolbarButton "Botó de la barra d'eines">
 <!ENTITY newGui.toolbarButton.0 "Prement-lo, aplica la llista de substitucions actual.">
 <!ENTITY newGui.toolbarButton.1 "Al costat té un menú com el FoxReplace de dalt.">

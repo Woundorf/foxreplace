@@ -24,8 +24,8 @@
 <!ENTITY exportButton.label "Exporta">
 <!ENTITY exportButton.accesskey "x">
 <!ENTITY subscriptionGroupBoxCaption "Actualitza periòdicament des d'un URL">
-<!ENTITY subscriptionEnableCheckBox.label "Habilita">
-<!ENTITY subscriptionEnableCheckBox.accesskey "H">
+<!ENTITY subscriptionEnableCheckBox.label "Activa">
+<!ENTITY subscriptionEnableCheckBox.accesskey "c">
 <!ENTITY subscriptionStatus.label "Estat:">
 <!ENTITY subscriptionUrl.label "URL">
 <!ENTITY subscriptionUrl.accesskey "U">
