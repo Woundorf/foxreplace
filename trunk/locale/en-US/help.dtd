@@ -31,19 +31,20 @@
 <!ENTITY replaceUrls "Replace URLs">
 <!ENTITY replaceUrls.p "This option is off by default. It it's on, substitutions are also applied to the URLs in the page (links, image sources, etc.), so it may change the behaviour of the page. Use it under your own responsibility. This has no effect in HTML substitutions, because then URLs can be modified always.">
 <!ENTITY newGui "New menu and toolbar elements">
+<!ENTITY newGui.app "Firefox menu">
 <!ENTITY newGui.edit "Edit">
-<!ENTITY newGui.edit.replace "Replace... (Shift+F2)">
-<!ENTITY newGui.edit.replace.d "Shows the replace bar.">
+<!ENTITY newGui.menu.replace "Replace... (Shift+F2)">
+<!ENTITY newGui.menu.replace.d "Shows the replace bar.">
 <!ENTITY newGui.tools "Tools">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.tools.foxreplace.replace "Replace with substitution list (F2)">
-<!ENTITY newGui.tools.foxreplace.replace.d "Applies current substitution list.">
-<!ENTITY newGui.tools.foxreplace.autoReplace "Auto-replace on page load">
-<!ENTITY newGui.tools.foxreplace.autoReplace.d "Toggles this option.">
-<!ENTITY newGui.tools.foxreplace.options "FoxReplace options...">
-<!ENTITY newGui.tools.foxreplace.options.d "Opens FoxReplace options window.">
-<!ENTITY newGui.tools.foxreplace.help "Help">
-<!ENTITY newGui.tools.foxreplace.help.d "Shows this page.">
+<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (F2)">
+<!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
+<!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
+<!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
+<!ENTITY newGui.menu.options "FoxReplace options...">
+<!ENTITY newGui.menu.options.d "Opens FoxReplace options window.">
+<!ENTITY newGui.menu.help "Help">
+<!ENTITY newGui.menu.help.d "Shows this page.">
 <!ENTITY newGui.toolbarButton "Toolbar button">
 <!ENTITY newGui.toolbarButton.0 "Pressing it applies current substitution list.">
 <!ENTITY newGui.toolbarButton.1 "It has a menu at side like the FoxReplace above.">
