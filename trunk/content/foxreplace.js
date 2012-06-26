@@ -328,6 +328,10 @@ var foxreplace = {
     var nValueNodes = valueNodes.snapshotLength;
     for (var i = 0; i < nValueNodes; i++) {
       var valueNode = valueNodes.snapshotItem(i);
+
+      // Special treatment for textareas that still have their default value (issue 63)
+      if (valueNode.type == "textarea" && valueNode.value == valueNode.defaultValue) continue;
+
       valueNode.value = aGroup.replace(valueNode.value);
     }
   },
