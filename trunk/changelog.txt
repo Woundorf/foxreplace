@@ -2,6 +2,7 @@ v0.13.0
 * Subscription works from local files (URL file://...) (issue 25).
 * Updated RegExp link in help file (issue 28).
 * Added new XPaths to select text nodes (issues 35, 53).
+* Fixed bug causing double substitution in title (issue 63).
 * Substitution list stored and exported as JSON (0.13) instead of XML (issue 67). XML kept as read-only.
 * Integration with the Firefox app menu.
 * Display of substitution list is updated after each subscription update.
