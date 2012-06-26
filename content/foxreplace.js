@@ -238,9 +238,6 @@ var foxreplace = {
    * Applies substitutions from aGroup to aDocument on text.
    */
   replaceText: function(aDocument, aGroup) {
-    // Replace title
-    aDocument.title = aGroup.replace(aDocument.title);
-
     // selection string possibilities
     /* //text()[name(parent::*)!='script']  :( name can be upper or lower */
     /* ... empty(index-of(('style'),lower-case(name(parent::*))))  :( functions not supported */
