@@ -31,19 +31,20 @@
 <!ENTITY replaceUrls "Ersätt URL:er">
 <!ENTITY replaceUrls.p "Detta alternativ är inaktiverat som standard. När det är aktiverat, så tillämpas ersättningar även på URL:erna på sidan (länkar, bildkällor, o.s.v.), så att sidans beteende kan ändras. Använd alternativet under eget ansvar. Detta påverkar inte HTML-ersättningar, eftersom URL:er alltid kan ändras vid sådana.">
 <!ENTITY newGui "Nya meny- och verktygsfältselement">
+<!ENTITY newGui.app "Firefox menu">
 <!ENTITY newGui.edit "Redigera-menyn">
-<!ENTITY newGui.edit.replace "Ersätt... (Skift+F2)">
-<!ENTITY newGui.edit.replace.d "Visar ersättningsfältet.">
+<!ENTITY newGui.menu.replace "Replace... (Shift+F2)">
+<!ENTITY newGui.menu.replace.d "Shows the replace bar.">
 <!ENTITY newGui.tools "Verktyg-menyn">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.tools.foxreplace.replace "Ersätt med ersättningslistan (F2)">
-<!ENTITY newGui.tools.foxreplace.replace.d "Tillämpar aktuell ersättningslista.">
-<!ENTITY newGui.tools.foxreplace.autoReplace "Ersätt automatiskt när sidan läses in">
-<!ENTITY newGui.tools.foxreplace.autoReplace.d "Växlar detta alternativ.">
-<!ENTITY newGui.tools.foxreplace.options "Inställningar för FoxReplace...">
-<!ENTITY newGui.tools.foxreplace.options.d "Öppnar fönstret &quot;Inställningar för FoxReplace&quot;.">
-<!ENTITY newGui.tools.foxreplace.help "Hjälp">
-<!ENTITY newGui.tools.foxreplace.help.d "Visar denna sida.">
+<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (F2)">
+<!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
+<!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
+<!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
+<!ENTITY newGui.menu.options "FoxReplace options...">
+<!ENTITY newGui.menu.options.d "Opens FoxReplace options window.">
+<!ENTITY newGui.menu.help "Help">
+<!ENTITY newGui.menu.help.d "Shows this page.">
 <!ENTITY newGui.toolbarButton "Verktygsfältsknapp">
 <!ENTITY newGui.toolbarButton.0 "Ett klick på knappen tillämpar aktuell ersättningslista.">
 <!ENTITY newGui.toolbarButton.1 "Knappen har en meny vid sidan av sig, som FoxReplace-menyn ovan.">

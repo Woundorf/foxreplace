@@ -1,12 +1,12 @@
-<!ENTITY menuEditReplace.label "Remplacer…">
-<!ENTITY menuEditReplace.accesskey "e">
+<!ENTITY menuReplace.label "Remplacer…">
+<!ENTITY menuReplace.accesskey "e">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
-<!ENTITY menuContextFoxReplace.label "Remplacer par la liste de substitution (FoxReplace)">
-<!ENTITY menuContextFoxReplace.accesskey "l">
+<!ENTITY contextMenuFoxReplace.label "Remplacer en utilisant la liste de substitution (FoxReplace)">
+<!ENTITY contextMenuFoxReplace.accesskey "i">
 <!ENTITY toolbarButton.label "FoxReplace">
-<!ENTITY toolbarButton.tooltip "Remplacement par la liste de substitution">
-<!ENTITY listReplace.label "Remplacer par la liste de substitution">
+<!ENTITY toolbarButton.tooltip "Remplacement en utilisant la liste de substitution">
+<!ENTITY listReplace.label "Remplacer en utilisant la liste de substitution">
 <!ENTITY listReplace.accesskey "R">
 <!ENTITY autoReplaceOnLoad.label "Remplacer automatiquement lors du chargement de la page">
 <!ENTITY autoReplaceOnLoad.accesskey "a">

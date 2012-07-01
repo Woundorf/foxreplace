@@ -1,9 +1,9 @@
-<!ENTITY menuEditReplace.label "Substituir…">
-<!ENTITY menuEditReplace.accesskey "e">
+<!ENTITY menuReplace.label "Replace...">
+<!ENTITY menuReplace.accesskey "e">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
-<!ENTITY menuContextFoxReplace.label "Substituir com uma lista (FoxReplace)">
-<!ENTITY menuContextFoxReplace.accesskey "l">
+<!ENTITY contextMenuFoxReplace.label "Replace with substitution list (FoxReplace)">
+<!ENTITY contextMenuFoxReplace.accesskey "l">
 <!ENTITY toolbarButton.label "FoxReplace">
 <!ENTITY toolbarButton.tooltip "Substituir com uma lista">
 <!ENTITY listReplace.label "Substituir com uma lista">

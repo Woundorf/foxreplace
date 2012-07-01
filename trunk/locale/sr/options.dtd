@@ -1,6 +1,6 @@
-<!ENTITY prefwindow.title "Опције ФоксЗамењивача">
+<!ENTITY prefwindow.title "FoxReplace - опције">
 <!ENTITY mainPane.title "Главно">
-<!ENTITY description "Направите списак за замену. Листа садржи групе са замењивање, где је свака група примењена ако се група адреса подудара са адресом учитане странице. Ако група нема адресу, њене замене су примењене на било који страницу. Групе се проверавају оним редом којим се појављују.">
+<!ENTITY description "Направите списак за замену. Списак садржи групе са замењивање, где је свака група примењена ако се група адреса подудара са адресом учитане странице. Ако група нема адресу, њене замене су примењене на било који страницу. Групе се проверавају оним редом којим се појављују.">
 <!ENTITY urlHeader "Адреса">
 <!ENTITY inputStringHeader "Замени">
 <!ENTITY outputStringHeader "са">
@@ -23,8 +23,10 @@
 <!ENTITY importFromUrlButton.accesskey "а">
 <!ENTITY exportButton.label "Извоз">
 <!ENTITY exportButton.accesskey "з">
-<!ENTITY subscriptionCheckBox.label "Ажурирање са адресе">
-<!ENTITY subscriptionCheckBox.accesskey "п">
+<!ENTITY subscriptionGroupBoxCaption "Повремено ажурирај са адресе">
+<!ENTITY subscriptionEnableCheckBox.label "Омогући">
+<!ENTITY subscriptionEnableCheckBox.accesskey "О">
+<!ENTITY subscriptionStatus.label "Стање:">
 <!ENTITY subscriptionUrl.label "Адреса">
 <!ENTITY subscriptionUrl.accesskey "А">
 <!ENTITY subscriptionPeriod.label "Период (минута)">

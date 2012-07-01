@@ -31,19 +31,20 @@
 <!ENTITY replaceUrls "URL’s vervangen">
 <!ENTITY replaceUrls.p "Deze optie staat standaard uit. Indien ingeschakeld worden vervangingen ook toegepast op de URL’s in de pagina (koppelingen, afbeeldingsbronnen, enz.), dus het gedrag van de pagina kan wijzigen. Gebruik deze optie naar eigen inzicht. Dit heeft geen effect in HTML-vervangingen, omdat dan URL’s altijd kunnen worden aangepast.">
 <!ENTITY newGui "Nieuwe menu- en werkbalkelementen">
+<!ENTITY newGui.app "Firefox-menu">
 <!ENTITY newGui.edit "Bewerken">
-<!ENTITY newGui.edit.replace "Vervangen… (Shift+F2)">
-<!ENTITY newGui.edit.replace.d "Geeft de vervangingsbalk weer.">
+<!ENTITY newGui.menu.replace "Vervangen… (Shift+F2)">
+<!ENTITY newGui.menu.replace.d "Geeft de vervangingsbalk weer.">
 <!ENTITY newGui.tools "Extra">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.tools.foxreplace.replace "Vervangen met vervangingslijst (F2)">
-<!ENTITY newGui.tools.foxreplace.replace.d "Past de huidige vervangingslijst toe.">
-<!ENTITY newGui.tools.foxreplace.autoReplace "Automatisch vervangen bij pagina laden">
-<!ENTITY newGui.tools.foxreplace.autoReplace.d "Schakelt deze optie in of uit.">
-<!ENTITY newGui.tools.foxreplace.options "FoxReplace opties…">
-<!ENTITY newGui.tools.foxreplace.options.d "Opent het optiesvenster van FoxReplace.">
-<!ENTITY newGui.tools.foxreplace.help "Help">
-<!ENTITY newGui.tools.foxreplace.help.d "Geeft deze pagina weer.">
+<!ENTITY newGui.menu.replaceWithList "Vervangen met vervangingslijst (F2)">
+<!ENTITY newGui.menu.replaceWithList.d "Past de huidige vervangingslijst toe.">
+<!ENTITY newGui.menu.autoReplace "Automatisch vervangen bij laden pagina">
+<!ENTITY newGui.menu.autoReplace.d "Wisselt deze optie.">
+<!ENTITY newGui.menu.options "FoxReplace-opties…">
+<!ENTITY newGui.menu.options.d "Opent het FoxReplace-optiesvenster.">
+<!ENTITY newGui.menu.help "Help">
+<!ENTITY newGui.menu.help.d "Geeft deze pagina weer.">
 <!ENTITY newGui.toolbarButton "Werkbalkknop">
 <!ENTITY newGui.toolbarButton.0 "Door hierop te drukken wordt de huidige vervangingslijst toegepast.">
 <!ENTITY newGui.toolbarButton.1 "Het bevat een zijmenu zoals het FoxReplace-menu hierboven.">

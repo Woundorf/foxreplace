@@ -1,9 +1,9 @@
-<!ENTITY menuEditReplace.label "Înlocuiește...">
-<!ENTITY menuEditReplace.accesskey "e">
+<!ENTITY menuReplace.label "Replace...">
+<!ENTITY menuReplace.accesskey "e">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
-<!ENTITY menuContextFoxReplace.label "Înlocuiește folosind lista de substituții (FoxReplace)">
-<!ENTITY menuContextFoxReplace.accesskey "i">
+<!ENTITY contextMenuFoxReplace.label "Replace with substitution list (FoxReplace)">
+<!ENTITY contextMenuFoxReplace.accesskey "l">
 <!ENTITY toolbarButton.label "FoxReplace">
 <!ENTITY toolbarButton.tooltip "Înlocuiește folosind lista de substituții">
 <!ENTITY listReplace.label "Înlocuiește cu lista de substituții">

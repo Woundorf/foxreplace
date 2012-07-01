@@ -31,19 +31,20 @@
 <!ENTITY replaceUrls "URL 대체">
 <!ENTITY replaceUrls.p "이 선택사항은 꺼짐이 기본값입니다. 켜지면 대체어는 페이지(링크, 이미지 소스, 등) 내 URL에도 적용되어서 해당 페이지의 동작을 변경시킬수도 있습니다. 자신의 책임하에 사용하십시오. 이것은 URL이 언제나 수정될 수 있기 때문에 HTML 대체어 안에선 효과가 없습니다.">
 <!ENTITY newGui "새 메뉴 및 도구막대 요소">
+<!ENTITY newGui.app "Firefox menu">
 <!ENTITY newGui.edit "편집">
-<!ENTITY newGui.edit.replace "대체... (Shift+F2)">
-<!ENTITY newGui.edit.replace.d "대체 막대 표시">
+<!ENTITY newGui.menu.replace "Replace... (Shift+F2)">
+<!ENTITY newGui.menu.replace.d "Shows the replace bar.">
 <!ENTITY newGui.tools "도구">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.tools.foxreplace.replace "대체어 목록으로 대체 (F2)">
-<!ENTITY newGui.tools.foxreplace.replace.d "현재 대체어 목록 적용">
-<!ENTITY newGui.tools.foxreplace.autoReplace "페이지 로드시 자동 대체">
-<!ENTITY newGui.tools.foxreplace.autoReplace.d "이 선택사항 전환.">
-<!ENTITY newGui.tools.foxreplace.options "FoxReplace 선택사항...">
-<!ENTITY newGui.tools.foxreplace.options.d "FoxReplace 선택사항 창 열기">
-<!ENTITY newGui.tools.foxreplace.help "도움말">
-<!ENTITY newGui.tools.foxreplace.help.d "이 페이지 표시.">
+<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (F2)">
+<!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
+<!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
+<!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
+<!ENTITY newGui.menu.options "FoxReplace options...">
+<!ENTITY newGui.menu.options.d "Opens FoxReplace options window.">
+<!ENTITY newGui.menu.help "Help">
+<!ENTITY newGui.menu.help.d "Shows this page.">
 <!ENTITY newGui.toolbarButton "도구막대 버튼">
 <!ENTITY newGui.toolbarButton.0 "현재 대체어 목록을 적용하려면 누르세요.">
 <!ENTITY newGui.toolbarButton.1 "FoxReplace 상단과 같은 측면에 메뉴를 가집니다.">

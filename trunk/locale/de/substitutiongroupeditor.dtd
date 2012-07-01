@@ -1,8 +1,46 @@
+<!ENTITY title "Substitution group editor">
+<!ENTITY description "Enter the URL list and the substitution list. The substitution list must have at least one substitution. The URL list can be empty, and then the substitutions will be applied to any page; otherwise they will be applied only when the page address matches one of the normal URLs but doesn't match any of the exclusion URLs. The exclusion URLs are the ones that start with a hyphen (&quot;-&quot;), and they are displayed in red. You may use &quot;*&quot; to match any 0 or more characters (not needed at the beginning and the end) and &quot;|&quot; to match the beginning or the end of the URL. For example, &quot;http://*.example.com/|&quot; would match &quot;http://www.example.com/&quot; but not &quot;http://www.example.com/whatever&quot;.">
+<!ENTITY urls "URLs">
+<!ENTITY url.label "URL">
+<!ENTITY url.accesskey "U">
+<!ENTITY addUrlButton.label "Add">
+<!ENTITY addUrlButton.accesskey "A">
 <!ENTITY editUrlButton.label "Bearbeiten">
+<!ENTITY editUrlButton.accesskey "E">
 <!ENTITY okEditUrlButton.label "OK">
 <!ENTITY okEditUrlButton.accesskey "O">
 <!ENTITY cancelEditUrlButton.label "Abbrechen">
+<!ENTITY cancelEditUrlButton.accesskey "n">
 <!ENTITY deleteUrlButton.label "Löschen">
+<!ENTITY deleteUrlButton.accesskey "l">
+<!ENTITY clearUrlsButton.label "Clear">
+<!ENTITY clearUrlsButton.accesskey "C">
+<!ENTITY substitutions "Substitutions">
 <!ENTITY inputString.label "Ersetzen">
+<!ENTITY inputString.accesskey "p">
+<!ENTITY outputString.label "with">
+<!ENTITY outputString.accesskey "w">
+<!ENTITY caseSensitive.label "Match case">
+<!ENTITY caseSensitive.accesskey "h">
+<!ENTITY addSubstitutionButton.label "Add">
+<!ENTITY addSubstitutionButton.accesskey "d">
+<!ENTITY moveUpSubstitutionButton.label "Move up">
+<!ENTITY moveUpSubstitutionButton.accesskey "M">
+<!ENTITY moveDownSubstitutionButton.label "Move down">
+<!ENTITY moveDownSubstitutionButton.accesskey "v">
+<!ENTITY editSubstitutionButton.label "Edit">
+<!ENTITY editSubstitutionButton.accesskey "i">
 <!ENTITY okEditSubstitutionButton.label "OK">
 <!ENTITY okEditSubstitutionButton.accesskey "O">
+<!ENTITY cancelEditSubstitutionButton.label "Cancel">
+<!ENTITY cancelEditSubstitutionButton.accesskey "n">
+<!ENTITY deleteSubstitutionButton.label "Delete">
+<!ENTITY deleteSubstitutionButton.accesskey "t">
+<!ENTITY clearSubstitutionsButton.label "Clear">
+<!ENTITY clearSubstitutionsButton.accesskey "r">
+<!ENTITY inputStringHeader "Replace">
+<!ENTITY inputTypeHeader "Type">
+<!ENTITY outputStringHeader "With">
+<!ENTITY caseSensitiveHeader "Match case">
+<!ENTITY html.label "Replace HTML">
+<!ENTITY html.accesskey "H">

@@ -31,19 +31,20 @@
 <!ENTITY replaceUrls "Замена адресов">
 <!ENTITY replaceUrls.p "Эта возможность по умолчанию отключена. При её включении замещения будут применяться и к адресам на странице (гиперссылкам, ссылкам на изображения и т.п.), изменяя таким образом её поведение. Пользуйтесь этой функцией с осторожностью. Не оказывает никакого эффекта на замещения в HTML, потому что тогда адреса могут изменяться в любом случае.">
 <!ENTITY newGui "Новые элементы меню и панели инструментов">
+<!ENTITY newGui.app "Firefox menu">
 <!ENTITY newGui.edit "Правка">
-<!ENTITY newGui.edit.replace "Заменить… (Shift+F2)">
-<!ENTITY newGui.edit.replace.d "Показывает панель замены.">
+<!ENTITY newGui.menu.replace "Replace... (Shift+F2)">
+<!ENTITY newGui.menu.replace.d "Shows the replace bar.">
 <!ENTITY newGui.tools "Инструменты">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.tools.foxreplace.replace "Замена по списку (F2)">
-<!ENTITY newGui.tools.foxreplace.replace.d "Применяет текущий список замещения.">
-<!ENTITY newGui.tools.foxreplace.autoReplace "Автозамена при загрузке страницы">
-<!ENTITY newGui.tools.foxreplace.autoReplace.d "Переключает этот параметр.">
-<!ENTITY newGui.tools.foxreplace.options "Настройки FoxReplace…">
-<!ENTITY newGui.tools.foxreplace.options.d "Открывает окно настройки FoxReplace.">
-<!ENTITY newGui.tools.foxreplace.help "Справка">
-<!ENTITY newGui.tools.foxreplace.help.d "Показывает эту страницу.">
+<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (F2)">
+<!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
+<!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
+<!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
+<!ENTITY newGui.menu.options "FoxReplace options...">
+<!ENTITY newGui.menu.options.d "Opens FoxReplace options window.">
+<!ENTITY newGui.menu.help "Help">
+<!ENTITY newGui.menu.help.d "Shows this page.">
 <!ENTITY newGui.toolbarButton "Кнопка панели инструментов">
 <!ENTITY newGui.toolbarButton.0 "Её нажатие применяет текущий список замещения.">
 <!ENTITY newGui.toolbarButton.1 "Аналогично пункту меню, описанному выше.">
