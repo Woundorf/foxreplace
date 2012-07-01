@@ -1,9 +1,9 @@
-<!ENTITY menuEditReplace.label "Vervangen…">
-<!ENTITY menuEditReplace.accesskey "e">
+<!ENTITY menuReplace.label "Vervangen…">
+<!ENTITY menuReplace.accesskey "e">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
-<!ENTITY menuContextFoxReplace.label "Vervangen met vervangingslijst (FoxReplace)">
-<!ENTITY menuContextFoxReplace.accesskey "l">
+<!ENTITY contextMenuFoxReplace.label "Vervangen met vervangingslijst (FoxReplace)">
+<!ENTITY contextMenuFoxReplace.accesskey "l">
 <!ENTITY toolbarButton.label "FoxReplace">
 <!ENTITY toolbarButton.tooltip "Vervangen met vervangingslijst">
 <!ENTITY listReplace.label "Vervangen met vervangingslijst">

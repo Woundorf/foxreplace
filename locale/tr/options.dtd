@@ -23,6 +23,14 @@
 <!ENTITY importFromUrlButton.accesskey "m">
 <!ENTITY exportButton.label "dosya ver">
 <!ENTITY exportButton.accesskey "x">
+<!ENTITY subscriptionGroupBoxCaption "Periodically update from URL">
+<!ENTITY subscriptionEnableCheckBox.label "Enable">
+<!ENTITY subscriptionEnableCheckBox.accesskey "b">
+<!ENTITY subscriptionStatus.label "Status:">
+<!ENTITY subscriptionUrl.label "URL">
+<!ENTITY subscriptionUrl.accesskey "R">
+<!ENTITY subscriptionPeriod.label "Period (minutes)">
+<!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "Otomatik sayfa yük üzerinde yerini">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
 <!ENTITY replaceUrls.label "Bu sayfa davranışlarını değiştirebilir (Uyarı: URL&apos;ler (link ve resim kaynakları değiştirin!)">

@@ -1,9 +1,9 @@
-<!ENTITY menuEditReplace.label "替换...">
-<!ENTITY menuEditReplace.accesskey "e">
+<!ENTITY menuReplace.label "替换...">
+<!ENTITY menuReplace.accesskey "e">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
-<!ENTITY menuContextFoxReplace.label "用替换列表进行替换(FoxReplace)">
-<!ENTITY menuContextFoxReplace.accesskey "I">
+<!ENTITY contextMenuFoxReplace.label "用替换列表进行替换 (FoxReplace)">
+<!ENTITY contextMenuFoxReplace.accesskey "l">
 <!ENTITY toolbarButton.label "FoxReplace">
 <!ENTITY toolbarButton.tooltip "用替换列表进行替换">
 <!ENTITY listReplace.label "用替换列表进行替换">

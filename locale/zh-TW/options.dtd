@@ -23,8 +23,10 @@
 <!ENTITY importFromUrlButton.accesskey "m">
 <!ENTITY exportButton.label "匯出">
 <!ENTITY exportButton.accesskey "x">
-<!ENTITY subscriptionCheckBox.label "從網址更新">
-<!ENTITY subscriptionCheckBox.accesskey "p">
+<!ENTITY subscriptionGroupBoxCaption "從網址定期更新">
+<!ENTITY subscriptionEnableCheckBox.label "啟用">
+<!ENTITY subscriptionEnableCheckBox.accesskey "b">
+<!ENTITY subscriptionStatus.label "狀態:">
 <!ENTITY subscriptionUrl.label "網址">
 <!ENTITY subscriptionUrl.accesskey "R">
 <!ENTITY subscriptionPeriod.label "週期 (分鐘)">

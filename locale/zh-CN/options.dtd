@@ -1,9 +1,9 @@
 <!ENTITY prefwindow.title "FoxReplace 选项">
 <!ENTITY mainPane.title "主要">
-<!ENTITY description "输入替换列表。这份名单是由替代群体，在每个小组都适用，如果任何组的URL匹配的地址加载页面。如果该组没有网址将适用于任何网页。按组的顺序检查。">
+<!ENTITY description "请输入替换列表。这份名单是由替换组组成，如果每个组URL匹配加载页面的地址的组都会被应用。如果该组没有网址将适用于任何网页。组的顺序检查是按顺序执行。">
 <!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "替换">
-<!ENTITY outputStringHeader "用">
+<!ENTITY outputStringHeader "为">
 <!ENTITY htmlHeader "HTML">
 <!ENTITY addButton.label "添加">
 <!ENTITY addButton.accesskey "A">
@@ -11,7 +11,7 @@
 <!ENTITY editButton.accesskey "E">
 <!ENTITY deleteButton.label "删除">
 <!ENTITY deleteButton.accesskey "D">
-<!ENTITY clearButton.label "高处">
+<!ENTITY clearButton.label "清除">
 <!ENTITY clearButton.accesskey "C">
 <!ENTITY moveUpButton.label "上移">
 <!ENTITY moveUpButton.accesskey "u">
@@ -23,13 +23,15 @@
 <!ENTITY importFromUrlButton.accesskey "m">
 <!ENTITY exportButton.label "导出">
 <!ENTITY exportButton.accesskey "x">
-<!ENTITY subscriptionCheckBox.label "从 URL 更新">
-<!ENTITY subscriptionCheckBox.accesskey "p">
+<!ENTITY subscriptionGroupBoxCaption "从 URL 定期更新">
+<!ENTITY subscriptionEnableCheckBox.label "启用">
+<!ENTITY subscriptionEnableCheckBox.accesskey "b">
+<!ENTITY subscriptionStatus.label "状态：">
 <!ENTITY subscriptionUrl.label "URL">
 <!ENTITY subscriptionUrl.accesskey "R">
-<!ENTITY subscriptionPeriod.label "周期(分钟)">
+<!ENTITY subscriptionPeriod.label "周期（分钟）">
 <!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "在网页加载时自动替换">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
-<!ENTITY replaceUrls.label "替换网址（链接和图片来源）（警告：这可能改变网页的运行！）">
+<!ENTITY replaceUrls.label "替换网址（链接和图片源）（警告：这可能改变页面的功能！）">
 <!ENTITY replaceUrls.accesskey "I">

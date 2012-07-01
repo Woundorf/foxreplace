@@ -3,4 +3,4 @@
 <!ENTITY append.accesskey "A">
 <!ENTITY overwrite.label "覆盖">
 <!ENTITY overwrite.accesskey "O">
-<!ENTITY question "你想追加替换名单或覆盖它？">
+<!ENTITY question "您想追加替换到列表还是想覆盖它？">

@@ -6,6 +6,7 @@ locale  foxreplace  de  locale/de/
 locale  foxreplace  en-US   locale/en-US/
 locale  foxreplace  fr  locale/fr/
 locale  foxreplace  ko-KR   locale/ko-KR/
+locale  foxreplace  lt  locale/lt/
 locale  foxreplace  nl  locale/nl/
 locale  foxreplace  pl  locale/pl/
 locale  foxreplace  pt-BR   locale/pt-BR/

@@ -1,4 +1,4 @@
-v0.13.0
+v0.13.0 (1-7-2012)
 * Subscription works from local files (URL file://...) (issue 25).
 * Updated RegExp link in help file (issue 28).
 * Added new XPaths to select text nodes (issues 35, 53).
@@ -10,6 +10,10 @@ v0.13.0
 * Status of subscription displayed in options window.
 * Fixed instantiation of XMLHttpRequest for import from URL.
 * Compatibility with Firefox 4 to 15.
+* New locales:
+  - lt (by Algimantas Margevičius)
+  - sv-SE (by Lakrits)
+  - zh-TW (by 林郁翔)
 
 v0.12.2 (10-8-2009)
 * Bugfix: the modules directory wasn't included in the XPI.

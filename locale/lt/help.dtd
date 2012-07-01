@@ -1,7 +1,7 @@
-<!ENTITY title "FoxReplace help">
+<!ENTITY title "FoxReplace žinynas">
 <!ENTITY h1 "FoxReplace help">
 <!ENTITY p "This extension allows you to replace text fragments (strings) in a page by other text fragments. The system is based on substitutions, where each substitution has an input text which has to be replaced (the &quot;Replace&quot; field) and an output text by which the first has to be replaced (the &quot;With&quot; field). There are additional options for the substitutions that are explained below. When a substitution is applied it's over the whole content of a page (you can't do partial substitutions at the moment).">
-<!ENTITY substitution "Substitution">
+<!ENTITY substitution "Keitimas">
 <!ENTITY substitution.p "It always has an input string and an output string. The output string can be empty (to remove text), but the input string must have at least one character. Optionally the substitution can be case-sensitive.">
 <!ENTITY substitution.inputString "Input string: the text string that will be replaced. It can't be empty. It can have of one of these 3 types:">
 <!ENTITY substitution.inputString.text "Text: it's interpreted as a character string without any particularities.">
@@ -43,8 +43,8 @@
 <!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
 <!ENTITY newGui.menu.options "FoxReplace options...">
 <!ENTITY newGui.menu.options.d "Opens FoxReplace options window.">
-<!ENTITY newGui.menu.help "Help">
-<!ENTITY newGui.menu.help.d "Shows this page.">
+<!ENTITY newGui.menu.help "Žinynas">
+<!ENTITY newGui.menu.help.d "Parodo šį puslapį.">
 <!ENTITY newGui.toolbarButton "Toolbar button">
 <!ENTITY newGui.toolbarButton.0 "Pressing it applies current substitution list.">
 <!ENTITY newGui.toolbarButton.1 "It has a menu at side like the FoxReplace above.">

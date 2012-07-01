@@ -31,19 +31,20 @@
 <!ENTITY replaceUrls "取代網址">
 <!ENTITY replaceUrls.p "此選項預設停用。如果啟用此選項，取代將作用於頁面上的網址 (連結、圖片網址...等)；這有可能改變網頁行為，請自負責任。此選項不作用於 HTML 取代。">
 <!ENTITY newGui "新選單和工具列元件">
+<!ENTITY newGui.app "Firefox 選單">
 <!ENTITY newGui.edit "編輯">
-<!ENTITY newGui.edit.replace "取代... (Shift+F2)">
-<!ENTITY newGui.edit.replace.d "顯示取代列。">
+<!ENTITY newGui.menu.replace "取代… (Shift+F2)">
+<!ENTITY newGui.menu.replace.d "顯示取代列。">
 <!ENTITY newGui.tools "工具">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.tools.foxreplace.replace "以取代列表執行取代 (F2)">
-<!ENTITY newGui.tools.foxreplace.replace.d "套用目前的取代列表">
-<!ENTITY newGui.tools.foxreplace.autoReplace "網頁載入時自動取代">
-<!ENTITY newGui.tools.foxreplace.autoReplace.d "切換這個選項。">
-<!ENTITY newGui.tools.foxreplace.options "FoxReplace 選項。">
-<!ENTITY newGui.tools.foxreplace.options.d "開啟 FoxReplace 選項視窗。">
-<!ENTITY newGui.tools.foxreplace.help "說明">
-<!ENTITY newGui.tools.foxreplace.help.d "顯示此頁面。">
+<!ENTITY newGui.menu.replaceWithList "以取代列表執行取代 (F2)">
+<!ENTITY newGui.menu.replaceWithList.d "套用目前的取代列表。">
+<!ENTITY newGui.menu.autoReplace "網頁載入時，自動取代">
+<!ENTITY newGui.menu.autoReplace.d "切換此選項。">
+<!ENTITY newGui.menu.options "FoxReplace 選項…">
+<!ENTITY newGui.menu.options.d "開啟 FoxReplace 選項視窗。">
+<!ENTITY newGui.menu.help "說明">
+<!ENTITY newGui.menu.help.d "顯示說明頁">
 <!ENTITY newGui.toolbarButton "工具列按鈕">
 <!ENTITY newGui.toolbarButton.0 "按下此按鈕，將以目前的取代列表執行取代。">
 <!ENTITY newGui.toolbarButton.1 "按鈕側邊有一個選單，該選單內容同上述工具中的 FoxReplace 的選單。">

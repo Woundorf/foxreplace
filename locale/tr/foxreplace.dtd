@@ -1,9 +1,9 @@
-<!ENTITY menuEditReplace.label "Değiştir...">
-<!ENTITY menuEditReplace.accesskey "e">
+<!ENTITY menuReplace.label "Replace...">
+<!ENTITY menuReplace.accesskey "e">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
-<!ENTITY menuContextFoxReplace.label "Yerine ikame listesi (FoxReplace) ile">
-<!ENTITY menuContextFoxReplace.accesskey "l">
+<!ENTITY contextMenuFoxReplace.label "Replace with substitution list (FoxReplace)">
+<!ENTITY contextMenuFoxReplace.accesskey "l">
 <!ENTITY toolbarButton.label "FoxReplace">
 <!ENTITY toolbarButton.tooltip "Yerine ikame listesi">
 <!ENTITY listReplace.label "Yerine ikame listesi">

@@ -17,11 +17,13 @@
                    em:optionsURL="chrome://foxreplace/content/options.xul">
     <em:contributor>Lutay Sergey (href substitution)</em:contributor>
     <em:contributor>Goofy (entitized help)</em:contributor>
-    <em:contributor>Yuf (ar)</em:contributor>
-    <em:contributor>AlleyKat (nick) / Finn S. Sørensen (real name), Mobleman (da)</em:contributor>
+<!--    <em:contributor>Yuf (ar)</em:contributor>-->
+    <em:contributor>AlleyKat (nick) / Finn S. Sørensen (real name) (da)</em:contributor>
+    <em:contributor>Mobleman (da)</em:contributor>
     <em:contributor>CosmicForce (de)</em:contributor>
     <em:contributor>Jojaba - BabelZilla (fr)</em:contributor>
     <em:contributor>용오름(Wtspout) (ko-KR)</em:contributor>
+    <em:contributor>Algimantas Margevičius (lt)</em:contributor>
     <em:contributor>markh van BabelZilla.org (nl)</em:contributor>
     <em:contributor>Wacław Jacek (pl)</em:contributor>
     <em:contributor>Alberto Eidh (pt-BR)</em:contributor>
