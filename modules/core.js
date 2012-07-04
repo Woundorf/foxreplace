@@ -96,7 +96,7 @@ Substitution.fromXml = function(aXml, aEscape) {
  */
 Substitution.fromJSON = function(aSubstitutionJSON) {
   let inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(aSubstitutionJSON.inputType);
-  return new Substitution(aSubstitutionJSON.input, aSubstitutionJSON.output, aSubstitutionJSON.caseSensitive, aSubstitutionJSON.inputType);
+  return new Substitution(aSubstitutionJSON.input, aSubstitutionJSON.output, aSubstitutionJSON.caseSensitive, inputType);
 };
 
 Substitution.prototype = {
