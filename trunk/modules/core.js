@@ -235,19 +235,24 @@ SubstitutionGroup.prototype = {
  * backslash-escaped.
  */
 SubstitutionGroup.fromXml = function(aXml, aEscape) {
-  var urls = [];
-  let urlsJxon = aXml.urls;
-  if (urlsJxon == true) urlsJxon = [];  // special case when there are no urls
-  if (!Array.isArray(urlsJxon)) urlsJxon = [urlsJxon];
-  for each (let url in urlsJxon) urls.push(url.url);
+  let urlsJxon;
 
-  var substitutions = [];
+  if (!aXml.urls.url) urlsJxon = [];  // special case when there are no urls
+  else urlsJxon = aXml.urls.url;
+
+  if (!Array.isArray(urlsJxon)) urlsJxon = [urlsJxon];  // special case when there is one url
+
+  let urls = [];
+  for each (let url in urlsJxon) urls.push(url);
+
   let substitutionsJxon;
 
-  if (aXml.substitutions == true) substitutionsJxon = []; // special case when there are no substitutions (should not happen)
+  if (!aXml.substitutions.substitution) substitutionsJxon = []; // special case when there are no substitutions (should not happen)
   else substitutionsJxon = aXml.substitutions.substitution;
 
-  if (!Array.isArray(substitutionsJxon)) substitutionsJxon = [substitutionsJxon];
+  if (!Array.isArray(substitutionsJxon)) substitutionsJxon = [substitutionsJxon]; // special case when there is one substitution
+
+  let substitutions = [];
 
   var errors = "";
   for each (let substitution in substitutionsJxon) {
@@ -287,18 +292,18 @@ function fxrSubstitutionListFromXml(aListXml) {
 
   if (listJxon.substitutionlist) {  // necessary when receiving empty string
     var escape = listJxon.substitutionlist["@version"] == "0.10";
-    //prompts.alert("version", listJxon.substitutionlist["@version"]);
 
-    let groups = listJxon.substitutionlist.group;
-    if (groups === undefined) groups = [];  // special case when there are no groups
-    if (!Array.isArray(groups)) groups = [groups];
+    let groups;
+
+    if (!listJxon.substitutionlist.group) groups = [];  // special case when there are no groups
+    else groups = listJxon.substitutionlist.group;
+
+    if (!Array.isArray(groups)) groups = [groups];  // special case when there is one group
 
     for each (let group in groups) {
       substitutionList.push(SubstitutionGroup.fromXml(group, escape));
     }
   }
-
-  //prompts.alert("json", JSON.stringify(substitutionListToJSON(substitutionList)));
 
   return substitutionList;
 }
