@@ -1,3 +1,6 @@
+v0.13.1
+* Fixed bug in loading input type from JSON (issue 70).
+
 v0.13.0 (1-7-2012)
 * Subscription works from local files (URL file://...) (issue 25).
 * Updated RegExp link in help file (issue 28).
