@@ -1,5 +1,5 @@
-v0.13.1
-* Fixed bug in loading input type from JSON (issue 70).
+v0.13.1 (5-7-2012)
+* Fixed bug in loading input type from JSON (a.k.a. "undefined" error) (issue 70).
 * Fixed bug in importing from XML when there was more than one URL (issue 71).
 
 v0.13.0 (1-7-2012)
