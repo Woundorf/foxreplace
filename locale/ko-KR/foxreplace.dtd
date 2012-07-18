@@ -1,8 +1,8 @@
-<!ENTITY menuReplace.label "Replace...">
+<!ENTITY menuReplace.label "대체…">
 <!ENTITY menuReplace.accesskey "e">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
-<!ENTITY contextMenuFoxReplace.label "Replace with substitution list (FoxReplace)">
+<!ENTITY contextMenuFoxReplace.label "대체어 목록으로 대체 (FoxReplace)">
 <!ENTITY contextMenuFoxReplace.accesskey "l">
 <!ENTITY toolbarButton.label "FoxReplace">
 <!ENTITY toolbarButton.tooltip "대체어 목록으로 대체">
