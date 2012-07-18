@@ -1,3 +1,6 @@
+v0.13.2
+* Fixed bug of auto-replace not working in OS X (issue 80).
+
 v0.13.1 (5-7-2012)
 * Fixed bug in loading input type from JSON (a.k.a. "undefined" error) (issue 70).
 * Fixed bug in importing from XML when there was more than one URL (issue 71).
