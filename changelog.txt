@@ -1,5 +1,6 @@
-v0.13.2
+v0.13.2 (18-7-2012)
 * Fixed bug of auto-replace not working in OS X (issue 80).
+* Compatibility with Firefox up to 17.0a1.
 
 v0.13.1 (5-7-2012)
 * Fixed bug in loading input type from JSON (a.k.a. "undefined" error) (issue 70).
