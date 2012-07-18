@@ -36,5 +36,6 @@
     <em:contributor>YFdyh000 (yfdyh000@gmail.com) (zh-CN)</em:contributor>
     <em:contributor>林郁翔 (zh-TW)</em:contributor>
     <em:targetApplication RDF:resource="rdf:#$mVUNH1"/>
+    <em:type>2</em:type>
   </RDF:Description>
 </RDF:RDF>
