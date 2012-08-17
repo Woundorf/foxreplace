@@ -1,56 +1,56 @@
-<!ENTITY title "FoxReplace help">
-<!ENTITY h1 "FoxReplace help">
-<!ENTITY p "This extension allows you to replace text fragments (strings) in a page by other text fragments. The system is based on substitutions, where each substitution has an input text which has to be replaced (the &quot;Replace&quot; field) and an output text by which the first has to be replaced (the &quot;With&quot; field). There are additional options for the substitutions that are explained below. When a substitution is applied it's over the whole content of a page (you can't do partial substitutions at the moment).">
-<!ENTITY substitution "Substitution">
-<!ENTITY substitution.p "It always has an input string and an output string. The output string can be empty (to remove text), but the input string must have at least one character. Optionally the substitution can be case-sensitive.">
-<!ENTITY substitution.inputString "Input string: the text string that will be replaced. It can't be empty. It can have of one of these 3 types:">
-<!ENTITY substitution.inputString.text "Text: it's interpreted as a character string without any particularities.">
-<!ENTITY substitution.inputString.wholeWords "Whole words: it's interpreted as one or more whole words. For example, &quot;active&quot; wouldn't match &quot;interactive&quot; (it would match if it was normal text).">
-<!ENTITY substitution.inputString.regExp.0 "Regular expression: it's interpreted as a">
+<!ENTITY title "Ayuda de FoxReplace">
+<!ENTITY h1 "Ayuda de FoxReplace">
+<!ENTITY p "Esta extensión le permite reemplazar fragmentos de texto (cadenas) en una página con fragmentos de texto. El sistema se basa en las sustituciones, donde cada sustitución tiene un texto de entrada que tiene que ser reemplazado (el &quot;Replace&quot; campo) y un texto de salida por la que el primero tiene que ser reemplazado (el &quot;With&quot; campo). Hay opciones adicionales para las sustituciones que se explican a continuación. Cuando una sustitución se aplica se acabó todo el contenido de una página (no se puede hacer sustituciones parciales en el momento).">
+<!ENTITY substitution "Sustitucion">
+<!ENTITY substitution.p "Siempre ha sido una cadena de entrada y una cadena de salida. La cadena de salida puede estar vacío (para eliminar el texto), pero la cadena de entrada debe tener al menos un carácter. Opcionalmente, la sustitución puede ser entre mayúsculas y minúsculas.">
+<!ENTITY substitution.inputString "La cadena de entrada: la cadena de texto que se reemplazará. No puede estar vacío. Puede tener de uno de estos 3 tipos:">
+<!ENTITY substitution.inputString.text "Texto: se interpreta como una cadena de caracteres sin ningún tipo de particularidades.">
+<!ENTITY substitution.inputString.wholeWords "Sólo palabras completas: se interpreta como una o varias palabras completas. Por ejemplo, &quot;active&quot; sin coincidir &quot;interactive&quot; (se coincida si se tratara de texto normal).">
+<!ENTITY substitution.inputString.regExp.0 "Expresion regular: se interpreta como un">
 <!ENTITY regExpLink "https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/RegExp#Special_characters_in_regular_expressions">
-<!ENTITY substitution.inputString.regExp.1 "regular expression">
-<!ENTITY substitution.inputString.regExp.2 ". If it isn't valid, a syntax error will be shown.">
-<!ENTITY substitution.outputString "Output string: the text string that will replace the input. It can have the following special patterns:">
-<!ENTITY substitution.table.summary "Special patterns for the output string">
-<!ENTITY substitution.table.0 "Inserts a &quot;$&quot;.">
-<!ENTITY substitution.table.1 "Inserts the input string.">
-<!ENTITY substitution.table.2 "Inserts the text preceding the input string inside the same block.">
-<!ENTITY substitution.table.3 "Inserts the text following the input string inside the same block.">
-<!ENTITY substitution.table.4.0 "If the input string is a regular expression, and">
-<!ENTITY substitution.table.4.1 "a decimal integer number between 1 and 99 (included), inserts the">
-<!ENTITY substitution.table.4.2 "th found substring.">
-<!ENTITY substitutionList "Substitution list">
-<!ENTITY substitutionList.p "FoxReplace keeps a substitution list that you can define and modify at any moment from the FoxReplace options window. You can apply the substitution list when you want by pressing the F2 key or by pushing the toolbar button or activating a menu option. When you do, substitutions in the list will be applied in the order in which they appear. You can apply the substitution list as many times as you want over the same page. Substitutions are done over the current content of the page, i.e. if you apply the substitution list a second time, it will be over the result of the first. In this substitution list there aren't the substitutions directly, but there are substitution groups, where a list of addresses (URLs) is associated with a list of substitutions which are applied to pages whose address matches one of the URLs in the list.">
-<!ENTITY substitutionGroup "Substitution group">
-<!ENTITY substitutionGroup.p0 "It's formed by an URL list and a substitution list. The substitutions are applied in the order they appear, and there must be one at least. With the URL list you can define to which pages the substitutions are applied. If the list is empty, the substitutions are applied to any page. You can add URLs and then the substitutions are applied only if the page address matches one of the URLs. Finally, you can also add exclusion URLs which have the opposite effect, the substitutions aren't applied if the page address matches one of them. So, if the URL list isn't empty, the substitutions are applied if the page address doesn't match any of the exclusion URLs and matches one of the normal URLs. The URL of a page is considered to match an URL of the group if the URL of the group is part of the URL of the page.">
-<!ENTITY substitutionGroup.p1 "The exclusion URLs are the ones that start with a hyphen (&quot;-&quot;), and they are displayed in red; the rest are normal URLs. You may use special characters &quot;*&quot; to match any 0 or more characters and &quot;|&quot; to match the beginning or the end of the URL. If you want to define an URL that starts with a hyphen (i.e. &quot;-abc&quot;) and it isn't an exclusion URL, you may use the equivalent form &quot;|*-abc&quot;.">
-<!ENTITY replaceHtml "Replace HTML">
-<!ENTITY replaceHtml.p "Substitutions are usually applied only to the text, but there's also the option of doing it to the HTML code of the page. This allows to modify the format or the page structure. You can set or unset this option for every group in the substitution list.">
-<!ENTITY autoReplace "Auto-replace on page load">
-<!ENTITY autoReplace.p "This option can be activated or deactivated. When it's on, the substitution list is applied automatically when a page is loaded, applying the substitutions of the groups with a matching URL. This way the extension can work as a filter for the pages you want.">
-<!ENTITY replaceUrls "Replace URLs">
-<!ENTITY replaceUrls.p "This option is off by default. It it's on, substitutions are also applied to the URLs in the page (links, image sources, etc.), so it may change the behaviour of the page. Use it under your own responsibility. This has no effect in HTML substitutions, because then URLs can be modified always.">
-<!ENTITY newGui "New menu and toolbar elements">
-<!ENTITY newGui.app "Firefox menu">
-<!ENTITY newGui.edit "Edit">
-<!ENTITY newGui.menu.replace "Replace... (Shift+F2)">
-<!ENTITY newGui.menu.replace.d "Shows the replace bar.">
-<!ENTITY newGui.tools "Tools">
+<!ENTITY substitution.inputString.regExp.1 "expresión regular">
+<!ENTITY substitution.inputString.regExp.2 ". Si no es válida, un error de sintaxis se muestra.">
+<!ENTITY substitution.outputString "Cadena de salida: la cadena de texto que reemplazará a la entrada. Puede tener los patrones especiales siguientes:">
+<!ENTITY substitution.table.summary "Patrones especiales para la cadena de salida">
+<!ENTITY substitution.table.0 "Inserta un &quot;$&quot;.">
+<!ENTITY substitution.table.1 "Inserta la cadena de entrada.">
+<!ENTITY substitution.table.2 "Inserta el texto que precede a la cadena de entrada en el interior del mismo bloque.">
+<!ENTITY substitution.table.3 "Inserta el texto después de la cadena de entrada en el interior del mismo bloque.">
+<!ENTITY substitution.table.4.0 "Si la cadena de entrada es una expresión regular, y">
+<!ENTITY substitution.table.4.1 "un número decimal entero entre 1 y 99 (incluido), inserta el">
+<!ENTITY substitution.table.4.2 "th subcadena encontrada.">
+<!ENTITY substitutionList "Lista de sustitucion">
+<!ENTITY substitutionList.p "FoxReplace mantiene una lista de sustitución que puede definir y modificar en cualquier momento desde la ventana de opciones FoxReplace. Usted puede solicitar la lista de suplentes cuando quiera pulsando la tecla F2 o pulsando el botón de barra de herramientas o la activación de una opción de menú. Cuando lo haga, las sustituciones en la lista se aplican en el orden en que aparecen. Usted puede solicitar la lista de suplentes tantas veces como desee durante la misma página. Las sustituciones se hacen sobre el contenido actual de la página, es decir, si se aplica la lista de suplentes por segunda vez, será el resultado de la primera. En esta lista de sustitución no son las sustituciones directamente, pero hay grupos de sustitución, donde se asocia una lista de direcciones (URL) con una lista de sustituciones que se aplican a páginas cuya dirección coincide con una de las URL en la lista.">
+<!ENTITY substitutionGroup "Grupo de sustitucion">
+<!ENTITY substitutionGroup.p0 "Está formado por una lista de direcciones URL y una lista de sustitución. Las sustituciones se aplican en el orden en que aparecen, y debe haber al menos uno. Con la lista de direcciones URL se puede definir a las páginas que las sustituciones se aplican. Si la lista está vacía, las sustituciones se aplican a cualquier página. Usted puede agregar las direcciones URL y las sustituciones sólo se aplican si la dirección de la página coincide con una de las direcciones URL. Por último, también puede agregar las direcciones URL de exclusión que tienen el efecto contrario, las sustituciones no se aplican si la dirección de la página coincide con uno de ellos. Por lo tanto, si la lista de direcciones URL no está vacío, las sustituciones se aplican si la dirección de la página no coincide con ninguna de las direcciones URL de exclusión y coincide con una de las direcciones URL normal. La dirección URL de una página se considera para que coincida con una dirección URL del grupo si la dirección del grupo es parte de la URL de la página.">
+<!ENTITY substitutionGroup.p1 "Las direcciones URL de exclusión son las que comienzan con un guión(&quot;-&quot;), y se muestran en rojo; el resto son las URL normales. Puedes usar caracteres especiales&quot;*&quot; para coincidir cualquier 0 o mas caracteres y &quot;|&quot; para que coincida con el comienzo o el final de la URL. Si desea definir una dirección URL que comienza con un guión (i.e. &quot;-abc&quot;) y no es una dirección URL de la exclusión, puede usar la forma equivalente &quot;|*-abc&quot;.">
+<!ENTITY replaceHtml "Reemplazar HTML">
+<!ENTITY replaceHtml.p "Las sustituciones se suele aplicar sólo al texto, pero también hay la opción de hacerlo en el código HTML de la página. Esto permite modificar el formato o la estructura de la página. Puede establecer o eliminar esta opción para cada grupo en la lista de suplentes.">
+<!ENTITY autoReplace "Auto reemplazar en la pagina cargada">
+<!ENTITY autoReplace.p "Esta opción puede ser activada o desactivada. Cuando está encendido, la lista de sustitución se aplica automáticamente cuando se carga una página, la aplicación de las sustituciones de los grupos con una dirección URL correspondiente. De esta manera la extensión puede funcionar como un filtro para las páginas que desee.">
+<!ENTITY replaceUrls "Reemplazar URLs">
+<!ENTITY replaceUrls.p "Esta opción está desactivada por defecto. Se está encendido, las sustituciones se aplica también a las direcciones URL de la página (enlaces, fuentes de imágenes, etc), por lo que puede cambiar el comportamiento de la página. Úselo bajo su propia responsabilidad. Esto no tiene efecto en la sustitución de HTML, porque entonces las direcciones URL se puede modificar siempre.">
+<!ENTITY newGui "Menu nuevo y barra de herramientas de elementos">
+<!ENTITY newGui.app "Menu Firefox">
+<!ENTITY newGui.edit "Editar">
+<!ENTITY newGui.menu.replace "Reemplazar... (Mayus+F2)">
+<!ENTITY newGui.menu.replace.d "Mostrar la barra de reemplazo">
+<!ENTITY newGui.tools "Herramientas">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (F2)">
-<!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
-<!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
-<!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
-<!ENTITY newGui.menu.options "FoxReplace options...">
-<!ENTITY newGui.menu.options.d "Opens FoxReplace options window.">
-<!ENTITY newGui.menu.help "Help">
-<!ENTITY newGui.menu.help.d "Shows this page.">
-<!ENTITY newGui.toolbarButton "Toolbar button">
-<!ENTITY newGui.toolbarButton.0 "Pressing it applies current substitution list.">
-<!ENTITY newGui.toolbarButton.1 "It has a menu at side like the FoxReplace above.">
-<!ENTITY newGui.contextMenu "Context menu">
-<!ENTITY newGui.contextMenu.replace "Replace with substitution list (FoxReplace) (F2)">
-<!ENTITY newGui.contextMenu.replace.d "Applies current substitution list.">
-<!ENTITY newGui.replaceBar "Replace bar">
-<!ENTITY newGui.replaceBar.0 "Appears below the find bar.">
-<!ENTITY newGui.replaceBar.1 "Lets you define a substitution and apply it instantly.">
+<!ENTITY newGui.menu.replaceWithList "Reemplazar con la lista de sustitucion (F2)">
+<!ENTITY newGui.menu.replaceWithList.d "Se aplica la sustitución de la lista actual.">
+<!ENTITY newGui.menu.autoReplace "Auto reemplazar en la pagina cargada">
+<!ENTITY newGui.menu.autoReplace.d "Alternar esta opción.">
+<!ENTITY newGui.menu.options "Opciones de FoxReplace...">
+<!ENTITY newGui.menu.options.d "Abrir ventana de opciones de FoxReplace.">
+<!ENTITY newGui.menu.help "Ayuda">
+<!ENTITY newGui.menu.help.d "Mostrar esta pagina.">
+<!ENTITY newGui.toolbarButton "Boton de barra de herramientas">
+<!ENTITY newGui.toolbarButton.0 "Al pulsarlo se aplica la lista de sustitución actual.">
+<!ENTITY newGui.toolbarButton.1 "eso tiene un menu al lado como el FoxReplace encima.">
+<!ENTITY newGui.contextMenu "Menu contextual">
+<!ENTITY newGui.contextMenu.replace "Reemplazar con la lista de sustitucion (FoxReplace) (F2)">
+<!ENTITY newGui.contextMenu.replace.d "Se aplica la sustitución de la lista actual.">
+<!ENTITY newGui.replaceBar "Reemplazar barra">
+<!ENTITY newGui.replaceBar.0 "Aparece debajo de la barra de búsqueda.">
+<!ENTITY newGui.replaceBar.1 "Permitir definir y aplicar un cambio al instante.">
