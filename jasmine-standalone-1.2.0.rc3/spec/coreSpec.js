@@ -286,6 +286,30 @@ describe("Substitution", function() {
 
   });
 
+  describe("escaped characters", function() {
+
+    it("should interpret '\\\\' as '\\'", function() {
+      var substitution = new Substitution("\\\\", "backslash");
+      expect(substitution.replace("\\\\")).toEqual("backslashbackslash");
+    });
+
+    it("should interpret '\\n' as newline", function() {
+      var substitution = new Substitution("\\n", "newline");
+      expect(substitution.replace("\\n\n\\n")).toEqual("\\nnewline\\n");
+    });
+
+    it("should interpret '\\r' as carriage return", function() {
+      var substitution = new Substitution("\\r", "return");
+      expect(substitution.replace("\\r\r\\r")).toEqual("\\rreturn\\r");
+    });
+
+    it("should interpret '\\t' as tab", function() {
+      var substitution = new Substitution("\\t", "tab");
+      expect(substitution.replace("\\t\t\\t")).toEqual("\\ttab\\t");
+    });
+
+  });
+
 });
 
 describe("SubstitutionGroup", function() {
