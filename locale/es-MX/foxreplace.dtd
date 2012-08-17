@@ -1,27 +1,27 @@
-<!ENTITY menuReplace.label "Replace...">
+<!ENTITY menuReplace.label "Reemplazar...">
 <!ENTITY menuReplace.accesskey "e">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
-<!ENTITY contextMenuFoxReplace.label "Replace with substitution list (FoxReplace)">
+<!ENTITY contextMenuFoxReplace.label "Reemplazar con lista de sustitucion(FoxReplace)">
 <!ENTITY contextMenuFoxReplace.accesskey "l">
 <!ENTITY toolbarButton.label "FoxReplace">
-<!ENTITY toolbarButton.tooltip "Replace with substitution list">
-<!ENTITY listReplace.label "Replace with substitution list">
+<!ENTITY toolbarButton.tooltip "Reemplazar con lista de sustitucion">
+<!ENTITY listReplace.label "Reemplazar con lista de sustitución">
 <!ENTITY listReplace.accesskey "R">
-<!ENTITY autoReplaceOnLoad.label "Auto-replace on page load">
+<!ENTITY autoReplaceOnLoad.label "Auto-reemplazar en la pagina cargada">
 <!ENTITY autoReplaceOnLoad.accesskey "A">
-<!ENTITY options.label "FoxReplace options...">
+<!ENTITY options.label "Opciones de FoxReplace">
 <!ENTITY options.accesskey "o">
-<!ENTITY help.label "Help">
+<!ENTITY help.label "Ayuda">
 <!ENTITY help.accesskey "H">
-<!ENTITY replaceBarClose "Close replace bar">
-<!ENTITY replaceBarInputString.label "Replace">
+<!ENTITY replaceBarClose "Cerrar barra de reemplazo">
+<!ENTITY replaceBarInputString.label "Reemplazar">
 <!ENTITY replaceBarInputString.accesskey "R">
-<!ENTITY replaceBarOutputString.label "with">
+<!ENTITY replaceBarOutputString.label "con">
 <!ENTITY replaceBarOutputString.accesskey "w">
-<!ENTITY replaceBarCaseSensitive.label "Match case">
+<!ENTITY replaceBarCaseSensitive.label "Corresponder a mayusculas minusculas">
 <!ENTITY replaceBarCaseSensitive.accesskey "M">
 <!ENTITY replaceBarHtml.label "HTML">
 <!ENTITY replaceBarHtml.accesskey "H">
-<!ENTITY replaceBarReplace.label "Replace">
+<!ENTITY replaceBarReplace.label "Reemplazar">
 <!ENTITY replaceBarReplace.accesskey "e">
