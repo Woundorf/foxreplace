@@ -36,6 +36,7 @@
 
 Components.utils.import("resource://foxreplace/jxon.js");
 Components.utils.import("resource://foxreplace/services.js");
+Components.utils.import("resource://foxreplace/xregexp-all-min.js");
 
 /**
  * Definitions of substitution and substitution group.
@@ -58,10 +59,9 @@ function Substitution(aInput, aOutput, aCaseSensitive, aInputType) {
   switch (this.inputType) {
     case this.INPUT_WHOLE_WORDS:
       var unescapedInput = fxrUnescape(aInput);
-      var suffix = fxrIsWordChar(unescapedInput.charAt(unescapedInput.length - 1)) ? this.WW_REGEXP_WORD_END
-                                                                                   : this.WW_REGEXP_NONWORD_END;
-      this._regExp = new RegExp(fxrStringToUnicode(unescapedInput) + suffix, aCaseSensitive ? "g" : "gi");
-      this._firstCharIsWordChar = fxrIsWordChar(unescapedInput.charAt(0));
+      var suffix = wordEndRegExpSource(unescapedInput.charAt(unescapedInput.length - 1));
+      this._regExp = new XRegExp(fxrStringToUnicode(unescapedInput) + suffix, aCaseSensitive ? "g" : "gi");
+      this._firstCharCategory = charCategory(unescapedInput.charAt(0));
       break;
     case this.INPUT_REG_EXP:
       this._regExp = new RegExp(aInput, aCaseSensitive ? "g" : "gi");
@@ -110,9 +110,10 @@ Substitution.prototype = {
       case this.INPUT_TEXT:
         return aString.replace(fxrUnescape(this.input), fxrUnescape(this.output), this.caseSensitive ? "g" : "gi");
       case this.INPUT_WHOLE_WORDS:
+        this._regExp.lastIndex = 0; // necessary according to http://stackoverflow.com/questions/4950463/regex-in-javascript-fails-every-other-time-with-identical-input
         var self = this;
         function replaceWholeWord(aWord, aIndex, aString) {
-          if (aIndex == 0 || self._firstCharIsWordChar != fxrIsWordChar(aString.charAt(aIndex - 1))) {
+          if (aIndex == 0 || self._firstCharCategory != charCategory(aString.charAt(aIndex - 1))) {
             var output = fxrUnescape(self.output);
             var re = /\$[\$\&\`\']/g;
             var fragments = output.split(re);
@@ -133,7 +134,9 @@ Substitution.prototype = {
           else return aWord;
         }
         return aString.replace(this._regExp, replaceWholeWord);
-      case this.INPUT_REG_EXP: return aString.replace(this._regExp, fxrUnescape(this.output));
+      case this.INPUT_REG_EXP:
+        this._regExp.lastIndex = 0; // necessary according to http://stackoverflow.com/questions/4950463/regex-in-javascript-fails-every-other-time-with-identical-input
+        return aString.replace(this._regExp, fxrUnescape(this.output));
     }
   },
 
@@ -157,10 +160,6 @@ Substitution.prototype.INPUT_TEXT = 0;
 Substitution.prototype.INPUT_WHOLE_WORDS = 1;
 Substitution.prototype.INPUT_REG_EXP = 2;
 Substitution.prototype.INPUT_TYPE_STRINGS = ["text", "wholewords", "regexp"];
-Substitution.prototype.WW_REGEXP_WORD_CHAR = /[0-9A-Z_a-z\xC0-\xD6\xD8-\xF6\xF8-\u02AF\u0386-\u03CE\u03D8-\u03EF\u03F3\u03F7\u03F8\u03FA\u03FB\u0400-\u0481\u048A-\u0513]/;
-//                                                          <- Latin + IPA extensions --><------------------- Greek + Coptic -------------------><------- Cyrillic ------->
-Substitution.prototype.WW_REGEXP_WORD_END = "(?!" + Substitution.prototype.WW_REGEXP_WORD_CHAR.source + ")";
-Substitution.prototype.WW_REGEXP_NONWORD_END = "(?![^" + Substitution.prototype.WW_REGEXP_WORD_CHAR.source.slice(1) + ")";
 
 /**
  * Substitution group, including an URL list and a substitution list. If aHtml is true, substitutions are done in HTML.
@@ -361,10 +360,39 @@ function fxrUnescape(aString) {
 }
 
 /**
- * Returns true if aChar is a word char and false otherwise.
+ * Char categories.
  */
-function fxrIsWordChar(aChar) {
-  return Substitution.prototype.WW_REGEXP_WORD_CHAR.test(aChar);
+const WORD_CHAR = 0;
+const NON_WORD_CHAR = 1;
+const SEPARATOR_CHAR = 2;
+
+/**
+ * Regular expression sources for testing char categories.
+ */
+const WORD_CHAR_REGEXP_SOURCE = "[\\p{Letter}\\p{Mark}\\p{Number}_]";
+const SEPARATOR_CHAR_REGEXP_SOURCE = "[\\s\\p{Separator}]";
+const NON_WORD_CHAR_REGEXP_SOURCE = "[^" + WORD_CHAR_REGEXP_SOURCE.slice(1, -1) + SEPARATOR_CHAR_REGEXP_SOURCE.slice(1, -1) + "]";
+
+/**
+ * Regular expression sources for testing "word" ends.
+ */
+const WORD_END_REGEXP_SOURCES = [
+  "(?!" + WORD_CHAR_REGEXP_SOURCE + ")",      // word end
+  "(?!" + NON_WORD_CHAR_REGEXP_SOURCE + ")",  // non-word "word" end
+  "(?!" + SEPARATOR_CHAR_REGEXP_SOURCE + ")"  // separator "word" end
+];
+
+/**
+ * Returns the category of aChar.
+ */
+function charCategory(aChar) {
+  if (XRegExp.cache(WORD_CHAR_REGEXP_SOURCE).test(aChar)) return WORD_CHAR;
+  else if (XRegExp.cache(NON_WORD_CHAR_REGEXP_SOURCE).test(aChar)) return NON_WORD_CHAR;
+  else return SEPARATOR_CHAR;
+}
+
+function wordEndRegExpSource(aChar) {
+  return WORD_END_REGEXP_SOURCES[charCategory(aChar)];
 }
 
 /**
