@@ -157,9 +157,10 @@ Substitution.prototype.INPUT_REG_EXP = 2;
 Substitution.prototype.INPUT_TYPE_STRINGS = ["text", "wholewords", "regexp"];
 
 /**
- * Substitution group, including an URL list and a substitution list. If aHtml is true, substitutions are done in HTML.
+ * Substitution group, including a name, an URL list and a substitution list. If aHtml is true, substitutions are done in HTML.
  */
-function SubstitutionGroup(aUrls, aSubstitutions, aHtml) {
+function SubstitutionGroup(aName, aUrls, aSubstitutions, aHtml) {
+  this.name = aName || "";
   this.urls = aUrls || [];
   this.substitutions = aSubstitutions || [];
   this.html = Boolean(aHtml);
@@ -217,6 +218,7 @@ SubstitutionGroup.prototype = {
    */
   toJSON: function() {
     return {
+      name: this.name,
       urls: this.urls,
       substitutions: this.substitutions,
       html: this.html
@@ -261,7 +263,7 @@ SubstitutionGroup.fromXml = function(aXml) {
 
   if (errors) prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlGroupErrorText") + "\n" + errors);
 
-  return new SubstitutionGroup(urls, substitutions, html);
+  return new SubstitutionGroup("", urls, substitutions, html);
 };
 
 /**
@@ -272,7 +274,7 @@ SubstitutionGroup.fromJSON = function(aGroupJSON) {
 
   for each (let substitutionJSON in aGroupJSON.substitutions) substitutions.push(Substitution.fromJSON(substitutionJSON));
 
-  return new SubstitutionGroup(aGroupJSON.urls, substitutions, aGroupJSON.html);
+  return new SubstitutionGroup(aGroupJSON.name, aGroupJSON.urls, substitutions, aGroupJSON.html);
 };
 
 /**
@@ -311,7 +313,7 @@ function fxrIsExclusionUrl(aUrl) {
  */
 function substitutionListToJSON(aSubstitutionList) {
   return {
-    version: "0.13",
+    version: "0.14",
     groups: aSubstitutionList
   };
 }

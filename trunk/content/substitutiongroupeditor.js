@@ -559,7 +559,7 @@ var foxreplaceSubstitutionGroupEditor = {
 
     var html = this._htmlCheckBox.checked;
 
-    var group = new this.core.SubstitutionGroup(urls, substitutions, html);
+    var group = new this.core.SubstitutionGroup("", urls, substitutions, html);
 
     window.arguments[0].out = { group: group };
 

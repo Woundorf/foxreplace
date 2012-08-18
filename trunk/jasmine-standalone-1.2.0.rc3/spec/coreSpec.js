@@ -323,7 +323,7 @@ describe("SubstitutionGroup", function() {
 
     it("should work with one URL", function() {
       var urls = ["www.example.com"];
-      var group = new SubstitutionGroup(urls);
+      var group = new SubstitutionGroup("", urls);
       expect(group.matches("www.example.com")).toBe(true);
       expect(group.matches("http://www.example.com/")).toBe(true);
       expect(group.matches("http://www.example.com/foo")).toBe(true);
@@ -332,7 +332,7 @@ describe("SubstitutionGroup", function() {
 
     it("should work with more than one URL", function() {
       var urls = ["example.com", "foo.net"];
-      var group = new SubstitutionGroup(urls);
+      var group = new SubstitutionGroup("", urls);
       expect(group.matches("http://www.example.com/")).toBe(true);
       expect(group.matches("http://foo.net/")).toBe(true);
       expect(group.matches("http://bar.org/")).toBe(false);
@@ -340,7 +340,7 @@ describe("SubstitutionGroup", function() {
 
     it("should work with wildcards", function() {
       var urls = ["http://*.example.com", "http*://foo.*/fu*.html", "http://**.bar.org"];
-      var group = new SubstitutionGroup(urls);
+      var group = new SubstitutionGroup("", urls);
       expect(group.matches("http://www.example.com/")).toBe(true);
       expect(group.matches("http://ex.example.com/")).toBe(true);
       expect(group.matches("http://example.com/")).toBe(false);
@@ -354,13 +354,13 @@ describe("SubstitutionGroup", function() {
 
     it("should work with special characters", function() {
       var urls = ["el-guió.cat/falç?v=%4Fg+42&x=_26"];
-      var group = new SubstitutionGroup(urls);
+      var group = new SubstitutionGroup("", urls);
       expect(group.matches("http://www.el-guió.cat/falç?v=%4Fg+42&x=_26")).toBe(true);
     });
 
     it("should work with anchors", function() {
       var urls = ["|ftp://www.example1.com/", "ftp://www.example2.com/|", "|ftp://www.example3.com/|"];
-      var group = new SubstitutionGroup(urls);
+      var group = new SubstitutionGroup("", urls);
       expect(group.matches("ftp://www.example1.com/")).toBe(true);
       expect(group.matches("ftp://www.example1.com/foo")).toBe(true);
       expect(group.matches("sftp://www.example1.com/")).toBe(false);
@@ -375,7 +375,7 @@ describe("SubstitutionGroup", function() {
 
     it("should work with exclusion URLs", function() {
       var urls = ["example.com", "-example.com/bar"];
-      var group = new SubstitutionGroup(urls);
+      var group = new SubstitutionGroup("", urls);
       expect(group.matches("http://www.example.com/")).toBe(true);
       expect(group.matches("http://www.example.com/foo")).toBe(true);
       expect(group.matches("http://www.example.com/bar")).toBe(false);
@@ -384,7 +384,7 @@ describe("SubstitutionGroup", function() {
 
     it("should work with URLs starting with hyphens", function() {
       var urls = ["|*-example.com"];
-      var group = new SubstitutionGroup(urls);
+      var group = new SubstitutionGroup("", urls);
       expect(group.matches("http://-example.com/")).toBe(true);
       expect(group.matches("http://some-example.com/")).toBe(true);
     });
