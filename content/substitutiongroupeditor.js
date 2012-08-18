@@ -44,6 +44,7 @@ var foxreplaceSubstitutionGroupEditor = {
   /**
    * Easy access to most used controls.
    */
+  get _nameTextBox() { return document.getElementById("nameTextBox"); },
   get _urlsListBox() { return document.getElementById("urlsListBox"); },
   get _substitutionsListBox() { return document.getElementById("substitutionsListBox"); },
   get _htmlCheckBox() { return document.getElementById("htmlCheckBox"); },
@@ -57,6 +58,7 @@ var foxreplaceSubstitutionGroupEditor = {
     if (window.arguments[0]["in"]) {
       var group = window.arguments[0]["in"].group;
 
+      this._nameTextBox.value = group.name;
       for (var i = 0; i < group.urls.length; i++) this.addUrl(group.urls[i]);
       for (var i = 0; i < group.substitutions.length; i++) this.addSubstitution(group.substitutions[i]);
       this._htmlCheckBox.checked = group.html;
@@ -558,8 +560,9 @@ var foxreplaceSubstitutionGroupEditor = {
     for (var i = 0; i < nUrls; i++) urls[i] = this._urlsListBox.getItemAtIndex(i).label;
 
     var html = this._htmlCheckBox.checked;
+    let name = this._nameTextBox.value;
 
-    var group = new this.core.SubstitutionGroup("", urls, substitutions, html);
+    var group = new this.core.SubstitutionGroup(name, urls, substitutions, html);
 
     window.arguments[0].out = { group: group };
 
