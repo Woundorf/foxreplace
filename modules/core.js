@@ -69,18 +69,13 @@ function Substitution(aInput, aOutput, aCaseSensitive, aInputType) {
   }
 }
 /**
- * Creates a substitution from an XML object. If aEscape is true, input and output strings will be backslash-escaped.
+ * Creates a substitution from an XML object.
  */
-Substitution.fromXml = function(aXml, aEscape) {
+Substitution.fromXml = function(aXml) {
   var input = aXml.input.slice(1, -1);   // to remove quotes
   var output = aXml.output.slice(1, -1); // to remove quotes
   var caseSensitive = aXml["@casesensitive"] == true;
   var inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(aXml.input["@type"]);
-
-  if (aEscape) {
-    if (inputType != this.prototype.INPUT_REG_EXP) input = fxrEscape(input);
-    output = fxrEscape(output);
-  }
 
   try {
     return new Substitution(input, output, caseSensitive, inputType);
@@ -230,10 +225,9 @@ SubstitutionGroup.prototype = {
 
 };
 /**
- * Creates a substitution group from an XML object. If aEscape is true, input and output strings will be
- * backslash-escaped.
+ * Creates a substitution group from an XML object.
  */
-SubstitutionGroup.fromXml = function(aXml, aEscape) {
+SubstitutionGroup.fromXml = function(aXml) {
   let urlsJxon;
 
   if (!aXml.urls.url) urlsJxon = [];  // special case when there are no urls
@@ -256,7 +250,7 @@ SubstitutionGroup.fromXml = function(aXml, aEscape) {
   var errors = "";
   for each (let substitution in substitutionsJxon) {
     try {
-      substitutions.push(Substitution.fromXml(substitution, aEscape));
+      substitutions.push(Substitution.fromXml(substitution));
     }
     catch (e) {
       errors += e + "\n";
@@ -290,8 +284,6 @@ function fxrSubstitutionListFromXml(aListXml) {
   var substitutionList = [];
 
   if (listJxon.substitutionlist) {  // necessary when receiving empty string
-    var escape = listJxon.substitutionlist["@version"] == "0.10";
-
     let groups;
 
     if (!listJxon.substitutionlist.group) groups = [];  // special case when there are no groups
@@ -300,7 +292,7 @@ function fxrSubstitutionListFromXml(aListXml) {
     if (!Array.isArray(groups)) groups = [groups];  // special case when there is one group
 
     for each (let group in groups) {
-      substitutionList.push(SubstitutionGroup.fromXml(group, escape));
+      substitutionList.push(SubstitutionGroup.fromXml(group));
     }
   }
 
@@ -338,13 +330,6 @@ function substitutionListFromJSON(aListJSON) {
 }
 
 ////////////////////////////////////// Non-exported functions //////////////////////////////////////
-
-/**
- * Escapes special characters in aString with a backslash combination.
- */
-function fxrEscape(aString) {
-  return aString.replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t");
-}
 
 /**
  * Unescapes backslash-escaped special characters in aString.

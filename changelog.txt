@@ -1,3 +1,5 @@
+* Removed compatibility with the substitution list in the 0.10 format.
+
 v0.13.3 (18-8-2012)
 * Changed behaviour of "whole words" feature. Now it supports all Unicode letters thanks to XRegExp and distinguishes between word characters,
   non-word characters, and spaces or separators. This solves issue 36.
