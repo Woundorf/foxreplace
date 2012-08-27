@@ -188,7 +188,9 @@ function SubstitutionGroup(aName, aUrls, aSubstitutions, aHtml) {
                       else this.urlRegExps.push(regExp);
                     }, this);
 }
+
 SubstitutionGroup.prototype = {
+
   /**
    * Returns true if aUrl matches any of the urls.
    */
@@ -197,6 +199,7 @@ SubstitutionGroup.prototype = {
         || (!this.exclusionUrlRegExps.some(function(element) { return element.test(aUrl); })
         && this.urlRegExps.some(function(element) { return element.test(aUrl); }));
   },
+
   /**
    * Applies the substitution group to aString and returns the result.
    */
@@ -205,12 +208,23 @@ SubstitutionGroup.prototype = {
     this.substitutions.forEach(function(element) { aString = element.replace(aString); });
     return aString;
   },
+
   /**
    * Applies the substitution group to aString if aUrl matches any of the urls and returns the result.
    */
   applyTo: function(aUrl, aString) {
     if (this.matches(aUrl)) return this.replace(aString);
     else return aString;
+  },
+
+  /**
+   * Returns a non-empty name for a substitution group. If it has a name it is returned. Otherwise a default name is returned.
+   */
+  nonEmptyName: function() {
+    if (this.name) return this.name;
+    else if (this.urls.length == 0) return getLocalizedString("generalSubstitutions");
+    else if (this.urls.length == 1) return getLocalizedString("substitutionsForUrl", this.urls[0]);
+    else return getLocalizedString("substitutionsForUrls", this.urls[0]);
   },
 
   /**
@@ -226,6 +240,7 @@ SubstitutionGroup.prototype = {
   }
 
 };
+
 /**
  * Creates a substitution group from an XML object.
  */
