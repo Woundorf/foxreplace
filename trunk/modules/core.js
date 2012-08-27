@@ -36,7 +36,7 @@
 
 Components.utils.import("resource://foxreplace/jxon.js");
 Components.utils.import("resource://foxreplace/services.js");
-Components.utils.import("resource://foxreplace/xregexp-all-min.js");
+Components.utils.import("resource://foxreplace/xregexp-wrapper.js");
 
 /**
  * Definitions of substitution and substitution group.
