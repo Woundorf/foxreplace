@@ -38,12 +38,10 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://foxreplace/skin/options.css" type="text/css"?>
 <!DOCTYPE prefwindow SYSTEM "chrome://foxreplace/locale/options.dtd">
-<prefwindow id="foxreplacePreferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-            title="&prefwindow.title;" onload="foxreplaceOptions.deleteDumbItem();">
-  <script src="options.js"/>
-  <prefpane id="mainPane" label="&mainPane.title;" onpaneload="foxreplaceOptions.loadSubstitutionList();">
+<prefwindow id="foxreplacePreferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title;">
+  <script type="application/x-javascript;version=1.8" src="options.js"/>
+  <prefpane id="mainPane" label="&mainPane.title;">
     <preferences>
-      <preference id="substitutionListJSON" name="extensions.foxreplace.substitutionListJSON" type="unichar"/>
       <preference id="autoReplaceOnLoad" name="extensions.foxreplace.autoReplaceOnLoad" type="bool"/>
       <preference id="replaceUrls" name="extensions.foxreplace.replaceUrls" type="bool"/>
       <preference id="enableSubscription" name="extensions.foxreplace.enableSubscription" type="bool"/>
@@ -53,60 +51,38 @@
     <description id="description">&description;</description>
     <separator/>
     <hbox>
-      <listbox id="substitutionListBox" flex="1" rows="10" preference-editable="true" preference="substitutionListJSON"
-               onsynctopreference="return foxreplaceOptions.saveSubstitutionList();"
-               onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitutionGroup();"
-               onselect="foxreplaceOptions.onSelectSubstitutionGroup();">
-        <listhead>
-          <listheader label="&urlHeader;"/>
-          <listheader label="&inputStringHeader;"/>
-          <listheader label="&outputStringHeader;"/>
-          <listheader label="&htmlHeader;"/>
-        </listhead>
-        <listcols>
-          <listcol flex="1" minwidth="64"/>
-          <listcol flex="1" minwidth="64"/>
-          <listcol flex="1" minwidth="64"/>
-          <listcol/>
-        </listcols>
-        <!-- workaround for listbox height -->
-        <listitem id="dumbItem">
-          <listcell orient="vertical">
-            <label value=""/>
-            <label value=""/>
-          </listcell>
-          <listcell orient="vertical">
-            <label value=""/>
-            <label value=""/>
-          </listcell>
-          <listcell orient="vertical">
-            <label value=""/>
-            <label value=""/>
-          </listcell>
-          <listcell/>
-        </listitem>
-      </listbox>
+      <tree id="substitutionListTree" seltype="single" flex="1" ondblclick="foxreplaceOptions.onTreeDoubleClick(event);"
+            onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitutionGroup();"
+            onselect="foxreplaceOptions.onSelectSubstitutionGroup();">
+        <treecols>
+          <treecol id="nameColumn" label="&nameHeader;" flex="1"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="urlColumn" label="&urlHeader;" flex="1"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="inputColumn" label="&inputStringHeader;" flex="1"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="outputColumn" label="&outputStringHeader;" flex="1"/>
+        </treecols>
+        <treechildren id="substitutionListTreeChildren"/>
+      </tree>
       <vbox>
-        <button id="addButton" label="&addButton.label;" accesskey="&addButton.accesskey;"
-                oncommand="foxreplaceOptions.addSubstitutionGroup();"/>
+        <button id="addButton" label="&addButton.label;" accesskey="&addButton.accesskey;" oncommand="foxreplaceOptions.addSubstitutionGroup();"/>
         <button id="editButton" disabled="true" label="&editButton.label;" accesskey="&editButton.accesskey;"
                 oncommand="foxreplaceOptions.editSubstitutionGroup();"/>
         <button id="deleteButton" disabled="true" label="&deleteButton.label;" accesskey="&deleteButton.accesskey;"
                 oncommand="foxreplaceOptions.deleteSubstitutionGroup();"/>
         <button id="clearButton" disabled="true" label="&clearButton.label;" accesskey="&clearButton.accesskey;"
-                oncommand="foxreplaceOptions.clearSubstitutionGroups();"/>
+                oncommand="foxreplaceOptions.clearSubstitutionList();"/>
         <separator/>
         <button id="moveUpButton" disabled="true" label="&moveUpButton.label;" accesskey="&moveUpButton.accesskey;"
                 oncommand="foxreplaceOptions.moveUpSubstitutionGroup();"/>
-        <button id="moveDownButton" disabled="true" label="&moveDownButton.label;"
-                accesskey="&moveDownButton.accesskey;" oncommand="foxreplaceOptions.moveDownSubstitutionGroup();"/>
+        <button id="moveDownButton" disabled="true" label="&moveDownButton.label;" accesskey="&moveDownButton.accesskey;"
+                oncommand="foxreplaceOptions.moveDownSubstitutionGroup();"/>
         <separator flex="1"/>
-        <button id="importButton" label="&importButton.label;" accesskey="&importButton.accesskey;"
-                oncommand="foxreplaceOptions.importSubstitutionList();"/>
+        <button id="importButton" label="&importButton.label;" accesskey="&importButton.accesskey;" oncommand="foxreplaceOptions.importSubstitutionList();"/>
         <button id="importFromUrlButton" label="&importFromUrlButton.label;" accesskey="&importFromUrlButton.accesskey;"
                 oncommand="foxreplaceOptions.importSubstitutionListFromUrl();"/>
-        <button id="exportButton" label="&exportButton.label;" accesskey="&exportButton.accesskey;"
-                oncommand="foxreplaceOptions.exportSubstitutionList();"/>
+        <button id="exportButton" label="&exportButton.label;" accesskey="&exportButton.accesskey;" oncommand="foxreplaceOptions.exportSubstitutionList();"/>
       </vbox>
     </hbox>
     <separator/>
@@ -118,8 +94,8 @@
         <label id="subscriptionUrlLabel" control="subscriptionUrlTextBox" value="&subscriptionUrl.label;" accesskey="&subscriptionUrl.accesskey;"/>
         <textbox id="subscriptionUrlTextBox" flex="1" preference-editable="true" preference="subscriptionUrl"/>
         <label id="subscriptionPeriodLabel" control="subscriptionPeriodTextBox" value="&subscriptionPeriod.label;" accesskey="&subscriptionPeriod.accesskey;"/>
-        <textbox id="subscriptionPeriodTextBox" type="number" min="1" max="1440" maxlength="4" size="4"
-                 preference-editable="true" preference="subscriptionPeriod"/>
+        <textbox id="subscriptionPeriodTextBox" type="number" min="1" max="1440" maxlength="4" size="4" preference-editable="true"
+                 preference="subscriptionPeriod"/>
       </hbox>
       <hbox align="center">
         <label id="subscriptionStatusLabel" value="&subscriptionStatus.label;"/>
@@ -127,9 +103,8 @@
       </hbox>
     </groupbox>
     <separator/>
-    <checkbox id="autoReplaceOnLoadCheckBox" label="&autoReplaceOnLoad.label;" accesskey="&autoReplaceOnLoad.accesskey;"
-              preference-editable="true" preference="autoReplaceOnLoad"/>
-    <checkbox id="replaceUrlsCheckBox" label="&replaceUrls.label;" accesskey="&replaceUrls.accesskey;"
-              preference-editable="true" preference="replaceUrls"/>
+    <checkbox id="autoReplaceOnLoadCheckBox" label="&autoReplaceOnLoad.label;" accesskey="&autoReplaceOnLoad.accesskey;" preference-editable="true"
+              preference="autoReplaceOnLoad"/>
+    <checkbox id="replaceUrlsCheckBox" label="&replaceUrls.label;" accesskey="&replaceUrls.accesskey;" preference-editable="true" preference="replaceUrls"/>
   </prefpane>
 </prefwindow>
