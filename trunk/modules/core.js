@@ -220,11 +220,11 @@ SubstitutionGroup.prototype = {
   /**
    * Returns a non-empty name for a substitution group. If it has a name it is returned. Otherwise a default name is returned.
    */
-  nonEmptyName: function() {
+  get nonEmptyName() {
     if (this.name) return this.name;
     else if (this.urls.length == 0) return getLocalizedString("generalSubstitutions");
-    else if (this.urls.length == 1) return getLocalizedString("substitutionsForUrl", this.urls[0]);
-    else return getLocalizedString("substitutionsForUrls", this.urls[0]);
+    else if (this.urls.length == 1) return getLocalizedString("substitutionsForUrl", [this.urls[0]]);
+    else return getLocalizedString("substitutionsForUrls", [this.urls[0]]);
   },
 
   /**
