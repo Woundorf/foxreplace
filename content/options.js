@@ -37,7 +37,7 @@
 /**
  * Object to manage FoxReplace options.
  */
-var foxreplaceOptions = {
+let foxreplaceOptions = {
 
   core: {},
 
@@ -47,6 +47,8 @@ var foxreplaceOptions = {
   onLoad: function() {
     this.Observers.add("fxrSubscriptionStatusChanged", this.updateSubscriptionStatus, this);
     this.prefs.observe("substitutionListJSON", this.loadSubstitutionList, this);
+    this.loadSubstitutionList();
+    this.setupTree();
     this.updateSubscriptionStatus();
   },
 
@@ -59,176 +61,210 @@ var foxreplaceOptions = {
   },
 
   /**
-   * Called when the options window is loaded. Loads the substitution list from preferences and fills the listbox.
+   * Tree double click event handler.
+   */
+  onTreeDoubleClick: function(aEvent) {
+    let index = document.getElementById("substitutionListTree").boxObject.getRowAt(aEvent.clientX, aEvent.clientY);
+    if (index >= 0) this.editSubstitutionGroup(index);
+    else this.addSubstitutionGroup();
+  },
+
+  /**
+   * Creates the tree view.
+   */
+  setupTree: function() {
+    document.getElementById("substitutionListTree").view = {
+      setTree: function(aTreeBox) {
+        this.treeBox = aTreeBox;
+      },
+      isSorted: function() {
+        return false;
+      },
+      get rowCount() {
+        return foxreplaceOptions.substitutionList.length;
+      },
+      getColumnProperties: function() {
+      },
+      getLevel: function() {
+        return 0;
+      },
+      getRowProperties: function() {
+      },
+      isContainer: function() {
+        return false;
+      },
+      isSeparator: function() {
+        return false;
+      },
+      getCellText: function(aRow, aColumn) {
+        let group = foxreplaceOptions.substitutionList[aRow];
+        switch (aColumn.id) {
+          case "nameColumn": return group.nonEmptyName;
+          case "urlColumn": return group.urls.length > 0 ? group.urls[0] : "";
+          case "inputColumn": return group.substitutions.length > 0 ? group.substitutions[0].input : "";
+          case "outputColumn": return group.substitutions.length > 0 ? group.substitutions[0].output : "";
+          default: return aColumn.id;
+        }
+      },
+      getCellProperties: function(aRow, aColumn, aProperties) {
+        if (aColumn.id == "urlColumn" && foxreplaceOptions.core.fxrIsExclusionUrl(this.getCellText(aRow, aColumn))) {
+          let atomService = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
+          aProperties.AppendElement(atomService.getAtom("exclusionUrl"));
+        }
+      },
+      getImageSrc: function() {
+        return null;
+      }
+    };
+  },
+
+  _substitutionListLength: 0,
+
+  /**
+   * Called when the options window is loaded or the substitution list is changed externally. Loads the substitution list from preferences and fills the tree.
    */
   loadSubstitutionList: function() {
-    this.substitutionListFromArray(this.prefs.substitutionList, true);
+    this.substitutionList = this.prefs.substitutionList.concat(); // easy way to create a copy of the array
+    this.substitutionList.length;
+
+    let treeBox = document.getElementById("substitutionListTree").boxObject;
+    treeBox.rowCountChanged(0, -this._substitutionListLength);
+    treeBox.rowCountChanged(0, this.substitutionList.length);
+    treeBox.invalidate();
+    this._substitutionListLength = this.substitutionList.length;
+
+    if (this.substitutionList.length > 0) document.getElementById("clearButton").disabled = false;
+    else document.getElementById("clearButton").disabled = true;
   },
 
   /**
-   * Called when there's a change in the listbox. Saves the substitution list to preferences.
+   * Called when the substitution list is changed from the UI. Saves the substitution list to preferences.
    */
   saveSubstitutionList: function() {
-    return JSON.stringify(this.core.substitutionListToJSON(this.substitutionListToArray()));
+    this.prefs.substitutionList = this.substitutionList;
   },
 
   /**
-   * Adds a new substitution group to the listbox.
+   * Adds a new substitution group.
    */
   addSubstitutionGroup: function() {
-    var params = {};
+    let params = {};
 
-    window.openDialog("chrome://foxreplace/content/substitutiongroupeditor.xul", "",
-                      "chrome,titlebar,toolbar,centerscreen,modal", params);
+    window.openDialog("chrome://foxreplace/content/substitutiongroupeditor.xul", "", "chrome,titlebar,toolbar,centerscreen,modal", params);
 
     if (params.out) {
-      var substitutionGroup = params.out.group;
-      var substitutionListBox = document.getElementById("substitutionListBox");
-
-      this.createListItemForSubstitutionGroup(substitutionGroup);
-
-      this.fireChangeEvent(substitutionListBox);
+      this.substitutionList.push(params.out.group);
+      this.saveSubstitutionList();
+      document.getElementById("substitutionListTree").view.selection.select(this.substitutionList.length - 1);
     }
   },
 
   /**
-   * Shows the dialog to edit the selected substitution group in the listbox.
+   * Shows the dialog to edit the selected substitution group in the tree.
    */
-  editSubstitutionGroup: function() {
-    var substitutionListBox = document.getElementById("substitutionListBox");
-    var selectedItem = substitutionListBox.selectedItem;
-    if (!selectedItem) return;
-    var params = { "in": { group: selectedItem.substitutionGroup } };
+  editSubstitutionGroup: function(aIndex) {
+    let index = aIndex;
 
-    window.openDialog("chrome://foxreplace/content/substitutiongroupeditor.xul", "",
-                      "chrome,titlebar,toolbar,centerscreen,modal", params);
+    if (index == undefined) {
+      let selection = document.getElementById("substitutionListTree").view.selection;
+      if (selection.count == 0) return;
+      index = selection.currentIndex;
+    }
+
+    let group = this.substitutionList[index];
+    let params = { "in": { group: group } };
+
+    window.openDialog("chrome://foxreplace/content/substitutiongroupeditor.xul", "", "chrome,titlebar,toolbar,centerscreen,modal", params);
 
     if (params.out) {
-      var substitutionGroup = params.out.group;
-
-      this.editListItemForSubstitutionGroup(selectedItem, substitutionGroup);
-
-      this.fireChangeEvent(substitutionListBox);
+      this.substitutionList.splice(index, 1, params.out.group);
+      this.saveSubstitutionList();
+      document.getElementById("substitutionListTree").view.selection.select(index);
     }
   },
 
   /**
-   * Removes the selected substitution group from the listbox.
+   * Removes the selected substitution group in the tree.
    */
   deleteSubstitutionGroup: function() {
-    var substitutionListBox = document.getElementById("substitutionListBox");
-    var selectedIndex = substitutionListBox.selectedIndex;
+    let selection = document.getElementById("substitutionListTree").view.selection;
+    if (selection.count == 0) return;
 
-    if (selectedIndex >= 0) {
-      substitutionListBox.removeItemAt(selectedIndex);
-      substitutionListBox.selectedIndex = Math.min(selectedIndex, substitutionListBox.getRowCount() - 1);
+    let index = selection.currentIndex;
+    this.substitutionList.splice(index, 1);
+    this.saveSubstitutionList();
 
-      if (substitutionListBox.getRowCount() == 0) document.getElementById("clearButton").disabled = true;
-
-      this.fireChangeEvent(substitutionListBox);
-    }
+    if (index < this.substitutionList.length) selection.select(index);
+    else if (index > 0) selection.select(index - 1);
   },
 
   /**
-   * Deletes all substitution groups from the listbox.
+   * Deletes all substitution groups.
    */
-  clearSubstitutionGroups: function(aDontFireChangeEvent) {
-    var substitutionListBox = document.getElementById("substitutionListBox");
-    var i = substitutionListBox.getRowCount() - 1;
-
-    while (i >= 0) {
-      substitutionListBox.removeItemAt(i);
-      i--;
-    }
-
-    document.getElementById("clearButton").disabled = true;
-
-    if (!aDontFireChangeEvent) this.fireChangeEvent(substitutionListBox);
+  clearSubstitutionList: function() {
+    let count = this.substitutionList.length;
+    this.substitutionList = [];
+    this.saveSubstitutionList();
   },
 
   /**
    * Moves up the selected substitution group.
    */
   moveUpSubstitutionGroup: function() {
-    var substitutionListBox = document.getElementById("substitutionListBox");
-    var selectedItem = substitutionListBox.selectedItem;
-    var selectedIndex = substitutionListBox.selectedIndex;
-
-    if (selectedItem) {
-      var previousItem = substitutionListBox.getPreviousItem(selectedItem, 1);
-
-      if (previousItem) {
-        substitutionListBox.removeChild(selectedItem);
-        substitutionListBox.insertBefore(selectedItem, previousItem);
-        substitutionListBox.selectedItem = selectedItem;
-
-        this.fireChangeEvent(substitutionListBox);
-      }
-    }
+    let selection = document.getElementById("substitutionListTree").view.selection;
+    if (selection.count == 0) return;
+    let index = selection.currentIndex;
+    if (index == 0) return;
+    let group = this.substitutionList[index];
+    this.substitutionList.splice(index, 1);
+    this.substitutionList.splice(index - 1, 0, group);
+    this.saveSubstitutionList();
+    selection.select(index - 1);
   },
 
   /**
    * Moves down the selected substitution group.
    */
   moveDownSubstitutionGroup: function() {
-    var substitutionListBox = document.getElementById("substitutionListBox");
-    var selectedItem = substitutionListBox.selectedItem;
-
-    if (selectedItem) {
-      var nextItem = substitutionListBox.getNextItem(selectedItem, 1);
-
-      if (nextItem) {
-        var nextNextItem = substitutionListBox.getNextItem(selectedItem, 2);
-
-        substitutionListBox.removeChild(selectedItem);
-
-        if (nextNextItem)
-          substitutionListBox.insertBefore(selectedItem, nextNextItem);
-        else
-          substitutionListBox.appendChild(selectedItem);
-
-        substitutionListBox.selectedItem = selectedItem;
-
-        this.fireChangeEvent(substitutionListBox);
-      }
-    }
+    let selection = document.getElementById("substitutionListTree").view.selection;
+    if (selection.count == 0) return;
+    let index = selection.currentIndex;
+    if (index == this.substitutionList.length - 1) return;
+    let group = this.substitutionList[index];
+    this.substitutionList.splice(index, 1);
+    this.substitutionList.splice(index + 1, 0, group);
+    this.saveSubstitutionList();
+    selection.select(index + 1);
   },
 
   /**
    * Imports the substitution list from a file.
    */
   importSubstitutionList: function() {
-    var substitutionList = fxrIO.importSubstitutionList();
-
-    if (substitutionList) {
-      var params = {};
-      window.openDialog("chrome://foxreplace/content/appendoverwrite.xul", "",
-                        "chrome,titlebar,toolbar,centerscreen,modal", params);
-
-      if (params.out) {
-        this.substitutionListFromArray(substitutionList, params.out.button == "overwrite");
-
-        this.fireChangeEvent(document.getElementById("substitutionListBox"));
-      }
-    }
+    let substitutionList = fxrIO.importSubstitutionList();
+    if (substitutionList) this.finishImportSubstitutionList(substitutionList);
   },
 
   /**
    * Imports the substitution list from an URL.
    */
   importSubstitutionListFromUrl: function() {
-    var substitutionList = fxrIO.importSubstitutionListFromUrl();
+    let substitutionList = fxrIO.importSubstitutionListFromUrl();
+    if (substitutionList) this.finishImportSubstitutionList(substitutionList);
+  },
 
-    if (substitutionList) {
-      var params = {};
-      window.openDialog("chrome://foxreplace/content/appendoverwrite.xul", "",
-                        "chrome,titlebar,toolbar,centerscreen,modal", params);
+  /**
+   * Common part of the importing pipeline.
+   */
+  finishImportSubstitutionList: function(aSubstitutionList) {
+    let params = {};
+    window.openDialog("chrome://foxreplace/content/appendoverwrite.xul", "", "chrome,titlebar,toolbar,centerscreen,modal", params);
 
-      if (params.out) {
-        this.substitutionListFromArray(substitutionList, params.out.button == "overwrite");
+    if (params.out) {
+      if (params.out.button == "overwrite") this.substitutionList = aSubstitutionList;
+      else this.substitutionList = this.substitutionList.concat(aSubstitutionList);
 
-        this.fireChangeEvent(document.getElementById("substitutionListBox"));
-      }
+      this.saveSubstitutionList();
     }
   },
 
@@ -236,15 +272,14 @@ var foxreplaceOptions = {
    * Exports the substitution list to a file.
    */
   exportSubstitutionList: function() {
-    // pass the function (for deferred execution)
-    fxrIO.exportSubstitutionList(this.substitutionListToArray);
+    fxrIO.exportSubstitutionList(this.substitutionList);
   },
 
   /**
    * Enables or disables some buttons when an substitution group item is selected or deselected.
    */
   onSelectSubstitutionGroup: function() {
-    if (document.getElementById("substitutionListBox").selectedItem) {
+    if (document.getElementById("substitutionListTree").currentIndex >= 0) {
       document.getElementById("editButton").disabled = false;
       document.getElementById("deleteButton").disabled = false;
       document.getElementById("moveUpButton").disabled = false;
@@ -259,159 +294,16 @@ var foxreplaceOptions = {
   },
 
   /**
-   * Fills the listbox from an array of substitutions.
+   * Updates the status of the subscription.
    */
-  substitutionListFromArray: function(aSubstitutionList, aOverwrite) {
-    if (aOverwrite && !document.getElementById("dumbItem")) this.clearSubstitutionGroups(true);
-
-    var nSubstitutions = aSubstitutionList.length
-
-    for (var i = 0; i < nSubstitutions; i++) this.createListItemForSubstitutionGroup(aSubstitutionList[i]);
-  },
-
-  /**
-   * Fills an array of substitutions from the substitution list and returns it.
-   */
-  substitutionListToArray: function() {
-    var substitutionListBox = document.getElementById("substitutionListBox");
-    var nSubstitutions = substitutionListBox.getRowCount();
-    var substitutionList = new Array(nSubstitutions);
-
-    for (var i = 0; i < nSubstitutions; i++) {
-      var substitutionGroup = substitutionListBox.getItemAtIndex(i).substitutionGroup;
-      substitutionList[i] = substitutionGroup;
-    }
-
-    return substitutionList;
-  },
-
-  /**
-   * Deletes the "dumbItem" (workaround for listbox height).
-   */
-  deleteDumbItem: function() {
-    var substitutionListBox = document.getElementById("substitutionListBox");
-
-    if (document.getElementById("dumbItem")) substitutionListBox.removeItemAt(0); // dumbItem is the first
-  },
-
-  /**
-   * Fires a change event from the passed object.
-   */
-  fireChangeEvent: function(aObject) {
-    var event = document.createEvent("Events");
-    event.initEvent("change", true, true);
-    aObject.dispatchEvent(event);
-  },
-
-  /**
-   * Creates a new list item in the listbox given a substitution group.
-   */
-  createListItemForSubstitutionGroup: function(aSubstitutionGroup) {
-    const MAX_LABELS = 2;
-
-    var groupItem = document.createElement("listitem");
-    groupItem.setAttribute("ondblclick", "foxreplaceOptions.editSubstitutionGroup();");
-    groupItem.substitutionGroup = aSubstitutionGroup;
-
-    var urlsCell = document.createElement("listcell");
-    urlsCell.align = "start";
-    urlsCell.orient = "vertical";
-
-    var nUrls = aSubstitutionGroup.urls.length;
-
-    for (var i = 0; i < nUrls && i < MAX_LABELS; i++) {
-      var ellipsis = i == MAX_LABELS - 1 && i < nUrls - 1;
-      var urlLabel = document.createElement("label");
-      urlLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.urls[i]);
-      if (this.core.fxrIsExclusionUrl(aSubstitutionGroup.urls[i])) urlLabel.setAttribute("class", "exclusionUrl");
-      urlsCell.appendChild(urlLabel);
-    }
-
-    groupItem.appendChild(urlsCell);
-
-    var inputsCell = document.createElement("listcell");
-    inputsCell.align = "start";
-    inputsCell.orient = "vertical";
-    var outputsCell = document.createElement("listcell");
-    outputsCell.align = "start";
-    outputsCell.orient = "vertical";
-
-    var nSubstitutions = aSubstitutionGroup.substitutions.length;
-
-    for (var i = 0; i < nSubstitutions && i < MAX_LABELS; i++) {
-      var ellipsis = i == MAX_LABELS - 1 && i < nSubstitutions - 1;
-      var inputLabel = document.createElement("label");
-      inputLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.substitutions[i].input);
-      inputsCell.appendChild(inputLabel);
-      var outputLabel = document.createElement("label");
-      outputLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.substitutions[i].output);
-      outputsCell.appendChild(outputLabel);
-    }
-
-    groupItem.appendChild(inputsCell);
-    groupItem.appendChild(outputsCell);
-
-    var htmlCell = document.createElement("listcell");
-    htmlCell.setAttribute("label", this.getLocalizedString(aSubstitutionGroup.html ? "yes" : "no"));
-    groupItem.appendChild(htmlCell);
-
-    document.getElementById("substitutionListBox").appendChild(groupItem);
-
-    document.getElementById("clearButton").disabled = false;
-  },
-
-  /**
-   * Edits a list item in the listbox to represent a new substitution group.
-   */
-  editListItemForSubstitutionGroup: function(aListItem, aSubstitutionGroup) {
-    const MAX_LABELS = 2;
-
-    aListItem.substitutionGroup = aSubstitutionGroup;
-
-    var urlsCell = aListItem.firstChild;
-
-    while (urlsCell.hasChildNodes()) urlsCell.removeChild(urlsCell.firstChild);
-
-    var nUrls = aSubstitutionGroup.urls.length;
-
-    for (var i = 0; i < nUrls && i < MAX_LABELS; i++) {
-      var ellipsis = i == MAX_LABELS - 1 && i < nUrls - 1;
-      var urlLabel = document.createElement("label");
-      urlLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.urls[i]);
-      if (this.core.fxrIsExclusionUrl(aSubstitutionGroup.urls[i])) urlLabel.setAttribute("class", "exclusionUrl");
-      urlsCell.appendChild(urlLabel);
-    }
-
-    var inputsCell = urlsCell.nextSibling;
-    var outputsCell = inputsCell.nextSibling;
-
-    while (inputsCell.hasChildNodes()) {
-      inputsCell.removeChild(inputsCell.firstChild);
-      outputsCell.removeChild(outputsCell.firstChild);
-    }
-
-    var nSubstitutions = aSubstitutionGroup.substitutions.length;
-
-    for (var i = 0; i < nSubstitutions && i < MAX_LABELS; i++) {
-      var ellipsis = i == MAX_LABELS - 1 && i < nSubstitutions - 1;
-      var inputLabel = document.createElement("label");
-      inputLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.substitutions[i].input);
-      inputsCell.appendChild(inputLabel);
-      var outputLabel = document.createElement("label");
-      outputLabel.setAttribute("value", ellipsis ? "..." : aSubstitutionGroup.substitutions[i].output);
-      outputsCell.appendChild(outputLabel);
-    }
-
-    var htmlCell = outputsCell.nextSibling;
-    htmlCell.setAttribute("label", this.getLocalizedString(aSubstitutionGroup.html ? "yes" : "no"));
-  },
-
   updateSubscriptionStatus: function() {
     document.getElementById("subscriptionStatusTextBox").value = fxrSubscription.status;
   }
 
 };
 
+const Cc = Components.classes;
+const Ci = Components.interfaces;
 const Cu = Components.utils;
 
 Cu.import("resource://foxreplace/core.js", foxreplaceOptions.core);

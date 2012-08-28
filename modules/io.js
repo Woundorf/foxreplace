@@ -157,11 +157,9 @@ var fxrIO = {
   },
 
   /**
-   * Exports the substitution list to a file (selected by parameter or by an user in a dialog). The parameter is a
-   * function to get the substitution list that is called only if it's needed (it's not called if the user cancels the
-   * export).
+   * Exports the given substitution list to a file (selected by parameter or by an user in a dialog).
    */
-  exportSubstitutionList: function(getSubstitutionList, aFile) {
+  exportSubstitutionList: function(aSubstitutionList, aFile) {
     if (!aFile) {
       var file = fxrShowFileDialog("export");
 
@@ -169,8 +167,7 @@ var fxrIO = {
       else aFile = file;
     }
 
-    var substitutionList = getSubstitutionList();
-    var listJSON = substitutionListToJSON(substitutionList);
+    var listJSON = substitutionListToJSON(aSubstitutionList);
     var data = JSON.stringify(listJSON);
     var fileOutputStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
     fileOutputStream.init(aFile, 0x02 | 0x08 | 0x20, 0666, 0);  // write, create, truncate

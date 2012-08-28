@@ -9,6 +9,6 @@
   overflow: visible;  /* to avoid that some checkboxes get hidden */
 }
 
-#substitutionListBox .exclusionUrl {
+#substitutionListTreeChildren::-moz-tree-cell-text(exclusionUrl) {
   color: red;
 }

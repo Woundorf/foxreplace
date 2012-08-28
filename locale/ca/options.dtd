@@ -1,10 +1,10 @@
 <!ENTITY prefwindow.title "Opcions de FoxReplace">
 <!ENTITY mainPane.title "Principal">
 <!ENTITY description "Introduïu la llista de substitucions. La llista es compon de grups de substitucions, on les substitucions de cada grup s'apliquen si algun dels URLs del grup coincideix amb l'adreça de la pàgina carregada. Si el grup no té cap URL les substituticions s'apliquen a qualsevol pàgina. Els grups es comproven en l'ordre en què apareixen.">
+<!ENTITY nameHeader "Nom">
 <!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Reemplaça">
 <!ENTITY outputStringHeader "Amb">
-<!ENTITY htmlHeader "HTML">
 <!ENTITY addButton.label "Afegeix">
 <!ENTITY addButton.accesskey "A">
 <!ENTITY editButton.label "Edita">
