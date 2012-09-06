@@ -2,46 +2,33 @@
 <!-- ***** BEGIN LICENSE BLOCK *****
   -   Version: MPL 1.1/GPL 2.0/LGPL 2.1
   -
-  - The contents of this file are subject to the Mozilla Public License Version
-  - 1.1 (the "License"); you may not use this file except in compliance with
-  - the License. You may obtain a copy of the License at
-  - http://www.mozilla.org/MPL/
+  - The contents of this file are subject to the Mozilla Public License Version 1.1 (the "License"); you may not use this file except in compliance with the
+  - License. You may obtain a copy of the License at http://www.mozilla.org/MPL/
   -
-  - Software distributed under the License is distributed on an "AS IS" basis,
-  - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
-  - for the specific language governing rights and limitations under the
-  - License.
+  - Software distributed under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for the
+  - specific language governing rights and limitations under the License.
   -
   - The Original Code is FoxReplace.
   -
-  - The Initial Developer of the Original Code is
-  - Marc Ruiz Altisent.
-  - Portions created by the Initial Developer are Copyright (C) 2008-2012
-  - the Initial Developer. All Rights Reserved.
+  - The Initial Developer of the Original Code is Marc Ruiz Altisent.
+  - Portions created by the Initial Developer are Copyright (C) 2008-2012 the Initial Developer. All Rights Reserved.
   -
   - Contributor(s):
   -
-  - Alternatively, the contents of this file may be used under the terms of
-  - either the GNU General Public License Version 2 or later (the "GPL"), or
-  - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
-  - in which case the provisions of the GPL or the LGPL are applicable instead
-  - of those above. If you wish to allow use of your version of this file only
-  - under the terms of either the GPL or the LGPL, and not to allow others to
-  - use your version of this file under the terms of the MPL, indicate your
-  - decision by deleting the provisions above and replace them with the notice
-  - and other provisions required by the GPL or the LGPL. If you do not delete
-  - the provisions above, a recipient may use your version of this file under
-  - the terms of any one of the MPL, the GPL or the LGPL.
+  - Alternatively, the contents of this file may be used under the terms of either the GNU General Public License Version 2 or later (the "GPL"), or the GNU
+  - Lesser General Public License Version 2.1 or later (the "LGPL"), in which case the provisions of the GPL or the LGPL are applicable instead of those above.
+  - If you wish to allow use of your version of this file only under the terms of either the GPL or the LGPL, and not to allow others to use your version of
+  - this file under the terms of the MPL, indicate your decision by deleting the provisions above and replace them with the notice and other provisions required
+  - by the GPL or the LGPL. If you do not delete the provisions above, a recipient may use your version of this file under the terms of any one of the MPL, the
+  - GPL or the LGPL.
   -
   - ***** END LICENSE BLOCK ***** -->
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://foxreplace/skin/substitutiongroupeditor.css" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://foxreplace/locale/substitutiongroupeditor.dtd">
-<dialog id="foxreplaceDialogSubstitutionGroupEditor"
-        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&title;"
-        onload="foxreplaceSubstitutionGroupEditor.onLoad();"
-        ondialogaccept="return foxreplaceSubstitutionGroupEditor.onAccept();">
+<dialog id="foxreplaceDialogSubstitutionGroupEditor" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&title;"
+        onload="foxreplaceSubstitutionGroupEditor.onLoad();" ondialogaccept="return foxreplaceSubstitutionGroupEditor.onAccept();">
   <script type="application/x-javascript;version=1.8" src="substitutiongroupeditor.js"/>
   <description>&description;</description>
   <hbox align="center">
@@ -63,28 +50,23 @@
                      onkeypress="foxreplaceSubstitutionGroupEditor.onUrlKeyPress(event);"/>
             <button id="addUrlButton" disabled="true" label="&addUrlButton.label;" accesskey="&addUrlButton.accesskey;"
                     oncommand="foxreplaceSubstitutionGroupEditor.addUrl();"/>
-            <button id="okEditUrlButton" hidden="true" label="&okEditUrlButton.label;"
-                    accesskey="&okEditUrlButton.accesskey;" oncommand="foxreplaceSubstitutionGroupEditor.okEditUrl();"/>
-            <button id="cancelEditUrlButton" hidden="true" label="&cancelEditUrlButton.label;"
-                    accesskey="&cancelEditUrlButton.accesskey;"
+            <button id="okEditUrlButton" hidden="true" label="&okEditUrlButton.label;" accesskey="&okEditUrlButton.accesskey;"
+                    oncommand="foxreplaceSubstitutionGroupEditor.okEditUrl();"/>
+            <button id="cancelEditUrlButton" hidden="true" label="&cancelEditUrlButton.label;" accesskey="&cancelEditUrlButton.accesskey;"
                     oncommand="foxreplaceSubstitutionGroupEditor.cancelEditUrl();"/>
           </hbox>
           <hbox>
-            <listbox id="urlsListBox" flex="1" rows="16"
-                     onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceSubstitutionGroupEditor.deleteUrl();"
+            <listbox id="urlsListBox" flex="1" rows="16" onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceSubstitutionGroupEditor.deleteUrl();"
                      onselect="foxreplaceSubstitutionGroupEditor.onSelectUrl();">
               <!-- workaround for listbox height -->
               <listitem id="urlDumbItem" label=""/>
             </listbox>
             <vbox>
-              <button id="editUrlButton" disabled="true" label="&editUrlButton.label;"
-                      accesskey="&editUrlButton.accesskey;"
+              <button id="editUrlButton" disabled="true" label="&editUrlButton.label;" accesskey="&editUrlButton.accesskey;"
                       oncommand="foxreplaceSubstitutionGroupEditor.startEditUrl();"/>
-              <button id="deleteUrlButton" disabled="true" label="&deleteUrlButton.label;"
-                      accesskey="&deleteUrlButton.accesskey;"
+              <button id="deleteUrlButton" disabled="true" label="&deleteUrlButton.label;" accesskey="&deleteUrlButton.accesskey;"
                       oncommand="foxreplaceSubstitutionGroupEditor.deleteUrl();"/>
-              <button id="clearUrlsButton" disabled="true" label="&clearUrlsButton.label;"
-                      accesskey="&clearUrlsButton.accesskey;"
+              <button id="clearUrlsButton" disabled="true" label="&clearUrlsButton.label;" accesskey="&clearUrlsButton.accesskey;"
                       oncommand="foxreplaceSubstitutionGroupEditor.clearUrls();"/>
             </vbox>
           </hbox>
@@ -93,25 +75,19 @@
       <tabpanel>
         <vbox flex="1">
           <hbox align="center">
-            <label id="inputStringLabel" control="inputStringTextBox" value="&inputString.label;"
-                   accesskey="&inputString.accesskey;"/>
+            <label id="inputStringLabel" control="inputStringTextBox" value="&inputString.label;" accesskey="&inputString.accesskey;"/>
             <textbox id="inputStringTextBox" flex="1" oninput="foxreplaceSubstitutionGroupEditor.onSubstitutionInput();"
                      onkeypress="foxreplaceSubstitutionGroupEditor.onSubstitutionKeyPress(event);"/>
-            <label id="outputStringLabel" control="outputStringTextBox" value="&outputString.label;"
-                   accesskey="&outputString.accesskey;"/>
-            <textbox id="outputStringTextBox" flex="1"
-                     onkeypress="foxreplaceSubstitutionGroupEditor.onSubstitutionKeyPress(event);"/>
+            <label id="outputStringLabel" control="outputStringTextBox" value="&outputString.label;" accesskey="&outputString.accesskey;"/>
+            <textbox id="outputStringTextBox" flex="1" onkeypress="foxreplaceSubstitutionGroupEditor.onSubstitutionKeyPress(event);"/>
             <checkbox id="caseSensitiveCheckBox" label="&caseSensitive.label;" accesskey="&caseSensitive.accesskey;"
                       onkeypress="foxreplaceSubstitutionGroupEditor.onSubstitutionKeyPress(event);"/>
-            <button id="addSubstitutionButton" disabled="true" label="&addSubstitutionButton.label;"
-                    accesskey="&addSubstitutionButton.accesskey;"
+            <button id="addSubstitutionButton" disabled="true" label="&addSubstitutionButton.label;" accesskey="&addSubstitutionButton.accesskey;"
                     oncommand="foxreplaceSubstitutionGroupEditor.addSubstitution();"/>
-            <button id="okEditSubstitutionButton" hidden="true" label="&okEditSubstitutionButton.label;"
-                    accesskey="&okEditSubstitutionButton.accesskey;"
+            <button id="okEditSubstitutionButton" hidden="true" label="&okEditSubstitutionButton.label;" accesskey="&okEditSubstitutionButton.accesskey;"
                     oncommand="foxreplaceSubstitutionGroupEditor.okEditSubstitution();"/>
             <button id="cancelEditSubstitutionButton" hidden="true" label="&cancelEditSubstitutionButton.label;"
-                    accesskey="&cancelEditSubstitutionButton.accesskey;"
-                    oncommand="foxreplaceSubstitutionGroupEditor.cancelEditSubstitution();"/>
+                    accesskey="&cancelEditSubstitutionButton.accesskey;" oncommand="foxreplaceSubstitutionGroupEditor.cancelEditSubstitution();"/>
           </hbox>
           <hbox>
             <listbox id="substitutionsListBox" flex="1" rows="15"
@@ -138,21 +114,16 @@
               </listitem>
             </listbox>
             <vbox>
-              <button id="moveUpSubstitutionButton" disabled="true" label="&moveUpSubstitutionButton.label;"
-                      accesskey="&moveUpSubstitutionButton.accesskey;"
+              <button id="moveUpSubstitutionButton" disabled="true" label="&moveUpSubstitutionButton.label;" accesskey="&moveUpSubstitutionButton.accesskey;"
                       oncommand="foxreplaceSubstitutionGroupEditor.moveUpSubstitution();"/>
               <button id="moveDownSubstitutionButton" disabled="true" label="&moveDownSubstitutionButton.label;"
-                      accesskey="&moveDownSubstitutionButton.accesskey;"
-                      oncommand="foxreplaceSubstitutionGroupEditor.moveDownSubstitution();"/>
+                      accesskey="&moveDownSubstitutionButton.accesskey;" oncommand="foxreplaceSubstitutionGroupEditor.moveDownSubstitution();"/>
               <separator/>
-              <button id="editSubstitutionButton" disabled="true" label="&editSubstitutionButton.label;"
-                      accesskey="&editSubstitutionButton.accesskey;"
+              <button id="editSubstitutionButton" disabled="true" label="&editSubstitutionButton.label;" accesskey="&editSubstitutionButton.accesskey;"
                       oncommand="foxreplaceSubstitutionGroupEditor.startEditSubstitution();"/>
-              <button id="deleteSubstitutionButton" disabled="true" label="&deleteSubstitutionButton.label;"
-                      accesskey="&deleteSubstitutionButton.accesskey;"
+              <button id="deleteSubstitutionButton" disabled="true" label="&deleteSubstitutionButton.label;" accesskey="&deleteSubstitutionButton.accesskey;"
                       oncommand="foxreplaceSubstitutionGroupEditor.deleteSubstitution();"/>
-              <button id="clearSubstitutionsButton" disabled="true" label="&clearSubstitutionsButton.label;"
-                      accesskey="&clearSubstitutionsButton.accesskey;"
+              <button id="clearSubstitutionsButton" disabled="true" label="&clearSubstitutionsButton.label;" accesskey="&clearSubstitutionsButton.accesskey;"
                       oncommand="foxreplaceSubstitutionGroupEditor.clearSubstitutions();"/>
             </vbox>
           </hbox>
