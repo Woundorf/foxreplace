@@ -3,8 +3,8 @@ v0.14.0
 * Substitution groups now have names. This implies a new list format: 0.14.
 
 v0.13.3 (18-8-2012)
-* Changed behaviour of "whole words" feature. Now it supports all Unicode letters thanks to XRegExp and distinguishes between word characters,
-  non-word characters, and spaces or separators. This solves issue 36.
+* Changed behaviour of "whole words" feature. Now it supports all Unicode letters thanks to XRegExp and distinguishes between word characters, non-word
+  characters, and spaces or separators. This solves issue 36.
 
 v0.13.2 (18-7-2012)
 * Fixed bug of auto-replace not working in OS X (issue 80).
@@ -42,43 +42,28 @@ v0.12.1 (5-8-2009)
 
 v0.12.0 (21-7-2009)
 * Subscription to update the substitution list periodically from an URL.
-* Ability to use backslash-escaped characters in input (text and whole words) and output. Supported
-  characters are \\ (backslash), \n (new line), \r (carriage return) and \t (tab).
+* Ability to use backslash-escaped characters in input (text and whole words) and output. Supported characters are \\ (backslash), \n (new line), \r (carriage
+  return) and \t (tab).
 * New list format 0.12 with the new interpretation of the backslash-escaped characters.
 * Removed compatibility with the substitution list in the 0.8 format.
 * Removed compatibility with Firefox 1.5 and 2.
 * Compatibility with Firefox 3.5.
 * New locale:
   - nl-NL (by markh van BabelZilla.org).
-* String changes:
-  - foxreplace.properties: new: invalidSubscriptionUrl.
-  - options.dtd: new: subscriptionCheckBox.label, subscriptionCheckBox.accesskey,
-    subscriptionUrl.label, subscriptionUrl.accesskey, subscriptionPeriod.label,
-    subscriptionPeriod.accesskey.
 
 v0.11.0 (25-4-2009)
 * Import from URL.
-* Whole words substitutions now support the extended Latin alphabet, IPA extensions, and the Greek,
-  Coptic and Cyrillic alphabets.
+* Whole words substitutions now support the extended Latin alphabet, IPA extensions, and the Greek, Coptic and Cyrillic alphabets.
 * "Clear" buttons in all dialogs disabled if their respective lists are empty.
 * Forced text color of input textbox so it's visible with dark themes.
 * Removed compatibility with the substitution list in the old 0.7 format.
 * Compatibility with Firefox 3.1b3.
 * Removed unneeded box "xmlHolder" in options.xul.
-* String changes:
-  - options.dtd: new: importFromUrlButton.label, importFromUrlButton.accesskey.
-  - foxreplace.properties: new: importFromUrlTitle, importFromUrlText, nonSupportedProtocol,
-    onlyHttp, httpError, cantConnectToServerTitle, cantConnectToServerText, unexpectedError.
-  - Misc. changes in the Catalan locale.
 * New locale:
   - tr-TR (by eren).
 
 v0.10.0 (25-1-2009)
 * Exclusion URLs.
-* String changes:
-  - help.dtd: new: substitutionGroup.p0, substitutionGroup.p1; removed:
-    substitutionGroup.p.
-  - substitutiongroupeditor.dtd: changed: description.
 
 v0.9.1 (26-12-2008)
 * Compatibility with Firefox 3.1b2.
@@ -90,67 +75,31 @@ v0.9.1 (26-12-2008)
 v0.9.0 (22-11-2008)
 * HTML substitutions.
 * Editable URLs and substitutions.
-* Edit, delete and move buttons in options dialog disabled when there is no item
-  selected.
+* Edit, delete and move buttons in options dialog disabled when there is no item selected.
 * Updated help.
-* No methods added to prototypes of standard global objects (to avoid possible
-  conflicts).
+* No methods added to prototypes of standard global objects (to avoid possible conflicts).
 * Revised binding for input textbox.
 * Compatibility with Firefox 3.1b1.
-* String changes:
-  - foxreplace.dtd: new: replaceBarHtml.label, replaceBarHtml.accesskey.
-  - options.dtd: new: htmlHeader.
-  - substitutiongroupeditor.dtd: new: editUrlButton.label,
-    editUrlButton.accesskey, okEditUrlButton.label, okEditUrlButton.accesskey,
-    cancelEditUrlButton.label, cancelEditUrlButton.accesskey,
-    editSubstitutionButton.label, editSubstitutionButton.accesskey,
-    okEditSubstitutionButton.label, okEditSubstitutionButton.accesskey,
-    cancelEditSubstitutionButton.label, cancelEditSubstitutionButton.accesskey,
-    html.label, html.accesskey; other accesskeys changed.
-  - help.dtd: new: replaceHtml, replaceHtml.p; changed: replaceUrls.p,
-    substitution.inputString.regExp.0, substitution.table.4.0,
-    substitution.table.4.1.
 
 v0.8.0 (20-9-2008)
 * Whole words option integrated in the XBL input textbox.
-* Per-site substitution: now you can define a list of substitution groups, where
-  every group has an URL list and a substitution list; the substitutions are
-  applied only if the URL of the current page matches one of the URLs in the
-  list or if the list is empty.
+* Per-site substitution: now you can define a list of substitution groups, where every group has an URL list and a substitution list; the substitutions are
+  applied only if the URL of the current page matches one of the URLs in the list or if the list is empty.
 * Substitution list stored in XML.
 * Updated help.
 * Some skin changes.
-* Removed special skin for macfoxIIgraphite because it's not compatible with
-  Firefox 3.
+* Removed special skin for macfoxIIgraphite because it's not compatible with Firefox 3.
 * New prototypes for FxRSubstitution and FxRSubstitutionGroup.
-* String changes:
-  - bindings.dtd: new: wholeWords.
-  - foxreplace.dtd: removed: replaceBarWholeWords.label,
-    replaceBarWholeWords.accesskey.
-  - help.dtd: several new, modified and removed strings.
-  - options.dtd: lots of changes.
-  - substitutiongroupeditor.dtd: all new.
-  - foxreplace.properties: new: text, wholewords, regexp, noSubstitutionsTitle,
-    noSubstitutionsDescription, xmlErrorTitle, xmlErrorText, xmlGroupErrorText.
 
 v0.7.3 (18-8-2008)
 * Less crowded replace bar (new input textbox with XBL).
 * New XBL input textbox also in options dialog.
 * Better replace bar theme for macfoxIIgraphite.
-* New strings:
-  - bindings.dtd: all.
-* Removed strings:
-  - foxreplace.dtd: replaceBarInputRegExp.label,
-    replaceBarInputRegExp.accesskey.
-  - options.dtd: inputRegExp.label, inputRegExp.accesskey.
 
 v0.7.2 (5-8-2008)
-* Corrected description in foxreplace.properties. It was cut with a \ at the
-  end, creating a bug that didn't allow to import a replace list.
+* Corrected description in foxreplace.properties. It was cut with a \ at the end, creating a bug that didn't allow to import a replace list.
 * New locale:
   - de-DE (by CosmicForce).
-* Changed strings:
-  - foxreplace.properties: extensions.fox@replace.fx.description.
 
 v0.7.1 (15-7-2008)
 * URL substitutions (thanks to Lutay Sergey).
@@ -161,10 +110,6 @@ v0.7.1 (15-7-2008)
   - pl-PL (by Wacław Jacek).
   - pt-BR (by Alberto Eidh).
   - ru-RU (by Пирятинский Виталий).
-* New strings:
-  - foxreplace.dtd: replaceBarWholeWords.label, replaceBarWholeWords.accesskey.
-  - options.dtd: wholeWords.label, wholeWords.accesskey, wholeWordsHeader.
-  - help.dtd: everything (extracted from help.html).
 
 v0.7.0 (8-6-2008)
 * Support for regular expressions.
@@ -203,15 +148,13 @@ v0.5.3 (30-12-2007)
 * Better description.
 
 v0.5.2 (28-12-2007)
-* Removed toolbar button context menu. It's no longer necessary because the
-  button is now a "menu-button".
+* Removed toolbar button context menu. It's no longer necessary because the button is now a "menu-button".
 * Bugfix on append/overwrite dialog: wrong function name.
 * Bugfix on toolbar button menu: button's oncommand was also executed.
 * Auto-replace on load now works on all tabs.
 * Revised access keys.
 * Focus returns to input string after adding a substitution in options dialog.
-* Workaroud to get correct height for listbox in the options dialog if there
-  isn't any substitution.
+* Workaroud to get correct height for listbox in the options dialog if there isn't any substitution.
 * Revised coding style.
 * Better documentation.
 * Localized description.
@@ -227,25 +170,20 @@ v0.5.1 (25-12-2007)
   - Textboxes width set in stylesheet.
   - Don't accept if the input string textbox is empty.
 * Options dialog:
-  - Auto height in stylesheet to ensure visibility of all controls with themes
-    that set a fixed height (like Noia 2.0 (eXtreme)).
-* New icons based on an icon from OSX Iconset at GNOME-Look
-  (http://www.gnome-look.org/content/show.php/OSX+Iconset?content=71334) by
-  rpgmaker.
+  - Auto height in stylesheet to ensure visibility of all controls with themes that set a fixed height (like Noia 2.0 (eXtreme)).
+* New icons based on an icon from OSX Iconset at GNOME-Look (http://www.gnome-look.org/content/show.php/OSX+Iconset?content=71334) by rpgmaker.
 * New keyboard shortcuts.
 * New toolbar button menu.
 * Changed some strings.
 * Two skins.
-* Tested compatibility with Firefox 3.0b2
+* Tested compatibility with Firefox 3.0b2.
 
 v0.5.0 (15-12-2007)
 * New FoxReplace submenu in Tools, replacing the old Replace command.
-* Replacing done only with strings (i.e. not creating a RegExp with the input
-  string).
+* Replacing done only with strings (i.e. not creating a RegExp with the input string).
 * Instant replace (Edit -> Replace...).
 * Import: custom append/overwrite dialog.
-* Options dialog: ListBox with 20 rows and a separator at the end (to ensure
-  visibility of the Export button with some themes (like macfoxIIgraphite).
+* Options dialog: ListBox with 20 rows and a separator at the end (to ensure visibility of the Export button with some themes (like macfoxIIgraphite)).
 * Auto-replace on page load: now, this can be a filter.
 * Default filename for import and export.
 
@@ -257,11 +195,9 @@ v0.3.0 (3-12-2007)
 
 v0.2.0 (2-12-2007)
 * Escaping of special characters when saving substitution list as string.
-* Replacing implementation changed. Now is based on code in
-  chrome://global/content/findBar.js. It's faster and finds only visible text.
+* Replacing implementation changed. Now is based on code in chrome://global/content/findBar.js. It's faster and finds only visible text.
 * Substitutions in document title.
-* Added buttons to move up, move down, delete and clear substitutions from
-  substitution list.
+* Added buttons to move up, move down, delete and clear substitutions from substitution list.
 
 v0.1.0 (24-11-2007)
 * Add and remove substitutions from options dialog.
