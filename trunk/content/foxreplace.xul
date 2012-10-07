@@ -37,8 +37,8 @@
     <command id="fxrCmdHelp" oncommand="foxreplace.showHelp();"/>
   </commandset>
   <keyset id="mainKeyset">
-    <key id="fxrKeyListReplace" keycode="VK_F2" command="fxrCmdListReplace"/>
-    <key id="fxrKeyShowReplaceBar" modifiers="shift" keycode="VK_F2" command="fxrCmdShowReplaceBar"/>
+    <key id="fxrKeyListReplace" modifiers="shift" keycode="VK_F8" command="fxrCmdListReplace"/>
+    <key id="fxrKeyShowReplaceBar" keycode="VK_F8" command="fxrCmdShowReplaceBar"/>
   </keyset>
   <vbox id="appmenuPrimaryPane">
     <splitmenu id="fxrAppMenuReplace" iconic="true" insertafter="appmenu_find" label="&menuReplace.label;" command="fxrCmdShowReplaceBar">
