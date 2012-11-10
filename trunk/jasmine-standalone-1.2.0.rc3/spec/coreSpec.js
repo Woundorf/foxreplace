@@ -382,6 +382,15 @@ describe("SubstitutionGroup", function() {
       expect(group.matches("http://foo.net/")).toBe(false);
     });
 
+    it("should work with exclusion URLs but no regular URLs", function() {
+      var urls = ["-example.com/bar"];
+      var group = new SubstitutionGroup("", urls);
+      expect(group.matches("http://www.example.com/")).toBe(true);
+      expect(group.matches("http://www.example.com/foo")).toBe(true);
+      expect(group.matches("http://www.example.com/bar")).toBe(false);
+      expect(group.matches("http://foo.net/")).toBe(true);
+    });
+
     it("should work with URLs starting with hyphens", function() {
       var urls = ["|*-example.com"];
       var group = new SubstitutionGroup("", urls);

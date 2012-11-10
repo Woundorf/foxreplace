@@ -183,12 +183,11 @@ function SubstitutionGroup(aName, aUrls, aSubstitutions, aHtml) {
 SubstitutionGroup.prototype = {
 
   /**
-   * Returns true if aUrl matches any of the urls.
+   * Returns whether the substitution group should be applied to aUrl.
    */
   matches: function(aUrl) {
-    return this.urls.length == 0
-        || (!this.exclusionUrlRegExps.some(function(element) { return element.test(aUrl); })
-        && this.urlRegExps.some(function(element) { return element.test(aUrl); }));
+    return (this.urlRegExps.length == 0 || this.urlRegExps.some(function(element) { return element.test(aUrl); })) &&
+           !this.exclusionUrlRegExps.some(function(element) { return element.test(aUrl); });
   },
 
   /**
