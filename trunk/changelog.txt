@@ -1,7 +1,7 @@
 v0.14.0
 * Removed compatibility with the substitution list in the 0.10 format.
 * Substitution groups now have names. This implies a new list format: 0.14.
-* Changed shortcuts because Shift+F2 is used for the developer toolbar in Firefox 16.
+* Changed shortcuts because Shift+F2 is used for the developer toolbar in Firefox 16 (issue 87).
 * Exclusion URLs can be used without normal URLs, so you can apply substitutions to all URLs except a few ones (issue 92).
 
 v0.13.3 (18-8-2012)
