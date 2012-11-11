@@ -90,7 +90,7 @@
     </toolbarbutton>
   </toolbarpalette>
   <vbox id="browser-bottombox">
-    <toolbar id="fxrReplaceBar" insertafter="FindToolbar" align="center" fullscreentoolbar="true" hidden="true">
+    <toolbar id="fxrReplaceBar" insertbefore="inspector-toolbar,addon-bar" align="center" fullscreentoolbar="true" hidden="true">
       <toolbarbutton id="fxrReplaceBarCloseButton" class="findbar-closebutton" tooltiptext="&replaceBarClose;"
                      oncommand="document.getElementById('fxrReplaceBar').hidden=true;"/>
       <label id="fxrReplaceBarInputStringLabel" control="fxrReplaceBarInputStringTextBox" value="&replaceBarInputString.label;"
