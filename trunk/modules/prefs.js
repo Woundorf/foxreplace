@@ -128,6 +128,20 @@ var prefs = {
   },
 
   /**
+   * Saves the replace scripts setting to preferences.
+   */
+  set replaceScripts(aReplaceScripts) {
+    this._preferences.set("replaceScripts", aReplaceScripts);
+  },
+
+  /**
+   * Loads the replace scripts setting from preferences and returns it.
+   */
+  get replaceScripts() {
+    return this._preferences.get("replaceScripts");
+  },
+
+  /**
    * Saves the replace URLs setting to preferences.
    */
   set replaceUrls(aReplaceUrls) {

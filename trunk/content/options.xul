@@ -33,6 +33,7 @@
     <preferences>
       <preference id="autoReplaceOnLoad" name="extensions.foxreplace.autoReplaceOnLoad" type="bool"/>
       <preference id="replaceUrls" name="extensions.foxreplace.replaceUrls" type="bool"/>
+      <preference id="replaceScripts" name="extensions.foxreplace.replaceScripts" type="bool"/>
       <preference id="enableSubscription" name="extensions.foxreplace.enableSubscription" type="bool"/>
       <preference id="subscriptionUrl" name="extensions.foxreplace.subscriptionUrl" type="unichar"/>
       <preference id="subscriptionPeriod" name="extensions.foxreplace.subscriptionPeriod" type="int"/>
@@ -95,5 +96,7 @@
     <checkbox id="autoReplaceOnLoadCheckBox" label="&autoReplaceOnLoad.label;" accesskey="&autoReplaceOnLoad.accesskey;" preference-editable="true"
               preference="autoReplaceOnLoad"/>
     <checkbox id="replaceUrlsCheckBox" label="&replaceUrls.label;" accesskey="&replaceUrls.accesskey;" preference-editable="true" preference="replaceUrls"/>
+    <checkbox id="replaceScriptsCheckBox" label="&replaceScripts.label;" accesskey="&replaceScripts.accesskey;" preference-editable="true"
+              preference="replaceScripts"/>
   </prefpane>
 </prefwindow>

@@ -35,3 +35,5 @@
 <!ENTITY autoReplaceOnLoad.accesskey "t">
 <!ENTITY replaceUrls.label "Replace URLs (links and image sources) (Warning: this may change page behaviour!)">
 <!ENTITY replaceUrls.accesskey "l">
+<!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">
+<!ENTITY replaceScripts.accesskey "s">

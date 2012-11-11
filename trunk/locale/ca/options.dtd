@@ -35,3 +35,5 @@
 <!ENTITY autoReplaceOnLoad.accesskey "t">
 <!ENTITY replaceUrls.label "Reemplaça els URLs (enllaços i fonts de les imatges) (Atenció: això pot modificar el comportament de les pàgines!)">
 <!ENTITY replaceUrls.accesskey "s">
+<!ENTITY replaceScripts.label "Reemplaça els scripts (Atenció: això pot modificar el comportament de les pàgines!) (experimental)">
+<!ENTITY replaceScripts.accesskey "ç">
