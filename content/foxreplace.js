@@ -318,6 +318,18 @@ var foxreplace = {
 
       valueNode.value = aGroup.replace(valueNode.value);
     }
+
+    // Replace scripts
+    if (this.prefs.replaceScripts) {
+      let scriptNodesXpath = "/html/body/script";
+      let scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+      let nScriptNodes = scriptNodes.snapshotLength;
+      for (let i = 0; i < nScriptNodes; i++) {
+        let scriptNode = scriptNodes.snapshotItem(i);
+        let newText = aGroup.replace(scriptNode.text);
+        if (newText != scriptNode.text) this._replaceScript(aDocument, scriptNode, newText);
+      }
+    }
   },
 
   /**
@@ -326,6 +338,31 @@ var foxreplace = {
   replaceHtml: function(aDocument, aGroup) {
     var body = aDocument.evaluate("/html/body", aDocument, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
     body.singleNodeValue.innerHTML = aGroup.replace(body.singleNodeValue.innerHTML);
+
+    // Replace scripts
+    if (this.prefs.replaceScripts) {
+      let scriptNodesXpath = "/html/body/script";
+      let scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+      let nScriptNodes = scriptNodes.snapshotLength;
+      for (let i = 0; i < nScriptNodes; i++) {
+        let scriptNode = scriptNodes.snapshotItem(i);
+        this._replaceScript(aDocument, scriptNode, scriptNode.text);
+        // scriptNode.text is already the replaced code, but scriptNode still executes the old code, so a new script node has to be created for the change to
+        // really work
+      }
+    }
+  },
+
+  /**
+   * Replaces aScript within aDocument with a new one with aNewCode.
+   */
+  _replaceScript: function (aDocument, aScript, aNewCode) {
+    let newScript = aDocument.createElement("script");
+    let attributes = aScript.attributes;
+    let nAttributes = attributes.length;
+    for (let i = 0; i < nAttributes; i++) newScript.setAttribute(attributes[i].name, attributes[i].value);
+    newScript.text = aNewCode;
+    aScript.parentNode.replaceChild(newScript, aScript);
   }
 
 };
