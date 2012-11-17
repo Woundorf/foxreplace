@@ -9,16 +9,16 @@
 <!ENTITY substitution.inputString.regExp.0 "Expressió regular: s'interpreta com una">
 <!ENTITY regExpLink "https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/RegExp#Special_characters_in_regular_expressions">
 <!ENTITY substitution.inputString.regExp.1 "expressió regular">
-<!ENTITY substitution.inputString.regExp.2 ". Si no és vàlida, saltarà un error de sintaxi.">
+<!ENTITY substitution.inputString.regExp.2 "amb la sintaxi de JavaScript. Si no és vàlida, saltarà un error de sintaxi.">
 <!ENTITY substitution.outputString "Cadena de sortida: la cadena de text que reemplaçarà la d'entrada. Pot tenir els següents patrons especials:">
 <!ENTITY substitution.table.summary "Patrons especials de la cadena de sortida">
 <!ENTITY substitution.table.0 "Insereix un &quot;$&quot;.">
 <!ENTITY substitution.table.1 "Insereix la cadena d'entrada.">
 <!ENTITY substitution.table.2 "Insereix el text d'abans de la cadena d'entrada dins del mateix bloc.">
 <!ENTITY substitution.table.3 "Insereix el text de després de la cadena d'entrada dins del mateix bloc.">
-<!ENTITY substitution.table.4.0 "Si la cadena d'entrada és una expressió regular, i">
+<!ENTITY substitution.table.4.0 "Si la cadena d'entrada és una expressió regular amb subcadenes entre parèntesis (per exemple &quot;(\w+) \w+&quot;), i">
 <!ENTITY substitution.table.4.1 "un nombre enter decimal entre 1 i 99 (inclosos), insereix la">
-<!ENTITY substitution.table.4.2 "-èssima subcadena trobada.">
+<!ENTITY substitution.table.4.2 "-èssima subcadena trobada (seguint amb l'exemple anterior, amb el text &quot;Lorem ipsum&quot;, &quot;$1&quot; seria &quot;Lorem&quot;).">
 <!ENTITY substitutionList "Llista de substitucions">
 <!ENTITY substitutionList.p "FoxReplace guarda una llista de substitucions que podeu definir i modificar en qualsevol moment des de la finestra d'opcions de FoxReplace. Podeu aplicar la llista de substitucions quan vulgueu prement la tecla F2 o bé prement el botó de la barra d'eines o activant una opció del menú. Quan ho feu, les substitucions de la llista s'aplicaran en l'ordre en què apareixen. Podeu aplicar la llista de substitucions tantes vegades com vulgueu sobre la mateixa pàgina. Les substitucions es fan sobre el contingut actual de la pàgina, és a dir, que si apliqueu la llista de substitucions una segona vegada, serà sobre el resultat de la primera. En aquesta llista de substitució, no hi ha les substitucions directament sinó que hi ha grups de substitucions, on s'associa una llista d'adreces (URLs) amb una llista de substitucions que s'apliquen en pàgines l'adreça de les quals coincideixi amb algun dels URLs.">
 <!ENTITY substitutionGroup "Grup de substitucions">
