@@ -5,6 +5,7 @@ v0.14.0
 * Exclusion URLs can be used without normal URLs, so you can apply substitutions to all URLs except a few ones (issue 92).
 * Replace bar again appears just below the find bar, without any other bar in between.
 * New option to allow inline scripts in the body to be replaced (issue 17).
+* Updated help file to clarify some concepts about regular expressions (issue 85).
 
 v0.13.3 (18-8-2012)
 * Changed behaviour of "whole words" feature. Now it supports all Unicode letters thanks to XRegExp and distinguishes between word characters, non-word

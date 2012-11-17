@@ -8,17 +8,17 @@
 <!ENTITY substitution.inputString.wholeWords "Whole words: it's interpreted as one or more whole words. For example, &quot;active&quot; wouldn't match &quot;interactive&quot; (it would match if it was normal text).">
 <!ENTITY substitution.inputString.regExp.0 "Regular expression: it's interpreted as a">
 <!ENTITY regExpLink "https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/RegExp#Special_characters_in_regular_expressions">
-<!ENTITY substitution.inputString.regExp.1 "regular expression">
-<!ENTITY substitution.inputString.regExp.2 ". If it isn't valid, a syntax error will be shown.">
+<!ENTITY substitution.inputString.regExp.1 "JavaScript regular expression">
+<!ENTITY substitution.inputString.regExp.2 "using JavaScript's syntax. If it isn't valid, a syntax error will be shown.">
 <!ENTITY substitution.outputString "Output string: the text string that will replace the input. It can have the following special patterns:">
 <!ENTITY substitution.table.summary "Special patterns for the output string">
 <!ENTITY substitution.table.0 "Inserts a &quot;$&quot;.">
 <!ENTITY substitution.table.1 "Inserts the input string.">
 <!ENTITY substitution.table.2 "Inserts the text preceding the input string inside the same block.">
 <!ENTITY substitution.table.3 "Inserts the text following the input string inside the same block.">
-<!ENTITY substitution.table.4.0 "If the input string is a regular expression, and">
+<!ENTITY substitution.table.4.0 "If the input string is a regular expression with substrings in parentheses (e.g. &quot;(\w+) \w+&quot;), and">
 <!ENTITY substitution.table.4.1 "a decimal integer number between 1 and 99 (included), inserts the">
-<!ENTITY substitution.table.4.2 "th found substring.">
+<!ENTITY substitution.table.4.2 "th matched substring (following the previous example, with the text &quot;Lorem ipsum&quot;, &quot;$1&quot; would be &quot;Lorem&quot;).">
 <!ENTITY substitutionList "Substitution list">
 <!ENTITY substitutionList.p "FoxReplace keeps a substitution list that you can define and modify at any moment from the FoxReplace options window. You can apply the substitution list when you want by pressing the F2 key or by pushing the toolbar button or activating a menu option. When you do, substitutions in the list will be applied in the order in which they appear. You can apply the substitution list as many times as you want over the same page. Substitutions are done over the current content of the page, i.e. if you apply the substitution list a second time, it will be over the result of the first. In this substitution list there aren't the substitutions directly, but there are substitution groups, where a list of addresses (URLs) is associated with a list of substitutions which are applied to pages whose address matches one of the URLs in the list.">
 <!ENTITY substitutionGroup "Substitution group">
