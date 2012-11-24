@@ -41,10 +41,12 @@
     <description id="description">&description;</description>
     <separator/>
     <hbox>
-      <tree id="substitutionListTree" seltype="single" flex="1" ondblclick="foxreplaceOptions.onTreeDoubleClick(event);"
+      <tree id="substitutionListTree" seltype="single" editable="true" flex="1" ondblclick="foxreplaceOptions.onTreeDoubleClick(event);"
             onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitutionGroup();"
             onselect="foxreplaceOptions.onSelectSubstitutionGroup();">
         <treecols>
+          <treecol id="enabledColumn" label="&enabledHeader;" type="checkbox" editable="true"/>
+          <splitter class="tree-splitter"/>
           <treecol id="nameColumn" label="&nameHeader;" flex="1"/>
           <splitter class="tree-splitter"/>
           <treecol id="urlColumn" label="&urlHeader;" flex="1"/>

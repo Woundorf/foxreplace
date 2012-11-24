@@ -150,11 +150,12 @@ Substitution.prototype.INPUT_TYPE_STRINGS = ["text", "wholewords", "regexp"];
 /**
  * Substitution group, including a name, an URL list and a substitution list. If aHtml is true, substitutions are done in HTML.
  */
-function SubstitutionGroup(aName, aUrls, aSubstitutions, aHtml) {
+function SubstitutionGroup(aName, aUrls, aSubstitutions, aHtml, aEnabled) {
   this.name = aName || "";
   this.urls = aUrls || [];
   this.substitutions = aSubstitutions || [];
   this.html = Boolean(aHtml);
+  this.enabled = Boolean(aEnabled);
   this.urls.sort();
   this.urlRegExps = [];
   this.exclusionUrlRegExps = [];
@@ -225,7 +226,8 @@ SubstitutionGroup.prototype = {
       name: this.name,
       urls: this.urls,
       substitutions: this.substitutions,
-      html: this.html
+      html: this.html,
+      enabled: this.enabled
     };
   }
 
@@ -268,18 +270,20 @@ SubstitutionGroup.fromXml = function(aXml) {
 
   if (errors) prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlGroupErrorText") + "\n" + errors);
 
-  return new SubstitutionGroup("", urls, substitutions, html);
+  return new SubstitutionGroup("", urls, substitutions, html, true);
 };
 
 /**
  * Returns the substitution group represented by aGroupJSON.
  */
-SubstitutionGroup.fromJSON = function(aGroupJSON) {
+SubstitutionGroup.fromJSON = function(aGroupJSON, aVersion) {
   let substitutions = [];
 
   for each (let substitutionJSON in aGroupJSON.substitutions) substitutions.push(Substitution.fromJSON(substitutionJSON));
 
-  return new SubstitutionGroup(aGroupJSON.name, aGroupJSON.urls, substitutions, aGroupJSON.html);
+  let enabled = aVersion == "0.13" ? true : aGroupJSON.enabled;
+
+  return new SubstitutionGroup(aGroupJSON.name, aGroupJSON.urls, substitutions, aGroupJSON.html, enabled);
 };
 
 /**
@@ -331,7 +335,7 @@ function substitutionListFromJSON(aListJSON) {
 
   let list = [];
 
-  for each (let groupJSON in aListJSON.groups) list.push(SubstitutionGroup.fromJSON(groupJSON));
+  for each (let groupJSON in aListJSON.groups) list.push(SubstitutionGroup.fromJSON(groupJSON, aListJSON.version));
 
   return list;
 }

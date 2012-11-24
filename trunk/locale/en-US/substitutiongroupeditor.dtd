@@ -4,6 +4,8 @@
 <!ENTITY name.accesskey "">
 <!ENTITY html.label "Replace HTML">
 <!ENTITY html.accesskey "H">
+<!ENTITY enabled.label "Enable">
+<!ENTITY enabled.accesskey "">
 <!ENTITY urls "URLs">
 <!ENTITY url.label "URL">
 <!ENTITY url.accesskey "U">
