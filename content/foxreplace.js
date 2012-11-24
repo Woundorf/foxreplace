@@ -41,7 +41,7 @@ var foxreplace = {
 
     gBrowser.addEventListener("DOMContentLoaded", this.onPageLoad, true);
 
-    this._substitutionList = this.prefs.substitutionList;
+    this._loadEnabledGroups();
     this.setAutoReplaceOnLoad(this.prefs.autoReplaceOnLoad);
 
     // subscription
@@ -71,7 +71,7 @@ var foxreplace = {
 
     switch (aData) {
       case "substitutionListJSON":
-        this._substitutionList = this.prefs.substitutionList;
+        this._loadEnabledGroups();
         break;
 
       case "autoReplaceOnLoad":
@@ -129,13 +129,10 @@ var foxreplace = {
 
     if (inputString == "") return;  // this should not happen
 
-    // save substitution list
-    var substitutionList = this._substitutionList;
-
     try {
       // new temporal substitution list with only one item
-      this._substitutionList = [new this.core.SubstitutionGroup("", [], [new this.core.Substitution(inputString, outputString, caseSensitive, inputType)],
-                                                                html)];
+      this._substitutionList = [new this.core.SubstitutionGroup("", [], [new this.core.Substitution(inputString, outputString, caseSensitive, inputType)], html,
+                                                                true)];
       // perform substitutions
       this.replaceDocXpath();
     }
@@ -144,7 +141,7 @@ var foxreplace = {
     }
 
     // restore substitution list
-    this._substitutionList = substitutionList;
+    this._loadEnabledGroups();
   },
 
   /**
@@ -356,13 +353,20 @@ var foxreplace = {
   /**
    * Replaces aScript within aDocument with a new one with aNewCode.
    */
-  _replaceScript: function (aDocument, aScript, aNewCode) {
+  _replaceScript: function(aDocument, aScript, aNewCode) {
     let newScript = aDocument.createElement("script");
     let attributes = aScript.attributes;
     let nAttributes = attributes.length;
     for (let i = 0; i < nAttributes; i++) newScript.setAttribute(attributes[i].name, attributes[i].value);
     newScript.text = aNewCode;
     aScript.parentNode.replaceChild(newScript, aScript);
+  },
+
+  /**
+   * Loads enabled substitution groups.
+   */
+  _loadEnabledGroups: function() {
+    this._substitutionList = this.prefs.substitutionList.filter(function(aGroup) { return aGroup.enabled; });
   }
 
 };

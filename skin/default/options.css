@@ -12,3 +12,8 @@
 #substitutionListTreeChildren::-moz-tree-cell-text(exclusionUrl) {
   color: red;
 }
+
+/* css for checked cells */
+treechildren::-moz-tree-checkbox(checked) {
+  list-style-image: url("chrome://global/skin/checkbox/cbox-check.gif");
+}

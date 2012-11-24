@@ -95,6 +95,20 @@ let foxreplaceOptions = {
           default: return aColumn.id;
         }
       },
+      getCellValue: function(aRow, aColumn) {
+        if (aColumn.id == "enabledColumn") {
+          let group = foxreplaceOptions.substitutionList[aRow];
+          return group.enabled;
+        }
+        else return "";
+      },
+      setCellValue: function(aRow, aColumn, aValue) {
+        if (aColumn.id == "enabledColumn") {
+          let group = foxreplaceOptions.substitutionList[aRow];
+          group.enabled = aValue == "true";
+          foxreplaceOptions.saveSubstitutionList();
+        }
+      },
       getCellProperties: function(aRow, aColumn, aProperties) {
         if (aColumn.id == "urlColumn" && foxreplaceOptions.core.fxrIsExclusionUrl(this.getCellText(aRow, aColumn))) {
           let atomService = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
@@ -103,6 +117,9 @@ let foxreplaceOptions = {
       },
       getImageSrc: function() {
         return null;
+      },
+      isEditable: function(aRow, aColumn) {
+        return aColumn.id == "enabledColumn";
       }
     };
   },
