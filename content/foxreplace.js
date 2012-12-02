@@ -220,7 +220,6 @@ var foxreplace = {
    */
   replaceText: function(aDocument, aGroup) {
     // selection string possibilities
-    /* //text()[name(parent::*)!='script']  :( name can be upper or lower */
     /* ... empty(index-of(('style'),lower-case(name(parent::*))))  :( functions not supported */
     /* //body//text()[string-length(normalize-space())>0] */
 
@@ -228,58 +227,7 @@ var foxreplace = {
 
     // Replace text nodes
     var textNodesXpath = "/html/head/title/text()"
-                       + "|/html/body/text()"
-                       + "|/html/body//body/text()" // this happens in Gmail (//iframe/html/body/text())
-                       + "|/html/body//div/text()"
-                       + "|/html/body//span/text()"
-                       + "|/html/body//h1/text()"
-                       + "|/html/body//h2/text()"
-                       + "|/html/body//h3/text()"
-                       + "|/html/body//h4/text()"
-                       + "|/html/body//h5/text()"
-                       + "|/html/body//h6/text()"
-                       + "|/html/body//address/text()"
-                       + "|/html/body//bdo/text()"
-                       + "|/html/body//em/text()"
-                       + "|/html/body//strong/text()"
-                       + "|/html/body//dfn/text()"
-                       + "|/html/body//code/text()"
-                       + "|/html/body//samp/text()"
-                       + "|/html/body//kbd/text()"
-                       + "|/html/body//var/text()"
-                       + "|/html/body//cite/text()"
-                       + "|/html/body//abbr/text()"
-                       + "|/html/body//acronym/text()"
-                       + "|/html/body//q/text()"
-                       + "|/html/body//sub/text()"
-                       + "|/html/body//sup/text()"
-                       + "|/html/body//p/text()"
-                       + "|/html/body//pre/text()"
-                       + "|/html/body//ins/text()"
-                       + "|/html/body//del/text()"
-                       + "|/html/body//li/text()"
-                       + "|/html/body//dt/text()"
-                       + "|/html/body//dd/text()"
-                       + "|/html/body//caption/text()"
-                       + "|/html/body//th/text()"
-                       + "|/html/body//td/text()"
-                       + "|/html/body//a/text()"
-                       + "|/html/body//object/text()"
-                       + "|/html/body//tt/text()"
-                       + "|/html/body//i/text()"
-                       + "|/html/body//b/text()"
-                       + "|/html/body//big/text()"
-                       + "|/html/body//small/text()"
-                       + "|/html/body//noframes/text()"
-                       + "|/html/body//iframe/text()"
-                       + "|/html/body//button/text()"
-                       + "|/html/body//option/text()"
-                       + "|/html/body//textarea/text()"
-                       + "|/html/body//label/text()"
-                       + "|/html/body//fieldset/text()"
-                       + "|/html/body//legend/text()"
-                       + "|/html/body//font/text()"
-                       + "|/html/body//blockquote/text()";
+                       + "|/html/body//text()[not(parent::script)]";
     var textNodes = aDocument.evaluate(textNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
     var nTextNodes = textNodes.snapshotLength;
     for (var i = 0; i < nTextNodes; i++) {
