@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009-2012 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2009-2013 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -157,7 +157,7 @@ var fxrIO = {
     }
 
     var listJSON = substitutionListToJSON(aSubstitutionList);
-    var data = JSON.stringify(listJSON);
+    var data = JSON.stringify(listJSON, null, 2);
     var fileOutputStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
     fileOutputStream.init(aFile, 0x02 | 0x08 | 0x20, 0666, 0);  // write, create, truncate
     var converterOutputStream = Cc["@mozilla.org/intl/converter-output-stream;1"].createInstance(Ci.nsIConverterOutputStream);
