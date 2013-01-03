@@ -1,5 +1,11 @@
 <!ENTITY title "取代詞組編輯器">
 <!ENTITY description "輸入網址列表和詞組清單。詞組清單必須至少有一個取代詞組。網址列表可以留空，那將會在所有頁面執行詞組取代。取代詞組只在其匹配的網址執行，而不在例外網址執行。例外網址以連字號(&quot;-&quot;)開頭，並以紅字顯示。你可以使用萬用字元(&quot;*&quot;)匹配零到多個字元 (不需要在網址開頭或結尾使用&quot;*&quot;)。管線符號(&quot;|&quot;)匹配網址開頭或結尾。例：&quot;http://*.example.com/|&quot; 匹配 &quot;http://www.example.com/&quot; 但不匹配 &quot;http://www.example.com/whatever&quot;.">
+<!ENTITY name.label "Name">
+<!ENTITY name.accesskey "N">
+<!ENTITY html.label "取代 HTML">
+<!ENTITY html.accesskey "H">
+<!ENTITY enabled.label "Enable">
+<!ENTITY enabled.accesskey "E">
 <!ENTITY urls "網址">
 <!ENTITY url.label "網址">
 <!ENTITY url.accesskey "U">
@@ -42,5 +48,3 @@
 <!ENTITY inputTypeHeader "類型">
 <!ENTITY outputStringHeader "取代為">
 <!ENTITY caseSensitiveHeader "符合大小寫">
-<!ENTITY html.label "取代 HTML">
-<!ENTITY html.accesskey "H">

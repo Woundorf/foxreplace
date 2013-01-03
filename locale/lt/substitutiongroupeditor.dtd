@@ -1,5 +1,11 @@
 <!ENTITY title "Keitimų grupės redaktorius">
 <!ENTITY description "Įveskite URL sąrašą ir pakeitimų sąrašą. Pakeitimų sąrašas turi turėti bent vieną pakeitimą. URL sąrašas gali būti tuščias, tada keitimų sąrašas bus taikomas visiems puslapiams; kitu atveju keitimai bus taikomi tiems adresams kurie atitinka esančius sąraše, bet jų nėra išimčių sąraše. Išimčių URL yra tie kurie prasideda brūkšniu(„-“), taipogi jie rodomi raudonai. „*“ atitinka 0 arba daugiau simbolių (nereikia pradžioj ir gale), „|“ atitinka URL pradžią arba pabaigą. Pvz. „http://*.pavyzdys.lt/|“ atitiks „http://www.pavyzdys.lt/“ bet ne „http://www.pavyzdys.lt/kazkas“">
+<!ENTITY name.label "Name">
+<!ENTITY name.accesskey "N">
+<!ENTITY html.label "Pakeisti HTML">
+<!ENTITY html.accesskey "H">
+<!ENTITY enabled.label "Enable">
+<!ENTITY enabled.accesskey "E">
 <!ENTITY urls "URL">
 <!ENTITY url.label "URL">
 <!ENTITY url.accesskey "U">
@@ -42,5 +48,3 @@
 <!ENTITY inputTypeHeader "Tipas">
 <!ENTITY outputStringHeader "Kuo">
 <!ENTITY caseSensitiveHeader "Skirti raidžių dydį">
-<!ENTITY html.label "Pakeisti HTML">
-<!ENTITY html.accesskey "H">

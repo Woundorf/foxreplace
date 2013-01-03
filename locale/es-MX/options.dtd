@@ -1,10 +1,11 @@
 <!ENTITY prefwindow.title "Opciones de FoxReplace">
 <!ENTITY mainPane.title "Principal">
 <!ENTITY description "Introducir la lista de sustitucion. La lista es compuesta de grupos de sustituciones, donde las sustituciones de cada grupo son aplicadas si cualquiera de los grupos de URLs coinciden con la direccion de la pagina cargada. si el grupo no tiene URLs las sustituciones son aplicadas a cualquier pagina. Los grupos se comprueban en el orden en que aparecen.">
+<!ENTITY enabledHeader "Enable">
+<!ENTITY nameHeader "Name">
 <!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Reemplazar">
 <!ENTITY outputStringHeader "Con">
-<!ENTITY htmlHeader "HTML">
 <!ENTITY addButton.label "Agregar">
 <!ENTITY addButton.accesskey "A">
 <!ENTITY editButton.label "Editar">
@@ -35,3 +36,5 @@
 <!ENTITY autoReplaceOnLoad.accesskey "t">
 <!ENTITY replaceUrls.label "Reemplazar URLs (fuentes de enlaces y imagenes)(Advertencia: esto puede cambiar el comportamiento de la pagina!)">
 <!ENTITY replaceUrls.accesskey "l">
+<!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">
+<!ENTITY replaceScripts.accesskey "s">
