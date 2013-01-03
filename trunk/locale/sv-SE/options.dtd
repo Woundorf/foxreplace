@@ -23,10 +23,6 @@
 <!ENTITY importFromUrlButton.accesskey "m">
 <!ENTITY exportButton.label "Exportera">
 <!ENTITY exportButton.accesskey "x">
-<!ENTITY subscriptionGroupBoxCaption "Periodically update from URL">
-<!ENTITY subscriptionEnableCheckBox.label "Enable">
-<!ENTITY subscriptionEnableCheckBox.accesskey "b">
-<!ENTITY subscriptionStatus.label "Status:">
 <!ENTITY subscriptionUrl.label "URL">
 <!ENTITY subscriptionUrl.accesskey "U">
 <!ENTITY subscriptionPeriod.label "Intervall (minuter)">
