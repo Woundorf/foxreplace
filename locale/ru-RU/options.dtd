@@ -23,10 +23,6 @@
 <!ENTITY importFromUrlButton.accesskey "п">
 <!ENTITY exportButton.label "Экспорт">
 <!ENTITY exportButton.accesskey "к">
-<!ENTITY subscriptionGroupBoxCaption "Periodically update from URL">
-<!ENTITY subscriptionEnableCheckBox.label "Enable">
-<!ENTITY subscriptionEnableCheckBox.accesskey "b">
-<!ENTITY subscriptionStatus.label "Status:">
 <!ENTITY subscriptionUrl.label "Адрес">
 <!ENTITY subscriptionUrl.accesskey "р">
 <!ENTITY subscriptionPeriod.label "Промежуток (минуты)">
