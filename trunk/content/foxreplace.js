@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2012 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2007-2013 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  * Lutay Sergey (href substitution)
@@ -281,12 +281,12 @@ var foxreplace = {
    * Applies substitutions from aGroup to aDocument on HTML.
    */
   replaceHtml: function(aDocument, aGroup) {
-    var body = aDocument.evaluate("/html/body", aDocument, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
-    body.singleNodeValue.innerHTML = aGroup.replace(body.singleNodeValue.innerHTML);
+    var html = aDocument.evaluate("/html", aDocument, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+    html.singleNodeValue.innerHTML = aGroup.replace(html.singleNodeValue.innerHTML);
 
     // Replace scripts
     if (this.prefs.replaceScripts) {
-      let scriptNodesXpath = "/html/body/script";
+      let scriptNodesXpath = "/html//script";
       let scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
       let nScriptNodes = scriptNodes.snapshotLength;
       for (let i = 0; i < nScriptNodes; i++) {
