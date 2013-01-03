@@ -1,5 +1,11 @@
 <!ENTITY title "Редактор групп замещений">
 <!ENTITY description "Введите список адресов и список замещений. Список адресов может быть пустым — тогда замещения будут применяться к любой странице; иначе они будут применены только в том случае, когда один из адресов будет совпадать с адресом страницы. При написании адресов можно использовать шаблоны. Символ «*» обозначает 0 или нескольких любых символов (бессмысленно использовать в начале или в конце адреса). Символ «|» служит для указания начала или конца адреса. Например, шаблону «http://*.example.com/|» будет соответствовать адрес «http://www.example.com/», но не «http://www.example.com/whatever». Список замещений должен содержать хотя бы одно замещение.">
+<!ENTITY name.label "Name">
+<!ENTITY name.accesskey "N">
+<!ENTITY html.label "Заменять HTML">
+<!ENTITY html.accesskey "H">
+<!ENTITY enabled.label "Enable">
+<!ENTITY enabled.accesskey "E">
 <!ENTITY urls "Адреса">
 <!ENTITY url.label "Адрес">
 <!ENTITY url.accesskey "д">
@@ -42,5 +48,3 @@
 <!ENTITY inputTypeHeader "Тип">
 <!ENTITY outputStringHeader "На">
 <!ENTITY caseSensitiveHeader "Учитывать регистр">
-<!ENTITY html.label "Заменять HTML">
-<!ENTITY html.accesskey "H">

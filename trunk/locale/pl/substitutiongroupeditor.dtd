@@ -1,4 +1,11 @@
 <!ENTITY title "Edytor grup zamienników">
+<!ENTITY description "Enter the URL list and the substitution list. The substitution list must have at least one substitution. The URL list can be empty, and then the substitutions will be applied to any page; otherwise they will be applied only when the page address matches one of the normal URLs but doesn't match any of the exclusion URLs. The exclusion URLs are the ones that start with a hyphen (&quot;-&quot;), and they are displayed in red. You may use &quot;*&quot; to match any 0 or more characters (not needed at the beginning and the end) and &quot;|&quot; to match the beginning or the end of the URL. For example, &quot;http://*.example.com/|&quot; would match &quot;http://www.example.com/&quot; but not &quot;http://www.example.com/whatever&quot;.">
+<!ENTITY name.label "Name">
+<!ENTITY name.accesskey "N">
+<!ENTITY html.label "Zastąp HTML">
+<!ENTITY html.accesskey "H">
+<!ENTITY enabled.label "Enable">
+<!ENTITY enabled.accesskey "E">
 <!ENTITY urls "Adresy URL">
 <!ENTITY url.label "Adres URL">
 <!ENTITY url.accesskey "A">
@@ -41,5 +48,3 @@
 <!ENTITY inputTypeHeader "Typ">
 <!ENTITY outputStringHeader "tekstem">
 <!ENTITY caseSensitiveHeader "Rozróżniaj wielkość znaków">
-<!ENTITY html.label "Zastąp HTML">
-<!ENTITY html.accesskey "H">

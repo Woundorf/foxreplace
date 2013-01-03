@@ -10,6 +10,7 @@ v0.14.0
 * Text replaced in all body elements (issue 62).
 * Pretty printing of exported JSON file (issue 96).
 * HTML substitutions are made on the html node instead of the body (issue 64, issue 76).
+* Compatibility with Firefox up to 21.0a1.
 
 v0.13.3 (18-8-2012)
 * Changed behaviour of "whole words" feature. Now it supports all Unicode letters thanks to XRegExp and distinguishes between word characters, non-word

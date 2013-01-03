@@ -1,5 +1,11 @@
 <!ENTITY title "替换组编辑器">
 <!ENTITY description "输入网址列表和替换列表。替换列表至少要有一个替换。网址列表可以为空，但将应用到任何网页；否则它们将只适用于当网页地址匹配的正常网址，但不符合任何的排斥网址。排除网址是那些以连字符开始(&quot;-&quot;), ，他们以红色显示。您可以使用“*”匹配任何0个或者多个字符（而不是必须在开始和结束）和“|”相匹配的开始或结束的网址。例如，输入“http://*.example.com/|”将匹配“http://www.example.com/” ，而不包括“http://www.example.com/whatever” 。">
+<!ENTITY name.label "Name">
+<!ENTITY name.accesskey "N">
+<!ENTITY html.label "替换 HTML">
+<!ENTITY html.accesskey "H">
+<!ENTITY enabled.label "Enable">
+<!ENTITY enabled.accesskey "E">
 <!ENTITY urls "网址">
 <!ENTITY url.label "网址">
 <!ENTITY url.accesskey "U">
@@ -42,5 +48,3 @@
 <!ENTITY inputTypeHeader "类型">
 <!ENTITY outputStringHeader "用">
 <!ENTITY caseSensitiveHeader "区分大小写">
-<!ENTITY html.label "替换 HTML">
-<!ENTITY html.accesskey "H">
