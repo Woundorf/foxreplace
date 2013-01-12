@@ -1,10 +1,10 @@
 <!ENTITY title "Editor de grupo de sustitucion">
 <!ENTITY description "Introdusca la lista de URL y la lista de sustitucion. La lista de sustitucion debe tener al menos una sustitucion. La lista puede estar vacia, y entonces las sustituciones pueden ser aplicadas a cualquier pagina;  de lo contrario, sólo se aplicará cuando la dirección de la página coincide con una de las direcciones URL normal, pero no coincide con ninguna de las direcciones URL de exclusion. Las direcciones URL de exclusión son las que comienzan con un guión (&quot;-&quot;), y se muestran en rojo. Usted puede usar &quot;*&quot; para coincidir cualquier 0 o mas caracteres (No es necesario en el principio y el fin) y &quot;|&quot; para coincidir el comienzo o el fin de la URL. Por ejemplo, &quot;http://*.example.com/|&quot; coincidiría con &quot;http://www.example.com/&quot; pero no &quot;http://www.example.com/whatever&quot;.">
-<!ENTITY name.label "Name">
+<!ENTITY name.label "Nombre">
 <!ENTITY name.accesskey "N">
 <!ENTITY html.label "Reemplazar HTML">
 <!ENTITY html.accesskey "H">
-<!ENTITY enabled.label "Enable">
+<!ENTITY enabled.label "Habilitar">
 <!ENTITY enabled.accesskey "E">
 <!ENTITY urls "URLs">
 <!ENTITY url.label "URL">

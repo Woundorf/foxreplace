@@ -1,11 +1,11 @@
 <!ENTITY title "Vervangingsgroep bewerken">
 <!ENTITY description "Voer de URL-lijst en de vervangingslijst in. De vervangingslijst dient ten minste één vervanging te bevatten. De URL-lijst mag leeg zijn; in dat geval worden de vervagingen toegepast op alle pagina’s. Anders worden ze alleen toegepast wanneer het adres van de pagina overeenkomt met één van de normale URL’s maar niet overeenkomt met één van de uitzonderings-URL’s. Uitzonderings-URL’s berginnen met een minusteken (‘-’) en worden weergegeven in rood. U kunt ‘*’ gebruiken om 0 of meer karakters te matchen (niet nodig ana het begin en het einde) en ‘|’ om het begin of het einde van de URL te matchen. Zo komt bijvoorbeeld ‘http://*.voorbeeld.com/|’ overeen met ‘http://www.voorbeeld.com/’ maar niet met ‘http://www.voorbeeld.com/watdanook’.">
-<!ENTITY name.label "Name">
+<!ENTITY name.label "Naam">
 <!ENTITY name.accesskey "N">
 <!ENTITY html.label "HTML vervangen">
-<!ENTITY html.accesskey "H">
-<!ENTITY enabled.label "Enable">
-<!ENTITY enabled.accesskey "E">
+<!ENTITY html.accesskey "M">
+<!ENTITY enabled.label "Inschakelen">
+<!ENTITY enabled.accesskey "c">
 <!ENTITY urls "URL’s">
 <!ENTITY url.label "URL">
 <!ENTITY url.accesskey "U">

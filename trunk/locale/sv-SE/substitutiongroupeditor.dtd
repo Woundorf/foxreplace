@@ -1,11 +1,11 @@
 <!ENTITY title "Ersättningsgruppsredigeraren">
 <!ENTITY description "Ange URL-listan och ersättningslistan. Ersättningslistan måste ha åtminstone en ersättning. URL-listan kan vara tom, ersättningarna kommer då att tillämpas på alla sidor; annars kommer de endast att tillämpas när sidans adress matchar en av de normala URL:erna, men inte matchar någon av de undantagna URL:erna. De undantagna URL:erna är de som börjar med ett bindestreck (&quot;-&quot;) och de visas i rött. Du kan använda &quot;*&quot; (asterisk) för att matcha 0 eller fler godtyckliga tecken (behövs inte i början och slutet) och &quot;|&quot; (lodrätt streck) för att matcha början eller slutet av URL:en. Till exempel: &quot;http://*.example.com/|&quot; matchar &quot;http://www.example.com/&quot; men inte &quot;http://www.example.com/webbsidangunnar&quot;.">
-<!ENTITY name.label "Name">
+<!ENTITY name.label "Namn">
 <!ENTITY name.accesskey "N">
 <!ENTITY html.label "Ersätt HTML">
 <!ENTITY html.accesskey "H">
-<!ENTITY enabled.label "Enable">
-<!ENTITY enabled.accesskey "E">
+<!ENTITY enabled.label "Aktivera">
+<!ENTITY enabled.accesskey "A">
 <!ENTITY urls "URL:er">
 <!ENTITY url.label "URL">
 <!ENTITY url.accesskey "U">

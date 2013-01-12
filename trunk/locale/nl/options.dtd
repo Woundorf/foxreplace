@@ -1,8 +1,8 @@
 <!ENTITY prefwindow.title "FoxReplace-opties">
 <!ENTITY mainPane.title "Hoofdpaneel">
 <!ENTITY description "Voer de vervangingslijst in. De lijst is opgebouwd uit vervangingsgroepen, waarbij de vervangingen van elke groep worden toegepast als één van de groeps-URL’s overeenkomt met het adres van de geladen pagina. Indien de groep geen URL’s bevat worden de vervangingen toegepast op alle pagina’s. Groepen worden nagelopen in volgorde van opsomming.">
-<!ENTITY enabledHeader "Enable">
-<!ENTITY nameHeader "Name">
+<!ENTITY enabledHeader "Inschakelen">
+<!ENTITY nameHeader "Naam">
 <!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Vervangen">
 <!ENTITY outputStringHeader "Door">
@@ -33,8 +33,8 @@
 <!ENTITY subscriptionPeriod.label "Periode (minuten)">
 <!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "Automatisch vervangen bij laden pagina">
-<!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY autoReplaceOnLoad.accesskey "p">
 <!ENTITY replaceUrls.label "URL’s vervangen (koppelingen en afbeeldingsbronnen) (Waarschuwing: hierdoor kan het gedrag van de pagina wijzigen)">
 <!ENTITY replaceUrls.accesskey "a">
-<!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">
-<!ENTITY replaceScripts.accesskey "s">
+<!ENTITY replaceScripts.label "Scripts vervangen (Waarschuwing: hierdoor wijzigt mogelijk het gedrag van de pagina!) (experimenteel)">
+<!ENTITY replaceScripts.accesskey "S">

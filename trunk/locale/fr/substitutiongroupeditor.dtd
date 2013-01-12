@@ -1,11 +1,11 @@
 <!ENTITY title "Éditeur de groupe de substitution">
 <!ENTITY description "Indiquez la liste des URLs et des substitutions. La liste d&apos;URLs est facultative, dans ce cas, la liste de substitution sera appliquée à toutes les pages ; sinon, les substitutions s&apos;appliqueront uniquement lorsque l&apos;adresse de la page correspond à une des URLs. Vous pouvez utiliser le caractère « * » pour faire correspondre aucun ou plusieurs caractères (inutile au début ou à la fin) et « | » pour faire correspondre le début ou la fin de l&apos;URL. Par exemple, « http://*.exemple.com/| » correspondra à « http://www.exemple.com/ » mais pas à « http://www.exemple.com/autrechose ». La liste doit comporter au moins un élément de substitution.">
-<!ENTITY name.label "Name">
+<!ENTITY name.label "Nom">
 <!ENTITY name.accesskey "N">
 <!ENTITY html.label "Remplacer le code HTML">
 <!ENTITY html.accesskey "H">
-<!ENTITY enabled.label "Enable">
-<!ENTITY enabled.accesskey "E">
+<!ENTITY enabled.label "Activer">
+<!ENTITY enabled.accesskey "A">
 <!ENTITY urls "URLs">
 <!ENTITY url.label "URL">
 <!ENTITY url.accesskey "U">
