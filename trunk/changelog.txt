@@ -4,12 +4,12 @@ v0.14.0
 * Changed shortcuts because Shift+F2 is used for the developer toolbar in Firefox 16 (issue 87).
 * Exclusion URLs can be used without normal URLs, so you can apply substitutions to all URLs except a few ones (issue 92).
 * Replace bar again appears just below the find bar, without any other bar in between.
-* New option to allow inline scripts in the body to be replaced (issue 17).
+* New option to allow inline scripts to be replaced (issue 17).
 * Updated help file to clarify some concepts about regular expressions (issue 85).
 * Substitution groups can be enabled or disabled (issue 33).
 * Text replaced in all body elements (issue 62).
 * Pretty printing of exported JSON file (issue 96).
-* HTML substitutions are made on the html node instead of the body (issue 64, issue 76).
+* HTML substitutions are made on the html node instead of the body (issues 64 and 76).
 * Compatibility with Firefox up to 21.0a1.
 
 v0.13.3 (18-8-2012)
