@@ -11,7 +11,7 @@
   - The Original Code is FoxReplace.
   -
   - The Initial Developer of the Original Code is Marc Ruiz Altisent.
-  - Portions created by the Initial Developer are Copyright (C) 2007-2012 the Initial Developer. All Rights Reserved.
+  - Portions created by the Initial Developer are Copyright (C) 2007-2013 the Initial Developer. All Rights Reserved.
   -
   - Contributor(s):
   -
@@ -45,15 +45,15 @@
             onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitutionGroup();"
             onselect="foxreplaceOptions.onSelectSubstitutionGroup();">
         <treecols>
-          <treecol id="enabledColumn" label="&enabledHeader;" type="checkbox" editable="true"/>
+          <treecol id="enabledColumn" label="&enabledHeader;" type="checkbox" editable="true" persist="width hidden"/>
           <splitter class="tree-splitter"/>
-          <treecol id="nameColumn" label="&nameHeader;" flex="1"/>
+          <treecol id="nameColumn" label="&nameHeader;" flex="1" persist="width hidden"/>
           <splitter class="tree-splitter"/>
-          <treecol id="urlColumn" label="&urlHeader;" flex="1"/>
+          <treecol id="urlColumn" label="&urlHeader;" flex="1" persist="width hidden"/>
           <splitter class="tree-splitter"/>
-          <treecol id="inputColumn" label="&inputStringHeader;" flex="1"/>
+          <treecol id="inputColumn" label="&inputStringHeader;" flex="1" persist="width hidden"/>
           <splitter class="tree-splitter"/>
-          <treecol id="outputColumn" label="&outputStringHeader;" flex="1"/>
+          <treecol id="outputColumn" label="&outputStringHeader;" flex="1" persist="width hidden"/>
         </treecols>
         <treechildren id="substitutionListTreeChildren"/>
       </tree>
