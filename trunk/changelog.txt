@@ -10,6 +10,7 @@ v0.14.0
 * Text replaced in all body elements (issue 62).
 * Pretty printing of exported JSON file (issue 96).
 * HTML substitutions are made on the html node instead of the body (issues 64 and 76).
+* Column settings on the options dialog are persistent (issue 103).
 * Compatibility with Firefox up to 21.0a1.
 
 v0.13.3 (18-8-2012)
