@@ -1,8 +1,8 @@
 <!ENTITY prefwindow.title "FoxReplace - опције">
 <!ENTITY mainPane.title "Главно">
 <!ENTITY description "Направите списак за замену. Списак садржи групе са замењивање, где је свака група примењена ако се група адреса подудара са адресом учитане странице. Ако група нема адресу, њене замене су примењене на било који страницу. Групе се проверавају оним редом којим се појављују.">
-<!ENTITY enabledHeader "Enable">
-<!ENTITY nameHeader "Name">
+<!ENTITY enabledHeader "Омогући">
+<!ENTITY nameHeader "Назив">
 <!ENTITY urlHeader "Адреса">
 <!ENTITY inputStringHeader "Замени">
 <!ENTITY outputStringHeader "са">
@@ -36,5 +36,5 @@
 <!ENTITY autoReplaceOnLoad.accesskey "т">
 <!ENTITY replaceUrls.label "Замени адресе (везе и изворе слика) (Упозорење: ово може утицати на понашање странице!)">
 <!ENTITY replaceUrls.accesskey "З">
-<!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">
-<!ENTITY replaceScripts.accesskey "s">
+<!ENTITY replaceScripts.label "Замени скрипте (упозорење: ово може утицати на понашање странице!) - пробно">
+<!ENTITY replaceScripts.accesskey "с">
