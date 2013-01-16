@@ -1,11 +1,11 @@
 <!ENTITY title "Уређивање групе за замену">
 <!ENTITY description "Унесите списак адреса. Овај списак може бити празан и тада ће замене бити примењене на све станице; иначе се примењују само на ове адресе које су наведене, Можете користити „*” за било који знак или (није потребно на почетку, ни на крају) и „|” за почетак или крај URL-а. Нпр. „http://*.primer.com/|” ће одговарати за „http://www.primer.com/”, али не и за „http://www.primer.com/proba”. Списак за замењивање мора имати барем једну замену.">
-<!ENTITY name.label "Name">
-<!ENTITY name.accesskey "N">
+<!ENTITY name.label "Назив">
+<!ENTITY name.accesskey "Н">
 <!ENTITY html.label "Замени HTML">
 <!ENTITY html.accesskey "Х">
-<!ENTITY enabled.label "Enable">
-<!ENTITY enabled.accesskey "E">
+<!ENTITY enabled.label "Омогући">
+<!ENTITY enabled.accesskey "О">
 <!ENTITY urls "Адресе">
 <!ENTITY url.label "Адреса">
 <!ENTITY url.accesskey "А">
