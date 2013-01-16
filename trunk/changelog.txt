@@ -1,4 +1,4 @@
-v0.14.0
+v0.14.0 (16-1-2013)
 * Removed compatibility with the substitution list in the 0.10 format.
 * Substitution groups now have names. This implies a new list format: 0.14.
 * Changed shortcuts because Shift+F2 is used for the developer toolbar in Firefox 16 (issue 87).
