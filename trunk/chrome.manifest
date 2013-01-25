@@ -26,4 +26,4 @@ skin    foxreplace-os   classic/1.0 skin/default/mac/   os=Darwin
 overlay chrome://browser/content/browser.xul    chrome://foxreplace/content/foxreplace.xul
 style   chrome://global/content/customizeToolbar.xul    chrome://foxreplace/skin/foxreplace.css
 
-content foxreplace-test jasmine-standalone-1.2.0.rc3/
+content foxreplace-test jasmine/
