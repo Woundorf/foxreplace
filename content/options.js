@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2012 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2007-2013 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -71,6 +71,8 @@ let foxreplaceOptions = {
       },
       get rowCount() {
         return foxreplaceOptions.substitutionList.length;
+      },
+      cycleHeader: function() {
       },
       getColumnProperties: function() {
       },
