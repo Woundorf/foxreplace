@@ -20,28 +20,6 @@ es resol bastant el tema de l'aparença, però només per Firefox 3
   -moz-border-bottom-colors: transparent;
   min-width: 1px;
 }
-/*
-#fxrReplaceBarCloseButton {
-  border: 1px solid transparent;
-  padding: 3px 2px 4px 2px !important;
-  list-style-image: url("chrome://foxreplace/skin/closeSidebar.png");
-  -moz-appearance: none;
-  -moz-image-region: rect(0px, 14px, 14px, 0px);
-}
-#fxrReplaceBarCloseButton > .toolbarbutton-icon {
-  -moz-margin-end: 0px !important;
-  -moz-padding-end: 2px !important;
-  -moz-padding-start: 2px !important;
-}
-#fxrReplaceBarCloseButton:hover {
-  -moz-image-region: rect(0px, 28px, 14px, 14px);
-}
-#fxrReplaceBarCloseButton:hover:active {
-  -moz-image-region: rect(0px, 42px, 14px, 28px);
-}*/
-#fxrReplaceBarInputStringTextBox, #fxrReplaceBarOutputStringTextBox {
-  width: 20em;
-}
 
 #fxrReplaceBarInputStringTextBox {
   -moz-binding: url("chrome://foxreplace/content/bindings.xml#inputTextBox");

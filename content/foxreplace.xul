@@ -95,10 +95,10 @@
                      oncommand="document.getElementById('fxrReplaceBar').hidden=true;"/>
       <label id="fxrReplaceBarInputStringLabel" control="fxrReplaceBarInputStringTextBox" value="&replaceBarInputString.label;"
              accesskey="&replaceBarInputString.accesskey;"/>
-      <textbox id="fxrReplaceBarInputStringTextBox" oninput="document.getElementById('fxrReplaceBarReplaceButton').disabled=this.value==''"/>
+      <textbox id="fxrReplaceBarInputStringTextBox" flex="1" oninput="document.getElementById('fxrReplaceBarReplaceButton').disabled=this.value==''"/>
       <label id="fxrReplaceBarOutputStringLabel" control="fxrReplaceBarOutputStringTextBox" value="&replaceBarOutputString.label;"
              accesskey="&replaceBarOutputString.accesskey;"/>
-      <textbox id="fxrReplaceBarOutputStringTextBox"/>
+      <textbox id="fxrReplaceBarOutputStringTextBox" flex="1"/>
       <checkbox id="fxrReplaceBarCaseSensitiveCheckBox" label="&replaceBarCaseSensitive.label;" accesskey="&replaceBarCaseSensitive.accesskey;"/>
       <checkbox id="fxrReplaceBarHtmlCheckBox" label="&replaceBarHtml.label;" accesskey="&replaceBarHtml.accesskey;"/>
       <button id="fxrReplaceBarReplaceButton" disabled="true" label="&replaceBarReplace.label;" accesskey="&replaceBarReplace.accesskey;"
