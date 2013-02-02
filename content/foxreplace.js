@@ -232,7 +232,16 @@ var foxreplace = {
     var nTextNodes = textNodes.snapshotLength;
     for (var i = 0; i < nTextNodes; i++) {
       var textNode = textNodes.snapshotItem(i);
-      textNode.textContent = aGroup.replace(textNode.textContent);
+      let oldTextContent = textNode.textContent;
+      textNode.textContent = aGroup.replace(oldTextContent);
+      
+      // Fire change event for textareas with default value (issue 49)
+      if (textNode.parentNode.localName == "textarea" && textNode.parentNode.value == textNode.parentNode.defaultValue &&
+          textNode.textContent != oldTextContent) {
+        let event = aDocument.createEvent("HTMLEvents");
+        event.initEvent("change", true, false);
+        textNode.parentNode.dispatchEvent(event);
+      }
     }
 
     // Replace nodes with a "value" property
@@ -257,11 +266,19 @@ var foxreplace = {
     var nValueNodes = valueNodes.snapshotLength;
     for (var i = 0; i < nValueNodes; i++) {
       var valueNode = valueNodes.snapshotItem(i);
+      let oldValue = valueNode.value;
 
       // Special treatment for textareas that still have their default value (issue 63)
-      if (valueNode.type == "textarea" && valueNode.value == valueNode.defaultValue) continue;
+      if (valueNode.type == "textarea" && oldValue == valueNode.defaultValue) continue;
 
-      valueNode.value = aGroup.replace(valueNode.value);
+      valueNode.value = aGroup.replace(oldValue);
+
+      // Fire change event for inputs and textareas (issue 49)
+      if ((valueNode.localName == "input" || valueNode.localName == "textarea") && valueNode.value != oldValue) {
+        let event = aDocument.createEvent("HTMLEvents");
+        event.initEvent("change", true, false);
+        valueNode.dispatchEvent(event);
+      }
     }
 
     // Replace scripts
