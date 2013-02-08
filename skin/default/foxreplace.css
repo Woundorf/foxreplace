@@ -9,7 +9,8 @@ es resol bastant el tema de l'aparença, però només per Firefox 3
 */
 
 #fxrAppMenuReplace, #fxrMenuEditReplace, #fxrMenuToolsFoxReplace, #fxrContextMenuFoxReplace {
-  list-style-image: url("chrome://foxreplace/skin/menu-icon.png");
+  list-style-image: url("chrome://foxreplace/skin/toolbar-icons.png");
+  -moz-image-region: rect(4px, 40px, 20px, 24px);
 }
 
 #fxrToolbarButton {
