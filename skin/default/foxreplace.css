@@ -12,6 +12,10 @@ es resol bastant el tema de l'aparença, però només per Firefox 3
   list-style-image: url("chrome://foxreplace/skin/menu-icon.png");
 }
 
+#fxrToolbarButton {
+  list-style-image: url("chrome://foxreplace/skin/toolbar-icons.png");
+}
+
 #fxrReplaceBar {
   -moz-appearance: none !important;
   border-top: 2px solid;
