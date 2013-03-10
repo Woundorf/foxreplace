@@ -11,7 +11,7 @@
   - The Original Code is FoxReplace.
   -
   - The Initial Developer of the Original Code is Marc Ruiz Altisent.
-  - Portions created by the Initial Developer are Copyright (C) 2008-2012 the Initial Developer. All Rights Reserved.
+  - Portions created by the Initial Developer are Copyright (C) 2008-2013 the Initial Developer. All Rights Reserved.
   -
   - Contributor(s):
   -
@@ -34,7 +34,8 @@
   <hbox align="center">
     <label id="nameLabel" control="nameTextBox" value="&name.label;" accesskey="&name.accesskey;"/>
     <textbox id="nameTextBox" flex="1"/>
-    <checkbox id="htmlCheckBox" label="&html.label;" accesskey="&html.accesskey;"/>
+    <label id="htmlLabel" control="htmlButton" value="&html.label;" accesskey="&html.accesskey;"/>
+    <box id="htmlButton"/>
     <checkbox id="enabledCheckBox" label="&enabled.label;" accesskey="&enabled.accesskey;"/>
   </hbox>
   <tabbox>

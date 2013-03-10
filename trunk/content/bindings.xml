@@ -11,7 +11,7 @@
   - The Original Code is FoxReplace.
   -
   - The Initial Developer of the Original Code is Marc Ruiz Altisent.
-  - Portions created by the Initial Developer are Copyright (C) 2008-2012 the Initial Developer. All Rights Reserved.
+  - Portions created by the Initial Developer are Copyright (C) 2008-2013 the Initial Developer. All Rights Reserved.
   -
   - Contributor(s):
   -
@@ -89,6 +89,51 @@
     <handlers>
       <handler event="keypress" keycode="VK_UP" action="this.inputType--;"/>
       <handler event="keypress" keycode="VK_DOWN" action="this.inputType++;"/>
+    </handlers>
+  </binding>
+  <binding id="htmlButton">
+    <content>
+      <xul:button anonid="button" type="menu">
+        <xul:menupopup inherits="position=menuposition">
+          <xul:menuitem label="&htmlNone;"
+                        oncommand="document.getBindingParent(this).html=document.getBindingParent(this)._fxrCore.SubstitutionGroup.prototype.HTML_NONE;"/>
+          <xul:menuitem label="&htmlOutput;"
+                        oncommand="document.getBindingParent(this).html=document.getBindingParent(this)._fxrCore.SubstitutionGroup.prototype.HTML_OUTPUT;"/>
+          <xul:menuitem label="&htmlInputOutput;"
+                        oncommand="document.getBindingParent(this).html=document.getBindingParent(this)._fxrCore.SubstitutionGroup.prototype.HTML_INPUT_OUTPUT;"/>
+        </xul:menupopup>
+      </xul:button>
+    </content>
+    <implementation>
+      <constructor>
+        this._fxrCore = {};
+        Components.utils.import("resource://foxreplace/core.js", this._fxrCore);
+        this.html = this._fxrCore.SubstitutionGroup.prototype.HTML_NONE;
+      </constructor>
+      <field name="_button" readonly="true">
+        document.getAnonymousElementByAttribute(this, "anonid", "button")
+      </field>
+      <field name="_html">
+        this._fxrCore.SubstitutionGroup.prototype.HTML_NONE
+      </field>
+      <property name="html" onget="return this._html;">
+        <setter>
+          <![CDATA[
+            if (val < this._fxrCore.SubstitutionGroup.prototype.HTML_NONE) val = this._fxrCore.SubstitutionGroup.prototype.HTML_NONE;
+            if (val > this._fxrCore.SubstitutionGroup.prototype.HTML_INPUT_OUTPUT) val = this._fxrCore.SubstitutionGroup.prototype.HTML_INPUT_OUTPUT;
+          ]]>
+          this._html = val;
+          switch (val) {
+            case this._fxrCore.SubstitutionGroup.prototype.HTML_NONE: this._button.label = "&htmlNone;"; break;
+            case this._fxrCore.SubstitutionGroup.prototype.HTML_OUTPUT: this._button.label = "&htmlOutput;"; break;
+            case this._fxrCore.SubstitutionGroup.prototype.HTML_INPUT_OUTPUT: this._button.label = "&htmlInputOutput;"; break;
+          }
+        </setter>
+      </property>
+    </implementation>
+    <handlers>
+      <handler event="keypress" keycode="VK_UP" action="this.html--;"/>
+      <handler event="keypress" keycode="VK_DOWN" action="this.html++;"/>
     </handlers>
   </binding>
 </bindings>

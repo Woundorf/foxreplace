@@ -99,8 +99,9 @@
       <label id="fxrReplaceBarOutputStringLabel" control="fxrReplaceBarOutputStringTextBox" value="&replaceBarOutputString.label;"
              accesskey="&replaceBarOutputString.accesskey;"/>
       <textbox id="fxrReplaceBarOutputStringTextBox" flex="1"/>
+      <label id="fxrReplaceBarHtmlLabel" control="fxrReplaceBarHtmlButton" value="&replaceBarHtml.label;" accesskey="&replaceBarHtml.accesskey;"/>
+      <box id="fxrReplaceBarHtmlButton"/><!-- Warning: it can't be a button or the binding won't work as expected -->
       <checkbox id="fxrReplaceBarCaseSensitiveCheckBox" label="&replaceBarCaseSensitive.label;" accesskey="&replaceBarCaseSensitive.accesskey;"/>
-      <checkbox id="fxrReplaceBarHtmlCheckBox" label="&replaceBarHtml.label;" accesskey="&replaceBarHtml.accesskey;"/>
       <button id="fxrReplaceBarReplaceButton" disabled="true" label="&replaceBarReplace.label;" accesskey="&replaceBarReplace.accesskey;"
               command="fxrCmdBarReplace"/>
     </toolbar>
