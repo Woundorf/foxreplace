@@ -30,6 +30,10 @@ es resol bastant el tema de l'aparença, però només per Firefox 3
   -moz-binding: url("chrome://foxreplace/content/bindings.xml#inputTextBox");
 }
 
+#fxrReplaceBarHtmlButton {
+  -moz-binding: url("chrome://foxreplace/content/bindings.xml#htmlButton");
+}
+
 /*
 #FindToolbar {
   -moz-appearance: none !important;

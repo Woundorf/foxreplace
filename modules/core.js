@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009-2012 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2009-2013 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -148,13 +148,15 @@ Substitution.prototype.INPUT_REG_EXP = 2;
 Substitution.prototype.INPUT_TYPE_STRINGS = ["text", "wholewords", "regexp"];
 
 /**
- * Substitution group, including a name, an URL list and a substitution list. If aHtml is true, substitutions are done in HTML.
+ * Substitution group, including a name, an URL list and a substitution list. aHtml decides whether HTML is used only in output, both in input and output or not
+ * used.
  */
 function SubstitutionGroup(aName, aUrls, aSubstitutions, aHtml, aEnabled) {
   this.name = aName || "";
   this.urls = aUrls || [];
   this.substitutions = aSubstitutions || [];
-  this.html = Boolean(aHtml);
+  this.html = aHtml || this.HTML_NONE;
+  if (this.html < this.HTML_NONE || this.html > this.HTML_INPUT_OUTPUT) this.html = this.HTML_NONE; // avoid invalid values
   this.enabled = Boolean(aEnabled);
   this.urls.sort();
   this.urlRegExps = [];
@@ -180,6 +182,62 @@ function SubstitutionGroup(aName, aUrls, aSubstitutions, aHtml, aEnabled) {
                       else this.urlRegExps.push(regExp);
                     }, this);
 }
+
+/**
+ * Creates a substitution group from an XML object.
+ */
+SubstitutionGroup.fromXml = function(aXml) {
+  let urlsJxon;
+
+  if (!aXml.urls.url) urlsJxon = [];  // special case when there are no urls
+  else urlsJxon = aXml.urls.url;
+
+  if (!Array.isArray(urlsJxon)) urlsJxon = [urlsJxon];  // special case when there is one url
+
+  let urls = [];
+  for each (let url in urlsJxon) urls.push(url);
+
+  let substitutionsJxon;
+
+  if (!aXml.substitutions.substitution) substitutionsJxon = []; // special case when there are no substitutions (should not happen)
+  else substitutionsJxon = aXml.substitutions.substitution;
+
+  if (!Array.isArray(substitutionsJxon)) substitutionsJxon = [substitutionsJxon]; // special case when there is one substitution
+
+  let substitutions = [];
+
+  var errors = "";
+  for each (let substitution in substitutionsJxon) {
+    try {
+      substitutions.push(Substitution.fromXml(substitution));
+    }
+    catch (e) {
+      errors += e + "\n";
+    }
+  }
+
+  let html = aXml["@html"] == true ? this.prototype.HTML_INPUT_OUTPUT : this.prototype.HTML_NONE;
+
+  if (errors) prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlGroupErrorText") + "\n" + errors);
+
+  return new SubstitutionGroup("", urls, substitutions, html, true);
+};
+
+/**
+ * Returns the substitution group represented by aGroupJSON.
+ */
+SubstitutionGroup.fromJSON = function(aGroupJSON, aVersion) {
+  let substitutions = [];
+  for each (let substitutionJSON in aGroupJSON.substitutions) substitutions.push(Substitution.fromJSON(substitutionJSON));
+
+  let html;
+  if (aVersion == "0.13" || aVersion == "0.14") html = aGroupJSON.html ? this.prototype.HTML_INPUT_OUTPUT : this.prototype.HTML_NONE;
+  else html = this.prototype.HTML_STRINGS.indexOf(aGroupJSON.html);
+
+  let enabled = aVersion == "0.13" ? true : aGroupJSON.enabled;
+
+  return new SubstitutionGroup(aGroupJSON.name, aGroupJSON.urls, substitutions, html, enabled);
+};
 
 SubstitutionGroup.prototype = {
 
@@ -226,7 +284,7 @@ SubstitutionGroup.prototype = {
       name: this.name,
       urls: this.urls,
       substitutions: this.substitutions,
-      html: this.html,
+      html: this.HTML_STRINGS[this.html],
       enabled: this.enabled
     };
   }
@@ -234,57 +292,12 @@ SubstitutionGroup.prototype = {
 };
 
 /**
- * Creates a substitution group from an XML object.
+ * Constants.
  */
-SubstitutionGroup.fromXml = function(aXml) {
-  let urlsJxon;
-
-  if (!aXml.urls.url) urlsJxon = [];  // special case when there are no urls
-  else urlsJxon = aXml.urls.url;
-
-  if (!Array.isArray(urlsJxon)) urlsJxon = [urlsJxon];  // special case when there is one url
-
-  let urls = [];
-  for each (let url in urlsJxon) urls.push(url);
-
-  let substitutionsJxon;
-
-  if (!aXml.substitutions.substitution) substitutionsJxon = []; // special case when there are no substitutions (should not happen)
-  else substitutionsJxon = aXml.substitutions.substitution;
-
-  if (!Array.isArray(substitutionsJxon)) substitutionsJxon = [substitutionsJxon]; // special case when there is one substitution
-
-  let substitutions = [];
-
-  var errors = "";
-  for each (let substitution in substitutionsJxon) {
-    try {
-      substitutions.push(Substitution.fromXml(substitution));
-    }
-    catch (e) {
-      errors += e + "\n";
-    }
-  }
-
-  var html = aXml["@html"] == true;
-
-  if (errors) prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlGroupErrorText") + "\n" + errors);
-
-  return new SubstitutionGroup("", urls, substitutions, html, true);
-};
-
-/**
- * Returns the substitution group represented by aGroupJSON.
- */
-SubstitutionGroup.fromJSON = function(aGroupJSON, aVersion) {
-  let substitutions = [];
-
-  for each (let substitutionJSON in aGroupJSON.substitutions) substitutions.push(Substitution.fromJSON(substitutionJSON));
-
-  let enabled = aVersion == "0.13" ? true : aGroupJSON.enabled;
-
-  return new SubstitutionGroup(aGroupJSON.name, aGroupJSON.urls, substitutions, aGroupJSON.html, enabled);
-};
+SubstitutionGroup.prototype.HTML_NONE = 0;
+SubstitutionGroup.prototype.HTML_OUTPUT = 1;
+SubstitutionGroup.prototype.HTML_INPUT_OUTPUT = 2;
+SubstitutionGroup.prototype.HTML_STRINGS = ["none", "output", "inputoutput"];
 
 /**
  * Creates the substitution list from an XML object.
@@ -322,7 +335,7 @@ function fxrIsExclusionUrl(aUrl) {
  */
 function substitutionListToJSON(aSubstitutionList) {
   return {
-    version: "0.14",
+    version: "0.15",
     groups: aSubstitutionList
   };
 }

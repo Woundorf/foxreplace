@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2008-2012 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2008-2013 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -36,7 +36,7 @@ var foxreplaceSubstitutionGroupEditor = {
   get _nameTextBox() { return document.getElementById("nameTextBox"); },
   get _urlsListBox() { return document.getElementById("urlsListBox"); },
   get _substitutionsListBox() { return document.getElementById("substitutionsListBox"); },
-  get _htmlCheckBox() { return document.getElementById("htmlCheckBox"); },
+  get _htmlButton() { return document.getElementById("htmlButton"); },
   get _enabledCheckBox() { return document.getElementById("enabledCheckBox"); },
 
   /**
@@ -51,7 +51,7 @@ var foxreplaceSubstitutionGroupEditor = {
       this._nameTextBox.value = group.name;
       for (var i = 0; i < group.urls.length; i++) this.addUrl(group.urls[i]);
       for (var i = 0; i < group.substitutions.length; i++) this.addSubstitution(group.substitutions[i]);
-      this._htmlCheckBox.checked = group.html;
+      this._htmlButton.html = group.html;
       this._enabledCheckBox.checked = group.enabled;
     }
   },
@@ -550,7 +550,7 @@ var foxreplaceSubstitutionGroupEditor = {
 
     for (var i = 0; i < nUrls; i++) urls[i] = this._urlsListBox.getItemAtIndex(i).label;
 
-    var html = this._htmlCheckBox.checked;
+    let html = this._htmlButton.html;
     let name = this._nameTextBox.value;
     let enabled = this._enabledCheckBox.checked;
 

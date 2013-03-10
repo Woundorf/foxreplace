@@ -125,7 +125,7 @@ var foxreplace = {
     var inputType = document.getElementById("fxrReplaceBarInputStringTextBox").inputType;
     var outputString = document.getElementById("fxrReplaceBarOutputStringTextBox").value;
     var caseSensitive = document.getElementById("fxrReplaceBarCaseSensitiveCheckBox").checked;
-    var html = document.getElementById("fxrReplaceBarHtmlCheckBox").checked;
+    var html = document.getElementById("fxrReplaceBarHtmlButton").html;
 
     if (inputString == "") return;  // this should not happen
 
@@ -210,8 +210,11 @@ var foxreplace = {
 
       if (!group.matches(url)) continue;
 
-      if (group.html) this.replaceHtml(doc, group);
-      else this.replaceText(doc, group);
+      switch (group.html) {
+        case group.HTML_NONE: this.replaceText(doc, group); break;
+        case group.HTML_OUTPUT: this.replaceTextWithHtml(doc, group); break;
+        case group.HTML_INPUT_OUTPUT: this.replaceHtml(doc, group); break;
+      }
     }
   },
 
@@ -286,6 +289,58 @@ var foxreplace = {
       let scriptNodesXpath = "/html/body/script";
       let scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
       let nScriptNodes = scriptNodes.snapshotLength;
+      for (let i = 0; i < nScriptNodes; i++) {
+        let scriptNode = scriptNodes.snapshotItem(i);
+        let newText = aGroup.replace(scriptNode.text);
+        if (newText != scriptNode.text) this._replaceScript(aDocument, scriptNode, newText);
+      }
+    }
+  },
+  
+  /**
+   * Applies substitutions from aGroup to aDocument on text with HTML output.
+   */
+  replaceTextWithHtml: function(aDocument, aGroup) {
+    // Replace text nodes
+    let textNodesXpath = "/html/head/title/text()"
+                       + "|/html/body//text()[not(parent::script)]";
+    let textNodes = aDocument.evaluate(textNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+    let nTextNodes = textNodes.snapshotLength;
+
+    for (let i = 0; i < nTextNodes; i++) {
+      let textNode = textNodes.snapshotItem(i);
+      let originalText = textNode.textContent;
+      let replacedText = aGroup.replace(originalText);
+
+      if (originalText != replacedText) {
+        let fragment = aDocument.createDocumentFragment();
+        let tmp = aDocument.createElement("a");
+        tmp.innerHTML = replacedText;
+        let child = tmp.firstChild;
+
+        while (child) {
+          fragment.appendChild(child);
+          child = tmp.firstChild
+        }
+
+        let parent = textNode.parentNode;
+        parent.replaceChild(fragment, textNode);
+
+        // Fire change event for textareas with default value (issue 49)
+        if (parent.localName == "textarea" && parent.value == parent.defaultValue) {
+          let event = aDocument.createEvent("HTMLEvents");
+          event.initEvent("change", true, false);
+          parent.dispatchEvent(event);
+        }
+      }
+    }
+
+    // Replace scripts
+    if (this.prefs.replaceScripts) {
+      let scriptNodesXpath = "/html/body/script";
+      let scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+      let nScriptNodes = scriptNodes.snapshotLength;
+
       for (let i = 0; i < nScriptNodes; i++) {
         let scriptNode = scriptNodes.snapshotItem(i);
         let newText = aGroup.replace(scriptNode.text);
