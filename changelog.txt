@@ -2,6 +2,7 @@
 * Change event is fired when a substitution changes text in an input or textarea element (issue 49).
 * Updated icon sizes.
 * Substitutions with HTML only in the output (issue 5).
+* Disabled tr locale (was reported as bad translation).
 
 v0.14.0 (16-1-2013)
 * Removed compatibility with the substitution list in the 0.10 format.

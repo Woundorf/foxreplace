@@ -15,7 +15,7 @@ locale  foxreplace  ro-RO   locale/ro-RO/
 locale  foxreplace  ru-RU   locale/ru-RU/
 locale  foxreplace  sr  locale/sr/
 locale  foxreplace  sv-SE   locale/sv-SE/
-locale  foxreplace  tr  locale/tr/
+#locale  foxreplace  tr  locale/tr/
 locale  foxreplace  zh-CN   locale/zh-CN/
 locale  foxreplace  zh-TW   locale/zh-TW/
 resource foxreplace modules/
