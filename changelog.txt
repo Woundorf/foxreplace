@@ -3,6 +3,7 @@
 * Updated icon sizes.
 * Substitutions with HTML only in the output (issue 5).
 * Disabled tr locale (was reported as bad translation).
+* Compatibility with Firefox up to 23.0.
 
 v0.14.0 (16-1-2013)
 * Removed compatibility with the substitution list in the 0.10 format.
