@@ -1,11 +1,7 @@
 <!ENTITY title "Udskiftningsgruppe-editor">
 <!ENTITY description "Indtast URL-listen og udskiftningslisten. URL-listen kan være tom, og udskiftninger vil blive foretaget på alle sider; ellers vil de kun blive foretaget når én af URLerne matcher sidens adresse. Du kan bruge &quot;*&quot; til at matche ethvert 0 eller flere tegn (ike nødvendigt i begyndelsen og slutningen) og &quot;|&quot; til at matche begyndelsen eller slutningen af URLen. For eksempel, &quot;http://*.example.com/|&quot; vil matche &quot;http://www.example.com/&quot; men ikke &quot;http://www.example.com/whatever&quot;. Udskiftningslisten skal indeholde mindst én udskiftning.">
-<!ENTITY name.label "Name">
-<!ENTITY name.accesskey "N">
 <!ENTITY html.label "Erstat HTML">
 <!ENTITY html.accesskey "H">
-<!ENTITY enabled.label "Enable">
-<!ENTITY enabled.accesskey "E">
 <!ENTITY urls "URLer">
 <!ENTITY url.label "URL">
 <!ENTITY url.accesskey "U">

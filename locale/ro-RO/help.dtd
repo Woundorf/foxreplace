@@ -31,20 +31,9 @@
 <!ENTITY replaceUrls "Înlocuiește adresele">
 <!ENTITY replaceUrls.p "Această opțiune este implicit dezactivată. Dacă este activată, substituțiile sunt aplicate și adreselor din pagină (legături, sursele imaginilor, etc) și astfel poate modifica comportamentul paginii. Folosiți această opțiune cu responsabilitate. Aceasta nu are efect în substituții HTML pentru că astfel adresele ar putea fi modificate oricând.">
 <!ENTITY newGui "Meniul nou și elementele barei de unelte">
-<!ENTITY newGui.app "Firefox menu">
 <!ENTITY newGui.edit "Editează">
-<!ENTITY newGui.menu.replace "Replace... (Shift+F2)">
-<!ENTITY newGui.menu.replace.d "Shows the replace bar.">
 <!ENTITY newGui.tools "Unelte">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (F2)">
-<!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
-<!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
-<!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
-<!ENTITY newGui.menu.options "FoxReplace options...">
-<!ENTITY newGui.menu.options.d "Opens FoxReplace options window.">
-<!ENTITY newGui.menu.help "Help">
-<!ENTITY newGui.menu.help.d "Shows this page.">
 <!ENTITY newGui.toolbarButton "Buton pe bara de unelte">
 <!ENTITY newGui.toolbarButton.0 "Apăsarea lui aplică lista curentă de substituții.">
 <!ENTITY newGui.toolbarButton.1 "Are un meniu lateral ca FoxReplace de sus.">
