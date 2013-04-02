@@ -31,20 +31,9 @@
 <!ENTITY replaceUrls "Замена адресов">
 <!ENTITY replaceUrls.p "Эта возможность по умолчанию отключена. При её включении замещения будут применяться и к адресам на странице (гиперссылкам, ссылкам на изображения и т.п.), изменяя таким образом её поведение. Пользуйтесь этой функцией с осторожностью. Не оказывает никакого эффекта на замещения в HTML, потому что тогда адреса могут изменяться в любом случае.">
 <!ENTITY newGui "Новые элементы меню и панели инструментов">
-<!ENTITY newGui.app "Firefox menu">
 <!ENTITY newGui.edit "Правка">
-<!ENTITY newGui.menu.replace "Replace... (Shift+F2)">
-<!ENTITY newGui.menu.replace.d "Shows the replace bar.">
 <!ENTITY newGui.tools "Инструменты">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (F2)">
-<!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
-<!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
-<!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
-<!ENTITY newGui.menu.options "FoxReplace options...">
-<!ENTITY newGui.menu.options.d "Opens FoxReplace options window.">
-<!ENTITY newGui.menu.help "Help">
-<!ENTITY newGui.menu.help.d "Shows this page.">
 <!ENTITY newGui.toolbarButton "Кнопка панели инструментов">
 <!ENTITY newGui.toolbarButton.0 "Её нажатие применяет текущий список замещения.">
 <!ENTITY newGui.toolbarButton.1 "Аналогично пункту меню, описанному выше.">

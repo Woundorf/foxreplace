@@ -1,8 +1,6 @@
 <!ENTITY prefwindow.title "FoxReplace indstillinger">
 <!ENTITY mainPane.title "Overordnet">
 <!ENTITY description "Indtast udskiftningslisten. Listen består af udskiftningsgrupper, hvor udskiftningerne for hver gruppe anvendes hvis en af gruppe-URLerne matcher adressen for den indlæste side. Hvis gruppen ikke har nogen URLer bruges dens udskiftninger på enhver side. Grupper tjekkes i den rækkefølge de optræder i.">
-<!ENTITY enabledHeader "Enable">
-<!ENTITY nameHeader "Name">
 <!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Erstat">
 <!ENTITY outputStringHeader "Med">
@@ -24,10 +22,6 @@
 <!ENTITY importFromUrlButton.accesskey "m">
 <!ENTITY exportButton.label "Eksporter">
 <!ENTITY exportButton.accesskey "E">
-<!ENTITY subscriptionGroupBoxCaption "Periodically update from URL">
-<!ENTITY subscriptionEnableCheckBox.label "Enable">
-<!ENTITY subscriptionEnableCheckBox.accesskey "b">
-<!ENTITY subscriptionStatus.label "Status:">
 <!ENTITY subscriptionUrl.label "URL">
 <!ENTITY subscriptionUrl.accesskey "L">
 <!ENTITY subscriptionPeriod.label "Periode (minutter)">
@@ -36,5 +30,3 @@
 <!ENTITY autoReplaceOnLoad.accesskey "A">
 <!ENTITY replaceUrls.label "Erstat URLer (links og billedkilder) (Advarsel: dette kan ændre sidens opførsel!)">
 <!ENTITY replaceUrls.accesskey "U">
-<!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">
-<!ENTITY replaceScripts.accesskey "s">
