@@ -3,6 +3,7 @@ v0.15.0
 * Change event is fired when a substitution changes text in an input or textarea element (issue 49).
 * Updated icon sizes.
 * Substitutions with HTML only in the output (issue 5).
+* Updated help (issue 110).
 * Disabled tr locale (was reported as bad translation).
 * Compatibility with Firefox up to 23.0.
 
