@@ -30,6 +30,8 @@
 <!ENTITY autoReplace.p "Aquesta opció es pot activar o desactivar. Quan està activa, s'aplica la llista de substitucions automàticament quan es carrega una pàgina, aplicant-se les substitucions dels grups amb un URL coincident. D'aquesta manera l'extensió pot actuar com un filtre per a les pàgines que vulgueu.">
 <!ENTITY replaceUrls "Reemplaça els URLs">
 <!ENTITY replaceUrls.p "Aquesta opció està desactivada per defecte. Si s'activa les substitucions també s'apliquen sobre els URLs que hi hagi a la pàgina (enllaços, fonts d'imatges, etc.), de manera que pot canviar el comportament de la pàgina. Utilitzeu-la sota la vostra pròpia responsabilitat. No té cap efecte quan les substitucions són a l'HTML, perquè llavors els URLs poden ser modificats sempre.">
+<!ENTITY replaceScripts "Reemplaça els scripts">
+<!ENTITY replaceScripts.p "Aquesta opció està desactivada per defecte. Si s'activa les substitucions també s'apliquen sobre els scripts que hi hagi a la pàgina, de manera que pot canviar el comportament de la pàgina. Utilitzeu-la sota la vostra pròpia responsabilitat. Per les substitucions amb HTML a l'entrada i a la sortida afecta a tots els scripts, altrament només als del body.">
 <!ENTITY newGui "Nous elements dels menús i barra d'eines">
 <!ENTITY newGui.app "Menú Firefox">
 <!ENTITY newGui.edit "Edita">
