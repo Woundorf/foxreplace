@@ -1,3 +1,6 @@
 <!ENTITY text "Text">
 <!ENTITY wholeWords "Hela ord">
 <!ENTITY regExp "Reguljärt uttryck">
+<!ENTITY htmlNone "Nej">
+<!ENTITY htmlOutput "Endast utdata">
+<!ENTITY htmlInputOutput "Indata och utdata">
