@@ -10,7 +10,7 @@
 <!ENTITY listReplace.accesskey "V">
 <!ENTITY autoReplaceOnLoad.label "Automatisch vervangen bij laden pagina">
 <!ENTITY autoReplaceOnLoad.accesskey "A">
-<!ENTITY options.label "FoxReplace opties…">
+<!ENTITY options.label "FoxReplace-opties…">
 <!ENTITY options.accesskey "o">
 <!ENTITY help.label "Help">
 <!ENTITY help.accesskey "H">

@@ -34,7 +34,7 @@
 <!ENTITY subscriptionPeriod.accesskey "д">
 <!ENTITY autoReplaceOnLoad.label "Аутоматски замени приликом учитавања странице">
 <!ENTITY autoReplaceOnLoad.accesskey "т">
-<!ENTITY replaceUrls.label "Замени адресе (везе и изворе слика) (Упозорење: ово може утицати на понашање странице!)">
+<!ENTITY replaceUrls.label "Замени адресе (везе и изворе слика) (упозорење: ово може утицати на понашање странице!)">
 <!ENTITY replaceUrls.accesskey "З">
 <!ENTITY replaceScripts.label "Замени скрипте (упозорење: ово може утицати на понашање странице!) - пробно">
 <!ENTITY replaceScripts.accesskey "с">

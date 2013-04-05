@@ -1,5 +1,5 @@
-<!ENTITY title "FoxReplace help">
-<!ENTITY h1 "FoxReplace help">
+<!ENTITY title "FoxReplace-help">
+<!ENTITY h1 "FoxReplace-help">
 <!ENTITY p "Deze extensie stelt u in staat om tekstfragmenten (zinsdelen) op een pagina te vervangen door andere tekstfragmenten. Het systeem is gebaseerd op vervangingen, waarbij elke vervanging een invoertekst kent die vervangen dient te worden (het veld ‘Vervangen’) en een uitvoertekst die de eerste vervangt (het veld ‘Met’). Er zijn aanvullende opties voor vervanging die hieronder worden uitgelegd. Als een vervanging wordt toegepast geldt dat voor de gehele inhoud van een pagina (op dit moment kunt u nog geen gedeeltelijke vervangingen uitvoeren).">
 <!ENTITY substitution "Vervanging">
 <!ENTITY substitution.p "Deze heeft altijd een invoertekst en een uitvoertekst. De uitvoertekst kan leeg zijn (om tekst te verwijderen), maar de invoertekst dient ten minste uit één karakter te bestaan. Optioneel kan de vervanging hoofdlettergevoelig zijn.">
