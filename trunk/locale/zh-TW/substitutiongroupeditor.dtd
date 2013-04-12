@@ -2,7 +2,7 @@
 <!ENTITY description "輸入網址列表和詞組清單。詞組清單必須至少有一個取代詞組。網址列表可以留空，那將會在所有頁面執行詞組取代。取代詞組只在其匹配的網址執行，而不在例外網址執行。例外網址以連字號(&quot;-&quot;)開頭，並以紅字顯示。你可以使用萬用字元(&quot;*&quot;)匹配零到多個字元 (不需要在網址開頭或結尾使用&quot;*&quot;)。管線符號(&quot;|&quot;)匹配網址開頭或結尾。例：&quot;http://*.example.com/|&quot; 匹配 &quot;http://www.example.com/&quot; 但不匹配 &quot;http://www.example.com/whatever&quot;.">
 <!ENTITY name.label "名稱">
 <!ENTITY name.accesskey "N">
-<!ENTITY html.label "取代 HTML">
+<!ENTITY html.label "HTML">
 <!ENTITY html.accesskey "H">
 <!ENTITY enabled.label "啟用">
 <!ENTITY enabled.accesskey "E">
@@ -12,24 +12,24 @@
 <!ENTITY addUrlButton.label "新增">
 <!ENTITY addUrlButton.accesskey "A">
 <!ENTITY editUrlButton.label "編輯">
-<!ENTITY editUrlButton.accesskey "E">
+<!ENTITY editUrlButton.accesskey "i">
 <!ENTITY okEditUrlButton.label "確定">
 <!ENTITY okEditUrlButton.accesskey "O">
 <!ENTITY cancelEditUrlButton.label "取消">
-<!ENTITY cancelEditUrlButton.accesskey "n">
+<!ENTITY cancelEditUrlButton.accesskey "C">
 <!ENTITY deleteUrlButton.label "刪除">
-<!ENTITY deleteUrlButton.accesskey "l">
+<!ENTITY deleteUrlButton.accesskey "D">
 <!ENTITY clearUrlsButton.label "全部刪除">
-<!ENTITY clearUrlsButton.accesskey "C">
+<!ENTITY clearUrlsButton.accesskey "l">
 <!ENTITY substitutions "取代詞組">
 <!ENTITY inputString.label "尋找目標">
-<!ENTITY inputString.accesskey "p">
+<!ENTITY inputString.accesskey "R">
 <!ENTITY outputString.label "取代為">
 <!ENTITY outputString.accesskey "w">
 <!ENTITY caseSensitive.label "符合大小寫">
-<!ENTITY caseSensitive.accesskey "h">
+<!ENTITY caseSensitive.accesskey "t">
 <!ENTITY addSubstitutionButton.label "新增">
-<!ENTITY addSubstitutionButton.accesskey "d">
+<!ENTITY addSubstitutionButton.accesskey "A">
 <!ENTITY moveUpSubstitutionButton.label "向上移">
 <!ENTITY moveUpSubstitutionButton.accesskey "M">
 <!ENTITY moveDownSubstitutionButton.label "向下移">
@@ -39,11 +39,11 @@
 <!ENTITY okEditSubstitutionButton.label "確定">
 <!ENTITY okEditSubstitutionButton.accesskey "O">
 <!ENTITY cancelEditSubstitutionButton.label "取消">
-<!ENTITY cancelEditSubstitutionButton.accesskey "n">
+<!ENTITY cancelEditSubstitutionButton.accesskey "C">
 <!ENTITY deleteSubstitutionButton.label "刪除">
-<!ENTITY deleteSubstitutionButton.accesskey "t">
+<!ENTITY deleteSubstitutionButton.accesskey "D">
 <!ENTITY clearSubstitutionsButton.label "全部刪除">
-<!ENTITY clearSubstitutionsButton.accesskey "r">
+<!ENTITY clearSubstitutionsButton.accesskey "l">
 <!ENTITY inputStringHeader "尋找目標">
 <!ENTITY inputTypeHeader "類型">
 <!ENTITY outputStringHeader "取代為">

@@ -20,24 +20,26 @@
 <!ENTITY substitution.table.4.1 "是一個十進位整數 1 至 99 (含)，插入第">
 <!ENTITY substitution.table.4.2 "個匹配的子字串。">
 <!ENTITY substitutionList "取代列表">
-<!ENTITY substitutionList.p "FoxReplace 儲存一個取代列表，你可以從 FoxReplace 選項視窗對列表做設定和修改，並經由手動按下 F2 鍵或工具列按鈕，或是設定選項自動執行取代。詞組依順序執行。你可以在同一頁面重複執行；再次地執行會覆蓋前一次執行的結果。取代列表由詞組清單所構成；詞組清單由網址和取代詞組所構成；詞組會在其指定的網址執行取代。">
+<!ENTITY substitutionList.p "FoxReplace 儲存一個取代列表，你可以從 FoxReplace 選項視窗對列表做設定和修改，並經由手動按下 Shift+F8 組合鍵或工具列按鈕，或是設定選項自動執行取代。詞組依順序執行。你可以在同一頁面重複執行；再次地執行會覆蓋前一次執行的結果。取代列表由詞組清單所構成；詞組清單由網址和取代詞組所構成；詞組會在其指定的網址執行取代。">
 <!ENTITY substitutionGroup "詞組清單">
 <!ENTITY substitutionGroup.p0 "詞組清單由網址和取代詞組所構成。詞組依順序執行；詞組必須至少含有一個取代詞。你可以設定套用的網址列表，如果網址列表留空，那將會在所有頁面執行詞組取代。你也可以設定例外網址，取代詞組不會在例外網址執行。所以，如果網址列表非空，取代詞組會在其匹配且非例外網址上執行。">
 <!ENTITY substitutionGroup.p1 "例外網址以連字號(&quot;-&quot;)開頭，並以紅字顯示。你可以使用萬用字元(&quot;*&quot;)匹配零到多個字元，管線符號(&quot;|&quot;)匹配網址開頭或結尾。如果你想要設定一個以連字號開頭的網址(如： &quot;-abc&quot;)，而且希望它不是例外網址，你可以使用格式： &quot;|*-abc&quot;。">
-<!ENTITY replaceHtml "取代 HTML">
-<!ENTITY replaceHtml.p "取代通常只作用於文字，但這個選項可以使之作用於 HTML 原始碼，它支援修改頁面的格式或結構。對於每一份詞組清單，你可以啟用或停用此選項。">
+<!ENTITY replaceHtml "HTML">
+<!ENTITY replaceHtml.p "取代通常只作用於文字，但 HTML 這個選項可以使之作用於原始碼，它支援修改頁面的格式或結構。對於每一份詞組清單，你可以選擇不使用 HTML（此時只能將文字取代成另一段文字）、僅輸出（例如：將純文字取代成格式化的文字，像是加入&lt;b&gt;使字型變成粗體）、或是選擇輸入和輸出（此時將直接作用於 HTML 原始碼）。">
 <!ENTITY autoReplace "網頁載入時自動取代">
 <!ENTITY autoReplace.p "你可以啟用或停用此選項。如果啟用此選項，取代列表將於網頁載入時，在其指定的網址自動執行；在你指定的頁面，這可作為一個過濾器。">
 <!ENTITY replaceUrls "取代網址">
-<!ENTITY replaceUrls.p "此選項預設停用。如果啟用此選項，取代將作用於頁面上的網址 (連結、圖片網址...等)；這有可能改變網頁行為，請自負責任。此選項不作用於 HTML 取代。">
+<!ENTITY replaceUrls.p "此選項預設停用。如果啟用此選項，取代將作用於頁面上的網址 (連結、圖片網址...等)；這有可能改變網頁行為，請自負責任。當選擇 HTML 輸入和輸出選項，而無勾選此選項時，網址仍可以被取代。">
+<!ENTITY replaceScripts "取代腳本">
+<!ENTITY replaceScripts.p "此選項預設停用。如果啟用此選項，取代將作用於頁面上的腳本；這有可能改變網頁行為，請自負責任。當選擇 HTML 輸入和輸出選項時，將作用於所有腳本；否則只作用於 body 內的腳本。">
 <!ENTITY newGui "新選單和工具列元件">
 <!ENTITY newGui.app "Firefox 選單">
 <!ENTITY newGui.edit "編輯">
-<!ENTITY newGui.menu.replace "取代… (Shift+F2)">
+<!ENTITY newGui.menu.replace "取代… (F8)">
 <!ENTITY newGui.menu.replace.d "顯示取代列。">
 <!ENTITY newGui.tools "工具">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "以取代列表執行取代 (F2)">
+<!ENTITY newGui.menu.replaceWithList "以取代列表執行取代 (Shift+F8)">
 <!ENTITY newGui.menu.replaceWithList.d "套用目前的取代列表。">
 <!ENTITY newGui.menu.autoReplace "網頁載入時，自動取代">
 <!ENTITY newGui.menu.autoReplace.d "切換此選項。">
@@ -49,7 +51,7 @@
 <!ENTITY newGui.toolbarButton.0 "按下此按鈕，將以目前的取代列表執行取代。">
 <!ENTITY newGui.toolbarButton.1 "按鈕側邊有一個選單，該選單內容同上述工具中的 FoxReplace 的選單。">
 <!ENTITY newGui.contextMenu "右鍵選單">
-<!ENTITY newGui.contextMenu.replace "以取代列表執行取代 (FoxReplace) (F2)">
+<!ENTITY newGui.contextMenu.replace "以取代列表執行取代 (FoxReplace) (Shift+F8)">
 <!ENTITY newGui.contextMenu.replace.d "執行目前的取代列表。">
 <!ENTITY newGui.replaceBar "取代列">
 <!ENTITY newGui.replaceBar.0 "顯示在文字尋找列下方。">

@@ -30,6 +30,8 @@
 <!ENTITY autoReplace.p "Deze optie kan worden in- of uitgeschakeld. Indien ingeschakeld wordt de vervangingslijst automatisch toegepast wanneer een pagina wordt geladen, waardoor de vervangingen worden toegepast op de groepen met een overeenkomende URL. Op deze manier kan de extensie als filter werken voor de pagina’s waar u dit bij wilt.">
 <!ENTITY replaceUrls "URL’s vervangen">
 <!ENTITY replaceUrls.p "Deze optie staat standaard uit. Indien ingeschakeld worden vervangingen ook toegepast op de URL’s in de pagina (koppelingen, afbeeldingsbronnen, enz.), dus het gedrag van de pagina kan wijzigen. Gebruik deze optie naar eigen inzicht. Dit heeft geen effect in HTML-vervangingen, omdat dan URL’s altijd kunnen worden aangepast.">
+<!ENTITY replaceScripts "Scripts vervangen">
+<!ENTITY replaceScripts.p "Deze optie staat standaard uit. Indien ingeschakeld wordt vervangingen ook toegepast op de scripts op de pagina, en dit kan het gedrag van de pagina wijzigen. Gebruik dit op eigen verantwoording. Voor vervangingen door HTML in de invoer en de uitvoer is deze optie van toepassing op alle scripts, anders alleen op de scripts in het <body>-gedeelte.">
 <!ENTITY newGui "Nieuwe menu- en werkbalkelementen">
 <!ENTITY newGui.app "Firefox-menu">
 <!ENTITY newGui.edit "Bewerken">

@@ -30,6 +30,8 @@
 <!ENTITY autoReplace.p "Cette option peut être activée ou désactivée. Lorsqu'elle est activée, la liste de substitution est appliquée automatiquement lors du chargement d'une page, en utilisant les substitutions des groupes dont l'URL correspond. Ainsi, l'extension pourra être utilisée en guise de filtre pour les pages que vous souhaitez assainir.">
 <!ENTITY replaceUrls "Remplacer les URL">
 <!ENTITY replaceUrls.p "Cette option est désactivée par défaut. Si elle est activée, les substitutions seront également appliquées aux URLs de la page (liens, sources des images, etc…), cela modifiera donc le comportement de la page. Utilisez-la sous votre propre responsabilité. Cela n'a aucun effet dans les substitutions HTML, puisque les URL sont alors toujours modifiables.">
+<!ENTITY replaceScripts "Remplacer les scripts">
+<!ENTITY replaceScripts.p "Cette option est désactivée par défaut. Si elle est activée, les substitutions sont également appliquées aux scripts de la page, cela pourra donc modifier son comportement. Utilisez-la sous votre propre responsabilité. Pour des substitutions par du HTML en entrée ou en sortie cette option s'applique à tous les scripts, sinon, uniquement aux scripts dans le corps (body).">
 <!ENTITY newGui "Nouveaux éléments de menu et de barre d'outils">
 <!ENTITY newGui.app "Menu Firefox">
 <!ENTITY newGui.edit "Éditer">

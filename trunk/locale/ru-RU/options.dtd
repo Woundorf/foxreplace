@@ -1,6 +1,8 @@
 <!ENTITY prefwindow.title "FoxReplace - Настройки">
 <!ENTITY mainPane.title "Общие">
 <!ENTITY description "Введите список замещения. Список состоит из групп замещений, где замещения каждой группы применяются, если любой адрес из группы совпадает с адресом загруженной страницы. Если в группе нет никаких адресов, её замещения применяются к любой странице. Группы проверяются в порядке их ввода.">
+<!ENTITY enabledHeader "Enable">
+<!ENTITY nameHeader "Name">
 <!ENTITY urlHeader "Адрес">
 <!ENTITY inputStringHeader "Заменить">
 <!ENTITY outputStringHeader "На">
@@ -22,6 +24,10 @@
 <!ENTITY importFromUrlButton.accesskey "п">
 <!ENTITY exportButton.label "Экспорт">
 <!ENTITY exportButton.accesskey "к">
+<!ENTITY subscriptionGroupBoxCaption "Periodically update from URL">
+<!ENTITY subscriptionEnableCheckBox.label "Enable">
+<!ENTITY subscriptionEnableCheckBox.accesskey "b">
+<!ENTITY subscriptionStatus.label "Status:">
 <!ENTITY subscriptionUrl.label "Адрес">
 <!ENTITY subscriptionUrl.accesskey "р">
 <!ENTITY subscriptionPeriod.label "Промежуток (минуты)">
@@ -30,3 +36,5 @@
 <!ENTITY autoReplaceOnLoad.accesskey "т">
 <!ENTITY replaceUrls.label "Заменять адреса (ссылок и изображений). ВНИМАНИЕ! Это изменит поведение страницы.">
 <!ENTITY replaceUrls.accesskey "с">
+<!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">
+<!ENTITY replaceScripts.accesskey "s">
