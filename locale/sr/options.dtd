@@ -13,17 +13,17 @@
 <!ENTITY deleteButton.label "Обриши">
 <!ENTITY deleteButton.accesskey "О">
 <!ENTITY clearButton.label "Очисти">
-<!ENTITY clearButton.accesskey "Ч">
-<!ENTITY moveUpButton.label "Помери горе">
+<!ENTITY clearButton.accesskey "ч">
+<!ENTITY moveUpButton.label "Помери нагоре">
 <!ENTITY moveUpButton.accesskey "г">
-<!ENTITY moveDownButton.label "Помери доле">
-<!ENTITY moveDownButton.accesskey "л">
+<!ENTITY moveDownButton.label "Помери надоле">
+<!ENTITY moveDownButton.accesskey "д">
 <!ENTITY importButton.label "Увоз">
-<!ENTITY importButton.accesskey "И">
+<!ENTITY importButton.accesskey "У">
 <!ENTITY importFromUrlButton.label "Увези са адресе">
 <!ENTITY importFromUrlButton.accesskey "а">
 <!ENTITY exportButton.label "Извоз">
-<!ENTITY exportButton.accesskey "з">
+<!ENTITY exportButton.accesskey "И">
 <!ENTITY subscriptionGroupBoxCaption "Повремено ажурирај са адресе">
 <!ENTITY subscriptionEnableCheckBox.label "Омогући">
 <!ENTITY subscriptionEnableCheckBox.accesskey "О">
@@ -31,9 +31,9 @@
 <!ENTITY subscriptionUrl.label "Адреса">
 <!ENTITY subscriptionUrl.accesskey "А">
 <!ENTITY subscriptionPeriod.label "Период (минута)">
-<!ENTITY subscriptionPeriod.accesskey "д">
+<!ENTITY subscriptionPeriod.accesskey "П">
 <!ENTITY autoReplaceOnLoad.label "Аутоматски замени приликом учитавања странице">
-<!ENTITY autoReplaceOnLoad.accesskey "т">
+<!ENTITY autoReplaceOnLoad.accesskey "А">
 <!ENTITY replaceUrls.label "Замени адресе (везе и изворе слика) (упозорење: ово може утицати на понашање странице!)">
 <!ENTITY replaceUrls.accesskey "З">
 <!ENTITY replaceScripts.label "Замени скрипте (упозорење: ово може утицати на понашање странице!) - пробно">

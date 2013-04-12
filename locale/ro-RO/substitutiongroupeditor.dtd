@@ -1,7 +1,11 @@
 <!ENTITY title "Editor de grup de substituții">
 <!ENTITY description "Introduceți lista de adrese și lista de substituții. Lista de adrese poate fi goală, în acest caz substituțiile se vor aplica la orice pagină; altfel vor fi aplicate doar când adresa vizitată se potrivește cu regula înscrisă. Puteți folosi * pentru a potrivi 0 sau mai multe caractere (nu e necesar acest lucru la început sau la sfârșit) și „|” pentru a potrivi începutul sau sfârșitul unei adrese. De exemplu, „http://*.exemplu.ro|” va găsi „http://www.exemplu.ro” dar nu va găsi „http://www.exemplu.ro/ceva”. Lista de substituții trebuie să aibă cel puțin o substituție.">
+<!ENTITY name.label "Name">
+<!ENTITY name.accesskey "N">
 <!ENTITY html.label "Înlocuiește HTML">
 <!ENTITY html.accesskey "H">
+<!ENTITY enabled.label "Enable">
+<!ENTITY enabled.accesskey "E">
 <!ENTITY urls "Adrese">
 <!ENTITY url.label "Adresă">
 <!ENTITY url.accesskey "A">

@@ -30,6 +30,8 @@
 <!ENTITY autoReplace.p "Esta opción puede ser activada o desactivada. Cuando está encendido, la lista de sustitución se aplica automáticamente cuando se carga una página, la aplicación de las sustituciones de los grupos con una dirección URL correspondiente. De esta manera la extensión puede funcionar como un filtro para las páginas que desee.">
 <!ENTITY replaceUrls "Reemplazar URLs">
 <!ENTITY replaceUrls.p "Esta opción está desactivada por defecto. Se está encendido, las sustituciones se aplica también a las direcciones URL de la página (enlaces, fuentes de imágenes, etc), por lo que puede cambiar el comportamiento de la página. Úselo bajo su propia responsabilidad. Esto no tiene efecto en la sustitución de HTML, porque entonces las direcciones URL se puede modificar siempre.">
+<!ENTITY replaceScripts "Replace scripts">
+<!ENTITY replaceScripts.p "This option is off by default. If it's on, substitutions are also applied to the scripts in the page, so it may change the behaviour of the page. Use it under your own responsibility. For substitutions with HTML in the input and the output this option applies to all the scripts, otherwise only to the scripts in the body.">
 <!ENTITY newGui "Menu nuevo y barra de herramientas de elementos">
 <!ENTITY newGui.app "Menu Firefox">
 <!ENTITY newGui.edit "Editar">

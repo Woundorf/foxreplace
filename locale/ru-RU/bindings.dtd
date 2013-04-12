@@ -1,3 +1,6 @@
 <!ENTITY text "Текст">
 <!ENTITY wholeWords "Только слова целиком">
 <!ENTITY regExp "Регулярное выражение">
+<!ENTITY htmlNone "No">
+<!ENTITY htmlOutput "Output only">
+<!ENTITY htmlInputOutput "Input &amp; output">

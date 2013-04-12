@@ -3,7 +3,7 @@
 <!ENTITY name.label "Назив">
 <!ENTITY name.accesskey "Н">
 <!ENTITY html.label "Замени HTML">
-<!ENTITY html.accesskey "Х">
+<!ENTITY html.accesskey "м">
 <!ENTITY enabled.label "Омогући">
 <!ENTITY enabled.accesskey "О">
 <!ENTITY urls "Адресе">
@@ -23,17 +23,17 @@
 <!ENTITY clearUrlsButton.accesskey "О">
 <!ENTITY substitutions "Замене">
 <!ENTITY inputString.label "Замени">
-<!ENTITY inputString.accesskey "п">
+<!ENTITY inputString.accesskey "З">
 <!ENTITY outputString.label "са">
 <!ENTITY outputString.accesskey "с">
 <!ENTITY caseSensitive.label "Подударање малих и великих слова">
 <!ENTITY caseSensitive.accesskey "х">
 <!ENTITY addSubstitutionButton.label "Додај">
-<!ENTITY addSubstitutionButton.accesskey "д">
-<!ENTITY moveUpSubstitutionButton.label "Помери горе">
-<!ENTITY moveUpSubstitutionButton.accesskey "М">
-<!ENTITY moveDownSubstitutionButton.label "Помери доле">
-<!ENTITY moveDownSubstitutionButton.accesskey "в">
+<!ENTITY addSubstitutionButton.accesskey "Д">
+<!ENTITY moveUpSubstitutionButton.label "Помери нагоре">
+<!ENTITY moveUpSubstitutionButton.accesskey "г">
+<!ENTITY moveDownSubstitutionButton.label "Помери надоле">
+<!ENTITY moveDownSubstitutionButton.accesskey "д">
 <!ENTITY editSubstitutionButton.label "Уреди">
 <!ENTITY editSubstitutionButton.accesskey "и">
 <!ENTITY okEditSubstitutionButton.label "У реду">
