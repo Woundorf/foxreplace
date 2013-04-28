@@ -36,7 +36,7 @@
     <textbox id="nameTextBox" flex="1"/>
     <label id="htmlLabel" control="htmlButton" value="&html.label;" accesskey="&html.accesskey;"/>
     <box id="htmlButton"/>
-    <checkbox id="enabledCheckBox" label="&enabled.label;" accesskey="&enabled.accesskey;"/>
+    <checkbox id="enabledCheckBox" checked="true" label="&enabled.label;" accesskey="&enabled.accesskey;"/>
   </hbox>
   <tabbox>
     <tabs>
