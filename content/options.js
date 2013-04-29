@@ -29,6 +29,18 @@
 let foxreplaceOptions = {
 
   core: {},
+  
+  /**
+   * Easy access to most used controls.
+   */
+  get _tree() { return document.getElementById("substitutionListTree"); },
+  get _addButton() { return document.getElementById("addButton"); },
+  get _editButton() { return document.getElementById("editButton"); },
+  get _deleteButton() { return document.getElementById("deleteButton"); },
+  get _clearButton() { return document.getElementById("clearButton"); },
+  get _moveUpButton() { return document.getElementById("moveUpButton"); },
+  get _moveDownButton() { return document.getElementById("moveDownButton"); },
+  get _subscriptionStatusTextBox() { return document.getElementById("subscriptionStatusTextBox"); },
 
   /**
    * Initialization code.
@@ -53,7 +65,7 @@ let foxreplaceOptions = {
    * Tree double click event handler.
    */
   onTreeDoubleClick: function(aEvent) {
-    let index = document.getElementById("substitutionListTree").boxObject.getRowAt(aEvent.clientX, aEvent.clientY);
+    let index = this._tree.boxObject.getRowAt(aEvent.clientX, aEvent.clientY);
     if (index >= 0) this.editSubstitutionGroup(index);
     else this.addSubstitutionGroup();
   },
@@ -62,7 +74,7 @@ let foxreplaceOptions = {
    * Creates the tree view.
    */
   setupTree: function() {
-    document.getElementById("substitutionListTree").view = {
+    this._tree.view = {
       setTree: function(aTreeBox) {
         this.treeBox = aTreeBox;
       },
@@ -109,6 +121,7 @@ let foxreplaceOptions = {
           let group = foxreplaceOptions.substitutionList[aRow];
           group.enabled = aValue == "true";
           foxreplaceOptions.saveSubstitutionList();
+          this.treeBox.invalidate(aRow, aColumn);
         }
       },
       getCellProperties: function(aRow, aColumn, aProperties) {
@@ -126,23 +139,37 @@ let foxreplaceOptions = {
     };
   },
 
-  _substitutionListLength: 0,
+  /**
+   * Current substitution list.
+   */
+  _substitutionList: [],
+  
+  /**
+   * Returns current substitution list.
+   */
+  get substitutionList() {
+    return this._substitutionList;
+  },
+  
+  /**
+   * Sets a new current substitution list and updates the tree.
+   */
+  set substitutionList(aNewList) {
+    let oldList = this._substitutionList;
+    this._substitutionList = aNewList;
+    let treeBox = this._tree.boxObject;
+    treeBox.rowCountChanged(0, -oldList.length);
+    treeBox.rowCountChanged(0, aNewList.length);
+    treeBox.invalidate();
+    this._clearButton.disabled = this.substitutionList.length == 0;
+  },
 
   /**
    * Called when the options window is loaded or the substitution list is changed externally. Loads the substitution list from preferences and fills the tree.
    */
   loadSubstitutionList: function() {
-    this.substitutionList = this.prefs.substitutionList.concat(); // easy way to create a copy of the array
-    this.substitutionList.length;
-
-    let treeBox = document.getElementById("substitutionListTree").boxObject;
-    treeBox.rowCountChanged(0, -this._substitutionListLength);
-    treeBox.rowCountChanged(0, this.substitutionList.length);
-    treeBox.invalidate();
-    this._substitutionListLength = this.substitutionList.length;
-
-    if (this.substitutionList.length > 0) document.getElementById("clearButton").disabled = false;
-    else document.getElementById("clearButton").disabled = true;
+    if (this.substitutionList.toSource() != this.prefs.substitutionList.toSource())
+      this.substitutionList = this.prefs.substitutionList.concat(); // easy way to create a copy of the array
   },
 
   /**
@@ -163,7 +190,11 @@ let foxreplaceOptions = {
     if (params.out) {
       this.substitutionList.push(params.out.group);
       this.saveSubstitutionList();
-      document.getElementById("substitutionListTree").view.selection.select(this.substitutionList.length - 1);
+      let treeBox = this._tree.boxObject;
+      treeBox.rowCountChanged(this.substitutionList.length - 1, 1);
+      treeBox.ensureRowIsVisible(this.substitutionList.length - 1);
+      this._tree.view.selection.select(this.substitutionList.length - 1);
+      this._clearButton.disabled = this.substitutionList.length == 0;
     }
   },
 
@@ -174,7 +205,7 @@ let foxreplaceOptions = {
     let index = aIndex;
 
     if (index == undefined) {
-      let selection = document.getElementById("substitutionListTree").view.selection;
+      let selection = this._tree.view.selection;
       if (selection.count == 0) return;
       index = selection.currentIndex;
     }
@@ -187,7 +218,9 @@ let foxreplaceOptions = {
     if (params.out) {
       this.substitutionList.splice(index, 1, params.out.group);
       this.saveSubstitutionList();
-      document.getElementById("substitutionListTree").view.selection.select(index);
+      let treeBox = this._tree.boxObject;
+      treeBox.invalidateRow(index);
+      treeBox.ensureRowIsVisible(index);
     }
   },
 
@@ -195,15 +228,18 @@ let foxreplaceOptions = {
    * Removes the selected substitution group in the tree.
    */
   deleteSubstitutionGroup: function() {
-    let selection = document.getElementById("substitutionListTree").view.selection;
+    let selection = this._tree.view.selection;
     if (selection.count == 0) return;
 
     let index = selection.currentIndex;
     this.substitutionList.splice(index, 1);
     this.saveSubstitutionList();
+    this._tree.boxObject.rowCountChanged(index, -1);
 
     if (index < this.substitutionList.length) selection.select(index);
     else if (index > 0) selection.select(index - 1);
+    
+    this._clearButton.disabled = this.substitutionList.length == 0;
   },
 
   /**
@@ -219,7 +255,7 @@ let foxreplaceOptions = {
    * Moves up the selected substitution group.
    */
   moveUpSubstitutionGroup: function() {
-    let selection = document.getElementById("substitutionListTree").view.selection;
+    let selection = this._tree.view.selection;
     if (selection.count == 0) return;
     let index = selection.currentIndex;
     if (index == 0) return;
@@ -227,6 +263,9 @@ let foxreplaceOptions = {
     this.substitutionList.splice(index, 1);
     this.substitutionList.splice(index - 1, 0, group);
     this.saveSubstitutionList();
+    let treeBox = this._tree.boxObject;
+    treeBox.invalidateRange(index - 1, index);
+    treeBox.ensureRowIsVisible(index - 1);
     selection.select(index - 1);
   },
 
@@ -234,7 +273,7 @@ let foxreplaceOptions = {
    * Moves down the selected substitution group.
    */
   moveDownSubstitutionGroup: function() {
-    let selection = document.getElementById("substitutionListTree").view.selection;
+    let selection = this._tree.view.selection;
     if (selection.count == 0) return;
     let index = selection.currentIndex;
     if (index == this.substitutionList.length - 1) return;
@@ -242,6 +281,9 @@ let foxreplaceOptions = {
     this.substitutionList.splice(index, 1);
     this.substitutionList.splice(index + 1, 0, group);
     this.saveSubstitutionList();
+    let treeBox = this._tree.boxObject;
+    treeBox.invalidateRange(index, index + 1);
+    treeBox.ensureRowIsVisible(index + 1);
     selection.select(index + 1);
   },
 
@@ -250,7 +292,7 @@ let foxreplaceOptions = {
    */
   importSubstitutionList: function() {
     let substitutionList = fxrIO.importSubstitutionList();
-    if (substitutionList) this.finishImportSubstitutionList(substitutionList);
+    if (substitutionList) this._finishImportSubstitutionList(substitutionList);
   },
 
   /**
@@ -258,13 +300,13 @@ let foxreplaceOptions = {
    */
   importSubstitutionListFromUrl: function() {
     let substitutionList = fxrIO.importSubstitutionListFromUrl();
-    if (substitutionList) this.finishImportSubstitutionList(substitutionList);
+    if (substitutionList) this._finishImportSubstitutionList(substitutionList);
   },
 
   /**
    * Common part of the importing pipeline.
    */
-  finishImportSubstitutionList: function(aSubstitutionList) {
+  _finishImportSubstitutionList: function(aSubstitutionList) {
     let params = {};
     window.openDialog("chrome://foxreplace/content/appendoverwrite.xul", "", "chrome,titlebar,toolbar,centerscreen,modal", params);
 
@@ -287,17 +329,17 @@ let foxreplaceOptions = {
    * Enables or disables some buttons when an substitution group item is selected or deselected.
    */
   onSelectSubstitutionGroup: function() {
-    if (document.getElementById("substitutionListTree").currentIndex >= 0) {
-      document.getElementById("editButton").disabled = false;
-      document.getElementById("deleteButton").disabled = false;
-      document.getElementById("moveUpButton").disabled = false;
-      document.getElementById("moveDownButton").disabled = false;
+    if (this._tree.currentIndex >= 0) {
+      this._editButton.disabled = false;
+      this._deleteButton.disabled = false;
+      this._moveUpButton.disabled = false;
+      this._moveDownButton.disabled = false;
     }
     else {
-      document.getElementById("editButton").disabled = true;
-      document.getElementById("deleteButton").disabled = true;
-      document.getElementById("moveUpButton").disabled = true;
-      document.getElementById("moveDownButton").disabled = true;
+      this._editButton.disabled = true;
+      this._deleteButton.disabled = true;
+      this._moveUpButton.disabled = true;
+      this._moveDownButton.disabled = true;
     }
   },
 
@@ -305,7 +347,7 @@ let foxreplaceOptions = {
    * Updates the status of the subscription.
    */
   updateSubscriptionStatus: function() {
-    document.getElementById("subscriptionStatusTextBox").value = fxrSubscription.status;
+    this._subscriptionStatusTextBox.value = fxrSubscription.status;
   }
 
 };
