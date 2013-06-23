@@ -126,8 +126,13 @@ let foxreplaceOptions = {
       },
       getCellProperties: function(aRow, aColumn, aProperties) {
         if (aColumn.id == "urlColumn" && foxreplaceOptions.core.fxrIsExclusionUrl(this.getCellText(aRow, aColumn))) {
-          let atomService = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
-          aProperties.AppendElement(atomService.getAtom("exclusionUrl"));
+          if (aProperties) {  // Firefox < 22
+            let atomService = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
+            aProperties.AppendElement(atomService.getAtom("exclusionUrl"));
+          }
+          else {  // Firefox >= 22
+            return "exclusionUrl";
+          }
         }
       },
       getImageSrc: function() {
