@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009-2012 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2009-2013 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -61,7 +61,7 @@ var prefs = {
    */
   get substitutionList() {
     if (!this._substitutionList || this._substitutionListJSONString != this._preferences.get("substitutionListJSON")) {
-      this.upgradeListToJSON();
+      this._upgradeListToJSON();
       try {
         this._substitutionListJSONString = this._preferences.get("substitutionListJSON");
         let substitutionListJSON = JSON.parse(this._substitutionListJSONString);
@@ -221,7 +221,7 @@ var prefs = {
   /**
    * Upgrades the substitution list preference from the old XML format (0.12) to the new JSON format (0.13), if necessary.
    */
-  upgradeListToJSON: function() {
+  _upgradeListToJSON: function() {
     if (this._preferences.has("substitutionListXml")) {
       let substitutionList = this.substitutionListXml;
       this._preferences.reset("substitutionListXml");
