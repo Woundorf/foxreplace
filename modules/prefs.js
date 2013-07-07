@@ -64,8 +64,7 @@ var prefs = {
       this._upgradeListToJSON();
       try {
         this._substitutionListJSONString = this._preferences.get("substitutionListJSON");
-        let substitutionListJSON = JSON.parse(this._substitutionListJSONString);
-        this._substitutionList = substitutionListFromJSON(substitutionListJSON);
+        this._substitutionList = this.substitutionListFromString(this._substitutionListJSONString);
       }
       catch (e) {
         prompts.alert(getLocalizedString("jsonErrorTitle"), getLocalizedString("jsonErrorText") + "\n" + e);
@@ -79,7 +78,21 @@ var prefs = {
    * Saves the substitution list to preferences.
    */
   set substitutionList(aSubstitutionList) {
-    this._preferences.set("substitutionListJSON", JSON.stringify(substitutionListToJSON(aSubstitutionList)));
+    this._preferences.set("substitutionListJSON", this.substitutionListToString(aSubstitutionList));
+  },
+  
+  /**
+   * Converts the string as saved in preferences to a substitution list.
+   */
+  substitutionListFromString: function(aJSONString) {
+    return substitutionListFromJSON(JSON.parse(aJSONString));
+  },
+  
+  /**
+   * Converts the substitution list to a string to save to preferences.
+   */
+  substitutionListToString: function(aSubstitutionList) {
+    return JSON.stringify(substitutionListToJSON(aSubstitutionList));
   },
 
   /**

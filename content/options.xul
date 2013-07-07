@@ -31,6 +31,7 @@
   <script type="application/x-javascript;version=1.8" src="options.js"/>
   <prefpane id="mainPane" label="&mainPane.title;">
     <preferences>
+      <preference id="substitutionList" name="extensions.foxreplace.substitutionListJSON" type="unichar"/>
       <preference id="autoReplaceOnLoad" name="extensions.foxreplace.autoReplaceOnLoad" type="bool"/>
       <preference id="replaceUrls" name="extensions.foxreplace.replaceUrls" type="bool"/>
       <preference id="replaceScripts" name="extensions.foxreplace.replaceScripts" type="bool"/>
@@ -41,7 +42,9 @@
     <description id="description">&description;</description>
     <separator/>
     <hbox>
-      <tree id="substitutionListTree" seltype="single" editable="true" flex="1" ondblclick="foxreplaceOptions.onTreeDoubleClick(event);"
+      <tree id="substitutionListTree" seltype="single" editable="true" flex="1" preference-editable="true" preference="substitutionList"
+            onsyncfrompreference="foxreplaceOptions.loadSubstitutionList();" onsynctopreference="return foxreplaceOptions.getSubstitutionListAsString();"
+            ondblclick="foxreplaceOptions.onTreeDoubleClick(event);"
             onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitutionGroup();"
             onselect="foxreplaceOptions.onSelectSubstitutionGroup();">
         <treecols>
