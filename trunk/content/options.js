@@ -120,7 +120,7 @@ let foxreplaceOptions = {
         if (aColumn.id == "enabledColumn") {
           let group = foxreplaceOptions.substitutionList[aRow];
           group.enabled = aValue == "true";
-          foxreplaceOptions.saveSubstitutionList();
+          foxreplaceOptions._fireTreeChangeEvent();
           this.treeBox.invalidate(aRow, aColumn);
         }
       },
@@ -142,6 +142,15 @@ let foxreplaceOptions = {
         return aColumn.id == "enabledColumn";
       }
     };
+  },
+  
+  /**
+   * Fires a change event from the tree.
+   */
+  _fireTreeChangeEvent: function() {
+    let event = document.createEvent("Events");
+    event.initEvent("change", true, true);
+    this._tree.dispatchEvent(event);
   },
 
   /**
@@ -173,15 +182,20 @@ let foxreplaceOptions = {
    * Called when the options window is loaded or the substitution list is changed externally. Loads the substitution list from preferences and fills the tree.
    */
   loadSubstitutionList: function() {
-    if (this.substitutionList.toSource() != this.prefs.substitutionList.toSource())
-      this.substitutionList = this.prefs.substitutionList.concat(); // easy way to create a copy of the array
+    let preference = document.getElementById("substitutionList");
+    // .value === undefined means the preference is set to the default value
+    let substitutionListString = preference.value !== undefined ? preference.value : preference.defaultValue;
+    let substitutionList = this.prefs.substitutionListFromString(substitutionListString);
+
+    if (this.substitutionList.toSource() != substitutionList.toSource())
+      this.substitutionList = substitutionList;
   },
 
   /**
-   * Called when the substitution list is changed from the UI. Saves the substitution list to preferences.
+   * Called when the substitution list is changed from the UI. Returns a string to save the substitution list to preferences.
    */
-  saveSubstitutionList: function() {
-    this.prefs.substitutionList = this.substitutionList;
+  getSubstitutionListAsString: function() {
+    return this.prefs.substitutionListToString(this.substitutionList);
   },
 
   /**
@@ -194,7 +208,7 @@ let foxreplaceOptions = {
 
     if (params.out) {
       this.substitutionList.push(params.out.group);
-      this.saveSubstitutionList();
+      this._fireTreeChangeEvent();
       let treeBox = this._tree.boxObject;
       treeBox.rowCountChanged(this.substitutionList.length - 1, 1);
       treeBox.ensureRowIsVisible(this.substitutionList.length - 1);
@@ -222,7 +236,7 @@ let foxreplaceOptions = {
 
     if (params.out) {
       this.substitutionList.splice(index, 1, params.out.group);
-      this.saveSubstitutionList();
+      this._fireTreeChangeEvent();
       let treeBox = this._tree.boxObject;
       treeBox.invalidateRow(index);
       treeBox.ensureRowIsVisible(index);
@@ -238,7 +252,7 @@ let foxreplaceOptions = {
 
     let index = selection.currentIndex;
     this.substitutionList.splice(index, 1);
-    this.saveSubstitutionList();
+    this._fireTreeChangeEvent();
     this._tree.boxObject.rowCountChanged(index, -1);
 
     if (index < this.substitutionList.length) selection.select(index);
@@ -253,7 +267,7 @@ let foxreplaceOptions = {
   clearSubstitutionList: function() {
     let count = this.substitutionList.length;
     this.substitutionList = [];
-    this.saveSubstitutionList();
+    this._fireTreeChangeEvent();
   },
 
   /**
@@ -267,7 +281,7 @@ let foxreplaceOptions = {
     let group = this.substitutionList[index];
     this.substitutionList.splice(index, 1);
     this.substitutionList.splice(index - 1, 0, group);
-    this.saveSubstitutionList();
+    this._fireTreeChangeEvent();
     let treeBox = this._tree.boxObject;
     treeBox.invalidateRange(index - 1, index);
     treeBox.ensureRowIsVisible(index - 1);
@@ -285,7 +299,7 @@ let foxreplaceOptions = {
     let group = this.substitutionList[index];
     this.substitutionList.splice(index, 1);
     this.substitutionList.splice(index + 1, 0, group);
-    this.saveSubstitutionList();
+    this._fireTreeChangeEvent();
     let treeBox = this._tree.boxObject;
     treeBox.invalidateRange(index, index + 1);
     treeBox.ensureRowIsVisible(index + 1);
@@ -319,7 +333,7 @@ let foxreplaceOptions = {
       if (params.out.button == "overwrite") this.substitutionList = aSubstitutionList;
       else this.substitutionList = this.substitutionList.concat(aSubstitutionList);
 
-      this.saveSubstitutionList();
+      this._fireTreeChangeEvent();
     }
   },
 
