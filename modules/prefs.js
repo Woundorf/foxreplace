@@ -240,7 +240,12 @@ var prefs = {
       this._preferences.reset("substitutionListXml");
       this.substitutionList = substitutionList;
     }
-  }
+  },
+  
+  /**
+   * Reference to the options window.
+   */
+  optionsWindow: null
 
 };
 
