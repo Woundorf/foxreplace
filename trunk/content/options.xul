@@ -27,7 +27,8 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://foxreplace/skin/options.css" type="text/css"?>
 <!DOCTYPE prefwindow SYSTEM "chrome://foxreplace/locale/options.dtd">
-<prefwindow id="foxreplacePreferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title;">
+<prefwindow id="foxreplacePreferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title;"
+            buttons="accept,cancel,disclosure" ondialogdisclosure="foxreplaceOptions.showTooltip();">
   <script type="application/x-javascript;version=1.8" src="options.js"/>
   <prefpane id="mainPane" label="&mainPane.title;">
     <preferences>
@@ -39,8 +40,6 @@
       <preference id="subscriptionUrl" name="extensions.foxreplace.subscriptionUrl" type="unichar"/>
       <preference id="subscriptionPeriod" name="extensions.foxreplace.subscriptionPeriod" type="int"/>
     </preferences>
-    <description id="description">&description;</description>
-    <separator/>
     <hbox>
       <tree id="substitutionListTree" seltype="single" editable="true" flex="1" preference-editable="true" preference="substitutionList"
             onsyncfrompreference="foxreplaceOptions.loadSubstitutionList();" onsynctopreference="return foxreplaceOptions.getSubstitutionListAsString();"
@@ -104,4 +103,5 @@
     <checkbox id="replaceScriptsCheckBox" label="&replaceScripts.label;" accesskey="&replaceScripts.accesskey;" preference-editable="true"
               preference="replaceScripts"/>
   </prefpane>
+  <tooltip id="tooltip" onclick="this.hidePopup();">&description;</tooltip>
 </prefwindow>

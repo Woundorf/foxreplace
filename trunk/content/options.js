@@ -41,6 +41,8 @@ let foxreplaceOptions = {
   get _moveUpButton() { return document.getElementById("moveUpButton"); },
   get _moveDownButton() { return document.getElementById("moveDownButton"); },
   get _subscriptionStatusTextBox() { return document.getElementById("subscriptionStatusTextBox"); },
+  get _tooltip() { return document.getElementById("tooltip"); },
+  get _disclosureButton() { return document.getElementById("foxreplacePreferences").getButton("disclosure"); },
 
   /**
    * Initialization code.
@@ -369,6 +371,13 @@ let foxreplaceOptions = {
    */
   updateSubscriptionStatus: function() {
     this._subscriptionStatusTextBox.value = fxrSubscription.status;
+  },
+
+  /**
+   * Shows the tooltip with additional information.
+   */
+  showTooltip: function() {
+    this._tooltip.openPopup(this._disclosureButton);
   }
 
 };
