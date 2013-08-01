@@ -7,6 +7,7 @@ v0.15.0
 * Disabled tr locale (was reported as bad translation).
 * New substitution groups enabled by default in the substitution group editor.
 * Improved substitution list behaviour in options dialog (issue 112).
+* Changed the code to open the options dialog to take into account several features (issues 98 and 66).
 * Compatibility with Firefox up to 24.0.
 
 v0.14.0 (16-1-2013)
