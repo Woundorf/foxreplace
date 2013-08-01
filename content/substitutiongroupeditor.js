@@ -38,6 +38,8 @@ var foxreplaceSubstitutionGroupEditor = {
   get _substitutionsListBox() { return document.getElementById("substitutionsListBox"); },
   get _htmlButton() { return document.getElementById("htmlButton"); },
   get _enabledCheckBox() { return document.getElementById("enabledCheckBox"); },
+  get _tooltip() { return document.getElementById("tooltip"); },
+  get _disclosureButton() { return document.getElementById("foxreplaceDialogSubstitutionGroupEditor").getButton("disclosure"); },
 
   /**
    * Deletes the dumb items and fills the listboxes.
@@ -559,6 +561,13 @@ var foxreplaceSubstitutionGroupEditor = {
     window.arguments[0].out = { group: group };
 
     return true;
+  },
+  
+  /**
+   * Shows the tooltip with additional information.
+   */
+  showTooltip: function() {
+    this._tooltip.openPopup(this._disclosureButton);
   }
 
 };

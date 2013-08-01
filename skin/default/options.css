@@ -5,10 +5,6 @@
   max-width: 1024px;
 }
 
-.paneDeckContainer, .content-box {
-  overflow: visible;  /* to avoid that some checkboxes get hidden */
-}
-
 #substitutionListTreeChildren::-moz-tree-cell-text(exclusionUrl) {
   color: red;
 }

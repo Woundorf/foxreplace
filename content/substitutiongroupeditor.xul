@@ -28,9 +28,9 @@
 <?xml-stylesheet href="chrome://foxreplace/skin/substitutiongroupeditor.css" type="text/css"?>
 <!DOCTYPE dialog SYSTEM "chrome://foxreplace/locale/substitutiongroupeditor.dtd">
 <dialog id="foxreplaceDialogSubstitutionGroupEditor" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&title;"
-        onload="foxreplaceSubstitutionGroupEditor.onLoad();" ondialogaccept="return foxreplaceSubstitutionGroupEditor.onAccept();">
+        buttons="accept,cancel,disclosure" onload="foxreplaceSubstitutionGroupEditor.onLoad();"
+        ondialogaccept="return foxreplaceSubstitutionGroupEditor.onAccept();" ondialogdisclosure="foxreplaceSubstitutionGroupEditor.showTooltip();">
   <script type="application/x-javascript;version=1.8" src="substitutiongroupeditor.js"/>
-  <description>&description;</description>
   <hbox align="center">
     <label id="nameLabel" control="nameTextBox" value="&name.label;" accesskey="&name.accesskey;"/>
     <textbox id="nameTextBox" flex="1"/>
@@ -133,4 +133,5 @@
       </tabpanel>
     </tabpanels>
   </tabbox>
+  <tooltip id="tooltip" onclick="this.hidePopup();">&description;</tooltip>
 </dialog>
