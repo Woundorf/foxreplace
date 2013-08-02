@@ -1,7 +1,3 @@
-#foxreplaceDialogSubstitutionGroupEditor {
-  max-width: 1024px;
-}
-
 #htmlButton {
   -moz-binding: url("chrome://foxreplace/content/bindings.xml#htmlButton");
 }

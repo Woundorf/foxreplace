@@ -42,7 +42,7 @@ let foxreplaceOptions = {
   get _moveDownButton() { return document.getElementById("moveDownButton"); },
   get _subscriptionStatusTextBox() { return document.getElementById("subscriptionStatusTextBox"); },
   get _tooltip() { return document.getElementById("tooltip"); },
-  get _disclosureButton() { return document.getElementById("foxreplacePreferences").getButton("disclosure"); },
+  get _disclosureButton() { return document.documentElement.getButton("disclosure"); },
 
   /**
    * Initialization code.
@@ -208,7 +208,8 @@ let foxreplaceOptions = {
   addSubstitutionGroup: function() {
     let params = {};
 
-    window.openDialog("chrome://foxreplace/content/substitutiongroupeditor.xul", "", "chrome,titlebar,toolbar,centerscreen,modal", params);
+    document.documentElement.openSubDialog("chrome://foxreplace/content/substitutiongroupeditor.xul", "chrome,titlebar,toolbar,centerscreen,modal,resizable",
+                                           params);
 
     if (params.out) {
       this.substitutionList.push(params.out.group);
@@ -236,7 +237,8 @@ let foxreplaceOptions = {
     let group = this.substitutionList[index];
     let params = { "in": { group: group } };
 
-    window.openDialog("chrome://foxreplace/content/substitutiongroupeditor.xul", "", "chrome,titlebar,toolbar,centerscreen,modal", params);
+    document.documentElement.openSubDialog("chrome://foxreplace/content/substitutiongroupeditor.xul", "chrome,titlebar,toolbar,centerscreen,modal,resizable",
+                                           params);
 
     if (params.out) {
       this.substitutionList.splice(index, 1, params.out.group);
@@ -331,7 +333,7 @@ let foxreplaceOptions = {
    */
   _finishImportSubstitutionList: function(aSubstitutionList) {
     let params = {};
-    window.openDialog("chrome://foxreplace/content/appendoverwrite.xul", "", "chrome,titlebar,toolbar,centerscreen,modal", params);
+    document.documentElement.openSubDialog("chrome://foxreplace/content/appendoverwrite.xul", "chrome,titlebar,toolbar,centerscreen,modal", params);
 
     if (params.out) {
       if (params.out.button == "overwrite") this.substitutionList = aSubstitutionList;

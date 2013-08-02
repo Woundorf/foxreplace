@@ -30,7 +30,7 @@
 <prefwindow id="foxreplacePreferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title;"
             buttons="accept,cancel,disclosure" ondialogdisclosure="foxreplaceOptions.showTooltip();">
   <script type="application/x-javascript;version=1.8" src="options.js"/>
-  <prefpane id="mainPane">
+  <prefpane id="mainPane" flex="1">
     <preferences>
       <preference id="substitutionList" name="extensions.foxreplace.substitutionListJSON" type="unichar"/>
       <preference id="autoReplaceOnLoad" name="extensions.foxreplace.autoReplaceOnLoad" type="bool"/>
@@ -40,7 +40,7 @@
       <preference id="subscriptionUrl" name="extensions.foxreplace.subscriptionUrl" type="unichar"/>
       <preference id="subscriptionPeriod" name="extensions.foxreplace.subscriptionPeriod" type="int"/>
     </preferences>
-    <hbox>
+    <hbox flex="1">
       <tree id="substitutionListTree" seltype="single" editable="true" flex="1" preference-editable="true" preference="substitutionList"
             onsyncfrompreference="foxreplaceOptions.loadSubstitutionList();" onsynctopreference="return foxreplaceOptions.getSubstitutionListAsString();"
             ondblclick="foxreplaceOptions.onTreeDoubleClick(event);"
