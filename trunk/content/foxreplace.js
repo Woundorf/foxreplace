@@ -165,7 +165,7 @@ var foxreplace = {
     // Based on code from https://developer.mozilla.org/en-US/docs/XUL/School_tutorial/Handling_Preferences#Preference_windows
     if (!this.prefs.optionsWindow) {
       let instantApply = Application.prefs.get("browser.preferences.instantApply");
-      let features = "chrome,titlebar,toolbar,centerscreen" + (instantApply.value ? ",dialog=no" : ",modal");
+      let features = "chrome,titlebar,toolbar,centerscreen,resizable" + (instantApply.value ? ",dialog=no" : ",modal");
       window.openDialog("chrome://foxreplace/content/options.xul", "", features);
     }
     else this.prefs.optionsWindow.focus();
