@@ -42,11 +42,9 @@ var foxreplaceSubstitutionGroupEditor = {
   get _disclosureButton() { return document.getElementById("foxreplaceDialogSubstitutionGroupEditor").getButton("disclosure"); },
 
   /**
-   * Deletes the dumb items and fills the listboxes.
+   * Fills the listboxes.
    */
   onLoad: function() {
-    this.deleteDumbItems();
-
     if (window.arguments[0]["in"]) {
       var group = window.arguments[0]["in"].group;
 
@@ -518,17 +516,6 @@ var foxreplaceSubstitutionGroupEditor = {
     var empty = document.getElementById("inputStringTextBox").value == "";
     document.getElementById("addSubstitutionButton").disabled = empty;
     document.getElementById("okEditSubstitutionButton").disabled = empty;
-  },
-
-  /**
-   * Deletes the dumb items (workaround for listbox height).
-   */
-  deleteDumbItems: function() {
-    if (document.getElementById("urlDumbItem"))
-      this._urlsListBox.removeItemAt(0);  // urlDumbItem is the first
-
-    if (document.getElementById("substitutionDumbItem"))
-      this._substitutionsListBox.removeItemAt(0); // urlDumbItem is the first
   },
 
   /**
