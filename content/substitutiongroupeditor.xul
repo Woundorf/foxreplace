@@ -59,10 +59,7 @@
           </hbox>
           <hbox flex="1">
             <listbox id="urlsListBox" flex="1" onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceSubstitutionGroupEditor.deleteUrl();"
-                     onselect="foxreplaceSubstitutionGroupEditor.onSelectUrl();">
-              <!-- workaround for listbox height -->
-              <listitem id="urlDumbItem" label=""/>
-            </listbox>
+                     onselect="foxreplaceSubstitutionGroupEditor.onSelectUrl();"/>
             <vbox>
               <button id="editUrlButton" disabled="true" label="&editUrlButton.label;" accesskey="&editUrlButton.accesskey;"
                       oncommand="foxreplaceSubstitutionGroupEditor.startEditUrl();"/>
@@ -107,13 +104,6 @@
                 <listcol flex="1" minwidth="64"/>
                 <listcol/>
               </listcols>
-              <!-- workaround for listbox height -->
-              <listitem id="substitutionDumbItem">
-                <listcell label=""/>
-                <listcell label=""/>
-                <listcell label=""/>
-                <listcell label=""/>
-              </listitem>
             </listbox>
             <vbox>
               <button id="moveUpSubstitutionButton" disabled="true" label="&moveUpSubstitutionButton.label;" accesskey="&moveUpSubstitutionButton.accesskey;"
