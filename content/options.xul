@@ -28,7 +28,7 @@
 <?xml-stylesheet href="chrome://foxreplace/skin/options.css" type="text/css"?>
 <!DOCTYPE prefwindow SYSTEM "chrome://foxreplace/locale/options.dtd">
 <prefwindow id="foxreplacePreferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title;"
-            buttons="accept,cancel,disclosure" ondialogdisclosure="foxreplaceOptions.showTooltip();">
+            buttons="accept,cancel,disclosure" ondialogdisclosure="foxreplaceOptions.showTooltip();" persist="width height">
   <script type="application/x-javascript;version=1.8" src="options.js"/>
   <prefpane id="mainPane" flex="1">
     <preferences>
