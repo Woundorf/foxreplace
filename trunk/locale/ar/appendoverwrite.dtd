@@ -1,6 +1,6 @@
-<!ENTITY dialog.title "Append or overwrite?">
-<!ENTITY append.label "Append">
-<!ENTITY append.accesskey "A">
-<!ENTITY overwrite.label "Overwrite">
-<!ENTITY overwrite.accesskey "O">
-<!ENTITY question "Do you want to append substitutions to the list or overwrite it?">
+<!ENTITY dialog.title "إضافة أم استبدال؟">
+<!ENTITY append.label "إضافة">
+<!ENTITY append.accesskey "ض">
+<!ENTITY overwrite.label "استبدال">
+<!ENTITY overwrite.accesskey "س">
+<!ENTITY question "هل ترغب في إضافة البدائل إلى القائمة أم استبدالها؟">
