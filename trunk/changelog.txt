@@ -23,7 +23,7 @@ v0.14.0 (16-1-2013)
 * Substitution groups can be enabled or disabled (issue 33).
 * Text replaced in all body elements (issue 62).
 * Pretty printing of exported JSON file (issue 96).
-* HTML substitutions are made on the html node instead of the body (issues 64 and 76).
+* HTML substitutions are made on the html node instead of the body (issues 21, 64 and 76).
 * Column settings on the options dialog are persistent (issue 103).
 * Compatibility with Firefox up to 21.0a1.
 
