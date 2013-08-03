@@ -257,7 +257,6 @@ var foxreplace = {
     var valueNodesXpath = "/html/body//input[@type='text']"
                         + "|/html/body//textarea"
                         + "|/html/body//@abbr"
-                        + "|/html/body//@abbr"
                         + "|/html/body//@alt"
                         + "|/html/body//@label"
                         + "|/html/body//@standby"
