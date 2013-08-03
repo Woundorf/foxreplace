@@ -1,4 +1,4 @@
-<!ENTITY menuReplace.label "Replace...">
+<!ENTITY menuReplace.label "استبدل...">
 <!ENTITY menuReplace.accesskey "e">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
@@ -17,10 +17,10 @@
 <!ENTITY replaceBarClose "Close replace bar">
 <!ENTITY replaceBarInputString.label "Replace">
 <!ENTITY replaceBarInputString.accesskey "R">
-<!ENTITY replaceBarOutputString.label "with">
-<!ENTITY replaceBarOutputString.accesskey "w">
-<!ENTITY replaceBarCaseSensitive.label "Match case">
-<!ENTITY replaceBarCaseSensitive.accesskey "M">
+<!ENTITY replaceBarOutputString.label "بـ">
+<!ENTITY replaceBarOutputString.accesskey "ب">
+<!ENTITY replaceBarCaseSensitive.label "مطابقة حالة الأحرف">
+<!ENTITY replaceBarCaseSensitive.accesskey "م">
 <!ENTITY replaceBarHtml.label "HTML">
 <!ENTITY replaceBarHtml.accesskey "H">
 <!ENTITY replaceBarReplace.label "Replace">
