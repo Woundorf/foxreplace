@@ -9,7 +9,7 @@ v0.15.0
 * Improved substitution list behaviour in options dialog (issue 112).
 * Changed the code to open the options dialog to take into account several features (issues 98 and 66).
 * Moved the descriptions of the options and substitution group editor dialogs to a tooltip showable with a "more info" button to remove clutter.
-* Made the options and substitution group editor dialogs resizable on all platforms (when open from FoxReplace UI) (issue 100).
+* Made the options and substitution group editor dialogs resizable on all platforms (when open from FoxReplace UI) (issue 100). The sizes are persistent.
 * Compatibility with Firefox up to 24.0.
 
 v0.14.0 (16-1-2013)

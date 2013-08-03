@@ -29,7 +29,8 @@
 <!DOCTYPE dialog SYSTEM "chrome://foxreplace/locale/substitutiongroupeditor.dtd">
 <dialog id="foxreplaceDialogSubstitutionGroupEditor" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&title;"
         buttons="accept,cancel,disclosure" onload="foxreplaceSubstitutionGroupEditor.onLoad();"
-        ondialogaccept="return foxreplaceSubstitutionGroupEditor.onAccept();" ondialogdisclosure="foxreplaceSubstitutionGroupEditor.showTooltip();">
+        ondialogaccept="return foxreplaceSubstitutionGroupEditor.onAccept();" ondialogdisclosure="foxreplaceSubstitutionGroupEditor.showTooltip();"
+        persist="width height">
   <script type="application/x-javascript;version=1.8" src="substitutiongroupeditor.js"/>
   <hbox align="center">
     <label id="nameLabel" control="nameTextBox" value="&name.label;" accesskey="&name.accesskey;"/>
