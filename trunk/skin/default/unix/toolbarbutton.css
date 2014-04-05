@@ -1,7 +1,7 @@
 #fxrToolbarButton {
-  -moz-image-region: rect(0px, 24px, 24px, 0px);
+  -moz-image-region: rect(0px, 56px, 24px, 32px);
 }
 
 toolbar[iconsize="small"] #fxrToolbarButton {
-  -moz-image-region: rect(4px, 40px, 20px, 24px);
+  -moz-image-region: rect(0px, 72px, 16px, 56px);
 }
