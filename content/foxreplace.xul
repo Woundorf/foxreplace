@@ -95,10 +95,11 @@
              onkeypress="if(event.keyCode==event.DOM_VK_ESCAPE)foxreplace.hideReplaceBar();">
       <label id="fxrReplaceBarInputStringLabel" control="fxrReplaceBarInputStringTextBox" value="&replaceBarInputString.label;"
              accesskey="&replaceBarInputString.accesskey;"/>
-      <textbox id="fxrReplaceBarInputStringTextBox" flex="1" oninput="document.getElementById('fxrReplaceBarReplaceButton').disabled=this.value==''"/>
+      <textbox id="fxrReplaceBarInputStringTextBox" flex="1" oninput="document.getElementById('fxrReplaceBarReplaceButton').disabled=this.value==''"
+               onkeypress="if(event.keyCode==event.DOM_VK_RETURN)foxreplace.instantReplace();"/>
       <label id="fxrReplaceBarOutputStringLabel" control="fxrReplaceBarOutputStringTextBox" value="&replaceBarOutputString.label;"
              accesskey="&replaceBarOutputString.accesskey;"/>
-      <textbox id="fxrReplaceBarOutputStringTextBox" flex="1"/>
+      <textbox id="fxrReplaceBarOutputStringTextBox" flex="1" onkeypress="if(event.keyCode==event.DOM_VK_RETURN)foxreplace.instantReplace();"/>
       <label id="fxrReplaceBarHtmlLabel" control="fxrReplaceBarHtmlButton" value="&replaceBarHtml.label;" accesskey="&replaceBarHtml.accesskey;"/>
       <box id="fxrReplaceBarHtmlButton"/><!-- Warning: it can't be a button or the binding won't work as expected -->
       <checkbox id="fxrReplaceBarCaseSensitiveCheckBox" label="&replaceBarCaseSensitive.label;" accesskey="&replaceBarCaseSensitive.accesskey;"/>
