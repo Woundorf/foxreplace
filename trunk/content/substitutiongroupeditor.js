@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2008-2013 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2008-2014 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -38,6 +38,9 @@ var foxreplaceSubstitutionGroupEditor = {
   get _substitutionsListBox() { return document.getElementById("substitutionsListBox"); },
   get _htmlButton() { return document.getElementById("htmlButton"); },
   get _enabledCheckBox() { return document.getElementById("enabledCheckBox"); },
+  get _urlTextBox() { return document.getElementById("urlTextBox"); },
+  get _inputStringTextBox() { return document.getElementById("inputStringTextBox"); },
+  get _outputStringTextBox() { return document.getElementById("outputStringTextBox"); },
   get _tooltip() { return document.getElementById("tooltip"); },
   get _disclosureButton() { return document.getElementById("foxreplaceDialogSubstitutionGroupEditor").getButton("disclosure"); },
 
@@ -62,8 +65,7 @@ var foxreplaceSubstitutionGroupEditor = {
   addUrl: function(aUrl) {
     if (this._urlsListBox.disabled) return;
 
-    var urlTextBox = document.getElementById("urlTextBox");
-    var url = aUrl || urlTextBox.value;
+    var url = aUrl || this._urlTextBox.value;
 
     if (!url) return; // this shouldn't happen
 
@@ -73,8 +75,8 @@ var foxreplaceSubstitutionGroupEditor = {
     if (this.core.fxrIsExclusionUrl(url)) urlItem.setAttribute("class", "exclusionUrl");
 
     if (!aUrl) {
-      urlTextBox.value = "";
-      urlTextBox.focus();
+      this._urlTextBox.value = "";
+      this._urlTextBox.focus();
       document.getElementById("addUrlButton").disabled = true;
     }
 
@@ -122,13 +124,12 @@ var foxreplaceSubstitutionGroupEditor = {
     var urlItem = this._urlsListBox.selectedItem;
 
     if (urlItem) {
-      var urlTextBox = document.getElementById("urlTextBox");
-      urlTextBox.value = urlItem.label;
+      this._urlTextBox.value = urlItem.label;
       document.getElementById("addUrlButton").hidden = true;
       document.getElementById("okEditUrlButton").hidden = false;
       document.getElementById("cancelEditUrlButton").hidden = false;
       this.disableUrlsListBox(true);
-      urlTextBox.focus();
+      this._urlTextBox.focus();
     }
   },
 
@@ -139,12 +140,11 @@ var foxreplaceSubstitutionGroupEditor = {
     if (!this._urlsListBox.disabled) return;
 
     var urlItem = this._urlsListBox.selectedItem;
-    var urlTextBox = document.getElementById("urlTextBox");
 
-    if (!urlTextBox.value) return;  // this shouldn't happen
+    if (!this._urlTextBox.value) return;  // this shouldn't happen
 
-    urlItem.label = urlTextBox.value;
-    urlTextBox.value = "";
+    urlItem.label = this._urlTextBox.value;
+    this._urlTextBox.value = "";
     document.getElementById("addUrlButton").disabled = true;
     document.getElementById("addUrlButton").hidden = false;
     document.getElementById("okEditUrlButton").hidden = true;
@@ -159,7 +159,7 @@ var foxreplaceSubstitutionGroupEditor = {
   cancelEditUrl: function() {
     if (!this._urlsListBox.disabled) return;
 
-    document.getElementById("urlTextBox").value = "";
+    this._urlTextBox.value = "";
     document.getElementById("addUrlButton").disabled = true;
     document.getElementById("addUrlButton").hidden = false;
     document.getElementById("okEditUrlButton").hidden = true;
@@ -218,7 +218,7 @@ var foxreplaceSubstitutionGroupEditor = {
    * Enables or disables some buttons when the URL textbox changes.
    */
   onUrlInput: function() {
-    var empty = document.getElementById("urlTextBox").value == "";
+    var empty = this._urlTextBox.value == "";
     document.getElementById("addUrlButton").disabled = empty;
     document.getElementById("okEditUrlButton").disabled = empty;
   },
@@ -229,13 +229,11 @@ var foxreplaceSubstitutionGroupEditor = {
   addSubstitution: function(aSubstitution) {
     if (this._substitutionsListBox.disabled) return;
 
-    var inputStringTextBox = document.getElementById("inputStringTextBox");
-    var outputStringTextBox = document.getElementById("outputStringTextBox");
     var caseSensitiveCheckBox = document.getElementById("caseSensitiveCheckBox");
 
-    var inputString = aSubstitution ? aSubstitution.input : inputStringTextBox.value;
-    var inputType = aSubstitution ? aSubstitution.inputType : inputStringTextBox.inputType;
-    var outputString = aSubstitution ? aSubstitution.output : outputStringTextBox.value;
+    var inputString = aSubstitution ? aSubstitution.input : this._inputStringTextBox.value;
+    var inputType = aSubstitution ? aSubstitution.inputType : this._inputStringTextBox.inputType;
+    var outputString = aSubstitution ? aSubstitution.output : this._outputStringTextBox.value;
     var caseSensitive = aSubstitution ? aSubstitution.caseSensitive : caseSensitiveCheckBox.checked;
 
     if (!inputString) return; // this shouldn't happen
@@ -277,12 +275,12 @@ var foxreplaceSubstitutionGroupEditor = {
 
     if (!aSubstitution) {
       // Clear fields
-      inputStringTextBox.value = "";
-      outputStringTextBox.value = "";
+      this._inputStringTextBox.value = "";
+      this._outputStringTextBox.value = "";
       caseSensitiveCheckBox.checked = false;
 
       // Set focus to input
-      inputStringTextBox.focus();
+      this._inputStringTextBox.focus();
       document.getElementById("addSubstitutionButton").disabled = true;
     }
 
@@ -376,18 +374,16 @@ var foxreplaceSubstitutionGroupEditor = {
 
     if (substitutionItem) {
       var substitution = substitutionItem.substitution;
-      var inputStringTextBox = document.getElementById("inputStringTextBox");
-      var outputStringTextBox = document.getElementById("outputStringTextBox");
       var caseSensitiveCheckBox = document.getElementById("caseSensitiveCheckBox");
-      inputStringTextBox.value = substitution.input;
-      inputStringTextBox.inputType = substitution.inputType
-      outputStringTextBox.value = substitution.output;
+      this._inputStringTextBox.value = substitution.input;
+      this._inputStringTextBox.inputType = substitution.inputType
+      this._outputStringTextBox.value = substitution.output;
       caseSensitiveCheckBox.checked = substitution.caseSensitive;
       document.getElementById("addSubstitutionButton").hidden = true;
       document.getElementById("okEditSubstitutionButton").hidden = false;
       document.getElementById("cancelEditSubstitutionButton").hidden = false;
       this.disableSubstitutionsListBox(true);
-      inputStringTextBox.focus();
+      this._inputStringTextBox.focus();
     }
   },
 
@@ -397,13 +393,11 @@ var foxreplaceSubstitutionGroupEditor = {
   okEditSubstitution: function() {
     if (!this._substitutionsListBox.disabled) return;
 
-    var inputStringTextBox = document.getElementById("inputStringTextBox");
-    var outputStringTextBox = document.getElementById("outputStringTextBox");
     var caseSensitiveCheckBox = document.getElementById("caseSensitiveCheckBox");
 
-    var inputString = inputStringTextBox.value;
-    var inputType = inputStringTextBox.inputType;
-    var outputString = outputStringTextBox.value;
+    var inputString = this._inputStringTextBox.value;
+    var inputType = this._inputStringTextBox.inputType;
+    var outputString = this._outputStringTextBox.value;
     var caseSensitive = caseSensitiveCheckBox.checked;
 
     if (!inputString) return; // this shouldn't happen
@@ -426,8 +420,8 @@ var foxreplaceSubstitutionGroupEditor = {
     substitutionItem.childNodes[3].setAttribute("label", this.getLocalizedString(caseSensitive ? "yes" : "no"));
 
     // Clear fields
-    inputStringTextBox.value = "";
-    outputStringTextBox.value = "";
+    this._inputStringTextBox.value = "";
+    this._outputStringTextBox.value = "";
     caseSensitiveCheckBox.checked = false;
 
     document.getElementById("addSubstitutionButton").disabled = true;
@@ -445,8 +439,8 @@ var foxreplaceSubstitutionGroupEditor = {
     if (!this._substitutionsListBox.disabled) return;
 
     // Clear fields
-    document.getElementById("inputStringTextBox").value = "";
-    document.getElementById("outputStringTextBox").value = "";
+    this._inputStringTextBox.value = "";
+    this._outputStringTextBox.value = "";
     document.getElementById("caseSensitiveCheckBox").checked = false;
 
     document.getElementById("addSubstitutionButton").disabled = true;
@@ -513,7 +507,7 @@ var foxreplaceSubstitutionGroupEditor = {
    * Enables or disables some buttons when the substitution input textbox changes.
    */
   onSubstitutionInput: function() {
-    var empty = document.getElementById("inputStringTextBox").value == "";
+    var empty = this._inputStringTextBox.value == "";
     document.getElementById("addSubstitutionButton").disabled = empty;
     document.getElementById("okEditSubstitutionButton").disabled = empty;
   },
@@ -522,11 +516,24 @@ var foxreplaceSubstitutionGroupEditor = {
    * If everything is correct puts the edited substitution group in the out argument and returns.
    */
   onAccept: function () {
+    // Check for uncommitted changes in URLs (not added, or edited but not confirmed) and commit them automatically
+    if (this._urlTextBox.value != "") {
+      // Call both methods to commit either type of change
+      this.addUrl();
+      this.okEditUrl();
+    }
+
+    // Check for uncommitted changes in substitutions (not added, or edited but not confirmed) and commit them automatically
+    if (this._inputStringTextBox.value != "") {
+      // Call both methods to commit either type of change
+      this.addSubstitution();
+      this.okEditSubstitution();
+    }
+
     var nSubstitutions = this._substitutionsListBox.getRowCount();
 
     if (nSubstitutions == 0) {
       this.prompts.alert(this.getLocalizedString("noSubstitutionsTitle"), this.getLocalizedString("noSubstitutionsDescription"));
-
       return false;
     }
 
