@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2013 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2007-2014 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  * Lutay Sergey (href substitution)
@@ -115,6 +115,13 @@ var foxreplace = {
     window.setTimeout(function() {
       document.getElementById("fxrReplaceBarInputStringTextBox").focus();
     }, 100);
+  },
+
+  /**
+   * Hides the replace bar.
+   */
+  hideReplaceBar: function() {
+    document.getElementById("fxrReplaceBar").hidden = true;
   },
 
   /**

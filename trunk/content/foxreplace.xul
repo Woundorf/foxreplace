@@ -11,7 +11,7 @@
   - The Original Code is FoxReplace.
   -
   - The Initial Developer of the Original Code is Marc Ruiz Altisent.
-  - Portions created by the Initial Developer are Copyright (C) 2007-2012 the Initial Developer. All Rights Reserved.
+  - Portions created by the Initial Developer are Copyright (C) 2007-2014 the Initial Developer. All Rights Reserved.
   -
   - Contributor(s):
   -
@@ -30,6 +30,7 @@
   <script type="application/javascript;version=1.8" src="chrome://foxreplace/content/foxreplace.js"/>
   <commandset>
     <command id="fxrCmdShowReplaceBar" oncommand="foxreplace.showReplaceBar();"/>
+    <command id="fxrCmdHideReplaceBar" oncommand="foxreplace.hideReplaceBar();"/>
     <command id="fxrCmdBarReplace" oncommand="foxreplace.instantReplace();"/>
     <command id="fxrCmdListReplace" oncommand="foxreplace.listReplace();"/>
     <command id="fxrCmdToggleAutoReplaceOnLoad" oncommand="foxreplace.toggleAutoReplaceOnLoad();"/>
@@ -90,7 +91,8 @@
     </toolbarbutton>
   </toolbarpalette>
   <vbox id="browser-bottombox">
-    <toolbar id="fxrReplaceBar" insertbefore="inspector-toolbar,addon-bar" align="center" fullscreentoolbar="true" hidden="true">
+    <toolbar id="fxrReplaceBar" insertbefore="inspector-toolbar,addon-bar" align="center" fullscreentoolbar="true" hidden="true"
+             onkeypress="if(event.keyCode==event.DOM_VK_ESCAPE)foxreplace.hideReplaceBar();">
       <label id="fxrReplaceBarInputStringLabel" control="fxrReplaceBarInputStringTextBox" value="&replaceBarInputString.label;"
              accesskey="&replaceBarInputString.accesskey;"/>
       <textbox id="fxrReplaceBarInputStringTextBox" flex="1" oninput="document.getElementById('fxrReplaceBarReplaceButton').disabled=this.value==''"/>
@@ -102,8 +104,7 @@
       <checkbox id="fxrReplaceBarCaseSensitiveCheckBox" label="&replaceBarCaseSensitive.label;" accesskey="&replaceBarCaseSensitive.accesskey;"/>
       <button id="fxrReplaceBarReplaceButton" disabled="true" label="&replaceBarReplace.label;" accesskey="&replaceBarReplace.accesskey;"
               command="fxrCmdBarReplace"/>
-      <toolbarbutton id="fxrReplaceBarCloseButton" class="findbar-closebutton close-icon" tooltiptext="&replaceBarClose;"
-                     oncommand="document.getElementById('fxrReplaceBar').hidden=true;"/>
+      <toolbarbutton id="fxrReplaceBarCloseButton" class="findbar-closebutton close-icon" tooltiptext="&replaceBarClose;" command="fxrCmdHideReplaceBar"/>
     </toolbar>
   </vbox>
 </overlay>
