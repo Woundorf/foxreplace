@@ -2,6 +2,7 @@
 * Moved toolbar close button to the right to match newer Firefox versions.
 * Unconfirmed changes (i.e. additions or editions) in substitution groups are automatically confirmed when pressing the dialog OK button (issue 125).
 * The replace bar is hidden when the ESC key is pressed (issue 107).
+* Pressing the return key when focus is in one of the text fields applies the replace bar substitution (issue 107).
 
 v0.15.0 (2013-08-03)
 * Textboxes in the replace bar use as much width as they can.
