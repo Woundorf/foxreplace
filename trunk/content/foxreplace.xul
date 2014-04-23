@@ -91,8 +91,6 @@
   </toolbarpalette>
   <vbox id="browser-bottombox">
     <toolbar id="fxrReplaceBar" insertbefore="inspector-toolbar,addon-bar" align="center" fullscreentoolbar="true" hidden="true">
-      <toolbarbutton id="fxrReplaceBarCloseButton" class="findbar-closebutton" tooltiptext="&replaceBarClose;"
-                     oncommand="document.getElementById('fxrReplaceBar').hidden=true;"/>
       <label id="fxrReplaceBarInputStringLabel" control="fxrReplaceBarInputStringTextBox" value="&replaceBarInputString.label;"
              accesskey="&replaceBarInputString.accesskey;"/>
       <textbox id="fxrReplaceBarInputStringTextBox" flex="1" oninput="document.getElementById('fxrReplaceBarReplaceButton').disabled=this.value==''"/>
@@ -104,6 +102,8 @@
       <checkbox id="fxrReplaceBarCaseSensitiveCheckBox" label="&replaceBarCaseSensitive.label;" accesskey="&replaceBarCaseSensitive.accesskey;"/>
       <button id="fxrReplaceBarReplaceButton" disabled="true" label="&replaceBarReplace.label;" accesskey="&replaceBarReplace.accesskey;"
               command="fxrCmdBarReplace"/>
+      <toolbarbutton id="fxrReplaceBarCloseButton" class="findbar-closebutton close-icon" tooltiptext="&replaceBarClose;"
+                     oncommand="document.getElementById('fxrReplaceBar').hidden=true;"/>
     </toolbar>
   </vbox>
 </overlay>
