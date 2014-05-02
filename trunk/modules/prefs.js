@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009-2013 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2009-2014 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -131,6 +131,34 @@ var prefs = {
    */
   set autoReplaceOnLoad(aAutoReplaceOnLoad) {
     this._preferences.set("autoReplaceOnLoad", aAutoReplaceOnLoad);
+  },
+
+  /**
+   * Loads the auto-replace periodically setting from preferences and returns it.
+   */
+  get autoReplacePeriodically() {
+    return this._preferences.get("autoReplacePeriodically");
+  },
+
+  /**
+   * Saves the auto-replace periodically setting to preferences.
+   */
+  set autoReplacePeriodically(aAutoReplacePeriodically) {
+    this._preferences.set("autoReplacePeriodically", aAutoReplacePeriodically);
+  },
+
+  /**
+   * Loads the auto-replace period setting from preferences and returns it.
+   */
+  get autoReplacePeriod() {
+    return this._preferences.get("autoReplacePeriod");
+  },
+
+  /**
+   * Saves the auto-replace period setting to preferences.
+   */
+  set autoReplacePeriod(aAutoReplacePeriod) {
+    this._preferences.set("autoReplacePeriod", aAutoReplacePeriod);
   },
 
   /**

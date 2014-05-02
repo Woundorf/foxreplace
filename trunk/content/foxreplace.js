@@ -38,11 +38,17 @@ var foxreplace = {
     //document.getElementById("contentAreaContextMenu").addEventListener("popupshowing", function() { foxreplace.onShowContextMenu(); }, false);
 
     this.prefs.service.addObserver("", this, false);
+    this.Observers.add(fxrPeriodicReplace.observerKey, this.listReplace, this);
 
     gBrowser.addEventListener("DOMContentLoaded", this.onPageLoad, true);
 
     this._loadEnabledGroups();
     this.setAutoReplaceOnLoad(this.prefs.autoReplaceOnLoad);
+
+    let autoReplacePeriodically = this.prefs.autoReplacePeriodically;
+    let autoReplacePeriod = this.prefs.autoReplacePeriod;
+    if (autoReplacePeriodically)
+      fxrPeriodicReplace.start(autoReplacePeriod);
 
     // subscription
     var enableSubscription = this.prefs.enableSubscription;
@@ -57,6 +63,7 @@ var foxreplace = {
    * Finalization code.
    */
   onUnload: function() {
+    this.Observers.remove(fxrPeriodicReplace.observerKey, this.listReplace, this);
     this.prefs.service.removeObserver("", this);
   },
 
@@ -76,6 +83,16 @@ var foxreplace = {
 
       case "autoReplaceOnLoad":
         this.setAutoReplaceOnLoad(this.prefs.autoReplaceOnLoad);
+        break;
+
+      case "autoReplacePeriodically":
+      case "autoReplacePeriod":
+        let autoReplacePeriodically = this.prefs.autoReplacePeriodically;
+        let autoReplacePeriod = this.prefs.autoReplacePeriod;
+        if (autoReplacePeriodically)
+          fxrPeriodicReplace.restart(autoReplacePeriod);
+        else
+          fxrPeriodicReplace.stop();
         break;
 
       case "enableSubscription":
@@ -404,9 +421,11 @@ var foxreplace = {
 };
 
 Components.utils.import("resource://foxreplace/core.js", foxreplace.core);
-Components.utils.import("resource://foxreplace/subscription.js");
+Components.utils.import("resource://foxreplace/Observers.js", foxreplace);
+Components.utils.import("resource://foxreplace/periodicreplace.js");
 Components.utils.import("resource://foxreplace/prefs.js", foxreplace);
 Components.utils.import("resource://foxreplace/services.js", foxreplace);
+Components.utils.import("resource://foxreplace/subscription.js");
 
 window.addEventListener("load", function() { foxreplace.onLoad(); }, false);
 window.addEventListener("unload", function() { foxreplace.onUnload(); }, false);

@@ -30,9 +30,13 @@
 <!ENTITY subscriptionUrl.label "URL">
 <!ENTITY subscriptionUrl.accesskey "R">
 <!ENTITY subscriptionPeriod.label "Period (minutes)">
-<!ENTITY subscriptionPeriod.accesskey "n">
+<!ENTITY subscriptionPeriod.accesskey "P">
 <!ENTITY autoReplaceOnLoad.label "Auto-replace on page load">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY autoReplacePeriodically.label "Auto-replace every">
+<!ENTITY autoReplacePeriodically.accesskey "v">
+<!ENTITY autoReplacePeriod.label "seconds">
+<!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "Replace URLs (links and image sources) (Warning: this may change page behaviour!)">
 <!ENTITY replaceUrls.accesskey "l">
 <!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">
