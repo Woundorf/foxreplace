@@ -33,6 +33,10 @@
 <!ENTITY subscriptionPeriod.accesskey "r">
 <!ENTITY autoReplaceOnLoad.label "Reemplaça automàticament en carregar una pàgina">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY autoReplacePeriodically.label "Reemplaça automàticament cada">
+<!ENTITY autoReplacePeriodically.accesskey "o">
+<!ENTITY autoReplacePeriod.label "segons">
+<!ENTITY autoReplacePeriod.accesskey "g">
 <!ENTITY replaceUrls.label "Reemplaça els URLs (enllaços i fonts de les imatges) (Atenció: això pot modificar el comportament de les pàgines!)">
 <!ENTITY replaceUrls.accesskey "s">
 <!ENTITY replaceScripts.label "Reemplaça els scripts (Atenció: això pot modificar el comportament de les pàgines!) (experimental)">

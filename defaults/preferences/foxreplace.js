@@ -1,6 +1,8 @@
 pref("extensions.fox@replace.fx.description", "chrome://foxreplace/locale/foxreplace.properties");
 pref("extensions.foxreplace.substitutionListJSON", '{"version":"0.15","groups":[]}');
 pref("extensions.foxreplace.autoReplaceOnLoad", false);
+pref("extensions.foxreplace.autoReplacePeriodically", false);
+pref("extensions.foxreplace.autoReplacePeriod", 1);
 pref("extensions.foxreplace.replaceUrls", false);
 pref("extensions.foxreplace.replaceScripts", false);
 pref("extensions.foxreplace.enableSubscription", false);
