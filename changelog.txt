@@ -1,3 +1,4 @@
+v0.16.0
 * Updated toolbar icons for Australis.
 * Moved toolbar close button to the right to match newer Firefox versions.
 * Unconfirmed changes (i.e. additions or editions) in substitution groups are automatically confirmed when pressing the dialog OK button (issue 125).
