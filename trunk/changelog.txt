@@ -5,6 +5,8 @@
 * Pressing the return key when focus is in one of the text fields applies the replace bar substitution (issue 107).
 * New option to periodically apply the substitution list (issue 129). This allows to overcome the limitation with dynamic content in some cases.
 * Updated shortcuts in the options dialog (issue 108).
+* New locale:
+  - ast-ES (by alministradores@softastur.org)
 
 v0.15.0 (2013-08-03)
 * Textboxes in the replace bar use as much width as they can.
