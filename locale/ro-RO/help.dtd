@@ -30,23 +30,10 @@
 <!ENTITY autoReplace.p "Această opțiune poate fi activată sau nu. Când este activată, lista de substituții este aplicată automat la încărcarea paginii, substituțiile grupului fiind aplicate dacă se potrivesc regulile definite pentru adrese. În acest fel, extensia poate funcționa ca un filtru.">
 <!ENTITY replaceUrls "Înlocuiește adresele">
 <!ENTITY replaceUrls.p "Această opțiune este implicit dezactivată. Dacă este activată, substituțiile sunt aplicate și adreselor din pagină (legături, sursele imaginilor, etc) și astfel poate modifica comportamentul paginii. Folosiți această opțiune cu responsabilitate. Aceasta nu are efect în substituții HTML pentru că astfel adresele ar putea fi modificate oricând.">
-<!ENTITY replaceScripts "Replace scripts">
-<!ENTITY replaceScripts.p "This option is off by default. If it's on, substitutions are also applied to the scripts in the page, so it may change the behaviour of the page. Use it under your own responsibility. For substitutions with HTML in the input and the output this option applies to all the scripts, otherwise only to the scripts in the body.">
 <!ENTITY newGui "Meniul nou și elementele barei de unelte">
-<!ENTITY newGui.app "Firefox menu">
 <!ENTITY newGui.edit "Editează">
-<!ENTITY newGui.menu.replace "Replace... (F8)">
-<!ENTITY newGui.menu.replace.d "Shows the replace bar.">
 <!ENTITY newGui.tools "Unelte">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (Shift+F8)">
-<!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
-<!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
-<!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
-<!ENTITY newGui.menu.options "FoxReplace options...">
-<!ENTITY newGui.menu.options.d "Opens FoxReplace options window.">
-<!ENTITY newGui.menu.help "Help">
-<!ENTITY newGui.menu.help.d "Shows this page.">
 <!ENTITY newGui.toolbarButton "Buton pe bara de unelte">
 <!ENTITY newGui.toolbarButton.0 "Apăsarea lui aplică lista curentă de substituții.">
 <!ENTITY newGui.toolbarButton.1 "Are un meniu lateral ca FoxReplace de sus.">

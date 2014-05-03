@@ -1,5 +1,6 @@
 content foxreplace  content/
 locale  foxreplace  ar  locale/ar/
+locale  foxreplace  ast-ES  locale/ast-ES/
 locale  foxreplace  ca  locale/ca/
 locale  foxreplace  da  locale/da/
 locale  foxreplace  de  locale/de/

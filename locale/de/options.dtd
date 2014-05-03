@@ -1,40 +1,18 @@
 <!ENTITY prefwindow.title "FoxReplace options">
 <!ENTITY mainPane.title "Main">
-<!ENTITY description "Enter the substitution list. The list is composed of substitution groups, where the substitutions of each group are applied if any of the group URLs matches the address of the loaded page. If the group has no URLs its substitutions are applied to any page. Groups are checked in the order they appear.">
-<!ENTITY enabledHeader "Enable">
-<!ENTITY nameHeader "Name">
-<!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Replace">
 <!ENTITY outputStringHeader "With">
 <!ENTITY addButton.label "Add">
 <!ENTITY addButton.accesskey "A">
-<!ENTITY editButton.label "Edit">
-<!ENTITY editButton.accesskey "E">
 <!ENTITY deleteButton.label "Delete">
 <!ENTITY deleteButton.accesskey "l">
 <!ENTITY clearButton.label "Clear">
 <!ENTITY clearButton.accesskey "C">
-<!ENTITY moveUpButton.label "Move up">
-<!ENTITY moveUpButton.accesskey "u">
-<!ENTITY moveDownButton.label "Move down">
-<!ENTITY moveDownButton.accesskey "o">
 <!ENTITY importButton.label "Import">
 <!ENTITY importButton.accesskey "I">
-<!ENTITY importFromUrlButton.label "Import from URL">
-<!ENTITY importFromUrlButton.accesskey "m">
 <!ENTITY exportButton.label "Export">
 <!ENTITY exportButton.accesskey "x">
-<!ENTITY subscriptionGroupBoxCaption "Periodically update from URL">
-<!ENTITY subscriptionEnableCheckBox.label "Enable">
-<!ENTITY subscriptionEnableCheckBox.accesskey "b">
-<!ENTITY subscriptionStatus.label "Status:">
-<!ENTITY subscriptionUrl.label "URL">
-<!ENTITY subscriptionUrl.accesskey "R">
-<!ENTITY subscriptionPeriod.label "Period (minutes)">
-<!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "Auto-replace on page load">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
 <!ENTITY replaceUrls.label "Replace URLs (links and image sources) (Warning: this will change page behaviour!)">
 <!ENTITY replaceUrls.accesskey "p">
-<!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">
-<!ENTITY replaceScripts.accesskey "s">
