@@ -1,5 +1,4 @@
 <!ENTITY prefwindow.title "FoxReplace options">
-<!ENTITY mainPane.title "Main">
 <!ENTITY description "Enter the substitution list. The list is composed of substitution groups, where the substitutions of each group are applied if any of the group URLs matches the address of the loaded page. If the group has no URLs its substitutions are applied to any page. Groups are checked in the order they appear.">
 <!ENTITY enabledHeader "Enable">
 <!ENTITY nameHeader "Name">
@@ -34,6 +33,10 @@
 <!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "Auto-replace on page load">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY autoReplacePeriodically.label "Auto-replace every">
+<!ENTITY autoReplacePeriodically.accesskey "t">
+<!ENTITY autoReplacePeriod.label "seconds">
+<!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "Replace URLs (links and image sources) (Warning: this may change page behaviour!)">
 <!ENTITY replaceUrls.accesskey "l">
 <!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">

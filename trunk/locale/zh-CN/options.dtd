@@ -1,6 +1,7 @@
 <!ENTITY prefwindow.title "FoxReplace 选项">
-<!ENTITY mainPane.title "主要">
 <!ENTITY description "请输入替换列表。这份名单是由替换组组成，如果每个组URL匹配加载页面的地址的组都会被应用。如果该组没有网址将适用于任何网页。组的顺序检查是按顺序执行。">
+<!ENTITY enabledHeader "Enable">
+<!ENTITY nameHeader "Name">
 <!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "替换">
 <!ENTITY outputStringHeader "为">
@@ -32,5 +33,11 @@
 <!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "在网页加载时自动替换">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY autoReplacePeriodically.label "Auto-replace every">
+<!ENTITY autoReplacePeriodically.accesskey "t">
+<!ENTITY autoReplacePeriod.label "seconds">
+<!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "替换网址（链接和图片源）（警告：这可能改变页面的功能！）">
 <!ENTITY replaceUrls.accesskey "I">
+<!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">
+<!ENTITY replaceScripts.accesskey "s">
