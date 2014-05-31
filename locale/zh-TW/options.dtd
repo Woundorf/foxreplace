@@ -1,5 +1,4 @@
 <!ENTITY prefwindow.title "FoxReplace 選項">
-<!ENTITY mainPane.title "主要">
 <!ENTITY description "輸入取代列表。這份列表由詞組清單所構成，每份詞組清單只在其指定的網址執行。如果未設定網址，所有頁面都會執行詞組取代。詞組清單依順序執行。">
 <!ENTITY enabledHeader "啟用">
 <!ENTITY nameHeader "名稱">
@@ -34,6 +33,10 @@
 <!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "網頁載入時自動取代">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY autoReplacePeriodically.label "Auto-replace every">
+<!ENTITY autoReplacePeriodically.accesskey "t">
+<!ENTITY autoReplacePeriod.label "seconds">
+<!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "取代網址 (連結和圖片網址) (警告：這可能改變網頁行為！)">
 <!ENTITY replaceUrls.accesskey "l">
 <!ENTITY replaceScripts.label "取代腳本 (警告：這可能改變網頁行為！)(實驗性)">

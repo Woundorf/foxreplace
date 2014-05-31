@@ -1,6 +1,7 @@
 <!ENTITY prefwindow.title "FoxReplace parinktys">
-<!ENTITY mainPane.title "Pagrindinis">
 <!ENTITY description "Įveskite pakeitimų sąrašą. Sąrašas sudarytas iš keitimo grupių, kiekviena grupė taikoma jei bent vienas iš grupės URL atitinka įkraunamo puslapio adresą. Jei grupė neturi taikymo URL, keitimai taikomi visiems puslapiams. Grupės tikrinamos tokia tvarka kokia jos matomos.">
+<!ENTITY enabledHeader "Enable">
+<!ENTITY nameHeader "Name">
 <!ENTITY urlHeader "URL">
 <!ENTITY inputStringHeader "Pakeisti">
 <!ENTITY outputStringHeader "Kuo">
@@ -32,5 +33,11 @@
 <!ENTITY subscriptionPeriod.accesskey "m">
 <!ENTITY autoReplaceOnLoad.label "Automatiškai pakeisti įkraunant puslapį">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY autoReplacePeriodically.label "Auto-replace every">
+<!ENTITY autoReplacePeriodically.accesskey "t">
+<!ENTITY autoReplacePeriod.label "seconds">
+<!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "Pakeisti URL (nuorodas ir paveikslėlių šaltinius) (Įspėjimas: tai gali paveikti puslapio darbą!)">
 <!ENTITY replaceUrls.accesskey "L">
+<!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">
+<!ENTITY replaceScripts.accesskey "s">

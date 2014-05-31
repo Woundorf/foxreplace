@@ -1,5 +1,4 @@
 <!ENTITY prefwindow.title "Options de FoxReplace">
-<!ENTITY mainPane.title "Principales">
 <!ENTITY description "Veuillez saisir la liste de substitution. Cette liste est composée de groupes de substitution pour lesquels les substitutions sont appliquées si une des URLs associées au groupe correspond à l'adresse de la page chargée. Si le groupe n'a pas d'URL associée, ses substitutions sont appliquées pour toutes les pages. Les groupes sont passés en revue dans l'ordre d'apparition.">
 <!ENTITY enabledHeader "Activer">
 <!ENTITY nameHeader "Nom">
@@ -34,6 +33,10 @@
 <!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "Remplacer automatiquement lors du chargement de la page">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY autoReplacePeriodically.label "Auto-replace every">
+<!ENTITY autoReplacePeriodically.accesskey "t">
+<!ENTITY autoReplacePeriod.label "seconds">
+<!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "Remplacer les URLs (liens et sources des images) - Avertissement : cela modifiera le comportement de la page !">
 <!ENTITY replaceUrls.accesskey "p">
 <!ENTITY replaceScripts.label "Remplacer les scripts (avertissement : cela peut modifier le comportement de la page !) [expérimental]">

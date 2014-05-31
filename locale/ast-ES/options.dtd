@@ -1,5 +1,4 @@
 <!ENTITY prefwindow.title "Opciones de FoxReplace">
-<!ENTITY mainPane.title "Principal">
 <!ENTITY description "Introducir la llista de sustitucion. La llista ta formada por grupos de sustituciones, au les sustituciones de cada grupu aplíquense si dalgunes de les URLs del grupu concasa cola direición de la páxina cargada. Si'l grupu nun tien denguna URL, les sustituciones aplíquense a cualesquier páxina. Los grupos compruébense nel orde nel qu'apaecen.">
 <!ENTITY enabledHeader "Habilitar">
 <!ENTITY nameHeader "Nome">
@@ -34,6 +33,10 @@
 <!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "Auto-trocar al cargar la páxina">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY autoReplacePeriodically.label "Auto-replace every">
+<!ENTITY autoReplacePeriodically.accesskey "t">
+<!ENTITY autoReplacePeriod.label "seconds">
+<!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "Trocar URLs (fontes d'enllaces ya imáxenes) (Avisu: esto pue camudar el comportamientu de la páxina!)">
 <!ENTITY replaceUrls.accesskey "l">
 <!ENTITY replaceScripts.label "Trocar scripts (Avisu: esto pue camudar el comportamientu de la páxina!)(esperimental)">

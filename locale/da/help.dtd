@@ -30,10 +30,23 @@
 <!ENTITY autoReplace.p "Denne indstilling kan være aktiveret eller deaktiveret. Når aktiveret anvendes udskiftningslisten automatisk når en side indlæses med anvendelse af udskiftningerne af grupper med matchende URL. På denne måde kan udvidelsen anvendes som filter på de sider du ønsker.">
 <!ENTITY replaceUrls "Erstat URLer">
 <!ENTITY replaceUrls.p "Denne indstilling er slået fra som standard. Hvis den er slået til anvendes udskiftninger også på URLer i siden (links, billedkilder m.v.), så dette kan ændre på sidens opførsel. Bruges på eget ansvar. Dette har ingen effekt på HTML-kode-udskiftninger, da URLer så alligevel bliver ændret.">
+<!ENTITY replaceScripts "Replace scripts">
+<!ENTITY replaceScripts.p "This option is off by default. If it's on, substitutions are also applied to the scripts in the page, so it may change the behaviour of the page. Use it under your own responsibility. For substitutions with HTML in the input and the output this option applies to all the scripts, otherwise only to the scripts in the body.">
 <!ENTITY newGui "Nye menu- og værktøjslinjeelementer">
+<!ENTITY newGui.app "Firefox menu">
 <!ENTITY newGui.edit "Rediger">
+<!ENTITY newGui.menu.replace "Replace... (F8)">
+<!ENTITY newGui.menu.replace.d "Shows the replace bar.">
 <!ENTITY newGui.tools "Funktioner">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
+<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (Shift+F8)">
+<!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
+<!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
+<!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
+<!ENTITY newGui.menu.options "FoxReplace options...">
+<!ENTITY newGui.menu.options.d "Opens FoxReplace options window.">
+<!ENTITY newGui.menu.help "Help">
+<!ENTITY newGui.menu.help.d "Shows this page.">
 <!ENTITY newGui.toolbarButton "Værktøjslinjeknap">
 <!ENTITY newGui.toolbarButton.0 "Klik på denne anvender nuværende udskiftningsliste.">
 <!ENTITY newGui.toolbarButton.1 "Den har en menu i siden lige som FoxReplace herover.">
