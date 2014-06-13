@@ -544,7 +544,8 @@ var foxreplaceSubstitutionGroupEditor = {
     var nUrls = this._urlsListBox.getRowCount();
     var urls = new Array(nUrls);
 
-    for (var i = 0; i < nUrls; i++) urls[i] = this._urlsListBox.getItemAtIndex(i).label;
+    // Must use the "label" attribute instead of the property because the property is not filled until the listitem is shown
+    for (var i = 0; i < nUrls; i++) urls[i] = this._urlsListBox.getItemAtIndex(i).getAttribute("label");
 
     let html = this._htmlButton.html;
     let name = this._nameTextBox.value;

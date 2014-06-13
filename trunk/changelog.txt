@@ -1,4 +1,5 @@
 * Fixed issue with the auto-replace on load option on the toolbar button menu showing incorrect values in some cases (issue 142).
+* Fixed bug where the substitution group editor ok button failed when not all the URLs were visible (issue 139).
 
 v0.16.0 (2014-05-31)
 * Updated toolbar icons for Australis.
