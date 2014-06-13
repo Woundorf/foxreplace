@@ -79,7 +79,7 @@
     <toolbarbutton id="fxrToolbarButton" class="toolbarbutton-1 chromeclass-toolbar-additional" type="menu-button" label="&toolbarButton.label;"
                    tooltiptext="&toolbarButton.tooltip;" command="fxrCmdListReplace">
       <!-- stop event propagation to avoid executing button's command -->
-      <menupopup oncommand="event.stopPropagation();">
+      <menupopup oncommand="event.stopPropagation();" onpopupshowing="foxreplace.updateToolbarButtonMenu();">
         <menuitem id="fxrToolbarButtonMenuReplace" label="&listReplace.label;" accesskey="&listReplace.accesskey;" command="fxrCmdListReplace"
                   key="fxrKeyListReplace"/>
         <menuitem id="fxrToolbarButtonMenuAutoReplaceOnLoad" type="checkbox" label="&autoReplaceOnLoad.label;" accesskey="&autoReplaceOnLoad.accesskey;"
