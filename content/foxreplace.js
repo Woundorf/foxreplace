@@ -68,6 +68,14 @@ var foxreplace = {
   },
 
   /**
+   * Updates the menu of the toolbar button. More specifically, it updates the status of the auto-replace on load item. This is needed because the menu isn't
+   * created until it's shown the first time, so it may be out of sync with the preference.
+   */
+  updateToolbarButtonMenu: function() {
+    document.getElementById("fxrToolbarButtonMenuAutoReplaceOnLoad").setAttribute("checked", this.prefs.autoReplaceOnLoad);
+  },
+
+  /**
    * Observes changes in preferences.
    */
   observe: function(aSubject, aTopic, aData) {
