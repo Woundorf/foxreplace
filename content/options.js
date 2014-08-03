@@ -316,7 +316,7 @@ let foxreplaceOptions = {
    * Imports the substitution list from a file.
    */
   importSubstitutionList: function() {
-    let substitutionList = fxrIO.importSubstitutionList();
+    let substitutionList = this.io.importSubstitutionList();
     if (substitutionList) this._finishImportSubstitutionList(substitutionList);
   },
 
@@ -324,7 +324,7 @@ let foxreplaceOptions = {
    * Imports the substitution list from an URL.
    */
   importSubstitutionListFromUrl: function() {
-    let substitutionList = fxrIO.importSubstitutionListFromUrl();
+    let substitutionList = this.io.importSubstitutionListFromUrl();
     if (substitutionList) this._finishImportSubstitutionList(substitutionList);
   },
 
@@ -347,7 +347,7 @@ let foxreplaceOptions = {
    * Exports the substitution list to a file.
    */
   exportSubstitutionList: function() {
-    fxrIO.exportSubstitutionList(this.substitutionList);
+    this.io.exportSubstitutionList(this.substitutionList);
   },
 
   /**
@@ -389,7 +389,7 @@ const Ci = Components.interfaces;
 const Cu = Components.utils;
 
 Cu.import("resource://foxreplace/core.js", foxreplaceOptions.core);
-Cu.import("resource://foxreplace/io.js");
+Cu.import("resource://foxreplace/io.js", foxreplaceOptions);
 Cu.import("resource://foxreplace/Observers.js", foxreplaceOptions);
 Cu.import("resource://foxreplace/prefs.js", foxreplaceOptions);
 Cu.import("resource://foxreplace/services.js", foxreplaceOptions);
