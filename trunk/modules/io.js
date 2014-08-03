@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009-2013 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2009-2014 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -34,9 +34,9 @@ Cu.import("resource://foxreplace/services.js");
  * Functions for input/output.
  */
 
-var EXPORTED_SYMBOLS = ["fxrIO"];
+var EXPORTED_SYMBOLS = ["io"];
 
-var fxrIO = {
+var io = {
 
   /**
    * Imports the substitution list from a file (selected by parameter or by a user in a dialog) and returns it.
