@@ -43,7 +43,7 @@ var io = {
    */
   importSubstitutionList: function(aFile) {
     if (!aFile) {
-      var file = fxrShowFileDialog("import");
+      var file = showFileDialog("import");
 
       if (!file) return null;
       else aFile = file;
@@ -150,7 +150,7 @@ var io = {
    */
   exportSubstitutionList: function(aSubstitutionList, aFile) {
     if (!aFile) {
-      var file = fxrShowFileDialog("export");
+      var file = showFileDialog("export");
 
       if (!file) return;
       else aFile = file;
@@ -177,12 +177,10 @@ var io = {
 
 };
 
-////////////////////////////////////// Non-exported functions //////////////////////////////////////
-
 /**
  * Shows the file dialog in the passed mode (import or export) and returns the file selected by the user.
  */
-function fxrShowFileDialog(aMode) {
+function showFileDialog(aMode) {
   var title = getLocalizedString(aMode == "import" ? "importTitle" : "exportTitle");
 
   try {
