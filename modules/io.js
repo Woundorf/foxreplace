@@ -72,25 +72,14 @@ var io = {
     converterInputStream.close();
     fileInputStream.close();
 
-    if (listString.charAt(0) == '{') {  // JSON
+    try {
       let listJSON = JSON.parse(listString);
       return substitutionListFromJSON(listJSON);
     }
-    else if (listString.charAt(0) == '<') { // XML
-      try {
-        let parser = Cc["@mozilla.org/xmlextras/domparser;1"].createInstance(Ci.nsIDOMParser);
-        let listXml = parser.parseFromString(listString, "text/xml");
-        return fxrSubstitutionListFromXml(listXml);
-      }
-      catch (e) {
-        prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlErrorText") + "\n" + e);
-      }
+    catch (e) {
+      prompts.alert(getLocalizedString("jsonErrorTitle"), getLocalizedString("jsonErrorText") + "\n" + e);
+      return null;
     }
-    else {  // unknown format
-      prompts.alert(getLocalizedString("unrecognizedFormatTitle"), getLocalizedString("unrecognizedFormatText"));
-    }
-
-    return null;
   },
 
   /**
@@ -115,21 +104,12 @@ var io = {
       request.send(null);
 
       if (request.status == 200) {
-        if (request.responseText.charAt(0) == '{') {  // JSON
+        try {
           let listJSON = JSON.parse(request.responseText);
           return substitutionListFromJSON(listJSON);
         }
-        else if (request.responseText.charAt(0) == '<') { // XML
-          try {
-            let listXml = request.responseXML;
-            return fxrSubstitutionListFromXml(listXml);
-          }
-          catch (e) {
-            prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlErrorText") + "\n" + e);
-          }
-        }
-        else {  // unknown format
-          prompts.alert(getLocalizedString("unrecognizedFormatTitle"), getLocalizedString("unrecognizedFormatText"));
+        catch(e) {
+          prompts.alert(getLocalizedString("jsonErrorTitle"), getLocalizedString("jsonErrorText") + "\n" + e);
         }
       }
       else prompts.alert(getLocalizedString("httpError"), request.status + " " + request.statusText);
@@ -190,7 +170,6 @@ function showFileDialog(aMode) {
     var window = windowMediator.getMostRecentWindow("");
     fileDialog.init(window, title, aMode == "import" ? nsIFP.modeOpen : nsIFP.modeSave);
     fileDialog.appendFilter(getLocalizedString("jsonFiles"), "*.json");
-    if (aMode == "import") fileDialog.appendFilters(nsIFP.filterXML);
     fileDialog.appendFilters(nsIFP.filterAll);
     fileDialog.filterIndex = 0;
     fileDialog.defaultExtension = ".json";
