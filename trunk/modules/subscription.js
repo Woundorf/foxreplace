@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009-2012 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2009-2014 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -55,24 +55,13 @@ var fxrSubscription = {
         request.onreadystatechange = function() {
           if (request.readyState == 4) {
             if ((http && request.status == 200) || (!http && request.status == 0)) {
-              if (request.responseText.charAt(0) == '{') {  // JSON
+              try {
                 let listJSON = JSON.parse(request.responseText);
                 prefs.substitutionList = substitutionListFromJSON(listJSON);
                 fxrSubscription.status = getLocalizedString("subscriptionStatusLastUpdated", [new Date().toLocaleString()]);
               }
-              else if (request.responseText.charAt(0) == '<') { // XML
-                try {
-                  let parser = Cc["@mozilla.org/xmlextras/domparser;1"].createInstance(Ci.nsIDOMParser);
-                  let listXml = parser.parseFromString(request.responseText, "text/xml");
-                  prefs.substitutionList = fxrSubstitutionListFromXml(listXml);
-                  fxrSubscription.status = getLocalizedString("subscriptionStatusLastUpdated", [new Date().toLocaleString()]);
-                }
-                catch (e) {
-                  fxrSubscription.status = getLocalizedString("xmlError", [e]);
-                }
-              }
-              else {  // unknown format
-                fxrSubscription.status = getLocalizedString("unrecognizedFormat");
+              catch (e) {
+                fxrSubscription.status = getLocalizedString("jsonErrorText") + " " + e;
               }
             }
             else if (http && request.status == 0) fxrSubscription.status = getLocalizedString("cantConnectToServer", [fxrSubscription.url]);

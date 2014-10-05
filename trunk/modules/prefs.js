@@ -61,7 +61,6 @@ var prefs = {
    */
   get substitutionList() {
     if (!this._substitutionList || this._substitutionListJSONString != this._preferences.get("substitutionListJSON")) {
-      this._upgradeListToJSON();
       try {
         this._substitutionListJSONString = this._preferences.get("substitutionListJSON");
         this._substitutionList = this.substitutionListFromString(this._substitutionListJSONString);
@@ -93,23 +92,6 @@ var prefs = {
    */
   substitutionListToString: function(aSubstitutionList) {
     return JSON.stringify(substitutionListToJSON(aSubstitutionList));
-  },
-
-  /**
-   * Loads the substitution list from preferences and returns it.
-   */
-  get substitutionListXml() {
-    try {
-      let substitutionListXmlString = this._preferences.get("substitutionListXml");
-      let parser = Cc["@mozilla.org/xmlextras/domparser;1"].createInstance(Ci.nsIDOMParser);
-      let listXml = parser.parseFromString(substitutionListXmlString, "text/xml");
-      let substitutionList = fxrSubstitutionListFromXml(listXml);
-      return substitutionList;
-    }
-    catch (e) {
-      prompts.alert(getLocalizedString("xmlErrorTitle"), getLocalizedString("xmlErrorText") + "\n" + e);
-      return undefined;
-    }
   },
 
   /**
@@ -257,17 +239,6 @@ var prefs = {
    */
   ignore: function(aPrefName, aCallback, aThisObject) {
     this._preferences.ignore(aPrefName, aCallback, aThisObject);
-  },
-
-  /**
-   * Upgrades the substitution list preference from the old XML format (0.12) to the new JSON format (0.13), if necessary.
-   */
-  _upgradeListToJSON: function() {
-    if (this._preferences.has("substitutionListXml")) {
-      let substitutionList = this.substitutionListXml;
-      this._preferences.reset("substitutionListXml");
-      this.substitutionList = substitutionList;
-    }
   },
   
   /**
