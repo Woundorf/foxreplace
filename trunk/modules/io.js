@@ -39,9 +39,9 @@ var EXPORTED_SYMBOLS = ["io"];
 var io = {
 
   /**
-   * Imports the substitution list from a file (selected by parameter or by a user in a dialog) and returns it.
+   * Reads a substitution list from a file (selected by parameter or by a user in a dialog) and returns it.
    */
-  importSubstitutionList: function(aFile) {
+  readList: function(aFile) {
     if (!aFile) {
       var file = showFileDialog("import");
 
@@ -83,9 +83,9 @@ var io = {
   },
 
   /**
-   * Imports the substitution list from an URL (selected by parameter or by an user in a dialog) and returns it.
+   * Reads a substitution list from an URL (selected by parameter or by an user in a dialog) and returns it.
    */
-  importSubstitutionListFromUrl: function(aUrl) {
+  readListFromUrl: function(aUrl) {
     if (!aUrl) {
       var input = { value: "" };
 
@@ -126,9 +126,9 @@ var io = {
   },
 
   /**
-   * Exports the given substitution list to a file (selected by parameter or by an user in a dialog).
+   * Writes the given substitution list to a file (selected by parameter or by an user in a dialog).
    */
-  exportSubstitutionList: function(aSubstitutionList, aFile) {
+  writeList: function(aSubstitutionList, aFile) {
     if (!aFile) {
       var file = showFileDialog("export");
 

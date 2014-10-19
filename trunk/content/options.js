@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2013 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2007-2014 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -316,7 +316,7 @@ let foxreplaceOptions = {
    * Imports the substitution list from a file.
    */
   importSubstitutionList: function() {
-    let substitutionList = this.io.importSubstitutionList();
+    let substitutionList = this.io.readList();
     if (substitutionList) this._finishImportSubstitutionList(substitutionList);
   },
 
@@ -324,7 +324,7 @@ let foxreplaceOptions = {
    * Imports the substitution list from an URL.
    */
   importSubstitutionListFromUrl: function() {
-    let substitutionList = this.io.importSubstitutionListFromUrl();
+    let substitutionList = this.io.readListFromUrl();
     if (substitutionList) this._finishImportSubstitutionList(substitutionList);
   },
 
@@ -347,7 +347,7 @@ let foxreplaceOptions = {
    * Exports the substitution list to a file.
    */
   exportSubstitutionList: function() {
-    this.io.exportSubstitutionList(this.substitutionList);
+    this.io.writeList(this.substitutionList);
   },
 
   /**
