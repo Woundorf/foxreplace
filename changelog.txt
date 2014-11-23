@@ -1,6 +1,6 @@
 * Animated showing and hiding of the replace bar.
 * Removed support to substitution lists in XML.
-* Compatibility with Firefox from 29.0 to 36.0.
+* Compatibility with Firefox from 30.0 to 37.0.
 
 v0.16.1 (2014-06-13)
 * Fixed issue with the auto-replace on load option on the toolbar button menu showing incorrect values in some cases (issue 142).
