@@ -29,6 +29,7 @@ const Cu = Components.utils;
 
 Cu.import("resource://foxreplace/core.js");
 Cu.import("resource://foxreplace/services.js");
+Cu.import("resource://gre/modules/osfile.jsm");
 
 /**
  * Functions for input/output.
@@ -39,120 +40,94 @@ var EXPORTED_SYMBOLS = ["io"];
 var io = {
 
   /**
-   * Reads a substitution list from a file (selected by parameter or by a user in a dialog) and returns it.
+   * Reads a substitution list from a file (selected by parameter or by a user in a dialog) and returns a promise that fulfills with it.
    */
   readList: function(aFile) {
     if (!aFile) {
-      var file = showFileDialog("import");
+      let file = showFileDialog("import");
 
-      if (!file) return null;
+      if (!file) return Promise.resolve(null);
       else aFile = file;
     }
 
-    var fileInputStream = Cc["@mozilla.org/network/file-input-stream;1"].createInstance(Ci.nsIFileInputStream);
-    var converterInputStream = Cc["@mozilla.org/intl/converter-input-stream;1"].createInstance(Ci.nsIConverterInputStream);
-    fileInputStream.init(aFile, 0x01, 0444, 0); // read
-    converterInputStream.init(fileInputStream, "UTF-8", 4096, 0x0000);
-
-    var listString = "";
-    var string = {};
-
-    try {
-      while (converterInputStream.readString(4096, string) > 0) listString += string.value;
-    }
-    catch (e) {
-      converterInputStream.close();
-      fileInputStream.close();
-
-      prompts.alert(getLocalizedString("importTitle"), e);
-
-      return null;
-    }
-
-    converterInputStream.close();
-    fileInputStream.close();
-
-    try {
-      let listJSON = JSON.parse(listString);
+    let promise = OS.File.read(aFile, { encoding: "utf-8" });
+    promise = promise.then(function onFulfilled(aString) {
+      let listJSON = JSON.parse(aString);
       return substitutionListFromJSON(listJSON);
-    }
-    catch (e) {
-      prompts.alert(getLocalizedString("jsonErrorTitle"), getLocalizedString("jsonErrorText") + "\n" + e);
+    }, function onRejected(aError) {
+      prompts.alert("FoxReplace", getLocalizedString("io.readError", [aFile, aError]));
       return null;
-    }
+    }).catch(function onRejected(aError) {
+      prompts.alert("FoxReplace", getLocalizedString("io.jsonError.file", [aFile, aError]));
+      return null;
+    });
+
+    return promise;
   },
 
   /**
-   * Reads a substitution list from an URL (selected by parameter or by an user in a dialog) and returns it.
+   * Reads a substitution list from an URL (selected by parameter or by a user in a dialog) and returns a promise that fulfills with it.
    */
   readListFromUrl: function(aUrl) {
     if (!aUrl) {
-      var input = { value: "" };
+      let input = { value: "" };
 
-      if (!prompts.prompt(getLocalizedString("importFromUrlTitle"), getLocalizedString("importFromUrlText"), input)) return null;
+      if (!prompts.prompt(getLocalizedString("importFromUrlTitle"), getLocalizedString("importFromUrlText"), input)) return Promise.resolve(null);
       else aUrl = input.value;
     }
 
     if (!/https?\:\/\//.test(aUrl)) {
       prompts.alert(getLocalizedString("nonSupportedProtocol"), getLocalizedString("onlyHttp"));
+      return Promise.resolve(null);
+    }
+
+    let promise = new Promise(function(resolve, reject) {
+      let request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
+      request.open("GET", aUrl);
+
+      request.onload = function() {
+        if (request.status == 200) resolve(request.responseText);
+        else reject(Error(request.status + " " + request.statusText));
+      };
+
+      request.onerror = function(e) {
+        reject(Error(getLocalizedString("io.networkError.generic")));
+      };
+
+      request.send();
+    });
+
+    promise = promise.then(function onFulfilled(aString) {
+      let listJSON = JSON.parse(aString);
+      return substitutionListFromJSON(listJSON);
+    }, function onRejected(aError) {
+      prompts.alert("FoxReplace", getLocalizedString("io.networkError", [aUrl, aError]));
       return null;
-    }
+    }).catch(function onRejected(aError) {
+      prompts.alert("FoxReplace", getLocalizedString("io.jsonError.url", [aUrl, aError]));
+      return null;
+    });
 
-    try {
-      var request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
-      request.open("GET", aUrl, false);
-      request.send(null);
-
-      if (request.status == 200) {
-        try {
-          let listJSON = JSON.parse(request.responseText);
-          return substitutionListFromJSON(listJSON);
-        }
-        catch(e) {
-          prompts.alert(getLocalizedString("jsonErrorTitle"), getLocalizedString("jsonErrorText") + "\n" + e);
-        }
-      }
-      else prompts.alert(getLocalizedString("httpError"), request.status + " " + request.statusText);
-    }
-    catch (e if e.result == Components.results.NS_ERROR_FAILURE) {
-      prompts.alert(getLocalizedString("cantConnectToServerTitle"),
-                    getLocalizedString("cantConnectToServerText", [url]));
-    }
-    catch (e) {
-      prompts.alert(getLocalizedString("unexpectedError"), e);
-    }
-
-    return null;
+    return promise;
   },
 
   /**
-   * Writes the given substitution list to a file (selected by parameter or by an user in a dialog).
+   * Writes the given substitution list to a file (selected by parameter or by a user in a dialog).
    */
   writeList: function(aSubstitutionList, aFile) {
     if (!aFile) {
-      var file = showFileDialog("export");
+      let file = showFileDialog("export");
 
       if (!file) return;
       else aFile = file;
     }
 
-    var listJSON = substitutionListToJSON(aSubstitutionList);
-    var data = JSON.stringify(listJSON, null, 2);
-    var fileOutputStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
-    fileOutputStream.init(aFile, 0x02 | 0x08 | 0x20, 0666, 0);  // write, create, truncate
-    var converterOutputStream = Cc["@mozilla.org/intl/converter-output-stream;1"].createInstance(Ci.nsIConverterOutputStream);
-    converterOutputStream.init(fileOutputStream, "UTF-8", 4096, 0x0000);
-
-    try {
-      converterOutputStream.writeString(data);
-    }
-    catch (e) {
-      prompts.alert(getLocalizedString("exportTitle"), e);
-    }
-    finally {
-      converterOutputStream.close();
-      fileOutputStream.close();
-    }
+    let listJSON = substitutionListToJSON(aSubstitutionList);
+    let string = JSON.stringify(listJSON, null, 2);
+    let promise = OS.File.writeAtomic(aFile, string, { encoding: "utf-8" });
+    promise = promise.catch(function onRejected(aError) {
+      prompts.alert("FoxReplace", getLocalizedString("io.writeError", [aFile, aError]));
+    });
   }
 
 };
@@ -177,7 +152,7 @@ function showFileDialog(aMode) {
 
     var ret = fileDialog.show();
 
-    if (ret == nsIFP.returnOK || ret == nsIFP.returnReplace) return fileDialog.file;
+    if (ret == nsIFP.returnOK || ret == nsIFP.returnReplace) return fileDialog.file.path;
   }
   catch (e) {
     prompts.alert(title, e);

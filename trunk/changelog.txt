@@ -1,3 +1,4 @@
+* Asynchronous input/output.
 * Animated showing and hiding of the replace bar.
 * Removed support to substitution lists in XML.
 * Compatibility with Firefox from 30.0 to 37.0.
