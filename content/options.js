@@ -316,16 +316,20 @@ let foxreplaceOptions = {
    * Imports the substitution list from a file.
    */
   importSubstitutionList: function() {
-    let substitutionList = this.io.readList();
-    if (substitutionList) this._finishImportSubstitutionList(substitutionList);
+    let substitutionListPromise = this.io.readList();
+    substitutionListPromise.then(function onFulfilled(aSubstitutionList) {
+      if (aSubstitutionList) foxreplaceOptions._finishImportSubstitutionList(aSubstitutionList);
+    });
   },
 
   /**
-   * Imports the substitution list from an URL.
+   * Imports the substitution list from a URL.
    */
   importSubstitutionListFromUrl: function() {
-    let substitutionList = this.io.readListFromUrl();
-    if (substitutionList) this._finishImportSubstitutionList(substitutionList);
+    let substitutionListPromise = this.io.readListFromUrl();
+    substitutionListPromise.then(function onFulfilled(aSubstitutionList) {
+      if (aSubstitutionList) foxreplaceOptions._finishImportSubstitutionList(aSubstitutionList);
+    });
   },
 
   /**
