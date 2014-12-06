@@ -39,6 +39,7 @@ var foxreplace = {
 
     this.prefs.service.addObserver("", this, false);
     this.Observers.add(fxrPeriodicReplace.observerKey, this.listReplace, this);
+    this.Observers.add(this.prefs.substitutionListChangedKey, this._loadEnabledGroups, this);
 
     gBrowser.addEventListener("DOMContentLoaded", this.onPageLoad, true);
 
@@ -63,6 +64,7 @@ var foxreplace = {
    * Finalization code.
    */
   onUnload: function() {
+    this.Observers.remove(this.prefs.substitutionListChangedKey, this._loadEnabledGroups, this);
     this.Observers.remove(fxrPeriodicReplace.observerKey, this.listReplace, this);
     this.prefs.service.removeObserver("", this);
   },
@@ -85,10 +87,6 @@ var foxreplace = {
     if (aTopic != "nsPref:changed") return;
 
     switch (aData) {
-      case "substitutionListJSON":
-        this._loadEnabledGroups();
-        break;
-
       case "autoReplaceOnLoad":
         this.setAutoReplaceOnLoad(this.prefs.autoReplaceOnLoad);
         break;
@@ -234,10 +232,15 @@ var foxreplace = {
   },
 
   /**
-   * Loads enabled substitution groups.
+   * Loads enabled substitution groups. The original substitution list can be taken either from aSubstitutionList or from prefs.
    */
-  _loadEnabledGroups: function() {
-    this._substitutionList = this.prefs.substitutionList.filter(function(aGroup) { return aGroup.enabled; });
+  _loadEnabledGroups: function(aSubstitutionList) {
+    if (aSubstitutionList) {
+      this._substitutionList = aSubstitutionList.filter(function(aGroup) { return aGroup.enabled; });
+    }
+    else {
+      this.prefs.substitutionList.then(function(aList) { foxreplace._loadEnabledGroups(aList); });
+    }
   }
 
 };
