@@ -28,11 +28,11 @@
 <?xml-stylesheet href="chrome://foxreplace/skin/options.css" type="text/css"?>
 <!DOCTYPE prefwindow SYSTEM "chrome://foxreplace/locale/options.dtd">
 <prefwindow id="foxreplacePreferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title;"
-            buttons="accept,cancel,disclosure" ondialogdisclosure="foxreplaceOptions.showTooltip();" persist="width height">
+            buttons="accept,cancel,disclosure" ondialogaccept="return foxreplaceOptions.onAccept();" ondialogdisclosure="foxreplaceOptions.showTooltip();"
+            persist="width height">
   <script type="application/x-javascript;version=1.8" src="options.js"/>
   <prefpane id="mainPane" flex="1">
     <preferences>
-      <preference id="substitutionList" name="extensions.foxreplace.substitutionListJSON" type="unichar"/>
       <preference id="autoReplaceOnLoad" name="extensions.foxreplace.autoReplaceOnLoad" type="bool"/>
       <preference id="autoReplacePeriodically" name="extensions.foxreplace.autoReplacePeriodically" type="bool"/>
       <preference id="autoReplacePeriod" name="extensions.foxreplace.autoReplacePeriod" type="int"/>
@@ -43,9 +43,7 @@
       <preference id="subscriptionPeriod" name="extensions.foxreplace.subscriptionPeriod" type="int"/>
     </preferences>
     <hbox flex="1">
-      <tree id="substitutionListTree" seltype="single" editable="true" flex="1" preference-editable="true" preference="substitutionList"
-            onsyncfrompreference="foxreplaceOptions.loadSubstitutionList();" onsynctopreference="return foxreplaceOptions.getSubstitutionListAsString();"
-            ondblclick="foxreplaceOptions.onTreeDoubleClick(event);"
+      <tree id="substitutionListTree" seltype="single" editable="true" flex="1" ondblclick="foxreplaceOptions.onTreeDoubleClick(event);"
             onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitutionGroup();"
             onselect="foxreplaceOptions.onSelectSubstitutionGroup();">
         <treecols>

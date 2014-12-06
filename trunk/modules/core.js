@@ -30,7 +30,8 @@ Components.utils.import("resource://foxreplace/xregexp-wrapper.js");
  * Definitions of substitution and substitution group.
  */
 
-var EXPORTED_SYMBOLS = ["Substitution", "SubstitutionGroup", "fxrIsExclusionUrl", "substitutionListToJSON", "substitutionListFromJSON"];
+var EXPORTED_SYMBOLS = ["Substitution", "SubstitutionGroup", "fxrIsExclusionUrl", "cloneSubstitutionList",
+                        "substitutionListToJSON", "substitutionListFromJSON"];
 
 /**
  * Substitution.
@@ -65,6 +66,14 @@ Substitution.fromJSON = function(aSubstitutionJSON) {
 };
 
 Substitution.prototype = {
+
+  /**
+   * Returns a clone (a deep copy) of this substitution.
+   */
+  clone: function() {
+    return new Substitution(this.input, this.output, this.caseSensitive, this.inputType);
+  },
+
   /**
    * Applies the substitution to aString and returns the result.
    */
@@ -183,6 +192,14 @@ SubstitutionGroup.fromJSON = function(aGroupJSON, aVersion) {
 SubstitutionGroup.prototype = {
 
   /**
+   * Returns a clone (a deep copy) of this substitution group.
+   */
+  clone: function() {
+    return new SubstitutionGroup(this.name, this.urls.map(function(aUrl) { return aUrl; }),
+                                 this.substitutions.map(function(aSubstitution) { return aSubstitution.clone(); }), this.html, this.enabled);
+  },
+
+  /**
    * Returns whether the substitution group should be applied to aUrl.
    */
   matches: function(aUrl) {
@@ -245,6 +262,13 @@ SubstitutionGroup.prototype.HTML_STRINGS = ["none", "output", "inputoutput"];
  */
 function fxrIsExclusionUrl(aUrl) {
   return /^-.*/.test(aUrl);
+}
+
+/**
+ * Returns a clone (a deep copy) of aSubstitutionList.
+ */
+function cloneSubstitutionList(aSubstitutionList) {
+  return aSubstitutionList.map(function(aSubstitutionGroup) { return aSubstitutionGroup.clone(); });
 }
 
 /**

@@ -28,8 +28,11 @@ const Ci = Components.interfaces;
 const Cu = Components.utils;
 
 Cu.import("resource://foxreplace/core.js");
+Cu.import("resource://foxreplace/io.js");
+Cu.import("resource://foxreplace/Observers.js");
 Cu.import("resource://foxreplace/Preferences.js");
 Cu.import("resource://foxreplace/services.js");
+Cu.import("resource://gre/modules/osfile.jsm");
 
 /**
  * Easy access to preferences.
@@ -43,6 +46,47 @@ var prefs = {
    * Preferences object referencing FoxReplace branch.
    */
   _preferences: new Preferences("extensions.foxreplace."),
+
+  /**
+   * Returns the path of the directory where the substitution list is saved.
+   */
+  get substitutionListDirPath() {
+    return OS.Path.join(OS.Constants.Path.profileDir, "foxreplace");
+  },
+
+  /**
+   * Returns the path of the file where the substitution list is saved.
+   */
+  get substitutionListFilePath() {
+    return OS.Path.join(this.substitutionListDirPath, "list.json");
+  },
+
+  /**
+   * Returns the observer key for the substitution list changed event.
+   */
+  get substitutionListChangedKey() {
+    return "substitutionListChanged";
+  },
+
+  /**
+   * Initializes this object to leave it ready for the first use.
+   */
+  init: function() {
+    // Port from previous version if necessary
+    if (this._preferences.has("substitutionListJSON")) {
+      let substitutionList = this.substitutionListJson;
+      this._preferences.reset("substitutionListJSON");
+      this.substitutionList = substitutionList;
+    }
+    // Create the file with an empty list if it doesn't exist
+    else if (!OS.File.exists(this.substitutionListFilePath)) {
+      this.substitutionList = [];
+    }
+    // Read the substitution list from file to have it ready when it's needed
+    else {
+      let l = this.substitutionList;
+    }
+  },
 
   /**
    * Returns the preferences service.
@@ -59,25 +103,42 @@ var prefs = {
   /**
    * Loads the substitution list from preferences and returns it.
    */
-  get substitutionList() {
-    if (!this._substitutionList || this._substitutionListJSONString != this._preferences.get("substitutionListJSON")) {
+  get substitutionListJson() {
+    if (this._preferences.has("substitutionListJSON")) {
       try {
-        this._substitutionListJSONString = this._preferences.get("substitutionListJSON");
-        this._substitutionList = this.substitutionListFromString(this._substitutionListJSONString);
+        let substitutionListJsonString = this._preferences.get("substitutionListJSON");
+        return this.substitutionListFromString(substitutionListJsonString);
       }
       catch (e) {
         prompts.alert(getLocalizedString("jsonErrorTitle"), getLocalizedString("jsonErrorText") + "\n" + e);
-        return undefined;
       }
     }
-    return this._substitutionList;
+
+    return null;
   },
 
   /**
-   * Saves the substitution list to preferences.
+   * Loads the substitution list asynchronously and returns a promise that is fulfilled with it.
+   */
+  get substitutionList() {
+    if (!this._getPromise) {
+      this._getPromise = io.readList(this.substitutionListFilePath);
+    }
+
+    // Each time we return a new promise that clones the substitution list so that the instance stored here is not modified externally
+    return this._getPromise.then(cloneSubstitutionList);
+  },
+
+  /**
+   * Saves the substitution list asynchronously.
    */
   set substitutionList(aSubstitutionList) {
-    this._preferences.set("substitutionListJSON", this.substitutionListToString(aSubstitutionList));
+    // Save a copy of the substitution list to return in the getter
+    this._getPromise = Promise.resolve(cloneSubstitutionList(aSubstitutionList));
+    Observers.notify(this.substitutionListChangedKey, aSubstitutionList);
+    OS.File.makeDir(this.substitutionListDirPath).then(function() {
+      io.writeList(aSubstitutionList, prefs.substitutionListFilePath);
+    });
   },
   
   /**
@@ -92,13 +153,6 @@ var prefs = {
    */
   substitutionListToString: function(aSubstitutionList) {
     return JSON.stringify(substitutionListToJSON(aSubstitutionList));
-  },
-
-  /**
-   * Deletes the cached substitution list.
-   */
-  onSubstitutionListJSONChange: function() {
-    this._substitutionList = null;
   },
 
   /**
@@ -228,6 +282,18 @@ var prefs = {
   },
 
   /**
+   * A Preferences object that doesn't reference any specific branch.
+   */
+  _globalPrefs: new Preferences(),
+
+  /**
+   * Returns the value of the instantApply preference.
+   */
+  get instantApply() {
+    return this._globalPrefs.get("browser.preferences.instantApply");
+  },
+
+  /**
    * Start observing a preference.
    */
   observe: function(aPrefName, aCallback, aThisObject) {
@@ -248,4 +314,4 @@ var prefs = {
 
 };
 
-prefs.observe("substitutionListJSON", prefs.onSubstitutionListJSONChange, prefs);
+prefs.init();

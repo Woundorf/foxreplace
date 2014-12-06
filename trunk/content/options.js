@@ -50,7 +50,7 @@ let foxreplaceOptions = {
   onLoad: function() {
     this.prefs.optionsWindow = window;
     this.Observers.add("fxrSubscriptionStatusChanged", this.updateSubscriptionStatus, this);
-    this.prefs.observe("substitutionListJSON", this.loadSubstitutionList, this);
+    this.Observers.add(this.prefs.substitutionListChangedKey, this.loadSubstitutionList, this);
     this.loadSubstitutionList();
     this.setupTree();
     this.updateSubscriptionStatus();
@@ -61,8 +61,19 @@ let foxreplaceOptions = {
    */
   onUnload: function() {
     this.Observers.remove("fxrSubscriptionStatusChanged", this.updateSubscriptionStatus, this);
-    this.prefs.ignore("substitutionListJSON", this.loadSubstitutionList, this);
+    this.Observers.remove(this.prefs.substitutionListChangedKey, this.loadSubstitutionList, this);
     this.prefs.optionsWindow = null;
+  },
+
+  /**
+   * Handler for dialog accept. Saves the substitution list if instantApply is false.
+   */
+  onAccept: function() {
+    if (!this.prefs.instantApply) {
+      this.prefs.substitutionList = this.substitutionList;
+    }
+
+    return true;
   },
 
   /**
@@ -124,7 +135,7 @@ let foxreplaceOptions = {
         if (aColumn.id == "enabledColumn") {
           let group = foxreplaceOptions.substitutionList[aRow];
           group.enabled = aValue == "true";
-          foxreplaceOptions._fireTreeChangeEvent();
+          foxreplaceOptions._handleListChange();
           this.treeBox.invalidate(aRow, aColumn);
         }
       },
@@ -149,12 +160,12 @@ let foxreplaceOptions = {
   },
   
   /**
-   * Fires a change event from the tree.
+   * Handles a change in the substitution list. Saves the substitution list to preferences if instantApply is true.
    */
-  _fireTreeChangeEvent: function() {
-    let event = document.createEvent("Events");
-    event.initEvent("change", true, true);
-    this._tree.dispatchEvent(event);
+  _handleListChange: function() {
+    if (this.prefs.instantApply) {
+      this.prefs.substitutionList = this.substitutionList;
+    }
   },
 
   /**
@@ -183,23 +194,17 @@ let foxreplaceOptions = {
   },
 
   /**
-   * Called when the options window is loaded or the substitution list is changed externally. Loads the substitution list from preferences and fills the tree.
+   * Called when the options window is loaded or the substitution list is changed externally. Loads the substitution list from preferences or from the parameter
+   * and fills the tree.
    */
-  loadSubstitutionList: function() {
-    let preference = document.getElementById("substitutionList");
-    // .value === undefined means the preference is set to the default value
-    let substitutionListString = preference.value !== undefined ? preference.value : preference.defaultValue;
-    let substitutionList = this.prefs.substitutionListFromString(substitutionListString);
-
-    if (this.substitutionList.toSource() != substitutionList.toSource())
-      this.substitutionList = substitutionList;
-  },
-
-  /**
-   * Called when the substitution list is changed from the UI. Returns a string to save the substitution list to preferences.
-   */
-  getSubstitutionListAsString: function() {
-    return this.prefs.substitutionListToString(this.substitutionList);
+  loadSubstitutionList: function(aSubstitutionList) {
+    if (aSubstitutionList) {
+      if (this.substitutionList.toSource() != aSubstitutionList.toSource())
+        this.substitutionList = aSubstitutionList;
+    }
+    else {
+      this.prefs.substitutionList.then(function(aList) { foxreplaceOptions.loadSubstitutionList(aList); });
+    }
   },
 
   /**
@@ -213,7 +218,7 @@ let foxreplaceOptions = {
 
     if (params.out) {
       this.substitutionList.push(params.out.group);
-      this._fireTreeChangeEvent();
+      this._handleListChange();
       let treeBox = this._tree.boxObject;
       treeBox.rowCountChanged(this.substitutionList.length - 1, 1);
       treeBox.ensureRowIsVisible(this.substitutionList.length - 1);
@@ -242,7 +247,7 @@ let foxreplaceOptions = {
 
     if (params.out) {
       this.substitutionList.splice(index, 1, params.out.group);
-      this._fireTreeChangeEvent();
+      this._handleListChange();
       let treeBox = this._tree.boxObject;
       treeBox.invalidateRow(index);
       treeBox.ensureRowIsVisible(index);
@@ -258,7 +263,7 @@ let foxreplaceOptions = {
 
     let index = selection.currentIndex;
     this.substitutionList.splice(index, 1);
-    this._fireTreeChangeEvent();
+    this._handleListChange();
     this._tree.boxObject.rowCountChanged(index, -1);
 
     if (index < this.substitutionList.length) selection.select(index);
@@ -273,7 +278,7 @@ let foxreplaceOptions = {
   clearSubstitutionList: function() {
     let count = this.substitutionList.length;
     this.substitutionList = [];
-    this._fireTreeChangeEvent();
+    this._handleListChange();
   },
 
   /**
@@ -287,7 +292,7 @@ let foxreplaceOptions = {
     let group = this.substitutionList[index];
     this.substitutionList.splice(index, 1);
     this.substitutionList.splice(index - 1, 0, group);
-    this._fireTreeChangeEvent();
+    this._handleListChange();
     let treeBox = this._tree.boxObject;
     treeBox.invalidateRange(index - 1, index);
     treeBox.ensureRowIsVisible(index - 1);
@@ -305,7 +310,7 @@ let foxreplaceOptions = {
     let group = this.substitutionList[index];
     this.substitutionList.splice(index, 1);
     this.substitutionList.splice(index + 1, 0, group);
-    this._fireTreeChangeEvent();
+    this._handleListChange();
     let treeBox = this._tree.boxObject;
     treeBox.invalidateRange(index, index + 1);
     treeBox.ensureRowIsVisible(index + 1);
@@ -343,7 +348,7 @@ let foxreplaceOptions = {
       if (params.out.button == "overwrite") this.substitutionList = aSubstitutionList;
       else this.substitutionList = this.substitutionList.concat(aSubstitutionList);
 
-      this._fireTreeChangeEvent();
+      this._handleListChange();
     }
   },
 
