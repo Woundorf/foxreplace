@@ -139,15 +139,12 @@ let foxreplaceOptions = {
           this.treeBox.invalidate(aRow, aColumn);
         }
       },
-      getCellProperties: function(aRow, aColumn, aProperties) {
+      getCellProperties: function(aRow, aColumn) {
         if (aColumn.id == "urlColumn" && foxreplaceOptions.core.fxrIsExclusionUrl(this.getCellText(aRow, aColumn))) {
-          if (aProperties) {  // Firefox < 22
-            let atomService = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
-            aProperties.AppendElement(atomService.getAtom("exclusionUrl"));
-          }
-          else {  // Firefox >= 22
-            return "exclusionUrl";
-          }
+          return "exclusionUrl";
+        }
+        else {
+          return "";
         }
       },
       getImageSrc: function() {
@@ -393,8 +390,6 @@ let foxreplaceOptions = {
 
 };
 
-const Cc = Components.classes;
-const Ci = Components.interfaces;
 const Cu = Components.utils;
 
 Cu.import("resource://foxreplace/core.js", foxreplaceOptions.core);
