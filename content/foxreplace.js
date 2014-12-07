@@ -120,8 +120,6 @@ var foxreplace = {
    */
   setAutoReplaceOnLoad: function(aAutoReplaceOnLoad) {
     document.getElementById("fxrMenuToolsFoxReplaceAutoReplaceOnLoad").setAttribute("checked", aAutoReplaceOnLoad);
-    let appMenuItem = document.getElementById("fxrAppMenuReplaceAutoReplaceOnLoad");
-    if (appMenuItem) appMenuItem.setAttribute("checked", aAutoReplaceOnLoad);
     var menuItem = document.getElementById("fxrToolbarButtonMenuAutoReplaceOnLoad");
     if (menuItem) menuItem.setAttribute("checked", aAutoReplaceOnLoad);
 
