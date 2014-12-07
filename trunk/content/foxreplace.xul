@@ -41,18 +41,6 @@
     <key id="fxrKeyListReplace" modifiers="shift" keycode="VK_F8" command="fxrCmdListReplace"/>
     <key id="fxrKeyShowReplaceBar" keycode="VK_F8" command="fxrCmdShowReplaceBar"/>
   </keyset>
-  <vbox id="appmenuPrimaryPane">
-    <splitmenu id="fxrAppMenuReplace" iconic="true" insertafter="appmenu_find" label="&menuReplace.label;" command="fxrCmdShowReplaceBar">
-      <menupopup>
-        <menuitem id="fxrAppMenuReplaceReplace" label="&menuReplace.label;" command="fxrCmdShowReplaceBar" key="fxrKeyShowReplaceBar"/>
-        <menuitem id="fxrAppMenuReplaceListReplace" label="&listReplace.label;" command="fxrCmdListReplace" key="fxrKeyListReplace"/>
-        <menuitem id="fxrAppMenuReplaceAutoReplaceOnLoad" type="checkbox" label="&autoReplaceOnLoad.label;" command="fxrCmdToggleAutoReplaceOnLoad"/>
-        <menuitem id="fxrAppMenuReplaceOptions" label="&options.label;" command="fxrCmdOptions"/>
-        <menuseparator/>
-        <menuitem id="fxrAppMenuReplaceHelp" label="&help.label;" command="fxrCmdHelp"/>
-      </menupopup>
-    </splitmenu>
-  </vbox>
   <menupopup id="menu_EditPopup">
     <menuitem id="fxrMenuEditReplace" class="menuitem-iconic" insertafter="menu_findAgain" label="&menuReplace.label;" accesskey="&menuReplace.accesskey;"
               command="fxrCmdShowReplaceBar" key="fxrKeyShowReplaceBar"/>
