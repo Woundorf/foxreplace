@@ -75,6 +75,7 @@ var prefs = {
     // Port from previous version if necessary
     if (this._preferences.has("substitutionListJSON")) {
       let substitutionList = this.substitutionListJson;
+      this._preferences.set("substitutionListJSONBackup", this._preferences.get("substitutionListJSON")); // backup
       this._preferences.reset("substitutionListJSON");
       this.substitutionList = substitutionList;
     }
