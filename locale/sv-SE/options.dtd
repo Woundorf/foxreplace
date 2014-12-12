@@ -33,6 +33,10 @@
 <!ENTITY subscriptionPeriod.accesskey "v">
 <!ENTITY autoReplaceOnLoad.label "Ersätt automatiskt när sidan läses in">
 <!ENTITY autoReplaceOnLoad.accesskey "ä">
+<!ENTITY autoReplacePeriodically.label "Auto-replace every">
+<!ENTITY autoReplacePeriodically.accesskey "t">
+<!ENTITY autoReplacePeriod.label "seconds">
+<!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "Ersätt URL:er (länkar och bildkällor) (Varning: Kan förändra sidans beteende!)">
 <!ENTITY replaceUrls.accesskey "s">
 <!ENTITY replaceScripts.label "Ersätt skript (Varning: Kan förändra sidans beteende!) (experimentellt)">

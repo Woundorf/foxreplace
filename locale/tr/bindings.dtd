@@ -1,3 +1,6 @@
 <!ENTITY text "Metin">
 <!ENTITY wholeWords "Bütün kelimeler">
 <!ENTITY regExp "Düzenli ifade">
+<!ENTITY htmlNone "No">
+<!ENTITY htmlOutput "Output only">
+<!ENTITY htmlInputOutput "Input &amp; output">
