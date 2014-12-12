@@ -38,8 +38,8 @@
     <command id="fxrCmdHelp" oncommand="foxreplace.showHelp();"/>
   </commandset>
   <keyset id="mainKeyset">
-    <key id="fxrKeyListReplace" modifiers="shift" keycode="VK_F8" command="fxrCmdListReplace"/>
-    <key id="fxrKeyShowReplaceBar" keycode="VK_F8" command="fxrCmdShowReplaceBar"/>
+    <key id="fxrKeyListReplace" modifiers="shift" keycode="VK_F9" command="fxrCmdListReplace"/>
+    <key id="fxrKeyShowReplaceBar" keycode="VK_F9" command="fxrCmdShowReplaceBar"/>
   </keyset>
   <menupopup id="menu_EditPopup">
     <menuitem id="fxrMenuEditReplace" class="menuitem-iconic" insertafter="menu_findAgain" label="&menuReplace.label;" accesskey="&menuReplace.accesskey;"
