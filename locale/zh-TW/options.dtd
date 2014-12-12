@@ -14,13 +14,13 @@
 <!ENTITY clearButton.label "全部刪除">
 <!ENTITY clearButton.accesskey "C">
 <!ENTITY moveUpButton.label "向上移">
-<!ENTITY moveUpButton.accesskey "u">
+<!ENTITY moveUpButton.accesskey "M">
 <!ENTITY moveDownButton.label "向下移">
-<!ENTITY moveDownButton.accesskey "o">
+<!ENTITY moveDownButton.accesskey "v">
 <!ENTITY importButton.label "匯入">
 <!ENTITY importButton.accesskey "I">
 <!ENTITY importFromUrlButton.label "從網址匯入">
-<!ENTITY importFromUrlButton.accesskey "m">
+<!ENTITY importFromUrlButton.accesskey "o">
 <!ENTITY exportButton.label "匯出">
 <!ENTITY exportButton.accesskey "x">
 <!ENTITY subscriptionGroupBoxCaption "從網址定期更新">
@@ -30,12 +30,12 @@
 <!ENTITY subscriptionUrl.label "網址">
 <!ENTITY subscriptionUrl.accesskey "R">
 <!ENTITY subscriptionPeriod.label "週期 (分鐘)">
-<!ENTITY subscriptionPeriod.accesskey "n">
+<!ENTITY subscriptionPeriod.accesskey "P">
 <!ENTITY autoReplaceOnLoad.label "網頁載入時自動取代">
-<!ENTITY autoReplaceOnLoad.accesskey "t">
-<!ENTITY autoReplacePeriodically.label "Auto-replace every">
+<!ENTITY autoReplaceOnLoad.accesskey "u">
+<!ENTITY autoReplacePeriodically.label "每隔">
 <!ENTITY autoReplacePeriodically.accesskey "t">
-<!ENTITY autoReplacePeriod.label "seconds">
+<!ENTITY autoReplacePeriod.label "秒，自動取代">
 <!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "取代網址 (連結和圖片網址) (警告：這可能改變網頁行為！)">
 <!ENTITY replaceUrls.accesskey "l">

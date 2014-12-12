@@ -1,7 +1,5 @@
 <!ENTITY prefwindow.title "FoxReplace - opcje">
 <!ENTITY description "Wprowadź listę wyrażeń do zastąpienia. Operacje zastępowania będą przeprowadzane zgodnie z ich kolejnością na liście.">
-<!ENTITY enabledHeader "Enable">
-<!ENTITY nameHeader "Name">
 <!ENTITY urlHeader "Adres URL">
 <!ENTITY inputStringHeader "Tekst do zastąpienia">
 <!ENTITY outputStringHeader "Tekst zastępujący">
@@ -19,25 +17,9 @@
 <!ENTITY moveDownButton.accesskey "r">
 <!ENTITY importButton.label "Zaimportuj">
 <!ENTITY importButton.accesskey "I">
-<!ENTITY importFromUrlButton.label "Import from URL">
-<!ENTITY importFromUrlButton.accesskey "o">
 <!ENTITY exportButton.label "Wyeksportuj">
 <!ENTITY exportButton.accesskey "E">
-<!ENTITY subscriptionGroupBoxCaption "Periodically update from URL">
-<!ENTITY subscriptionEnableCheckBox.label "Enable">
-<!ENTITY subscriptionEnableCheckBox.accesskey "b">
-<!ENTITY subscriptionStatus.label "Status:">
-<!ENTITY subscriptionUrl.label "URL">
-<!ENTITY subscriptionUrl.accesskey "R">
-<!ENTITY subscriptionPeriod.label "Period (minutes)">
-<!ENTITY subscriptionPeriod.accesskey "P">
 <!ENTITY autoReplaceOnLoad.label "Automatycznie zastępuj tekst na stronach podczas ich wczytywania">
 <!ENTITY autoReplaceOnLoad.accesskey "A">
-<!ENTITY autoReplacePeriodically.label "Auto-replace every">
-<!ENTITY autoReplacePeriodically.accesskey "t">
-<!ENTITY autoReplacePeriod.label "seconds">
-<!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "Zastępuj tekst będący adresem odnośnika lub obrazka (ostrzeżenie: ta opcja może zmienić zachowanie stron!)">
 <!ENTITY replaceUrls.accesskey "o">
-<!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">
-<!ENTITY replaceScripts.accesskey "s">

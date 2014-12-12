@@ -33,9 +33,9 @@
 <!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "페이지 로드시 자동 대체">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
-<!ENTITY autoReplacePeriodically.label "Auto-replace every">
+<!ENTITY autoReplacePeriodically.label "다음 초마다 자동 대체:">
 <!ENTITY autoReplacePeriodically.accesskey "t">
-<!ENTITY autoReplacePeriod.label "seconds">
+<!ENTITY autoReplacePeriod.label "초">
 <!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "URL 대체(링크와 이미지 소스들)(주의:페이지 동작까지 변경시킬 수 있습니다!)">
 <!ENTITY replaceUrls.accesskey "R">

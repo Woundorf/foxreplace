@@ -33,10 +33,6 @@
 <!ENTITY subscriptionPeriod.accesskey "П">
 <!ENTITY autoReplaceOnLoad.label "Аутоматски замени приликом учитавања странице">
 <!ENTITY autoReplaceOnLoad.accesskey "А">
-<!ENTITY autoReplacePeriodically.label "Auto-replace every">
-<!ENTITY autoReplacePeriodically.accesskey "t">
-<!ENTITY autoReplacePeriod.label "seconds">
-<!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "Замени адресе (везе и изворе слика) (упозорење: ово може утицати на понашање странице!)">
 <!ENTITY replaceUrls.accesskey "З">
 <!ENTITY replaceScripts.label "Замени скрипте (упозорење: ово може утицати на понашање странице!) - пробно">
