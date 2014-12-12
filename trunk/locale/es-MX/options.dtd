@@ -33,10 +33,6 @@
 <!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "Auto-replace en pagina cargada">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
-<!ENTITY autoReplacePeriodically.label "Auto-replace every">
-<!ENTITY autoReplacePeriodically.accesskey "t">
-<!ENTITY autoReplacePeriod.label "seconds">
-<!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "Reemplazar URLs (fuentes de enlaces y imagenes)(Advertencia: esto puede cambiar el comportamiento de la pagina!)">
 <!ENTITY replaceUrls.accesskey "l">
 <!ENTITY replaceScripts.label "Reemplazar scripts (Advertencia: esto puede cambiar el comportamiento de la pagina!)(experimental)">

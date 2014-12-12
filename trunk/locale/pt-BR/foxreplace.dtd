@@ -1,27 +1,27 @@
-<!ENTITY menuReplace.label "Replace...">
-<!ENTITY menuReplace.accesskey "e">
+<!ENTITY menuReplace.label "Substituir">
+<!ENTITY menuReplace.accesskey "s">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
-<!ENTITY contextMenuFoxReplace.label "Replace with substitution list (FoxReplace)">
-<!ENTITY contextMenuFoxReplace.accesskey "l">
+<!ENTITY contextMenuFoxReplace.label "Substituir com uma lista (FoxReplace)">
+<!ENTITY contextMenuFoxReplace.accesskey "f">
 <!ENTITY toolbarButton.label "FoxReplace">
 <!ENTITY toolbarButton.tooltip "Substituir com uma lista">
 <!ENTITY listReplace.label "Substituir com uma lista">
-<!ENTITY listReplace.accesskey "R">
-<!ENTITY autoReplaceOnLoad.label "Substituir automaticamente ao carregar página">
+<!ENTITY listReplace.accesskey "S">
+<!ENTITY autoReplaceOnLoad.label "Substituir no carregamento da página">
 <!ENTITY autoReplaceOnLoad.accesskey "A">
 <!ENTITY options.label "Opções do FoxReplace…">
 <!ENTITY options.accesskey "o">
 <!ENTITY help.label "Ajuda">
-<!ENTITY help.accesskey "H">
+<!ENTITY help.accesskey "j">
 <!ENTITY replaceBarClose "Fechar barra de substituição">
 <!ENTITY replaceBarInputString.label "Substituir">
-<!ENTITY replaceBarInputString.accesskey "R">
-<!ENTITY replaceBarOutputString.label "com">
-<!ENTITY replaceBarOutputString.accesskey "w">
+<!ENTITY replaceBarInputString.accesskey "u">
+<!ENTITY replaceBarOutputString.label "por">
+<!ENTITY replaceBarOutputString.accesskey "p">
 <!ENTITY replaceBarCaseSensitive.label "Diferenciar maiúsc./minúsc.">
-<!ENTITY replaceBarCaseSensitive.accesskey "M">
-<!ENTITY replaceBarHtml.label "HTML">
+<!ENTITY replaceBarCaseSensitive.accesskey "d">
+<!ENTITY replaceBarHtml.label "Substituir HTML">
 <!ENTITY replaceBarHtml.accesskey "H">
 <!ENTITY replaceBarReplace.label "Substituir">
-<!ENTITY replaceBarReplace.accesskey "p">
+<!ENTITY replaceBarReplace.accesskey "s">

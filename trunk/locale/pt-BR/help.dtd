@@ -1,58 +1,58 @@
 <!ENTITY title "Ajuda do FoxReplace">
 <!ENTITY h1 "Ajuda do FoxReplace">
-<!ENTITY p "Esta extensão permite você substituir fragmentos do texto numa página por outros fragmentos de texto. O sistema é baseado em <b>substituições</b>: uma substituição consiste num texto que deve ser substituído (identificado como &quot;Substituir&quot;) e um texto que substituirá (Identificado como &quot;Com&quot;). Todas as substituições são sempre aplicados sobre <b>todo</b> conteúdo da página (você não pode fazer substituições parciais no momento).">
+<!ENTITY p "Esta extensão permite substituir fragmentos de texto (strings) numa página por outros fragmentos de texto. O sistema é baseado em substituições: uma substituição consiste em um texto que será substituído (entrada, identificado como &quot;Substituir&quot;) e o texto que substituirá (saída, identificado como &quot;Por&quot;). Há opções adicionais para as substituições, que são explicadas mais abaixo. Quando uma substituição é aplicada, ela é feita em todo o conteúdo da página (no momento não há opção para substituições parciais).">
 <!ENTITY substitution "Substituição">
-<!ENTITY substitution.p "Tem uma string de entrada e uma de saída, e a opção de diferenciar maiúsc./minúsc. ou não.">
-<!ENTITY substitution.inputString "Input string: the text string that will be replaced. It can't be empty. It can have of one of these 3 types:">
-<!ENTITY substitution.inputString.text "Texto: é intertrepado como uma caracter de string sem quaisquer particularidades.">
-<!ENTITY substitution.inputString.wholeWords "Palavra inteira: é interpretado como um ou mais palavras inteiras. Por exemplo, &quot;ativo&quot; não corresponderia &quot;interativo&quot; (corresponderia se fosse um texto normal).">
-<!ENTITY substitution.inputString.regExp.0 "Expressão regular: é interpretado como um">
-<!ENTITY regExpLink "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions">
-<!ENTITY substitution.inputString.regExp.1 "expressão regular">
-<!ENTITY substitution.inputString.regExp.2 ". Se não é válido, um erro será exibido.">
+<!ENTITY substitution.p "Sempre tem uma string de entrada e uma de saída. A string de saída pode ficar vazia (para remover texto), mas a string de entrada deve ter pelo menos um caractere. Opcionalmente, a substituição pode diferenciar maiúscula e minúscula.">
+<!ENTITY substitution.inputString "String de entrada: o texto que será substituído. Não pode ficar vazio. Pode ter um desses três tipos:">
+<!ENTITY substitution.inputString.text "Texto: é interpretado como uma série de caracteres sem quaisquer particularidades.">
+<!ENTITY substitution.inputString.wholeWords "Palavra inteira: é interpretado como uma ou mais palavras inteiras. Por exemplo, &quot;ativo&quot; não corresponderia &quot;interativo&quot; (corresponderia se fosse um texto normal).">
+<!ENTITY substitution.inputString.regExp.0 "Expressão regular (RegExp): é interpretado como uma">
+<!ENTITY regExpLink "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#character-classes">
+<!ENTITY substitution.inputString.regExp.1 "expressão regular de JavaScript">
+<!ENTITY substitution.inputString.regExp.2 ", que usa sua sintaxe. Se não for válido, um erro de sintaxe será exibido.">
 <!ENTITY substitution.outputString "String de saída: o texto que substituirá a string de entrada. Pode ter os seguintes padrões especiais:">
 <!ENTITY substitution.table.summary "Padrões especiais para a string de saída">
 <!ENTITY substitution.table.0 "Insere um &quot;$&quot;.">
-<!ENTITY substitution.table.1 "Insere uma string de entrada.">
+<!ENTITY substitution.table.1 "Insere o texto da string de entrada.">
 <!ENTITY substitution.table.2 "Insere o texto precedendo a string de entrada dentro do mesmo bloco.">
 <!ENTITY substitution.table.3 "Insere o texto seguindo a string de entrada dentro do mesmo bloco.">
-<!ENTITY substitution.table.4.0 "Se o texto de entrada é uma expressão regular, e">
-<!ENTITY substitution.table.4.1 "um número inteiro decimal entre 1 e 99 (incluso), insere o">
-<!ENTITY substitution.table.4.2 "substring encontrado.">
+<!ENTITY substitution.table.4.0 "Se o texto de entrada é uma expressão regular com substrings entre parêntesis (ex. &quot;(\w+) \w+&quot;), e">
+<!ENTITY substitution.table.4.1 "um número inteiro decimal entre 1 e 99 (incluso), insere a">
+<!ENTITY substitution.table.4.2 "substring encontrada (seguindo o exemplo anterior, com o texto &quot;(Lorem) (ipsum)&quot;, &quot;$1&quot; seria &quot;Lorem&quot;).">
 <!ENTITY substitutionList "Lista de substituição">
-<!ENTITY substitutionList.p "A extensão mantém uma lista de substituição que você pode definir e modificar a qualquer momento da janela de opções do FoxReplace. Você pode aplicar a lista de substituição quando você quiser apertando a tecla F2 ou clicando sobre o botão da barra de ferramentas ou ativando um menu de opção. Quando você fizer, substituições na lista serão aplicadas na ordem que eles aparecerem. Você pode aplicar a lista de substituição quantas vezes você quiser sobre a mesma página.">
+<!ENTITY substitutionList.p "FoxReplace mantém uma lista de substituição que você pode definir e modificar a qualquer momento da janela de opções do FoxReplace. Você pode aplicar a lista de substituição quando quiser pressionando Shift+F8, clicando no botão da barra de ferramentas, ou ativando uma opção de menu. Quando isso é feito, as substituições serão aplicadas na ordem em que aparecem. Você pode aplicar a lista de substituição quantas vezes quiser na mesma página. As substituições são feitas no conteúdo atual da página, ex. se aplicar a lista de substituição uma segunda vez, isso será feito por cima do resultado da primeira. Nessa lista de substituição, não estão diretamente as substituições, mas os grupos de substituição, onde uma lista de endereços (URLs) é associada com a lista de substituições que são aplicadas às páginas em que seu endereço corresponde a uma das URLs da lista.">
 <!ENTITY substitutionGroup "Grupo de substituição">
-<!ENTITY substitutionGroup.p0 "It's formed by an URL list and a substitution list. The substitutions are applied in the order they appear, and there must be one at least. With the URL list you can define to which pages the substitutions are applied. If the list is empty, the substitutions are applied to any page. You can add URLs and then the substitutions are applied only if the page address matches one of the URLs. Finally, you can also add exclusion URLs which have the opposite effect, the substitutions aren't applied if the page address matches one of them. So, the substitutions are applied if the page address doesn't match any of the exclusion URLs and it matches one of the normal URLs or there is none. The URL of a page is considered to match an URL of the group if the URL of the group is part of the URL of the page.">
-<!ENTITY substitutionGroup.p1 "The exclusion URLs are the ones that start with a hyphen (&quot;-&quot;), and they are displayed in red; the rest are normal URLs. You may use special characters &quot;*&quot; to match any 0 or more characters and &quot;|&quot; to match the beginning or the end of the URL. If you want to define an URL that starts with a hyphen (i.e. &quot;-abc&quot;) and it isn't an exclusion URL, you may use the equivalent form &quot;|*-abc&quot;.">
+<!ENTITY substitutionGroup.p0 "É formado por uma lista de endereços e uma lista de substituições. As substituições são aplicadas na ordem em que aparecem, e deve haver pelo menos uma. Com a lista de endereços você pode definir para qual página as substituições são aplicadas. Se a lista estiver vazia, são aplicadas a qualquer página. Se endereços forem adicionados, serão aplicadas apenas se o endereço da página corresponder com pelo menos um endereço da lista; se um endereço de exclusão for adicionado, tem-se o efeito oposto, ou seja, as substituições <b><u>não</u></b> serão aplicadas se um dos endereços corresponder com o endereço da página. O endereço de uma página é considerado para corresponder um endereço do grupo se o endereço do grupo é pelo menos parte do endereço da página.">
+<!ENTITY substitutionGroup.p1 "Os endereços de exclusão são aqueles que começam com um hífen (&quot;-&quot;), e são exibidos em vermelho. Você pode usar &quot;*&quot; para coincidir qualquer 0 ou mais caracteres (não é necessário no início nem no fim), e &quot;|&quot; para corresponder o início e o fim do endereço. Se quiser definir uma URL que começa com um hífen (ex. &quot;-abc&quot;) e não é um endereço de exclusão, você pode usar a forma equivalente &quot;|*-abc&quot;.">
 <!ENTITY replaceHtml "Substituir HTML">
-<!ENTITY replaceHtml.p "Substitutions are usually applied only to the text, but HTML can also be used to modify the format or the page structure. For each substitution group you can choose between not using HTML, using HTML only in the output (for example to replace plain text with formatted text), or using HTML both in the input and the output (this way the substitutions are applied directly to the HTML code).">
-<!ENTITY autoReplace "Substituição automática ao carregar a página">
-<!ENTITY autoReplace.p "This option can be activated or deactivated. When it's on, the substitution list is applied automatically when a page is loaded, applying the substitutions of the groups with a matching URL. This way the extension can work as a filter for the pages you want.">
-<!ENTITY replaceUrls "Substituir Endereços">
-<!ENTITY replaceUrls.p "This option is off by default. It it's on, substitutions are also applied to the URLs in the page (links, image sources, etc.), so it may change the behaviour of the page. Use it under your own responsibility. This has no effect in substitutions with HTML in the input and the output, because then URLs can be modified always.">
-<!ENTITY replaceScripts "Replace scripts">
-<!ENTITY replaceScripts.p "This option is off by default. If it's on, substitutions are also applied to the scripts in the page, so it may change the behaviour of the page. Use it under your own responsibility. For substitutions with HTML in the input and the output this option applies to all the scripts, otherwise only to the scripts in the body.">
-<!ENTITY newGui "Novos elementos do menu e barra de ferramentas">
-<!ENTITY newGui.app "Firefox menu">
+<!ENTITY replaceHtml.p "As substituições, geralmente, são aplicadas apenas no texto, mas HTML também pode ser usado para modificar o formato ou a estrutura da página. Para cada grupo de substituição você pode escolher entre não usar HTML, usar apenas para as strings de saída (por exemplo para substituir texto simples por texto formatado), e usar HTML tanto para as strings de entrada quanto para as de saída (assim as substituições são aplicadas diretamente no código HTML, sendo possível, por exemplo, trocar uma formatação por outra, ou até mesmo modificar a estrutura de página). A última opção pode causar problemas em páginas &quot;hipersensíveis&quot; (como o YouTube, por exemplo).">
+<!ENTITY autoReplace "Substituir automaticamente no carregamento da página">
+<!ENTITY autoReplace.p "Essa opção pode ser ativada ou desativada. Quando ativada, a lista de substituição é aplicada automaticamente quando a página é carregada, aplicando as substituições dos grupos com um endereço correspondente. Desse modo, a extensão pode funcionar como um filtro para as páginas que desejar.">
+<!ENTITY replaceUrls "Substituir endereços">
+<!ENTITY replaceUrls.p "Esta opção está desativada por padrão. Se ativada, as substituições também se aplicam às URLs nas páginas (links, endereços de imagens, etc.), podendo mudar o comportamento da mesma. Use sob sua própria responsabilidade. Não tem efeito em substituições com HTML na entrada e saída, porque as URLs podem ser sempre modificadas.">
+<!ENTITY replaceScripts "Substituir scripts">
+<!ENTITY replaceScripts.p "Esta opção está desativada por padrão. Se ativada, as substituições também se aplicam aos scripts nas páginas, podendo mudar o comportamento da mesma. Use sob sua própria responsabilidade. Para substituições com HTML na entrada e saída essa opção se aplica a todos os scripts; do contrário, apenas para os scripts no corpo da página.">
+<!ENTITY newGui "Novos elementos do menu e da barra de ferramentas">
+<!ENTITY newGui.app "Menu do Firefox">
 <!ENTITY newGui.edit "Editar">
-<!ENTITY newGui.menu.replace "Replace... (F8)">
-<!ENTITY newGui.menu.replace.d "Shows the replace bar.">
+<!ENTITY newGui.menu.replace "Substituir... (F8)">
+<!ENTITY newGui.menu.replace.d "Mostra a barra de substituição.">
 <!ENTITY newGui.tools "Ferramentas">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (Shift+F8)">
-<!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
-<!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
-<!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
-<!ENTITY newGui.menu.options "FoxReplace options...">
-<!ENTITY newGui.menu.options.d "Opens FoxReplace options window.">
-<!ENTITY newGui.menu.help "Help">
-<!ENTITY newGui.menu.help.d "Shows this page.">
+<!ENTITY newGui.menu.replaceWithList "Substituir com a lista (Shift+F8)">
+<!ENTITY newGui.menu.replaceWithList.d "Aplica a lista de substituição atual.">
+<!ENTITY newGui.menu.autoReplace "Substituir automaticamente no carregamento da página">
+<!ENTITY newGui.menu.autoReplace.d "Ativa essa opção.">
+<!ENTITY newGui.menu.options "Opções do FoxReplace..">
+<!ENTITY newGui.menu.options.d "Abre a janela de opções do FoxReplace.">
+<!ENTITY newGui.menu.help "Ajuda">
+<!ENTITY newGui.menu.help.d "Mostra essa página.">
 <!ENTITY newGui.toolbarButton "Botão da barra de ferramentas">
-<!ENTITY newGui.toolbarButton.0 "Clicando sobre aplica a lista de substituição.">
-<!ENTITY newGui.toolbarButton.1 "It has a menu at side like the FoxReplace above.">
+<!ENTITY newGui.toolbarButton.0 "Clicando, aplica a lista de substituição atual.">
+<!ENTITY newGui.toolbarButton.1 "Há um menu do lado, como o FoxReplace acima.">
 <!ENTITY newGui.contextMenu "Menu de contexto">
-<!ENTITY newGui.contextMenu.replace "Substituir com uma lista de substituição (FoxReplace) (F2)">
-<!ENTITY newGui.contextMenu.replace.d "Aplica a lista de substituição atual">
+<!ENTITY newGui.contextMenu.replace "Substituir com uma lista de substituição (FoxReplace) (Shift+F8)">
+<!ENTITY newGui.contextMenu.replace.d "Aplica a lista de substituição atual.">
 <!ENTITY newGui.replaceBar "Barra de substituição">
-<!ENTITY newGui.replaceBar.0 "Aparece abaixo da barra de localização">
-<!ENTITY newGui.replaceBar.1 "Permite você definir uma substituição e aplicar instantaneamente.">
+<!ENTITY newGui.replaceBar.0 "Aparece abaixo da barra de localização (Ctrl+F).">
+<!ENTITY newGui.replaceBar.1 "Permite definir uma substituição e aplicar instantaneamente.">
