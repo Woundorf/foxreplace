@@ -30,6 +30,8 @@
 <!ENTITY autoReplace.p "Detta alternativ kan aktiveras eller inaktiveras. När det är aktiverat, så tillämpas ersättningslistan tillämpas automatiskt när en sida har lästs in, genom att tillämpa ersättningarna för grupperna med en matchande URL. På så sätt kan tillägget fungera som ett filter för sidor du själv väljer.">
 <!ENTITY replaceUrls "Ersätt URL:er">
 <!ENTITY replaceUrls.p "Detta alternativ är inaktiverat som standard. När det är aktiverat, så tillämpas ersättningar även på URL:erna på sidan (länkar, bildkällor, o.s.v.), så att sidans beteende kan ändras. Använd alternativet under eget ansvar. Detta påverkar inte HTML-ersättningar, eftersom URL:er alltid kan ändras vid sådana.">
+<!ENTITY replaceScripts "Replace scripts">
+<!ENTITY replaceScripts.p "This option is off by default. If it's on, substitutions are also applied to the scripts in the page, so it may change the behaviour of the page. Use it under your own responsibility. For substitutions with HTML in the input and the output this option applies to all the scripts, otherwise only to the scripts in the body.">
 <!ENTITY newGui "Nya meny- och verktygsfältselement">
 <!ENTITY newGui.app "Firefox-menyn">
 <!ENTITY newGui.edit "Redigera-menyn">

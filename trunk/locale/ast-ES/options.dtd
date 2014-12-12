@@ -33,6 +33,10 @@
 <!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "Auto-trocar al cargar la páxina">
 <!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY autoReplacePeriodically.label "Auto-replace every">
+<!ENTITY autoReplacePeriodically.accesskey "t">
+<!ENTITY autoReplacePeriod.label "seconds">
+<!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "Trocar URLs (fontes d'enllaces ya imáxenes) (Avisu: esto pue camudar el comportamientu de la páxina!)">
 <!ENTITY replaceUrls.accesskey "l">
 <!ENTITY replaceScripts.label "Trocar scripts (Avisu: esto pue camudar el comportamientu de la páxina!)(esperimental)">
