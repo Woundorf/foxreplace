@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009-2014 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2009-2015 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -32,6 +32,10 @@ Cu.import("resource://foxreplace/io.js");
 Cu.import("resource://foxreplace/Observers.js");
 Cu.import("resource://foxreplace/prefs.js");
 Cu.import("resource://foxreplace/services.js");
+Cu.import("resource://gre/modules/Services.jsm");
+
+// The status that represents a OK response for non-HTTP requests has changed across Firefox versions: it was 0 before Firefox 35 and 200 since then
+const NON_HTTP_OK_STATUS = Services.vc.compare(Services.appinfo.platformVersion, "35.0") < 0 ? 0 : 200;
 
 /**
  * Updates the substitution list from a subscription URL.
@@ -54,7 +58,7 @@ var fxrSubscription = {
         request.responseType = "text";
         request.onreadystatechange = function() {
           if (request.readyState == 4) {
-            if ((http && request.status == 200) || (!http && request.status == 0)) {
+            if ((http && request.status == 200) || (!http && request.status == NON_HTTP_OK_STATUS)) {
               try {
                 let listJSON = JSON.parse(request.responseText);
                 prefs.substitutionList = substitutionListFromJSON(listJSON);
