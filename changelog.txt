@@ -6,6 +6,8 @@ v0.17.0
 * Changed shortcuts because Shift+F8 is for the WebIDE. The new ones are F9 to show the replace bar and Shift+F9 to apply the substitution list (issue 154).
 * Fixed subscription to a local URL for Firefox 35+ (issue 157).
 * Compatibility with Firefox from 30.0 to 39.0.
+* New locale:
+  - ja (by Bruno Lopes)
 
 v0.16.1 (2014-06-13)
 * Fixed issue with the auto-replace on load option on the toolbar button menu showing incorrect values in some cases (issue 142).
