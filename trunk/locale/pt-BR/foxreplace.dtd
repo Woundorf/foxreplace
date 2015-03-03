@@ -1,4 +1,4 @@
-<!ENTITY menuReplace.label "Substituir">
+<!ENTITY menuReplace.label "Substituir…">
 <!ENTITY menuReplace.accesskey "s">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
@@ -8,7 +8,7 @@
 <!ENTITY toolbarButton.tooltip "Substituir com uma lista">
 <!ENTITY listReplace.label "Substituir com uma lista">
 <!ENTITY listReplace.accesskey "S">
-<!ENTITY autoReplaceOnLoad.label "Substituir no carregamento da página">
+<!ENTITY autoReplaceOnLoad.label "Substituição automática ao carregar a página">
 <!ENTITY autoReplaceOnLoad.accesskey "A">
 <!ENTITY options.label "Opções do FoxReplace…">
 <!ENTITY options.accesskey "o">
