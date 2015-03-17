@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2014 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2007-2015 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -318,20 +318,28 @@ let foxreplaceOptions = {
    * Imports the substitution list from a file.
    */
   importSubstitutionList: function() {
-    let substitutionListPromise = this.io.readList();
-    substitutionListPromise.then(function onFulfilled(aSubstitutionList) {
-      if (aSubstitutionList) foxreplaceOptions._finishImportSubstitutionList(aSubstitutionList);
-    });
+    let filePath = this._showFileDialog("import");
+
+    if (filePath) {
+      let substitutionListPromise = this.io.readList(filePath);
+      substitutionListPromise.then(function onFulfilled(aSubstitutionList) {
+        if (aSubstitutionList) foxreplaceOptions._finishImportSubstitutionList(aSubstitutionList);
+      });
+    }
   },
 
   /**
    * Imports the substitution list from a URL.
    */
   importSubstitutionListFromUrl: function() {
-    let substitutionListPromise = this.io.readListFromUrl();
-    substitutionListPromise.then(function onFulfilled(aSubstitutionList) {
-      if (aSubstitutionList) foxreplaceOptions._finishImportSubstitutionList(aSubstitutionList);
-    });
+    let url = this._promptForImportUrl();
+
+    if (url) {
+      let substitutionListPromise = this.io.readListFromUrl(url);
+      substitutionListPromise.then(function onFulfilled(aSubstitutionList) {
+        if (aSubstitutionList) foxreplaceOptions._finishImportSubstitutionList(aSubstitutionList);
+      });
+    }
   },
 
   /**
@@ -353,7 +361,8 @@ let foxreplaceOptions = {
    * Exports the substitution list to a file.
    */
   exportSubstitutionList: function() {
-    this.io.writeList(this.substitutionList);
+    let filePath = this._showFileDialog("export");
+    if (filePath) this.io.writeList(this.substitutionList, filePath);
   },
 
   /**
@@ -386,6 +395,52 @@ let foxreplaceOptions = {
    */
   showTooltip: function() {
     this._tooltip.openPopup(this._disclosureButton);
+  },
+
+  /**
+   * Shows the file dialog in the passed mode (import or export) and returns the file selected by the user.
+   */
+  _showFileDialog: function(aMode) {
+    let title = this.getLocalizedString(aMode == "import" ? "importTitle" : "exportTitle");
+
+    try {
+      const Cc = Components.classes;
+      const Ci = Components.interfaces;
+      const nsIFP = Ci.nsIFilePicker;
+      let fileDialog = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFP);
+      let windowMediator = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
+      let window = windowMediator.getMostRecentWindow("");
+      fileDialog.init(window, title, aMode == "import" ? nsIFP.modeOpen : nsIFP.modeSave);
+      fileDialog.appendFilter(this.getLocalizedString("jsonFiles"), "*.json");
+      fileDialog.appendFilters(nsIFP.filterAll);
+      fileDialog.filterIndex = 0;
+      fileDialog.defaultExtension = ".json";
+      fileDialog.defaultString = "FoxReplace.json";
+
+      let ret = fileDialog.show();
+
+      if (ret == nsIFP.returnOK || ret == nsIFP.returnReplace) return fileDialog.file.path;
+    }
+    catch (e) {
+      this.prompts.alert(title, e);
+    }
+
+    return null;
+  },
+
+  /**
+   * Prompts the user for a URL and returns this URL or null if the user cancels or the URL is not a HTTP URL.
+   */
+  _promptForImportUrl: function() {
+    let input = { value: "" };
+
+    if (this.prompts.prompt(this.getLocalizedString("importFromUrlTitle"), this.getLocalizedString("importFromUrlText"), input)) {
+      let url = input.value;
+      if (/https?\:\/\//.test(url)) return url;
+      else this.prompts.alert(this.getLocalizedString("nonSupportedProtocol"), this.getLocalizedString("onlyHttp"));
+    }
+
+    return null;
   }
 
 };

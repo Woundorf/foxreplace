@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009-2014 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2009-2015 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -40,25 +40,20 @@ var EXPORTED_SYMBOLS = ["io"];
 var io = {
 
   /**
-   * Reads a substitution list from a file (selected by parameter or by a user in a dialog) and returns a promise that fulfills with it.
+   * Reads a substitution list from aFilePath and returns a promise that fulfills with it.
    */
-  readList: function(aFile) {
-    if (!aFile) {
-      let file = showFileDialog("import");
+  readList: function(aFilePath) {
+    if (!aFilePath) return Promise.resolve(null);
 
-      if (!file) return Promise.resolve(null);
-      else aFile = file;
-    }
-
-    let promise = OS.File.read(aFile, { encoding: "utf-8" });
+    let promise = OS.File.read(aFilePath, { encoding: "utf-8" });
     promise = promise.then(function onFulfilled(aString) {
       let listJSON = JSON.parse(aString);
       return substitutionListFromJSON(listJSON);
     }, function onRejected(aError) {
-      prompts.alert("FoxReplace", getLocalizedString("io.readError", [aFile, aError]));
+      prompts.alert("FoxReplace", getLocalizedString("io.readError", [aFilePath, aError]));
       return null;
     }).catch(function onRejected(aError) {
-      prompts.alert("FoxReplace", getLocalizedString("io.jsonError.file", [aFile, aError]));
+      prompts.alert("FoxReplace", getLocalizedString("io.jsonError.file", [aFilePath, aError]));
       return null;
     });
 
@@ -66,20 +61,10 @@ var io = {
   },
 
   /**
-   * Reads a substitution list from an URL (selected by parameter or by a user in a dialog) and returns a promise that fulfills with it.
+   * Reads a substitution list from aUrl and returns a promise that fulfills with it.
    */
   readListFromUrl: function(aUrl) {
-    if (!aUrl) {
-      let input = { value: "" };
-
-      if (!prompts.prompt(getLocalizedString("importFromUrlTitle"), getLocalizedString("importFromUrlText"), input)) return Promise.resolve(null);
-      else aUrl = input.value;
-    }
-
-    if (!/https?\:\/\//.test(aUrl)) {
-      prompts.alert(getLocalizedString("nonSupportedProtocol"), getLocalizedString("onlyHttp"));
-      return Promise.resolve(null);
-    }
+    if (!aUrl) return Promise.resolve(null);
 
     let promise = new Promise(function(resolve, reject) {
       let request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
@@ -112,51 +97,17 @@ var io = {
   },
 
   /**
-   * Writes the given substitution list to a file (selected by parameter or by a user in a dialog).
+   * Writes the given substitution list to aFilePath.
    */
-  writeList: function(aSubstitutionList, aFile) {
-    if (!aFile) {
-      let file = showFileDialog("export");
-
-      if (!file) return;
-      else aFile = file;
-    }
+  writeList: function(aSubstitutionList, aFilePath) {
+    if (!aFilePath) return;
 
     let listJSON = substitutionListToJSON(aSubstitutionList);
     let string = JSON.stringify(listJSON, null, 2);
-    let promise = OS.File.writeAtomic(aFile, string, { encoding: "utf-8" });
+    let promise = OS.File.writeAtomic(aFilePath, string, { encoding: "utf-8" });
     promise = promise.catch(function onRejected(aError) {
-      prompts.alert("FoxReplace", getLocalizedString("io.writeError", [aFile, aError]));
+      prompts.alert("FoxReplace", getLocalizedString("io.writeError", [aFilePath, aError]));
     });
   }
 
 };
-
-/**
- * Shows the file dialog in the passed mode (import or export) and returns the file selected by the user.
- */
-function showFileDialog(aMode) {
-  var title = getLocalizedString(aMode == "import" ? "importTitle" : "exportTitle");
-
-  try {
-    const nsIFP = Ci.nsIFilePicker;
-    var fileDialog = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFP);
-    var windowMediator = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
-    var window = windowMediator.getMostRecentWindow("");
-    fileDialog.init(window, title, aMode == "import" ? nsIFP.modeOpen : nsIFP.modeSave);
-    fileDialog.appendFilter(getLocalizedString("jsonFiles"), "*.json");
-    fileDialog.appendFilters(nsIFP.filterAll);
-    fileDialog.filterIndex = 0;
-    fileDialog.defaultExtension = ".json";
-    fileDialog.defaultString = "FoxReplace.json";
-
-    var ret = fileDialog.show();
-
-    if (ret == nsIFP.returnOK || ret == nsIFP.returnReplace) return fileDialog.file.path;
-  }
-  catch (e) {
-    prompts.alert(title, e);
-  }
-
-  return null;
-}
