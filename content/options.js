@@ -324,6 +324,9 @@ let foxreplaceOptions = {
       let substitutionListPromise = this.io.readList(filePath);
       substitutionListPromise.then(function onFulfilled(aSubstitutionList) {
         if (aSubstitutionList) foxreplaceOptions._finishImportSubstitutionList(aSubstitutionList);
+      },
+      function onRejected(aError) {
+        foxreplaceOptions.prompts.alert(foxreplaceOptions.getLocalizedString("options.importError"), aError);
       });
     }
   },
@@ -338,6 +341,9 @@ let foxreplaceOptions = {
       let substitutionListPromise = this.io.readListFromUrl(url);
       substitutionListPromise.then(function onFulfilled(aSubstitutionList) {
         if (aSubstitutionList) foxreplaceOptions._finishImportSubstitutionList(aSubstitutionList);
+      },
+      function onRejected(aError) {
+        foxreplaceOptions.prompts.alert(foxreplaceOptions.getLocalizedString("options.importError"), aError);
       });
     }
   },
@@ -362,7 +368,13 @@ let foxreplaceOptions = {
    */
   exportSubstitutionList: function() {
     let filePath = this._showFileDialog("export");
-    if (filePath) this.io.writeList(this.substitutionList, filePath);
+
+    if (filePath) {
+      let writePromise = this.io.writeList(this.substitutionList, filePath);
+      writePromise.catch(function onRejected(aError) {
+        foxreplaceOptions.prompts.alert(foxreplaceOptions.getLocalizedString("options.exportError"), aError);
+      });
+    }
   },
 
   /**

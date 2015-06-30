@@ -40,7 +40,7 @@ var EXPORTED_SYMBOLS = ["io"];
 var io = {
 
   /**
-   * Reads a substitution list from aFilePath and returns a promise that fulfills with it.
+   * Reads a substitution list from aFilePath and returns a promise that fulfills with it or rejects with an error message.
    */
   readList: function(aFilePath) {
     if (!aFilePath) return Promise.resolve(null);
@@ -50,18 +50,17 @@ var io = {
       let listJSON = JSON.parse(aString);
       return substitutionListFromJSON(listJSON);
     }, function onRejected(aError) {
-      prompts.alert("FoxReplace", getLocalizedString("io.readError", [aFilePath, aError]));
-      return null;
+      throw getLocalizedString("io.readError", [aFilePath, aError]);
     }).catch(function onRejected(aError) {
-      prompts.alert("FoxReplace", getLocalizedString("io.jsonError.file", [aFilePath, aError]));
-      return null;
+      if (aError instanceof Error) throw getLocalizedString("io.jsonError.file", [aFilePath, aError]);
+      else throw aError;
     });
 
     return promise;
   },
 
   /**
-   * Reads a substitution list from aUrl and returns a promise that fulfills with it.
+   * Reads a substitution list from aUrl and returns a promise that fulfills with it or rejects with an error message.
    */
   readListFromUrl: function(aUrl) {
     if (!aUrl) return Promise.resolve(null);
@@ -86,28 +85,29 @@ var io = {
       let listJSON = JSON.parse(aString);
       return substitutionListFromJSON(listJSON);
     }, function onRejected(aError) {
-      prompts.alert("FoxReplace", getLocalizedString("io.networkError", [aUrl, aError]));
-      return null;
+      throw getLocalizedString("io.networkError", [aUrl, aError]);
     }).catch(function onRejected(aError) {
-      prompts.alert("FoxReplace", getLocalizedString("io.jsonError.url", [aUrl, aError]));
-      return null;
+      if (aError instanceof Error) throw getLocalizedString("io.jsonError.url", [aUrl, aError]);
+      else throw aError;
     });
 
     return promise;
   },
 
   /**
-   * Writes the given substitution list to aFilePath.
+   * Writes the given substitution list to aFilePath and returns a promise that fulfills with an undefined value or rejects with an error message.
    */
   writeList: function(aSubstitutionList, aFilePath) {
-    if (!aFilePath) return;
+    if (!aFilePath) return Promise.resolve();
 
     let listJSON = substitutionListToJSON(aSubstitutionList);
     let string = JSON.stringify(listJSON, null, 2);
     let promise = OS.File.writeAtomic(aFilePath, string, { encoding: "utf-8" });
     promise = promise.catch(function onRejected(aError) {
-      prompts.alert("FoxReplace", getLocalizedString("io.writeError", [aFilePath, aError]));
+      throw getLocalizedString("io.writeError", [aFilePath, aError]);
     });
+
+    return promise;
   }
 
 };
