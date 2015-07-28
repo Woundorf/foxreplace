@@ -11,7 +11,7 @@
   - The Original Code is FoxReplace.
   -
   - The Initial Developer of the Original Code is Marc Ruiz Altisent.
-  - Portions created by the Initial Developer are Copyright (C) 2007-2014 the Initial Developer. All Rights Reserved.
+  - Portions created by the Initial Developer are Copyright (C) 2007-2015 the Initial Developer. All Rights Reserved.
   -
   - Contributor(s):
   -
@@ -43,22 +43,30 @@
       <preference id="subscriptionPeriod" name="extensions.foxreplace.subscriptionPeriod" type="int"/>
     </preferences>
     <hbox flex="1">
-      <tree id="substitutionListTree" seltype="single" editable="true" flex="1" ondblclick="foxreplaceOptions.onTreeDoubleClick(event);"
-            onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitutionGroup();"
-            onselect="foxreplaceOptions.onSelectSubstitutionGroup();">
-        <treecols>
-          <treecol id="enabledColumn" label="&enabledHeader;" type="checkbox" editable="true" persist="width hidden"/>
-          <splitter class="tree-splitter"/>
-          <treecol id="nameColumn" label="&nameHeader;" flex="1" persist="width hidden"/>
-          <splitter class="tree-splitter"/>
-          <treecol id="urlColumn" label="&urlHeader;" flex="1" persist="width hidden"/>
-          <splitter class="tree-splitter"/>
-          <treecol id="inputColumn" label="&inputStringHeader;" flex="1" persist="width hidden"/>
-          <splitter class="tree-splitter"/>
-          <treecol id="outputColumn" label="&outputStringHeader;" flex="1" persist="width hidden"/>
-        </treecols>
-        <treechildren id="substitutionListTreeChildren"/>
-      </tree>
+      <stack flex="1">
+        <tree id="substitutionListTree" seltype="single" editable="true" ondblclick="foxreplaceOptions.onTreeDoubleClick(event);"
+              onkeypress="if(event.keyCode==event.DOM_VK_DELETE)foxreplaceOptions.deleteSubstitutionGroup();"
+              onselect="foxreplaceOptions.onSelectSubstitutionGroup();">
+          <treecols>
+            <treecol id="enabledColumn" label="&enabledHeader;" type="checkbox" editable="true" persist="width hidden"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="nameColumn" label="&nameHeader;" flex="1" persist="width hidden"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="urlColumn" label="&urlHeader;" flex="1" persist="width hidden"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="inputColumn" label="&inputStringHeader;" flex="1" persist="width hidden"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="outputColumn" label="&outputStringHeader;" flex="1" persist="width hidden"/>
+          </treecols>
+          <treechildren id="substitutionListTreeChildren"/>
+        </tree>
+        <stack id="progressOverlay" hidden="true">
+          <page id="translucentBackground"/>
+          <vbox align="center" pack="center">
+            <progressmeter mode="undetermined" width="256" height="32"/>
+          </vbox>
+        </stack>
+      </stack>
       <vbox>
         <button id="addButton" label="&addButton.label;" accesskey="&addButton.accesskey;" oncommand="foxreplaceOptions.addSubstitutionGroup();"/>
         <button id="editButton" disabled="true" label="&editButton.label;" accesskey="&editButton.accesskey;"
