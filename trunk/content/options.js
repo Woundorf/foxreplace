@@ -34,12 +34,16 @@ let foxreplaceOptions = {
    * Easy access to most used controls.
    */
   get _tree() { return document.getElementById("substitutionListTree"); },
+  get _progressOverlay() { return document.getElementById("progressOverlay"); },
   get _addButton() { return document.getElementById("addButton"); },
   get _editButton() { return document.getElementById("editButton"); },
   get _deleteButton() { return document.getElementById("deleteButton"); },
   get _clearButton() { return document.getElementById("clearButton"); },
   get _moveUpButton() { return document.getElementById("moveUpButton"); },
   get _moveDownButton() { return document.getElementById("moveDownButton"); },
+  get _importButton() { return document.getElementById("importButton"); },
+  get _importFromUrlButton() { return document.getElementById("importFromUrlButton"); },
+  get _exportButton() { return document.getElementById("exportButton"); },
   get _subscriptionStatusTextBox() { return document.getElementById("subscriptionStatusTextBox"); },
   get _tooltip() { return document.getElementById("tooltip"); },
   get _disclosureButton() { return document.documentElement.getButton("disclosure"); },
@@ -198,8 +202,11 @@ let foxreplaceOptions = {
     if (aSubstitutionList) {
       if (this.substitutionList.toSource() != aSubstitutionList.toSource())
         this.substitutionList = aSubstitutionList;
+
+      this._toggleProgressIndicator(false);
     }
     else {
+      this._toggleProgressIndicator(true);
       this.prefs.substitutionList.then(function(aList) { foxreplaceOptions.loadSubstitutionList(aList); });
     }
   },
@@ -321,12 +328,16 @@ let foxreplaceOptions = {
     let filePath = this._showFileDialog("import");
 
     if (filePath) {
+      this._toggleProgressIndicator(true);
       let substitutionListPromise = this.io.readList(filePath);
       substitutionListPromise.then(function onFulfilled(aSubstitutionList) {
         if (aSubstitutionList) foxreplaceOptions._finishImportSubstitutionList(aSubstitutionList);
+
+        foxreplaceOptions._toggleProgressIndicator(false);
       },
       function onRejected(aError) {
         foxreplaceOptions.prompts.alert(foxreplaceOptions.getLocalizedString("options.importError"), aError);
+        foxreplaceOptions._toggleProgressIndicator(false);
       });
     }
   },
@@ -338,12 +349,16 @@ let foxreplaceOptions = {
     let url = this._promptForImportUrl();
 
     if (url) {
+      this._toggleProgressIndicator(true);
       let substitutionListPromise = this.io.readListFromUrl(url);
       substitutionListPromise.then(function onFulfilled(aSubstitutionList) {
         if (aSubstitutionList) foxreplaceOptions._finishImportSubstitutionList(aSubstitutionList);
+
+        foxreplaceOptions._toggleProgressIndicator(false);
       },
       function onRejected(aError) {
         foxreplaceOptions.prompts.alert(foxreplaceOptions.getLocalizedString("options.importError"), aError);
+        foxreplaceOptions._toggleProgressIndicator(false);
       });
     }
   },
@@ -453,6 +468,24 @@ let foxreplaceOptions = {
     }
 
     return null;
+  },
+
+  /**
+   * Shows or hides the progress indicator according to aShow.
+   */
+  _toggleProgressIndicator: function(aShow) {
+    this._progressOverlay.hidden = !aShow;
+    this._addButton.disabled = aShow;
+    this._editButton.disabled = aShow;
+    this._deleteButton.disabled = aShow;
+    this._clearButton.disabled = aShow;
+    this._moveUpButton.disabled = aShow;
+    this._moveDownButton.disabled = aShow;
+    this._importButton.disabled = aShow;
+    this._importFromUrlButton.disabled = aShow;
+    this._exportButton.disabled = aShow;
+
+    if (!aShow) this.onSelectSubstitutionGroup(); // little hack to get the proper state for the some buttons
   }
 
 };

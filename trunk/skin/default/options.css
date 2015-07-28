@@ -6,3 +6,7 @@
 treechildren::-moz-tree-checkbox(checked) {
   list-style-image: url("chrome://global/skin/checkbox/cbox-check.gif");
 }
+
+#translucentBackground {
+  opacity: 0.9;
+}
