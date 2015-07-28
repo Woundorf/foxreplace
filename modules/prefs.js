@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2009-2014 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2009-2015 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *
@@ -79,13 +79,17 @@ var prefs = {
       this._preferences.reset("substitutionListJSON");
       this.substitutionList = substitutionList;
     }
-    // Create the file with an empty list if it doesn't exist
-    else if (!OS.File.exists(this.substitutionListFilePath)) {
-      this.substitutionList = [];
-    }
-    // Read the substitution list from file to have it ready when it's needed
     else {
-      let l = this.substitutionList;
+      OS.File.exists(this.substitutionListFilePath).then(function onFulfilled(aExists) {
+        // Create the file with an empty list if it doesn't exist
+        if (!aExists) {
+          prefs.substitutionList = [];
+        }
+        // Read the substitution list from file to have it ready when it's needed
+        else {
+          let l = prefs.substitutionList;
+        }
+      });
     }
   },
 
