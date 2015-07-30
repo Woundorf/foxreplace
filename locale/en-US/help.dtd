@@ -29,7 +29,7 @@
 <!ENTITY autoReplace "Auto-replace on page load">
 <!ENTITY autoReplace.p "This option can be activated or deactivated. When it's on, the substitution list is applied automatically when a page is loaded, applying the substitutions of the groups with a matching URL. This way the extension can work as a filter for the pages you want.">
 <!ENTITY replaceUrls "Replace URLs">
-<!ENTITY replaceUrls.p "This option is off by default. It it's on, substitutions are also applied to the URLs in the page (links, image sources, etc.), so it may change the behaviour of the page. Use it under your own responsibility. This has no effect in substitutions with HTML in the input and the output, because then URLs can be modified always.">
+<!ENTITY replaceUrls.p "This option is off by default. If it's on, substitutions are also applied to the URLs in the page (links, image sources, etc.), so it may change the behaviour of the page. Use it under your own responsibility. This has no effect in substitutions with HTML in the input and the output, because then URLs can be modified always.">
 <!ENTITY replaceScripts "Replace scripts">
 <!ENTITY replaceScripts.p "This option is off by default. If it's on, substitutions are also applied to the scripts in the page, so it may change the behaviour of the page. Use it under your own responsibility. For substitutions with HTML in the input and the output this option applies to all the scripts, otherwise only to the scripts in the body.">
 <!ENTITY newGui "New menu and toolbar elements">
