@@ -5,6 +5,7 @@ v0.17.0
 * Removed support to substitution lists in XML.
 * Changed shortcuts because Shift+F8 is for the WebIDE. The new ones are F9 to show the replace bar and Shift+F9 to apply the substitution list (issue 154).
 * Fixed subscription to a local URL for Firefox 35+ (issue 157).
+* Corrected typo in English help file (issue 165).
 * Compatibility with Firefox from 30.0 to 43.0.
 * New locale:
   - ja (by Bruno Lopes)
