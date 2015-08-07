@@ -1,5 +1,5 @@
 <!ENTITY menuReplace.label "استبدل...">
-<!ENTITY menuReplace.accesskey "e">
+<!ENTITY menuReplace.accesskey "ت">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
 <!ENTITY contextMenuFoxReplace.label "Replace with substitution list (FoxReplace)">
@@ -12,16 +12,16 @@
 <!ENTITY autoReplaceOnLoad.accesskey "A">
 <!ENTITY options.label "FoxReplace options...">
 <!ENTITY options.accesskey "o">
-<!ENTITY help.label "Help">
-<!ENTITY help.accesskey "H">
-<!ENTITY replaceBarClose "Close replace bar">
-<!ENTITY replaceBarInputString.label "Replace">
-<!ENTITY replaceBarInputString.accesskey "R">
+<!ENTITY help.label "مساعدة">
+<!ENTITY help.accesskey "م">
+<!ENTITY replaceBarClose "غلق شريط الاستبدال">
+<!ENTITY replaceBarInputString.label "استبدال">
+<!ENTITY replaceBarInputString.accesskey "س">
 <!ENTITY replaceBarOutputString.label "بـ">
 <!ENTITY replaceBarOutputString.accesskey "ب">
 <!ENTITY replaceBarCaseSensitive.label "مطابقة حالة الأحرف">
-<!ENTITY replaceBarCaseSensitive.accesskey "م">
+<!ENTITY replaceBarCaseSensitive.accesskey "ط">
 <!ENTITY replaceBarHtml.label "HTML">
 <!ENTITY replaceBarHtml.accesskey "H">
-<!ENTITY replaceBarReplace.label "Replace">
-<!ENTITY replaceBarReplace.accesskey "e">
+<!ENTITY replaceBarReplace.label "استبدال">
+<!ENTITY replaceBarReplace.accesskey "ت">
