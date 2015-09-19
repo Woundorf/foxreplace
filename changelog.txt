@@ -1,4 +1,4 @@
-v0.17.0
+v0.17.0 (2015-09-19)
 * Asynchronous input/output.
 * Save the substitution list to a file instead of preferences to allow bigger lists (issue 145).
 * Animated showing and hiding of the replace bar.
