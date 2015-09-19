@@ -192,7 +192,8 @@ var foxreplace = {
   showOptions: function() {
     // Based on code from https://developer.mozilla.org/en-US/docs/XUL/School_tutorial/Handling_Preferences#Preference_windows
     if (!this.prefs.optionsWindow) {
-      let instantApply = Application.prefs.get("browser.preferences.instantApply");
+      let preferences = new this.Preferences();
+      let instantApply = preferences.get("browser.preferences.instantApply");
       let features = "chrome,titlebar,toolbar,centerscreen,resizable" + (instantApply.value ? ",dialog=no" : ",modal");
       window.openDialog("chrome://foxreplace/content/options.xul", "", features);
     }
@@ -246,6 +247,7 @@ var foxreplace = {
 Components.utils.import("resource://foxreplace/core.js", foxreplace.core);
 Components.utils.import("resource://foxreplace/Observers.js", foxreplace);
 Components.utils.import("resource://foxreplace/periodicreplace.js");
+Components.utils.import("resource://foxreplace/Preferences.js", foxreplace);
 Components.utils.import("resource://foxreplace/prefs.js", foxreplace);
 Components.utils.import("resource://foxreplace/replace.js", foxreplace);
 Components.utils.import("resource://foxreplace/services.js", foxreplace);
