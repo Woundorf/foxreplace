@@ -12,7 +12,7 @@
                    em:version="0.17.0"
                    em:creator="Marc Ruiz Altisent"
                    em:description="Lets you replace text in web pages. You can define a substitution list and apply it automatically or at your own discretion, or make individual substitutions. You can use this as a filter, or just for fun :)"
-                   em:homepageURL="http://code.google.com/p/foxreplace/"
+                   em:homepageURL="https://github.com/Woundorf/foxreplace"
                    em:iconURL="chrome://foxreplace/content/foxreplace48.png"
                    em:icon64URL="chrome://foxreplace/content/foxreplace64.png"
                    em:optionsURL="chrome://foxreplace/content/options.xul">
