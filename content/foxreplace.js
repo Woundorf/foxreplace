@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2007-2014 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2007-2015 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  * Lutay Sergey (href substitution)
@@ -204,8 +204,7 @@ var foxreplace = {
    * Shows help file in a new tab.
    */
   showHelp: function() {
-    // Add tab, then make active
-    gBrowser.selectedTab = gBrowser.addTab("chrome://foxreplace/content/help.xhtml");
+    this._openAndReuseOneTabPerURL("chrome://foxreplace/content/help.xhtml");
   },
 
   /**
@@ -239,6 +238,55 @@ var foxreplace = {
     }
     else {
       this.prefs.substitutionList.then(function(aList) { foxreplace._loadEnabledGroups(aList); });
+    }
+  },
+
+  /**
+   * Opens aUrl in a new tab, or selects the tab where it is open.
+   * Copied from https://developer.mozilla.org/en-US/Add-ons/Code_snippets/Tabbed_browser#Reusing_tabs.
+   */
+  _openAndReuseOneTabPerURL: function(aUrl) {
+    let wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+    let browserEnumerator = wm.getEnumerator("navigator:browser");
+
+    // Check each browser instance for our URL
+    let found = false;
+
+    while (!found && browserEnumerator.hasMoreElements()) {
+      let browserWin = browserEnumerator.getNext();
+      let tabBrowser = browserWin.gBrowser;
+
+      // Check each tab of this browser instance
+      let numTabs = tabBrowser.browsers.length;
+
+      for (let index = 0; index < numTabs; index++) {
+        let currentBrowser = tabBrowser.getBrowserAtIndex(index);
+
+        if (aUrl == currentBrowser.currentURI.spec) {
+          // The URL is already opened. Select this tab.
+          tabBrowser.selectedTab = tabBrowser.tabContainer.childNodes[index];
+
+          // Focus *this* browser-window
+          browserWin.focus();
+
+          found = true;
+          break;
+        }
+      }
+    }
+
+    // Our URL isn't open. Open it now.
+    if (!found) {
+      let recentWindow = wm.getMostRecentWindow("navigator:browser");
+
+      if (recentWindow) {
+        // Use an existing browser window
+        recentWindow.delayedOpenTab(aUrl, null, null, null, null);
+      }
+      else {
+        // No browser windows are open, so open a new one.
+        window.open(aUrl);
+      }
     }
   }
 
