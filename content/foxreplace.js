@@ -194,7 +194,7 @@ var foxreplace = {
     if (!this.prefs.optionsWindow) {
       let preferences = new this.Preferences();
       let instantApply = preferences.get("browser.preferences.instantApply");
-      let features = "chrome,titlebar,toolbar,centerscreen,resizable" + (instantApply.value ? ",dialog=no" : ",modal");
+      let features = "chrome,titlebar,toolbar,centerscreen,resizable" + (instantApply ? ",dialog=no" : ",modal");
       window.openDialog("chrome://foxreplace/content/options.xul", "", features);
     }
     else this.prefs.optionsWindow.focus();
