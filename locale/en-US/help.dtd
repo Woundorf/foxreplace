@@ -33,7 +33,6 @@
 <!ENTITY replaceScripts "Replace scripts">
 <!ENTITY replaceScripts.p "This option is off by default. If it's on, substitutions are also applied to the scripts in the page, so it may change the behaviour of the page. Use it under your own responsibility. For substitutions with HTML in the input and the output this option applies to all the scripts, otherwise only to the scripts in the body.">
 <!ENTITY newGui "New menu and toolbar elements">
-<!ENTITY newGui.app "Firefox menu">
 <!ENTITY newGui.edit "Edit">
 <!ENTITY newGui.menu.replace "Replace... (F8)">
 <!ENTITY newGui.menu.replace.d "Shows the replace bar.">
