@@ -499,5 +499,12 @@ Cu.import("resource://foxreplace/prefs.js", foxreplaceOptions);
 Cu.import("resource://foxreplace/services.js", foxreplaceOptions);
 Cu.import("resource://foxreplace/subscription.js");
 
-window.addEventListener("load", function() { foxreplaceOptions.onLoad(); }, false);
-window.addEventListener("unload", function() { foxreplaceOptions.onUnload(); }, false);
+window.addEventListener("load", function onLoad() {
+  window.removeEventListener("load", onLoad, false);
+  foxreplaceOptions.onLoad();
+}, false);
+
+window.addEventListener("unload", function onUnload() {
+  window.removeEventListener("unload", onUnload, false);
+  foxreplaceOptions.onUnload();
+}, false);

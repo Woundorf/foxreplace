@@ -67,6 +67,8 @@ var foxreplace = {
     this.Observers.remove(this.prefs.substitutionListChangedKey, this._loadEnabledGroups, this);
     this.Observers.remove(fxrPeriodicReplace.observerKey, this.listReplace, this);
     this.prefs.service.removeObserver("", this);
+
+    gBrowser.removeEventListener("DOMContentLoaded", this.onPageLoad, true);
   },
 
   /**
@@ -301,5 +303,12 @@ Components.utils.import("resource://foxreplace/replace.js", foxreplace);
 Components.utils.import("resource://foxreplace/services.js", foxreplace);
 Components.utils.import("resource://foxreplace/subscription.js");
 
-window.addEventListener("load", function() { foxreplace.onLoad(); }, false);
-window.addEventListener("unload", function() { foxreplace.onUnload(); }, false);
+window.addEventListener("load", function onLoad() {
+  window.removeEventListener("load", onLoad, false);
+  foxreplace.onLoad();
+}, false);
+
+window.addEventListener("unload", function onUnload() {
+  window.removeEventListener("unload", onUnload, false);
+  foxreplace.onUnload();
+}, false);
