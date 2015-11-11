@@ -1,4 +1,5 @@
 * Fixed bug about the options window being always opened as a modal dialog.
+* Fixed bug about the OK and More info buttons not working in Firefox 44 (#169).
 * Updated homepage link.
 * Updated help.
 * If the help tab is already open, it is shown instead of opening a new one.

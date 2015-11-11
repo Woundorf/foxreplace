@@ -26,7 +26,7 @@
 /**
  * Object to manage FoxReplace options.
  */
-let foxreplaceOptions = {
+var foxreplaceOptions = {
 
   core: {},
   
