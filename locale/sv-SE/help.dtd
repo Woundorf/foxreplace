@@ -33,7 +33,6 @@
 <!ENTITY replaceScripts "Replace scripts">
 <!ENTITY replaceScripts.p "This option is off by default. If it's on, substitutions are also applied to the scripts in the page, so it may change the behaviour of the page. Use it under your own responsibility. For substitutions with HTML in the input and the output this option applies to all the scripts, otherwise only to the scripts in the body.">
 <!ENTITY newGui "Nya meny- och verktygsfältselement">
-<!ENTITY newGui.app "Firefox-menyn">
 <!ENTITY newGui.edit "Redigera-menyn">
 <!ENTITY newGui.menu.replace "Ersätt… (Skift+F2)">
 <!ENTITY newGui.menu.replace.d "Visar ersättningsfältet.">

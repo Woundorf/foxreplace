@@ -33,7 +33,6 @@
 <!ENTITY replaceScripts "取代腳本">
 <!ENTITY replaceScripts.p "此選項預設停用。如果啟用此選項，取代將作用於頁面上的腳本；這有可能改變網頁行為，請自負責任。當選擇 HTML 輸入和輸出選項時，將作用於所有腳本；否則只作用於 body 內的腳本。">
 <!ENTITY newGui "新選單和工具列元件">
-<!ENTITY newGui.app "Firefox 選單">
 <!ENTITY newGui.edit "編輯">
 <!ENTITY newGui.menu.replace "取代… (F8)">
 <!ENTITY newGui.menu.replace.d "顯示取代列。">

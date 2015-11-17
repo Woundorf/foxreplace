@@ -10,7 +10,7 @@
 <!ENTITY editButton.label "Edit">
 <!ENTITY editButton.accesskey "E">
 <!ENTITY deleteButton.label "Delete">
-<!ENTITY deleteButton.accesskey "l">
+<!ENTITY deleteButton.accesskey "D">
 <!ENTITY clearButton.label "Clear">
 <!ENTITY clearButton.accesskey "C">
 <!ENTITY moveUpButton.label "Move up">
@@ -32,12 +32,12 @@
 <!ENTITY subscriptionPeriod.label "Period (minutes)">
 <!ENTITY subscriptionPeriod.accesskey "P">
 <!ENTITY autoReplaceOnLoad.label "Auto-replace on page load">
-<!ENTITY autoReplaceOnLoad.accesskey "t">
+<!ENTITY autoReplaceOnLoad.accesskey "u">
 <!ENTITY autoReplacePeriodically.label "Auto-replace every">
 <!ENTITY autoReplacePeriodically.accesskey "t">
 <!ENTITY autoReplacePeriod.label "seconds">
 <!ENTITY autoReplacePeriod.accesskey "n">
-<!ENTITY replaceUrls.label "Replace URLs (links and image sources) (Warning: this will change page behaviour!)">
-<!ENTITY replaceUrls.accesskey "p">
+<!ENTITY replaceUrls.label "Replace URLs (links and image sources) (Warning: this may change page behaviour!)">
+<!ENTITY replaceUrls.accesskey "l">
 <!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">
 <!ENTITY replaceScripts.accesskey "s">

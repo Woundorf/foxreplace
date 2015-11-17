@@ -33,13 +33,12 @@
 <!ENTITY replaceScripts "Replace scripts">
 <!ENTITY replaceScripts.p "This option is off by default. If it's on, substitutions are also applied to the scripts in the page, so it may change the behaviour of the page. Use it under your own responsibility. For substitutions with HTML in the input and the output this option applies to all the scripts, otherwise only to the scripts in the body.">
 <!ENTITY newGui "Yeni menü ve araç çubuğu öğeleri">
-<!ENTITY newGui.app "Firefox menu">
 <!ENTITY newGui.edit "Düzenle">
-<!ENTITY newGui.menu.replace "Replace... (F8)">
+<!ENTITY newGui.menu.replace "Replace... (F9)">
 <!ENTITY newGui.menu.replace.d "Shows the replace bar.">
 <!ENTITY newGui.tools "Araçlar">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (Shift+F8)">
+<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (Shift+F9)">
 <!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
 <!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
 <!ENTITY newGui.menu.autoReplace.d "Toggles this option.">

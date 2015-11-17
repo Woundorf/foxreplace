@@ -2,13 +2,13 @@
 <!ENTITY menuReplace.accesskey "e">
 <!ENTITY menuToolsFoxReplace.label "FoxReplace">
 <!ENTITY menuToolsFoxReplace.accesskey "F">
-<!ENTITY contextMenuFoxReplace.label "Reemplazar con lista de sustitucion(FoxReplace)">
+<!ENTITY contextMenuFoxReplace.label "Reemplazar con lista de sustitución (FoxReplace)">
 <!ENTITY contextMenuFoxReplace.accesskey "l">
 <!ENTITY toolbarButton.label "FoxReplace">
-<!ENTITY toolbarButton.tooltip "Reemplazar con lista de sustitucion">
+<!ENTITY toolbarButton.tooltip "Reemplazar con lista de sustitución">
 <!ENTITY listReplace.label "Reemplazar con lista de sustitución">
 <!ENTITY listReplace.accesskey "R">
-<!ENTITY autoReplaceOnLoad.label "Auto-reemplazar en la pagina cargada">
+<!ENTITY autoReplaceOnLoad.label "Auto-reemplazar cuando cargue la página">
 <!ENTITY autoReplaceOnLoad.accesskey "A">
 <!ENTITY options.label "Opciones de FoxReplace">
 <!ENTITY options.accesskey "o">
@@ -19,7 +19,7 @@
 <!ENTITY replaceBarInputString.accesskey "R">
 <!ENTITY replaceBarOutputString.label "con">
 <!ENTITY replaceBarOutputString.accesskey "w">
-<!ENTITY replaceBarCaseSensitive.label "Corresponder a mayusculas minusculas">
+<!ENTITY replaceBarCaseSensitive.label "Corresponder a mayúsculas minúsculas">
 <!ENTITY replaceBarCaseSensitive.accesskey "M">
 <!ENTITY replaceBarHtml.label "HTML">
 <!ENTITY replaceBarHtml.accesskey "H">

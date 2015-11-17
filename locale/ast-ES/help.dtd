@@ -20,7 +20,7 @@
 <!ENTITY substitution.table.4.1 "un númberu enteru decimal ente 1 y 99 (incluyíos), inxerta la">
 <!ENTITY substitution.table.4.2 "-ésima subcadena guetada (siguiendo col exemplu anterior, col testu &quot;Lorem ipsum&quot;, &quot;$1&quot; sedría &quot;Lorem&quot;)..">
 <!ENTITY substitutionList "Llista de sustituciones">
-<!ENTITY substitutionList.p "FoxReplace caltién una llista de sustitución que pues definir y modificar en cualesquier momentu dende la ventana d'opciones FoxReplace. Pue aplicase la llista de sustituciones en cualquier momentu primiendo Mayús+F8, o calcando nel botón de la barra de ferramientas o activando una opción nel. Cuando lo faigas, les sustituciones de la llista van aplicase nel orde nel qu'apaezan. Pues aplicar la llista de sustituciones tantes vegades como quieras na mesma páxina. Les sustituciones fáense sobre'l conteníu actual de la páxina, ye dicir, si s'aplica la llista de sustituciones por segunda vegada, ye sobre'l resultáu de la primera. Nesta llista nun hai sustituciones direutes sinón grupos de sustitución, au s'asocia una llista de direiciones (URL) con una llista de sustituciones que s'apliquen a páxines cuya direición concasa con una de les URL na llista.">
+<!ENTITY substitutionList.p "FoxReplace caltién una llista de sustitución que pues definir y modificar en cualesquier momentu dende la ventana d'opciones FoxReplace. Pue aplicase la llista de sustituciones en cualquier momentu primiendo Mayús+F9, o calcando nel botón de la barra de ferramientas o activando una opción nel. Cuando lo faigas, les sustituciones de la llista van aplicase nel orde nel qu'apaezan. Pues aplicar la llista de sustituciones tantes vegades como quieras na mesma páxina. Les sustituciones fáense sobre'l conteníu actual de la páxina, ye dicir, si s'aplica la llista de sustituciones por segunda vegada, ye sobre'l resultáu de la primera. Nesta llista nun hai sustituciones direutes sinón grupos de sustitución, au s'asocia una llista de direiciones (URL) con una llista de sustituciones que s'apliquen a páxines cuya direición concasa con una de les URL na llista.">
 <!ENTITY substitutionGroup "Grupu de sustituciones">
 <!ENTITY substitutionGroup.p0 "Ta ensamáu por una llista de direiciones URL y una llista de sustitución. Les sustituciones aplíquense nel orde nel qu'apaecen y tien d'haber una como mínimo. La llista d'URLs sirve pa definir a qué páxines s'apliquen les susstituciones. Si la llista ta balera, les sustituciones aplíquense a cualesquier páxina. Puen amestarse URLs entós les sustituciones aplíquense namái si la direición de la páxina concasa con una de les URLs. Finalmente, tamién puen haber URLs d'esclusión que tienen l'efeutu contrariu, esto ye, faen que nun s'apliquen les sustituciones si la direición de la páxina concasa con una d'estes. Poro, aplíquense les sustituciones si la direición de la páxina nun concasa con denguna URL d'esclusión y si concasa con una de les URLs normales o nun la hai. Considérase que un URL d'una páxina concasa un URL del grupu si l'URL del grupu ye una parte de la URL de la páxina.">
 <!ENTITY substitutionGroup.p1 "Les direiciones URL d'esclusión son les qu'entamen con un guión (&quot;-&quot;), y amúesense en bermeyo; el restu son URLs normales. Pues facete sirvir de caráuteres especiales, como por exemplu, &quot;*&quot; col envís de facer concasar con 0 o más caráuteres cualesquiera y &quot;|&quot; pa que concase col aniciu o'l final de la URL. Si quies definir una URL qu'entame con un guión (por exemplu &quot;-abc&quot;) y nun seya d'esclusión, pues facete sirvir del mou equivalente &quot;|*-abc&quot;.">
@@ -33,13 +33,12 @@
 <!ENTITY replaceScripts "Trocar scripts">
 <!ENTITY replaceScripts.p "Esta opcion ta desactivada por defeutu. Si ta activada, les sustituciones tamién s'apliquen a la páxina de scripts, y pue camudar el comportamientu de la páxina. Úsala baxo la to propia responsabilidá. Pa les sustituciones con HTML a la entrada y a la salida, afeuta a tolos scripts, del otru mou namái a les del body.">
 <!ENTITY newGui "Elementos nuevos del menú y de la barra de ferramientes">
-<!ENTITY newGui.app "Menu Firefox">
 <!ENTITY newGui.edit "Editar">
-<!ENTITY newGui.menu.replace "Trocar... (F8)">
+<!ENTITY newGui.menu.replace "Trocar... (F9)">
 <!ENTITY newGui.menu.replace.d "Amosar la barra de troquéu">
 <!ENTITY newGui.tools "Ferramientes">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Trocar cola llista de sustitucion (Mayús+F8)">
+<!ENTITY newGui.menu.replaceWithList "Trocar cola llista de sustitucion (Mayús+F9)">
 <!ENTITY newGui.menu.replaceWithList.d "Aplica la llista de sustituciones actual.">
 <!ENTITY newGui.menu.autoReplace "Auto-trocar al cargar la páxina">
 <!ENTITY newGui.menu.autoReplace.d "Activa/desactiva esta opción.">
@@ -51,7 +50,7 @@
 <!ENTITY newGui.toolbarButton.0 "Primiéndolu, aplícase la llista de sustituciones actual.">
 <!ENTITY newGui.toolbarButton.1 "Tien un menú al llau como'l FoxReplace d'arriba.">
 <!ENTITY newGui.contextMenu "Menu contestual">
-<!ENTITY newGui.contextMenu.replace "Trocar cola llista de sustitucion (FoxReplace) (Mayús+F8)">
+<!ENTITY newGui.contextMenu.replace "Trocar cola llista de sustitucion (FoxReplace) (Mayús+F9)">
 <!ENTITY newGui.contextMenu.replace.d "Aplícase la llista de sustituciones actual.">
 <!ENTITY newGui.replaceBar "Barra de sustituciones">
 <!ENTITY newGui.replaceBar.0 "Apaez baxo la barra de gueta.">

@@ -33,7 +33,6 @@
 <!ENTITY replaceScripts "Substituir scripts">
 <!ENTITY replaceScripts.p "Esta opção está desativada por padrão. Se ativada, as substituições também se aplicam aos scripts nas páginas, podendo mudar o comportamento da mesma. Use sob sua própria responsabilidade. Para substituições com HTML na entrada e saída essa opção se aplica a todos os scripts; do contrário, apenas para os scripts no corpo da página.">
 <!ENTITY newGui "Novos elementos do menu e da barra de ferramentas">
-<!ENTITY newGui.app "Menu do Firefox">
 <!ENTITY newGui.edit "Editar">
 <!ENTITY newGui.menu.replace "Substituir... (F8)">
 <!ENTITY newGui.menu.replace.d "Mostra a barra de substituição.">

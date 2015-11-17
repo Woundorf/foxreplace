@@ -33,9 +33,9 @@
 <!ENTITY subscriptionPeriod.accesskey "n">
 <!ENTITY autoReplaceOnLoad.label "Automatisch vervangen bij laden pagina">
 <!ENTITY autoReplaceOnLoad.accesskey "p">
-<!ENTITY autoReplacePeriodically.label "Auto-replace every">
-<!ENTITY autoReplacePeriodically.accesskey "t">
-<!ENTITY autoReplacePeriod.label "seconds">
+<!ENTITY autoReplacePeriodically.label "Elke">
+<!ENTITY autoReplacePeriodically.accesskey "k">
+<!ENTITY autoReplacePeriod.label "seconden automatisch vervangen">
 <!ENTITY autoReplacePeriod.accesskey "n">
 <!ENTITY replaceUrls.label "URL’s vervangen (koppelingen en afbeeldingsbronnen) (Waarschuwing: hierdoor kan het gedrag van de pagina wijzigen)">
 <!ENTITY replaceUrls.accesskey "a">

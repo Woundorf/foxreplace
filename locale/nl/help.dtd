@@ -8,8 +8,8 @@
 <!ENTITY substitution.inputString.wholeWords "Hele woorden: wordt geïnterpreteerd als één of meerdere woorden. Zo komt bijvoorbeeld ‘actief’ niet overeen met ‘interactief’ (wat wel het geval zou zijn als het normale tekst was).">
 <!ENTITY substitution.inputString.regExp.0 "Reguliere expressie: wordt geïnterpreteerd als een">
 <!ENTITY regExpLink "https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Regular_Expressions">
-<!ENTITY substitution.inputString.regExp.1 "reguliere expressie">
-<!ENTITY substitution.inputString.regExp.2 ". Indien ongeldig wordt een foutmelding weergegeven.">
+<!ENTITY substitution.inputString.regExp.1 "JavaScript-reguliere expressie">
+<!ENTITY substitution.inputString.regExp.2 "in de opzet van JavaScript. Indien ongeldig wordt een foutmelding weergegeven.">
 <!ENTITY substitution.outputString "Uitvoertekst: het tekstgedeelte dat de invoertekst zal vervangen. Deze kan de volgende speciale patronen bevatten:">
 <!ENTITY substitution.table.summary "Speciale patronen voor de uitvoertekst">
 <!ENTITY substitution.table.0 "Voegt een ‘$’ in.">
@@ -33,7 +33,6 @@
 <!ENTITY replaceScripts "Scripts vervangen">
 <!ENTITY replaceScripts.p "Deze optie staat standaard uit. Indien ingeschakeld wordt vervangingen ook toegepast op de scripts op de pagina, en dit kan het gedrag van de pagina wijzigen. Gebruik dit op eigen verantwoording. Voor vervangingen door HTML in de invoer en de uitvoer is deze optie van toepassing op alle scripts, anders alleen op de scripts in het <body>-gedeelte.">
 <!ENTITY newGui "Nieuwe menu- en werkbalkelementen">
-<!ENTITY newGui.app "Firefox-menu">
 <!ENTITY newGui.edit "Bewerken">
 <!ENTITY newGui.menu.replace "Vervangen… (Shift+F2)">
 <!ENTITY newGui.menu.replace.d "Geeft de vervangingsbalk weer.">
@@ -51,8 +50,8 @@
 <!ENTITY newGui.toolbarButton.0 "Door hierop te drukken wordt de huidige vervangingslijst toegepast.">
 <!ENTITY newGui.toolbarButton.1 "Het bevat een zijmenu zoals het FoxReplace-menu hierboven.">
 <!ENTITY newGui.contextMenu "Contextmenu">
-<!ENTITY newGui.contextMenu.replace "Vervangen met vervangingslijst (FoxReplace) (F2)">
+<!ENTITY newGui.contextMenu.replace "Vervangen met vervangingslijst (FoxReplace) (Shift+F9)">
 <!ENTITY newGui.contextMenu.replace.d "Past de huidige vervangingslijst toe.">
-<!ENTITY newGui.replaceBar "Vervanginsbalk">
+<!ENTITY newGui.replaceBar "Vervangingsbalk">
 <!ENTITY newGui.replaceBar.0 "Verschijnt onder de zoekbalk.">
 <!ENTITY newGui.replaceBar.1 "Laat u een vervanging definiëren en direct toepassen.">

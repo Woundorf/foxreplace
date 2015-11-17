@@ -33,7 +33,6 @@
 <!ENTITY replaceScripts "替换脚本">
 <!ENTITY replaceScripts.p "此选项默认关闭。如果开启，替代也会应用到页面中的脚本，因此它可能改变页面的行为。请明确了解后再使用此选项。对于输入和输出中使用 HTML 的替代选项，此选项将应用到所有脚本，否则只应用到 body 内的脚本。">
 <!ENTITY newGui "创建菜单和工具栏组件">
-<!ENTITY newGui.app "Firefox 菜单">
 <!ENTITY newGui.edit "编辑">
 <!ENTITY newGui.menu.replace "替换... (F8)">
 <!ENTITY newGui.menu.replace.d "显示替换栏。">

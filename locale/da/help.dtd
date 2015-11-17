@@ -7,7 +7,7 @@
 <!ENTITY substitution.inputString.text "Tekst: fortolkes som en streng af tegn uden nogen særlige hensyn.">
 <!ENTITY substitution.inputString.wholeWords "Hele ord: Fortolkes som ét eller flere hele ord. For eksempel ville ordet &quot;aktiv&quot; ikke matche ordet &quot;inaktiv&quot; (hvilket er tilfældet hvis det var almindelig tekst).">
 <!ENTITY substitution.inputString.regExp.0 "Regulært udtryk: Fortolkes som et">
-<!ENTITY regExpLink "http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Global_Objects:RegExp#Special_characters_in_regular_expressions">
+<!ENTITY regExpLink "https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/RegExp#Special_characters_in_regular_expressions">
 <!ENTITY substitution.inputString.regExp.1 "regulært udtryk">
 <!ENTITY substitution.inputString.regExp.2 ". Hvis det ikke er gyldigt, vil der blive vist en fejlmeddelelse.">
 <!ENTITY substitution.outputString "Output-streng: tekststrengen der skal erstatte input-teksten. Den kan have følgende særlige mønstre:">
@@ -20,7 +20,7 @@
 <!ENTITY substitution.table.4.1 "et decimal-heltal mellem 1 og 99 (inklusive), indsætter den">
 <!ENTITY substitution.table.4.2 ". fundne understreng.">
 <!ENTITY substitutionList "Udskiftningsliste">
-<!ENTITY substitutionList.p "FoxReplace opbevarer en udskiftningsliste som du kan definere og redigere til hver en tid fra FoxReplace indstillingsvinduet. Du kan anvende udskiftningslisten når du vil ved at trykke F2-tasten eller ved at bruge værktøjslinje-knappen eller aktivere menupunktet. Når dette gøres, anvendes udskiftningerne i den rækkefølge hvori de er angivet i listen. Du kan anvende udskiftningslisten så mange gange du ønsker på samme side. Udskiftninger foretages på det nuværende indhold af siden, så hvis du udfører udskiftning for anden gang vil denne blive anvendt på resultatet af den første. I denne udskiftningsliste er der ikke direkte udskiftninger, men udskiftningsgrupper, hvor en liste med adresser (URLer) er associeret med en liste af udskiftninger som anvendes på sider hvis adresse matcher en af URLerne i listen.">
+<!ENTITY substitutionList.p "FoxReplace opbevarer en udskiftningsliste som du kan definere og redigere til hver en tid fra FoxReplace indstillingsvinduet. Du kan anvende udskiftningslisten når du vil ved at trykke Shift+F9-tasten eller ved at bruge værktøjslinje-knappen eller aktivere menupunktet. Når dette gøres, anvendes udskiftningerne i den rækkefølge hvori de er angivet i listen. Du kan anvende udskiftningslisten så mange gange du ønsker på samme side. Udskiftninger foretages på det nuværende indhold af siden, så hvis du udfører udskiftning for anden gang vil denne blive anvendt på resultatet af den første. I denne udskiftningsliste er der ikke direkte udskiftninger, men udskiftningsgrupper, hvor en liste med adresser (URLer) er associeret med en liste af udskiftninger som anvendes på sider hvis adresse matcher en af URLerne i listen.">
 <!ENTITY substitutionGroup "Udskiftningsgruppe">
 <!ENTITY substitutionGroup.p0 "Den består af en URL-liste og en udskiftningsliste. Udskiftninger anvendes i den rækkefølge de optræder i listen, og der skal være mindst en. Med URL-listen kan du definere hvilke sider udskiftningerne anvendes på. Hvis listen er tom, anvendes udskiftningerne på alle sider. Du kan tilføje URLer, og udskiftningerne vil så kun blive anvendt hvis sideadressen matcher en af URLerne. Endelig kan du også tilføje eksklusions-URLer som har den modsatte effekt, at udskiftninger ikke anvendes hvis sideadressen matcher en af disse. Så hvis URL-listen ikke er tom, anvendes udskiftningerne hvis sideadressen ikke mather en af eksklusions-URLerne og matcher en af de almindelige URLer. En sides URL anses for at matche en URL for gruppen hvis gruppens URL er en del af URLen for siden.">
 <!ENTITY substitutionGroup.p1 "Eksklusions-URLer er dem der starter med en bindestreg (&quot;-&quot;), og vises med rødt; resten er normale URLer. Du kan bruge specialkarakterer &quot;*&quot; for at matche ethvert 0 eller flere tegn og &quot;|&quot; for at matche begyndelsen eller slutningen på en URL. Hvis du ønsker at definere en URL der starter med en bindestreg (f.eks. &quot;-abc&quot;) og det ikke skal være en eksklusions-URL, kan du anvende den lignende form &quot;|*-abc&quot;.">
@@ -33,13 +33,12 @@
 <!ENTITY replaceScripts "Replace scripts">
 <!ENTITY replaceScripts.p "This option is off by default. If it's on, substitutions are also applied to the scripts in the page, so it may change the behaviour of the page. Use it under your own responsibility. For substitutions with HTML in the input and the output this option applies to all the scripts, otherwise only to the scripts in the body.">
 <!ENTITY newGui "Nye menu- og værktøjslinjeelementer">
-<!ENTITY newGui.app "Firefox menu">
 <!ENTITY newGui.edit "Rediger">
-<!ENTITY newGui.menu.replace "Replace... (F8)">
+<!ENTITY newGui.menu.replace "Replace... (F9)">
 <!ENTITY newGui.menu.replace.d "Shows the replace bar.">
 <!ENTITY newGui.tools "Funktioner">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (Shift+F8)">
+<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (Shift+F9)">
 <!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
 <!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
 <!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
@@ -51,7 +50,7 @@
 <!ENTITY newGui.toolbarButton.0 "Klik på denne anvender nuværende udskiftningsliste.">
 <!ENTITY newGui.toolbarButton.1 "Den har en menu i siden lige som FoxReplace herover.">
 <!ENTITY newGui.contextMenu "Kontekstmenu">
-<!ENTITY newGui.contextMenu.replace "Erstat med udskiftningsliste (FoxReplace (F2)">
+<!ENTITY newGui.contextMenu.replace "Erstat med udskiftningsliste (FoxReplace) (Shift+F9)">
 <!ENTITY newGui.contextMenu.replace.d "Anvender nuværende udskiftningsliste.">
 <!ENTITY newGui.replaceBar "Erstat-linje">
 <!ENTITY newGui.replaceBar.0 "Vises under find-linjen.">
