@@ -10,7 +10,7 @@
  * The Original Code is FoxReplace.
  *
  * The Initial Developer of the Original Code is Marc Ruiz Altisent.
- * Portions created by the Initial Developer are Copyright (C) 2014 the Initial Developer. All Rights Reserved.
+ * Portions created by the Initial Developer are Copyright (C) 2016 the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  * Lutay Sergey (href substitution)
@@ -85,14 +85,17 @@ function replaceText(aDocument, aGroup) {
   for (var i = 0; i < nTextNodes; i++) {
     var textNode = textNodes.snapshotItem(i);
     let oldTextContent = textNode.textContent;
-    textNode.textContent = aGroup.replace(oldTextContent);
+    let newTextContent = aGroup.replace(oldTextContent);
 
-    // Fire change event for textareas with default value (issue 49)
-    if (textNode.parentNode.localName == "textarea" && textNode.parentNode.value == textNode.parentNode.defaultValue &&
-        textNode.textContent != oldTextContent) {
-      let event = aDocument.createEvent("HTMLEvents");
-      event.initEvent("change", true, false);
-      textNode.parentNode.dispatchEvent(event);
+    if (oldTextContent != newTextContent) {
+      textNode.textContent = newTextContent;
+
+      // Fire change event for textareas with default value (issue 49)
+      if (textNode.parentNode.localName == "textarea" && textNode.parentNode.value == textNode.parentNode.defaultValue) {
+        let event = aDocument.createEvent("HTMLEvents");
+        event.initEvent("change", true, false);
+        textNode.parentNode.dispatchEvent(event);
+      }
     }
   }
 
@@ -117,18 +120,22 @@ function replaceText(aDocument, aGroup) {
   var nValueNodes = valueNodes.snapshotLength;
   for (var i = 0; i < nValueNodes; i++) {
     var valueNode = valueNodes.snapshotItem(i);
-    let oldValue = valueNode.value;
 
     // Special treatment for textareas that still have their default value (issue 63)
     if (valueNode.type == "textarea" && oldValue == valueNode.defaultValue) continue;
 
-    valueNode.value = aGroup.replace(oldValue);
+    let oldValue = valueNode.value;
+    let newValue = aGroup.replace(oldValue);
 
-    // Fire change event for inputs and textareas (issue 49)
-    if ((valueNode.localName == "input" || valueNode.localName == "textarea") && valueNode.value != oldValue) {
-      let event = aDocument.createEvent("HTMLEvents");
-      event.initEvent("change", true, false);
-      valueNode.dispatchEvent(event);
+    if (oldValue != newValue) {
+      valueNode.value = newValue;
+
+      // Fire change event for inputs and textareas (issue 49)
+      if (valueNode.localName == "input" || valueNode.localName == "textarea") {
+        let event = aDocument.createEvent("HTMLEvents");
+        event.initEvent("change", true, false);
+        valueNode.dispatchEvent(event);
+      }
     }
   }
 
@@ -202,18 +209,23 @@ function replaceTextWithHtml(aDocument, aGroup) {
  */
 function replaceHtml(aDocument, aGroup) {
   var html = aDocument.evaluate("/html", aDocument, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
-  html.singleNodeValue.innerHTML = aGroup.replace(html.singleNodeValue.innerHTML);
+  let oldHtml = html.singleNodeValue.innerHTML;
+  let newHtml = aGroup.replace(html.singleNodeValue.innerHTML);
 
-  // Replace scripts
-  if (prefs.replaceScripts) {
-    let scriptNodesXpath = "/html//script";
-    let scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-    let nScriptNodes = scriptNodes.snapshotLength;
-    for (let i = 0; i < nScriptNodes; i++) {
-      let scriptNode = scriptNodes.snapshotItem(i);
-      replaceScript(aDocument, scriptNode, scriptNode.text);
-      // scriptNode.text is already the replaced code, but scriptNode still executes the old code, so a new script node has to be created for the change to
-      // really work
+  if (oldHtml != newHtml) {
+    html.singleNodeValue.innerHTML = newHtml;
+
+    // Replace scripts
+    if (prefs.replaceScripts) {
+      let scriptNodesXpath = "/html//script";
+      let scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+      let nScriptNodes = scriptNodes.snapshotLength;
+      for (let i = 0; i < nScriptNodes; i++) {
+        let scriptNode = scriptNodes.snapshotItem(i);
+        replaceScript(aDocument, scriptNode, scriptNode.text);
+        // scriptNode.text is already the replaced code, but scriptNode still executes the old code, so a new script node has to be created for the change to
+        // really work
+      }
     }
   }
 }

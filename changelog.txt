@@ -1,3 +1,6 @@
+* Fix bug about an innocuous substitution changing the cursor position in some textboxes (#148).
+* Performance improvement (#126).
+
 v0.17.1 (2015-11-17)
 * Fixed bug about the options window being always opened as a modal dialog.
 * Fixed bug about the OK and More info buttons not working in Firefox 44 (#169).
