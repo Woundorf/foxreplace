@@ -1,6 +1,7 @@
 * Fix bug about an innocuous substitution changing the cursor position in some textboxes (#148).
 * Fix bugs related to changes in Firefox 49 (#179, #181).
 * Performance improvement (#126).
+* Compatibility with Firefox up to 52.
 
 v0.17.1 (2015-11-17)
 * Fixed bug about the options window being always opened as a modal dialog.
