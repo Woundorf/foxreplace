@@ -45,11 +45,19 @@ function Substitution(aInput, aOutput, aCaseSensitive, aInputType) {
   if (this.inputType < this.INPUT_TEXT || this.inputType > this.INPUT_REG_EXP) this.inputType = this.INPUT_TEXT;
 
   switch (this.inputType) {
+    case this.INPUT_TEXT:
+      {
+        let unescapedInput = fxrUnescape(aInput);
+        this._regExp = new XRegExp(fxrStringToUnicode(unescapedInput), aCaseSensitive ? "g" : "gi");
+      }
+      break;
     case this.INPUT_WHOLE_WORDS:
-      var unescapedInput = fxrUnescape(aInput);
-      var suffix = wordEndRegExpSource(unescapedInput.charAt(unescapedInput.length - 1));
-      this._regExp = new XRegExp(fxrStringToUnicode(unescapedInput) + suffix, aCaseSensitive ? "g" : "gi");
-      this._firstCharCategory = charCategory(unescapedInput.charAt(0));
+      {
+        let unescapedInput = fxrUnescape(aInput);
+        var suffix = wordEndRegExpSource(unescapedInput.charAt(unescapedInput.length - 1));
+        this._regExp = new XRegExp(fxrStringToUnicode(unescapedInput) + suffix, aCaseSensitive ? "g" : "gi");
+        this._firstCharCategory = charCategory(unescapedInput.charAt(0));
+      }
       break;
     case this.INPUT_REG_EXP:
       this._regExp = new RegExp(aInput, aCaseSensitive ? "g" : "gi");
@@ -82,7 +90,7 @@ Substitution.prototype = {
 
     switch (this.inputType) {
       case this.INPUT_TEXT:
-        return aString.replace(fxrUnescape(this.input), fxrUnescape(this.output), this.caseSensitive ? "g" : "gi");
+        return aString.replace(this._regExp, fxrUnescape(this.output));
       case this.INPUT_WHOLE_WORDS:
         // necessary according to http://stackoverflow.com/questions/4950463/regex-in-javascript-fails-every-other-time-with-identical-input
         this._regExp.lastIndex = 0;
