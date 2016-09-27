@@ -1,6 +1,6 @@
-<!ENTITY dialog.title "Append or overwrite?">
-<!ENTITY append.label "Append">
+<!ENTITY dialog.title "Anhängeno der Überschreiben?">
+<!ENTITY append.label "Anhängen">
 <!ENTITY append.accesskey "A">
-<!ENTITY overwrite.label "Overwrite">
+<!ENTITY overwrite.label "Überschreiben">
 <!ENTITY overwrite.accesskey "O">
 <!ENTITY question "Do you want to append substitutions to the list or overwrite it?">

@@ -10,7 +10,7 @@
 <!ENTITY listReplace.accesskey "З">
 <!ENTITY autoReplaceOnLoad.label "Аутоматски замени приликом учитавања странице">
 <!ENTITY autoReplaceOnLoad.accesskey "А">
-<!ENTITY options.label "FoxReplace -опције...">
+<!ENTITY options.label "FoxReplace - опције...">
 <!ENTITY options.accesskey "О">
 <!ENTITY help.label "Помоћ">
 <!ENTITY help.accesskey "П">

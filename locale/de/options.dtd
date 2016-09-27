@@ -1,43 +1,43 @@
-<!ENTITY prefwindow.title "FoxReplace options">
+<!ENTITY prefwindow.title "FoxReplace Optionen">
 <!ENTITY description "Enter the substitution list. The list is composed of substitution groups, where the substitutions of each group are applied if any of the group URLs matches the address of the loaded page. If the group has no URLs its substitutions are applied to any page. Groups are checked in the order they appear.">
-<!ENTITY enabledHeader "Enable">
+<!ENTITY enabledHeader "Aktivieren">
 <!ENTITY nameHeader "Name">
 <!ENTITY urlHeader "URL">
-<!ENTITY inputStringHeader "Replace">
-<!ENTITY outputStringHeader "With">
-<!ENTITY addButton.label "Add">
+<!ENTITY inputStringHeader "Ersetzen">
+<!ENTITY outputStringHeader "Mit">
+<!ENTITY addButton.label "Hinzufügen">
 <!ENTITY addButton.accesskey "A">
-<!ENTITY editButton.label "Edit">
+<!ENTITY editButton.label "Editieren">
 <!ENTITY editButton.accesskey "E">
-<!ENTITY deleteButton.label "Delete">
+<!ENTITY deleteButton.label "Entfernen">
 <!ENTITY deleteButton.accesskey "D">
-<!ENTITY clearButton.label "Clear">
+<!ENTITY clearButton.label "Leeren">
 <!ENTITY clearButton.accesskey "C">
-<!ENTITY moveUpButton.label "Move up">
+<!ENTITY moveUpButton.label "Nach oben">
 <!ENTITY moveUpButton.accesskey "M">
-<!ENTITY moveDownButton.label "Move down">
+<!ENTITY moveDownButton.label "Nach unten">
 <!ENTITY moveDownButton.accesskey "v">
-<!ENTITY importButton.label "Import">
+<!ENTITY importButton.label "Importieren">
 <!ENTITY importButton.accesskey "I">
-<!ENTITY importFromUrlButton.label "Import from URL">
+<!ENTITY importFromUrlButton.label "Import von URL">
 <!ENTITY importFromUrlButton.accesskey "o">
-<!ENTITY exportButton.label "Export">
+<!ENTITY exportButton.label "Exportieren">
 <!ENTITY exportButton.accesskey "x">
-<!ENTITY subscriptionGroupBoxCaption "Periodically update from URL">
-<!ENTITY subscriptionEnableCheckBox.label "Enable">
+<!ENTITY subscriptionGroupBoxCaption "Periodische Updates über URL">
+<!ENTITY subscriptionEnableCheckBox.label "Aktivieren">
 <!ENTITY subscriptionEnableCheckBox.accesskey "b">
 <!ENTITY subscriptionStatus.label "Status:">
 <!ENTITY subscriptionUrl.label "URL">
 <!ENTITY subscriptionUrl.accesskey "R">
-<!ENTITY subscriptionPeriod.label "Period (minutes)">
+<!ENTITY subscriptionPeriod.label "Intervall (Minuten)">
 <!ENTITY subscriptionPeriod.accesskey "P">
-<!ENTITY autoReplaceOnLoad.label "Auto-replace on page load">
+<!ENTITY autoReplaceOnLoad.label "Automatisch ersetzen bei Seitenaufruf">
 <!ENTITY autoReplaceOnLoad.accesskey "u">
-<!ENTITY autoReplacePeriodically.label "Auto-replace every">
+<!ENTITY autoReplacePeriodically.label "Automatisch ersetzen alle">
 <!ENTITY autoReplacePeriodically.accesskey "t">
-<!ENTITY autoReplacePeriod.label "seconds">
+<!ENTITY autoReplacePeriod.label "Sekunden">
 <!ENTITY autoReplacePeriod.accesskey "n">
-<!ENTITY replaceUrls.label "Replace URLs (links and image sources) (Warning: this may change page behaviour!)">
-<!ENTITY replaceUrls.accesskey "l">
-<!ENTITY replaceScripts.label "Replace scripts (Warning: this may change page behaviour!) (experimental)">
+<!ENTITY replaceUrls.label "URLs ersetzen (Links und Bildquellen) (Achtung: Kann das Verhalten der Seite beeinflussen!)">
+<!ENTITY replaceUrls.accesskey "I">
+<!ENTITY replaceScripts.label "Skripte ersetzen (Achtung: Kann das Verhalten der Seite beeinflussen!) (Experimentell)">
 <!ENTITY replaceScripts.accesskey "s">

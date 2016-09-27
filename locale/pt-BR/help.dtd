@@ -7,7 +7,7 @@
 <!ENTITY substitution.inputString.text "Texto: é interpretado como uma série de caracteres sem quaisquer particularidades.">
 <!ENTITY substitution.inputString.wholeWords "Palavra inteira: é interpretado como uma ou mais palavras inteiras. Por exemplo, &quot;ativo&quot; não corresponderia &quot;interativo&quot; (corresponderia se fosse um texto normal).">
 <!ENTITY substitution.inputString.regExp.0 "Expressão regular (RegExp): é interpretado como uma">
-<!ENTITY regExpLink "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#character-classes">
+<!ENTITY regExpLink "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/RegExp#character-classes">
 <!ENTITY substitution.inputString.regExp.1 "expressão regular de JavaScript">
 <!ENTITY substitution.inputString.regExp.2 ", que usa sua sintaxe. Se não for válido, um erro de sintaxe será exibido.">
 <!ENTITY substitution.outputString "String de saída: o texto que substituirá a string de entrada. Pode ter os seguintes padrões especiais:">
