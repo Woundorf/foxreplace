@@ -1,3 +1,6 @@
+v0.17.3 (2016-09-29)
+* Fixed bug introduced in the previous version that manifested itself with textareas with default values (#183).
+
 v0.17.2 (2016-09-27)
 * Fixed bug about an innocuous substitution changing the cursor position in some textboxes (#148).
 * Fixed bugs related to changes in Firefox 49 (#179, #181).

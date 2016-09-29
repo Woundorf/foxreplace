@@ -122,7 +122,7 @@ function replaceText(aDocument, aGroup) {
     var valueNode = valueNodes.snapshotItem(i);
 
     // Special treatment for textareas that still have their default value (issue 63)
-    if (valueNode.type == "textarea" && oldValue == valueNode.defaultValue) continue;
+    if (valueNode.type == "textarea" && valueNode.value == valueNode.defaultValue) continue;
 
     let oldValue = valueNode.value;
     let newValue = aGroup.replace(oldValue);
