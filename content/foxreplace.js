@@ -284,14 +284,14 @@ var foxreplace = {
 
 };
 
-Components.utils.import("resource://foxreplace/core.js", foxreplace.core);
-Components.utils.import("resource://foxreplace/Observers.js", foxreplace);
-Components.utils.import("resource://foxreplace/periodicreplace.js");
-Components.utils.import("resource://foxreplace/Preferences.js", foxreplace);
-Components.utils.import("resource://foxreplace/prefs.js", foxreplace);
-Components.utils.import("resource://foxreplace/replace.js", foxreplace);
-Components.utils.import("resource://foxreplace/services.js", foxreplace);
-Components.utils.import("resource://foxreplace/subscription.js");
+Components.utils.import("chrome://foxreplace/content/core.js", foxreplace.core);
+Components.utils.import("chrome://foxreplace/content/Observers.js", foxreplace);
+Components.utils.import("chrome://foxreplace/content/periodicreplace.js");
+Components.utils.import("chrome://foxreplace/content/Preferences.js", foxreplace);
+Components.utils.import("chrome://foxreplace/content/prefs.js", foxreplace);
+Components.utils.import("chrome://foxreplace/content/replace.js", foxreplace);
+Components.utils.import("chrome://foxreplace/content/services.js", foxreplace);
+Components.utils.import("chrome://foxreplace/content/subscription.js");
 
 window.addEventListener("load", function onLoad() {
   window.removeEventListener("load", onLoad, false);

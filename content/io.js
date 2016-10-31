@@ -18,8 +18,8 @@ const Cc = Components.classes;
 const Ci = Components.interfaces;
 const Cu = Components.utils;
 
-Cu.import("resource://foxreplace/core.js");
-Cu.import("resource://foxreplace/services.js");
+Cu.import("chrome://foxreplace/content/core.js");
+Cu.import("chrome://foxreplace/content/services.js");
 Cu.import("resource://gre/modules/osfile.jsm");
 
 /**

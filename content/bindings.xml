@@ -42,7 +42,7 @@
     <implementation>
       <constructor>
         this._fxrCore = {};
-        Components.utils.import("resource://foxreplace/core.js", this._fxrCore);
+        Components.utils.import("chrome://foxreplace/content/core.js", this._fxrCore);
         this.inputType = this._fxrCore.Substitution.prototype.INPUT_TEXT;
       </constructor>
       <field name="_button" readonly="true">
@@ -98,7 +98,7 @@
     <implementation>
       <constructor>
         this._fxrCore = {};
-        Components.utils.import("resource://foxreplace/core.js", this._fxrCore);
+        Components.utils.import("chrome://foxreplace/content/core.js", this._fxrCore);
         this.html = this._fxrCore.SubstitutionGroup.prototype.HTML_NONE;
       </constructor>
       <field name="_button" readonly="true">

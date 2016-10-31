@@ -18,11 +18,11 @@ const Cc = Components.classes;
 const Ci = Components.interfaces;
 const Cu = Components.utils;
 
-Cu.import("resource://foxreplace/core.js");
-Cu.import("resource://foxreplace/io.js");
-Cu.import("resource://foxreplace/Observers.js");
-Cu.import("resource://foxreplace/prefs.js");
-Cu.import("resource://foxreplace/services.js");
+Cu.import("chrome://foxreplace/content/core.js");
+Cu.import("chrome://foxreplace/content/io.js");
+Cu.import("chrome://foxreplace/content/Observers.js");
+Cu.import("chrome://foxreplace/content/prefs.js");
+Cu.import("chrome://foxreplace/content/services.js");
 Cu.import("resource://gre/modules/Services.jsm");
 
 // The status that represents a OK response for non-HTTP requests has changed across Firefox versions: it was 0 before Firefox 35 and 200 since then

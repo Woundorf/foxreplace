@@ -21,4 +21,4 @@
 var EXPORTED_SYMBOLS = ["XRegExp"];
 
 let loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
-loader.loadSubScript("resource://foxreplace/xregexp-all-min.js");
+loader.loadSubScript("chrome://foxreplace/content/xregexp-all-min.js");

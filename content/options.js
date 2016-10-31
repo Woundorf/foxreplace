@@ -483,12 +483,12 @@ var foxreplaceOptions = {
 
 const Cu = Components.utils;
 
-Cu.import("resource://foxreplace/core.js", foxreplaceOptions.core);
-Cu.import("resource://foxreplace/io.js", foxreplaceOptions);
-Cu.import("resource://foxreplace/Observers.js", foxreplaceOptions);
-Cu.import("resource://foxreplace/prefs.js", foxreplaceOptions);
-Cu.import("resource://foxreplace/services.js", foxreplaceOptions);
-Cu.import("resource://foxreplace/subscription.js");
+Cu.import("chrome://foxreplace/content/core.js", foxreplaceOptions.core);
+Cu.import("chrome://foxreplace/content/io.js", foxreplaceOptions);
+Cu.import("chrome://foxreplace/content/Observers.js", foxreplaceOptions);
+Cu.import("chrome://foxreplace/content/prefs.js", foxreplaceOptions);
+Cu.import("chrome://foxreplace/content/services.js", foxreplaceOptions);
+Cu.import("chrome://foxreplace/content/subscription.js");
 
 window.addEventListener("load", function onLoad() {
   window.removeEventListener("load", onLoad, false);

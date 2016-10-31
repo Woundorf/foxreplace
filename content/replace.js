@@ -19,8 +19,8 @@ const Cu = Components.utils;
 
 const XPathResult = Ci.nsIDOMXPathResult;
 
-Cu.import("resource://foxreplace/core.js");
-Cu.import("resource://foxreplace/prefs.js");
+Cu.import("chrome://foxreplace/content/core.js");
+Cu.import("chrome://foxreplace/content/prefs.js");
 
 /**
  * Exports a function that applies a substitution list to a window or frame.

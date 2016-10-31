@@ -18,7 +18,7 @@ const Cc = Components.classes;
 const Ci = Components.interfaces;
 const Cu = Components.utils;
 
-Cu.import("resource://foxreplace/Observers.js");
+Cu.import("chrome://foxreplace/content/Observers.js");
 
 /**
  * Updates the substitution list from a subscription URL.

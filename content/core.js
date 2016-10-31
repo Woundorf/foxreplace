@@ -14,8 +14,8 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://foxreplace/services.js");
-Components.utils.import("resource://foxreplace/xregexp-wrapper.js");
+Components.utils.import("chrome://foxreplace/content/services.js");
+Components.utils.import("chrome://foxreplace/content/xregexp-wrapper.js");
 
 /**
  * Definitions of substitution and substitution group.
