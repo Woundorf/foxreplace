@@ -24,6 +24,7 @@ Cu.import("chrome://foxreplace/content/Observers.js");
 Cu.import("chrome://foxreplace/content/Preferences.js");
 Cu.import("chrome://foxreplace/content/services.js");
 Cu.import("resource://gre/modules/osfile.jsm");
+Cu.import("resource://gre/modules/Services.jsm");
 
 /**
  * Easy access to preferences.
@@ -57,6 +58,13 @@ var prefs = {
    */
   get substitutionListChangedKey() {
     return "substitutionListChanged";
+  },
+  
+  /**
+   * Loads the default preferences.
+   */
+  loadDefaults: function() {
+    Services.scriptloader.loadSubScript("chrome://foxreplace/content/defaultprefs.js", { pref: setDefaultPref });
   },
 
   /**
@@ -310,4 +318,35 @@ var prefs = {
 
 };
 
+function setDefaultPref(prefName, prefValue)
+{
+  var defaultBranch = Services.prefs.getDefaultBranch(null);
+  setGenericPref(defaultBranch, prefName, prefValue);
+}
+
+function setGenericPref(branch, prefName, prefValue)
+{
+  switch (typeof prefValue)
+  {
+    case "string":
+      setUCharPref(prefName, prefValue, branch);
+      return;
+    case "number":
+      branch.setIntPref(prefName, prefValue);
+      return;
+    case "boolean":
+      branch.setBoolPref(prefName, prefValue);
+      return;
+  }
+}
+
+function setUCharPref(prefName, text, branch)  // Unicode setCharPref
+{
+  var string = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+  string.data = text;
+  branch = branch ? branch : Services.prefs;
+  branch.setComplexValue(prefName, Components.interfaces.nsISupportsString, string);
+}
+
+prefs.loadDefaults();
 prefs.init();
