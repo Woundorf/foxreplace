@@ -1,3 +1,5 @@
+* Changed license to GPLv3 or later.
+
 v0.17.3 (2016-09-29)
 * Fixed bug introduced in the previous version that manifested itself with textareas with default values (#183).
 
