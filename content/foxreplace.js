@@ -25,6 +25,8 @@ var foxreplace = {
    * Initialization code.
    */
   onLoad: function() {
+    this.buildUi(gBrowser);
+
     //document.getElementById("contentAreaContextMenu").addEventListener("popupshowing", function() { foxreplace.onShowContextMenu(); }, false);
 
     this.prefs.service.addObserver("", this, false);
@@ -292,6 +294,7 @@ Components.utils.import("chrome://foxreplace/content/prefs.js", foxreplace);
 Components.utils.import("chrome://foxreplace/content/replace.js", foxreplace);
 Components.utils.import("chrome://foxreplace/content/services.js", foxreplace);
 Components.utils.import("chrome://foxreplace/content/subscription.js");
+Components.utils.import("chrome://foxreplace/content/ui.js", foxreplace);
 
 window.addEventListener("load", function onLoad() {
   window.removeEventListener("load", onLoad, false);
