@@ -15,7 +15,6 @@
   -
   - ***** END LICENSE BLOCK ***** -->
 
-<?xml-stylesheet href="chrome://foxreplace/skin/foxreplace.css" type="text/css"?>
 <overlay id="foxreplaceOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/javascript;version=1.8" src="chrome://foxreplace/content/foxreplace.js"/>
 </overlay>

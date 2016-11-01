@@ -14,10 +14,13 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
+const Cc = Components.classes;
+const Ci = Components.interfaces;
 const Cu = Components.utils;
 
 Cu.import("chrome://foxreplace/content/strings.js");
 Cu.import("chrome://foxreplace/content/xul.js");
+Cu.import("resource://gre/modules/Services.jsm");
 
 /**
  * Substitute for XUL overlay.
@@ -114,6 +117,11 @@ function buildUi(aBrowser) {
                           command: "fxrCmdHideReplaceBar" })
     );
   replaceBar.build(doc.getElementById("browser-bottombox"));
+  
+  // Load stylesheet
+  let styleSheetService = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+  let styleSheetURI = Services.io.newURI("chrome://foxreplace/skin/foxreplace.css", null, null);
+  styleSheetService.loadAndRegisterSheet(styleSheetURI, styleSheetService.AUTHOR_SHEET);
 }
 
 /**
@@ -142,4 +150,10 @@ function removeUi(aBrowser) {
 
   let replaceBar = doc.getElementById("fxrReplaceBar");
   replaceBar.parentNode.removeChild(replaceBar);
+  
+  // Unload stylesheet
+  let styleSheetService = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+  let styleSheetURI = Services.io.newURI("chrome://foxreplace/skin/foxreplace.css", null, null);
+  if (styleSheetService.sheetRegistered(styleSheetURI, styleSheetService.AUTHOR_SHEET))
+    styleSheetService.unregisterSheet(styleSheetURI, styleSheetService.AUTHOR_SHEET);
 }
