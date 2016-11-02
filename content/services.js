@@ -14,6 +14,10 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
+const Cu = Components.utils;
+
+Cu.import("chrome://foxreplace/content/strings.js");
+
 /**
  * Easy access to some services.
  */
@@ -48,10 +52,8 @@ var prompts = {
 
 };
 
-var stringBundle = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService)
-                             .createBundle("chrome://foxreplace/locale/foxreplace.properties");
+let strings = new LocalizedStrings("foxreplace.properties");
 
 function getLocalizedString(aKey, aValues) {
-  if (!aValues) return stringBundle.GetStringFromName(aKey);
-  else return stringBundle.formatStringFromName(aKey, aValues, aValues.length);
+  return strings.get(aKey, aValues);
 }
