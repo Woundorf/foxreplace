@@ -28,7 +28,13 @@ var EXPORTED_SYMBOLS = ["LocalizedStrings"];
  * Creates a LocalizedStrings object referencing the given aProperties file in the locale folder.
  */
 function LocalizedStrings(aPropertiesFile) {
-  this.stringBundle = Services.strings.createBundle("chrome://foxreplace/locale/" + aPropertiesFile);
+  /* HACK: The string bundle cache is cleared on addon shutdown, however it doesn't appear to do so reliably.
+     Errors can erratically happen on next load of the same file in certain instances. (at minimum, when strings are added/removed)
+     The apparently accepted solution to reliably load new versions is to always create bundles with a unique URL so as to bypass the cache.
+     This is accomplished by passing a random number in a parameter after a '?'. (this random ID is otherwise ignored)
+     The loaded string bundle is still cached on startup and should still be cleared out of the cache on addon shutdown.
+     This just bypasses the built-in cache for repeated loads of the same path so that a newly installed update loads cleanly. */
+  this.stringBundle = Services.strings.createBundle("chrome://foxreplace/locale/" + aPropertiesFile + "?" + Math.random());
 }
 
 LocalizedStrings.prototype = {
