@@ -21,7 +21,6 @@
 # It uses a temporary directory ./build when building; don't use that!
 # Script's output is:
 # ./$APP_NAME.xpi
-# ./$APP_NAME.jar  (only if $KEEP_JAR=1)
 # ./files -- the list of packaged files
 #
 # Note: It modifies chrome.manifest when packaging so that it points to
@@ -58,29 +57,26 @@ EXCLUDED_EXTENSIONS_PATTERN=`echo $EXCLUDED_EXTENSIONS | sed s/[[:alnum:]_][[:al
 #set -x
 
 # remove any left-over files from previous build
-rm -f $APP_NAME.jar $APP_NAME.xpi files
+rm -f $APP_NAME.xpi files
 rm -rf $TMP_DIR
 
 $BEFORE_BUILD
 
 mkdir --parents --verbose $TMP_DIR/chrome
 
-# generate the JAR file, excluding .svn and temporary files
-JAR_FILE=$TMP_DIR/chrome/$APP_NAME.jar
-echo "Generating $JAR_FILE..."
+# move chrome providers to chrome dir
+echo "Generating $TMP_DIR/chrome..."
 for CHROME_SUBDIR in $CHROME_PROVIDERS; do
-  find $CHROME_SUBDIR -path '*.svn*' -prune -o -type f -print | grep -v -e \~ $EXCLUDED_EXTENSIONS_PATTERN >> files
+  find $CHROME_SUBDIR -type f -print | grep -v -e \~ $EXCLUDED_EXTENSIONS_PATTERN >> files
 done
 
-#zip -0 -r $JAR_FILE `cat files`
-# The following statement should be used instead if you don't wish to use the JAR file
 cp --verbose --parents `cat files` $TMP_DIR/chrome
 
 # prepare components and defaults
 echo "Copying various files to $TMP_DIR folder..."
 for DIR in $ROOT_DIRS; do
   mkdir $TMP_DIR/$DIR
-  FILES="`find $DIR -path '*.svn*' -prune -o -type f -print | grep -v -e \~ $EXCLUDED_EXTENSIONS_PATTERN`"
+  FILES="`find $DIR -type f -print | grep -v -e \~ $EXCLUDED_EXTENSIONS_PATTERN`"
   echo $FILES >> files
   cp --verbose --parents $FILES $TMP_DIR
 done
@@ -94,22 +90,6 @@ for ROOT_FILE in $ROOT_FILES install.rdf chrome.manifest; do
 done
 
 cd $TMP_DIR
-
-# Uncomment to use the JAR file
-#if [ -f "chrome.manifest" ]; then
-#  echo "Preprocessing chrome.manifest..."
-#  # You think this is scary?
-#  #s/^(content\s+\S*\s+)(\S*\/)$/\1jar:chrome\/$APP_NAME\.jar!\/\2/
-#  ##s/^(skin|locale)(\s+\S*\s+\S*\s+)(.*\/)$/\1\2jar:chrome\/$APP_NAME\.jar!\/\3/
-#  #s/^(skin|locale)(\s+\S*\s+\S*\s+)(.*)$/\1\2jar:chrome\/$APP_NAME\.jar!\/\3/
-#  #
-#  # Then try this! (Same, but with characters escaped for bash :)
-#  sed -i -r s/^\(content\\s+\\S*\\s+\)\(\\S*\\/\)$/\\1jar:chrome\\/$APP_NAME\\.jar!\\/\\2/ chrome.manifest
-#  #sed -i -r s/^\(skin\|locale\)\(\\s+\\S*\\s+\\S*\\s+\)\(.*\\/\)$/\\1\\2jar:chrome\\/$APP_NAME\\.jar!\\/\\3/ chrome.manifest
-#  sed -i -r s/^\(skin\|locale\)\(\\s+\\S*\\s+\\S*\\s+\)\(.*\)$/\\1\\2jar:chrome\\/$APP_NAME\\.jar!\\/\\3/ chrome.manifest
-#
-#  # (it simply adds jar:chrome/whatever.jar!/ at appropriate positions of chrome.manifest)
-#fi
 
 # No JAR file
 if [ -f "chrome.manifest" ]; then
@@ -140,15 +120,12 @@ zip -r ../$APP_NAME.xpi *
 cd "$ROOT_DIR"
 
 echo "Cleanup..."
-if [ $CLEAN_UP = 0 ]; then
-  # save the jar file
-  mv $TMP_DIR/chrome/$APP_NAME.jar .
-else
+if [ $CLEAN_UP != 0 ]; then
+  # remove the working files
   rm ./files
+  rm -rf $TMP_DIR
 fi
 
-# remove the working files
-rm -rf $TMP_DIR
 echo "Done!"
 
 $AFTER_BUILD

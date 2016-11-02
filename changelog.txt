@@ -1,3 +1,4 @@
+* Converted to restartless (boostrapped) addon.
 * Changed license to GPLv3 or later.
 
 v0.17.3 (2016-09-29)

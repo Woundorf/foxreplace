@@ -16,6 +16,7 @@
                    em:iconURL="chrome://foxreplace/content/foxreplace48.png"
                    em:icon64URL="chrome://foxreplace/content/foxreplace64.png"
                    em:optionsURL="chrome://foxreplace/content/options.xul">
+    <em:bootstrap>true</em:bootstrap>
     <em:contributor>Lutay Sergey (href substitution)</em:contributor>
     <em:contributor>Goofy (entitized help)</em:contributor>
     <em:translator>Ibrahim Saed [ibraheem5000@gmail.com] (ar)</em:translator>

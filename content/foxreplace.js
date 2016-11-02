@@ -14,53 +14,141 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+const Cu = Components.utils;
+
+Cu.import("chrome://foxreplace/content/core.js");
+Cu.import("chrome://foxreplace/content/Observers.js");
+Cu.import("chrome://foxreplace/content/periodicreplace.js");
+Cu.import("chrome://foxreplace/content/Preferences.js");
+Cu.import("chrome://foxreplace/content/prefs.js");
+Cu.import("chrome://foxreplace/content/replace.js");
+Cu.import("chrome://foxreplace/content/services.js");
+Cu.import("chrome://foxreplace/content/subscription.js");
+Cu.import("chrome://foxreplace/content/ui.js");
+
 /**
- * Main object of the FoxReplace extension. It performs the substitutions and manages the main UI.
+ * Main module of FoxReplace. It manages timers, observers and the main UI.
+ */
+
+var EXPORTED_SYMBOLS = ["foxreplace", "FoxReplace"];
+
+/**
+ * Global object to manage startup and shutdown.
  */
 var foxreplace = {
 
-  core: {},
-
   /**
-   * Initialization code.
+   * Sets up an observer and starts enabled timers.
    */
-  onLoad: function() {
-    this.buildUi(gBrowser);
+  startup: function() {
+    prefs.service.addObserver("", this, false);
 
-    //document.getElementById("contentAreaContextMenu").addEventListener("popupshowing", function() { foxreplace.onShowContextMenu(); }, false);
-
-    this.prefs.service.addObserver("", this, false);
-    this.Observers.add(fxrPeriodicReplace.observerKey, this.listReplace, this);
-    this.Observers.add(this.prefs.substitutionListChangedKey, this._loadEnabledGroups, this);
-
-    gBrowser.addEventListener("DOMContentLoaded", this.onPageLoad, true);
-
-    this._loadEnabledGroups();
-    this.setAutoReplaceOnLoad(this.prefs.autoReplaceOnLoad);
-
-    let autoReplacePeriodically = this.prefs.autoReplacePeriodically;
-    let autoReplacePeriod = this.prefs.autoReplacePeriod;
+    let autoReplacePeriodically = prefs.autoReplacePeriodically;
+    let autoReplacePeriod = prefs.autoReplacePeriod;
     if (autoReplacePeriodically)
       fxrPeriodicReplace.start(autoReplacePeriod);
 
     // subscription
-    var enableSubscription = this.prefs.enableSubscription;
-    var subscriptionUrl = this.prefs.subscriptionUrl;
-    var subscriptionPeriod = this.prefs.subscriptionPeriod;
+    var enableSubscription = prefs.enableSubscription;
+    var subscriptionUrl = prefs.subscriptionUrl;
+    var subscriptionPeriod = prefs.subscriptionPeriod;
 
     if (enableSubscription && subscriptionUrl && subscriptionPeriod > 0)
       fxrSubscription.start(subscriptionUrl, subscriptionPeriod);
   },
 
   /**
+   * Removes the observer and stops timers.
+   */
+  shutdown: function() {
+    prefs.service.removeObserver("", this);
+
+    fxrPeriodicReplace.stop();
+    fxrSubscription.stop();
+  },
+
+  /**
+   * Observes changes in preferences.
+   */
+  observe: function(aSubject, aTopic, aData) {
+    // aSubject is the nsIPrefBranch we're observing (after appropriate QI)
+    // aData is the name of the pref that's been changed (relative to aSubject)
+
+    if (aTopic != "nsPref:changed") return;
+
+    switch (aData) {
+      case "autoReplacePeriodically":
+      case "autoReplacePeriod":
+        let autoReplacePeriodically = prefs.autoReplacePeriodically;
+        let autoReplacePeriod = prefs.autoReplacePeriod;
+        if (autoReplacePeriodically)
+          fxrPeriodicReplace.restart(autoReplacePeriod);
+        else
+          fxrPeriodicReplace.stop();
+        break;
+
+      case "enableSubscription":
+      case "subscriptionUrl":
+      case "subscriptionPeriod":
+        var enableSubscription = prefs.enableSubscription;
+        var subscriptionUrl = prefs.subscriptionUrl;
+        var subscriptionPeriod = prefs.subscriptionPeriod;
+        if (enableSubscription && subscriptionUrl && subscriptionPeriod > 0)
+          fxrSubscription.restart(subscriptionUrl, subscriptionPeriod);
+        else
+          fxrSubscription.stop();
+        break;
+    }
+  },
+
+};
+
+/**
+ * Creates a FoxReplace object associated with the given aWindow.
+ */
+function FoxReplace(aWindow) {
+  this.window = aWindow;
+  this.document = this.window.document;
+  this.onLoad();
+}
+
+FoxReplace.prototype = {
+
+  /**
+   * Initialization code.
+   */
+  onLoad: function() {
+    buildUi(this.window.gBrowser);
+
+    prefs.service.addObserver("", this, false);
+    Observers.add(fxrPeriodicReplace.observerKey, this.listReplace, this);
+    Observers.add(prefs.substitutionListChangedKey, this._loadEnabledGroups, this);
+
+    this._loadEnabledGroups();
+    this.setAutoReplaceOnLoad(prefs.autoReplaceOnLoad);
+
+    this.window.gBrowser.addEventListener("DOMContentLoaded", this, true);
+
+    this.window.foxreplace = this;
+  },
+
+  /**
    * Finalization code.
    */
   onUnload: function() {
-    this.Observers.remove(this.prefs.substitutionListChangedKey, this._loadEnabledGroups, this);
-    this.Observers.remove(fxrPeriodicReplace.observerKey, this.listReplace, this);
-    this.prefs.service.removeObserver("", this);
+    Observers.remove(prefs.substitutionListChangedKey, this._loadEnabledGroups, this);
+    Observers.remove(fxrPeriodicReplace.observerKey, this.listReplace, this);
+    prefs.service.removeObserver("", this);
 
-    gBrowser.removeEventListener("DOMContentLoaded", this.onPageLoad, true);
+    this.window.gBrowser.removeEventListener("DOMContentLoaded", this, true);
+
+    removeUi(this.window.gBrowser);
+
+    delete this.window.foxreplace;
+    this.window = null;
+    this.document = null;
   },
 
   /**
@@ -68,7 +156,7 @@ var foxreplace = {
    * created until it's shown the first time, so it may be out of sync with the preference.
    */
   updateToolbarButtonMenu: function() {
-    document.getElementById("fxrToolbarButtonMenuAutoReplaceOnLoad").setAttribute("checked", this.prefs.autoReplaceOnLoad);
+    this.document.getElementById("fxrToolbarButtonMenuAutoReplaceOnLoad").setAttribute("checked", prefs.autoReplaceOnLoad);
   },
 
   /**
@@ -82,29 +170,7 @@ var foxreplace = {
 
     switch (aData) {
       case "autoReplaceOnLoad":
-        this.setAutoReplaceOnLoad(this.prefs.autoReplaceOnLoad);
-        break;
-
-      case "autoReplacePeriodically":
-      case "autoReplacePeriod":
-        let autoReplacePeriodically = this.prefs.autoReplacePeriodically;
-        let autoReplacePeriod = this.prefs.autoReplacePeriod;
-        if (autoReplacePeriodically)
-          fxrPeriodicReplace.restart(autoReplacePeriod);
-        else
-          fxrPeriodicReplace.stop();
-        break;
-
-      case "enableSubscription":
-      case "subscriptionUrl":
-      case "subscriptionPeriod":
-        var enableSubscription = this.prefs.enableSubscription;
-        var subscriptionUrl = this.prefs.subscriptionUrl;
-        var subscriptionPeriod = this.prefs.subscriptionPeriod;
-        if (enableSubscription && subscriptionUrl && subscriptionPeriod > 0)
-          fxrSubscription.restart(subscriptionUrl, subscriptionPeriod);
-        else
-          fxrSubscription.stop();
+        this.setAutoReplaceOnLoad(prefs.autoReplaceOnLoad);
         break;
     }
   },
@@ -113,8 +179,8 @@ var foxreplace = {
    * Sets auto-replace on load setting.
    */
   setAutoReplaceOnLoad: function(aAutoReplaceOnLoad) {
-    document.getElementById("fxrMenuToolsFoxReplaceAutoReplaceOnLoad").setAttribute("checked", aAutoReplaceOnLoad);
-    var menuItem = document.getElementById("fxrToolbarButtonMenuAutoReplaceOnLoad");
+    this.document.getElementById("fxrMenuToolsFoxReplaceAutoReplaceOnLoad").setAttribute("checked", aAutoReplaceOnLoad);
+    var menuItem = this.document.getElementById("fxrToolbarButtonMenuAutoReplaceOnLoad");
     if (menuItem) menuItem.setAttribute("checked", aAutoReplaceOnLoad);
 
     this._autoReplaceOnLoad = aAutoReplaceOnLoad;
@@ -124,10 +190,11 @@ var foxreplace = {
    * Shows the replace bar.
    */
   showReplaceBar: function() {
-    var replaceBar = document.getElementById("fxrReplaceBar");
+    var replaceBar = this.document.getElementById("fxrReplaceBar");
     replaceBar.hidden = false;
     // without the timeout it doesn't get the focus
-    window.setTimeout(function() {
+    let document = this.document;
+    this.window.setTimeout(function() {
       document.getElementById("fxrReplaceBarInputStringTextBox").focus();
     }, 100);
   },
@@ -136,30 +203,29 @@ var foxreplace = {
    * Hides the replace bar.
    */
   hideReplaceBar: function() {
-    document.getElementById("fxrReplaceBar").hidden = true;
+    this.document.getElementById("fxrReplaceBar").hidden = true;
   },
 
   /**
    * Applies the substitution entered by the user in the replace bar.
    */
   instantReplace: function() {
-    var inputString = document.getElementById("fxrReplaceBarInputStringTextBox").value;
-    var inputType = document.getElementById("fxrReplaceBarInputStringTextBox").inputType;
-    var outputString = document.getElementById("fxrReplaceBarOutputStringTextBox").value;
-    var caseSensitive = document.getElementById("fxrReplaceBarCaseSensitiveCheckBox").checked;
-    var html = document.getElementById("fxrReplaceBarHtmlButton").html;
+    var inputString = this.document.getElementById("fxrReplaceBarInputStringTextBox").value;
+    var inputType = this.document.getElementById("fxrReplaceBarInputStringTextBox").inputType;
+    var outputString = this.document.getElementById("fxrReplaceBarOutputStringTextBox").value;
+    var caseSensitive = this.document.getElementById("fxrReplaceBarCaseSensitiveCheckBox").checked;
+    var html = this.document.getElementById("fxrReplaceBarHtmlButton").html;
 
     if (inputString == "") return;  // this should not happen
 
     try {
       // new temporal substitution list with only one item
-      this._substitutionList = [new this.core.SubstitutionGroup("", [], [new this.core.Substitution(inputString, outputString, caseSensitive, inputType)], html,
-                                                                true)];
+      this._substitutionList = [new SubstitutionGroup("", [], [new Substitution(inputString, outputString, caseSensitive, inputType)], html, true)];
       // perform substitutions
       this.replaceDocXpath();
     }
     catch (se) {  // SyntaxError
-      this.prompts.alert(this.getLocalizedString("regExpError"), se);
+      prompts.alert(getLocalizedString("regExpError"), se);
     }
 
     // restore substitution list
@@ -177,7 +243,7 @@ var foxreplace = {
    * Toggles auto-replace on load setting.
    */
   toggleAutoReplaceOnLoad: function() {
-    this.prefs.autoReplaceOnLoad = !this.prefs.autoReplaceOnLoad;
+    prefs.autoReplaceOnLoad = !prefs.autoReplaceOnLoad;
   },
 
   /**
@@ -185,13 +251,13 @@ var foxreplace = {
    */
   showOptions: function() {
     // Based on code from https://developer.mozilla.org/en-US/docs/XUL/School_tutorial/Handling_Preferences#Preference_windows
-    if (!this.prefs.optionsWindow) {
-      let preferences = new this.Preferences();
+    if (!prefs.optionsWindow) {
+      let preferences = new Preferences();
       let instantApply = preferences.get("browser.preferences.instantApply");
       let features = "chrome,titlebar,toolbar,centerscreen,resizable" + (instantApply ? ",dialog=no" : ",modal");
-      window.openDialog("chrome://foxreplace/content/options.xul", "", features);
+      this.window.openDialog("chrome://foxreplace/content/options.xul", "", features);
     }
-    else this.prefs.optionsWindow.focus();
+    else prefs.optionsWindow.focus();
   },
 
   /**
@@ -204,23 +270,23 @@ var foxreplace = {
   /**
    * Applies substitutions from the substitution list to the loaded page if auto-replace on load is on.
    */
-  onPageLoad: function(aEvent) {
-    if (!foxreplace._autoReplaceOnLoad) return;
+  handleEvent: function(aEvent) {
+    if (!this._autoReplaceOnLoad) return;
 
     // doc is the document that triggered "onload" event
     var doc = aEvent.originalTarget;
     if (doc.nodeName != "#document") return;
 
     // perform substitutions on the loaded document
-    foxreplace.replaceDocXpath(doc.defaultView);
+    this.replaceDocXpath(doc.defaultView);
   },
 
   /**
    * Performs susbstitutions from the substitution list in the passed window. If no window is passed the current window is the target.
    */
   replaceDocXpath: function(aWindow) {
-    if (!aWindow) aWindow = window.content;
-    this.replaceWindow(aWindow, this._substitutionList);
+    if (!aWindow) aWindow = this.window.content;
+    replaceWindow(aWindow, this._substitutionList);
   },
 
   /**
@@ -231,7 +297,8 @@ var foxreplace = {
       this._substitutionList = aSubstitutionList.filter(function(aGroup) { return aGroup.enabled; });
     }
     else {
-      this.prefs.substitutionList.then(function(aList) { foxreplace._loadEnabledGroups(aList); });
+      let self = this;
+      prefs.substitutionList.then(function(aList) { self._loadEnabledGroups(aList); });
     }
   },
 
@@ -240,7 +307,7 @@ var foxreplace = {
    * Copied from https://developer.mozilla.org/en-US/Add-ons/Code_snippets/Tabbed_browser#Reusing_tabs.
    */
   _openAndReuseOneTabPerURL: function(aUrl) {
-    let wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+    let wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
     let browserEnumerator = wm.getEnumerator("navigator:browser");
 
     // Check each browser instance for our URL
@@ -279,29 +346,9 @@ var foxreplace = {
       }
       else {
         // No browser windows are open, so open a new one.
-        window.open(aUrl);
+        this.window.open(aUrl);
       }
     }
   }
 
 };
-
-Components.utils.import("chrome://foxreplace/content/core.js", foxreplace.core);
-Components.utils.import("chrome://foxreplace/content/Observers.js", foxreplace);
-Components.utils.import("chrome://foxreplace/content/periodicreplace.js");
-Components.utils.import("chrome://foxreplace/content/Preferences.js", foxreplace);
-Components.utils.import("chrome://foxreplace/content/prefs.js", foxreplace);
-Components.utils.import("chrome://foxreplace/content/replace.js", foxreplace);
-Components.utils.import("chrome://foxreplace/content/services.js", foxreplace);
-Components.utils.import("chrome://foxreplace/content/subscription.js");
-Components.utils.import("chrome://foxreplace/content/ui.js", foxreplace);
-
-window.addEventListener("load", function onLoad() {
-  window.removeEventListener("load", onLoad, false);
-  foxreplace.onLoad();
-}, false);
-
-window.addEventListener("unload", function onUnload() {
-  window.removeEventListener("unload", onUnload, false);
-  foxreplace.onUnload();
-}, false);

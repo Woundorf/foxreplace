@@ -38,13 +38,13 @@ function buildUi(aBrowser) {
 
   let commandset =
     Xul.COMMANDSET({ id: "fxrCommandset" },
-      Xul.COMMAND({ id: "fxrCmdShowReplaceBar", oncommand: "foxreplace.showReplaceBar();" }),
-      Xul.COMMAND({ id: "fxrCmdHideReplaceBar", oncommand: "foxreplace.hideReplaceBar();" }),
-      Xul.COMMAND({ id: "fxrCmdBarReplace", oncommand: "foxreplace.instantReplace();" }),
-      Xul.COMMAND({ id: "fxrCmdListReplace", oncommand: "foxreplace.listReplace();" }),
-      Xul.COMMAND({ id: "fxrCmdToggleAutoReplaceOnLoad", oncommand: "foxreplace.toggleAutoReplaceOnLoad();" }),
-      Xul.COMMAND({ id: "fxrCmdOptions", oncommand: "foxreplace.showOptions();" }),
-      Xul.COMMAND({ id: "fxrCmdHelp", oncommand: "foxreplace.showHelp();" })
+      Xul.COMMAND({ id: "fxrCmdShowReplaceBar", oncommand: "window.foxreplace.showReplaceBar();" }),
+      Xul.COMMAND({ id: "fxrCmdHideReplaceBar", oncommand: "window.foxreplace.hideReplaceBar();" }),
+      Xul.COMMAND({ id: "fxrCmdBarReplace", oncommand: "window.foxreplace.instantReplace();" }),
+      Xul.COMMAND({ id: "fxrCmdListReplace", oncommand: "window.foxreplace.listReplace();" }),
+      Xul.COMMAND({ id: "fxrCmdToggleAutoReplaceOnLoad", oncommand: "window.foxreplace.toggleAutoReplaceOnLoad();" }),
+      Xul.COMMAND({ id: "fxrCmdOptions", oncommand: "window.foxreplace.showOptions();" }),
+      Xul.COMMAND({ id: "fxrCmdHelp", oncommand: "window.foxreplace.showHelp();" })
     );
   commandset.build(aBrowser);
 
@@ -83,7 +83,7 @@ function buildUi(aBrowser) {
     Xul.TOOLBARBUTTON({ id: "fxrToolbarButton", "class": "toolbarbutton-1 chromeclass-toolbar-additional", type: "menu-button",
                         label: strings.get("toolbarButton.label"), tooltiptext: strings.get("toolbarButton.tooltip"), command: "fxrCmdListReplace" },
       Xul.MENUPOPUP({ oncommand: "event.stopPropagation();",  // stop event propagation to avoid executing button's command
-                      onpopupshowing: "foxreplace.updateToolbarButtonMenu();" },
+                      onpopupshowing: "window.foxreplace.updateToolbarButtonMenu();" },
         Xul.MENUITEM({ id: "fxrToolbarButtonMenuReplace", label: strings.get("listReplace.label"), accesskey: strings.get("listReplace.accesskey"),
                        command: "fxrCmdListReplace", key: "fxrKeyListReplace" }),
         Xul.MENUITEM({ id: "fxrToolbarButtonMenuAutoReplaceOnLoad", type: "checkbox", label: strings.get("autoReplaceOnLoad.label"),
@@ -98,14 +98,15 @@ function buildUi(aBrowser) {
 
   let replaceBar =
     Xul.TOOLBAR({ id: "fxrReplaceBar", align: "center", fullscreentoolbar: "true", hidden: "true",
-                  onkeypress: "if (event.keyCode == event.DOM_VK_ESCAPE) foxreplace.hideReplaceBar();" },
+                  onkeypress: "if (event.keyCode == event.DOM_VK_ESCAPE) window.foxreplace.hideReplaceBar();" },
       Xul.LABEL({ id: "fxrReplaceBarInputStringLabel", control: "fxrReplaceBarInputStringTextBox", value: strings.get("replaceBarInputString.label"),
                   accesskey: strings.get("replaceBarInputString.accesskey") }),
       Xul.TEXTBOX({ id: "fxrReplaceBarInputStringTextBox", flex: "1", oninput: "document.getElementById('fxrReplaceBarReplaceButton').disabled=this.value==''",
-                    onkeypress: "if (event.keyCode == event.DOM_VK_RETURN) foxreplace.instantReplace();" }),
+                    onkeypress: "if (event.keyCode == event.DOM_VK_RETURN) window.foxreplace.instantReplace();" }),
       Xul.LABEL({ id: "fxrReplaceBarOutputStringLabel", control: "fxrReplaceBarOutputStringTextBox", value: strings.get("replaceBarOutputString.label"),
                   accesskey: strings.get("replaceBarOutputString.accesskey") }),
-      Xul.TEXTBOX({ id: "fxrReplaceBarOutputStringTextBox", flex: "1", onkeypress: "if (event.keyCode == event.DOM_VK_RETURN) foxreplace.instantReplace();" }),
+      Xul.TEXTBOX({ id: "fxrReplaceBarOutputStringTextBox", flex: "1",
+                    onkeypress: "if (event.keyCode == event.DOM_VK_RETURN) window.foxreplace.instantReplace();" }),
       Xul.LABEL({ id: "fxrReplaceBarHtmlLabel", control: "fxrReplaceBarHtmlButton", value: strings.get("replaceBarHtml.label"),
                   accesskey: strings.get("replaceBarHtml.accesskey") }),
       Xul.BOX({ id: "fxrReplaceBarHtmlButton" }), // Warning: it can't be a button or the binding won't work as expected
