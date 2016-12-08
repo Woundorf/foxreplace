@@ -147,7 +147,7 @@ function removeUi(aBrowser) {
   contextMenuItem.parentNode.removeChild(contextMenuItem);
 
   let toolbarButton = doc.getElementById("fxrToolbarButton");
-  toolbarButton.parentNode.removeChild(toolbarButton);
+  if (toolbarButton) toolbarButton.parentNode.removeChild(toolbarButton);
 
   let replaceBar = doc.getElementById("fxrReplaceBar");
   replaceBar.parentNode.removeChild(replaceBar);
