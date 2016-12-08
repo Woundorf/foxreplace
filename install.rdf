@@ -4,8 +4,8 @@
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
   <RDF:Description RDF:about="rdf:#$mVUNH1"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-                   em:minVersion="30.0"
-                   em:maxVersion="52.0" />
+                   em:minVersion="51.0a1"
+                   em:maxVersion="*" />
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="fox@replace.fx"
                    em:name="FoxReplace"
@@ -17,6 +17,8 @@
                    em:icon64URL="chrome://foxreplace/content/foxreplace64.png"
                    em:optionsURL="chrome://foxreplace/content/options.xul">
     <em:bootstrap>true</em:bootstrap>
+    <em:hasEmbeddedWebExtension>true</em:hasEmbeddedWebExtension>
+    <em:multiprocessCompatible>true</em:multiprocessCompatible>
     <em:contributor>Lutay Sergey (href substitution)</em:contributor>
     <em:contributor>Goofy (entitized help)</em:contributor>
     <em:translator>Ibrahim Saed [ibraheem5000@gmail.com] (ar)</em:translator>

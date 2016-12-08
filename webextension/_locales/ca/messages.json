@@ -1,0 +1,25 @@
+{
+
+  "generalSubstitutions": {
+    "message": "Substitucions generals"
+  },
+
+  "substitutionsForUrl": {
+    "message": "Substitucions per a $url$",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+
+  "substitutionsForUrls": {
+    "message": "Substitucions per a $url$ i altres",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  }
+
+}

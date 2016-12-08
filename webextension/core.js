@@ -14,16 +14,6 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("chrome://foxreplace/content/services.js");
-Components.utils.import("chrome://foxreplace/content/xregexp-wrapper.js");
-
-/**
- * Definitions of substitution and substitution group.
- */
-
-var EXPORTED_SYMBOLS = ["Substitution", "SubstitutionGroup", "fxrIsExclusionUrl", "cloneSubstitutionList",
-                        "substitutionListToJSON", "substitutionListFromJSON"];
-
 /**
  * Substitution.
  */
@@ -228,9 +218,9 @@ SubstitutionGroup.prototype = {
    */
   get nonEmptyName() {
     if (this.name) return this.name;
-    else if (this.urls.length == 0) return getLocalizedString("generalSubstitutions");
-    else if (this.urls.length == 1) return getLocalizedString("substitutionsForUrl", [this.urls[0]]);
-    else return getLocalizedString("substitutionsForUrls", [this.urls[0]]);
+    else if (this.urls.length == 0) return browser.i18n.getMessage("generalSubstitutions");
+    else if (this.urls.length == 1) return browser.i18n.getMessage("substitutionsForUrl", this.urls[0]);
+    else return browser.i18n.getMessage("substitutionsForUrls", this.urls[0]);
   },
 
   /**

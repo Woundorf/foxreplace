@@ -27,6 +27,14 @@ function startup(aData, aReason) {
   forEachOpenWindow(loadIntoWindow);
 
   Services.wm.addListener(WindowListener);
+
+  aData.webExtension.startup().then(api => {
+    const {browser} = api;
+    browser.runtime.onConnect.addListener(port => {
+      foxreplace.webExtensionPort = port;
+    });
+    browser.runtime.onMessage.addListener(foxreplace.webExtensionMessageListener);
+  });
 }
 
 function shutdown(aData, aReason) {

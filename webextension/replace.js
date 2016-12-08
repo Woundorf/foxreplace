@@ -14,29 +14,10 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
-const Ci = Components.interfaces;
-const Cu = Components.utils;
-
-const XPathResult = Ci.nsIDOMXPathResult;
-
-Cu.import("chrome://foxreplace/content/core.js");
-Cu.import("chrome://foxreplace/content/prefs.js");
-
-/**
- * Exports a function that applies a substitution list to a window or frame.
- */
-
-var EXPORTED_SYMBOLS = ["replaceWindow"];
-
 /**
  * Applies aSubstitutionList to the document of aWindow.
  */
-function replaceWindow(aWindow, aSubstitutionList) {
-  if (aWindow.frames.length > 0) {
-    var nFrames = aWindow.frames.length;
-    for (var i = 0; i < nFrames; i++) replaceWindow(aWindow.frames[i], aSubstitutionList);
-  }
-
+function replaceWindow(aWindow, aSubstitutionList, aPrefs) {
   var doc = aWindow.document;
   if (!doc || !("body" in doc)) return;
 
@@ -50,9 +31,9 @@ function replaceWindow(aWindow, aSubstitutionList) {
     if (!group.matches(url)) continue;
 
     switch (group.html) {
-      case group.HTML_NONE: replaceText(doc, group); break;
-      case group.HTML_OUTPUT: replaceTextWithHtml(doc, group); break;
-      case group.HTML_INPUT_OUTPUT: replaceHtml(doc, group); break;
+      case group.HTML_NONE: replaceText(doc, group, aPrefs); break;
+      case group.HTML_OUTPUT: replaceTextWithHtml(doc, group, aPrefs); break;
+      case group.HTML_INPUT_OUTPUT: replaceHtml(doc, group, aPrefs); break;
     }
   }
 }
@@ -60,7 +41,7 @@ function replaceWindow(aWindow, aSubstitutionList) {
 /**
  * Applies substitutions from aGroup to aDocument on text.
  */
-function replaceText(aDocument, aGroup) {
+function replaceText(aDocument, aGroup, aPrefs) {
   // selection string possibilities
   /* ... empty(index-of(('style'),lower-case(name(parent::*))))  :( functions not supported */
   /* //body//text()[string-length(normalize-space())>0] */
@@ -101,7 +82,7 @@ function replaceText(aDocument, aGroup) {
                       + "|/html/body//input[@type!='hidden']/@value"
                       + "|/html/body//option/@value"
                       + "|/html/body//button/@value";
-  if (prefs.replaceUrls) {
+  if (aPrefs.replaceUrls) {
     valueNodesXpath += "|/html/body//a/@href"
                      + "|/html/body//img/@src";
   }
@@ -130,7 +111,7 @@ function replaceText(aDocument, aGroup) {
   }
 
   // Replace scripts
-  if (prefs.replaceScripts) {
+  if (aPrefs.replaceScripts) {
     let scriptNodesXpath = "/html/body/script";
     let scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
     let nScriptNodes = scriptNodes.snapshotLength;
@@ -145,7 +126,7 @@ function replaceText(aDocument, aGroup) {
 /**
  * Applies substitutions from aGroup to aDocument on text with HTML output.
  */
-function replaceTextWithHtml(aDocument, aGroup) {
+function replaceTextWithHtml(aDocument, aGroup, aPrefs) {
   // Replace text nodes
   let textNodesXpath = "/html/head/title/text()"
                      + "|/html/body//text()[not(parent::script)]";
@@ -181,7 +162,7 @@ function replaceTextWithHtml(aDocument, aGroup) {
   }
 
   // Replace scripts
-  if (prefs.replaceScripts) {
+  if (aPrefs.replaceScripts) {
     let scriptNodesXpath = "/html/body/script";
     let scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
     let nScriptNodes = scriptNodes.snapshotLength;
@@ -197,7 +178,7 @@ function replaceTextWithHtml(aDocument, aGroup) {
 /**
  * Applies substitutions from aGroup to aDocument on HTML.
  */
-function replaceHtml(aDocument, aGroup) {
+function replaceHtml(aDocument, aGroup, aPrefs) {
   var html = aDocument.evaluate("/html", aDocument, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
   let oldHtml = html.singleNodeValue.innerHTML;
   let newHtml = aGroup.replace(html.singleNodeValue.innerHTML);
@@ -206,7 +187,7 @@ function replaceHtml(aDocument, aGroup) {
     html.singleNodeValue.innerHTML = newHtml;
 
     // Replace scripts
-    if (prefs.replaceScripts) {
+    if (aPrefs.replaceScripts) {
       let scriptNodesXpath = "/html//script";
       let scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
       let nScriptNodes = scriptNodes.snapshotLength;

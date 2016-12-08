@@ -23,10 +23,6 @@ Cu.import("chrome://foxreplace/content/io.js");
 Cu.import("chrome://foxreplace/content/Observers.js");
 Cu.import("chrome://foxreplace/content/prefs.js");
 Cu.import("chrome://foxreplace/content/services.js");
-Cu.import("resource://gre/modules/Services.jsm");
-
-// The status that represents a OK response for non-HTTP requests has changed across Firefox versions: it was 0 before Firefox 35 and 200 since then
-const NON_HTTP_OK_STATUS = Services.vc.compare(Services.appinfo.platformVersion, "35.0") < 0 ? 0 : 200;
 
 /**
  * Updates the substitution list from a subscription URL.
@@ -41,15 +37,13 @@ var fxrSubscription = {
    */
   _callback: {
     notify: function(aTimer) {
-      var http = /https?\:\/\//.test(fxrSubscription.url);
-
       try {
         var request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
         request.open("GET", fxrSubscription.url);
         request.responseType = "text";
         request.onreadystatechange = function() {
           if (request.readyState == 4) {
-            if ((http && request.status == 200) || (!http && request.status == NON_HTTP_OK_STATUS)) {
+            if (request.status == 200) {
               try {
                 let listJSON = JSON.parse(request.responseText);
                 prefs.substitutionList = substitutionListFromJSON(listJSON);
@@ -59,7 +53,7 @@ var fxrSubscription = {
                 fxrSubscription.status = getLocalizedString("jsonErrorText") + " " + e;
               }
             }
-            else if (http && request.status == 0) fxrSubscription.status = getLocalizedString("cantConnectToServer", [fxrSubscription.url]);
+            else if (request.status == 0) fxrSubscription.status = getLocalizedString("cantConnectToServer", [fxrSubscription.url]);
             else fxrSubscription.status = getLocalizedString("httpError", [request.status + " " + request.statusText]);
           }
         };

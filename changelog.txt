@@ -1,5 +1,7 @@
-* Converted to restartless (bootstrapped) addon.
+* Converted to restartless (bootstrapped) addon with embedded WebExtension.
+* Made multiprocess compatible.
 * Changed license to GPLv3 or later.
+* Compatibility with Firefox 51.0a1 and later.
 
 v0.17.3 (2016-09-29)
 * Fixed bug introduced in the previous version that manifested itself with textareas with default values (#183).

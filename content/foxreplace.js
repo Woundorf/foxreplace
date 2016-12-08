@@ -23,7 +23,6 @@ Cu.import("chrome://foxreplace/content/Observers.js");
 Cu.import("chrome://foxreplace/content/periodicreplace.js");
 Cu.import("chrome://foxreplace/content/Preferences.js");
 Cu.import("chrome://foxreplace/content/prefs.js");
-Cu.import("chrome://foxreplace/content/replace.js");
 Cu.import("chrome://foxreplace/content/services.js");
 Cu.import("chrome://foxreplace/content/subscription.js");
 Cu.import("chrome://foxreplace/content/ui.js");
@@ -35,7 +34,7 @@ Cu.import("chrome://foxreplace/content/ui.js");
 var EXPORTED_SYMBOLS = ["foxreplace", "FoxReplace"];
 
 /**
- * Global object to manage startup and shutdown.
+ * Global object to manage startup, shutdown and communication with the embedded WebExtension.
  */
 var foxreplace = {
 
@@ -117,6 +116,29 @@ var foxreplace = {
     else {
       prefs.substitutionList.then(list => { this.loadEnabledGroups(list); });
     }
+  },
+
+  /**
+   * Listens and responds to messages from the embedded WebExtension.
+   */
+  webExtensionMessageListener: function(message, sender, sendResponse) {
+    // Note: this != foxreplace
+    switch (message.key) {
+      case "getAutoReplaceOnLoad":
+        sendResponse({
+          autoReplaceOnLoad: prefs.autoReplaceOnLoad
+        });
+        break;
+      case "getSubstitutionList":
+        sendResponse({
+          list: substitutionListToJSON(foxreplace.substitutionList),
+          prefs: {
+            replaceUrls: prefs.replaceUrls,
+            replaceScripts: prefs.replaceScripts
+          }
+        });
+        break;
+    }
   }
 
 };
@@ -143,8 +165,6 @@ FoxReplace.prototype = {
 
     this.setAutoReplaceOnLoad(prefs.autoReplaceOnLoad);
 
-    this.window.gBrowser.addEventListener("DOMContentLoaded", this, true);
-
     this.window.foxreplace = this;
   },
 
@@ -154,8 +174,6 @@ FoxReplace.prototype = {
   onUnload: function() {
     Observers.remove(fxrPeriodicReplace.observerKey, this.listReplace, this);
     prefs.service.removeObserver("", this);
-
-    this.window.gBrowser.removeEventListener("DOMContentLoaded", this, true);
 
     removeUi(this.window.gBrowser);
 
@@ -235,7 +253,7 @@ FoxReplace.prototype = {
       // new temporal substitution list with only one item
       let substitutionList = [new SubstitutionGroup("", [], [new Substitution(inputString, outputString, caseSensitive, inputType)], html, true)];
       // perform substitutions
-      this.replaceDocXpath(null, substitutionList);
+      this.replaceDocXpath(substitutionList);
     }
     catch (se) {  // SyntaxError
       prompts.alert(getLocalizedString("regExpError"), se);
@@ -278,26 +296,18 @@ FoxReplace.prototype = {
   },
 
   /**
-   * Applies substitutions from the substitution list to the loaded page if auto-replace on load is on.
+   * Applies aSubstitutionList to the current tab. If no substitution list is given the current one is used.
    */
-  handleEvent: function(aEvent) {
-    if (!this._autoReplaceOnLoad) return;
-
-    // doc is the document that triggered "onload" event
-    var doc = aEvent.originalTarget;
-    if (doc.nodeName != "#document") return;
-
-    // perform substitutions on the loaded document
-    this.replaceDocXpath(doc.defaultView);
-  },
-
-  /**
-   * Applies aSubstitutionList to aWindow. If no window is given the current window is used. If no substitution list is given the current one is used.
-   */
-  replaceDocXpath: function(aWindow, aSubstitutionList) {
-    if (!aWindow) aWindow = this.window.content;
-    if (!aSubstitutionList) aSubstitutionList = foxreplace.substitutionList;
-    replaceWindow(aWindow, aSubstitutionList);
+  replaceDocXpath: function(aSubstitutionList) {
+    let substitutionList = aSubstitutionList || foxreplace.substitutionList;
+    foxreplace.webExtensionPort.postMessage({
+      key: "replace",
+      list: substitutionListToJSON(substitutionList),
+      prefs: {
+        replaceUrls: prefs.replaceUrls,
+        replaceScripts: prefs.replaceScripts
+      }
+    });
   },
 
   /**
