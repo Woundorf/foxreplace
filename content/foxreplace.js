@@ -44,6 +44,9 @@ var foxreplace = {
    */
   startup: function() {
     prefs.service.addObserver("", this, false);
+    Observers.add(prefs.substitutionListChangedKey, this.loadEnabledGroups, this);
+
+    this.loadEnabledGroups();
 
     let autoReplacePeriodically = prefs.autoReplacePeriodically;
     let autoReplacePeriod = prefs.autoReplacePeriod;
@@ -63,6 +66,7 @@ var foxreplace = {
    * Removes the observer and stops timers.
    */
   shutdown: function() {
+    Observers.remove(prefs.substitutionListChangedKey, this.loadEnabledGroups, this);
     prefs.service.removeObserver("", this);
 
     fxrPeriodicReplace.stop();
@@ -103,6 +107,18 @@ var foxreplace = {
     }
   },
 
+  /**
+   * Loads enabled substitution groups. The original substitution list can be taken either from aSubstitutionList or from prefs.
+   */
+  loadEnabledGroups: function(aSubstitutionList) {
+    if (aSubstitutionList) {
+      this.substitutionList = aSubstitutionList.filter(group => group.enabled);
+    }
+    else {
+      prefs.substitutionList.then(list => { this.loadEnabledGroups(list); });
+    }
+  }
+
 };
 
 /**
@@ -124,9 +140,7 @@ FoxReplace.prototype = {
 
     prefs.service.addObserver("", this, false);
     Observers.add(fxrPeriodicReplace.observerKey, this.listReplace, this);
-    Observers.add(prefs.substitutionListChangedKey, this._loadEnabledGroups, this);
 
-    this._loadEnabledGroups();
     this.setAutoReplaceOnLoad(prefs.autoReplaceOnLoad);
 
     this.window.gBrowser.addEventListener("DOMContentLoaded", this, true);
@@ -138,7 +152,6 @@ FoxReplace.prototype = {
    * Finalization code.
    */
   onUnload: function() {
-    Observers.remove(prefs.substitutionListChangedKey, this._loadEnabledGroups, this);
     Observers.remove(fxrPeriodicReplace.observerKey, this.listReplace, this);
     prefs.service.removeObserver("", this);
 
@@ -283,21 +296,8 @@ FoxReplace.prototype = {
    */
   replaceDocXpath: function(aWindow, aSubstitutionList) {
     if (!aWindow) aWindow = this.window.content;
-    if (!aSubstitutionList) aSubstitutionList = this._substitutionList;
+    if (!aSubstitutionList) aSubstitutionList = foxreplace.substitutionList;
     replaceWindow(aWindow, aSubstitutionList);
-  },
-
-  /**
-   * Loads enabled substitution groups. The original substitution list can be taken either from aSubstitutionList or from prefs.
-   */
-  _loadEnabledGroups: function(aSubstitutionList) {
-    if (aSubstitutionList) {
-      this._substitutionList = aSubstitutionList.filter(function(aGroup) { return aGroup.enabled; });
-    }
-    else {
-      let self = this;
-      prefs.substitutionList.then(function(aList) { self._loadEnabledGroups(aList); });
-    }
   },
 
   /**
