@@ -220,16 +220,13 @@ FoxReplace.prototype = {
 
     try {
       // new temporal substitution list with only one item
-      this._substitutionList = [new SubstitutionGroup("", [], [new Substitution(inputString, outputString, caseSensitive, inputType)], html, true)];
+      let substitutionList = [new SubstitutionGroup("", [], [new Substitution(inputString, outputString, caseSensitive, inputType)], html, true)];
       // perform substitutions
-      this.replaceDocXpath();
+      this.replaceDocXpath(null, substitutionList);
     }
     catch (se) {  // SyntaxError
       prompts.alert(getLocalizedString("regExpError"), se);
     }
-
-    // restore substitution list
-    this._loadEnabledGroups();
   },
 
   /**
@@ -282,11 +279,12 @@ FoxReplace.prototype = {
   },
 
   /**
-   * Performs susbstitutions from the substitution list in the passed window. If no window is passed the current window is the target.
+   * Applies aSubstitutionList to aWindow. If no window is given the current window is used. If no substitution list is given the current one is used.
    */
-  replaceDocXpath: function(aWindow) {
+  replaceDocXpath: function(aWindow, aSubstitutionList) {
     if (!aWindow) aWindow = this.window.content;
-    replaceWindow(aWindow, this._substitutionList);
+    if (!aSubstitutionList) aSubstitutionList = this._substitutionList;
+    replaceWindow(aWindow, aSubstitutionList);
   },
 
   /**
