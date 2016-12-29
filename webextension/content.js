@@ -16,7 +16,7 @@
 
 // The content has just loaded. Apply the substitution list if auto-replace on load is on.
 browser.runtime.sendMessage({
-  key: "getAutoReplaceOnLoad"
+  key: "getPrefs"
 }).then(response => {
   if (response.autoReplaceOnLoad) {
     browser.runtime.sendMessage({

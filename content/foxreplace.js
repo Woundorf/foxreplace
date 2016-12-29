@@ -124,9 +124,17 @@ var foxreplace = {
   webExtensionMessageListener: function(message, sender, sendResponse) {
     // Note: this != foxreplace
     switch (message.key) {
-      case "getAutoReplaceOnLoad":
+      case "getPrefs":
         sendResponse({
-          autoReplaceOnLoad: prefs.autoReplaceOnLoad
+          autoReplaceOnLoad: prefs.autoReplaceOnLoad,
+          autoReplacePeriodically: prefs.autoReplacePeriodically,
+          autoReplacePeriod: prefs.autoReplacePeriod,
+          replaceUrls: prefs.replaceUrls,
+          replaceScripts: prefs.replaceScripts,
+          enableSubscription: prefs.enableSubscription,
+          subscriptionUrl: prefs.subscriptionUrl,
+          subscriptionPeriod: prefs.subscriptionPeriod,
+          debug: prefs.debug
         });
         break;
       case "getSubstitutionList":
