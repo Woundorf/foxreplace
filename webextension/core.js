@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2016 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -167,7 +167,7 @@ function SubstitutionGroup(aName, aUrls, aSubstitutions, aHtml, aEnabled) {
  */
 SubstitutionGroup.fromJSON = function(aGroupJSON, aVersion) {
   let substitutions = [];
-  for each (let substitutionJSON in aGroupJSON.substitutions) substitutions.push(Substitution.fromJSON(substitutionJSON));
+  for (let substitutionJSON of aGroupJSON.substitutions) substitutions.push(Substitution.fromJSON(substitutionJSON));
 
   let html;
   if (aVersion == "0.13" || aVersion == "0.14") html = aGroupJSON.html ? this.prototype.HTML_INPUT_OUTPUT : this.prototype.HTML_NONE;
@@ -278,7 +278,7 @@ function substitutionListFromJSON(aListJSON) {
 
   let list = [];
 
-  for each (let groupJSON in aListJSON.groups) list.push(SubstitutionGroup.fromJSON(groupJSON, aListJSON.version));
+  for (let groupJSON of aListJSON.groups) list.push(SubstitutionGroup.fromJSON(groupJSON, aListJSON.version));
 
   return list;
 }
