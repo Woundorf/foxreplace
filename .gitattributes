@@ -1,2 +1,5 @@
 # Normalize all auto-detected text files in the repository to LF line ending
-* text=auto
+*     text=auto
+
+# Force .sh files to use LF everywhere
+*.sh  text eol=lf
