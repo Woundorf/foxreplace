@@ -1,3 +1,5 @@
+* Substitutions are applied when the main page has loaded, without waiting for other resources.
+
 v1.0.0 (2017-03-13)
 * Converted to restartless (bootstrapped) addon with embedded WebExtension.
 * Made multiprocess compatible.
