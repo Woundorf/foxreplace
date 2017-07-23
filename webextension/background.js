@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2016 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -23,7 +23,24 @@ legacyPort.onMessage.addListener(message => {
     case "replace":
       replaceCurrentTab(message);
       break;
+    case "autoReplaceOnLoad":
+      storage.setPrefs({
+        autoReplaceOnLoad: message.value
+      });
+      break;
+    case "showOptions":
+      browser.runtime.openOptionsPage();
+      break;
   }
+});
+
+// Migrate data from the legacy extension
+storage.hasData().then(has => {
+  let message = {
+    key: "migrateData",
+    force: !has
+  };
+  browser.runtime.sendMessage(message).then(response => browser.storage.local.set(response));
 });
 
 /**
@@ -37,3 +54,51 @@ function replaceCurrentTab(aMessage) {
     if (tabs[0]) browser.tabs.sendMessage(tabs[0].id, aMessage);
   });
 }
+
+// Initialize things
+storage.getPrefs().then(prefs => {
+  if (prefs.enableSubscription) subscription.start(prefs.subscriptionUrl, prefs.subscriptionPeriod);
+
+  if (prefs.autoReplacePeriodically) periodicReplace.start(prefs.autoReplacePeriod);
+
+  legacyPort.postMessage({
+    key: "autoReplaceOnLoad",
+    value: prefs.autoReplaceOnLoad
+  });
+});
+
+// Update things
+browser.storage.onChanged.addListener(changes => {
+  // TODO should check which keys are in changes, but with the current implementation it always contains all keys
+  storage.getPrefs().then(prefs => {
+    if (prefs.enableSubscription) subscription.restart(prefs.subscriptionUrl, prefs.subscriptionPeriod);
+    else subscription.stop();
+
+    if (prefs.autoReplacePeriodically) periodicReplace.restart(prefs.autoReplacePeriod);
+    else periodicReplace.stop();
+
+    legacyPort.postMessage({
+      key: "autoReplaceOnLoad",
+      value: prefs.autoReplaceOnLoad
+    });
+  });
+});
+
+// Listen for periodic replace alarm
+browser.alarms.onAlarm.addListener(alarm => {
+  if (alarm.name == periodicReplace.alarmName) {
+    Promise.all([storage.getEnabledGroups(), storage.getPrefs()])
+      .then(([list, prefs]) => {
+        if (list.length > 0) {
+          replaceCurrentTab({
+            key: "replace",
+            list: substitutionListToJSON(list),
+            prefs: {
+              replaceUrls: prefs.replaceUrls,
+              replaceScripts: prefs.replaceScripts
+            }
+          });
+        }
+      });
+  }
+});

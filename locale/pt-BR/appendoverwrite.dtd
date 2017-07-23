@@ -1,6 +1,0 @@
-<!ENTITY dialog.title "Adicionar ou sobrescrever?">
-<!ENTITY append.label "Adicionar">
-<!ENTITY append.accesskey "A">
-<!ENTITY overwrite.label "Sobrescrever">
-<!ENTITY overwrite.accesskey "S">
-<!ENTITY question "Deseja adicionar substituições para a lista ou sobrescrevê-la?">

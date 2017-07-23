@@ -1,6 +1,0 @@
-<!ENTITY dialog.title "Tilføj eller overskriv?">
-<!ENTITY append.label "Tilføj">
-<!ENTITY append.accesskey "T">
-<!ENTITY overwrite.label "Overskriv">
-<!ENTITY overwrite.accesskey "O">
-<!ENTITY question "Vil du tilføje udskiftninger til listen eller overskrive den?">

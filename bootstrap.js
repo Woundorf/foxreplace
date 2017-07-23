@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2016 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -22,8 +22,6 @@ Cu.import("resource://gre/modules/Services.jsm");
 function startup(aData, aReason) {
   Cu.import("chrome://foxreplace/content/foxreplace.js");
 
-  foxreplace.startup();
-
   forEachOpenWindow(loadIntoWindow);
 
   Services.wm.addListener(WindowListener);
@@ -32,6 +30,7 @@ function startup(aData, aReason) {
     const {browser} = api;
     browser.runtime.onConnect.addListener(port => {
       foxreplace.webExtensionPort = port;
+      forEachOpenWindow(listenOnWebExtensionPort);
     });
     browser.runtime.onMessage.addListener(foxreplace.webExtensionMessageListener);
   });
@@ -43,8 +42,6 @@ function shutdown(aData, aReason) {
   forEachOpenWindow(unloadFromWindow);
 
   Services.wm.removeListener(WindowListener);
-
-  foxreplace.shutdown();
 
   Cu.unload("chrome://foxreplace/content/foxreplace.js");
 
@@ -70,6 +67,10 @@ function unloadFromWindow(aWindow) {
   delete windows[aWindow];
 }
 
+function listenOnWebExtensionPort(aWindow) {
+  windows[aWindow].listenOnWebExtensionPort();
+}
+
 // Apply a function to all open browser windows
 function forEachOpenWindow(aFunction) {
   let windows = Services.wm.getEnumerator("navigator:browser");
@@ -86,6 +87,7 @@ let WindowListener = {
       window.removeEventListener("load", onWindowLoad);
       if (window.document.documentElement.getAttribute("windowtype") == "navigator:browser")
         loadIntoWindow(window);
+        listenOnWebExtensionPort(window);
     }
     window.addEventListener("load", onWindowLoad);
   },

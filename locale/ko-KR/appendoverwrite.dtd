@@ -1,6 +1,0 @@
-<!ENTITY dialog.title "추가할까요, 덮어쓸까요?">
-<!ENTITY append.label "추가">
-<!ENTITY append.accesskey "A">
-<!ENTITY overwrite.label "덮어쓰기">
-<!ENTITY overwrite.accesskey "O">
-<!ENTITY question "대체어를 목록에 추가하거나 덮어쓰기를 원하십니까?">

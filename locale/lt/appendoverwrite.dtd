@@ -1,6 +1,0 @@
-<!ENTITY dialog.title "Papildyti ar perrašyti?">
-<!ENTITY append.label "Papildyti">
-<!ENTITY append.accesskey "P">
-<!ENTITY overwrite.label "Perrašyti">
-<!ENTITY overwrite.accesskey "r">
-<!ENTITY question "Norite papildyti sąrašą pakeitimais ar perrašyti jį?">

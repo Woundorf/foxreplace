@@ -1,6 +1,0 @@
-<!ENTITY dialog.title "Amestar o sobreescribir">
-<!ENTITY append.label "Anexar">
-<!ENTITY append.accesskey "A">
-<!ENTITY overwrite.label "Sobrescribir">
-<!ENTITY overwrite.accesskey "O">
-<!ENTITY question "Quies amestar les sustituciones pa la llista o sobrescribiles?">

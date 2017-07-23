@@ -1,6 +1,0 @@
-<!ENTITY dialog.title "Afegir o sobreescriure?">
-<!ENTITY append.label "Afegeix">
-<!ENTITY append.accesskey "A">
-<!ENTITY overwrite.label "Sobreescriu">
-<!ENTITY overwrite.accesskey "S">
-<!ENTITY question "Voleu afegir les substitucions a la llista o sobreescriure-la?">

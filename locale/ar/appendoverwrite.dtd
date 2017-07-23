@@ -1,6 +1,0 @@
-<!ENTITY dialog.title "إضافة أم استبدال؟">
-<!ENTITY append.label "إضافة">
-<!ENTITY append.accesskey "ض">
-<!ENTITY overwrite.label "استبدال">
-<!ENTITY overwrite.accesskey "س">
-<!ENTITY question "هل ترغب في إضافة البدائل إلى القائمة أم استبدالها؟">

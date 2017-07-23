@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2016 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -14,8 +14,6 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
-const Cc = Components.classes;
-const Ci = Components.interfaces;
 const Cu = Components.utils;
 
 Cu.import("chrome://foxreplace/content/core.js");
@@ -44,41 +42,6 @@ var io = {
       throw getLocalizedString("io.readError", [aFilePath, aError]);
     }).catch(function onRejected(aError) {
       if (aError instanceof Error) throw getLocalizedString("io.jsonError.file", [aFilePath, aError]);
-      else throw aError;
-    });
-
-    return promise;
-  },
-
-  /**
-   * Reads a substitution list from aUrl and returns a promise that fulfills with it or rejects with an error message.
-   */
-  readListFromUrl: function(aUrl) {
-    if (!aUrl) return Promise.resolve(null);
-
-    let promise = new Promise(function(resolve, reject) {
-      let request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
-      request.open("GET", aUrl);
-
-      request.onload = function() {
-        if (request.status == 200) resolve(request.responseText);
-        else reject(Error(request.status + " " + request.statusText));
-      };
-
-      request.onerror = function(e) {
-        reject(Error(getLocalizedString("io.networkError.generic")));
-      };
-
-      request.send();
-    });
-
-    promise = promise.then(function onFulfilled(aString) {
-      let listJSON = JSON.parse(aString);
-      return substitutionListFromJSON(listJSON);
-    }, function onRejected(aError) {
-      throw getLocalizedString("io.networkError", [aUrl, aError]);
-    }).catch(function onRejected(aError) {
-      if (aError instanceof Error) throw getLocalizedString("io.jsonError.url", [aUrl, aError]);
       else throw aError;
     });
 

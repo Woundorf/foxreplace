@@ -1,6 +1,0 @@
-<!ENTITY dialog.title "Ekleyin veya üzerine?">
-<!ENTITY append.label "Ekleyin">
-<!ENTITY append.accesskey "A">
-<!ENTITY overwrite.label "Üzerine">
-<!ENTITY overwrite.accesskey "O">
-<!ENTITY question "Size listesine değiştirmelerin ekleyin veya üzerine istiyor musunuz?">

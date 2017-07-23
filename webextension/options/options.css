@@ -14,21 +14,60 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
-// The content has just loaded. Apply the substitution list if auto-replace on load is on.
-storage.getPrefs().then(prefs => {
-  if (prefs.autoReplaceOnLoad) {
-    storage.getEnabledGroups().then(list => {
-      replaceWindow(window, list, prefs);
-    });
-  }
-});
+body {
+  font-family: sans-serif;
+  padding: 20px;
+}
 
-// Listen to messages from background scripts
-browser.runtime.onMessage.addListener(message => {
-  switch (message.key) {
-    case "replace":
-      let substitutionList = substitutionListFromJSON(message.list);
-      replaceWindow(window, substitutionList, message.prefs);
-      break;
-  }
-});
+button > img {
+  vertical-align: middle;
+}
+
+#listGrid, #urlsGrid, #substitutionsGrid {
+  height: 400px;
+}
+
+.enabledCell {
+  text-align: center;
+}
+
+.flex {
+  display: flex !important;
+}
+
+.ag-fresh {
+  flex: 1;
+}
+
+.rightButtons {
+  margin-left: 16px;
+}
+
+.ui.bottom.attached.tab.segment { /* hack for correct height */
+  margin-bottom: 0;
+}
+
+.placeholder {
+  color: gray;
+}
+
+.exclusionUrl {
+  color: red;
+}
+
+.placeholder > input, .exclusionUrl > input {
+  color: black;
+}
+
+.ag-fresh .icon {
+  cursor: pointer;
+}
+
+.checkboxEditor {
+  width: 100%;
+  height: 100%;
+}
+
+.importFromFile .importFromUrl, .importFromUrl .importFromFile {
+  display: none;
+}

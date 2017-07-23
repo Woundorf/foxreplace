@@ -21,7 +21,7 @@ Components.utils.import("chrome://foxreplace/content/xregexp-wrapper.js");
  * Definitions of substitution and substitution group.
  */
 
-var EXPORTED_SYMBOLS = ["Substitution", "SubstitutionGroup", "fxrIsExclusionUrl", "cloneSubstitutionList",
+var EXPORTED_SYMBOLS = ["Substitution", "SubstitutionGroup", "cloneSubstitutionList",
                         "substitutionListToJSON", "substitutionListFromJSON"];
 
 /**
@@ -221,16 +221,6 @@ SubstitutionGroup.prototype = {
   applyTo: function(aUrl, aString) {
     if (this.matches(aUrl)) return this.replace(aString);
     else return aString;
-  },
-
-  /**
-   * Returns a non-empty name for a substitution group. If it has a name it is returned. Otherwise a default name is returned.
-   */
-  get nonEmptyName() {
-    if (this.name) return this.name;
-    else if (this.urls.length == 0) return getLocalizedString("generalSubstitutions");
-    else if (this.urls.length == 1) return getLocalizedString("substitutionsForUrl", [this.urls[0]]);
-    else return getLocalizedString("substitutionsForUrls", [this.urls[0]]);
   },
 
   /**

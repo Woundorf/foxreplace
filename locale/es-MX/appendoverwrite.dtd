@@ -1,6 +1,0 @@
-<!ENTITY dialog.title "Anexar o sobreescribir">
-<!ENTITY append.label "Anexar">
-<!ENTITY append.accesskey "A">
-<!ENTITY overwrite.label "Sobreescribir">
-<!ENTITY overwrite.accesskey "O">
-<!ENTITY question "Deseas anexar las sustituciones para la lista o sobrescribirlas?">

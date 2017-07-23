@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2016 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -19,12 +19,8 @@ const Ci = Components.interfaces;
 const Cu = Components.utils;
 
 Cu.import("chrome://foxreplace/content/core.js");
-Cu.import("chrome://foxreplace/content/Observers.js");
-Cu.import("chrome://foxreplace/content/periodicreplace.js");
-Cu.import("chrome://foxreplace/content/Preferences.js");
 Cu.import("chrome://foxreplace/content/prefs.js");
 Cu.import("chrome://foxreplace/content/services.js");
-Cu.import("chrome://foxreplace/content/subscription.js");
 Cu.import("chrome://foxreplace/content/ui.js");
 
 /**
@@ -39,113 +35,32 @@ var EXPORTED_SYMBOLS = ["foxreplace", "FoxReplace"];
 var foxreplace = {
 
   /**
-   * Sets up an observer and starts enabled timers.
-   */
-  startup: function() {
-    prefs.service.addObserver("", this, false);
-    Observers.add(prefs.substitutionListChangedKey, this.loadEnabledGroups, this);
-
-    this.loadEnabledGroups();
-
-    let autoReplacePeriodically = prefs.autoReplacePeriodically;
-    let autoReplacePeriod = prefs.autoReplacePeriod;
-    if (autoReplacePeriodically)
-      fxrPeriodicReplace.start(autoReplacePeriod);
-
-    // subscription
-    var enableSubscription = prefs.enableSubscription;
-    var subscriptionUrl = prefs.subscriptionUrl;
-    var subscriptionPeriod = prefs.subscriptionPeriod;
-
-    if (enableSubscription && subscriptionUrl && subscriptionPeriod > 0)
-      fxrSubscription.start(subscriptionUrl, subscriptionPeriod);
-  },
-
-  /**
-   * Removes the observer and stops timers.
-   */
-  shutdown: function() {
-    Observers.remove(prefs.substitutionListChangedKey, this.loadEnabledGroups, this);
-    prefs.service.removeObserver("", this);
-
-    fxrPeriodicReplace.stop();
-    fxrSubscription.stop();
-  },
-
-  /**
-   * Observes changes in preferences.
-   */
-  observe: function(aSubject, aTopic, aData) {
-    // aSubject is the nsIPrefBranch we're observing (after appropriate QI)
-    // aData is the name of the pref that's been changed (relative to aSubject)
-
-    if (aTopic != "nsPref:changed") return;
-
-    switch (aData) {
-      case "autoReplacePeriodically":
-      case "autoReplacePeriod":
-        let autoReplacePeriodically = prefs.autoReplacePeriodically;
-        let autoReplacePeriod = prefs.autoReplacePeriod;
-        if (autoReplacePeriodically)
-          fxrPeriodicReplace.restart(autoReplacePeriod);
-        else
-          fxrPeriodicReplace.stop();
-        break;
-
-      case "enableSubscription":
-      case "subscriptionUrl":
-      case "subscriptionPeriod":
-        var enableSubscription = prefs.enableSubscription;
-        var subscriptionUrl = prefs.subscriptionUrl;
-        var subscriptionPeriod = prefs.subscriptionPeriod;
-        if (enableSubscription && subscriptionUrl && subscriptionPeriod > 0)
-          fxrSubscription.restart(subscriptionUrl, subscriptionPeriod);
-        else
-          fxrSubscription.stop();
-        break;
-    }
-  },
-
-  /**
-   * Loads enabled substitution groups. The original substitution list can be taken either from aSubstitutionList or from prefs.
-   */
-  loadEnabledGroups: function(aSubstitutionList) {
-    if (aSubstitutionList) {
-      this.substitutionList = aSubstitutionList.filter(group => group.enabled);
-    }
-    else {
-      prefs.substitutionList.then(list => { this.loadEnabledGroups(list); });
-    }
-  },
-
-  /**
    * Listens and responds to messages from the embedded WebExtension.
    */
   webExtensionMessageListener: function(message, sender, sendResponse) {
     // Note: this != foxreplace
     switch (message.key) {
-      case "getPrefs":
-        sendResponse({
-          autoReplaceOnLoad: prefs.autoReplaceOnLoad,
-          autoReplacePeriodically: prefs.autoReplacePeriodically,
-          autoReplacePeriod: prefs.autoReplacePeriod,
-          replaceUrls: prefs.replaceUrls,
-          replaceScripts: prefs.replaceScripts,
-          enableSubscription: prefs.enableSubscription,
-          subscriptionUrl: prefs.subscriptionUrl,
-          subscriptionPeriod: prefs.subscriptionPeriod,
-          debug: prefs.debug
-        });
-        break;
-      case "getSubstitutionList":
-        sendResponse({
-          list: substitutionListToJSON(foxreplace.substitutionList),
-          prefs: {
-            replaceUrls: prefs.replaceUrls,
-            replaceScripts: prefs.replaceScripts
+      case "migrateData":
+        prefs.shouldMigrate().then(should => {
+          if (should || message.force) {
+            prefs.backup();
+            prefs.substitutionList.then(list => {
+              sendResponse({
+                list: substitutionListToJSON(list),
+                autoReplaceOnLoad: prefs.autoReplaceOnLoad,
+                autoReplacePeriodically: prefs.autoReplacePeriodically,
+                autoReplacePeriod: prefs.autoReplacePeriod,
+                replaceUrls: prefs.replaceUrls,
+                replaceScripts: prefs.replaceScripts,
+                enableSubscription: prefs.enableSubscription,
+                subscriptionUrl: prefs.subscriptionUrl,
+                subscriptionPeriod: prefs.subscriptionPeriod
+                // prefs.debug consciously ignored
+              });
+            });
           }
         });
-        break;
+        return true;  // needed to use sendResponse asynchronously
     }
   }
 
@@ -168,11 +83,6 @@ FoxReplace.prototype = {
   onLoad: function() {
     buildUi(this.window.gBrowser);
 
-    prefs.service.addObserver("", this, false);
-    Observers.add(fxrPeriodicReplace.observerKey, this.listReplace, this);
-
-    this.setAutoReplaceOnLoad(prefs.autoReplaceOnLoad);
-
     this.window.foxreplace = this;
   },
 
@@ -180,10 +90,11 @@ FoxReplace.prototype = {
    * Finalization code.
    */
   onUnload: function() {
-    Observers.remove(fxrPeriodicReplace.observerKey, this.listReplace, this);
-    prefs.service.removeObserver("", this);
-
     removeUi(this.window.gBrowser);
+
+    if (this.webExtensionMessageListener && !Cu.isDeadWrapper(foxreplace.webExtensionPort)) {
+      foxreplace.webExtensionPort.onMessage.removeListener(this.webExtensionMessageListener);
+    }
 
     delete this.window.foxreplace;
     this.window = null;
@@ -195,22 +106,18 @@ FoxReplace.prototype = {
    * created until it's shown the first time, so it may be out of sync with the preference.
    */
   updateToolbarButtonMenu: function() {
-    this.document.getElementById("fxrToolbarButtonMenuAutoReplaceOnLoad").setAttribute("checked", prefs.autoReplaceOnLoad);
+    this.document.getElementById("fxrToolbarButtonMenuAutoReplaceOnLoad").setAttribute("checked", this._autoReplaceOnLoad);
   },
 
   /**
-   * Observes changes in preferences.
+   * Starts to listen on the WebExtension port.
    */
-  observe: function(aSubject, aTopic, aData) {
-    // aSubject is the nsIPrefBranch we're observing (after appropriate QI)
-    // aData is the name of the pref that's been changed (relative to aSubject)
-
-    if (aTopic != "nsPref:changed") return;
-
-    switch (aData) {
-      case "autoReplaceOnLoad":
-        this.setAutoReplaceOnLoad(prefs.autoReplaceOnLoad);
-        break;
+  listenOnWebExtensionPort() {
+    if (foxreplace.webExtensionPort) {
+      this.webExtensionMessageListener = message => {
+        if (message.key == "autoReplaceOnLoad") this.setAutoReplaceOnLoad(message.value);
+      };
+      foxreplace.webExtensionPort.onMessage.addListener(this.webExtensionMessageListener);
     }
   },
 
@@ -279,21 +186,19 @@ FoxReplace.prototype = {
    * Toggles auto-replace on load setting.
    */
   toggleAutoReplaceOnLoad: function() {
-    prefs.autoReplaceOnLoad = !prefs.autoReplaceOnLoad;
+    foxreplace.webExtensionPort.postMessage({
+      key: "autoReplaceOnLoad",
+      value: !this._autoReplaceOnLoad
+    });
   },
 
   /**
    * Shows options dialog.
    */
   showOptions: function() {
-    // Based on code from https://developer.mozilla.org/en-US/docs/XUL/School_tutorial/Handling_Preferences#Preference_windows
-    if (!prefs.optionsWindow) {
-      let preferences = new Preferences();
-      let instantApply = preferences.get("browser.preferences.instantApply");
-      let features = "chrome,titlebar,toolbar,centerscreen,resizable" + (instantApply ? ",dialog=no" : ",modal");
-      this.window.openDialog("chrome://foxreplace/content/options.xul", "", features);
-    }
-    else prefs.optionsWindow.focus();
+    foxreplace.webExtensionPort.postMessage({
+      key: "showOptions"
+    });
   },
 
   /**

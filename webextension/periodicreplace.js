@@ -14,21 +14,45 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
-// The content has just loaded. Apply the substitution list if auto-replace on load is on.
-storage.getPrefs().then(prefs => {
-  if (prefs.autoReplaceOnLoad) {
-    storage.getEnabledGroups().then(list => {
-      replaceWindow(window, list, prefs);
-    });
-  }
-});
+/**
+ * Updates the substitution list from a subscription URL.
+ */
+var periodicReplace = {
 
-// Listen to messages from background scripts
-browser.runtime.onMessage.addListener(message => {
-  switch (message.key) {
-    case "replace":
-      let substitutionList = substitutionListFromJSON(message.list);
-      replaceWindow(window, substitutionList, message.prefs);
-      break;
+  get alarmName() {
+    return "periodicReplace";
+  },
+
+  /**
+   * Starts the periodic replace.
+   */
+  start(period) {
+    return browser.alarms.get(this.alarmName)
+      .then(alarm => {
+        if (alarm) return;  // already started
+
+        browser.alarms.create(this.alarmName, {
+          when: Date.now() + 100, // first call after 100 ms
+          periodInMinutes: period / 60
+        });
+      });
+  },
+
+  /**
+   * Restarts the periodic replace with possibly new parameters.
+   */
+  restart(period) {
+    this.stop()
+      .then(() => {
+        this.start(period);
+      });
+  },
+
+  /**
+   * Stops the periodic replace.
+   */
+  stop() {
+    return browser.alarms.clear(this.alarmName);
   }
-});
+
+};

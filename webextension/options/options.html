@@ -1,0 +1,228 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+  -
+  - Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+  -
+  - This file is part of FoxReplace.
+  -
+  - FoxReplace is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software
+  - Foundation, either version 3 of the License, or (at your option) any later version.
+  -
+  - FoxReplace is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+  - A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+  -
+  - You should have received a copy of the GNU General Public License along with FoxReplace. If not, see <http://www.gnu.org/licenses/>.
+  -
+  - ***** END LICENSE BLOCK ***** -->
+
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>FoxReplace Options</title>
+    <link rel="stylesheet" href="semantic.min.css">
+    <link rel="stylesheet" href="options.css">
+    <script src="ag-grid.min.js"></script>
+    <script src="jquery-3.2.0.min.js"></script>
+    <script src="semantic.min.js"></script>
+    <script src="../xregexp-all-min.js"></script>
+    <script src="../core.js"></script>
+    <script src="../storage.js"></script>
+    <script src="options.js"></script>
+    <script src="groupeditor.js"></script>
+  </head>
+
+  <body>
+    <div>
+      <h4 class="ui dividing header">Substitution list</h4>
+      <p>
+        <div class="ui buttons">
+          <button id="addGroup" class="ui button">
+            <i class="plus icon"></i> Add
+          </button>
+          <button id="clearGroups" class="ui button">
+            <i class="trash icon"></i> Clear
+          </button>
+        </div>
+        <div class="ui buttons">
+          <button id="moveUpGroup" class="ui button">
+            <i class="angle up icon"></i> Move up
+          </button>
+          <button id="moveDownGroup" class="ui button">
+            <i class="angle down icon"></i> Move down
+          </button>
+        </div>
+        <div class="ui buttons">
+          <button id="import" class="ui button">
+            <i class="folder open icon"></i> Import
+          </button>
+          <button id="importFromUrl" class="ui button">
+            <i class="cloud icon"></i> Import from URL
+          </button>
+          <button id="export" class="ui button">
+            <i class="archive icon"></i> Export
+          </button>
+        </div>
+      </p>
+      <div id="listGrid" class="ag-fresh"></div>
+    </div>
+    <div class="ui hidden divider"></div>
+    <div id="prefs" class="ui form"><!-- not a form to avoid reloading the page with an accidental submit -->
+      <h4 class="ui dividing header">Periodically update from URL</h4>
+      <div class="field">
+        <div class="ui checkbox">
+          <input name="enableSubscription" type="checkbox"></input>
+          <label>Enable</label>
+        </div>
+      </div>
+      <div class="inline fields">
+        <div class="twelve wide field">
+          <label>URL</label>
+          <input name="subscriptionUrl" type="text"></input>
+        </div>
+        <div class="field">
+          <label>Period (minutes)</label>
+          <input name="subscriptionPeriod" type="number" value="1"></input>
+        </div>
+      </div>
+      <div class="inline field">
+        <label>Status:</label>
+        <span id="status">Disabled</span>
+      </div>
+      <h4 class="ui dividing header">Other settings</h4>
+      <div class="field">
+        <div class="ui checkbox">
+          <input name="autoReplaceOnLoad" type="checkbox"></input>
+          <label>Auto-replace on page load</label>
+        </div>
+      </div>
+      <div class="inline fields">
+        <div class="field">
+          <div class="ui checkbox">
+            <input name="autoReplacePeriodically" type="checkbox"></input>
+            <label>Auto-replace every</label>
+          </div>
+        </div>
+        <div class="one wide field">
+          <input name="autoReplacePeriod" type="number" value="1"></input>
+        </div>
+        <div class="field">seconds</div>
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <input name="replaceUrls" type="checkbox"></input>
+          <label>Replace URLs (links and image sources) (Warning: this may change page behaviour!)</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <input name="replaceScripts" type="checkbox"></input>
+          <label>Replace scripts (Warning: this may change page behaviour!) (experimental)</label>
+        </div>
+      </div>
+    </div>
+    <div class="ui hidden divider"></div>
+    <p>
+      <button id="save" class="ui positive button">
+        <i class="save icon"></i>
+        Save
+      </button>
+    </p>
+
+    <div id="importModal" class="ui modal">
+      <div class="header">Import</div>
+      <div class="content ui form">
+        <p>
+          <input id="importFile" class="importFromFile" type="file" accept=".json">
+          <input id="importUrl" class="importFromUrl" type="text">
+        </p>
+        <div id="importError" class="ui error message"></div>
+      </div>
+      <div class="actions">
+        <button id="importAppend" class="ui positive button">Import and append</button>
+        <button id="importOverwrite" class="ui positive button">Import and overwrite</button>
+        <button class="ui cancel button">Cancel</button>
+      </div>
+    </div>
+
+    <div id="groupEditorModal" class="ui fullscreen modal">
+      <div class="content">
+        <div id="groupEditor" class="ui form"><!-- not a form to avoid reloading the page with an accidental submit -->
+          <div class="field">
+            <div class="ui checkbox">
+              <input name="enabled" type="checkbox"></input>
+              <label>Enable</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Name</label>
+            <input name="name" type="text"></input>
+          </div>
+          <div class="field">
+            <label>HTML</label>
+            <select name="html" class="ui dropdown">
+              <option value="0" selected="">No</option>
+              <option value="1">Input only</option>
+              <option value="2">Input &amp; output</option>
+            </select>
+          </div>
+        </div>
+        <div class="ui top attached tabular menu">
+          <a class="active item" data-tab="urls">URLs</a>
+          <a class="item" data-tab="substitutions">Substitutions</a>
+        </div>
+        <div id="urlsTab" class="ui bottom attached active tab segment" data-tab="urls">
+          <div class="flex">
+            <div id="urlsGrid" class="ag-fresh"></div>
+            <div class="rightButtons">
+              <button id="clearUrlsButton" class="ui icon button" data-tooltip="Clear" data-inverted="">
+                <i class="trash icon"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="substitutionsTab" class="ui bottom attached tab segment" data-tab="substitutions">
+          <div class="flex">
+            <div id="substitutionsGrid" class="ag-fresh"></div>
+            <div class="rightButtons">
+              <div class="ui vertical icon buttons">
+                <button id="moveTopSubstitutionButton" class="ui button" data-tooltip="Move to top" data-inverted="">
+                  <i class="angle double up icon"></i>
+                </button>
+                <button id="moveUpSubstitutionButton" class="ui button" data-tooltip="Move up" data-inverted="">
+                  <i class="angle up icon"></i>
+                </button>
+                <button id="moveDownSubstitutionButton" class="ui button" data-tooltip="Move down" data-inverted="">
+                  <i class="angle down icon"></i>
+                </button>
+                <button id="moveBottomSubstitutionButton" class="ui button" data-tooltip="Move to bottom" data-inverted="">
+                  <i class="angle double down icon"></i>
+                </button>
+              </div>
+              <br>
+              <br>
+              <button id="clearSubstitutionsButton" class="ui icon button" data-tooltip="Clear" data-inverted="">
+                <i class="trash icon"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui ok primary labeled icon button">
+          <i class="checkmark icon"></i>
+          OK
+        </div>
+        <div class="ui cancel button">
+          Cancel
+        </div>
+        <div id="groupApplyButton" class="ui approve button">
+          Apply
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+</html>

@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2016 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -20,7 +20,6 @@ const Cu = Components.utils;
 
 Cu.import("chrome://foxreplace/content/core.js");
 Cu.import("chrome://foxreplace/content/io.js");
-Cu.import("chrome://foxreplace/content/Observers.js");
 Cu.import("chrome://foxreplace/content/Preferences.js");
 Cu.import("chrome://foxreplace/content/services.js");
 Cu.import("resource://gre/modules/osfile.jsm");
@@ -54,12 +53,12 @@ var prefs = {
   },
 
   /**
-   * Returns the observer key for the substitution list changed event.
+   * Returns the path of the file where the substitution list backup is saved.
    */
-  get substitutionListChangedKey() {
-    return "substitutionListChanged";
+  get substitutionListBackupFilePath() {
+    return OS.Path.join(this.substitutionListDirPath, "list-backup.json");
   },
-  
+
   /**
    * Loads the default preferences.
    */
@@ -134,24 +133,30 @@ var prefs = {
   },
 
   /**
+   * Loads the substitution list backup asynchronously and returns a promise that is fulfilled with it.
+   */
+  get substitutionListBackup() {
+    return io.readList(this.substitutionListBackupFilePath);
+  },
+
+  /**
    * Saves the substitution list asynchronously.
    */
   set substitutionList(aSubstitutionList) {
     // Save a copy of the substitution list to return in the getter
     this._getPromise = Promise.resolve(cloneSubstitutionList(aSubstitutionList));
-    Observers.notify(this.substitutionListChangedKey, aSubstitutionList);
     OS.File.makeDir(this.substitutionListDirPath).then(function() {
       io.writeList(aSubstitutionList, prefs.substitutionListFilePath);
     });
   },
-  
+
   /**
    * Converts the string as saved in preferences to a substitution list.
    */
   substitutionListFromString: function(aJSONString) {
     return substitutionListFromJSON(JSON.parse(aJSONString));
   },
-  
+
   /**
    * Converts the substitution list to a string to save to preferences.
    */
@@ -286,35 +291,21 @@ var prefs = {
   },
 
   /**
-   * A Preferences object that doesn't reference any specific branch.
+   * Returns a promise that is fulfilled with true if the substitution list and the preferences should be migrated, and with false otherwise.
    */
-  _globalPrefs: new Preferences(),
-
-  /**
-   * Returns the value of the instantApply preference.
-   */
-  get instantApply() {
-    return this._globalPrefs.get("browser.preferences.instantApply");
+  shouldMigrate() {
+    // Backup if current list and backup are different (compare JSON string for simplicity) or if there is any error
+    return Promise.all([this.substitutionList, this.substitutionListBackup])
+      .then(([list, backup]) => JSON.stringify(substitutionListToJSON(list)) != JSON.stringify(substitutionListToJSON(backup)))
+      .catch(() => true);
   },
 
   /**
-   * Start observing a preference.
+   * Creates a backup of the substitution list.
    */
-  observe: function(aPrefName, aCallback, aThisObject) {
-    this._preferences.observe(aPrefName, aCallback, aThisObject);
-  },
-
-  /**
-   * Stop observing a preference.
-   */
-  ignore: function(aPrefName, aCallback, aThisObject) {
-    this._preferences.ignore(aPrefName, aCallback, aThisObject);
-  },
-  
-  /**
-   * Reference to the options window.
-   */
-  optionsWindow: null
+  backup() {
+    OS.File.copy(this.substitutionListFilePath, this.substitutionListBackupFilePath);
+  }
 
 };
 

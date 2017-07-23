@@ -14,8 +14,7 @@
                    em:description="Lets you replace text in web pages. You can define a substitution list and apply it automatically or at your own discretion, or make individual substitutions. You can use this as a filter, or just for fun :)"
                    em:homepageURL="https://github.com/Woundorf/foxreplace"
                    em:iconURL="chrome://foxreplace/content/foxreplace48.png"
-                   em:icon64URL="chrome://foxreplace/content/foxreplace64.png"
-                   em:optionsURL="chrome://foxreplace/content/options.xul">
+                   em:icon64URL="chrome://foxreplace/content/foxreplace64.png">
     <em:bootstrap>true</em:bootstrap>
     <em:hasEmbeddedWebExtension>true</em:hasEmbeddedWebExtension>
     <em:multiprocessCompatible>true</em:multiprocessCompatible>

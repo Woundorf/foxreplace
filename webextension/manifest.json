@@ -5,17 +5,27 @@
   "version": "1.0.0",
   "default_locale": "en",
 
+  "content_security_policy": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'",
+
+  "permissions": ["<all_urls>", "alarms", "downloads", "storage"],
+
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["xregexp-all-min.js", "core.js", "periodicreplace.js", "storage.js", "subscription.js", "background.js"]
   },
 
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["xregexp-all-min.js", "core.js", "replace.js", "content.js"],
+      "js": ["xregexp-all-min.js", "core.js", "replace.js", "storage.js", "content.js"],
       "all_frames": true,
       "run_at": "document_end"
     }
-  ]
+  ],
+
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true,
+    "browser_style": true
+  }
 
 }
