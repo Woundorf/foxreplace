@@ -79,20 +79,25 @@ function forEachOpenWindow(aFunction) {
     aFunction(windows.getNext().QueryInterface(Ci.nsIDOMWindow));
 }
 
-let WindowListener = {
+var WindowListener = {
 
   onOpenWindow: function(aXulWindow) {
     let window = aXulWindow.QueryInterface(Ci.nsIInterfaceRequestor).getInterface(Ci.nsIDOMWindow);
     function onWindowLoad() {
       window.removeEventListener("load", onWindowLoad);
-      if (window.document.documentElement.getAttribute("windowtype") == "navigator:browser")
+      if (window.document.documentElement.getAttribute("windowtype") == "navigator:browser") {
         loadIntoWindow(window);
         listenOnWebExtensionPort(window);
+      }
     }
     window.addEventListener("load", onWindowLoad);
   },
 
   onCloseWindow: function(aXulWindow) {
+    let window = aXulWindow.QueryInterface(Ci.nsIInterfaceRequestor).getInterface(Ci.nsIDOMWindow);
+    if (window.document.documentElement.getAttribute("windowtype") == "navigator:browser") {
+      unloadFromWindow(window);
+    }
   },
 
   onWindowTitleChange: function(aXulWindow, aNewTitle) {
