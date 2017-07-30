@@ -219,15 +219,19 @@ FoxReplace.prototype = {
    * Applies aSubstitutionList to the current tab. If no substitution list is given the current one is used.
    */
   replaceDocXpath: function(aSubstitutionList) {
-    let substitutionList = aSubstitutionList || foxreplace.substitutionList;
-    foxreplace.webExtensionPort.postMessage({
-      key: "replace",
-      list: substitutionListToJSON(substitutionList),
-      prefs: {
-        replaceUrls: prefs.replaceUrls,
-        replaceScripts: prefs.replaceScripts
-      }
-    });
+    if (aSubstitutionList) {
+      foxreplace.webExtensionPort.postMessage({
+        key: "replace",
+        list: substitutionListToJSON(aSubstitutionList),
+        prefs: {
+          replaceUrls: prefs.replaceUrls,
+          replaceScripts: prefs.replaceScripts
+        }
+      });
+    }
+    else {
+      foxreplace.webExtensionPort.postMessage({ key: "replaceWithList" });
+    }
   },
 
   /**

@@ -21,6 +21,7 @@ let legacyPort = browser.runtime.connect();
 legacyPort.onMessage.addListener(message => {
   switch (message.key) {
     case "replace":
+    case "replaceWithList":
       replaceCurrentTab(message);
       break;
     case "autoReplaceOnLoad":
