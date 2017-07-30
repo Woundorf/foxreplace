@@ -1,3 +1,4 @@
+v1.1.0 (2017-07-30)
 * Substitutions are applied when the main page has loaded, without waiting for other resources.
 * Substitutions list and preferences saved in the embedded WebExtension's local storage.
 * Options page moved to the embedded WebExtension.
