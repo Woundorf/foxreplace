@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2016 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -79,23 +79,6 @@ function buildUi(aBrowser) {
                                        accesskey: strings.get("contextMenuFoxReplace.accesskey"), command: "fxrCmdListReplace", key: "fxrKeyListReplace" });
   contextMenuItem.build(doc.getElementById("contentAreaContextMenu"));
 
-  let toolbarButton =
-    Xul.TOOLBARBUTTON({ id: "fxrToolbarButton", "class": "toolbarbutton-1 chromeclass-toolbar-additional", type: "menu-button",
-                        label: strings.get("toolbarButton.label"), tooltiptext: strings.get("toolbarButton.tooltip"), command: "fxrCmdListReplace" },
-      Xul.MENUPOPUP({ oncommand: "event.stopPropagation();",  // stop event propagation to avoid executing button's command
-                      onpopupshowing: "window.foxreplace.updateToolbarButtonMenu();" },
-        Xul.MENUITEM({ id: "fxrToolbarButtonMenuReplace", label: strings.get("listReplace.label"), accesskey: strings.get("listReplace.accesskey"),
-                       command: "fxrCmdListReplace", key: "fxrKeyListReplace" }),
-        Xul.MENUITEM({ id: "fxrToolbarButtonMenuAutoReplaceOnLoad", type: "checkbox", label: strings.get("autoReplaceOnLoad.label"),
-                       accesskey: strings.get("autoReplaceOnLoad.accesskey"), command: "fxrCmdToggleAutoReplaceOnLoad" }),
-        Xul.MENUITEM({ id: "fxrToolbarButtonMenuOptions", label: strings.get("options.label"), accesskey: strings.get("options.accesskey"),
-                       command: "fxrCmdOptions" }),
-        Xul.MENUSEPARATOR(),
-        Xul.MENUITEM({ id: "fxrToolbarMenuHelp", label: strings.get("help.label"), accesskey: strings.get("help.accesskey"), command: "fxrCmdHelp" })
-      )
-    );
-  toolbarButton.build(doc.getElementById("navigator-toolbox").palette);
-
   let replaceBar =
     Xul.TOOLBAR({ id: "fxrReplaceBar", align: "center", fullscreentoolbar: "true", hidden: "true",
                   onkeypress: "if (event.keyCode == event.DOM_VK_ESCAPE) window.foxreplace.hideReplaceBar();" },
@@ -118,7 +101,7 @@ function buildUi(aBrowser) {
                           command: "fxrCmdHideReplaceBar" })
     );
   replaceBar.build(doc.getElementById("browser-bottombox"));
-  
+
   // Load stylesheet
   let styleSheetService = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
   let styleSheetURI = Services.io.newURI("chrome://foxreplace/skin/foxreplace.css", null, null);
@@ -146,12 +129,9 @@ function removeUi(aBrowser) {
   let contextMenuItem = doc.getElementById("fxrContextMenuFoxReplace");
   contextMenuItem.parentNode.removeChild(contextMenuItem);
 
-  let toolbarButton = doc.getElementById("fxrToolbarButton");
-  if (toolbarButton) toolbarButton.parentNode.removeChild(toolbarButton);
-
   let replaceBar = doc.getElementById("fxrReplaceBar");
   replaceBar.parentNode.removeChild(replaceBar);
-  
+
   // Unload stylesheet
   let styleSheetService = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
   let styleSheetURI = Services.io.newURI("chrome://foxreplace/skin/foxreplace.css", null, null);

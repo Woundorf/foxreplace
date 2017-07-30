@@ -34,6 +34,18 @@ legacyPort.onMessage.addListener(message => {
   }
 });
 
+// Listen to messages from other parts of the WebExtension
+browser.runtime.onMessage.addListener(message => {
+  switch (message.key) {
+    case "replaceWithList":
+      replaceCurrentTab(message);
+      break;
+    case "showHelp":
+      legacyPort.postMessage(message);
+      break;
+  }
+});
+
 // Migrate data from the legacy extension
 storage.hasData().then(has => {
   let message = {

@@ -14,28 +14,16 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
-// The content has just loaded. Apply the substitution list if auto-replace on load is on.
-storage.getPrefs().then(prefs => {
-  if (prefs.autoReplaceOnLoad) {
-    storage.getEnabledGroups().then(list => {
-      replaceWindow(window, list, prefs);
-    });
-  }
-});
+.panel-list-item {
+  padding-left: 32px;
+}
 
-// Listen to messages from background scripts
-browser.runtime.onMessage.addListener(message => {
-  switch (message.key) {
-    case "replace":
-      let substitutionList = substitutionListFromJSON(message.list);
-      replaceWindow(window, substitutionList, message.prefs);
-      break;
-    case "replaceWithList":
-      storage.getPrefs().then(prefs => {
-        storage.getEnabledGroups().then(list => {
-          replaceWindow(window, list, prefs);
-        });
-      });
-      break;
-  }
-});
+.panel-list-item > .icon {
+  position: absolute;
+  left: 16px;
+}
+
+.panel-list-item > .text-shortcut {
+  font: unset;
+  margin-left: 16px;
+}

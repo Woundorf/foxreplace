@@ -26,6 +26,16 @@
     "page": "options/options.html",
     "open_in_tab": true,
     "browser_style": true
+  },
+
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/toolbaricon16.png",
+      "32": "icons/toolbaricon32.png",
+      "64": "icons/toolbaricon64.png"
+    },
+    "default_popup": "popup/toolbarbutton.html",
+    "browser_style": true
   }
 
 }

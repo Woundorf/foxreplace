@@ -115,7 +115,14 @@ FoxReplace.prototype = {
   listenOnWebExtensionPort() {
     if (foxreplace.webExtensionPort) {
       this.webExtensionMessageListener = message => {
-        if (message.key == "autoReplaceOnLoad") this.setAutoReplaceOnLoad(message.value);
+        switch (message.key) {
+          case "autoReplaceOnLoad":
+            this.setAutoReplaceOnLoad(message.value);
+            break;
+          case "showHelp":
+            this.showHelp();
+            break;
+        }
       };
       foxreplace.webExtensionPort.onMessage.addListener(this.webExtensionMessageListener);
     }
