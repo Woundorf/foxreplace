@@ -20,7 +20,7 @@
 <!ENTITY substitution.table.4.1 "un número decimal entero entre 1 y 99 (incluido), inserta el">
 <!ENTITY substitution.table.4.2 "th subcadena encontrada.">
 <!ENTITY substitutionList "Lista de sustitucion">
-<!ENTITY substitutionList.p "FoxReplace mantiene una lista de sustitución que puede definir y modificar en cualquier momento desde la ventana de opciones FoxReplace. Usted puede solicitar la lista de suplentes cuando quiera pulsando las teclas Mayus+F9 o pulsando el botón de barra de herramientas o la activación de una opción de menú. Cuando lo haga, las sustituciones en la lista se aplican en el orden en que aparecen. Usted puede solicitar la lista de suplentes tantas veces como desee durante la misma página. Las sustituciones se hacen sobre el contenido actual de la página, es decir, si se aplica la lista de suplentes por segunda vez, será el resultado de la primera. En esta lista de sustitución no son las sustituciones directamente, pero hay grupos de sustitución, donde se asocia una lista de direcciones (URL) con una lista de sustituciones que se aplican a páginas cuya dirección coincide con una de las URL en la lista.">
+<!ENTITY substitutionList.p "FoxReplace mantiene una lista de sustitución que puede definir y modificar en cualquier momento desde la ventana de opciones FoxReplace. Usted puede solicitar la lista de suplentes cuando quiera pulsando las teclas Ctrl+F9 o pulsando el botón de barra de herramientas o la activación de una opción de menú. Cuando lo haga, las sustituciones en la lista se aplican en el orden en que aparecen. Usted puede solicitar la lista de suplentes tantas veces como desee durante la misma página. Las sustituciones se hacen sobre el contenido actual de la página, es decir, si se aplica la lista de suplentes por segunda vez, será el resultado de la primera. En esta lista de sustitución no son las sustituciones directamente, pero hay grupos de sustitución, donde se asocia una lista de direcciones (URL) con una lista de sustituciones que se aplican a páginas cuya dirección coincide con una de las URL en la lista.">
 <!ENTITY substitutionGroup "Grupo de sustitucion">
 <!ENTITY substitutionGroup.p0 "Está formado por una lista de direcciones URL y una lista de sustitución. Las sustituciones se aplican en el orden en que aparecen, y debe haber al menos uno. Con la lista de direcciones URL se puede definir a las páginas que las sustituciones se aplican. Si la lista está vacía, las sustituciones se aplican a cualquier página. Usted puede agregar las direcciones URL y las sustituciones sólo se aplican si la dirección de la página coincide con una de las direcciones URL. Por último, también puede agregar las direcciones URL de exclusión que tienen el efecto contrario, las sustituciones no se aplican si la dirección de la página coincide con uno de ellos. Por lo tanto, si la lista de direcciones URL no está vacío, las sustituciones se aplican si la dirección de la página no coincide con ninguna de las direcciones URL de exclusión y coincide con una de las direcciones URL normal. La dirección URL de una página se considera para que coincida con una dirección URL del grupo si la dirección del grupo es parte de la URL de la página.">
 <!ENTITY substitutionGroup.p1 "Las direcciones URL de exclusión son las que comienzan con un guión(&quot;-&quot;), y se muestran en rojo; el resto son las URL normales. Puedes usar caracteres especiales&quot;*&quot; para coincidir cualquier 0 o mas caracteres y &quot;|&quot; para que coincida con el comienzo o el final de la URL. Si desea definir una dirección URL que comienza con un guión (i.e. &quot;-abc&quot;) y no es una dirección URL de la exclusión, puede usar la forma equivalente &quot;|*-abc&quot;.">
@@ -38,7 +38,7 @@
 <!ENTITY newGui.menu.replace.d "Mostrar la barra de reemplazo">
 <!ENTITY newGui.tools "Herramientas">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Reemplazar con la lista de sustitución (Mayus+F9)">
+<!ENTITY newGui.menu.replaceWithList "Reemplazar con la lista de sustitución (Ctrl+F9)">
 <!ENTITY newGui.menu.replaceWithList.d "Se aplica la sustitución de la lista actual.">
 <!ENTITY newGui.menu.autoReplace "Auto reemplazar en la pagina cargada">
 <!ENTITY newGui.menu.autoReplace.d "Alternar esta opción.">
@@ -50,7 +50,7 @@
 <!ENTITY newGui.toolbarButton.0 "Al pulsarlo se aplica la lista de sustitución actual.">
 <!ENTITY newGui.toolbarButton.1 "eso tiene un menu al lado como el FoxReplace encima.">
 <!ENTITY newGui.contextMenu "Menu contextual">
-<!ENTITY newGui.contextMenu.replace "Reemplazar con la lista de sustitución (FoxReplace) (Mayus+F9)">
+<!ENTITY newGui.contextMenu.replace "Reemplazar con la lista de sustitución (FoxReplace) (Ctrl+F9)">
 <!ENTITY newGui.contextMenu.replace.d "Se aplica la sustitución de la lista actual.">
 <!ENTITY newGui.replaceBar "Reemplazar barra">
 <!ENTITY newGui.replaceBar.0 "Aparece debajo de la barra de búsqueda.">

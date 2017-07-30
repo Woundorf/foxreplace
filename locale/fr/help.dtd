@@ -20,7 +20,7 @@
 <!ENTITY substitution.table.4.1 "un nombre entier décimal entre 1 et 99 (inclus), insère la">
 <!ENTITY substitution.table.4.2 "e sous-chaîne trouvée.">
 <!ENTITY substitutionList "Liste de substitution">
-<!ENTITY substitutionList.p "FoxReplace conserve une liste de substitution que vous pouvez définir et modifier à n'importe quel moment à partir de la fenêtre des options FoxReplace. Vous pouvez appliquer ces substitutions en appuyant sur la touche F2, en cliquant sur le bouton de la barre d'outils ou en activant une entrée de menu. Les substitutions se feront dans l'ordre dans lequel elles apparaissent. Vous pouvez appliquer autant de fois que vous le voulez la liste de substitution sur la même page. Les substitutions se feront sur le contenu de la page courante, c -à-d. si vous appliquez une seconde fois la liste de substitution, cela se fera sur le résultat de la première substitution. On ne trouve pas directement les substitutions dans cette liste mais des groupes de substitution contenant une liste d'adresses (URL) associées à une liste de substitution qui sont appliquées aux pages dont l'adresse correspond à une des URL de la liste.">
+<!ENTITY substitutionList.p "FoxReplace conserve une liste de substitution que vous pouvez définir et modifier à n'importe quel moment à partir de la fenêtre des options FoxReplace. Vous pouvez appliquer ces substitutions en appuyant sur la touche Ctrl+F9, en cliquant sur le bouton de la barre d'outils ou en activant une entrée de menu. Les substitutions se feront dans l'ordre dans lequel elles apparaissent. Vous pouvez appliquer autant de fois que vous le voulez la liste de substitution sur la même page. Les substitutions se feront sur le contenu de la page courante, c -à-d. si vous appliquez une seconde fois la liste de substitution, cela se fera sur le résultat de la première substitution. On ne trouve pas directement les substitutions dans cette liste mais des groupes de substitution contenant une liste d'adresses (URL) associées à une liste de substitution qui sont appliquées aux pages dont l'adresse correspond à une des URL de la liste.">
 <!ENTITY substitutionGroup "Groupe de substitution">
 <!ENTITY substitutionGroup.p0 "Il est composé d'une liste d'URL et d'une liste de substitution. Les substitutions sont réalisées dans l'ordre dans lequel elles apparaissent, il en faut au moins une. Grâce à la liste d'URL vous pouvez définir à quelles pages les substitutions seront appliquées. Si la liste est vide, les substitutions sont appliquées à toutes les pages. Vous pouvez ajouter des URLs et ensuite les substitutions sont appliquées uniquement si l'adresse de la page correspond à une de celles ajoutées. Enfin, vous pouvez également définir des URL exclues qui ont l'effet inverse, les substitutions ne sont pas appliquées si l'adresse de la page correspond à l'une d'entre elles. En résumé, si la liste d'URL n'est pas vide, les substitutions sont appliquées si l'adresse de la page ne correspond à aucune adresse de la liste d'exclusion et à une des adresses de la liste normale. L'URL d'une page est considérée comme correspondant à une URL du groupe si l'URL du groupe correspond à une partie de l'URL de la page.">
 <!ENTITY substitutionGroup.p1 "Les URL exclues sont celles débutant par un tiret (« - »), elles sont affichées en rouge ; les autres URLs sont des adresses normales. Vous pouvez utiliser le caractère spécial « * » pour une correspondance avec aucun ou plusieurs caractères et « | » pour une correspondance avec le début ou la fin d'une URL. Si vous souhaitez définir une URL débutant par un tiret (ex. : « -abc ») et ne devant pas être considérée comme étant une URL exclue, vous pourrez utiliser la forme équivalente suivante : « |*-abc ».">
@@ -34,11 +34,11 @@
 <!ENTITY replaceScripts.p "Cette option est désactivée par défaut. Si elle est activée, les substitutions sont également appliquées aux scripts de la page, cela pourra donc modifier son comportement. Utilisez-la sous votre propre responsabilité. Pour des substitutions par du HTML en entrée ou en sortie cette option s'applique à tous les scripts, sinon, uniquement aux scripts dans le corps (body).">
 <!ENTITY newGui "Nouveaux éléments de menu et de barre d'outils">
 <!ENTITY newGui.edit "Éditer">
-<!ENTITY newGui.menu.replace "Remplacer… (Maj. + F2)">
+<!ENTITY newGui.menu.replace "Remplacer… (F9)">
 <!ENTITY newGui.menu.replace.d "Affiche la barre de remplacement.">
 <!ENTITY newGui.tools "Outils">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Remplacer en utilisant la liste de substitution (F2)">
+<!ENTITY newGui.menu.replaceWithList "Remplacer en utilisant la liste de substitution (Ctrl+F9)">
 <!ENTITY newGui.menu.replaceWithList.d "Applique la liste de substitution courante.">
 <!ENTITY newGui.menu.autoReplace "Remplacement automatique au chargement de la page">
 <!ENTITY newGui.menu.autoReplace.d "Active/désactive cette option.">
@@ -50,7 +50,7 @@
 <!ENTITY newGui.toolbarButton.0 "En cliquant dessus, la liste de substitution courante est appliquée.">
 <!ENTITY newGui.toolbarButton.1 "Il comporte un menu déroulant comme celui de FoxReplace ci-dessus.">
 <!ENTITY newGui.contextMenu "Menu contextuel">
-<!ENTITY newGui.contextMenu.replace "Remplacer par la liste de substitution (FoxReplace - F2)">
+<!ENTITY newGui.contextMenu.replace "Remplacer par la liste de substitution (FoxReplace) (Ctrl+F9)">
 <!ENTITY newGui.contextMenu.replace.d "Applique la liste de substitution courante.">
 <!ENTITY newGui.replaceBar "Barre de remplacement">
 <!ENTITY newGui.replaceBar.0 "Apparaît sous la barre de recherche">

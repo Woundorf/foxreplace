@@ -20,7 +20,7 @@
 <!ENTITY substitution.table.4.1 "un întreg zecimal între 1 și 99 (inclusiv), inserează">
 <!ENTITY substitution.table.4.2 "textul găsit.">
 <!ENTITY substitutionList "Lista de substituții">
-<!ENTITY substitutionList.p "FoxReplace păstrează o listă de substituții pe care o puteți defini și modifica oricând din fereastra de opțiuni pentru FoxReplace. Puteți aplica lista de substituții oricând doriți apăsând tasta F2 sau apăsând butonul din bara de unelte sau activând o opțiune din meniu. Când faceți asta, substituțiile din listă vor fi aplicate în ordinea în care apar. Puteți aplica lista de substituții de câte ori doriți pe aceeași pagină. Substituțiile sunt făcute pe conținutul curent al paginii, adică dacă aplicați substituțiile a doua oară, acest lucru se va face pe rezultatul primei aplicări. În lista aceasta de substituții nu sunt direct substituții, ci grupuri de substituții unde o listă de adrese este asociată cu o listă de substituții care sunt aplicate paginilor care se potrivesc cu lista de adrese.">
+<!ENTITY substitutionList.p "FoxReplace păstrează o listă de substituții pe care o puteți defini și modifica oricând din fereastra de opțiuni pentru FoxReplace. Puteți aplica lista de substituții oricând doriți apăsând tasta Ctrl+F9 sau apăsând butonul din bara de unelte sau activând o opțiune din meniu. Când faceți asta, substituțiile din listă vor fi aplicate în ordinea în care apar. Puteți aplica lista de substituții de câte ori doriți pe aceeași pagină. Substituțiile sunt făcute pe conținutul curent al paginii, adică dacă aplicați substituțiile a doua oară, acest lucru se va face pe rezultatul primei aplicări. În lista aceasta de substituții nu sunt direct substituții, ci grupuri de substituții unde o listă de adrese este asociată cu o listă de substituții care sunt aplicate paginilor care se potrivesc cu lista de adrese.">
 <!ENTITY substitutionGroup "Grup de substituții">
 <!ENTITY substitutionGroup.p0 "Se compune dintr-o listă de adrese și o listă de substituții. Substituțiile sunt aplicate în ordinea în care apar și trebuie să fie cel puțin una. Cu lista de adrese puteți defini căror pagini le sunt aplicate substituțiile. Dacă lista e goală, substituțiile sunt aplicate tuturor paginilor. Puteți adăuga adrese pentru a limita paginile pe care sunt aplicate substituțiile. În fine, puteți și să adăugați excepții, care au efectul invers, adică substituțiile nu sunt aplicate dacă pagina adresei se potrivește cu una dintre adrese.  Deci dacă lista de adrese nu e goală, substituțiile sunt aplicate dacă adresa paginii nu se potrivește cu oricare din adresele de excludere și se potrivește cu una dintre adresele normale. Adresa unei pagini este considerată potrivită cu o adresă dintr-un grup dacă adresa din grup este parte a adresei paginii.">
 <!ENTITY substitutionGroup.p1 "Adresele de excludere sunt cele care încep cu linuță de despărțire „-”) și sunt afișate cu roșu; restul sunt adrese normale. Puteți folosi caractere speciale ca „*” pentru a potrivi 0 sau mai multe caractere și „|” pentru a potrivi începutul sau sfârșitul adresei. Dacă doriți să definiți o adresă care începe cu o liniuță de despărțire (ex: „-abc”) și nu este o adresă de excludere, puteți folosi forma echivalentă „|*-abc”.">
@@ -34,11 +34,11 @@
 <!ENTITY replaceScripts.p "This option is off by default. If it's on, substitutions are also applied to the scripts in the page, so it may change the behaviour of the page. Use it under your own responsibility. For substitutions with HTML in the input and the output this option applies to all the scripts, otherwise only to the scripts in the body.">
 <!ENTITY newGui "Meniul nou și elementele barei de unelte">
 <!ENTITY newGui.edit "Editează">
-<!ENTITY newGui.menu.replace "Replace... (F8)">
+<!ENTITY newGui.menu.replace "Replace... (F9)">
 <!ENTITY newGui.menu.replace.d "Shows the replace bar.">
 <!ENTITY newGui.tools "Unelte">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (Shift+F8)">
+<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (Ctrl+F9)">
 <!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
 <!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
 <!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
@@ -50,7 +50,7 @@
 <!ENTITY newGui.toolbarButton.0 "Apăsarea lui aplică lista curentă de substituții.">
 <!ENTITY newGui.toolbarButton.1 "Are un meniu lateral ca FoxReplace de sus.">
 <!ENTITY newGui.contextMenu "Meniu contextual">
-<!ENTITY newGui.contextMenu.replace "Înlocuiește cu lista de substituții (FoxReplace) (F2)">
+<!ENTITY newGui.contextMenu.replace "Înlocuiește cu lista de substituții (FoxReplace) (Ctrl+F9)">
 <!ENTITY newGui.contextMenu.replace.d "Aplică lista curentă de substituții.">
 <!ENTITY newGui.replaceBar "Bara de înlocuire">
 <!ENTITY newGui.replaceBar.0 "Apare sub bara de căutare.">

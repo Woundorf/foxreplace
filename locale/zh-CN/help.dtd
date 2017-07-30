@@ -20,7 +20,7 @@
 <!ENTITY substitution.table.4.1 "一个十进制整数 1至99(含)，插入">
 <!ENTITY substitution.table.4.2 "第 发现子字符串。">
 <!ENTITY substitutionList "替代列表">
-<!ENTITY substitutionList.p "FoxReplace keeps a substitution list that you can define and modify at any moment from the FoxReplace options window. You can apply the substitution list when you want by pressing Shift+F8 or by pushing the toolbar button or activating a menu option. When you do, substitutions in the list will be applied in the order in which they appear. You can apply the substitution list as many times as you want over the same page. Substitutions are done over the current content of the page, i.e. if you apply the substitution list a second time, it will be over the result of the first. In this substitution list there aren't the substitutions directly, but there are substitution groups, where a list of addresses (URLs) is associated with a list of substitutions which are applied to pages whose address matches one of the URLs in the list.">
+<!ENTITY substitutionList.p "FoxReplace keeps a substitution list that you can define and modify at any moment from the FoxReplace options window. You can apply the substitution list when you want by pressing Ctrl+F9 or by pushing the toolbar button or activating a menu option. When you do, substitutions in the list will be applied in the order in which they appear. You can apply the substitution list as many times as you want over the same page. Substitutions are done over the current content of the page, i.e. if you apply the substitution list a second time, it will be over the result of the first. In this substitution list there aren't the substitutions directly, but there are substitution groups, where a list of addresses (URLs) is associated with a list of substitutions which are applied to pages whose address matches one of the URLs in the list.">
 <!ENTITY substitutionGroup "替代组">
 <!ENTITY substitutionGroup.p0 "It's formed by an URL list and a substitution list. The substitutions are applied in the order they appear, and there must be one at least. With the URL list you can define to which pages the substitutions are applied. If the list is empty, the substitutions are applied to any page. You can add URLs and then the substitutions are applied only if the page address matches one of the URLs. Finally, you can also add exclusion URLs which have the opposite effect, the substitutions aren't applied if the page address matches one of them. So, the substitutions are applied if the page address doesn't match any of the exclusion URLs and it matches one of the normal URLs or there is none. The URL of a page is considered to match an URL of the group if the URL of the group is part of the URL of the page.">
 <!ENTITY substitutionGroup.p1 "The exclusion URLs are the ones that start with a hyphen (&quot;-&quot;), and they are displayed in red; the rest are normal URLs. You may use special characters &quot;*&quot; to match any 0 or more characters and &quot;|&quot; to match the beginning or the end of the URL. If you want to define an URL that starts with a hyphen (i.e. &quot;-abc&quot;) and it isn't an exclusion URL, you may use the equivalent form &quot;|*-abc&quot;.">
@@ -34,11 +34,11 @@
 <!ENTITY replaceScripts.p "此选项默认关闭。如果开启，替代也会应用到页面中的脚本，因此它可能改变页面的行为。请明确了解后再使用此选项。对于输入和输出中使用 HTML 的替代选项，此选项将应用到所有脚本，否则只应用到 body 内的脚本。">
 <!ENTITY newGui "创建菜单和工具栏组件">
 <!ENTITY newGui.edit "编辑">
-<!ENTITY newGui.menu.replace "替换... (F8)">
+<!ENTITY newGui.menu.replace "替换... (F9)">
 <!ENTITY newGui.menu.replace.d "显示替换栏。">
 <!ENTITY newGui.tools "工具">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "使用替代列表替换 (Shift+F8)">
+<!ENTITY newGui.menu.replaceWithList "使用替代列表替换 (Ctrl+F9)">
 <!ENTITY newGui.menu.replaceWithList.d "应用当前的替代列表。">
 <!ENTITY newGui.menu.autoReplace "页面载入后自动替换">
 <!ENTITY newGui.menu.autoReplace.d "切换此选项。">
@@ -50,7 +50,7 @@
 <!ENTITY newGui.toolbarButton.0 "它适用于紧凑的菜单。">
 <!ENTITY newGui.toolbarButton.1 "它有一个菜单，如 FoxReplace 以上。">
 <!ENTITY newGui.contextMenu "右键菜单">
-<!ENTITY newGui.contextMenu.replace "用替代列表替换 (FoxReplace) (Shift+F8)">
+<!ENTITY newGui.contextMenu.replace "用替代列表替换 (FoxReplace) (Ctrl+F9)">
 <!ENTITY newGui.contextMenu.replace.d "适用于当前的替代列表。">
 <!ENTITY newGui.replaceBar "替换工具栏">
 <!ENTITY newGui.replaceBar.0 "出现在查找工具栏下方。">

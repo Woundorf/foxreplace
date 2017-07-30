@@ -20,7 +20,7 @@
 <!ENTITY substitution.table.4.1 "是一個十進位整數 1 至 99 (含)，插入第">
 <!ENTITY substitution.table.4.2 "個匹配的子字串。">
 <!ENTITY substitutionList "取代列表">
-<!ENTITY substitutionList.p "FoxReplace 儲存一個取代列表，你可以從 FoxReplace 選項視窗對列表做設定和修改，並經由手動按下 Shift+F8 組合鍵或工具列按鈕，或是設定選項自動執行取代。詞組依順序執行。你可以在同一頁面重複執行；再次地執行會覆蓋前一次執行的結果。取代列表由詞組清單所構成；詞組清單由網址和取代詞組所構成；詞組會在其指定的網址執行取代。">
+<!ENTITY substitutionList.p "FoxReplace 儲存一個取代列表，你可以從 FoxReplace 選項視窗對列表做設定和修改，並經由手動按下 Ctrl+F9 組合鍵或工具列按鈕，或是設定選項自動執行取代。詞組依順序執行。你可以在同一頁面重複執行；再次地執行會覆蓋前一次執行的結果。取代列表由詞組清單所構成；詞組清單由網址和取代詞組所構成；詞組會在其指定的網址執行取代。">
 <!ENTITY substitutionGroup "詞組清單">
 <!ENTITY substitutionGroup.p0 "詞組清單由網址和取代詞組所構成。詞組依順序執行；詞組必須至少含有一個取代詞。你可以設定套用的網址列表，如果網址列表留空，那將會在所有頁面執行詞組取代。你也可以設定例外網址，取代詞組不會在例外網址執行。所以，如果網址列表非空，取代詞組會在其匹配且非例外網址上執行。">
 <!ENTITY substitutionGroup.p1 "例外網址以連字號(&quot;-&quot;)開頭，並以紅字顯示。你可以使用萬用字元(&quot;*&quot;)匹配零到多個字元，管線符號(&quot;|&quot;)匹配網址開頭或結尾。如果你想要設定一個以連字號開頭的網址(如： &quot;-abc&quot;)，而且希望它不是例外網址，你可以使用格式： &quot;|*-abc&quot;。">
@@ -34,11 +34,11 @@
 <!ENTITY replaceScripts.p "此選項預設停用。如果啟用此選項，取代將作用於頁面上的腳本；這有可能改變網頁行為，請自負責任。當選擇 HTML 輸入和輸出選項時，將作用於所有腳本；否則只作用於 body 內的腳本。">
 <!ENTITY newGui "新選單和工具列元件">
 <!ENTITY newGui.edit "編輯">
-<!ENTITY newGui.menu.replace "取代… (F8)">
+<!ENTITY newGui.menu.replace "取代… (F9)">
 <!ENTITY newGui.menu.replace.d "顯示取代列。">
 <!ENTITY newGui.tools "工具">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "以取代列表執行取代 (Shift+F8)">
+<!ENTITY newGui.menu.replaceWithList "以取代列表執行取代 (Ctrl+F9)">
 <!ENTITY newGui.menu.replaceWithList.d "套用目前的取代列表。">
 <!ENTITY newGui.menu.autoReplace "網頁載入時，自動取代">
 <!ENTITY newGui.menu.autoReplace.d "切換此選項。">
@@ -50,7 +50,7 @@
 <!ENTITY newGui.toolbarButton.0 "按下此按鈕，將以目前的取代列表執行取代。">
 <!ENTITY newGui.toolbarButton.1 "按鈕側邊有一個選單，該選單內容同上述工具中的 FoxReplace 的選單。">
 <!ENTITY newGui.contextMenu "右鍵選單">
-<!ENTITY newGui.contextMenu.replace "以取代列表執行取代 (FoxReplace) (Shift+F8)">
+<!ENTITY newGui.contextMenu.replace "以取代列表執行取代 (FoxReplace) (Ctrl+F9)">
 <!ENTITY newGui.contextMenu.replace.d "執行目前的取代列表。">
 <!ENTITY newGui.replaceBar "取代列">
 <!ENTITY newGui.replaceBar.0 "顯示在文字尋找列下方。">

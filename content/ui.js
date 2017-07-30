@@ -50,7 +50,7 @@ function buildUi(aBrowser) {
 
   let keyset =
     Xul.KEYSET({ id: "fxrKeyset" },
-      Xul.KEY({ id: "fxrKeyListReplace", modifiers: "shift", keycode: "VK_F9", command: "fxrCmdListReplace" }),
+      Xul.KEY({ id: "fxrKeyListReplace", modifiers: "control", keycode: "VK_F9", command: "fxrCmdListReplace" }),
       Xul.KEY({ id: "fxrKeyShowReplaceBar", keycode: "VK_F9", command: "fxrCmdShowReplaceBar" })
     );
   keyset.build(aBrowser);

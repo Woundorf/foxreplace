@@ -4,6 +4,7 @@
 * Subscription and periodic replace functions also moved to the embedded WebExtension.
 * Toolbar button also moved to the embedded WebExtension.
 * Fixed some errors in initialization.
+* Changed the shortcut to apply the substitution list to Ctrl+F9 because Shift+F9 is now used by Firefox.
 
 v1.0.0 (2017-03-13)
 * Converted to restartless (bootstrapped) addon with embedded WebExtension.

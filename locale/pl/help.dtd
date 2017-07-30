@@ -20,7 +20,7 @@
 <!ENTITY substitution.table.4.1 "a decimal integer number between 1 and 99 (included), inserts the">
 <!ENTITY substitution.table.4.2 "th matched substring (following the previous example, with the text &quot;Lorem ipsum&quot;, &quot;$1&quot; would be &quot;Lorem&quot;).">
 <!ENTITY substitutionList "Lista zamienników">
-<!ENTITY substitutionList.p "FoxReplace pozwala na zarządzanie listą zamienników, które możesz dodawać i edytować w każdej chwili w oknie opcji rozszerzenia. Możesz zastąpić tekst na stronie kiedy tylko chcesz poprzez wciśnięcie klawisza F2, przycisku na pasku narzędzi lub wybranie odpowiedniego wpisu z menu. Teksty na stronie są zastępowane zgodnie z ich kolejnością na liście. Możesz wykonać operację zastępowania na jednej stronie tyle razy, ile tylko chcesz. Za każdym razem, kiedy to zrobisz, zastąpiona zostanie aktualna, a nie pierwotna zawartość strony.">
+<!ENTITY substitutionList.p "FoxReplace pozwala na zarządzanie listą zamienników, które możesz dodawać i edytować w każdej chwili w oknie opcji rozszerzenia. Możesz zastąpić tekst na stronie kiedy tylko chcesz poprzez wciśnięcie klawisza Ctrl+F9, przycisku na pasku narzędzi lub wybranie odpowiedniego wpisu z menu. Teksty na stronie są zastępowane zgodnie z ich kolejnością na liście. Możesz wykonać operację zastępowania na jednej stronie tyle razy, ile tylko chcesz. Za każdym razem, kiedy to zrobisz, zastąpiona zostanie aktualna, a nie pierwotna zawartość strony.">
 <!ENTITY substitutionGroup "Grupa zamienników">
 <!ENTITY substitutionGroup.p0 "It's formed by an URL list and a substitution list. The substitutions are applied in the order they appear, and there must be one at least. With the URL list you can define to which pages the substitutions are applied. If the list is empty, the substitutions are applied to any page. You can add URLs and then the substitutions are applied only if the page address matches one of the URLs. Finally, you can also add exclusion URLs which have the opposite effect, the substitutions aren't applied if the page address matches one of them. So, the substitutions are applied if the page address doesn't match any of the exclusion URLs and it matches one of the normal URLs or there is none. The URL of a page is considered to match an URL of the group if the URL of the group is part of the URL of the page.">
 <!ENTITY substitutionGroup.p1 "The exclusion URLs are the ones that start with a hyphen (&quot;-&quot;), and they are displayed in red; the rest are normal URLs. You may use special characters &quot;*&quot; to match any 0 or more characters and &quot;|&quot; to match the beginning or the end of the URL. If you want to define an URL that starts with a hyphen (i.e. &quot;-abc&quot;) and it isn't an exclusion URL, you may use the equivalent form &quot;|*-abc&quot;.">
@@ -34,11 +34,11 @@
 <!ENTITY replaceScripts.p "This option is off by default. If it's on, substitutions are also applied to the scripts in the page, so it may change the behaviour of the page. Use it under your own responsibility. For substitutions with HTML in the input and the output this option applies to all the scripts, otherwise only to the scripts in the body.">
 <!ENTITY newGui "Nowe menu i elementy paska narzędzi">
 <!ENTITY newGui.edit "Edycja">
-<!ENTITY newGui.menu.replace "Replace... (F8)">
+<!ENTITY newGui.menu.replace "Replace... (F9)">
 <!ENTITY newGui.menu.replace.d "Shows the replace bar.">
 <!ENTITY newGui.tools "Narzędzia">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (Shift+F8)">
+<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (Ctrl+F9)">
 <!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
 <!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
 <!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
@@ -50,7 +50,7 @@
 <!ENTITY newGui.toolbarButton.0 "Wciśnięcie tego przycisku zastępuje tekst na stronie zgodnie z listą wyrażeń.">
 <!ENTITY newGui.toolbarButton.1 "Zawiera rozwijalne menu takie, jak to w menu Narzędzia.">
 <!ENTITY newGui.contextMenu "Menu kontekstowe">
-<!ENTITY newGui.contextMenu.replace "Zastąp tekst na stronie zgodnie z listą wyrażeń (FoxReplace) (F2)">
+<!ENTITY newGui.contextMenu.replace "Zastąp tekst na stronie zgodnie z listą wyrażeń (FoxReplace) (Ctrl+F9)">
 <!ENTITY newGui.contextMenu.replace.d "Jak wyżej.">
 <!ENTITY newGui.replaceBar "Replace bar">
 <!ENTITY newGui.replaceBar.0 "Appears below the find bar.">

@@ -20,7 +20,7 @@
 <!ENTITY substitution.table.4.1 "eine dezimale Integer-Zahl zwischen 1 und 99 einschließlich, fügt ein">
 <!ENTITY substitution.table.4.2 "Der gefundene Substring (im vorherigen Beispiel würde in dem Text „Lorem ipsum“ „$1“ zu „Lorem“).">
 <!ENTITY substitutionList "Liste der Ersetzungen">
-<!ENTITY substitutionList.p "FoxReplace keeps a substitution list that you can define and modify at any moment from the FoxReplace options window. You can apply the substitution list when you want by pressing Shift+F9 or by pushing the toolbar button or activating a menu option. When you do, substitutions in the list will be applied in the order in which they appear. You can apply the substitution list as many times as you want over the same page. Substitutions are done over the current content of the page, i.e. if you apply the substitution list a second time, it will be over the result of the first. In this substitution list there aren't the substitutions directly, but there are substitution groups, where a list of addresses (URLs) is associated with a list of substitutions which are applied to pages whose address matches one of the URLs in the list.">
+<!ENTITY substitutionList.p "FoxReplace keeps a substitution list that you can define and modify at any moment from the FoxReplace options window. You can apply the substitution list when you want by pressing Ctrl+F9 or by pushing the toolbar button or activating a menu option. When you do, substitutions in the list will be applied in the order in which they appear. You can apply the substitution list as many times as you want over the same page. Substitutions are done over the current content of the page, i.e. if you apply the substitution list a second time, it will be over the result of the first. In this substitution list there aren't the substitutions directly, but there are substitution groups, where a list of addresses (URLs) is associated with a list of substitutions which are applied to pages whose address matches one of the URLs in the list.">
 <!ENTITY substitutionGroup "Substitution group">
 <!ENTITY substitutionGroup.p0 "It's formed by an URL list and a substitution list. The substitutions are applied in the order they appear, and there must be one at least. With the URL list you can define to which pages the substitutions are applied. If the list is empty, the substitutions are applied to any page. You can add URLs and then the substitutions are applied only if the page address matches one of the URLs. Finally, you can also add exclusion URLs which have the opposite effect, the substitutions aren't applied if the page address matches one of them. So, the substitutions are applied if the page address doesn't match any of the exclusion URLs and it matches one of the normal URLs or there is none. The URL of a page is considered to match an URL of the group if the URL of the group is part of the URL of the page.">
 <!ENTITY substitutionGroup.p1 "The exclusion URLs are the ones that start with a hyphen (&quot;-&quot;), and they are displayed in red; the rest are normal URLs. You may use special characters &quot;*&quot; to match any 0 or more characters and &quot;|&quot; to match the beginning or the end of the URL. If you want to define an URL that starts with a hyphen (i.e. &quot;-abc&quot;) and it isn't an exclusion URL, you may use the equivalent form &quot;|*-abc&quot;.">
@@ -38,7 +38,7 @@
 <!ENTITY newGui.menu.replace.d "Zeigt die Ersetzungs-Leiste an.">
 <!ENTITY newGui.tools "Werkzeuge">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (Shift+F9)">
+<!ENTITY newGui.menu.replaceWithList "Replace with substitution list (Ctrl+F9)">
 <!ENTITY newGui.menu.replaceWithList.d "Applies current substitution list.">
 <!ENTITY newGui.menu.autoReplace "Auto-replace on page load">
 <!ENTITY newGui.menu.autoReplace.d "Toggles this option.">
@@ -50,7 +50,7 @@
 <!ENTITY newGui.toolbarButton.0 "Pressing it applies current substitution list.">
 <!ENTITY newGui.toolbarButton.1 "It has a menu at side like the FoxReplace above.">
 <!ENTITY newGui.contextMenu "Kontextmenü">
-<!ENTITY newGui.contextMenu.replace "Replace with substitution list (FoxReplace) (Shift+F9)">
+<!ENTITY newGui.contextMenu.replace "Replace with substitution list (FoxReplace) (Ctrl+F9)">
 <!ENTITY newGui.contextMenu.replace.d "Applies current substitution list.">
 <!ENTITY newGui.replaceBar "Replace bar">
 <!ENTITY newGui.replaceBar.0 "Appears below the find bar.">

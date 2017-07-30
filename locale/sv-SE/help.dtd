@@ -20,7 +20,7 @@
 <!ENTITY substitution.table.4.1 "är ett heltal mellan 1 och 99 (inkluderat), så infogas den">
 <!ENTITY substitution.table.4.2 ":e hittade delsträngen.">
 <!ENTITY substitutionList "Ersättningslista">
-<!ENTITY substitutionList.p "FoxReplace har en ersättningslista som du kan definiera och ändra när du vill i FoxReplaces inställningar. Du kan tillämpa ersättningslistan när du vill genom att trycka ned F2-tangenten, genom att klicka på verktygsfältsknappen eller genom att välja ett menyalternativ. När du gör det kommer ersättningarna i listan att tillämpas i den ordning de står, med början längst upp. Du kan tillämpa ersättningslistan så många gånger du vill på samma sida. Ersättningar görs i det aktuella innehållet på sidan, d.v.s. om du tillämpar ersättningslistan en andra gång, så kommer det att göras ovanpå resultatet av den första tillämpningen. I ersättningslistan finns inte de direkta ersättningarna, utan ersättningsgrupper som består av en lista över adresser (URL:er) som associeras med en lista över ersättningar. Dessa ersättningar tillämpas på sidor vilkas adresser matchar URL:erna i listan.">
+<!ENTITY substitutionList.p "FoxReplace har en ersättningslista som du kan definiera och ändra när du vill i FoxReplaces inställningar. Du kan tillämpa ersättningslistan när du vill genom att trycka ned Ctrl+F9-tangenten, genom att klicka på verktygsfältsknappen eller genom att välja ett menyalternativ. När du gör det kommer ersättningarna i listan att tillämpas i den ordning de står, med början längst upp. Du kan tillämpa ersättningslistan så många gånger du vill på samma sida. Ersättningar görs i det aktuella innehållet på sidan, d.v.s. om du tillämpar ersättningslistan en andra gång, så kommer det att göras ovanpå resultatet av den första tillämpningen. I ersättningslistan finns inte de direkta ersättningarna, utan ersättningsgrupper som består av en lista över adresser (URL:er) som associeras med en lista över ersättningar. Dessa ersättningar tillämpas på sidor vilkas adresser matchar URL:erna i listan.">
 <!ENTITY substitutionGroup "Ersättningsgrupp">
 <!ENTITY substitutionGroup.p0 "Ersättningsgruppen utgörs av en URL-lista och en ersättningslista. Ersättningarna tillämpas i den ordning de står och det måste finnas åtminstone en. I URL-listan kan du definiera på vilka sidor ersättningarna tillämpas. Om listan är tom, så tillämpas ersättningarna på alla sidor. Du kan lägga till URL:er så att ersättningarna endast tillämpas om sidans adress matchar en av URL:erna i listan. Slutligen kan du även lägga till undantagna URL:er som har motsatt effekt, ersättningarna tillämpas inte om sidans adress matchar en av dem. Så, om URL-listan inte är tom, tillämpas ersättningarna om sidans adress inte matchar någon av de undantagna URL:erna och matchar en av de normala URL:erna. URL:en för en sida anses matcha en URL i gruppen om URL:en i gruppen är en del av sidans URL:en.">
 <!ENTITY substitutionGroup.p1 "De undantagna URL:erna är de som börjar med ett bindestreck (&quot;-&quot;) och de visas i rött; resten är normala URL:er. Du kan använda jokertecknen &quot;*&quot; (asterisk) för att matcha 0 eller fler godtyckliga tecken och &quot;|&quot; (lodrätt streck) för att matcha början eller slutet av URL:en. Om du vill definiera en URL som börjar med ett bindestreck (d.v.s. &quot;-abc&quot;) och den inte är en undantagen URL, så kan du använda kombinationen &quot;|*-abc&quot;.">
@@ -34,11 +34,11 @@
 <!ENTITY replaceScripts.p "This option is off by default. If it's on, substitutions are also applied to the scripts in the page, so it may change the behaviour of the page. Use it under your own responsibility. For substitutions with HTML in the input and the output this option applies to all the scripts, otherwise only to the scripts in the body.">
 <!ENTITY newGui "Nya meny- och verktygsfältselement">
 <!ENTITY newGui.edit "Redigera-menyn">
-<!ENTITY newGui.menu.replace "Ersätt… (Skift+F2)">
+<!ENTITY newGui.menu.replace "Ersätt… (F9)">
 <!ENTITY newGui.menu.replace.d "Visar ersättningsfältet.">
 <!ENTITY newGui.tools "Verktyg-menyn">
 <!ENTITY newGui.tools.foxreplace "FoxReplace">
-<!ENTITY newGui.menu.replaceWithList "Ersätt med ersättningslista (F2)">
+<!ENTITY newGui.menu.replaceWithList "Ersätt med ersättningslista (Ctrl+F9)">
 <!ENTITY newGui.menu.replaceWithList.d "Tillämpar aktuell ersättningslista.">
 <!ENTITY newGui.menu.autoReplace "Ersätt automatiskt när sidan läses in">
 <!ENTITY newGui.menu.autoReplace.d "Växlar detta alternativ.">
@@ -50,7 +50,7 @@
 <!ENTITY newGui.toolbarButton.0 "Ett klick på knappen tillämpar aktuell ersättningslista.">
 <!ENTITY newGui.toolbarButton.1 "Knappen har en meny vid sidan av sig, som FoxReplace-menyn ovan.">
 <!ENTITY newGui.contextMenu "Snabbmenyn">
-<!ENTITY newGui.contextMenu.replace "Ersätt med ersättningslista (FoxReplace) (F2)">
+<!ENTITY newGui.contextMenu.replace "Ersätt med ersättningslista (FoxReplace) (Ctrl+F9)">
 <!ENTITY newGui.contextMenu.replace.d "Tillämpar aktuell ersättningslista.">
 <!ENTITY newGui.replaceBar "Ersättningsfältet">
 <!ENTITY newGui.replaceBar.0 "Visas nedanför söklisten.">
