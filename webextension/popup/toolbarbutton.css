@@ -18,6 +18,12 @@
   padding-left: 32px;
 }
 
+.panel-list-item > .text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .panel-list-item > .icon {
   position: absolute;
   left: 16px;
