@@ -36,6 +36,21 @@
     },
     "default_popup": "popup/toolbarbutton.html",
     "browser_style": true
+  },
+
+  "commands": {
+    "show-replace-bar": {
+      "suggested_key": {
+        "default": "F9"
+      },
+      "description": "Show the replace bar"
+    },
+    "apply-substitution-list": {
+      "suggested_key": {
+        "default": "Ctrl+F9"
+      },
+      "description": "Apply the current substitution list"
+    }
   }
 
 }

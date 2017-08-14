@@ -48,15 +48,8 @@ function buildUi(aBrowser) {
     );
   commandset.build(aBrowser);
 
-  let keyset =
-    Xul.KEYSET({ id: "fxrKeyset" },
-      Xul.KEY({ id: "fxrKeyListReplace", modifiers: "control", keycode: "VK_F9", command: "fxrCmdListReplace" }),
-      Xul.KEY({ id: "fxrKeyShowReplaceBar", keycode: "VK_F9", command: "fxrCmdShowReplaceBar" })
-    );
-  keyset.build(aBrowser);
-
   let editReplace = Xul.MENUITEM({ id: "fxrMenuEditReplace", "class": "menuitem-iconic", label: strings.get("menuReplace.label"),
-                                   accesskey: strings.get("menuReplace.accesskey"), command: "fxrCmdShowReplaceBar", key: "fxrKeyShowReplaceBar" });
+                                   accesskey: strings.get("menuReplace.accesskey"), command: "fxrCmdShowReplaceBar" });
   editReplace.build(doc.getElementById("menu_EditPopup"), { insertBefore: doc.getElementById("textfieldDirection-separator") });
 
   let toolsFoxReplace =
@@ -64,7 +57,7 @@ function buildUi(aBrowser) {
                accesskey: strings.get("menuToolsFoxReplace.accesskey") },
       Xul.MENUPOPUP(
         Xul.MENUITEM({ id: "fxrMenuToolsFoxReplaceReplace", label: strings.get("listReplace.label"), accesskey: strings.get("listReplace.accesskey"),
-                       command: "fxrCmdListReplace", key: "fxrKeyListReplace" }),
+                       command: "fxrCmdListReplace" }),
         Xul.MENUITEM({ id: "fxrMenuToolsFoxReplaceAutoReplaceOnLoad", type: "checkbox", label: strings.get("autoReplaceOnLoad.label"),
                        accesskey: strings.get("autoReplaceOnLoad.accesskey"), command: "fxrCmdToggleAutoReplaceOnLoad" }),
         Xul.MENUITEM({ id: "fxrMenuToolsFoxReplaceOptions", label: strings.get("options.label"), accesskey: strings.get("options.accesskey"),
@@ -76,7 +69,7 @@ function buildUi(aBrowser) {
   toolsFoxReplace.build(doc.getElementById("menu_ToolsPopup"), { insertBefore: doc.getElementById("devToolsSeparator") });
 
   let contextMenuItem = Xul.MENUITEM({ id: "fxrContextMenuFoxReplace", "class": "menuitem-iconic", label: strings.get("contextMenuFoxReplace.label"),
-                                       accesskey: strings.get("contextMenuFoxReplace.accesskey"), command: "fxrCmdListReplace", key: "fxrKeyListReplace" });
+                                       accesskey: strings.get("contextMenuFoxReplace.accesskey"), command: "fxrCmdListReplace" });
   contextMenuItem.build(doc.getElementById("contentAreaContextMenu"));
 
   let replaceBar =
@@ -116,9 +109,6 @@ function removeUi(aBrowser) {
 
   let commandset = doc.getElementById("fxrCommandset");
   commandset.parentNode.removeChild(commandset);
-
-  let keyset = doc.getElementById("fxrKeyset");
-  keyset.parentNode.removeChild(keyset);
 
   let editReplace = doc.getElementById("fxrMenuEditReplace");
   editReplace.parentNode.removeChild(editReplace);

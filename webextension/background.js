@@ -115,3 +115,14 @@ browser.alarms.onAlarm.addListener(alarm => {
       });
   }
 });
+
+browser.commands.onCommand.addListener(name => {
+  switch (name) {
+    case "show-replace-bar":
+      legacyPort.postMessage({ key: "showReplaceBar" });
+      break;
+    case "apply-substitution-list":
+      replaceCurrentTab({ key: "replaceWithList" });
+      break;
+  }
+});

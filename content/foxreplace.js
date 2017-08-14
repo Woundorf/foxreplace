@@ -122,6 +122,9 @@ FoxReplace.prototype = {
           case "showHelp":
             this.showHelp();
             break;
+          case "showReplaceBar":
+            this.showReplaceBar();
+            break;
         }
       };
       foxreplace.webExtensionPort.onMessage.addListener(this.webExtensionMessageListener);
