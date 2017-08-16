@@ -126,3 +126,15 @@ browser.commands.onCommand.addListener(name => {
       break;
   }
 });
+
+browser.contextMenus.create({
+  id: "context.apply-substitution-list",
+  title: "Replace with substitution list",
+  contexts: ["all"]
+});
+
+browser.contextMenus.onClicked.addListener(info => {
+  if (info.menuItemId == "context.apply-substitution-list") {
+    replaceCurrentTab({ key: "replaceWithList" });
+  }
+});

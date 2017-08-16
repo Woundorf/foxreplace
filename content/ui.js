@@ -68,10 +68,6 @@ function buildUi(aBrowser) {
     );
   toolsFoxReplace.build(doc.getElementById("menu_ToolsPopup"), { insertBefore: doc.getElementById("devToolsSeparator") });
 
-  let contextMenuItem = Xul.MENUITEM({ id: "fxrContextMenuFoxReplace", "class": "menuitem-iconic", label: strings.get("contextMenuFoxReplace.label"),
-                                       accesskey: strings.get("contextMenuFoxReplace.accesskey"), command: "fxrCmdListReplace" });
-  contextMenuItem.build(doc.getElementById("contentAreaContextMenu"));
-
   let replaceBar =
     Xul.TOOLBAR({ id: "fxrReplaceBar", align: "center", fullscreentoolbar: "true", hidden: "true",
                   onkeypress: "if (event.keyCode == event.DOM_VK_ESCAPE) window.foxreplace.hideReplaceBar();" },
@@ -115,9 +111,6 @@ function removeUi(aBrowser) {
 
   let toolsFoxReplace = doc.getElementById("fxrMenuToolsFoxReplace");
   toolsFoxReplace.parentNode.removeChild(toolsFoxReplace);
-
-  let contextMenuItem = doc.getElementById("fxrContextMenuFoxReplace");
-  contextMenuItem.parentNode.removeChild(contextMenuItem);
 
   let replaceBar = doc.getElementById("fxrReplaceBar");
   replaceBar.parentNode.removeChild(replaceBar);
