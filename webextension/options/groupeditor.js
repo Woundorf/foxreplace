@@ -400,7 +400,7 @@ var groupEditor = (() => {
 
       let substitutions = [];
       substitutionsGridOptions.api.forEachNode(node => {
-        if (node.data.input) substitutions.push(Substitution.fromJSON(node.data));
+        if (node.data.input) substitutions.push(new Substitution(node.data.input, node.data.output, node.data.caseSensitive, node.data.inputType));
       });
 
       return new SubstitutionGroup(name, urls, substitutions, html, enabled);
