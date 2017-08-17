@@ -222,11 +222,7 @@ FoxReplace.prototype = {
     if (aSubstitutionList) {
       foxreplace.webExtensionPort.postMessage({
         key: "replace",
-        list: substitutionListToJSON(aSubstitutionList),
-        prefs: {
-          replaceUrls: prefs.replaceUrls,
-          replaceScripts: prefs.replaceScripts
-        }
+        list: substitutionListToJSON(aSubstitutionList)
       });
     }
     else {

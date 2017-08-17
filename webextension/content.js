@@ -27,8 +27,10 @@ storage.getPrefs().then(prefs => {
 browser.runtime.onMessage.addListener(message => {
   switch (message.key) {
     case "replace":
-      let substitutionList = substitutionListFromJSON(message.list);
-      replaceWindow(window, substitutionList, message.prefs);
+      storage.getPrefs().then(prefs => {
+        let substitutionList = substitutionListFromJSON(message.list);
+        replaceWindow(window, substitutionList, prefs);
+      });
       break;
     case "replaceWithList":
       storage.getPrefs().then(prefs => {

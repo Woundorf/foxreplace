@@ -1,3 +1,5 @@
+* Fixed another bug in v1.1.0 in which the replace bar didn't follow current preferences.
+
 v1.1.1 (2017-08-17)
 * Fixed a bug introduced in v1.1.0 in which the input type was not properly saved.
 * Compatibility with Firefox 55 and 56.
