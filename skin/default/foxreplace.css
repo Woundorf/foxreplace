@@ -1,50 +1,6 @@
 /* rect(top, right, bottom, left) */
 
-@import url("chrome://global/skin/findBar.css");
-/*
-amb això i posant que el botó de tancar sigui de la classe findbar-closebutton
-es resol bastant el tema de l'aparença, però només per Firefox 3
-*/
-
-#fxrMenuEditReplace, #fxrMenuToolsFoxReplace, #fxrContextMenuFoxReplace {
+#fxrMenuEditReplace, #fxrMenuToolsFoxReplace {
   list-style-image: url("chrome://foxreplace/skin/toolbar-icons.png");
   -moz-image-region: rect(0px, 48px, 16px, 32px);
-}
-
-#fxrToolbarButton {
-  list-style-image: url("chrome://foxreplace/skin/toolbar-icons.png");
-  -moz-image-region: rect(0px, 48px, 16px, 32px);
-}
-
-#fxrToolbarButton[cui-areatype="menu-panel"], toolbarpaletteitem[place="palette"] > #fxrToolbarButton {
-  -moz-image-region: rect(0px, 32px, 32px, 0px);
-}
-
-#fxrReplaceBar {
-  -moz-appearance: none !important;
-  border-top: 2px solid;
-  -moz-border-top-colors: ThreeDShadow ThreeDHighlight !important;
-  border-bottom: 1px solid;
-  -moz-border-bottom-colors: transparent;
-  min-width: 1px;
-  transition-property: margin-bottom, opacity, visibility;
-  transition-duration: 150ms, 150ms, 0s;
-  transition-timing-function: ease-in-out, ease-in-out, linear;
-}
-
-#fxrReplaceBar[hidden] {
-  /* Override display:none to make the transition work. */
-  display: -moz-box;
-  visibility: collapse;
-  margin-bottom: -1em;
-  opacity: 0;
-  transition-delay: 0s, 0s, 150ms;
-}
-
-#fxrReplaceBarInputStringTextBox {
-  -moz-binding: url("chrome://foxreplace/content/bindings.xml#inputTextBox");
-}
-
-#fxrReplaceBarHtmlButton {
-  -moz-binding: url("chrome://foxreplace/content/bindings.xml#htmlButton");
 }

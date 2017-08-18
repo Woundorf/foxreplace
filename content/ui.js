@@ -39,8 +39,6 @@ function buildUi(aBrowser) {
   let commandset =
     Xul.COMMANDSET({ id: "fxrCommandset" },
       Xul.COMMAND({ id: "fxrCmdShowReplaceBar", oncommand: "window.foxreplace.showReplaceBar();" }),
-      Xul.COMMAND({ id: "fxrCmdHideReplaceBar", oncommand: "window.foxreplace.hideReplaceBar();" }),
-      Xul.COMMAND({ id: "fxrCmdBarReplace", oncommand: "window.foxreplace.instantReplace();" }),
       Xul.COMMAND({ id: "fxrCmdListReplace", oncommand: "window.foxreplace.listReplace();" }),
       Xul.COMMAND({ id: "fxrCmdToggleAutoReplaceOnLoad", oncommand: "window.foxreplace.toggleAutoReplaceOnLoad();" }),
       Xul.COMMAND({ id: "fxrCmdOptions", oncommand: "window.foxreplace.showOptions();" }),
@@ -68,29 +66,6 @@ function buildUi(aBrowser) {
     );
   toolsFoxReplace.build(doc.getElementById("menu_ToolsPopup"), { insertBefore: doc.getElementById("devToolsSeparator") });
 
-  let replaceBar =
-    Xul.TOOLBAR({ id: "fxrReplaceBar", align: "center", fullscreentoolbar: "true", hidden: "true",
-                  onkeypress: "if (event.keyCode == event.DOM_VK_ESCAPE) window.foxreplace.hideReplaceBar();" },
-      Xul.LABEL({ id: "fxrReplaceBarInputStringLabel", control: "fxrReplaceBarInputStringTextBox", value: strings.get("replaceBarInputString.label"),
-                  accesskey: strings.get("replaceBarInputString.accesskey") }),
-      Xul.TEXTBOX({ id: "fxrReplaceBarInputStringTextBox", flex: "1", oninput: "document.getElementById('fxrReplaceBarReplaceButton').disabled=this.value==''",
-                    onkeypress: "if (event.keyCode == event.DOM_VK_RETURN) window.foxreplace.instantReplace();" }),
-      Xul.LABEL({ id: "fxrReplaceBarOutputStringLabel", control: "fxrReplaceBarOutputStringTextBox", value: strings.get("replaceBarOutputString.label"),
-                  accesskey: strings.get("replaceBarOutputString.accesskey") }),
-      Xul.TEXTBOX({ id: "fxrReplaceBarOutputStringTextBox", flex: "1",
-                    onkeypress: "if (event.keyCode == event.DOM_VK_RETURN) window.foxreplace.instantReplace();" }),
-      Xul.LABEL({ id: "fxrReplaceBarHtmlLabel", control: "fxrReplaceBarHtmlButton", value: strings.get("replaceBarHtml.label"),
-                  accesskey: strings.get("replaceBarHtml.accesskey") }),
-      Xul.BOX({ id: "fxrReplaceBarHtmlButton" }), // Warning: it can't be a button or the binding won't work as expected
-      Xul.CHECKBOX({ id: "fxrReplaceBarCaseSensitiveCheckBox", label: strings.get("replaceBarCaseSensitive.label"),
-                     accesskey: strings.get("replaceBarCaseSensitive.accesskey") }),
-      Xul.BUTTON({ id: "fxrReplaceBarReplaceButton", disabled: "true", label: strings.get("replaceBarReplace.label"),
-                   accesskey: strings.get("replaceBarReplace.accesskey"), command: "fxrCmdBarReplace" }),
-      Xul.TOOLBARBUTTON({ id: "fxrReplaceBarCloseButton", "class": "findbar-closebutton close-icon", tooltiptext: strings.get("replaceBarClose"),
-                          command: "fxrCmdHideReplaceBar" })
-    );
-  replaceBar.build(doc.getElementById("browser-bottombox"));
-
   // Load stylesheet
   let styleSheetService = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
   let styleSheetURI = Services.io.newURI("chrome://foxreplace/skin/foxreplace.css", null, null);
@@ -111,9 +86,6 @@ function removeUi(aBrowser) {
 
   let toolsFoxReplace = doc.getElementById("fxrMenuToolsFoxReplace");
   toolsFoxReplace.parentNode.removeChild(toolsFoxReplace);
-
-  let replaceBar = doc.getElementById("fxrReplaceBar");
-  replaceBar.parentNode.removeChild(replaceBar);
 
   // Unload stylesheet
   let styleSheetService = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);

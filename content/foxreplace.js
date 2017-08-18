@@ -20,7 +20,6 @@ const Cu = Components.utils;
 
 Cu.import("chrome://foxreplace/content/core.js");
 Cu.import("chrome://foxreplace/content/prefs.js");
-Cu.import("chrome://foxreplace/content/services.js");
 Cu.import("chrome://foxreplace/content/ui.js");
 
 /**
@@ -122,9 +121,6 @@ FoxReplace.prototype = {
           case "showHelp":
             this.showHelp();
             break;
-          case "showReplaceBar":
-            this.showReplaceBar();
-            break;
         }
       };
       foxreplace.webExtensionPort.onMessage.addListener(this.webExtensionMessageListener);
@@ -146,50 +142,16 @@ FoxReplace.prototype = {
    * Shows the replace bar.
    */
   showReplaceBar: function() {
-    var replaceBar = this.document.getElementById("fxrReplaceBar");
-    replaceBar.hidden = false;
-    // without the timeout it doesn't get the focus
-    let document = this.document;
-    this.window.setTimeout(function() {
-      document.getElementById("fxrReplaceBarInputStringTextBox").focus();
-    }, 100);
-  },
-
-  /**
-   * Hides the replace bar.
-   */
-  hideReplaceBar: function() {
-    this.document.getElementById("fxrReplaceBar").hidden = true;
-  },
-
-  /**
-   * Applies the substitution entered by the user in the replace bar.
-   */
-  instantReplace: function() {
-    var inputString = this.document.getElementById("fxrReplaceBarInputStringTextBox").value;
-    var inputType = this.document.getElementById("fxrReplaceBarInputStringTextBox").inputType;
-    var outputString = this.document.getElementById("fxrReplaceBarOutputStringTextBox").value;
-    var caseSensitive = this.document.getElementById("fxrReplaceBarCaseSensitiveCheckBox").checked;
-    var html = this.document.getElementById("fxrReplaceBarHtmlButton").html;
-
-    if (inputString == "") return;  // this should not happen
-
-    try {
-      // new temporal substitution list with only one item
-      let substitutionList = [new SubstitutionGroup("", [], [new Substitution(inputString, outputString, caseSensitive, inputType)], html, true)];
-      // perform substitutions
-      this.replaceDocXpath(substitutionList);
-    }
-    catch (se) {  // SyntaxError
-      prompts.alert(getLocalizedString("regExpError"), se);
-    }
+    foxreplace.webExtensionPort.postMessage({
+      key: "showReplaceBar"
+    });
   },
 
   /**
    * Applies substitutions from the substitution list.
    */
   listReplace: function() {
-    this.replaceDocXpath();
+    foxreplace.webExtensionPort.postMessage({ key: "replaceWithList" });
   },
 
   /**
@@ -216,21 +178,6 @@ FoxReplace.prototype = {
    */
   showHelp: function() {
     this._openAndReuseOneTabPerURL("chrome://foxreplace/content/help.xhtml");
-  },
-
-  /**
-   * Applies aSubstitutionList to the current tab. If no substitution list is given the current one is used.
-   */
-  replaceDocXpath: function(aSubstitutionList) {
-    if (aSubstitutionList) {
-      foxreplace.webExtensionPort.postMessage({
-        key: "replace",
-        list: substitutionListToJSON(aSubstitutionList)
-      });
-    }
-    else {
-      foxreplace.webExtensionPort.postMessage({ key: "replaceWithList" });
-    }
   },
 
   /**

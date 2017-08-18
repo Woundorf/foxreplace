@@ -14,7 +14,6 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("chrome://foxreplace/content/services.js");
 Components.utils.import("chrome://foxreplace/content/xregexp-wrapper.js");
 
 /**

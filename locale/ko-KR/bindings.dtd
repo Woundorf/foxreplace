@@ -1,6 +1,0 @@
-<!ENTITY text "텍스트">
-<!ENTITY wholeWords "전체 단어">
-<!ENTITY regExp "정규 표현식">
-<!ENTITY htmlNone "안함">
-<!ENTITY htmlOutput "출력 전용">
-<!ENTITY htmlInputOutput "입력 및 출력">

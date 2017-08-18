@@ -1,6 +1,0 @@
-<!ENTITY text "نص">
-<!ENTITY wholeWords "جميع الكلمات">
-<!ENTITY regExp "تعبير عادي">
-<!ENTITY htmlNone "لا">
-<!ENTITY htmlOutput "الخرج فقط">
-<!ENTITY htmlInputOutput "الدخل والخرج">

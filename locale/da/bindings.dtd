@@ -1,6 +1,0 @@
-<!ENTITY text "Tekst">
-<!ENTITY wholeWords "Hele ord">
-<!ENTITY regExp "Regulært udtryk">
-<!ENTITY htmlNone "No">
-<!ENTITY htmlOutput "Output only">
-<!ENTITY htmlInputOutput "Input &amp; output">

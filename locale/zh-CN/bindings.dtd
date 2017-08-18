@@ -1,6 +1,0 @@
-<!ENTITY text "文本">
-<!ENTITY wholeWords "全词匹配">
-<!ENTITY regExp "正则表达式">
-<!ENTITY htmlNone "不">
-<!ENTITY htmlOutput "仅输出">
-<!ENTITY htmlInputOutput "输入和输出">

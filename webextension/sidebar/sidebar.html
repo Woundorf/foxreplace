@@ -1,0 +1,74 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+  -
+  - Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+  -
+  - This file is part of FoxReplace.
+  -
+  - FoxReplace is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software
+  - Foundation, either version 3 of the License, or (at your option) any later version.
+  -
+  - FoxReplace is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+  - A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+  -
+  - You should have received a copy of the GNU General Public License along with FoxReplace. If not, see <http://www.gnu.org/licenses/>.
+  -
+  - ***** END LICENSE BLOCK ***** -->
+
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../lib/semantic.min.css">
+    <script src="../lib/jquery-3.2.0.min.js"></script>
+    <script src="../lib/semantic.min.js"></script>
+    <script src="../xregexp-all-min.js"></script>
+    <script src="../core.js"></script>
+    <script src="sidebar.js"></script>
+    <style type="text/css">
+      * {
+        min-width: unset !important;
+      }
+      body {
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form id="form" class="ui form">
+      <div class="required field">
+        <label>Replace</label>
+        <input name="input" type="text">
+      </div>
+      <div class="field">
+        <select name="inputType" class="ui dropdown">
+          <option value="0">Text</option>
+          <option value="1">Whole words</option>
+          <option value="2">Regular expression</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>With</label>
+        <input name="output" type="text">
+      </div>
+      <div class="field">
+        <label>HTML</label>
+        <select name="html" class="ui dropdown">
+          <option value="0">No</option>
+          <option value="1">Output only</option>
+          <option value="2">Input &amp; output</option>
+        </select>
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <input name="caseSensitive" type="checkbox">
+          <label>Match case</label>
+        </div>
+      </div>
+      <button class="ui button" type="submit">Replace</button>
+    </fom>
+  </body>
+
+</html>

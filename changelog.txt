@@ -1,5 +1,6 @@
 * Shortcuts moved to the embedded WebExtension.
 * Context menu moved to the embedded WebExtension.
+* Replace bar moved to the embedded WebExtension as a sidebar.
 
 v1.1.3 (2017-08-28)
 * Corrected a wrong string.

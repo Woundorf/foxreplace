@@ -1,6 +1,0 @@
-<!ENTITY text "字串">
-<!ENTITY wholeWords "全詞匹配">
-<!ENTITY regExp "正規表示式">
-<!ENTITY htmlNone "不使用">
-<!ENTITY htmlOutput "僅輸出">
-<!ENTITY htmlInputOutput "輸入和輸出">

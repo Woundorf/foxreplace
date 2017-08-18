@@ -32,12 +32,16 @@ legacyPort.onMessage.addListener(message => {
     case "showOptions":
       browser.runtime.openOptionsPage();
       break;
+    case "showReplaceBar":
+      // TODO no api currently!!
+      break;
   }
 });
 
 // Listen to messages from other parts of the WebExtension
 browser.runtime.onMessage.addListener(message => {
   switch (message.key) {
+    case "replace":
     case "replaceWithList":
       replaceCurrentTab(message);
       break;
@@ -118,9 +122,6 @@ browser.alarms.onAlarm.addListener(alarm => {
 
 browser.commands.onCommand.addListener(name => {
   switch (name) {
-    case "show-replace-bar":
-      legacyPort.postMessage({ key: "showReplaceBar" });
-      break;
     case "apply-substitution-list":
       replaceCurrentTab({ key: "replaceWithList" });
       break;

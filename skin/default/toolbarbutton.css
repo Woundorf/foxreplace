@@ -1,7 +1,0 @@
-#fxrToolbarButton {
-  -moz-image-region: rect(0px, 72px, 16px, 56px);
-}
-
-#fxrToolbarButton[cui-areatype="menu-panel"], toolbarpaletteitem[place="palette"] > #fxrToolbarButton {
-  -moz-image-region: rect(0px, 32px, 32px, 0px);
-}

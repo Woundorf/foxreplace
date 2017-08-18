@@ -46,7 +46,7 @@
   },
 
   "commands": {
-    "show-replace-bar": {
+    "_execute_sidebar_action": {
       "suggested_key": {
         "default": "F9"
       },
@@ -58,6 +58,11 @@
       },
       "description": "Apply the current substitution list"
     }
+  },
+
+  "sidebar_action": {
+    "default_panel": "sidebar/sidebar.html",
+    "browser_style": true
   }
 
 }
