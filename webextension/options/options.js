@@ -75,6 +75,7 @@ function onLoad() {
   storage.getPrefs().then(prefs => {
     $("#prefs").form("set values", prefs);
   });
+  eventListeners.subscriptionUrlChanged();  // update warning visibility after loading preferences
 
   browser.runtime.getBackgroundPage().then(background => {
     $("#status").text(background.subscription.status);
@@ -221,6 +222,12 @@ var eventListeners = {
       api.setFocusedCell(newIndex);
     }
   },
+  subscriptionUrlChanged() {
+    // Show the warning if the user inputs a string, hide it otherwise
+    let url = document.getElementById("subscriptionUrl").value;
+    if (url != "") document.getElementById("prefs").classList.add("warning");
+    else document.getElementById("prefs").classList.remove("warning");
+  },
   startImport() {
     $("#importModal .header").text("Import");
     $("#importModal").removeClass("importFromUrl").addClass("importFromFile");
@@ -263,6 +270,7 @@ function addEventListeners() {
   document.getElementById("clearGroups").addEventListener("click", eventListeners.clearGroups);
   document.getElementById("moveUpGroup").addEventListener("click", eventListeners.moveUpGroup);
   document.getElementById("moveDownGroup").addEventListener("click", eventListeners.moveDownGroup);
+  document.getElementById("subscriptionUrl").addEventListener("input", eventListeners.subscriptionUrlChanged);
   document.getElementById("import").addEventListener("click", eventListeners.startImport);
   document.getElementById("importFromUrl").addEventListener("click", eventListeners.startImportFromUrl);
   document.getElementById("export").addEventListener("click", eventListeners.startExport);
@@ -274,6 +282,7 @@ function removeEventListeners() {
   document.getElementById("clearGroups").removeEventListener("click", eventListeners.clearGroups);
   document.getElementById("moveUpGroup").removeEventListener("click", eventListeners.moveUpGroup);
   document.getElementById("moveDownGroup").removeEventListener("click", eventListeners.moveDownGroup);
+  document.getElementById("subscriptionUrl").removeEventListener("input", eventListeners.subscriptionUrlChanged);
   document.getElementById("import").removeEventListener("click", eventListeners.startImport);
   document.getElementById("importFromUrl").removeEventListener("click", eventListeners.startImportFromUrl);
   document.getElementById("export").removeEventListener("click", eventListeners.startExport);

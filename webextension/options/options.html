@@ -80,7 +80,7 @@
       <div class="inline fields">
         <div class="twelve wide field">
           <label>URL</label>
-          <input name="subscriptionUrl" type="text"></input>
+          <input id="subscriptionUrl" name="subscriptionUrl" type="text"></input>
         </div>
         <div class="field">
           <label>Period (minutes)</label>
@@ -90,6 +90,15 @@
       <div class="inline field">
         <label>Status:</label>
         <span id="status">Disabled</span>
+      </div>
+      <div class="ui warning message">
+        <div class="header">
+          <i class="warning sign icon"></i>
+          Warning: use only trusted sources
+        </div>
+        Updating the substitution list from a remote server has potential security and privacy issues.
+        A malicious server could execute code on your browser and use it to steal your information or perform another kind of attack.
+        Thus you should only use a remote URL from a server you trust.
       </div>
       <h4 class="ui dividing header">Other settings</h4>
       <div class="field">
