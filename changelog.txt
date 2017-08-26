@@ -1,3 +1,5 @@
+* Corrected a wrong string.
+
 v1.1.2 (2017-08-17)
 * Fixed another bug in v1.1.0 in which the replace bar didn't follow current preferences.
 
