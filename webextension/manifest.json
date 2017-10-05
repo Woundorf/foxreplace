@@ -7,7 +7,7 @@
 
   "content_security_policy": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'",
 
-  "permissions": ["<all_urls>", "alarms", "contextMenus", "downloads", "storage"],
+  "permissions": ["<all_urls>", "alarms", "menus", "downloads", "storage"],
 
   "icons": {
     "16": "icons/toolbaricon16.png",

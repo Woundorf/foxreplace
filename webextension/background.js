@@ -135,13 +135,13 @@ browser.commands.onCommand.addListener(name => {
   }
 });
 
-browser.contextMenus.create({
+browser.menus.create({
   id: "context.apply-substitution-list",
   title: browser.i18n.getMessage("menu.replaceWithList"),
   contexts: ["all"]
 });
 
-browser.contextMenus.onClicked.addListener(info => {
+browser.menus.onClicked.addListener(info => {
   if (info.menuItemId == "context.apply-substitution-list") {
     replaceCurrentTab({ key: "replaceWithList" });
   }
