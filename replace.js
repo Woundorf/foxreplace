@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2016 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -139,14 +139,14 @@ function replaceTextWithHtml(aDocument, aGroup, aPrefs) {
     let replacedText = aGroup.replace(originalText);
 
     if (originalText != replacedText) {
+      let parser = new DOMParser();
+      let doc = parser.parseFromString(replacedText, "text/html");
       let fragment = aDocument.createDocumentFragment();
-      let tmp = aDocument.createElement("a");
-      tmp.innerHTML = replacedText;
-      let child = tmp.firstChild;
+      let child = doc.body.firstChild;
 
       while (child) {
         fragment.appendChild(child);
-        child = tmp.firstChild
+        child = doc.body.firstChild;
       }
 
       let parent = textNode.parentNode;
@@ -184,7 +184,9 @@ function replaceHtml(aDocument, aGroup, aPrefs) {
   let newHtml = aGroup.replace(html.singleNodeValue.innerHTML);
 
   if (oldHtml != newHtml) {
-    html.singleNodeValue.innerHTML = newHtml;
+    let parser = new DOMParser();
+    let doc = parser.parseFromString(newHtml, "text/html");
+    aDocument.replaceChild(doc.documentElement, aDocument.documentElement);
 
     // Replace scripts
     if (aPrefs.replaceScripts) {

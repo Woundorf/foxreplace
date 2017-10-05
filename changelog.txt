@@ -4,6 +4,7 @@
 * Fixed bug about the subscription warning not showing sometimes.
 * Fixed bug related to subscription causing it to update very fast forever.
 * Fixed export (#222).
+* DOMParser is used instead of innerHTML.
 * Compatibility with Firefox 57 and later.
 
 v1.1.3 (2017-08-28)
