@@ -16,6 +16,7 @@
 
 function onLoad() {
   window.removeEventListener("DOMContentLoaded", onLoad);
+  document.getElementById("replace").addEventListener("click", showReplaceBar);
   document.getElementById("replaceWithList").addEventListener("click", replaceWithList);
   document.getElementById("autoReplaceOnLoad").addEventListener("click", toggleAutoReplaceOnLoad);
   document.getElementById("options").addEventListener("click", showOptions);
@@ -28,9 +29,15 @@ function onLoad() {
 
 function onUnload() {
   window.removeEventListener("unload", onUnload);
+  document.getElementById("replace").removeEventListener("click", showReplaceBar);
   document.getElementById("replaceWithList").removeEventListener("click", replaceWithList);
   document.getElementById("autoReplaceOnLoad").removeEventListener("click", toggleAutoReplaceOnLoad);
   document.getElementById("options").removeEventListener("click", showOptions);
+}
+
+function showReplaceBar() {
+  browser.sidebarAction.open()
+    .then(() => window.close());
 }
 
 function replaceWithList() {

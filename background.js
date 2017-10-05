@@ -99,6 +99,11 @@ browser.menus.create({
 });
 // Tools menu
 browser.menus.create({
+  id: "tools.replace",
+  title: browser.i18n.getMessage("menu.replace"),
+  contexts: ["tools_menu"]
+});
+browser.menus.create({
   id: "tools.apply-substitution-list",
   title: browser.i18n.getMessage("menu.replaceWithList"),
   contexts: ["tools_menu"]
@@ -116,7 +121,10 @@ browser.menus.create({
 });
 
 browser.menus.onClicked.addListener(info => {
-  if (info.menuItemId == "context.apply-substitution-list" || info.menutItemId == "tools.apply-substitution-list") {
+  if (info.menuItemId == "tools.replace") {
+    browser.sidebarAction.open();
+  }
+  else if (info.menuItemId == "context.apply-substitution-list" || info.menutItemId == "tools.apply-substitution-list") {
     replaceCurrentTab({ key: "replaceWithList" });
   }
   else if (info.menuItemId == "tools.auto-replace-on-load") {

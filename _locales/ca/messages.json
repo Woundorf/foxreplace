@@ -251,6 +251,10 @@
     "message": "No es pot connectar al servidor"
   },
 
+  "menu.replace": {
+    "message": "Reemplaça..."
+  },
+
   "menu.replaceWithList": {
     "message": "Reemplaça amb la llista de substitucions"
   },

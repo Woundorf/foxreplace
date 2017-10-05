@@ -251,6 +251,10 @@
     "message": "Can't connect to server"
   },
 
+  "menu.replace": {
+    "message": "Replace..."
+  },
+
   "menu.replaceWithList": {
     "message": "Replace with substitution list"
   },
