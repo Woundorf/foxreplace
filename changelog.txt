@@ -3,6 +3,7 @@
 * Replace bar moved to the embedded WebExtension as a sidebar.
 * Enabled translation.
 * Fixed bug about the subscription warning not showing sometimes.
+* Fixed bug related to subscription causing it to update very fast forever.
 
 v1.1.3 (2017-08-28)
 * Corrected a wrong string.

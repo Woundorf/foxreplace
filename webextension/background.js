@@ -86,18 +86,25 @@ storage.getPrefs().then(prefs => {
 
 // Update things
 browser.storage.onChanged.addListener(changes => {
-  // TODO should check which keys are in changes, but with the current implementation it always contains all keys
+  // TODO should check which keys are in changes, but with the current implementation it always contains all keys,
+  //      so just check if old and new values are actually different
   storage.getPrefs().then(prefs => {
-    if (prefs.enableSubscription) subscription.restart(prefs.subscriptionUrl, prefs.subscriptionPeriod);
-    else subscription.stop();
+    if (changes.enableSubscription && changes.enableSubscription.newValue != changes.enableSubscription.oldValue) {
+      if (prefs.enableSubscription) subscription.restart(prefs.subscriptionUrl, prefs.subscriptionPeriod);
+      else subscription.stop();
+    }
 
-    if (prefs.autoReplacePeriodically) periodicReplace.restart(prefs.autoReplacePeriod);
-    else periodicReplace.stop();
+    if (changes.autoReplacePeriodically && changes.autoReplacePeriodically.newValue != changes.autoReplacePeriodically.oldValue) {
+      if (prefs.autoReplacePeriodically) periodicReplace.restart(prefs.autoReplacePeriod);
+      else periodicReplace.stop();
+    }
 
-    legacyPort.postMessage({
-      key: "autoReplaceOnLoad",
-      value: prefs.autoReplaceOnLoad
-    });
+    if (changes.autoReplaceOnLoad && changes.autoReplaceOnLoad.newValue != changes.autoReplaceOnLoad.oldValue) {
+      legacyPort.postMessage({
+        key: "autoReplaceOnLoad",
+        value: prefs.autoReplaceOnLoad
+      });
+    }
   });
 });
 
