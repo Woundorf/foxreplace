@@ -30,7 +30,6 @@
 # default configuration file is ./config_build.sh, unless another file is
 # specified in command-line. Available config variables:
 APP_NAME=          # short-name, jar and xpi files name. Must be lowercase with no spaces
-CHROME_PROVIDERS=  # which chrome providers we have (space-separated list)
 CLEAN_UP=          # delete the jar / "files" when done?       (1/0)
 ROOT_FILES=        # put these files in root of xpi (space separated list of leaf filenames)
 ROOT_DIRS=         # ...and these directories       (space separated list)
@@ -62,15 +61,7 @@ rm -rf $TMP_DIR
 
 $BEFORE_BUILD
 
-mkdir --parents --verbose $TMP_DIR/chrome
-
-# move chrome providers to chrome dir
-echo "Generating $TMP_DIR/chrome..."
-for CHROME_SUBDIR in $CHROME_PROVIDERS; do
-  find $CHROME_SUBDIR -type f -print | grep -v -e \~ $EXCLUDED_EXTENSIONS_PATTERN >> files
-done
-
-cp --verbose --parents `cat files` $TMP_DIR/chrome
+mkdir $TMP_DIR
 
 # prepare components and defaults
 echo "Copying various files to $TMP_DIR folder..."
@@ -82,7 +73,7 @@ for DIR in $ROOT_DIRS; do
 done
 
 # Copy other files to the root of future XPI.
-for ROOT_FILE in $ROOT_FILES install.rdf chrome.manifest; do
+for ROOT_FILE in $ROOT_FILES; do
   cp --verbose $ROOT_FILE $TMP_DIR
   if [ -f $ROOT_FILE ]; then
     echo $ROOT_FILE >> files
@@ -90,20 +81,6 @@ for ROOT_FILE in $ROOT_FILES install.rdf chrome.manifest; do
 done
 
 cd $TMP_DIR
-
-# No JAR file
-if [ -f "chrome.manifest" ]; then
-  echo "Preprocessing chrome.manifest..."
-  sed -i -r "s ^(content\s+\S*\s+)(.*)$ \1chrome/\2 " chrome.manifest
-  sed -i -r "s ^(skin|locale)(\s+\S*\s+\S*\s+)(.*)$ \1\2chrome/\3 " chrome.manifest
-  # (it simply adds chrome/ at appropriate positions of chrome.manifest)
-fi
-
-# Remove the line to register test code in chrome
-if [ -f "chrome.manifest" ]; then
-  echo "Removing test registration from chrome.manifest..."
-  sed -i -r s/^.*foxreplace-test.*$// chrome.manifest
-fi
 
 # generate the XPI file
 echo "Generating $APP_NAME.xpi..."

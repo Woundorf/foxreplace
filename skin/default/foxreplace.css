@@ -1,6 +1,0 @@
-/* rect(top, right, bottom, left) */
-
-#fxrMenuEditReplace, #fxrMenuToolsFoxReplace {
-  list-style-image: url("chrome://foxreplace/skin/toolbar-icons.png");
-  -moz-image-region: rect(0px, 48px, 16px, 32px);
-}

@@ -1,0 +1,299 @@
+{
+
+  "extensionDescription": {
+    "message": "Us permet reemplaçar text en pàgines web. Podeu definir una llista de substitució i aplicar-la automàticament o a la vostra discreció, o fer substitucions individuals. Ho podeu fer servir com a filtre, o simplement per diversió :)"
+  },
+
+  "generalSubstitutions": {
+    "message": "Substitucions generals"
+  },
+
+  "substitutionsForUrl": {
+    "message": "Substitucions per a $url$",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+
+  "substitutionsForUrls": {
+    "message": "Substitucions per a $url$ i altres",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+
+  "inputType.text": {
+    "message": "Text"
+  },
+
+  "inputType.wholeWords": {
+    "message": "Paraules senceres"
+  },
+
+  "inputType.regExp": {
+    "message": "Expressió regular"
+  },
+
+  "options.substitutionList": {
+    "message": "Llista de substitucions"
+  },
+
+  "options.add": {
+    "message": "Afegeix"
+  },
+
+  "options.clear": {
+    "message": "Buida"
+  },
+
+  "options.moveTop": {
+    "message": "Mou a la part superior"
+  },
+
+  "options.moveUp": {
+    "message": "Mou amunt"
+  },
+
+  "options.moveDown": {
+    "message": "Mou avall"
+  },
+
+  "options.moveBottom": {
+    "message": "Mou a la part inferior"
+  },
+
+  "options.import": {
+    "message": "Importa"
+  },
+
+  "options.importFromUrl": {
+    "message": "Importa des d'un URL"
+  },
+
+  "options.export": {
+    "message": "Exporta"
+  },
+
+  "options.subscription.header": {
+    "message": "Actualitza periòdicament des d'un URL"
+  },
+
+  "options.subscription.enable": {
+    "message": "Activa"
+  },
+
+  "options.subscription.url": {
+    "message": "URL"
+  },
+
+  "options.subscription.period": {
+    "message": "Període (minuts)"
+  },
+
+  "options.subscription.status": {
+    "message": "Estat:"
+  },
+
+  "options.subscription.warning.header": {
+    "message": "Avís: feu servir només fonts de confiança"
+  },
+
+  "options.subscription.warning.content": {
+    "message": "Actualitzar la llista de substitucions des d'un servidor remot comporta un risc potencial per a la seguretat i la privadesa. Un servidor malèvol podria executar codi al vostre navegador i utilitzar-lo per robar la vostra informació o dur a terme un altre tipus d'atac. És per això que només hauríeu de fer servir una URL remote d'un servidor en el qual confieu."
+  },
+
+  "options.otherSettings": {
+    "message": "Altres opcions"
+  },
+
+  "options.autoReplaceOnLoad": {
+    "message": "Reemplaça automàticament en carregar una pàgina"
+  },
+
+  "options.autoReplacePeriodically": {
+    "message": "Reemplaça automàticament cada"
+  },
+
+  "options.autoReplacePeriodUnits": {
+    "message": "segons"
+  },
+
+  "options.replaceUrls": {
+    "message": "Reemplaça els URLs (enllaços i fonts de les imatges) (Atenció: això pot modificar el comportament de les pàgines!)"
+  },
+
+  "options.replaceScripts": {
+    "message": "Reemplaça els scripts (Atenció: això pot modificar el comportament de les pàgines!) (experimental)"
+  },
+
+  "options.save": {
+    "message": "Desa"
+  },
+
+  "options.importAndAppend": {
+    "message": "Importa i afegeix"
+  },
+
+  "options.importAndOverwrite": {
+    "message": "Importa i sobreescriu"
+  },
+
+  "options.ok": {
+    "message": "D'acord"
+  },
+
+  "options.cancel": {
+    "message": "Cancel·la"
+  },
+
+  "options.apply": {
+    "message": "Aplica"
+  },
+
+  "options.group.enabled": {
+    "message": "Habilita"
+  },
+
+  "options.group.name": {
+    "message": "Nom"
+  },
+
+  "html": {
+    "message": "HTML"
+  },
+
+  "html.none": {
+    "message": "No"
+  },
+
+  "html.output": {
+    "message": "Només a la sortida"
+  },
+
+  "html.inputOutput": {
+    "message": "Entrada i sortida"
+  },
+
+  "options.group.url": {
+    "message": "URL"
+  },
+
+  "options.group.urls": {
+    "message": "URLs"
+  },
+
+  "options.group.substitutions": {
+    "message": "Substitucions"
+  },
+
+    "list.urlHint": {
+    "message": "Escriviu un URL..."
+  },
+
+  "list.inputHeader": {
+    "message": "Reemplaça"
+  },
+
+  "list.inputHint": {
+    "message": "Escriviu l'entrada... (necessari)"
+  },
+
+  "list.inputTypeHeader": {
+    "message": "Tipus"
+  },
+
+  "list.outputHeader": {
+    "message": "Amb"
+  },
+
+  "list.outputHint": {
+    "message": "Escriviu la sortida..."
+  },
+
+  "list.caseSensitiveHeader": {
+    "message": "Distingeix entre majúscules i minúscules"
+  },
+
+  "yes": {
+    "message": "Sí"
+  },
+
+  "no": {
+    "message": "No"
+  },
+
+  "options.warning.selectFile": {
+    "message": "Trieu un fitxer"
+  },
+
+  "options.warning.enterUrl": {
+    "message": "Introduïu un URL"
+  },
+
+  "options.warning.atLeastOneSubstitution": {
+    "message": "Heu d'afegir almenys una substitució"
+  },
+
+  "options.error.invalidJson": {
+    "message": "S'ha trobat JSON no vàlid a $url$",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+
+  "options.error.cantConnect": {
+    "message": "No es pot connectar al servidor"
+  },
+
+  "menu.replaceWithList": {
+    "message": "Reemplaça amb la llista de substitucions"
+  },
+
+  "menu.autoReplaceOnLoad": {
+    "message": "Reemplaça automàticament en carregar una pàgina"
+  },
+
+  "menu.options": {
+    "message": "Opcions"
+  },
+
+  "toolbar.input": {
+    "message": "Reemplaça"
+  },
+
+  "toolbar.output": {
+    "message": "Amb"
+  },
+
+  "toolbar.caseSensitive": {
+    "message": "Distingeix entre majúscules i minúscules"
+  },
+
+  "toolbar.replace": {
+    "message": "Reemplaça"
+  },
+
+  "subscriptionStatus.disabled": {
+    "message": "Inactiu"
+  },
+
+  "subscriptionStatus.updating": {
+    "message": "S'està actualitzant..."
+  },
+
+  "subscriptionStatus.lastUpdate": {
+    "message": "Última actualització: $dateTime$",
+    "placeholders": {
+      "dateTime": {
+        "content": "$1"
+      }
+    }
+  }
+
+}

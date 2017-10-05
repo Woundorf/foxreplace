@@ -1,0 +1,51 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+  -
+  - Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+  -
+  - This file is part of FoxReplace.
+  -
+  - FoxReplace is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software
+  - Foundation, either version 3 of the License, or (at your option) any later version.
+  -
+  - FoxReplace is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+  - A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+  -
+  - You should have received a copy of the GNU General Public License along with FoxReplace. If not, see <http://www.gnu.org/licenses/>.
+  -
+  - ***** END LICENSE BLOCK ***** -->
+
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="icon.min.css">
+    <link rel="stylesheet" href="toolbarbutton.css">
+    <script src="../storage.js"></script>
+    <script src="toolbarbutton.js"></script>
+  </head>
+
+  <body>
+
+    <div class="panel">
+      <div class="panel-section panel-section-list">
+        <div id="replaceWithList" class="panel-list-item">
+          <div class="text i18n">menu.replaceWithList</div>
+          <div class="text-shortcut">Ctrl+F9</div><!-- TODO set from script -->
+        </div>
+        <div id="autoReplaceOnLoad" class="panel-list-item">
+          <div class="icon">
+            <i id="autoReplaceOnLoadCheck" class="icon"></i>
+          </div>
+          <div class="text i18n">menu.autoReplaceOnLoad</div>
+        </div>
+        <div id="options" class="panel-list-item i18n">menu.options</div>
+      </div>
+    </div>
+
+    <script src="../scripts/i18n.js"></script>
+
+  </body>
+
+</html>

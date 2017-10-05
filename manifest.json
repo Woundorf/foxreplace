@@ -1,0 +1,80 @@
+{
+
+  "manifest_version": 2,
+  "name": "FoxReplace",
+  "version": "1.1.3",
+  "default_locale": "en",
+
+  "applications": {
+    "gecko": {
+      "id": "fox@replace.fx",
+      "strict_min_version": "55.0"
+    }
+  },
+
+  "author": "Marc Ruiz Altisent",
+  "homepage_url": "https://github.com/Woundorf/foxreplace",
+
+  "description": "__MSG_extensionDescription__",
+
+  "content_security_policy": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'",
+
+  "permissions": ["<all_urls>", "alarms", "menus", "downloads", "storage"],
+
+  "icons": {
+    "16": "icons/toolbaricon16.png",
+    "32": "icons/toolbaricon32.png",
+    "48": "icons/foxreplace48.png",
+    "96": "icons/foxreplace96.png"
+  },
+
+  "background": {
+    "scripts": ["xregexp-all-min.js", "core.js", "periodicreplace.js", "storage.js", "subscription.js", "background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["xregexp-all-min.js", "core.js", "replace.js", "storage.js", "content.js"],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true,
+    "browser_style": true
+  },
+
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/toolbaricon16.png",
+      "32": "icons/toolbaricon32.png",
+      "64": "icons/toolbaricon64.png"
+    },
+    "default_popup": "popup/toolbarbutton.html",
+    "browser_style": true
+  },
+
+  "commands": {
+    "_execute_sidebar_action": {
+      "suggested_key": {
+        "default": "F9"
+      },
+      "description": "Show the replace bar"
+    },
+    "apply-substitution-list": {
+      "suggested_key": {
+        "default": "Ctrl+F9"
+      },
+      "description": "Apply the current substitution list"
+    }
+  },
+
+  "sidebar_action": {
+    "default_panel": "sidebar/sidebar.html",
+    "browser_style": true
+  }
+
+}

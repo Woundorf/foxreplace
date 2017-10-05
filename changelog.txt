@@ -1,6 +1,5 @@
-* Shortcuts moved to the embedded WebExtension.
-* Context menu moved to the embedded WebExtension.
-* Replace bar moved to the embedded WebExtension as a sidebar.
+* Finished conversion to WebExtension.
+* Replace bar has been transformed into a sidebar until WebExtensions support toolbars.
 * Enabled translation.
 * Fixed bug about the subscription warning not showing sometimes.
 * Fixed bug related to subscription causing it to update very fast forever.
