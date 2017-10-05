@@ -73,8 +73,8 @@ function onLoad() {
 
   storage.getPrefs().then(prefs => {
     $("#prefs").form("set values", prefs);
+    eventListeners.subscriptionUrlChanged();  // update warning visibility after loading preferences
   });
-  eventListeners.subscriptionUrlChanged();  // update warning visibility after loading preferences
 
   browser.runtime.getBackgroundPage().then(background => {
     $("#status").text(background.subscription.status);
