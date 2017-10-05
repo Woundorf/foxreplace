@@ -76,7 +76,7 @@ var groupEditor = (() => {
           }
         },
         cellRenderer(params) {
-          return isLastRow(params) ? "Type URL..." : params.value;
+          return isLastRow(params) ? browser.i18n.getMessage("list.urlHint") : params.value;
         }//,
         //onCellValueChanged(params) {
         //  // TODO to use this instead of onCellEditingStopped change params.value -> params.newValue and params.rowIndex -> params.node.rowIndex
@@ -131,37 +131,37 @@ var groupEditor = (() => {
 
     columnDefs: [
       {
-        headerName: "Replace",
+        headerName: "list.inputHeader",
         field: "input",
         cellRenderer(params) {
-          return isLastRow(params) ? "Type input... (required)" : escapeHtml(params.value);
+          return isLastRow(params) ? browser.i18n.getMessage("list.inputHint") : escapeHtml(params.value);
         }
       },
       {
-        headerName: "Type",
+        headerName: "list.inputTypeHeader",
         field: "inputType",
         cellRenderer(params) {  // TODO improve (less hardcoding)
           switch (Number(params.value)) {
-            case 0: return "Text";
-            case 1: return "Whole words";
-            case 2: return "Regular expression";
+            case 0: return browser.i18n.getMessage("inputType.text");
+            case 1: return browser.i18n.getMessage("inputType.wholeWords");
+            case 2: return browser.i18n.getMessage("inputType.regExp");
             default: return params.value;
           }
         },
         cellEditor: InputTypeEditor
       },
       {
-        headerName: "With",
+        headerName: "list.outputHeader",
         field: "output",
         cellRenderer(params) {
-          return isLastRow(params) ? "Type output..." : escapeHtml(params.value);
+          return isLastRow(params) ? browser.i18n.getMessage("list.outputHint") : escapeHtml(params.value);
         }
       },
       {
-        headerName: "Match case",
+        headerName: "list.caseSensitiveHeader",
         field: "caseSensitive",
         cellRenderer(params) {
-          return params.value ? "Yes" : "No";
+          return params.value ? browser.i18n.getMessage("yes") : browser.i18n.getMessage("no");
         },
         cellEditor: CheckboxCellEditor
       },

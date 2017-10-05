@@ -37,38 +37,42 @@
   </head>
 
   <body>
+
     <form id="form" class="ui form">
       <div class="required field">
-        <label>Replace</label>
+        <label class="i18n">toolbar.input</label>
         <input name="input" type="text">
       </div>
       <div class="field">
         <select name="inputType" class="ui dropdown">
-          <option value="0">Text</option>
-          <option value="1">Whole words</option>
-          <option value="2">Regular expression</option>
+          <option value="0" class="i18n">inputType.text</option>
+          <option value="1" class="i18n">inputType.wholeWords</option>
+          <option value="2" class="i18n">inputType.regExp</option>
         </select>
       </div>
       <div class="field">
-        <label>With</label>
+        <label class="i18n">toolbar.output</label>
         <input name="output" type="text">
       </div>
       <div class="field">
-        <label>HTML</label>
+        <label class="i18n">html</label>
         <select name="html" class="ui dropdown">
-          <option value="0">No</option>
-          <option value="1">Output only</option>
-          <option value="2">Input &amp; output</option>
+          <option value="0" class="i18n">html.none</option>
+          <option value="1" class="i18n">html.output</option>
+          <option value="2" class="i18n">html.inputOutput</option>
         </select>
       </div>
       <div class="field">
         <div class="ui checkbox">
           <input name="caseSensitive" type="checkbox">
-          <label>Match case</label>
+          <label class="i18n">toolbar.caseSensitive</label>
         </div>
       </div>
-      <button class="ui button" type="submit">Replace</button>
-    </fom>
+      <button class="ui button i18n" type="submit">toolbar.replace</button>
+    </form>
+
+    <script src="../scripts/i18n.js"></script>
+
   </body>
 
 </html>

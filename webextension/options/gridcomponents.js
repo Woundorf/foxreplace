@@ -136,9 +136,9 @@ class InputTypeEditor {
 
   init(params) {
     this.gui = $('<select class="ui dropdown">' +
-                  InputTypeEditor.getOption(params, 0, "Text") +
-                  InputTypeEditor.getOption(params, 1, "Whole words") +
-                  InputTypeEditor.getOption(params, 2, "Regular expression") +
+                  InputTypeEditor.getOption(params, 0, browser.i18n.getMessage("inputType.text")) +
+                  InputTypeEditor.getOption(params, 1, browser.i18n.getMessage("inputType.wholeWords")) +
+                  InputTypeEditor.getOption(params, 2, browser.i18n.getMessage("inputType.regExp")) +
                  '</select>')[0];
     this.width = params.column.actualWidth;
     this.api = params.api;

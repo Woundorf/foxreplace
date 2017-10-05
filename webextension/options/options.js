@@ -19,7 +19,7 @@ var editedIndex = null; // index of node currently being edited in the dialog, n
 var gridOptions = {
   columnDefs: [
     {
-      headerName: "Enabled",
+      headerName: browser.i18n.getMessage("options.group.enabled"),
       field: "enabled",
       width: 63,
       cellClass: "enabledCell",
@@ -27,24 +27,23 @@ var gridOptions = {
       suppressFilter: true
     },
     {
-      headerName: "Name",
+      headerName: browser.i18n.getMessage("options.group.name"),
       field: "nonEmptyName"
     },
     {
-      headerName: "URL",
+      headerName: browser.i18n.getMessage("options.group.url"),
       valueGetter: (params) => params.data.urls.length > 0 ? params.data.urls[0] : ""
     },
     {
-      headerName: "Replace",
+      headerName: browser.i18n.getMessage("list.inputHeader"),
       valueGetter: (params) => params.data.substitutions.length > 0 ? params.data.substitutions[0].input : ""
     },
     {
-      headerName: "With",
+      headerName: browser.i18n.getMessage("list.outputHeader"),
       valueGetter: (params) => params.data.substitutions.length > 0 ? params.data.substitutions[0].output : ""
     },
     {
       headerName: "",
-      field: "index",
       width: 48,
       cellRenderer: ButtonsCellRenderer,
       suppressFilter: true,
@@ -105,7 +104,7 @@ function onLoad() {
       if ($("#importModal").hasClass("importFromFile")) {
         let files = $("#importFile")[0].files;
         if (files.length === 0) {
-          alert("Select a file");
+          alert(browser.i18n.getMessage("options.warning.selectFile"));
           $("#importModal").modal("setting", "closable", true);
           return false;
         }
@@ -120,7 +119,7 @@ function onLoad() {
       else if ($("#importModal").hasClass("importFromUrl")) {
         let url = $("#importUrl").val();
         if (!url) {
-          alert("Enter a URL");
+          alert(browser.i18n.getMessage("options.warning.enterUrl"));
           $("#importModal").modal("setting", "closable", true);
           return false;
         }
@@ -155,7 +154,7 @@ function onLoad() {
     },
     onApprove(button) {
       if (!groupEditor.isValidGroup()) {
-        alert("You must add at least one substitution");
+        alert(browser.i18n.getMessage("options.warning.atLeastOneSubstitution"));
         return false;
       }
 
@@ -229,12 +228,12 @@ var eventListeners = {
     else document.getElementById("prefs").classList.remove("warning");
   },
   startImport() {
-    $("#importModal .header").text("Import");
+    $("#importModal .header").text(browser.i18n.getMessage("options.import"));
     $("#importModal").removeClass("importFromUrl").addClass("importFromFile");
     $("#importModal").modal("show");
   },
   startImportFromUrl() {
-    $("#importModal .header").text("Import from URL");
+    $("#importModal .header").text(browser.i18n.getMessage("options.importFromUrl"));
     $("#importModal").removeClass("importFromFile").addClass("importFromUrl");
     $("#importModal").modal("show");
   },
@@ -320,7 +319,7 @@ function importFromUrl(url) {
           resolve(list);
         }
         else {
-          reject(Error("Invalid JSON at " + url));
+          reject(Error(browser.i18n.getMessage("options.error.invalidJson", url)));
         }
       }
       else {
@@ -328,7 +327,7 @@ function importFromUrl(url) {
       }
     };
     request.onerror = () => {
-      reject(Error("Can't connect to server"));
+      reject(Error(browser.i18n.getMessage("options.error.cantConnect")));
     };
     request.send();
   });

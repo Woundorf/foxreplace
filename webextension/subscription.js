@@ -59,7 +59,7 @@ var subscription = (() => {
     stop() {
       return browser.alarms.clear(ALARM_NAME)
         .then(cleared => {
-          if (cleared) setStatus("Disabled");
+          if (cleared) setStatus(browser.i18n.getMessage("subscriptionStatus.disabled"));
         });
     },
 
@@ -70,12 +70,12 @@ var subscription = (() => {
   };
 
   var subscribedUrl = "";
-  var status = "Disabled";
+  var status = browser.i18n.getMessage("subscriptionStatus.disabled");
 
   function update(alarm) {
     if (alarm.name != ALARM_NAME) return;
 
-    setStatus("Updating...");
+    setStatus(browser.i18n.getMessage("subscriptionStatus.updating"));
 
     let init;
     if (new URL(subscribedUrl).protocol == "file:") init = { mode: "same-origin" };
@@ -85,7 +85,7 @@ var subscription = (() => {
       .then(json => {
         let list = substitutionListFromJSON(json);
         storage.setList(list);
-        setStatus("Last update: " + new Date().toLocaleString());
+        setStatus(browser.i18n.getMessage("subscriptionStatus.lastUpdate", new Date().toLocaleString()));
       }).
       catch(error => {
         setStatus(String(error));

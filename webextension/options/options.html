@@ -36,33 +36,40 @@
 
   <body>
     <div>
-      <h4 class="ui dividing header">Substitution list</h4>
+      <h4 class="ui dividing header i18n">options.substitutionList</h4>
       <p>
         <div class="ui buttons">
           <button id="addGroup" class="ui button">
-            <i class="plus icon"></i> Add
+            <i class="plus icon"></i>
+            <span class="i18n">options.add</span>
           </button>
           <button id="clearGroups" class="ui button">
-            <i class="trash icon"></i> Clear
+            <i class="trash icon"></i>
+            <span class="i18n">options.clear</span>
           </button>
         </div>
         <div class="ui buttons">
           <button id="moveUpGroup" class="ui button">
-            <i class="angle up icon"></i> Move up
+            <i class="angle up icon"></i>
+            <span class="i18n">options.moveUp</span>
           </button>
           <button id="moveDownGroup" class="ui button">
-            <i class="angle down icon"></i> Move down
+            <i class="angle down icon"></i>
+            <span class="i18n">options.moveDown</span>
           </button>
         </div>
         <div class="ui buttons">
           <button id="import" class="ui button">
-            <i class="folder open icon"></i> Import
+            <i class="folder open icon"></i>
+            <span class="i18n">options.import</span>
           </button>
           <button id="importFromUrl" class="ui button">
-            <i class="cloud icon"></i> Import from URL
+            <i class="cloud icon"></i>
+            <span class="i18n">options.importFromUrl</span>
           </button>
           <button id="export" class="ui button">
-            <i class="archive icon"></i> Export
+            <i class="archive icon"></i>
+            <span class="i18n">options.export</span>
           </button>
         </div>
       </p>
@@ -70,65 +77,63 @@
     </div>
     <div class="ui hidden divider"></div>
     <div id="prefs" class="ui form"><!-- not a form to avoid reloading the page with an accidental submit -->
-      <h4 class="ui dividing header">Periodically update from URL</h4>
+      <h4 class="ui dividing header i18n">options.subscription.header</h4>
       <div class="field">
         <div class="ui checkbox">
           <input name="enableSubscription" type="checkbox"></input>
-          <label>Enable</label>
+          <label class="i18n">options.subscription.enable</label>
         </div>
       </div>
       <div class="inline fields">
         <div class="twelve wide field">
-          <label>URL</label>
+          <label class="i18n">options.subscription.url</label>
           <input id="subscriptionUrl" name="subscriptionUrl" type="text"></input>
         </div>
         <div class="field">
-          <label>Period (minutes)</label>
+          <label class="i18n">options.subscription.period</label>
           <input name="subscriptionPeriod" type="number" value="1"></input>
         </div>
       </div>
       <div class="inline field">
-        <label>Status:</label>
+        <label class="i18n">options.subscription.status</label>
         <span id="status">Disabled</span>
       </div>
       <div class="ui warning message">
         <div class="header">
           <i class="warning sign icon"></i>
-          Warning: use only trusted sources
+          <span class="i18n">options.subscription.warning.header</span>
         </div>
-        Updating the substitution list from a remote server has potential security and privacy issues.
-        A malicious server could execute code on your browser and use it to steal your information or perform another kind of attack.
-        Thus you should only use a remote URL from a server you trust.
+        <span class="i18n">options.subscription.warning.content</span>
       </div>
-      <h4 class="ui dividing header">Other settings</h4>
+      <h4 class="ui dividing header i18n">options.otherSettings</h4>
       <div class="field">
         <div class="ui checkbox">
           <input name="autoReplaceOnLoad" type="checkbox"></input>
-          <label>Auto-replace on page load</label>
+          <label class="i18n">options.autoReplaceOnLoad</label>
         </div>
       </div>
       <div class="inline fields">
         <div class="field">
           <div class="ui checkbox">
             <input name="autoReplacePeriodically" type="checkbox"></input>
-            <label>Auto-replace every</label>
+            <label class="i18n">options.autoReplacePeriodically</label>
           </div>
         </div>
         <div class="one wide field">
           <input name="autoReplacePeriod" type="number" value="1"></input>
         </div>
-        <div class="field">seconds</div>
+        <div class="field i18n">options.autoReplacePeriodUnits</div>
       </div>
       <div class="field">
         <div class="ui checkbox">
           <input name="replaceUrls" type="checkbox"></input>
-          <label>Replace URLs (links and image sources) (Warning: this may change page behaviour!)</label>
+          <label class="i18n">options.replaceUrls</label>
         </div>
       </div>
       <div class="field">
         <div class="ui checkbox">
           <input name="replaceScripts" type="checkbox"></input>
-          <label>Replace scripts (Warning: this may change page behaviour!) (experimental)</label>
+          <label class="i18n">options.replaceScripts</label>
         </div>
       </div>
     </div>
@@ -136,7 +141,7 @@
     <p>
       <button id="save" class="ui positive button">
         <i class="save icon"></i>
-        Save
+        <span class="i18n">options.save</span>
       </button>
     </p>
 
@@ -150,9 +155,9 @@
         <div id="importError" class="ui error message"></div>
       </div>
       <div class="actions">
-        <button id="importAppend" class="ui positive button">Import and append</button>
-        <button id="importOverwrite" class="ui positive button">Import and overwrite</button>
-        <button class="ui cancel button">Cancel</button>
+        <button id="importAppend" class="ui positive button i18n">options.importAndAppend</button>
+        <button id="importOverwrite" class="ui positive button i18n">options.importAndOverwrite</button>
+        <button class="ui cancel button i18n">options.cancel</button>
       </div>
     </div>
 
@@ -162,31 +167,31 @@
           <div class="field">
             <div class="ui checkbox">
               <input name="enabled" type="checkbox"></input>
-              <label>Enable</label>
+              <label class="i18n">options.group.enabled</label>
             </div>
           </div>
           <div class="field">
-            <label>Name</label>
+            <label class="i18n">options.group.name</label>
             <input name="name" type="text"></input>
           </div>
           <div class="field">
-            <label>HTML</label>
+            <label class="i18n">html</label>
             <select name="html" class="ui dropdown">
-              <option value="0" selected="">No</option>
-              <option value="1">Output only</option>
-              <option value="2">Input &amp; output</option>
+              <option value="0" selected="" class="i18n">html.none</option>
+              <option value="1" class="i18n">html.output</option>
+              <option value="2" class="i18n">html.inputOutput</option>
             </select>
           </div>
         </div>
         <div class="ui top attached tabular menu">
-          <a class="active item" data-tab="urls">URLs</a>
-          <a class="item" data-tab="substitutions">Substitutions</a>
+          <a class="active item i18n" data-tab="urls">options.group.urls</a>
+          <a class="item i18n" data-tab="substitutions">options.group.substitutions</a>
         </div>
         <div id="urlsTab" class="ui bottom attached active tab segment" data-tab="urls">
           <div class="flex">
             <div id="urlsGrid" class="ag-fresh"></div>
             <div class="rightButtons">
-              <button id="clearUrlsButton" class="ui icon button" data-tooltip="Clear" data-inverted="">
+              <button id="clearUrlsButton" class="ui icon button i18n_data-tooltip" data-tooltip="options.clear" data-inverted="">
                 <i class="trash icon"></i>
               </button>
             </div>
@@ -197,22 +202,22 @@
             <div id="substitutionsGrid" class="ag-fresh"></div>
             <div class="rightButtons">
               <div class="ui vertical icon buttons">
-                <button id="moveTopSubstitutionButton" class="ui button" data-tooltip="Move to top" data-inverted="">
+                <button id="moveTopSubstitutionButton" class="ui button i18n_data-tooltip" data-tooltip="options.moveTop" data-inverted="">
                   <i class="angle double up icon"></i>
                 </button>
-                <button id="moveUpSubstitutionButton" class="ui button" data-tooltip="Move up" data-inverted="">
+                <button id="moveUpSubstitutionButton" class="ui button i18n_data-tooltip" data-tooltip="options.moveUp" data-inverted="">
                   <i class="angle up icon"></i>
                 </button>
-                <button id="moveDownSubstitutionButton" class="ui button" data-tooltip="Move down" data-inverted="">
+                <button id="moveDownSubstitutionButton" class="ui button i18n_data-tooltip" data-tooltip="options.moveDown" data-inverted="">
                   <i class="angle down icon"></i>
                 </button>
-                <button id="moveBottomSubstitutionButton" class="ui button" data-tooltip="Move to bottom" data-inverted="">
+                <button id="moveBottomSubstitutionButton" class="ui button i18n_data-tooltip" data-tooltip="options.moveBottom" data-inverted="">
                   <i class="angle double down icon"></i>
                 </button>
               </div>
               <br>
               <br>
-              <button id="clearSubstitutionsButton" class="ui icon button" data-tooltip="Clear" data-inverted="">
+              <button id="clearSubstitutionsButton" class="ui icon button i18n_data-tooltip" data-tooltip="options.clear" data-inverted="">
                 <i class="trash icon"></i>
               </button>
             </div>
@@ -222,16 +227,14 @@
       <div class="actions">
         <div class="ui ok primary labeled icon button">
           <i class="checkmark icon"></i>
-          OK
+          <span class="i18n">options.ok</span>
         </div>
-        <div class="ui cancel button">
-          Cancel
-        </div>
-        <div id="groupApplyButton" class="ui approve button">
-          Apply
-        </div>
+        <div class="ui cancel button i18n">options.cancel</div>
+        <div id="groupApplyButton" class="ui approve button i18n">options.apply</div>
       </div>
     </div>
+
+    <script src="../scripts/i18n.js"></script>
 
   </body>
 

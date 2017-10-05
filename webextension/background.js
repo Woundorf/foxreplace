@@ -130,7 +130,7 @@ browser.commands.onCommand.addListener(name => {
 
 browser.contextMenus.create({
   id: "context.apply-substitution-list",
-  title: "Replace with substitution list",
+  title: browser.i18n.getMessage("menu.replaceWithList"),
   contexts: ["all"]
 });
 
