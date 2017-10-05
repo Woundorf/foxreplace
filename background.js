@@ -57,6 +57,10 @@ browser.storage.onChanged.addListener(changes => {
       if (prefs.autoReplacePeriodically) periodicReplace.restart(prefs.autoReplacePeriod);
       else periodicReplace.stop();
     }
+
+    if (changes.autoReplaceOnLoad && changes.autoReplaceOnLoad.newValue != changes.autoReplaceOnLoad.oldValue) {
+      browser.menus.update("tools.auto-replace-on-load", { checked: prefs.autoReplaceOnLoad });
+    }
   });
 });
 
@@ -87,14 +91,38 @@ browser.commands.onCommand.addListener(name => {
   }
 });
 
+// Context menu
 browser.menus.create({
   id: "context.apply-substitution-list",
   title: browser.i18n.getMessage("menu.replaceWithList"),
   contexts: ["all"]
 });
+// Tools menu
+browser.menus.create({
+  id: "tools.apply-substitution-list",
+  title: browser.i18n.getMessage("menu.replaceWithList"),
+  contexts: ["tools_menu"]
+});
+browser.menus.create({
+  id: "tools.auto-replace-on-load",
+  type: "checkbox",
+  title: browser.i18n.getMessage("menu.autoReplaceOnLoad"),
+  contexts: ["tools_menu"]
+});
+browser.menus.create({
+  id: "tools.options",
+  title: browser.i18n.getMessage("menu.options"),
+  contexts: ["tools_menu"]
+});
 
 browser.menus.onClicked.addListener(info => {
-  if (info.menuItemId == "context.apply-substitution-list") {
+  if (info.menuItemId == "context.apply-substitution-list" || info.menutItemId == "tools.apply-substitution-list") {
     replaceCurrentTab({ key: "replaceWithList" });
+  }
+  else if (info.menuItemId == "tools.auto-replace-on-load") {
+    storage.setPrefs({ autoReplaceOnLoad: info.checked });
+  }
+  else if (info.menuItemId == "tools.options") {
+    browser.runtime.openOptionsPage();
   }
 });
