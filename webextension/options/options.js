@@ -247,12 +247,24 @@ var eventListeners = {
     let jsonText = JSON.stringify(json, null, 2);
     let blob = new Blob([jsonText], { type: "application/json" });
     let url = URL.createObjectURL(blob);
+    let downloadId;
 
     browser.downloads.download({
       url: url,
       filename: "FoxReplace.json",
       saveAs: true
-    }).then(() => URL.revokeObjectURL(url));
+    }).then(id => {
+      downloadId = id;
+    });
+
+    function onChanged(delta) {
+      if (delta.id == downloadId && (delta.state.current === "complete" || delta.state.current === "interrupted")) {
+        URL.revokeObjectURL(url);
+        browser.downloads.onChanged.removeListener(onChanged);
+      }
+    }
+
+    browser.downloads.onChanged.addListener(onChanged);
   },
   save() {
     let list = [];
