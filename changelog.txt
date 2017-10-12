@@ -1,3 +1,4 @@
+v2.0.0 (2017-10-13)
 * Finished conversion to WebExtension.
 * Replace bar has been transformed into a sidebar until WebExtensions support toolbars.
 * Enabled translation.
