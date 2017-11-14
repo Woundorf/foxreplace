@@ -72,7 +72,7 @@ var groupEditor = (() => {
             return isLastRow(params);
           },
           exclusionUrl(params) {
-            return fxrIsExclusionUrl(params.data.url);
+            return isExclusionUrl(params.data.url);
           }
         },
         cellRenderer(params) {

@@ -135,7 +135,7 @@ function SubstitutionGroup(aName, aUrls, aSubstitutions, aHtml, aEnabled) {
   this.exclusionUrlRegExps = [];
   this.urls.forEach(function(element) {
                       var url, exclusion;
-                      if (fxrIsExclusionUrl(element)) {
+                      if (isExclusionUrl(element)) {
                         url = fxrCleanExclusionUrl(element);
                         exclusion = true;
                       }
@@ -234,7 +234,7 @@ SubstitutionGroup.prototype.HTML_STRINGS = ["none", "output", "inputoutput"];
 /**
  * Returns whether aUrl is an exclusion URL or not (it is an exclusion URL if it starts with "-").
  */
-function fxrIsExclusionUrl(aUrl) {
+function isExclusionUrl(aUrl) {
   return /^-.*/.test(aUrl);
 }
 
@@ -341,6 +341,6 @@ function fxrNumberToHex(aNumber, aDigits) {
  * Returns aUrl removing the exclusion part.
  */
 function fxrCleanExclusionUrl(aUrl) {
-  if (fxrIsExclusionUrl(aUrl)) return aUrl.slice(1);
+  if (isExclusionUrl(aUrl)) return aUrl.slice(1);
   else return aUrl;
 }
