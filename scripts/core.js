@@ -163,12 +163,10 @@ SubstitutionGroup.fromJSON = function(aGroupJSON, aVersion) {
   for (let substitutionJSON of aGroupJSON.substitutions) substitutions.push(Substitution.fromJSON(substitutionJSON));
 
   let html;
-  if (aVersion == "0.13" || aVersion == "0.14") html = aGroupJSON.html ? this.prototype.HTML_INPUT_OUTPUT : this.prototype.HTML_NONE;
+  if (aVersion == "0.14") html = aGroupJSON.html ? this.prototype.HTML_INPUT_OUTPUT : this.prototype.HTML_NONE;
   else html = this.prototype.HTML_STRINGS.indexOf(aGroupJSON.html);
 
-  let enabled = aVersion == "0.13" ? true : aGroupJSON.enabled;
-
-  return new SubstitutionGroup(aGroupJSON.name, aGroupJSON.urls, substitutions, html, enabled);
+  return new SubstitutionGroup(aGroupJSON.name, aGroupJSON.urls, substitutions, html, aGroupJSON.enabled);
 };
 
 SubstitutionGroup.prototype = {
