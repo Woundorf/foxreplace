@@ -15,330 +15,319 @@
  *  ***** END LICENSE BLOCK ***** */
 
 /**
- * Substitution.
+ *  Represents a single substitution with an input, an output and some additional parameters.
  */
-function Substitution(aInput, aOutput, aCaseSensitive, aInputType) {
-  this.input = aInput;
-  this.output = aOutput;
-  this.caseSensitive = Boolean(aCaseSensitive);
-  this.inputType = aInputType || this.INPUT_TEXT;
-  // avoid invalid values
-  if (this.inputType < this.INPUT_TEXT || this.inputType > this.INPUT_REG_EXP) this.inputType = this.INPUT_TEXT;
+var Substitution = (() => {
 
-  switch (this.inputType) {
-    case this.INPUT_TEXT:
-      {
-        let unescapedInput = fxrUnescape(aInput);
-        this._regExp = new XRegExp(fxrStringToUnicode(unescapedInput), aCaseSensitive ? "g" : "gi");
-      }
-      break;
-    case this.INPUT_WHOLE_WORDS:
-      {
-        let unescapedInput = fxrUnescape(aInput);
-        var suffix = wordEndRegExpSource(unescapedInput.charAt(unescapedInput.length - 1));
-        this._regExp = new XRegExp(fxrStringToUnicode(unescapedInput) + suffix, aCaseSensitive ? "g" : "gi");
-        this._firstCharCategory = charCategory(unescapedInput.charAt(0));
-      }
-      break;
-    case this.INPUT_REG_EXP:
-      this._regExp = new RegExp(aInput, aCaseSensitive ? "g" : "gi");
-      break;
-  }
-}
+  class Substitution {
 
-/**
- * Returns the substitution represented by aSubstitutionJSON.
- */
-Substitution.fromJSON = function(aSubstitutionJSON) {
-  let inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(aSubstitutionJSON.inputType);
-  return new Substitution(aSubstitutionJSON.input, aSubstitutionJSON.output, aSubstitutionJSON.caseSensitive, inputType);
-};
+    constructor(input, output, caseSensitive = false, inputType = this.INPUT_TEXT) {
+      this.input = input;
+      this.output = output;
+      this.caseSensitive = Boolean(caseSensitive);
+      this.inputType = inputType;
+      if (this.inputType < this.INPUT_TEXT || this.inputType > this.INPUT_REG_EXP) this.inputType = this.INPUT_TEXT;  // avoid invalid values
 
-Substitution.prototype = {
-
-  /**
-   * Applies the substitution to aString and returns the result.
-   */
-  replace: function(aString) {
-    if (aString == undefined || aString == null) return aString;
-
-    switch (this.inputType) {
-      case this.INPUT_TEXT:
-        return aString.replace(this._regExp, fxrUnescape(this.output));
-      case this.INPUT_WHOLE_WORDS:
-        // necessary according to http://stackoverflow.com/questions/4950463/regex-in-javascript-fails-every-other-time-with-identical-input
-        this._regExp.lastIndex = 0;
-        var self = this;
-        function replaceWholeWord(aWord, aIndex, aString) {
-          if (aIndex == 0 || self._firstCharCategory != charCategory(aString.charAt(aIndex - 1))) {
-            var output = fxrUnescape(self.output);
-            var re = /\$[\$\&\`\']/g;
-            var fragments = output.split(re);
-            var nFragments = fragments.length;
-            var result = fragments[0];
-            var i = fragments[0].length + 1;    // index of the char after the $
-            for (var j = 1; j < nFragments; j++) {
-              var c = output.charAt(i);
-              if (c == "$") result += "$";
-              else if (c == "&") result += aWord;
-              else if (c == "`") result += aString.slice(0, aIndex);
-              else if (c == "'") result += aString.slice(aIndex + aWord.length);
-              result += fragments[j];
-              i += 2 + fragments[j].length;
-            }
-            return result;
+      switch (this.inputType) {
+        case this.INPUT_TEXT:
+          {
+            let unescapedInput = unescape(this.input);
+            this.regExp = new XRegExp(stringToUnicode(unescapedInput), this.caseSensitive ? "g" : "gi");
           }
-          else return aWord;
-        }
-        return aString.replace(this._regExp, replaceWholeWord);
-      case this.INPUT_REG_EXP:
-        // necessary according to http://stackoverflow.com/questions/4950463/regex-in-javascript-fails-every-other-time-with-identical-input
-        this._regExp.lastIndex = 0;
-        return aString.replace(this._regExp, fxrUnescape(this.output));
+          break;
+        case this.INPUT_WHOLE_WORDS:
+          {
+            let unescapedInput = unescape(this.input);
+            let suffix = wordEndRegExpSource(unescapedInput.charAt(unescapedInput.length - 1));
+            this.regExp = new XRegExp(stringToUnicode(unescapedInput) + suffix, this.caseSensitive ? "g" : "gi");
+            this.firstCharCategory = charCategory(unescapedInput.charAt(0));
+          }
+          break;
+        case this.INPUT_REG_EXP:
+          this.regExp = new RegExp(this.input, this.caseSensitive ? "g" : "gi");
+          break;
+      }
     }
-  },
 
-  /**
-   * Returns the substitution as a simple object that can be serialized as JSON.
-   */
-  toJSON: function() {
-    return {
-      input: this.input,
-      inputType: this.INPUT_TYPE_STRINGS[this.inputType],
-      output: this.output,
-      caseSensitive: this.caseSensitive
-    };
+    /**
+     *  Applies this substitution to the given string and returns the result.
+     */
+    replace(string) {
+      if (string === undefined || string === null) return string;
+
+      switch (this.inputType) {
+        case this.INPUT_TEXT:
+          // necessary according to https://stackoverflow.com/q/1520800
+          this.regExp.lastIndex = 0;
+          return string.replace(this.regExp, unescape(this.output));
+
+        case this.INPUT_WHOLE_WORDS:
+          // necessary according to https://stackoverflow.com/q/1520800
+          this.regExp.lastIndex = 0;
+          return string.replace(this.regExp, (word, index, string) => {
+            if (index === 0 || this.firstCharCategory != charCategory(string.charAt(index - 1))) {
+              let output = unescape(this.output);
+              let re = /\$[\$\&\`\']/g;
+              let fragments = output.split(re);
+              let nFragments = fragments.length;
+              let result = fragments[0];
+              let i = fragments[0].length + 1;    // index of the char after the $
+              for (let j = 1; j < nFragments; j++) {
+                let c = output.charAt(i);
+                if (c == "$") result += "$";
+                else if (c == "&") result += word;
+                else if (c == "`") result += string.slice(0, index);
+                else if (c == "'") result += string.slice(index + word.length);
+                result += fragments[j];
+                i += 2 + fragments[j].length;
+              }
+              return result;
+            }
+            else {
+              return word;
+            }
+          });
+
+        case this.INPUT_REG_EXP:
+          // necessary according to https://stackoverflow.com/q/1520800
+          this.regExp.lastIndex = 0;
+          return string.replace(this.regExp, unescape(this.output));
+      }
+    }
+
+    /**
+     *  Converts this substitution to JSON.
+     */
+    toJSON() {
+      return {
+        input: this.input,
+        inputType: this.INPUT_TYPE_STRINGS[this.inputType],
+        output: this.output,
+        caseSensitive: this.caseSensitive
+      };
+    }
+
   }
 
-};
-/**
- * Constants.
- */
-Substitution.prototype.INPUT_TEXT = 0;
-Substitution.prototype.INPUT_WHOLE_WORDS = 1;
-Substitution.prototype.INPUT_REG_EXP = 2;
-Substitution.prototype.INPUT_TYPE_STRINGS = ["text", "wholewords", "regexp"];
+  /**
+   *  Creates a substitution from the given JSON.
+   */
+  Substitution.fromJSON = function(json) {
+    let inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(json.inputType);
+    return new Substitution(json.input, json.output, json.caseSensitive, inputType);
+  };
+
+  /**
+   *  Constants.
+   */
+  Object.defineProperties(Substitution.prototype, {
+    INPUT_TEXT: { value: 0 },
+    INPUT_WHOLE_WORDS: { value: 1 },
+    INPUT_REG_EXP: { value: 2 },
+    INPUT_TYPE_STRINGS: { value: ["text", "wholewords", "regexp"] }
+  });
+
+  // Unescapes backslash-escaped special characters in the given string.
+  function unescape(string) {
+    return string.replace(/\\./g, str => {
+      if (str == "\\\\") return "\\";
+      if (str == "\\n") return "\n";
+      if (str == "\\r") return "\r";
+      if (str == "\\t") return "\t";
+      return str;
+    });
+  }
+
+  // Converts all the characters of the given string to escaped unicode notation.
+  function stringToUnicode(string) {
+    let result = "";
+    let length = string.length;
+    for (let i = 0; i < length; i++) result += "\\u" + numberToHex(string.charCodeAt(i));
+    return result;
+  }
+
+  // Converts the given number to hexadecimal with 4 digits.
+  function numberToHex(number) {
+    return number.toString(16).padStart(4, "0");
+  }
+
+  // Char categories.
+  const WORD_CHAR = 0;
+  const NON_WORD_CHAR = 1;
+  const SEPARATOR_CHAR = 2;
+
+  // Regular expression sources for testing char categories.
+  const WORD_CHAR_REGEXP_SOURCE = "[\\p{Letter}\\p{Mark}\\p{Number}_]";
+  const SEPARATOR_CHAR_REGEXP_SOURCE = "[\\s\\p{Separator}]";
+  const NON_WORD_CHAR_REGEXP_SOURCE = "[^" + WORD_CHAR_REGEXP_SOURCE.slice(1, -1) + SEPARATOR_CHAR_REGEXP_SOURCE.slice(1, -1) + "]";
+
+  // Returns the category of the given character.
+  function charCategory(character) {
+    if (XRegExp.cache(WORD_CHAR_REGEXP_SOURCE).test(character)) return WORD_CHAR;
+    else if (XRegExp.cache(NON_WORD_CHAR_REGEXP_SOURCE).test(character)) return NON_WORD_CHAR;
+    else return SEPARATOR_CHAR;
+  }
+
+  // Regular expression sources for testing "word" ends.
+  const WORD_END_REGEXP_SOURCES = [
+    "(?!" + WORD_CHAR_REGEXP_SOURCE + ")",      // word end
+    "(?!" + NON_WORD_CHAR_REGEXP_SOURCE + ")",  // non-word "word" end
+    "(?!" + SEPARATOR_CHAR_REGEXP_SOURCE + ")"  // separator "word" end
+  ];
+
+  // Returns the regular expression source for testing the end of a "word" ending with the given character.
+  function wordEndRegExpSource(character) {
+    return WORD_END_REGEXP_SOURCES[charCategory(character)];
+  }
+
+  return Substitution;
+
+})();
 
 /**
- * Substitution group, including a name, an URL list and a substitution list. aHtml decides whether HTML is used only in output, both in input and output or not
- * used.
+ *  Represents a group of substitutions that are applied to the same set of URLs.
  */
-function SubstitutionGroup(aName, aUrls, aSubstitutions, aHtml, aEnabled) {
-  this.name = aName || "";
-  this.urls = aUrls || [];
-  this.substitutions = aSubstitutions || [];
-  this.html = aHtml || this.HTML_NONE;
-  if (this.html < this.HTML_NONE || this.html > this.HTML_INPUT_OUTPUT) this.html = this.HTML_NONE; // avoid invalid values
-  this.enabled = Boolean(aEnabled);
-  this.urls.sort();
-  this.urlRegExps = [];
-  this.exclusionUrlRegExps = [];
-  this.urls.forEach(function(element) {
-                      var url, exclusion;
-                      if (isExclusionUrl(element)) {
-                        url = fxrCleanExclusionUrl(element);
-                        exclusion = true;
-                      }
-                      else {
-                        url = element;
-                        exclusion = false;
-                      }
-                      var regExp = new RegExp(url.replace(/\*+/g, "*")      // remove multiple wildcards
-                                                 .replace(/(\W)/g, "\\$1")  // escape special symbols
-                                                 .replace(/\\\*/g, ".*")    // replace wildcards by .*
-                                                 .replace(/^\\\|/, "^")     // process anchor at expression start
-                                                 .replace(/\\\|$/, "$")     // process anchor at expression end
-                                                 .replace(/^(\.\*)/,"")     // remove leading wildcards
-                                                 .replace(/(\.\*)$/,""));   // remove trailing wildcards
-                      if (exclusion) this.exclusionUrlRegExps.push(regExp);
-                      else this.urlRegExps.push(regExp);
-                    }, this);
+var SubstitutionGroup = (() => {
+
+  class SubstitutionGroup {
+
+    constructor(name = "", urls = [], substitutions = [], html = this.HTML_NONE, enabled = true) {
+      this.name = String(name);
+      this.urls = urls;
+      this.substitutions = substitutions;
+      this.html = html;
+      if (this.html < this.HTML_NONE || this.html > this.HTML_INPUT_OUTPUT) this.html = this.HTML_NONE; // avoid invalid values
+      this.enabled = Boolean(enabled);
+
+      this.urls.sort();
+      this.urlRegExps = [];
+      this.exclusionUrlRegExps = [];
+
+      this.urls.forEach(element => {
+        let url, exclusion;
+
+        if (isExclusionUrl(element)) {
+          url = cleanExclusionUrl(element);
+          exclusion = true;
+        }
+        else {
+          url = element;
+          exclusion = false;
+        }
+
+        let regExp = new RegExp(url.replace(/\*+/g, "*")      // remove multiple wildcards
+                                   .replace(/(\W)/g, "\\$1")  // escape special symbols
+                                   .replace(/\\\*/g, ".*")    // replace wildcards by .*
+                                   .replace(/^\\\|/, "^")     // process anchor at expression start
+                                   .replace(/\\\|$/, "$")     // process anchor at expression end
+                                   .replace(/^(\.\*)/, "")    // remove leading wildcards
+                                   .replace(/(\.\*)$/, ""));  // remove trailing wildcards
+
+        if (exclusion) this.exclusionUrlRegExps.push(regExp);
+        else this.urlRegExps.push(regExp);
+      });
+    }
+
+    /**
+     *  Returns a non-empty name for this substitution group. If it has a name it is returned. Otherwise a default name is returned.
+     */
+    get nonEmptyName() {
+      if (this.name) return this.name;
+      else if (this.urls.length === 0) return browser.i18n.getMessage("generalSubstitutions");
+      else if (this.urls.length === 1) return browser.i18n.getMessage("substitutionsForUrl", this.urls[0]);
+      else return browser.i18n.getMessage("substitutionsForUrls", this.urls[0]);
+    }
+
+    /**
+     *  Returns whether the substitution group should be applied to the given URL or not.
+     *  Returns true if the URL matches one from the list (or the list is empty) and doesn't match any exclusion URL.
+     */
+    matches(url) {
+      return (this.urlRegExps.length === 0 || this.urlRegExps.some(regExp => regExp.test(url))) &&
+             !this.exclusionUrlRegExps.some(regExp => regExp.test(url));
+    }
+
+    /**
+     *  Applies each substitution in the group to the given string and returns the result.
+     */
+    replace(string) {
+      if (!string) return string;
+      this.substitutions.forEach(substitution => { string = substitution.replace(string); });
+      return string;
+    }
+
+    /**
+     *  Converts this substitution group to JSON.
+     */
+    toJSON() {
+      return {
+        name: this.name,
+        urls: this.urls,
+        substitutions: this.substitutions.map(substitution => substitution.toJSON()),
+        html: this.HTML_STRINGS[this.html],
+        enabled: this.enabled
+      };
+    }
+
+  }
+
+  /**
+   *  Creates a substitution group from the given JSON and version.
+   */
+  SubstitutionGroup.fromJSON = function(json, version) {
+    let substitutions = [];
+    for (let substitutionJSON of json.substitutions) substitutions.push(Substitution.fromJSON(substitutionJSON));
+
+    let html;
+    if (version == "0.14") html = json.html ? this.prototype.HTML_INPUT_OUTPUT : this.prototype.HTML_NONE;
+    else html = this.prototype.HTML_STRINGS.indexOf(json.html);
+
+    return new SubstitutionGroup(json.name, json.urls, substitutions, html, json.enabled);
+  };
+
+  /**
+   *  Constants.
+   */
+  Object.defineProperties(SubstitutionGroup.prototype, {
+    HTML_NONE: { value: 0 },
+    HTML_OUTPUT: { value: 1 },
+    HTML_INPUT_OUTPUT: { value: 2 },
+    HTML_STRINGS: { value: ["none", "output", "inputoutput"] }
+  });
+
+  // Returns the given url removing the exclusion part.
+  function cleanExclusionUrl(url) {
+    if (isExclusionUrl(url)) return url.slice(1);
+    else return url;
+  }
+
+  return SubstitutionGroup;
+
+})();
+
+/**
+ *  Returns whether the given URL is an exclusion URL or not (it is an exclusion URL if it starts with "-").
+ */
+function isExclusionUrl(url) {
+  return /^-.*/.test(url);
 }
 
 /**
- * Returns the substitution group represented by aGroupJSON.
+ *  Converts the given substitution list to JSON.
  */
-SubstitutionGroup.fromJSON = function(aGroupJSON, aVersion) {
-  let substitutions = [];
-  for (let substitutionJSON of aGroupJSON.substitutions) substitutions.push(Substitution.fromJSON(substitutionJSON));
-
-  let html;
-  if (aVersion == "0.14") html = aGroupJSON.html ? this.prototype.HTML_INPUT_OUTPUT : this.prototype.HTML_NONE;
-  else html = this.prototype.HTML_STRINGS.indexOf(aGroupJSON.html);
-
-  return new SubstitutionGroup(aGroupJSON.name, aGroupJSON.urls, substitutions, html, aGroupJSON.enabled);
-};
-
-SubstitutionGroup.prototype = {
-
-  /**
-   * Returns whether the substitution group should be applied to aUrl.
-   */
-  matches: function(aUrl) {
-    return (this.urlRegExps.length == 0 || this.urlRegExps.some(function(element) { return element.test(aUrl); })) &&
-           !this.exclusionUrlRegExps.some(function(element) { return element.test(aUrl); });
-  },
-
-  /**
-   * Applies the substitution group to aString and returns the result.
-   */
-  replace: function(aString) {
-    if (!aString) return aString;
-    this.substitutions.forEach(function(element) { aString = element.replace(aString); });
-    return aString;
-  },
-
-  /**
-   * Applies the substitution group to aString if aUrl matches any of the urls and returns the result.
-   */
-  applyTo: function(aUrl, aString) {
-    if (this.matches(aUrl)) return this.replace(aString);
-    else return aString;
-  },
-
-  /**
-   * Returns a non-empty name for a substitution group. If it has a name it is returned. Otherwise a default name is returned.
-   */
-  get nonEmptyName() {
-    if (this.name) return this.name;
-    else if (this.urls.length == 0) return browser.i18n.getMessage("generalSubstitutions");
-    else if (this.urls.length == 1) return browser.i18n.getMessage("substitutionsForUrl", this.urls[0]);
-    else return browser.i18n.getMessage("substitutionsForUrls", this.urls[0]);
-  },
-
-  /**
-   * Returns the substitution group as a simple object that can be serialized as JSON.
-   */
-  toJSON: function() {
-    return {
-      name: this.name,
-      urls: this.urls,
-      substitutions: this.substitutions.map(substitution => substitution.toJSON()),
-      html: this.HTML_STRINGS[this.html],
-      enabled: this.enabled
-    };
-  }
-
-};
-
-/**
- * Constants.
- */
-SubstitutionGroup.prototype.HTML_NONE = 0;
-SubstitutionGroup.prototype.HTML_OUTPUT = 1;
-SubstitutionGroup.prototype.HTML_INPUT_OUTPUT = 2;
-SubstitutionGroup.prototype.HTML_STRINGS = ["none", "output", "inputoutput"];
-
-/**
- * Returns whether aUrl is an exclusion URL or not (it is an exclusion URL if it starts with "-").
- */
-function isExclusionUrl(aUrl) {
-  return /^-.*/.test(aUrl);
-}
-
-/**
- * Returns aSubstitutionList as a simple object that can be serialized as JSON.
- */
-function substitutionListToJSON(aSubstitutionList) {
+function substitutionListToJSON(list) {
   return {
     version: "0.15",
-    groups: aSubstitutionList.map(group => group.toJSON())
+    groups: list.map(group => group.toJSON())
   };
 }
 
 /**
- * Returns the substitution list represented by aListJSON.
+ *  Creates a substitution list from the given JSON.
  */
-function substitutionListFromJSON(aListJSON) {
-  // if (aListJSON.version ... // possible version check
-
+function substitutionListFromJSON(json) {
+  // if (json.version ... // possible version check
   let list = [];
-
-  for (let groupJSON of aListJSON.groups) list.push(SubstitutionGroup.fromJSON(groupJSON, aListJSON.version));
-
+  for (let groupJSON of json.groups) list.push(SubstitutionGroup.fromJSON(groupJSON, json.version));
   return list;
-}
-
-////////////////////////////////////// Non-exported functions //////////////////////////////////////
-
-/**
- * Unescapes backslash-escaped special characters in aString.
- */
-function fxrUnescape(aString) {
-  return aString.replace(/\\./g, function(str) {
-                                   if (str == "\\\\") return "\\";
-                                   if (str == "\\n") return "\n";
-                                   if (str == "\\r") return "\r";
-                                   if (str == "\\t") return "\t";
-                                   return str;
-                                 });
-}
-
-/**
- * Char categories.
- */
-const WORD_CHAR = 0;
-const NON_WORD_CHAR = 1;
-const SEPARATOR_CHAR = 2;
-
-/**
- * Regular expression sources for testing char categories.
- */
-const WORD_CHAR_REGEXP_SOURCE = "[\\p{Letter}\\p{Mark}\\p{Number}_]";
-const SEPARATOR_CHAR_REGEXP_SOURCE = "[\\s\\p{Separator}]";
-const NON_WORD_CHAR_REGEXP_SOURCE = "[^" + WORD_CHAR_REGEXP_SOURCE.slice(1, -1) + SEPARATOR_CHAR_REGEXP_SOURCE.slice(1, -1) + "]";
-
-/**
- * Regular expression sources for testing "word" ends.
- */
-const WORD_END_REGEXP_SOURCES = [
-  "(?!" + WORD_CHAR_REGEXP_SOURCE + ")",      // word end
-  "(?!" + NON_WORD_CHAR_REGEXP_SOURCE + ")",  // non-word "word" end
-  "(?!" + SEPARATOR_CHAR_REGEXP_SOURCE + ")"  // separator "word" end
-];
-
-/**
- * Returns the category of aChar.
- */
-function charCategory(aChar) {
-  if (XRegExp.cache(WORD_CHAR_REGEXP_SOURCE).test(aChar)) return WORD_CHAR;
-  else if (XRegExp.cache(NON_WORD_CHAR_REGEXP_SOURCE).test(aChar)) return NON_WORD_CHAR;
-  else return SEPARATOR_CHAR;
-}
-
-function wordEndRegExpSource(aChar) {
-  return WORD_END_REGEXP_SOURCES[charCategory(aChar)];
-}
-
-/**
- * Converts all the characters of aString to escaped unicode notation.
- */
-function fxrStringToUnicode(aString) {
-  var result = "";
-  var length = aString.length;
-
-  for (var i = 0; i < length; i++) result += "\\u" + fxrNumberToHex(aString.charCodeAt(i));
-
-  return result;
-};
-
-/**
- * Converts aNumber to hexadecimal with aDigits digits.
- */
-function fxrNumberToHex(aNumber, aDigits) {
-  var hex = aNumber.toString(16);
-  var digits = aDigits || 4;
-  var length = hex.length;
-
-  for (var i = length; i < digits; i++) hex = "0" + hex;
-
-  return hex;
-};
-
-/**
- * Returns aUrl removing the exclusion part.
- */
-function fxrCleanExclusionUrl(aUrl) {
-  if (isExclusionUrl(aUrl)) return aUrl.slice(1);
-  else return aUrl;
 }
