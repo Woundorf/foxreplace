@@ -70,8 +70,12 @@ var storage = {
     return browser.storage.local.set(sanitizedPrefs);
   },
 
-  getEnabledGroups() {
-    return this.getList().then(list => list.filter(group => group.enabled));
+  getAutomaticGroups() {
+    return this.getList().then(list => list.filter(group => group.enabled && (group.mode == group.MODE_AUTO_AND_MANUAL || group.mode == group.MODE_AUTO)));
+  },
+
+  getManualGroups() {
+    return this.getList().then(list => list.filter(group => group.enabled && (group.mode == group.MODE_AUTO_AND_MANUAL || group.mode == group.MODE_MANUAL)));
   }
 
 };

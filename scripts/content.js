@@ -17,7 +17,7 @@
 // The content has just loaded. Apply the substitution list if auto-replace on load is on.
 storage.getPrefs().then(prefs => {
   if (prefs.autoReplaceOnLoad) {
-    storage.getEnabledGroups().then(list => {
+    storage.getAutomaticGroups().then(list => {
       replaceWindow(window, list, prefs);
     });
   }
@@ -34,7 +34,14 @@ browser.runtime.onMessage.addListener(message => {
       break;
     case "replaceWithList":
       storage.getPrefs().then(prefs => {
-        storage.getEnabledGroups().then(list => {
+        storage.getManualGroups().then(list => {
+          replaceWindow(window, list, prefs);
+        });
+      });
+      break;
+    case "replaceWithListPeriod":
+      storage.getPrefs().then(prefs => {
+        storage.getAutomaticGroups().then(list => {
           replaceWindow(window, list, prefs);
         });
       });

@@ -67,19 +67,7 @@ browser.storage.onChanged.addListener(changes => {
 // Listen for periodic replace alarm
 browser.alarms.onAlarm.addListener(alarm => {
   if (alarm.name == periodicReplace.alarmName) {
-    Promise.all([storage.getEnabledGroups(), storage.getPrefs()])
-      .then(([list, prefs]) => {
-        if (list.length > 0) {
-          replaceCurrentTab({
-            key: "replace",
-            list: substitutionListToJSON(list),
-            prefs: {
-              replaceUrls: prefs.replaceUrls,
-              replaceScripts: prefs.replaceScripts
-            }
-          });
-        }
-      });
+    replaceCurrentTab({ key: "replaceWithListPeriod"});
   }
 });
 
