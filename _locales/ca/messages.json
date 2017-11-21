@@ -158,6 +158,22 @@
     "message": "Habilita"
   },
 
+  "options.group.mode": {
+    "message": "Mode"
+  },
+
+  "options.group.mode.autoAndManual": {
+    "message": "Automàtic i manual"
+  },
+
+  "options.group.mode.auto": {
+    "message": "Automàtic"
+  },
+
+  "options.group.mode.manual": {
+    "message": "Manual"
+  },
+
   "options.group.name": {
     "message": "Nom"
   },

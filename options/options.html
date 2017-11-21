@@ -164,10 +164,19 @@
     <div id="groupEditorModal" class="ui fullscreen modal">
       <div class="content">
         <div id="groupEditor" class="ui form"><!-- not a form to avoid reloading the page with an accidental submit -->
-          <div class="field">
-            <div class="ui checkbox">
+          <div class="inline fields">
+            <div class="field ui checkbox">
               <input name="enabled" type="checkbox"></input>
               <label class="i18n">options.group.enabled</label>
+            </div>
+            <div class="one wide field"></div><!-- for separation -->
+            <div class="field">
+              <label class="i18n">options.group.mode</label>
+              <select name="mode" class="ui dropdown">
+                <option value="0" selected="" class="i18n">options.group.mode.autoAndManual</option>
+                <option value="1" class="i18n">options.group.mode.auto</option>
+                <option value="2" class="i18n">options.group.mode.manual</option>
+              </select>
             </div>
           </div>
           <div class="field">

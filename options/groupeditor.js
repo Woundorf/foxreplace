@@ -364,7 +364,7 @@ var groupEditor = (() => {
     clear() {
       $("#groupEditor").form("clear");
       $("#groupEditor").form("set value", "enabled", true);
-      $("#groupEditor .ui.dropdown").dropdown("set selected", "0"); // for HTML options
+      $("#groupEditor .ui.dropdown").dropdown("set selected", "0"); // for mode and HTML options
       this.clearUrls();
       this.clearSubstitutions();
     },
@@ -378,8 +378,8 @@ var groupEditor = (() => {
     },
 
     setGroup(group) {
-      $("#groupEditor .ui.dropdown").dropdown("set selected", "0"); // for HTML options
-      $("#groupEditor").form("set values", { enabled: group.enabled, name: group.name, html: group.html });
+      $("#groupEditor .ui.dropdown").dropdown("set selected", "0"); // for mode and HTML options
+      $("#groupEditor").form("set values", { enabled: group.enabled, mode: group.mode, name: group.name, html: group.html });
 
       let urls = group.urls.map(u => ({ url: u}));
       urls.push({ url: "" });
@@ -391,7 +391,7 @@ var groupEditor = (() => {
     },
 
     getGroup() {
-      let {enabled, name, html} = $("#groupEditor").form("get values", ["enabled", "name", "html"]);
+      let {enabled, mode, name, html} = $("#groupEditor").form("get values", ["enabled", "mode", "name", "html"]);
 
       let urls = [];
       urlsGridOptions.api.forEachNode(node => {
@@ -403,7 +403,7 @@ var groupEditor = (() => {
         if (node.data.input) substitutions.push(new Substitution(node.data.input, node.data.output, node.data.caseSensitive, node.data.inputType));
       });
 
-      return new SubstitutionGroup(name, urls, substitutions, html, enabled);
+      return new SubstitutionGroup(name, urls, substitutions, html, enabled, mode);
     },
 
     isValidGroup() {

@@ -158,6 +158,22 @@
     "message": "Enable"
   },
 
+  "options.group.mode": {
+    "message": "Mode"
+  },
+
+  "options.group.mode.autoAndManual": {
+    "message": "Auto & manual"
+  },
+
+  "options.group.mode.auto": {
+    "message": "Auto"
+  },
+
+  "options.group.mode.manual": {
+    "message": "Manual"
+  },
+
   "options.group.name": {
     "message": "Name"
   },
