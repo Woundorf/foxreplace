@@ -191,13 +191,15 @@ var SubstitutionGroup = (() => {
 
   class SubstitutionGroup {
 
-    constructor(name = "", urls = [], substitutions = [], html = this.HTML_NONE, enabled = true) {
+    constructor(name = "", urls = [], substitutions = [], html = this.HTML_NONE, enabled = true, mode = this.MODE_AUTO_AND_MANUAL) {
       this.name = String(name);
       this.urls = urls;
       this.substitutions = substitutions;
       this.html = html;
       if (this.html < this.HTML_NONE || this.html > this.HTML_INPUT_OUTPUT) this.html = this.HTML_NONE; // avoid invalid values
       this.enabled = Boolean(enabled);
+      this.mode = mode;
+      if (this.mode < this.MODE_AUTO_AND_MANUAL || this.mode > this.MODE_MANUAL) this.mode = this.MODE_AUTO_AND_MANUAL; // avoid invalid values
 
       this.urls.sort();
       this.urlRegExps = [];
@@ -265,7 +267,8 @@ var SubstitutionGroup = (() => {
         urls: this.urls,
         substitutions: this.substitutions.map(substitution => substitution.toJSON()),
         html: this.HTML_STRINGS[this.html],
-        enabled: this.enabled
+        enabled: this.enabled,
+        mode: this.MODE_STRINGS[this.mode]
       };
     }
 
@@ -282,7 +285,10 @@ var SubstitutionGroup = (() => {
     if (version == "0.14") html = json.html ? this.prototype.HTML_INPUT_OUTPUT : this.prototype.HTML_NONE;
     else html = this.prototype.HTML_STRINGS.indexOf(json.html);
 
-    return new SubstitutionGroup(json.name, json.urls, substitutions, html, json.enabled);
+    // check if mode exists to support versions older than 2.1 (i.e. 0.14 and 0.15)
+    let mode = json.mode ? this.prototype.MODE_STRINGS.indexOf(json.mode) : this.prototype.MODE_AUTO_AND_MANUAL;
+
+    return new SubstitutionGroup(json.name, json.urls, substitutions, html, json.enabled, mode);
   };
 
   /**
@@ -292,7 +298,11 @@ var SubstitutionGroup = (() => {
     HTML_NONE: { value: 0 },
     HTML_OUTPUT: { value: 1 },
     HTML_INPUT_OUTPUT: { value: 2 },
-    HTML_STRINGS: { value: ["none", "output", "inputoutput"] }
+    HTML_STRINGS: { value: ["none", "output", "inputoutput"] },
+    MODE_AUTO_AND_MANUAL: { value: 0 },
+    MODE_AUTO: { value: 1 },
+    MODE_MANUAL: { value: 2 },
+    MODE_STRINGS: { value: ["auto&manual", "auto", "manual"] }
   });
 
   // Returns the given url removing the exclusion part.
@@ -317,7 +327,7 @@ function isExclusionUrl(url) {
  */
 function substitutionListToJSON(list) {
   return {
-    version: "0.15",
+    version: "2.1",
     groups: list.map(group => group.toJSON())
   };
 }
