@@ -4,6 +4,7 @@
   - auto&manual (default): used in both cases, equivalent to previous versions
 * New list format 2.1 to include the mode.
 * Dropped support for substitution lists in the 0.13 format.
+* Fixed header names in substitutions tab in options.
 
 v2.0.0 (2017-10-13)
 * Finished conversion to WebExtension.

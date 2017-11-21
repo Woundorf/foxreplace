@@ -131,14 +131,14 @@ var groupEditor = (() => {
 
     columnDefs: [
       {
-        headerName: "list.inputHeader",
+        headerName: browser.i18n.getMessage("list.inputHeader"),
         field: "input",
         cellRenderer(params) {
           return isLastRow(params) ? browser.i18n.getMessage("list.inputHint") : escapeHtml(params.value);
         }
       },
       {
-        headerName: "list.inputTypeHeader",
+        headerName: browser.i18n.getMessage("list.inputTypeHeader"),
         field: "inputType",
         cellRenderer(params) {  // TODO improve (less hardcoding)
           switch (Number(params.value)) {
@@ -151,14 +151,14 @@ var groupEditor = (() => {
         cellEditor: InputTypeEditor
       },
       {
-        headerName: "list.outputHeader",
+        headerName: browser.i18n.getMessage("list.outputHeader"),
         field: "output",
         cellRenderer(params) {
           return isLastRow(params) ? browser.i18n.getMessage("list.outputHint") : escapeHtml(params.value);
         }
       },
       {
-        headerName: "list.caseSensitiveHeader",
+        headerName: browser.i18n.getMessage("list.caseSensitiveHeader"),
         field: "caseSensitive",
         cellRenderer(params) {
           return params.value ? browser.i18n.getMessage("yes") : browser.i18n.getMessage("no");
