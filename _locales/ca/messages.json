@@ -110,6 +110,10 @@
     "message": "Altres opcions"
   },
 
+  "options.enableContextMenu": {
+    "message": "Habilita el menú contextual"
+  },
+
   "options.autoReplaceOnLoad": {
     "message": "Reemplaça automàticament en carregar una pàgina"
   },

@@ -4,6 +4,7 @@
   - auto&manual (default): used in both cases, equivalent to previous versions
 * New list format 2.1 to include the mode.
 * Dropped support for substitution lists in the 0.13 format.
+* Context menu is now optional (#229).
 * Fixed header names in substitutions tab in options.
 * Fixed apply substitution list from the Tools menu (#230).
 * Correct shortcuts shown in the toolbar button menu on all platforms (#230).

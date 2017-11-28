@@ -33,6 +33,7 @@ var storage = {
 
   getPrefs() {
     return browser.storage.local.get({
+      enableContextMenu: false,
       autoReplaceOnLoad: false,
       autoReplacePeriodically: false,
       autoReplacePeriod: 1,
@@ -48,6 +49,7 @@ var storage = {
     let sanitizedPrefs = {};
     for (let p in prefs) {
       switch (p) {
+        case "enableContextMenu":
         case "autoReplaceOnLoad":
         case "autoReplacePeriodically":
         case "replaceUrls":

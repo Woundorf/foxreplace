@@ -38,6 +38,8 @@ function replaceCurrentTab(aMessage) {
 
 // Initialize things
 storage.getPrefs().then(prefs => {
+  if (prefs.enableContextMenu) createContextMenu();
+
   if (prefs.enableSubscription) subscription.start(prefs.subscriptionUrl, prefs.subscriptionPeriod);
 
   if (prefs.autoReplacePeriodically) periodicReplace.start(prefs.autoReplacePeriod);
@@ -48,6 +50,11 @@ browser.storage.onChanged.addListener(changes => {
   // TODO should check which keys are in changes, but with the current implementation it always contains all keys,
   //      so just check if old and new values are actually different
   storage.getPrefs().then(prefs => {
+    if (changes.enableContextMenu && changes.enableContextMenu.newValue != changes.enableContextMenu.oldValue) {
+      if (prefs.enableContextMenu) createContextMenu();
+      else browser.menus.remove("context.apply-substitution-list");
+    }
+
     if (changes.enableSubscription && changes.enableSubscription.newValue != changes.enableSubscription.oldValue) {
       if (prefs.enableSubscription) subscription.restart(prefs.subscriptionUrl, prefs.subscriptionPeriod);
       else subscription.stop();
@@ -79,12 +86,14 @@ browser.commands.onCommand.addListener(name => {
   }
 });
 
-// Context menu
-browser.menus.create({
-  id: "context.apply-substitution-list",
-  title: browser.i18n.getMessage("menu.replaceWithList"),
-  contexts: ["all"]
-});
+function createContextMenu() {
+  browser.menus.create({
+    id: "context.apply-substitution-list",
+    title: browser.i18n.getMessage("menu.replaceWithList"),
+    contexts: ["all"]
+  });
+}
+
 // Tools menu
 browser.menus.create({
   id: "tools.replace",

@@ -110,6 +110,10 @@
     "message": "Other settings"
   },
 
+  "options.enableContextMenu": {
+    "message": "Enable context menu"
+  },
+
   "options.autoReplaceOnLoad": {
     "message": "Auto-replace on page load"
   },
