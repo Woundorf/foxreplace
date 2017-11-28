@@ -1,3 +1,4 @@
+v2.1.0 (2017-11-28)
 * Added 3 modes for substitution groups (#206):
   - auto: used in auto-replace on load and auto-replace every n seconds
   - manual: used when manually applying the substitution list
