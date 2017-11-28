@@ -25,6 +25,17 @@ function onLoad() {
     if (prefs.autoReplaceOnLoad) document.getElementById("autoReplaceOnLoadCheck").classList.add("checkmark");
     else document.getElementById("autoReplaceOnLoadCheck").classList.remove("checkmark");
   });
+
+  browser.commands.getAll().then(commands => {
+    for (let command of commands) {
+      let elementId;
+      switch (command.name) {
+        case "_execute_sidebar_action": elementId = "replaceShortcut"; break;
+        case "apply-substitution-list": elementId = "replaceWithListShortcut"; break;
+      }
+      document.getElementById(elementId).textContent = command.shortcut;
+    }
+  });
 }
 
 function onUnload() {
