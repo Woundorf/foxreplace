@@ -26,14 +26,16 @@ function onLoad() {
     else document.getElementById("autoReplaceOnLoadCheck").classList.remove("checkmark");
   });
 
-  browser.commands.getAll().then(commands => {
+  Promise.all([browser.commands.getAll(), browser.runtime.getPlatformInfo()]).then(([commands, info]) => {
     for (let command of commands) {
       let elementId;
       switch (command.name) {
         case "_execute_sidebar_action": elementId = "replaceShortcut"; break;
         case "apply-substitution-list": elementId = "replaceWithListShortcut"; break;
       }
-      document.getElementById(elementId).textContent = command.shortcut;
+      let shortcut = command.shortcut;
+      if (info.os == "mac") shortcut = shortcut.replace("Ctrl", "Cmd");
+      document.getElementById(elementId).textContent = shortcut;
     }
   });
 }

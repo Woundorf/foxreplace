@@ -6,6 +6,7 @@
 * Dropped support for substitution lists in the 0.13 format.
 * Fixed header names in substitutions tab in options.
 * Fixed apply substitution list from the Tools menu (#230).
+* Correct shortcuts shown in the toolbar button menu on all platforms (#230).
 
 v2.0.0 (2017-10-13)
 * Finished conversion to WebExtension.
