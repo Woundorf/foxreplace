@@ -43,6 +43,18 @@ var gridOptions = {
       valueGetter: (params) => params.data.substitutions.length > 0 ? params.data.substitutions[0].output : ""
     },
     {
+      headerName: browser.i18n.getMessage("options.group.mode"),
+      field: "mode",
+      cellRenderer(params) {  // TODO improve (less hardcoding)
+        switch (Number(params.value)) {
+          case 0: return browser.i18n.getMessage("options.group.mode.autoAndManual");
+          case 1: return browser.i18n.getMessage("options.group.mode.auto");
+          case 2: return browser.i18n.getMessage("options.group.mode.manual");
+          default: return params.value;
+        }
+      }
+    },
+    {
       headerName: "",
       width: 48,
       cellRenderer: ButtonsCellRenderer,
