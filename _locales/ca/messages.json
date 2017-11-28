@@ -115,11 +115,11 @@
   },
 
   "options.autoReplaceOnLoad": {
-    "message": "Reemplaça automàticament en carregar una pàgina"
+    "message": "Aplica les substitucions automàtiques en carregar una pàgina"
   },
 
   "options.autoReplacePeriodically": {
-    "message": "Reemplaça automàticament cada"
+    "message": "Aplica les substitucions automàtiques cada"
   },
 
   "options.autoReplacePeriodUnits": {
@@ -276,11 +276,11 @@
   },
 
   "menu.replaceWithList": {
-    "message": "Reemplaça amb la llista de substitucions"
+    "message": "Aplica les substitucions manuals"
   },
 
   "menu.autoReplaceOnLoad": {
-    "message": "Reemplaça automàticament en carregar una pàgina"
+    "message": "Aplica les substitucions automàtiques en carregar una pàgina"
   },
 
   "menu.options": {

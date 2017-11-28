@@ -115,11 +115,11 @@
   },
 
   "options.autoReplaceOnLoad": {
-    "message": "Auto-replace on page load"
+    "message": "Apply automatic substitutions on page load"
   },
 
   "options.autoReplacePeriodically": {
-    "message": "Auto-replace every"
+    "message": "Apply automatic substitutions every"
   },
 
   "options.autoReplacePeriodUnits": {
@@ -276,11 +276,11 @@
   },
 
   "menu.replaceWithList": {
-    "message": "Replace with substitution list"
+    "message": "Apply manual substitutions"
   },
 
   "menu.autoReplaceOnLoad": {
-    "message": "Auto-replace on page load"
+    "message": "Apply automatic substitutions on page load"
   },
 
   "menu.options": {
