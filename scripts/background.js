@@ -112,7 +112,7 @@ browser.menus.onClicked.addListener(info => {
   if (info.menuItemId == "tools.replace") {
     browser.sidebarAction.open();
   }
-  else if (info.menuItemId == "context.apply-substitution-list" || info.menutItemId == "tools.apply-substitution-list") {
+  else if (info.menuItemId == "context.apply-substitution-list" || info.menuItemId == "tools.apply-substitution-list") {
     replaceCurrentTab({ key: "replaceWithList" });
   }
   else if (info.menuItemId == "tools.auto-replace-on-load") {
