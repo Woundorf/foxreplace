@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -43,6 +43,8 @@ storage.getPrefs().then(prefs => {
   if (prefs.enableSubscription) subscription.start(prefs.subscriptionUrl, prefs.subscriptionPeriod);
 
   if (prefs.autoReplacePeriodically) periodicReplace.start(prefs.autoReplacePeriod);
+
+  createToolsMenu(prefs.autoReplaceOnLoad);
 });
 
 // Update things
@@ -94,28 +96,30 @@ function createContextMenu() {
   });
 }
 
-// Tools menu
-browser.menus.create({
-  id: "tools.replace",
-  title: browser.i18n.getMessage("menu.replace"),
-  contexts: ["tools_menu"]
-});
-browser.menus.create({
-  id: "tools.apply-substitution-list",
-  title: browser.i18n.getMessage("menu.replaceWithList"),
-  contexts: ["tools_menu"]
-});
-browser.menus.create({
-  id: "tools.auto-replace-on-load",
-  type: "checkbox",
-  title: browser.i18n.getMessage("menu.autoReplaceOnLoad"),
-  contexts: ["tools_menu"]
-});
-browser.menus.create({
-  id: "tools.options",
-  title: browser.i18n.getMessage("menu.options"),
-  contexts: ["tools_menu"]
-});
+function createToolsMenu(autoReplaceOnLoad) {
+  browser.menus.create({
+    id: "tools.replace",
+    title: browser.i18n.getMessage("menu.replace"),
+    contexts: ["tools_menu"]
+  });
+  browser.menus.create({
+    id: "tools.apply-substitution-list",
+    title: browser.i18n.getMessage("menu.replaceWithList"),
+    contexts: ["tools_menu"]
+  });
+  browser.menus.create({
+    id: "tools.auto-replace-on-load",
+    type: "checkbox",
+    title: browser.i18n.getMessage("menu.autoReplaceOnLoad"),
+    contexts: ["tools_menu"],
+    checked: autoReplaceOnLoad
+  });
+  browser.menus.create({
+    id: "tools.options",
+    title: browser.i18n.getMessage("menu.options"),
+    contexts: ["tools_menu"]
+  });
+}
 
 browser.menus.onClicked.addListener(info => {
   if (info.menuItemId == "tools.replace") {
