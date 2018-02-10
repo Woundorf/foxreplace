@@ -78,6 +78,10 @@
     "message": "Export"
   },
 
+  "options.resetColumns": {
+    "message": "Reset columns"
+  },
+
   "options.subscription.header": {
     "message": "Periodically update from URL"
   },

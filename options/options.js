@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -70,6 +70,12 @@ var gridOptions = {
     let row = this.api.getModel().getRow(params.rowIndex);
     if (row) row.setSelected(true); // check needed when deleting the last row by click
   },
+  onColumnResized() {
+    storage.setMainColumnState(gridOptions.columnApi.getColumnState());
+  },
+  onDragStopped() {
+    storage.setMainColumnState(gridOptions.columnApi.getColumnState());
+  }
 };
 
 function onLoad() {
@@ -77,6 +83,10 @@ function onLoad() {
 
   let substitutionListGrid = document.getElementById("listGrid");
   new agGrid.Grid(substitutionListGrid, gridOptions);
+
+  storage.getMainColumnState().then(columnState => {
+    if (columnState) gridOptions.columnApi.setColumnState(columnState);
+  });
 
   storage.getList().then(list => {
     gridOptions.api.setRowData(list);
@@ -280,6 +290,10 @@ var eventListeners = {
 
     browser.downloads.onChanged.addListener(onChanged);
   },
+  resetColumns() {
+    gridOptions.columnApi.resetColumnState();
+    storage.setMainColumnState(gridOptions.columnApi.getColumnState());
+  },
   save() {
     let list = [];
     gridOptions.api.forEachNode(node => {
@@ -299,6 +313,7 @@ function addEventListeners() {
   document.getElementById("import").addEventListener("click", eventListeners.startImport);
   document.getElementById("importFromUrl").addEventListener("click", eventListeners.startImportFromUrl);
   document.getElementById("export").addEventListener("click", eventListeners.startExport);
+  document.getElementById("resetColumns").addEventListener("click", eventListeners.resetColumns);
   document.getElementById("save").addEventListener("click", eventListeners.save);
 }
 
@@ -311,6 +326,7 @@ function removeEventListeners() {
   document.getElementById("import").removeEventListener("click", eventListeners.startImport);
   document.getElementById("importFromUrl").removeEventListener("click", eventListeners.startImportFromUrl);
   document.getElementById("export").removeEventListener("click", eventListeners.startExport);
+  document.getElementById("resetColumns").removeEventListener("click", eventListeners.resetColumns);
   document.getElementById("save").removeEventListener("click", eventListeners.save);
 }
 
@@ -366,6 +382,6 @@ document.addEventListener("unload", onUnload);
 // TODO shortcuts
 // TODO warn unsaved changes
 // TODO move to top/bottom
-// TODO remember column widths
+// TODO remember column widths in secondary grids
 // TODO allow to sort and unsort
 // TODO allow to filter

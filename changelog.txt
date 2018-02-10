@@ -1,4 +1,5 @@
 * The "Apply automatic substitutions on page load" item in the Tools menu is correctly initialized.
+* Column widths and order are saved.
 
 v2.1.0 (2017-11-28)
 * Added 3 modes for substitution groups (#206):

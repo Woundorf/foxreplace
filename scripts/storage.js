@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -78,6 +78,16 @@ var storage = {
 
   getManualGroups() {
     return this.getList().then(list => list.filter(group => group.enabled && (group.mode == group.MODE_AUTO_AND_MANUAL || group.mode == group.MODE_MANUAL)));
+  },
+
+  getMainColumnState() {
+    return browser.storage.local.get("mainColumnState").then(result => {
+      return result.mainColumnState;
+    });
+  },
+
+  setMainColumnState(columnState) {
+    return browser.storage.local.set({ mainColumnState: columnState });
   }
 
 };

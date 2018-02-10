@@ -78,6 +78,10 @@
     "message": "Exporta"
   },
 
+  "options.resetColumns": {
+    "message": "Restableix les columnes"
+  },
+
   "options.subscription.header": {
     "message": "Actualitza periòdicament des d'un URL"
   },
