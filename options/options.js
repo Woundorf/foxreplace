@@ -14,14 +14,12 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
-var editedIndex = null; // index of node currently being edited in the dialog, null if none
-
 var gridOptions = {
   columnDefs: [
     {
       headerName: browser.i18n.getMessage("options.group.enabled"),
       field: "enabled",
-      width: 63,
+      width: 83,
       cellClass: "enabledCell",
       cellRenderer: CheckboxCellRenderer,
       suppressFilter: true
@@ -56,7 +54,8 @@ var gridOptions = {
     },
     {
       headerName: "",
-      width: 48,
+      field: "name",
+      width: 64,
       cellRenderer: ButtonsCellRenderer,
       suppressFilter: true,
       suppressNavigable: true
@@ -148,7 +147,7 @@ function onLoad() {
 
       function finishImport(list) {
         if (button.prop("id") == "importAppend") {
-          gridOptions.api.addItems(list);
+          gridOptions.api.updateRowData({ add: list });
         }
         else if (button.prop("id") == "importOverwrite") {
           gridOptions.api.setRowData(list);
@@ -170,13 +169,15 @@ function onLoad() {
         return false;
       }
 
-      if (editedIndex === null) {
-        editedIndex = gridOptions.api.getModel().getRowCount();
-        gridOptions.api.addItems([groupEditor.getGroup()]);
+      if (!groupEditor.isEditing) {
+        // Add new group
+        groupEditor.isEditing = true; // needed in case the apply button is used on a new group
+        let result = gridOptions.api.updateRowData({ add: [groupEditor.getGroup()] });
+        result.add[0].setSelected(true);
       }
       else {
-        gridOptions.api.removeItems([gridOptions.api.getModel().getRow(editedIndex)]);
-        gridOptions.api.insertItemsAtIndex(editedIndex, [groupEditor.getGroup()]);
+        // Update current group
+        gridOptions.api.getSelectedNodes()[0].setData(groupEditor.getGroup());
       }
 
       if (button.prop("id") == "groupApplyButton") {
@@ -204,7 +205,6 @@ function onUnload() {
 
 var eventListeners = {
   addGroup() {
-    editedIndex = null;
     groupEditor.clear();
     $("#groupEditorModal").modal("show");
   },
@@ -216,9 +216,10 @@ var eventListeners = {
     let selectedNode = api.getSelectedNodes()[0];
 
     if (selectedNode) {
+      let data = selectedNode.data;
       let newIndex = Math.max(selectedNode.rowIndex - 1, 0);
-      api.removeItems([selectedNode]);
-      api.insertItemsAtIndex(newIndex, [selectedNode.data]);
+      api.updateRowData({ remove: [data] });
+      api.updateRowData({ add: [data], addIndex: newIndex});
       api.setFocusedCell(newIndex);
     }
   },
@@ -227,9 +228,10 @@ var eventListeners = {
     let selectedNode = api.getSelectedNodes()[0];
 
     if (selectedNode) {
+      let data = selectedNode.data;
       let newIndex = Math.min(selectedNode.rowIndex + 1, selectedNode.rowModel.getRowCount() - 1);
-      api.removeItems([selectedNode]);
-      api.insertItemsAtIndex(newIndex, [selectedNode.data]);
+      api.updateRowData({ remove: [data] });
+      api.updateRowData({ add: [data], addIndex: newIndex});
       api.setFocusedCell(newIndex);
     }
   },

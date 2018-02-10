@@ -22,15 +22,14 @@ class ButtonsCellRenderer {
   init(params) {
     this.edit = ButtonsCellRenderer.createIconButton("edit");
     this.editListener = () => {
-      editedIndex = params.rowIndex;  // global variable in options.js  // TODO improve
-      groupEditor.setGroup(params.node.data);
+      groupEditor.setGroup(params.data);
       $("#groupEditorModal").modal("show");
     };
     this.edit.addEventListener("click", this.editListener);
 
     this.del = ButtonsCellRenderer.createIconButton("remove");
     this.deleteListener = () => {
-      params.api.removeItems([params.node]);
+      params.api.updateRowData({ remove: [params.data] });
     };
     this.del.addEventListener("click", this.deleteListener);
 
@@ -95,18 +94,16 @@ class CheckboxCellRenderer {
 class DeleteButtonCellRenderer {
 
   init(params) {
-    let rowIndex = params.rowIndex;
-    let rowModel = params.api && params.api.getModel();
-    let isLastRow = rowIndex == rowModel.getRowCount() - 1;
+    let isEmpty = params.value === "";
 
-    if (isLastRow) {
+    if (isEmpty) {
       this.gui = "";
     }
     else {
       this.gui = document.createElement("i");
       this.gui.setAttribute("class", "remove icon");
       this.deleteListener = () => {
-        params.api.removeItems([params.node]);
+        params.api.updateRowData({ remove: [params.data] });
       };
       this.gui.addEventListener("click", this.deleteListener);
     }

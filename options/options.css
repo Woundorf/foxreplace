@@ -35,7 +35,7 @@ button > img {
   display: flex !important;
 }
 
-.ag-fresh {
+.ag-theme-fresh {
   flex: 1;
 }
 
@@ -59,7 +59,7 @@ button > img {
   color: black;
 }
 
-.ag-fresh .icon {
+.ag-theme-fresh .icon {
   cursor: pointer;
 }
 

@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -50,8 +50,8 @@ var groupEditor = (() => {
    *  Returns true if the row defined by params is the last row and false otherwise.
    */
   function isLastRow(params) {
-    let rowIndex = params.rowIndex || params.node && params.node.rowIndex;
-    let rowModel = params.api && params.api.getModel() || params.node && params.node.rowModel || params.rowModel;
+    let rowIndex = params.rowIndex;
+    let rowModel = params.api && params.api.getModel() || params.rowModel;
     return rowIndex == rowModel.getRowCount() - 1;
   }
 
@@ -69,21 +69,22 @@ var groupEditor = (() => {
         editable: true,
         cellClassRules: {
           placeholder(params) {
-            return isLastRow(params);
+            return params.value === "";
           },
           exclusionUrl(params) {
             return isExclusionUrl(params.data.url);
           }
         },
         cellRenderer(params) {
-          return isLastRow(params) ? browser.i18n.getMessage("list.urlHint") : params.value;
+          return params.value === "" ? browser.i18n.getMessage("list.urlHint") : params.value;
         }//,
         //onCellValueChanged(params) {
         //  // TODO to use this instead of onCellEditingStopped change params.value -> params.newValue and params.rowIndex -> params.node.rowIndex
         //}
       },
       {
-        width: 24,
+        field: "url",
+        width: 40,
         cellRenderer: DeleteButtonCellRenderer,
         suppressSizeToFit: true
       }
@@ -91,19 +92,20 @@ var groupEditor = (() => {
 
     onCellEditingStopped(params) {
       let isLast = isLastRow(params);
-      let isEmpty = params.value == "";
+      let isEmpty = params.value === "";
 
       if (!isLast && isEmpty) {
-        params.api.removeItems([params.node]);
+        params.api.updateRowData({ remove: [params.data] });
       }
       else if (isLast && !isEmpty) {
-        params.api.addItems([{ url: "" }]);
+        params.api.updateRowData({ add: [{ url: "" }] });
       }
 
       // TODO si s'ha fet enter i no (és l'últim i el deixem buit) -> focus a la fila següent
     },
 
     onCellFocused(params) {
+      if (params.rowIndex === null) return; // Safety check needed in ag-Grid 14.2.0
       this.api.getModel().getRow(params.rowIndex).setSelected(true);
     }
 
@@ -124,7 +126,7 @@ var groupEditor = (() => {
       editable: true,
       cellClassRules: {
         placeholder(params) {
-          return isLastRow(params);
+          return params.data.input === "";
         }
       }
     },
@@ -134,7 +136,7 @@ var groupEditor = (() => {
         headerName: browser.i18n.getMessage("list.inputHeader"),
         field: "input",
         cellRenderer(params) {
-          return isLastRow(params) ? browser.i18n.getMessage("list.inputHint") : escapeHtml(params.value);
+          return params.value === "" ? browser.i18n.getMessage("list.inputHint") : escapeHtml(params.value);
         }
       },
       {
@@ -154,7 +156,7 @@ var groupEditor = (() => {
         headerName: browser.i18n.getMessage("list.outputHeader"),
         field: "output",
         cellRenderer(params) {
-          return isLastRow(params) ? browser.i18n.getMessage("list.outputHint") : escapeHtml(params.value);
+          return params.data.input === "" ? browser.i18n.getMessage("list.outputHint") : escapeHtml(params.value);
         }
       },
       {
@@ -167,7 +169,8 @@ var groupEditor = (() => {
       },
       {
         headerName: "",
-        width: 24,
+        field: "input",
+        width: 40,
         cellRenderer: DeleteButtonCellRenderer,
         suppressSizeToFit: true,
         editable: false
@@ -176,19 +179,20 @@ var groupEditor = (() => {
 
     onRowEditingStopped(params) {
       let isLast = isLastRow(params);
-      let isEmpty = params.node.data.input == "";
+      let isEmpty = params.data.input === "";
 
       if (!isLast && isEmpty) {
-        this.api.removeItems([params.node]);
+        params.api.updateRowData({ remove: [params.data] });
       }
       else if (isLast && !isEmpty) {
-        this.api.addItems([{ input: "", inputType: 0, output: "", caseSensitive: false }]);
+        params.api.updateRowData({ add: [{ input: "", inputType: 0, output: "", caseSensitive: false }] });
       }
 
       // TODO si s'ha fet enter i no (és l'últim i el deixem buit) -> focus a la fila següent
     },
 
     onCellFocused(params) {
+      if (params.rowIndex === null) return; // Safety check needed in ag-Grid 14.2.0
       this.api.getModel().getRow(params.rowIndex).setSelected(true);
     },
 
@@ -222,7 +226,7 @@ var groupEditor = (() => {
         if (!api.getSelectedNodes()) return;
         let selectedNode = api.getSelectedNodes()[0];
         if (selectedNode.rowIndex != selectedNode.rowModel.getRowCount() - 1) { // no last row
-          api.removeItems(api.getSelectedNodes());
+          api.updateRowData({ remove: api.getSelectedRows() });
         }
         event.stopPropagation();
       }
@@ -255,7 +259,7 @@ var groupEditor = (() => {
         if (!api.getSelectedNodes()) return;
         let selectedNode = api.getSelectedNodes()[0];
         if (selectedNode.rowIndex != selectedNode.rowModel.getRowCount() - 1) { // no last row
-          api.removeItems(api.getSelectedNodes());
+          api.updateRowData({ remove: api.getSelectedRows() });
         }
         event.stopPropagation();
       }
@@ -272,8 +276,9 @@ var groupEditor = (() => {
       let api = substitutionsGridOptions.api;
       let selectedNode = substitutionsEventListeners._getSelectedNode();
       if (selectedNode && !isLastRow(selectedNode)) {
-        api.removeItems([selectedNode]);
-        api.insertItemsAtIndex(0, [selectedNode.data]);
+        let data = selectedNode.data;
+        api.updateRowData({ remove: [data] });
+        api.updateRowData({ add: [data], addIndex: 0});
         api.setFocusedCell(0);
       }
     },
@@ -281,9 +286,10 @@ var groupEditor = (() => {
       let api = substitutionsGridOptions.api;
       let selectedNode = substitutionsEventListeners._getSelectedNode();
       if (selectedNode && !isLastRow(selectedNode)) {
+        let data = selectedNode.data;
         let newIndex = Math.max(selectedNode.rowIndex - 1, 0);
-        api.removeItems([selectedNode]);
-        api.insertItemsAtIndex(newIndex, [selectedNode.data]);
+        api.updateRowData({ remove: [data] });
+        api.updateRowData({ add: [data], addIndex: newIndex});
         api.setFocusedCell(newIndex);
       }
     },
@@ -291,9 +297,10 @@ var groupEditor = (() => {
       let api = substitutionsGridOptions.api;
       let selectedNode = substitutionsEventListeners._getSelectedNode();
       if (selectedNode && !isLastRow(selectedNode)) {
+        let data = selectedNode.data;
         let newIndex = Math.min(selectedNode.rowIndex + 1, selectedNode.rowModel.getRowCount() - 2);
-        api.removeItems([selectedNode]);
-        api.insertItemsAtIndex(newIndex, [selectedNode.data]);
+        api.updateRowData({ remove: [data] });
+        api.updateRowData({ add: [data], addIndex: newIndex});
         api.setFocusedCell(newIndex);
       }
     },
@@ -301,9 +308,10 @@ var groupEditor = (() => {
       let api = substitutionsGridOptions.api;
       let selectedNode = substitutionsEventListeners._getSelectedNode();
       if (selectedNode && !isLastRow(selectedNode)) {
+        let data = selectedNode.data;
         let newIndex = selectedNode.rowModel.getRowCount() - 2;
-        api.removeItems([selectedNode]);
-        api.insertItemsAtIndex(newIndex, [selectedNode.data]);
+        api.updateRowData({ remove: [data] });
+        api.updateRowData({ add: [data], addIndex: newIndex});
         api.setFocusedCell(newIndex);
       }
     },
@@ -362,6 +370,8 @@ var groupEditor = (() => {
     },
 
     clear() {
+      this.isEditing = false;
+
       $("#groupEditor").form("clear");
       $("#groupEditor").form("set value", "enabled", true);
       $("#groupEditor .ui.dropdown").dropdown("set selected", "0"); // for mode and HTML options
@@ -378,6 +388,8 @@ var groupEditor = (() => {
     },
 
     setGroup(group) {
+      this.isEditing = true;
+
       $("#groupEditor .ui.dropdown").dropdown("set selected", "0"); // for mode and HTML options
       $("#groupEditor").form("set values", { enabled: group.enabled, mode: group.mode, name: group.name, html: group.html });
 
