@@ -56,6 +56,23 @@ var groupEditor = (() => {
   }
 
   /**
+   *  Validates that the given params contains a valid substitution (mainly that it isn't a RegExp with a syntax error).
+   */
+  function validateSubstitution(params) {
+    try {
+      new Substitution(params.data.input, params.data.output, params.data.caseSensitive, params.data.inputType);
+      if (params.node.error) {
+        delete params.node.error;
+        params.api.refreshCells({ rowNodes: [params.node], force: true });
+      }
+    }
+    catch (e) {
+      params.node.error = e;
+      params.api.refreshCells({ rowNodes: [params.node], force: true });
+    }
+  }
+
+  /**
    *  Options for the URLs grid.
    */
   var urlsGridOptions = {
@@ -127,6 +144,9 @@ var groupEditor = (() => {
       cellClassRules: {
         placeholder(params) {
           return params.data.input === "";
+        },
+        error(params) {
+          return params.node.error;
         }
       }
     },
@@ -136,7 +156,9 @@ var groupEditor = (() => {
         headerName: browser.i18n.getMessage("list.inputHeader"),
         field: "input",
         cellRenderer(params) {
-          return params.value === "" ? browser.i18n.getMessage("list.inputHint") : escapeHtml(params.value);
+          let text = params.value === "" ? browser.i18n.getMessage("list.inputHint") : escapeHtml(params.value);
+          if (params.node.error) text += ` <i class="warning sign icon" title="${params.node.error}"></i>`;
+          return text;
         }
       },
       {
@@ -187,6 +209,8 @@ var groupEditor = (() => {
       else if (isLast && !isEmpty) {
         params.api.updateRowData({ add: [{ input: "", inputType: 0, output: "", caseSensitive: false }] });
       }
+
+      if (!isEmpty) validateSubstitution(params);
 
       // TODO si s'ha fet enter i no (és l'últim i el deixem buit) -> focus a la fila següent
     },
@@ -419,7 +443,11 @@ var groupEditor = (() => {
     },
 
     isValidGroup() {
-      return substitutionsGridOptions.api.getModel().getRowCount() > 1;
+      let error = false;
+      substitutionsGridOptions.api.forEachNode(node => {
+        if (node.error) error = true;
+      });
+      return substitutionsGridOptions.api.getModel().getRowCount() > 1 && !error;
     },
 
     adjustUrlsColumnWidths() {

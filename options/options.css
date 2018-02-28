@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -51,7 +51,7 @@ button > img {
   color: gray;
 }
 
-.exclusionUrl {
+.exclusionUrl, .error {
   color: red;
 }
 

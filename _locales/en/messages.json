@@ -258,8 +258,8 @@
     "message": "Enter a URL"
   },
 
-  "options.warning.atLeastOneSubstitution": {
-    "message": "You must add at least one substitution"
+  "options.warning.atLeastOneSubstitutionAndNoErrors": {
+    "message": "You must add at least one substitution and correct all errors"
   },
 
   "options.error.invalidJson": {

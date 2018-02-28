@@ -175,7 +175,7 @@ function onLoad() {
     },
     onApprove(button) {
       if (!groupEditor.isValidGroup()) {
-        alert(browser.i18n.getMessage("options.warning.atLeastOneSubstitution"));
+        alert(browser.i18n.getMessage("options.warning.atLeastOneSubstitutionAndNoErrors"));
         return false;
       }
 

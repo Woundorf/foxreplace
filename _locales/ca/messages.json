@@ -258,8 +258,8 @@
     "message": "Introduïu un URL"
   },
 
-  "options.warning.atLeastOneSubstitution": {
-    "message": "Heu d'afegir almenys una substitució"
+  "options.warning.atLeastOneSubstitutionAndNoErrors": {
+    "message": "Heu d'afegir almenys una substitució i corregir tots els errors"
   },
 
   "options.error.invalidJson": {

@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -25,7 +25,7 @@ var Substitution = (() => {
       this.input = input;
       this.output = output;
       this.caseSensitive = Boolean(caseSensitive);
-      this.inputType = inputType;
+      this.inputType = +inputType;  // coalesce to number
       if (this.inputType < this.INPUT_TEXT || this.inputType > this.INPUT_REG_EXP) this.inputType = this.INPUT_TEXT;  // avoid invalid values
 
       switch (this.inputType) {
