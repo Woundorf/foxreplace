@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -22,14 +22,14 @@ class ButtonsCellRenderer {
   init(params) {
     this.edit = ButtonsCellRenderer.createIconButton("edit");
     this.editListener = () => {
-      groupEditor.setGroup(params.data);
+      groupEditor.setGroup(params.node.data);
       $("#groupEditorModal").modal("show");
     };
     this.edit.addEventListener("click", this.editListener);
 
     this.del = ButtonsCellRenderer.createIconButton("remove");
     this.deleteListener = () => {
-      params.api.updateRowData({ remove: [params.data] });
+      params.api.updateRowData({ remove: [params.node.data] });
     };
     this.del.addEventListener("click", this.deleteListener);
 
@@ -103,7 +103,7 @@ class DeleteButtonCellRenderer {
       this.gui = document.createElement("i");
       this.gui.setAttribute("class", "remove icon");
       this.deleteListener = () => {
-        params.api.updateRowData({ remove: [params.data] });
+        params.api.updateRowData({ remove: [params.node.data] });
       };
       this.gui.addEventListener("click", this.deleteListener);
     }
