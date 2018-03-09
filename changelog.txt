@@ -2,6 +2,7 @@
 * Column widths and order are saved.
 * Added checks to prevent saving substitutions with invalid regular expressions (#223, #236).
 * Substitution groups can be edited with double click (#226).
+* The Delete key no longer removes the whole substitution while it's being edited (#226).
 
 v2.1.0 (2017-11-28)
 * Added 3 modes for substitution groups (#206):

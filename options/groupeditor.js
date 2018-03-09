@@ -278,7 +278,7 @@ var groupEditor = (() => {
       if (event.key == "Escape") event.stopPropagation();
     },
     onKeyDown(event) {
-      if (event.key == "Delete") {
+      if (event.key == "Delete" && event.target.tagName != "INPUT") { // In case of input don't do anything to allow to delete characters
         let api = substitutionsGridOptions.api;
         if (!api.getSelectedNodes()) return;
         let selectedNode = api.getSelectedNodes()[0];
