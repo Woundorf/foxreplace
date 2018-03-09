@@ -65,7 +65,10 @@ var gridOptions = {
   enableColResize: true,
   //enableFilter: true,
   //onRowSelected: // enable/disable buttons
-  //onRowDoubleClicked: // edit
+  onRowDoubleClicked(params) {
+    groupEditor.setGroup(params.node.data);
+    $("#groupEditorModal").modal("show");
+  },
   onCellFocused(params) {
     let row = this.api.getModel().getRow(params.rowIndex);
     if (row) row.setSelected(true); // check needed when deleting the last row by click
