@@ -2,6 +2,7 @@
 * Column widths and order are saved.
 * Added checks to prevent saving substitutions with invalid regular expressions (#223, #236).
 * Substitution groups can be edited with double click (#226).
+* The edit group button is larger and more separated from the remove button (#226).
 * The Delete key no longer removes the whole substitution while it's being edited (#226).
 * Added a confirmation before clearing the substitution list and moved the clear button to the right end.
 * Updated ag-Grid to version 14.2.0.

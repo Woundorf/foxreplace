@@ -27,6 +27,10 @@ button > img {
   height: 400px;
 }
 
+#listGrid .edit.icon {
+  margin-right: 16px;
+}
+
 .enabledCell {
   text-align: center;
 }

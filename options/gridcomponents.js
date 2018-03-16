@@ -20,7 +20,7 @@
 class ButtonsCellRenderer {
 
   init(params) {
-    this.edit = ButtonsCellRenderer.createIconButton("edit");
+    this.edit = ButtonsCellRenderer.createIconButton("large edit");
     this.editListener = () => {
       groupEditor.setGroup(params.node.data);
       $("#groupEditorModal").modal("show");

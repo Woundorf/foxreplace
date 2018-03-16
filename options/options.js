@@ -55,7 +55,7 @@ var gridOptions = {
     {
       headerName: "",
       field: "name",
-      width: 64,
+      width: 80,
       cellRenderer: ButtonsCellRenderer,
       suppressFilter: true,
       suppressNavigable: true
