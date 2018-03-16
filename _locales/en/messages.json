@@ -138,10 +138,6 @@
     "message": "Replace scripts (Warning: this may change page behaviour!) (experimental)"
   },
 
-  "options.save": {
-    "message": "Save"
-  },
-
   "options.confirmClearGroups.content": {
     "message": "This will clear the whole list. Are you sure?"
   },

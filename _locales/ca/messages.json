@@ -138,10 +138,6 @@
     "message": "Reemplaça els scripts (Atenció: això pot modificar el comportament de les pàgines!) (experimental)"
   },
 
-  "options.save": {
-    "message": "Desa"
-  },
-
   "options.confirmClearGroups.content": {
     "message": "Es buidarà la llista de substitucions. N'esteu segur?"
   },

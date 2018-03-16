@@ -87,6 +87,8 @@ function onLoad() {
   let substitutionListGrid = document.getElementById("listGrid");
   new agGrid.Grid(substitutionListGrid, gridOptions);
 
+  gridOptions.api.addEventListener("listChanged", save);
+
   storage.getMainColumnState().then(columnState => {
     if (columnState) gridOptions.columnApi.setColumnState(columnState);
   });
@@ -109,18 +111,12 @@ function onLoad() {
       $("#status").text(message.status);
   });
 
-  browser.storage.onChanged.addListener(changes => {  // TODO could improve
-    storage.getList().then(list => {
-      gridOptions.api.setRowData(list);
-    });
-    storage.getPrefs().then(prefs => {
-      $("#prefs").form("set values", prefs);
-    });
-  });
+  browser.storage.onChanged.addListener(storageChangeListener);
 
   $("#confirmClearGroupsModal").modal({
     onApprove() {
       gridOptions.api.setRowData([]);
+      save();
     }
   });
 
@@ -174,6 +170,8 @@ function onLoad() {
 
         $("#importModal").modal("hide");
         $("#importModal").modal("setting", "closable", true);
+
+        save();
       }
     }
   });
@@ -198,6 +196,8 @@ function onLoad() {
         // Update current group
         gridOptions.api.getSelectedNodes()[0].setData(groupEditor.getGroup());
       }
+
+      save();
 
       if (button.prop("id") == "groupApplyButton") {
         return false;
@@ -240,6 +240,7 @@ var eventListeners = {
       api.updateRowData({ remove: [data] });
       api.updateRowData({ add: [data], addIndex: newIndex});
       api.setFocusedCell(newIndex);
+      save();
     }
   },
   moveDownGroup() {
@@ -252,6 +253,7 @@ var eventListeners = {
       api.updateRowData({ remove: [data] });
       api.updateRowData({ add: [data], addIndex: newIndex});
       api.setFocusedCell(newIndex);
+      save();
     }
   },
   subscriptionUrlChanged() {
@@ -302,14 +304,6 @@ var eventListeners = {
   resetColumns() {
     gridOptions.columnApi.resetColumnState();
     storage.setMainColumnState(gridOptions.columnApi.getColumnState());
-  },
-  save() {
-    let list = [];
-    gridOptions.api.forEachNode(node => {
-      list.push(node.data);
-    });
-    storage.setList(list);
-    storage.setPrefs($("#prefs").form("get values"));
   }
 };
 
@@ -323,7 +317,7 @@ function addEventListeners() {
   document.getElementById("importFromUrl").addEventListener("click", eventListeners.startImportFromUrl);
   document.getElementById("export").addEventListener("click", eventListeners.startExport);
   document.getElementById("resetColumns").addEventListener("click", eventListeners.resetColumns);
-  document.getElementById("save").addEventListener("click", eventListeners.save);
+  document.getElementById("prefs").addEventListener("change", save);
 }
 
 function removeEventListeners() {
@@ -336,7 +330,7 @@ function removeEventListeners() {
   document.getElementById("importFromUrl").removeEventListener("click", eventListeners.startImportFromUrl);
   document.getElementById("export").removeEventListener("click", eventListeners.startExport);
   document.getElementById("resetColumns").removeEventListener("click", eventListeners.resetColumns);
-  document.getElementById("save").removeEventListener("click", eventListeners.save);
+  document.getElementById("prefs").removeEventListener("change", save);
 }
 
 function importFromFile(file) {
@@ -381,6 +375,28 @@ function importFromUrl(url) {
       reject(Error(browser.i18n.getMessage("options.error.cantConnect")));
     };
     request.send();
+  });
+}
+
+function save() { // TODO save only what has changed (particularly individual prefs)
+  browser.storage.onChanged.removeListener(storageChangeListener);
+
+  let list = [];
+  gridOptions.api.forEachNode(node => {
+    list.push(node.data);
+  });
+  storage.setList(list);
+  storage.setPrefs($("#prefs").form("get values"));
+
+  browser.storage.onChanged.addListener(storageChangeListener);
+}
+
+function storageChangeListener(/*changes*/) { // TODO could improve
+  storage.getList().then(list => {
+    gridOptions.api.setRowData(list);
+  });
+  storage.getPrefs().then(prefs => {
+    $("#prefs").form("set values", prefs);
   });
 }
 

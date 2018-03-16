@@ -30,6 +30,7 @@ class ButtonsCellRenderer {
     this.del = ButtonsCellRenderer.createIconButton("remove");
     this.deleteListener = () => {
       params.api.updateRowData({ remove: [params.node.data] });
+      params.api.dispatchEvent(new Event("listChanged"));
     };
     this.del.addEventListener("click", this.deleteListener);
 
@@ -69,6 +70,7 @@ class CheckboxCellRenderer {
     this.checkbox.checked = params.value;
     this.listener = (event) => {
       params.node.setDataValue(params.column, event.target.checked);
+      params.api.dispatchEvent(new Event("listChanged"));
     };
     this.checkbox.addEventListener("input", this.listener);
   }
