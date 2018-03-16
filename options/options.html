@@ -45,10 +45,6 @@
             <i class="plus icon"></i>
             <span class="i18n">options.add</span>
           </button>
-          <button id="clearGroups" class="ui button">
-            <i class="trash icon"></i>
-            <span class="i18n">options.clear</span>
-          </button>
         </div>
         <div class="ui buttons">
           <button id="moveUpGroup" class="ui button">
@@ -74,10 +70,18 @@
             <span class="i18n">options.export</span>
           </button>
         </div>
-        <button id="resetColumns" class="ui button">
-          <i class="undo icon"></i>
-          <span class="i18n">options.resetColumns</span>
-        </button>
+        <div class="ui buttons">
+          <button id="resetColumns" class="ui button">
+            <i class="undo icon"></i>
+            <span class="i18n">options.resetColumns</span>
+          </button>
+        </div>
+        <div class="ui buttons">
+          <button id="clearGroups" class="ui red button">
+            <i class="trash icon"></i>
+            <span class="i18n">options.clear</span>
+          </button>
+        </div>
       </p>
       <div id="listGrid" class="ag-theme-fresh"></div>
     </div>
@@ -162,6 +166,14 @@
         <span class="i18n">options.save</span>
       </button>
     </p>
+
+    <div id="confirmClearGroupsModal" class="ui small modal">
+      <div class="content i18n">options.confirmClearGroups.content</div>
+      <div class="actions">
+        <button class="ui ok red button i18n">options.confirmClearGroups.clear</button>
+        <button class="ui cancel button i18n">options.confirmClearGroups.cancel</button>
+      </div>
+    </div>
 
     <div id="importModal" class="ui modal">
       <div class="header">Import</div>

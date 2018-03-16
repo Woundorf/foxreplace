@@ -118,6 +118,12 @@ function onLoad() {
     });
   });
 
+  $("#confirmClearGroupsModal").modal({
+    onApprove() {
+      gridOptions.api.setRowData([]);
+    }
+  });
+
   $("#importModal").modal({
     onShow() {
       $("#importModal .form").removeClass("error");
@@ -222,7 +228,7 @@ var eventListeners = {
     $("#groupEditorModal").modal("show");
   },
   clearGroups() {
-    gridOptions.api.setRowData([]);
+    $("#confirmClearGroupsModal").modal("show");
   },
   moveUpGroup() {
     let api = gridOptions.api;
