@@ -1,3 +1,4 @@
+v2.2.0 (2018-03-19)
 * The "Apply automatic substitutions on page load" item in the Tools menu is correctly initialized.
 * Column widths and order are saved.
 * Added checks to prevent saving substitutions with invalid regular expressions (#223, #236).
