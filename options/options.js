@@ -87,7 +87,7 @@ function onLoad() {
   let substitutionListGrid = document.getElementById("listGrid");
   new agGrid.Grid(substitutionListGrid, gridOptions);
 
-  gridOptions.api.addEventListener("listChanged", save);
+  gridOptions.api.addEventListener("listChanged", saveList);
 
   storage.getMainColumnState().then(columnState => {
     if (columnState) gridOptions.columnApi.setColumnState(columnState);
@@ -116,7 +116,7 @@ function onLoad() {
   $("#confirmClearGroupsModal").modal({
     onApprove() {
       gridOptions.api.setRowData([]);
-      save();
+      saveList();
     }
   });
 
@@ -171,7 +171,7 @@ function onLoad() {
         $("#importModal").modal("hide");
         $("#importModal").modal("setting", "closable", true);
 
-        save();
+        saveList();
       }
     }
   });
@@ -197,7 +197,7 @@ function onLoad() {
         gridOptions.api.getSelectedNodes()[0].setData(groupEditor.getGroup());
       }
 
-      save();
+      saveList();
 
       if (button.prop("id") == "groupApplyButton") {
         return false;
@@ -240,7 +240,7 @@ var eventListeners = {
       api.updateRowData({ remove: [data] });
       api.updateRowData({ add: [data], addIndex: newIndex});
       api.setFocusedCell(newIndex);
-      save();
+      saveList();
     }
   },
   moveDownGroup() {
@@ -253,7 +253,7 @@ var eventListeners = {
       api.updateRowData({ remove: [data] });
       api.updateRowData({ add: [data], addIndex: newIndex});
       api.setFocusedCell(newIndex);
-      save();
+      saveList();
     }
   },
   subscriptionUrlChanged() {
@@ -317,7 +317,7 @@ function addEventListeners() {
   document.getElementById("importFromUrl").addEventListener("click", eventListeners.startImportFromUrl);
   document.getElementById("export").addEventListener("click", eventListeners.startExport);
   document.getElementById("resetColumns").addEventListener("click", eventListeners.resetColumns);
-  document.getElementById("prefs").addEventListener("change", save);
+  document.getElementById("prefs").addEventListener("change", savePref);
 }
 
 function removeEventListeners() {
@@ -330,7 +330,7 @@ function removeEventListeners() {
   document.getElementById("importFromUrl").removeEventListener("click", eventListeners.startImportFromUrl);
   document.getElementById("export").removeEventListener("click", eventListeners.startExport);
   document.getElementById("resetColumns").removeEventListener("click", eventListeners.resetColumns);
-  document.getElementById("prefs").removeEventListener("change", save);
+  document.getElementById("prefs").removeEventListener("change", savePref);
 }
 
 function importFromFile(file) {
@@ -378,26 +378,39 @@ function importFromUrl(url) {
   });
 }
 
-function save() { // TODO save only what has changed (particularly individual prefs)
+function saveList() {
   browser.storage.onChanged.removeListener(storageChangeListener);
 
   let list = [];
   gridOptions.api.forEachNode(node => {
     list.push(node.data);
   });
-  storage.setList(list);
-  storage.setPrefs($("#prefs").form("get values"));
-
-  browser.storage.onChanged.addListener(storageChangeListener);
+  storage.setList(list)
+    .then(() => { browser.storage.onChanged.addListener(storageChangeListener); });
 }
 
-function storageChangeListener(/*changes*/) { // TODO could improve
-  storage.getList().then(list => {
-    gridOptions.api.setRowData(list);
-  });
-  storage.getPrefs().then(prefs => {
-    $("#prefs").form("set values", prefs);
-  });
+function savePref(event) {
+  browser.storage.onChanged.removeListener(storageChangeListener);
+
+  let prefs = {};
+
+  if (event.target.type == "checkbox") prefs[event.target.name] = event.target.checked;
+  else if (event.target.type == "number") prefs[event.target.name] = event.target.valueAsNumber;
+  else if (event.target.type == "text") prefs[event.target.name] = event.target.value;
+
+  storage.setPrefs(prefs)
+    .then(() => { browser.storage.onChanged.addListener(storageChangeListener); });
+}
+
+function storageChangeListener(changes) {
+  if (changes.list) {
+    gridOptions.api.setRowData(substitutionListFromJSON(changes.list.newValue));
+  }
+  else {
+    for (let c in changes) {
+      $("#prefs").form("set value", c, changes[c].newValue);
+    }
+  }
 }
 
 document.addEventListener("DOMContentLoaded", onLoad);
@@ -405,7 +418,6 @@ document.addEventListener("unload", onUnload);
 
 // TODO split in more files (e.g. one for grid handling, one for import/export, etc.)
 // TODO shortcuts
-// TODO warn unsaved changes
 // TODO move to top/bottom
 // TODO remember column widths in secondary grids
 // TODO allow to sort and unsort

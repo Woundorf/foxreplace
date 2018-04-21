@@ -49,8 +49,6 @@ storage.getPrefs().then(prefs => {
 
 // Update things
 browser.storage.onChanged.addListener(changes => {
-  // TODO should check which keys are in changes, but with the current implementation it always contains all keys,
-  //      so just check if old and new values are actually different
   storage.getPrefs().then(prefs => {
     if (changes.enableContextMenu && changes.enableContextMenu.newValue != changes.enableContextMenu.oldValue) {
       if (prefs.enableContextMenu) createContextMenu();
