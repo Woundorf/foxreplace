@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -23,25 +23,38 @@ function replaceWindow(aWindow, aSubstitutionList, aPrefs) {
 
   var url = doc.URL;
   if (!url) return;
-  var nSubstitutions = aSubstitutionList.length;
 
-  for (var j = 0; j < nSubstitutions; j++) {
-    var group = aSubstitutionList[j];
+  let applicableGroups = aSubstitutionList.filter(group => group.matches(url));
 
-    if (!group.matches(url)) continue;
+  // Optimization: handle together consecutive groups with the same HTML mode to reduce the number of renders
 
-    switch (group.html) {
-      case group.HTML_NONE: replaceText(doc, group, aPrefs); break;
-      case group.HTML_OUTPUT: replaceTextWithHtml(doc, group, aPrefs); break;
-      case group.HTML_INPUT_OUTPUT: replaceHtml(doc, group, aPrefs); break;
+  for (let i = 0; i < applicableGroups.length; i++) {
+    let group = applicableGroups[i];
+    let html = group.html;
+    let consecutiveGroups = [group];
+
+    for (let j = i + 1; j < applicableGroups.length; j++) {
+      if (applicableGroups[j].html == html) {
+        consecutiveGroups.push(applicableGroups[j]);
+        i = j;
+      }
+      else {
+        break;
+      }
+    }
+
+    switch (html) {
+      case group.HTML_NONE: replaceText(doc, consecutiveGroups, aPrefs); break;
+      case group.HTML_OUTPUT: replaceTextWithHtml(doc, consecutiveGroups, aPrefs); break;
+      case group.HTML_INPUT_OUTPUT: replaceHtml(doc, consecutiveGroups, aPrefs); break;
     }
   }
 }
 
 /**
- * Applies substitutions from aGroup to aDocument on text.
+ * Applies substitutions from aGroups to aDocument on text.
  */
-function replaceText(aDocument, aGroup, aPrefs) {
+function replaceText(aDocument, aGroups, aPrefs) {
   // selection string possibilities
   /* ... empty(index-of(('style'),lower-case(name(parent::*))))  :( functions not supported */
   /* //body//text()[string-length(normalize-space())>0] */
@@ -56,7 +69,11 @@ function replaceText(aDocument, aGroup, aPrefs) {
   for (var i = 0; i < nTextNodes; i++) {
     var textNode = textNodes.snapshotItem(i);
     let oldTextContent = textNode.textContent;
-    let newTextContent = aGroup.replace(oldTextContent);
+    let newTextContent = oldTextContent;
+
+    for (let group of aGroups) {
+      newTextContent = group.replace(newTextContent);
+    }
 
     if (oldTextContent != newTextContent) {
       textNode.textContent = newTextContent;
@@ -96,7 +113,11 @@ function replaceText(aDocument, aGroup, aPrefs) {
     if (valueNode.type == "textarea" && valueNode.value == valueNode.defaultValue) continue;
 
     let oldValue = valueNode.value;
-    let newValue = aGroup.replace(oldValue);
+    let newValue = oldValue;
+
+    for (let group of aGroups) {
+      newValue = group.replace(newValue);
+    }
 
     if (oldValue != newValue) {
       valueNode.value = newValue;
@@ -117,71 +138,82 @@ function replaceText(aDocument, aGroup, aPrefs) {
     let nScriptNodes = scriptNodes.snapshotLength;
     for (let i = 0; i < nScriptNodes; i++) {
       let scriptNode = scriptNodes.snapshotItem(i);
-      let newText = aGroup.replace(scriptNode.text);
+      let newText = scriptNode.text;
+      for (let group of aGroups) {
+        newText = group.replace(newText);
+      }
       if (newText != scriptNode.text) replaceScript(aDocument, scriptNode, newText);
     }
   }
 }
 
 /**
- * Applies substitutions from aGroup to aDocument on text with HTML output.
+ * Applies substitutions from aGroups to aDocument on text with HTML output.
  */
-function replaceTextWithHtml(aDocument, aGroup, aPrefs) {
-  // Replace text nodes
-  let textNodesXpath = "/html/head/title/text()"
-                     + "|/html/body//text()[not(parent::script)]";
-  let textNodes = aDocument.evaluate(textNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-  let nTextNodes = textNodes.snapshotLength;
+function replaceTextWithHtml(aDocument, aGroups, aPrefs) {
+  // Since each substitution potentially changes the DOM, each group has to be applied individually.
+  // In fact each single substitution should be applied individually, but it has never been done that way, so let's keep the old logic for now.
+  for (let group of aGroups) {
+    // Replace text nodes
+    let textNodesXpath = "/html/head/title/text()"
+                       + "|/html/body//text()[not(parent::script)]";
+    let textNodes = aDocument.evaluate(textNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+    let nTextNodes = textNodes.snapshotLength;
 
-  for (let i = 0; i < nTextNodes; i++) {
-    let textNode = textNodes.snapshotItem(i);
-    let originalText = textNode.textContent;
-    let replacedText = aGroup.replace(originalText);
+    for (let i = 0; i < nTextNodes; i++) {
+      let textNode = textNodes.snapshotItem(i);
+      let originalText = textNode.textContent;
+      let replacedText = aGroup.replace(originalText);
 
-    if (originalText != replacedText) {
-      let parser = new DOMParser();
-      let doc = parser.parseFromString(replacedText, "text/html");
-      let fragment = aDocument.createDocumentFragment();
-      let child = doc.body.firstChild;
+      if (originalText != replacedText) {
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(replacedText, "text/html");
+        let fragment = aDocument.createDocumentFragment();
+        let child = doc.body.firstChild;
 
-      while (child) {
-        fragment.appendChild(child);
-        child = doc.body.firstChild;
-      }
+        while (child) {
+          fragment.appendChild(child);
+          child = doc.body.firstChild;
+        }
 
-      let parent = textNode.parentNode;
-      parent.replaceChild(fragment, textNode);
+        let parent = textNode.parentNode;
+        parent.replaceChild(fragment, textNode);
 
-      // Fire change event for textareas with default value (issue 49)
-      if (parent.localName == "textarea" && parent.value == parent.defaultValue) {
-        let event = aDocument.createEvent("HTMLEvents");
-        event.initEvent("change", true, false);
-        parent.dispatchEvent(event);
+        // Fire change event for textareas with default value (issue 49)
+        if (parent.localName == "textarea" && parent.value == parent.defaultValue) {
+          let event = aDocument.createEvent("HTMLEvents");
+          event.initEvent("change", true, false);
+          parent.dispatchEvent(event);
+        }
       }
     }
-  }
 
-  // Replace scripts
-  if (aPrefs.replaceScripts) {
-    let scriptNodesXpath = "/html/body/script";
-    let scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-    let nScriptNodes = scriptNodes.snapshotLength;
+    // Replace scripts
+    if (aPrefs.replaceScripts) {
+      let scriptNodesXpath = "/html/body/script";
+      let scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+      let nScriptNodes = scriptNodes.snapshotLength;
 
-    for (let i = 0; i < nScriptNodes; i++) {
-      let scriptNode = scriptNodes.snapshotItem(i);
-      let newText = aGroup.replace(scriptNode.text);
-      if (newText != scriptNode.text) replaceScript(aDocument, scriptNode, newText);
+      for (let i = 0; i < nScriptNodes; i++) {
+        let scriptNode = scriptNodes.snapshotItem(i);
+        let newText = aGroup.replace(scriptNode.text);
+        if (newText != scriptNode.text) replaceScript(aDocument, scriptNode, newText);
+      }
     }
   }
 }
 
 /**
- * Applies substitutions from aGroup to aDocument on HTML.
+ * Applies substitutions from aGroups to aDocument on HTML.
  */
-function replaceHtml(aDocument, aGroup, aPrefs) {
+function replaceHtml(aDocument, aGroups, aPrefs) {
   var html = aDocument.evaluate("/html", aDocument, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
   let oldHtml = html.singleNodeValue.innerHTML;
-  let newHtml = aGroup.replace(html.singleNodeValue.innerHTML);
+  let newHtml = oldHtml;
+
+  for (let group of aGroups) {
+    newHtml = group.replace(newHtml);
+  }
 
   if (oldHtml != newHtml) {
     let parser = new DOMParser();
