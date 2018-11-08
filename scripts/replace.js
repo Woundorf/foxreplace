@@ -120,10 +120,19 @@ function replaceText(aDocument, aGroups, aPrefs) {
     }
 
     if (oldValue != newValue) {
+      let selectionStart, selectionEnd, selectionDirection;
+
+      if (valueNode.localName == "input" || valueNode.localName == "textarea") {
+        selectionStart = valueNode.selectionStart;
+        selectionEnd = valueNode.selectionEnd;
+        selectionDirection = valueNode.selectionDirection;
+      }
+
       valueNode.value = newValue;
 
-      // Fire change event for inputs and textareas (issue 49)
+      // Restore cursor position or selection (#15) and fire change event (#49) for inputs and textareas
       if (valueNode.localName == "input" || valueNode.localName == "textarea") {
+        valueNode.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
         let event = aDocument.createEvent("HTMLEvents");
         event.initEvent("change", true, false);
         valueNode.dispatchEvent(event);

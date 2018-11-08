@@ -1,4 +1,5 @@
 * Consecutive groups with the same HMTL mode are applied at once without intermediate renders (where possible) to improve performance (#126).
+* Cursor position or selection in text boxes is preserved (#15).
 
 v2.2.0 (2018-03-19)
 * The "Apply automatic substitutions on page load" item in the Tools menu is correctly initialized.
