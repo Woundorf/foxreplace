@@ -1,3 +1,5 @@
+* Fixed bug introduced in v2.2.1 (#260).
+
 v2.2.1 (2018-11-22)
 * Consecutive groups with the same HMTL mode are applied at once without intermediate renders (where possible) to improve performance (#126).
 * Cursor position or selection in text boxes is preserved (#15).

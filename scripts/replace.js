@@ -172,7 +172,7 @@ function replaceTextWithHtml(aDocument, aGroups, aPrefs) {
     for (let i = 0; i < nTextNodes; i++) {
       let textNode = textNodes.snapshotItem(i);
       let originalText = textNode.textContent;
-      let replacedText = aGroup.replace(originalText);
+      let replacedText = group.replace(originalText);
 
       if (originalText != replacedText) {
         let parser = new DOMParser();
@@ -205,7 +205,7 @@ function replaceTextWithHtml(aDocument, aGroups, aPrefs) {
 
       for (let i = 0; i < nScriptNodes; i++) {
         let scriptNode = scriptNodes.snapshotItem(i);
-        let newText = aGroup.replace(scriptNode.text);
+        let newText = group.replace(scriptNode.text);
         if (newText != scriptNode.text) replaceScript(aDocument, scriptNode, newText);
       }
     }
