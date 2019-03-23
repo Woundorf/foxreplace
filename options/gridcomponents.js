@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -134,7 +134,7 @@ class InputTypeEditor {
   }
 
   init(params) {
-    this.gui = $('<select class="ui dropdown">' +
+    this.gui = $('<select>' +
                   InputTypeEditor.getOption(params, 0, browser.i18n.getMessage("inputType.text")) +
                   InputTypeEditor.getOption(params, 1, browser.i18n.getMessage("inputType.wholeWords")) +
                   InputTypeEditor.getOption(params, 2, browser.i18n.getMessage("inputType.regExp")) +
@@ -148,9 +148,7 @@ class InputTypeEditor {
   }
 
   afterGuiAttached() {
-    $(this.gui).dropdown();
-    this.newGui = this.gui.parentNode;
-    this.newGui.style = "position:fixed;z-index:1;width:" + this.width + "px";  // needed to see it more or less right without being a popup
+    this.gui.style = `width: ${this.width}px`;
 
     if (this.api.getFocusedCell().column.colId == "inputType") {
       this.focusIn(); // special case for when edition starts in this cell
@@ -158,16 +156,11 @@ class InputTypeEditor {
   }
 
   getValue() {
-    return $(this.newGui).dropdown("get value");
+    return this.gui.value;
   }
 
   focusIn() {
-    this.newGui.focus();
-    this.newGui.classList.add("inputTypeEditorFocused");
-  }
-
-  focusOut() {
-    this.newGui.classList.remove("inputTypeEditorFocused");
+    this.gui.focus();
   }
 
   destroy() {
