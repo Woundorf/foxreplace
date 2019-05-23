@@ -1,4 +1,5 @@
 * Fixed bug where the input down dropdown was badly positioned (#248).
+* Shortcut to open the replace bar changed to Ctrl+Shift+F9 (#266).
 
 v2.2.2 (2018-11-23)
 * Fixed bug introduced in v2.2.1 (#260).

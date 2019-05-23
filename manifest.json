@@ -61,7 +61,7 @@
   "commands": {
     "_execute_sidebar_action": {
       "suggested_key": {
-        "default": "F9"
+        "default": "Ctrl+Shift+F9"
       },
       "description": "Show the replace bar"
     },
