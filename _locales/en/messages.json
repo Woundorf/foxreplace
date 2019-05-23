@@ -330,6 +330,18 @@
         "content": "$1"
       }
     }
+  },
+
+  "keys.cmd": {
+    "message": "Cmd"
+  },
+
+  "keys.ctrl": {
+    "message": "Ctrl"
+  },
+
+  "keys.shift": {
+    "message": "Shift"
   }
 
 }

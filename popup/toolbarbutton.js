@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -34,7 +34,9 @@ function onLoad() {
         case "apply-substitution-list": elementId = "replaceWithListShortcut"; break;
       }
       let shortcut = command.shortcut;
-      if (info.os == "mac") shortcut = shortcut.replace("Ctrl", "Cmd");
+      if (info.os == "mac") shortcut = shortcut.replace("Ctrl", browser.i18n.getMessage("keys.cmd"));
+      shortcut = shortcut.replace("Ctrl", browser.i18n.getMessage("keys.ctrl"));
+      shortcut = shortcut.replace("Shift", browser.i18n.getMessage("keys.shift"));
       document.getElementById(elementId).textContent = shortcut;
     }
   });
