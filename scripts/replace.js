@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -89,6 +89,7 @@ function replaceText(aDocument, aGroups, aPrefs) {
 
   // Replace nodes with a "value" property
   var valueNodesXpath = "/html/body//input[@type='text']"
+                      + "|/html/body//input[not(@type)]"
                       + "|/html/body//textarea"
                       + "|/html/body//@abbr"
                       + "|/html/body//@alt"
@@ -97,6 +98,7 @@ function replaceText(aDocument, aGroups, aPrefs) {
                       + "|/html/body//@summary"
                       + "|/html/body//@title"
                       + "|/html/body//input[@type!='hidden']/@value"
+                      + "|/html/body//input[not(@type)]/@value"
                       + "|/html/body//option/@value"
                       + "|/html/body//button/@value";
   if (aPrefs.replaceUrls) {
