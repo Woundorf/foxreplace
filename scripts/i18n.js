@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -13,6 +13,10 @@
  *  You should have received a copy of the GNU General Public License along with FoxReplace. If not, see <http://www.gnu.org/licenses/>.
  *
  *  ***** END LICENSE BLOCK ***** */
+
+if (document.title) {
+  document.title = browser.i18n.getMessage(document.title);
+}
 
 document.querySelectorAll(".i18n").forEach(node => {
   node.textContent = browser.i18n.getMessage(node.textContent);

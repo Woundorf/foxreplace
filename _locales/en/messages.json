@@ -38,6 +38,10 @@
     "message": "Regular expression"
   },
 
+  "options.title": {
+    "message": "FoxReplace options"
+  },
+
   "options.substitutionList": {
     "message": "Substitution list"
   },

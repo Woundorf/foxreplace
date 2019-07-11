@@ -38,6 +38,10 @@
     "message": "Expressió regular"
   },
 
+  "options.title": {
+    "message": "Opcions de FoxReplace"
+  },
+
   "options.substitutionList": {
     "message": "Llista de substitucions"
   },
