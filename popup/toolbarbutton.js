@@ -22,8 +22,8 @@ function onLoad() {
   document.getElementById("options").addEventListener("click", showOptions);
 
   storage.getPrefs().then(prefs => {
-    if (prefs.autoReplaceOnLoad) document.getElementById("autoReplaceOnLoadCheck").classList.add("checkmark");
-    else document.getElementById("autoReplaceOnLoadCheck").classList.remove("checkmark");
+    if (prefs.autoReplaceOnLoad) document.getElementById("autoReplaceOnLoadCheck").classList.add("fa-check");
+    else document.getElementById("autoReplaceOnLoadCheck").classList.remove("fa-check");
   });
 
   Promise.all([browser.commands.getAll(), browser.runtime.getPlatformInfo()]).then(([commands, info]) => {

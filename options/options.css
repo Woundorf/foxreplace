@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -15,40 +15,23 @@
  *  ***** END LICENSE BLOCK ***** */
 
 body {
-  font-family: sans-serif;
   padding: 20px;
-}
-
-button > img {
-  vertical-align: middle;
 }
 
 #listGrid, #urlsGrid, #substitutionsGrid {
   height: 400px;
 }
 
-#listGrid .edit.icon {
-  margin-right: 16px;
-}
-
 .enabledCell {
   text-align: center;
-}
-
-.flex {
-  display: flex !important;
 }
 
 .ag-theme-fresh {
   flex: 1;
 }
 
-.rightButtons {
-  margin-left: 16px;
-}
-
-.ui.bottom.attached.tab.segment { /* hack for correct height */
-  margin-bottom: 0;
+i.fa-backspace {
+  color: red;
 }
 
 .placeholder {
@@ -63,7 +46,7 @@ button > img {
   color: black;
 }
 
-.ag-theme-fresh .icon {
+.ag-theme-fresh i {
   cursor: pointer;
 }
 

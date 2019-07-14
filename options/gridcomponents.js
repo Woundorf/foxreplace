@@ -20,14 +20,15 @@
 class ButtonsCellRenderer {
 
   init(params) {
-    this.edit = ButtonsCellRenderer.createIconButton("large edit");
+    this.edit = ButtonsCellRenderer.createIconButton("edit mr-4");
+    this.edit.setAttribute("style", "font-size: large;");
     this.editListener = () => {
       groupEditor.setGroup(params.node.data);
       $("#groupEditorModal").modal("show");
     };
     this.edit.addEventListener("click", this.editListener);
 
-    this.del = ButtonsCellRenderer.createIconButton("remove");
+    this.del = ButtonsCellRenderer.createIconButton("backspace");
     this.deleteListener = () => {
       params.api.updateRowData({ remove: [params.node.data] });
       params.api.dispatchEvent(new Event("listChanged"));
@@ -53,7 +54,7 @@ class ButtonsCellRenderer {
 
   static createIconButton(iconName) {
     let icon = document.createElement("i");
-    icon.setAttribute("class", iconName + " icon");
+    icon.setAttribute("class", `fas fa-${iconName}`);
     return icon;
   }
 
@@ -103,7 +104,7 @@ class DeleteButtonCellRenderer {
     }
     else {
       this.gui = document.createElement("i");
-      this.gui.setAttribute("class", "remove icon");
+      this.gui.setAttribute("class", "fas fa-backspace");
       this.deleteListener = () => {
         params.api.updateRowData({ remove: [params.node.data] });
       };

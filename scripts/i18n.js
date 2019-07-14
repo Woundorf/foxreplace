@@ -21,6 +21,3 @@ if (document.title) {
 document.querySelectorAll(".i18n").forEach(node => {
   node.textContent = browser.i18n.getMessage(node.textContent);
 });
-document.querySelectorAll(".i18n_data-tooltip").forEach(node => {
-  node.setAttribute("data-tooltip", browser.i18n.getMessage(node.getAttribute("data-tooltip")));
-});

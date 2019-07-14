@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -394,13 +394,8 @@ var groupEditor = (() => {
     },
 
     clear() {
+      this.setGroup(new SubstitutionGroup());
       this.isEditing = false;
-
-      $("#groupEditor").form("clear");
-      $("#groupEditor").form("set value", "enabled", true);
-      $("#groupEditor .ui.dropdown").dropdown("set selected", "0"); // for mode and HTML options
-      this.clearUrls();
-      this.clearSubstitutions();
     },
 
     clearUrls() {
@@ -414,8 +409,10 @@ var groupEditor = (() => {
     setGroup(group) {
       this.isEditing = true;
 
-      $("#groupEditor .ui.dropdown").dropdown("set selected", "0"); // for mode and HTML options
-      $("#groupEditor").form("set values", { enabled: group.enabled, mode: group.mode, name: group.name, html: group.html });
+      document.getElementById('groupEnabled').checked = group.enabled;
+      document.getElementById('groupMode').selectedIndex = group.mode;
+      document.getElementById('groupHtml').selectedIndex = group.html;
+      document.getElementById('groupName').value = group.name;
 
       let urls = group.urls.map(u => ({ url: u}));
       urls.push({ url: "" });
@@ -427,7 +424,10 @@ var groupEditor = (() => {
     },
 
     getGroup() {
-      let {enabled, mode, name, html} = $("#groupEditor").form("get values", ["enabled", "mode", "name", "html"]);
+      let enabled = document.getElementById('groupEnabled').checked;
+      let mode = document.getElementById('groupMode').selectedIndex;
+      let html = document.getElementById('groupHtml').selectedIndex;
+      let name = document.getElementById('groupName').value;
 
       let urls = [];
       urlsGridOptions.api.forEachNode(node => {

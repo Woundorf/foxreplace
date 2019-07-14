@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -19,7 +19,7 @@ var gridOptions = {
     {
       headerName: browser.i18n.getMessage("options.group.enabled"),
       field: "enabled",
-      width: 83,
+      width: 92,
       cellClass: "enabledCell",
       cellRenderer: CheckboxCellRenderer,
       suppressFilter: true
@@ -97,10 +97,7 @@ function onLoad() {
     gridOptions.api.setRowData(list);
   });
 
-  storage.getPrefs().then(prefs => {
-    $("#prefs").form("set values", prefs);
-    eventListeners.subscriptionUrlChanged();  // update warning visibility after loading preferences
-  });
+  storage.getPrefs().then(loadPrefs);
 
   browser.runtime.getBackgroundPage().then(background => {
     $("#status").text(background.subscription.status);
@@ -113,104 +110,11 @@ function onLoad() {
 
   browser.storage.onChanged.addListener(storageChangeListener);
 
-  $("#confirmClearGroupsModal").modal({
-    onApprove() {
-      gridOptions.api.setRowData([]);
-      saveList();
-    }
-  });
-
-  $("#importModal").modal({
-    onShow() {
-      $("#importModal .form").removeClass("error");
-    },
-    onApprove(button) {
-      $("#importModal").modal("setting", "closable", false);
-
-      if ($("#importModal").hasClass("importFromFile")) {
-        let files = $("#importFile")[0].files;
-        if (files.length === 0) {
-          alert(browser.i18n.getMessage("options.warning.selectFile"));
-          $("#importModal").modal("setting", "closable", true);
-          return false;
-        }
-        importFromFile(files[0])
-          .then(finishImport)
-          .catch(error => {
-            $("#importError").text(error);
-            $("#importModal .form").addClass("error");
-            $("#importModal").modal("setting", "closable", true);
-          });
-      }
-      else if ($("#importModal").hasClass("importFromUrl")) {
-        let url = $("#importUrl").val();
-        if (!url) {
-          alert(browser.i18n.getMessage("options.warning.enterUrl"));
-          $("#importModal").modal("setting", "closable", true);
-          return false;
-        }
-        importFromUrl(url)
-          .then(finishImport)
-          .catch(error => {
-            $("#importError").text(error);
-            $("#importModal .form").addClass("error");
-            $("#importModal").modal("setting", "closable", true);
-          });
-      }
-
-      return false; // to keep modal open while importing
-
-      function finishImport(list) {
-        if (button.prop("id") == "importAppend") {
-          gridOptions.api.updateRowData({ add: list });
-        }
-        else if (button.prop("id") == "importOverwrite") {
-          gridOptions.api.setRowData(list);
-        }
-
-        $("#importModal").modal("hide");
-        $("#importModal").modal("setting", "closable", true);
-
-        saveList();
-      }
-    }
-  });
-
-  $("#groupEditorModal").modal({
-    onShow() {
-      groupEditor.adjustUrlsColumnWidths();
-    },
-    onApprove(button) {
-      if (!groupEditor.isValidGroup()) {
-        alert(browser.i18n.getMessage("options.warning.atLeastOneSubstitutionAndNoErrors"));
-        return false;
-      }
-
-      if (!groupEditor.isEditing) {
-        // Add new group
-        groupEditor.isEditing = true; // needed in case the apply button is used on a new group
-        let result = gridOptions.api.updateRowData({ add: [groupEditor.getGroup()] });
-        result.add[0].setSelected(true);
-      }
-      else {
-        // Update current group
-        gridOptions.api.getSelectedNodes()[0].setData(groupEditor.getGroup());
-      }
-
-      saveList();
-
-      if (button.prop("id") == "groupApplyButton") {
-        return false;
-      }
-    }
-  });
-
-  $(".ui.dropdown").dropdown();
-  $(".menu .item").tab({
-    onFirstLoad(tabPath) {
-      if (tabPath == "substitutions") groupEditor.adjustSubstitutionsColumnWidths();
-    }
-  });
+  //$(".menu .item").tab({
+  //  onFirstLoad(tabPath) {
+  //    if (tabPath == "substitutions") groupEditor.adjustSubstitutionsColumnWidths();
+  //  }
+  //});
 
   addEventListeners();
   groupEditor.init();
@@ -223,13 +127,6 @@ function onUnload() {
 }
 
 var eventListeners = {
-  addGroup() {
-    groupEditor.clear();
-    $("#groupEditorModal").modal("show");
-  },
-  clearGroups() {
-    $("#confirmClearGroupsModal").modal("show");
-  },
   moveUpGroup() {
     let api = gridOptions.api;
     let selectedNode = api.getSelectedNodes()[0];
@@ -259,18 +156,8 @@ var eventListeners = {
   subscriptionUrlChanged() {
     // Show the warning if the user inputs a string, hide it otherwise
     let url = document.getElementById("subscriptionUrl").value;
-    if (url != "") document.getElementById("prefs").classList.add("warning");
-    else document.getElementById("prefs").classList.remove("warning");
-  },
-  startImport() {
-    $("#importModal .header").text(browser.i18n.getMessage("options.import"));
-    $("#importModal").removeClass("importFromUrl").addClass("importFromFile");
-    $("#importModal").modal("show");
-  },
-  startImportFromUrl() {
-    $("#importModal .header").text(browser.i18n.getMessage("options.importFromUrl"));
-    $("#importModal").removeClass("importFromFile").addClass("importFromUrl");
-    $("#importModal").modal("show");
+    if (url != "") document.getElementById("subscriptionWarning").classList.remove("d-none");
+    else document.getElementById("subscriptionWarning").classList.add("d-none");
   },
   startExport() {
     let list = [];
@@ -308,29 +195,146 @@ var eventListeners = {
 };
 
 function addEventListeners() {
-  document.getElementById("addGroup").addEventListener("click", eventListeners.addGroup);
-  document.getElementById("clearGroups").addEventListener("click", eventListeners.clearGroups);
+  $('#groupEditorModal').on('show.bs.modal', prepareGroupEditor);
+  $('#substitutionsTab').on('show.bs.tab', function() {
+    groupEditor.adjustSubstitutionsColumnWidths();
+  });
+  $('#groupOk').click(saveGroup);
+  $('#groupApply').click(saveGroup);
+  $('#importModal').on('show.bs.modal', prepareImport);
+  $('#importModal').on('hide.bs.modal', onHideImport);
+  $('#importAppend').click(startImport);
+  $('#importOverwrite').click(startImport);
+  $('#confirmClearGroupsButton').click(confirmClearGroups);
   document.getElementById("moveUpGroup").addEventListener("click", eventListeners.moveUpGroup);
   document.getElementById("moveDownGroup").addEventListener("click", eventListeners.moveDownGroup);
   document.getElementById("subscriptionUrl").addEventListener("input", eventListeners.subscriptionUrlChanged);
-  document.getElementById("import").addEventListener("click", eventListeners.startImport);
-  document.getElementById("importFromUrl").addEventListener("click", eventListeners.startImportFromUrl);
   document.getElementById("export").addEventListener("click", eventListeners.startExport);
   document.getElementById("resetColumns").addEventListener("click", eventListeners.resetColumns);
   document.getElementById("prefs").addEventListener("change", savePref);
 }
 
 function removeEventListeners() {
-  document.getElementById("addGroup").removeEventListener("click", eventListeners.addGroup);
-  document.getElementById("clearGroups").removeEventListener("click", eventListeners.clearGroups);
   document.getElementById("moveUpGroup").removeEventListener("click", eventListeners.moveUpGroup);
   document.getElementById("moveDownGroup").removeEventListener("click", eventListeners.moveDownGroup);
   document.getElementById("subscriptionUrl").removeEventListener("input", eventListeners.subscriptionUrlChanged);
-  document.getElementById("import").removeEventListener("click", eventListeners.startImport);
-  document.getElementById("importFromUrl").removeEventListener("click", eventListeners.startImportFromUrl);
   document.getElementById("export").removeEventListener("click", eventListeners.startExport);
   document.getElementById("resetColumns").removeEventListener("click", eventListeners.resetColumns);
   document.getElementById("prefs").removeEventListener("change", savePref);
+}
+
+function prepareGroupEditor(event) {
+  groupEditor.adjustUrlsColumnWidths();
+
+  if (event.relatedTarget == document.getElementById('addGroup')) {
+    groupEditor.clear();
+  }
+}
+
+function saveGroup(event) {
+  let button = $(event.currentTarget);
+  let action = button.data('action');
+
+  if (!groupEditor.isValidGroup()) {
+    alert(browser.i18n.getMessage("options.warning.atLeastOneSubstitutionAndNoErrors"));
+    return;
+  }
+
+  if (!groupEditor.isEditing) {
+    // Add new group
+    groupEditor.isEditing = true; // needed in case the apply button is used on a new group
+    let result = gridOptions.api.updateRowData({ add: [groupEditor.getGroup()] });
+    result.add[0].setSelected(true);
+  }
+  else {
+    // Update current group
+    gridOptions.api.getSelectedNodes()[0].setData(groupEditor.getGroup());
+  }
+
+  saveList();
+
+  if (action == 'ok') {
+    $('#groupEditorModal').modal('hide');
+  }
+}
+
+function prepareImport(event) {
+  let button = $(event.relatedTarget);
+  let from = button.data('from');
+  $('#importAppend').data('from', from);
+  $('#importOverwrite').data('from', from);
+  $('#importError').addClass('d-none');
+
+  if (from == 'file') {
+    $('#importTitle').text(browser.i18n.getMessage('options.import'));
+    $('#importModal').removeClass('importFromUrl').addClass('importFromFile');
+  }
+  else if (from == 'url') {
+    $('#importTitle').text(browser.i18n.getMessage('options.importFromUrl'));
+    $('#importModal').removeClass('importFromFile').addClass('importFromUrl');
+  }
+}
+
+var importing = false;  // will be true in the middle of an import
+
+function onHideImport(event) {
+  if (importing) {
+    event.preventDefault(); // prevents closing the modal in the middle of an import
+  }
+}
+
+function startImport(event) {
+  let button = $(event.currentTarget);
+  let from = button.data('from');
+  let action = button.data('action');
+
+  if (from == 'file') {
+    let files = $('#importFile')[0].files;
+
+    if (files.length === 0) {
+      alert(browser.i18n.getMessage('options.warning.selectFile'));
+    }
+    else {
+      importing = true;
+      importFromFile(files[0])
+        .then(finishImport)
+        .catch(error => {
+          $('#importError').text(error);
+          $('#importError').removeClass('d-none');
+          importing = false;
+        });
+    }
+  }
+  else if (from == 'url') {
+    let url = $('#importUrl').val();
+
+    if (!url) {
+      alert(browser.i18n.getMessage('options.warning.enterUrl'));
+    }
+    else {
+      importing = true;
+      importFromUrl(url)
+        .then(finishImport)
+        .catch(error => {
+          $('#importError').text(error);
+          $('#importError').removeClass('d-none');
+          importing = false;
+        });
+    }
+  }
+
+  function finishImport(list) {
+    if (action == 'append') {
+      gridOptions.api.updateRowData({ add: list });
+    }
+    else if (action == 'overwrite') {
+      gridOptions.api.setRowData(list);
+    }
+
+    saveList();
+    importing = false;
+    $('#importModal').modal('hide');
+  }
 }
 
 function importFromFile(file) {
@@ -354,8 +358,8 @@ function importFromFile(file) {
 function importFromUrl(url) {
   return new Promise((resolve, reject) => {
     let request = new XMLHttpRequest();
-    request.open("GET", url);
-    request.responseType = "json";
+    request.open('GET', url);
+    request.responseType = 'json';
     request.onload = () => {
       if (request.status === 200) {
         if (request.response) {
@@ -364,18 +368,24 @@ function importFromUrl(url) {
           resolve(list);
         }
         else {
-          reject(Error(browser.i18n.getMessage("options.error.invalidJson", url)));
+          reject(Error(browser.i18n.getMessage('options.error.invalidJson', url)));
         }
       }
       else {
-        reject(Error(request.status + " " + request.statusText));
+        reject(Error(`${request.status} ${request.statusText}`));
       }
     };
     request.onerror = () => {
-      reject(Error(browser.i18n.getMessage("options.error.cantConnect")));
+      reject(Error(browser.i18n.getMessage('options.error.cantConnect')));
     };
     request.send();
   });
+}
+
+function confirmClearGroups() {
+  gridOptions.api.setRowData([]);
+  saveList();
+  $('#confirmClearGroupsModal').modal('hide');
 }
 
 function saveList() {
@@ -389,14 +399,28 @@ function saveList() {
     .then(() => { browser.storage.onChanged.addListener(storageChangeListener); });
 }
 
+function loadPrefs(prefs) {
+  for (let id in prefs) {
+    let element = document.getElementById(id);
+
+    switch (element.type) {
+      case 'checkbox': element.checked = prefs[id]; break;
+      case 'number': element.valueAsNumber = prefs[id]; break;
+      case 'text': element.value = prefs[id]; break;
+    }
+  }
+
+  eventListeners.subscriptionUrlChanged();  // update warning visibility after loading preferences
+}
+
 function savePref(event) {
   browser.storage.onChanged.removeListener(storageChangeListener);
 
   let prefs = {};
 
-  if (event.target.type == "checkbox") prefs[event.target.name] = event.target.checked;
-  else if (event.target.type == "number") prefs[event.target.name] = event.target.valueAsNumber;
-  else if (event.target.type == "text") prefs[event.target.name] = event.target.value;
+  if (event.target.type == "checkbox") prefs[event.target.id] = event.target.checked;
+  else if (event.target.type == "number") prefs[event.target.id] = event.target.valueAsNumber;
+  else if (event.target.type == "text") prefs[event.target.id] = event.target.value;
 
   storage.setPrefs(prefs)
     .then(() => { browser.storage.onChanged.addListener(storageChangeListener); });
@@ -409,6 +433,7 @@ function storageChangeListener(changes) {
   else {
     for (let c in changes) {
       $("#prefs").form("set value", c, changes[c].newValue);
+      // TODO copiar de loadPrefs
     }
   }
 }
