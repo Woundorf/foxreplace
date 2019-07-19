@@ -1,6 +1,7 @@
 * Migrated from Semantic UI to Bootstrap.
 * Slightly modified group editor UI (#282).
 * Fixed bug where certain fields were not replaced (#202).
+* Improved workflow when adding substitutions (#250).
 
 v2.2.3 (2019-05-23)
 * Fixed bug where the input type dropdown was badly positioned (#248).

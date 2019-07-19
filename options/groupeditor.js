@@ -79,6 +79,7 @@ var groupEditor = (() => {
 
     headerHeight: 0,
     rowSelection: "single",
+    stopEditingWhenGridLosesFocus: true,
 
     columnDefs: [
       {
@@ -138,6 +139,7 @@ var groupEditor = (() => {
     //enableFilter: true,
     editType: "fullRow",
     rowSelection: "single",
+    stopEditingWhenGridLosesFocus: true,
 
     defaultColDef: {
       editable: true,
