@@ -296,12 +296,14 @@ function startImport(event) {
     }
     else {
       importing = true;
+      $('#importModal .spinner-border').removeClass('d-none');
       importFromFile(files[0])
         .then(finishImport)
         .catch(error => {
           $('#importError').text(error);
           $('#importError').removeClass('d-none');
           importing = false;
+          $('#importModal .spinner-border').addClass('d-none');
         });
     }
   }
@@ -313,12 +315,14 @@ function startImport(event) {
     }
     else {
       importing = true;
+      $('#importModal .spinner-border').removeClass('d-none');
       importFromUrl(url)
         .then(finishImport)
         .catch(error => {
           $('#importError').text(error);
           $('#importError').removeClass('d-none');
           importing = false;
+          $('#importModal .spinner-border').addClass('d-none');
         });
     }
   }
@@ -333,6 +337,7 @@ function startImport(event) {
 
     saveList();
     importing = false;
+    $('#importModal .spinner-border').addClass('d-none');
     $('#importModal').modal('hide');
   }
 }
