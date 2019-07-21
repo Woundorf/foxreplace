@@ -1,6 +1,6 @@
 <!-- ***** BEGIN LICENSE BLOCK *****
   -
-  - Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+  - Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
   -
   - This file is part of FoxReplace.
   -
@@ -20,9 +20,9 @@
 
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../lib/semantic.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../lib/bootstrap.css">
     <script src="../lib/jquery-3.2.0.min.js"></script>
-    <script src="../lib/semantic.min.js"></script>
     <script src="../lib/xregexp-all-min.js"></script>
     <script src="../scripts/core.js"></script>
     <script src="sidebar.js"></script>
@@ -38,37 +38,35 @@
 
   <body>
 
-    <form id="form" class="ui form">
-      <div class="required field">
+    <form id="form">
+      <div class="form-group">
         <label class="i18n">toolbar.input</label>
-        <input name="input" type="text" autocomplete="off">
+        <input name="input" type="text" class="w-100" autocomplete="off" required="">
       </div>
-      <div class="field">
-        <select name="inputType" class="ui dropdown">
-          <option value="0" class="i18n">inputType.text</option>
+      <div class="form-group">
+        <select name="inputType" class="custom-select">
+          <option value="0" selected="" class="i18n">inputType.text</option>
           <option value="1" class="i18n">inputType.wholeWords</option>
           <option value="2" class="i18n">inputType.regExp</option>
         </select>
       </div>
-      <div class="field">
+      <div class="form-group">
         <label class="i18n">toolbar.output</label>
-        <input name="output" type="text" autocomplete="off">
+        <input name="output" type="text" class="w-100" autocomplete="off">
       </div>
-      <div class="field">
+      <div class="form-group">
         <label class="i18n">html</label>
-        <select name="html" class="ui dropdown">
-          <option value="0" class="i18n">html.none</option>
+        <select name="html" class="custom-select">
+          <option value="0" selected="" class="i18n">html.none</option>
           <option value="1" class="i18n">html.output</option>
           <option value="2" class="i18n">html.inputOutput</option>
         </select>
       </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input name="caseSensitive" type="checkbox">
-          <label class="i18n">toolbar.caseSensitive</label>
-        </div>
+      <div class="form-group form-check">
+        <input name="caseSensitive" type="checkbox" class="form-check-input">
+        <label class="form-check-label i18n">toolbar.caseSensitive</label>
       </div>
-      <button class="ui button i18n" type="submit">toolbar.replace</button>
+      <button class="btn btn-primary i18n" type="submit">toolbar.replace</button>
     </form>
 
     <script src="../scripts/i18n.js"></script>

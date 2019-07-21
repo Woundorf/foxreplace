@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -16,9 +16,6 @@
 
 function onLoad() {
   document.removeEventListener("DOMContentLoaded", onLoad);
-
-  $(".ui.dropdown").dropdown();
-
   document.getElementById("form").addEventListener("submit", onSubmit);
 }
 
@@ -30,9 +27,13 @@ function onUnload() {
 function onSubmit(event) {
   event.preventDefault(); // we just want to get the values, we don't want to submit anything
 
-  let formValues = $("#form").form("get values");
+  let serialized = $('#form').serializeArray();
+  let formValues = {};
 
-  if (formValues.input == "") return;
+  for (let item of serialized) {
+    formValues[item.name] = item.value;
+  }
+  // Checkbox values are returned as 'on' when checked and missing (thus undefined) when unchecked. This works well when converted to Boolean.
 
   let substitutionList = [new SubstitutionGroup("", [], [new Substitution(formValues.input, formValues.output, formValues.caseSensitive, formValues.inputType)],
                                                 formValues.html, true)];
