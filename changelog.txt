@@ -2,6 +2,7 @@
 * Slightly modified group editor UI (#282).
 * Fixed bug where certain fields were not replaced (#202).
 * Improved workflow when adding substitutions (#250).
+* Updated XRegExp to version 4.2.4.
 
 v2.2.3 (2019-05-23)
 * Fixed bug where the input type dropdown was badly positioned (#248).
