@@ -437,8 +437,14 @@ function storageChangeListener(changes) {
   }
   else {
     for (let c in changes) {
-      $("#prefs").form("set value", c, changes[c].newValue);
-      // TODO copiar de loadPrefs
+      let element = document.getElementById(c);
+      let newValue = changes[c].newValue;
+
+      switch (element.type) {
+        case 'checkbox': element.checked = newValue; break;
+        case 'number': element.valueAsNumber = newValue; break;
+        case 'text': element.value = newValue; break;
+      }
     }
   }
 }
