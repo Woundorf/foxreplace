@@ -1,3 +1,4 @@
+v2.3.0 (2019-07-30)
 * Migrated from Semantic UI to Bootstrap.
 * Slightly modified group editor UI (#282).
 * Fixed bug where certain fields were not replaced (#202).
