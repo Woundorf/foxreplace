@@ -303,6 +303,10 @@
     "message": "Options..."
   },
 
+  "menu.help": {
+    "message": "Help"
+  },
+
   "toolbar.input": {
     "message": "Replace"
   },

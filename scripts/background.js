@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -117,6 +117,11 @@ function createToolsMenu(autoReplaceOnLoad) {
     title: browser.i18n.getMessage("menu.options"),
     contexts: ["tools_menu"]
   });
+  browser.menus.create({
+    id: 'tools.help',
+    title: browser.i18n.getMessage('menu.help'),
+    contexts: ['tools_menu']
+  });
 }
 
 browser.menus.onClicked.addListener(info => {
@@ -131,5 +136,10 @@ browser.menus.onClicked.addListener(info => {
   }
   else if (info.menuItemId == "tools.options") {
     browser.runtime.openOptionsPage();
+  }
+  else if (info.menuItemId == 'tools.help') {
+     browser.tabs.create({
+      url: 'https://github.com/Woundorf/foxreplace/wiki/FAQ'
+    });
   }
 });

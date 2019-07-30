@@ -20,6 +20,7 @@ function onLoad() {
   document.getElementById("replaceWithList").addEventListener("click", replaceWithList);
   document.getElementById("autoReplaceOnLoad").addEventListener("click", toggleAutoReplaceOnLoad);
   document.getElementById("options").addEventListener("click", showOptions);
+  document.getElementById('help').addEventListener('click', showHelp);
 
   storage.getPrefs().then(prefs => {
     if (prefs.autoReplaceOnLoad) document.getElementById("autoReplaceOnLoadCheck").classList.add("fa-check");
@@ -48,6 +49,7 @@ function onUnload() {
   document.getElementById("replaceWithList").removeEventListener("click", replaceWithList);
   document.getElementById("autoReplaceOnLoad").removeEventListener("click", toggleAutoReplaceOnLoad);
   document.getElementById("options").removeEventListener("click", showOptions);
+  document.getElementById('help').removeEventListener('click', showHelp);
 }
 
 function showReplaceBar() {
@@ -71,6 +73,12 @@ function toggleAutoReplaceOnLoad() {
 function showOptions() {
   browser.runtime.openOptionsPage()
     .then(() => window.close());
+}
+
+function showHelp() {
+  browser.tabs.create({
+    url: 'https://github.com/Woundorf/foxreplace/wiki/FAQ'
+  }).then(() => window.close());
 }
 
 window.addEventListener("DOMContentLoaded", onLoad);
