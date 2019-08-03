@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -83,9 +83,22 @@ var subscription = (() => {
     fetch(subscribedUrl, init)
       .then(response => response.json())
       .then(json => {
-        let list = substitutionListFromJSON(json);
-        storage.setList(list);
-        setStatus(browser.i18n.getMessage("subscriptionStatus.lastUpdate", new Date().toLocaleString()));
+        let check = checkVersion(json);
+
+        if (check.status) {
+          let list = substitutionListFromJSON(json);
+          storage.setList(list);
+          let status = browser.i18n.getMessage("subscriptionStatus.lastUpdate", new Date().toLocaleString());
+
+          if (check.message) {
+            status = `⚠ ${check.message} ${status}`;
+          }
+
+          setStatus(status);
+        }
+        else {
+          throw Error(check.message);
+        }
       }).
       catch(error => {
         setStatus(String(error));

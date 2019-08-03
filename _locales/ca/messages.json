@@ -26,6 +26,34 @@
     }
   },
 
+  "warning": {
+    "message": "Avís"
+  },
+
+  "deprecatedJsonVersion": {
+    "message": "Aquest fitxer fa servir un format antic (versió $version$) que en el futur deixarà de ser admès. Hauríeu d'actualitzar-lo a la darrera versió ($currentVersion$).",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      },
+      "currentVersion": {
+        "content": "$2"
+      }
+    }
+  },
+
+  "unsupportedJsonVersion": {
+    "message": "Aquest fitxer fa servir un format no admès: versió $version$. La versió actual és $currentVersion$.",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      },
+      "currentVersion": {
+        "content": "$2"
+      }
+    }
+  },
+
   "inputType.text": {
     "message": "Text"
   },

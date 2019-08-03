@@ -116,6 +116,8 @@ function onLoad() {
   //  }
   //});
 
+  $('#importWarning').toast({ autohide: false });
+
   addEventListeners();
   groupEditor.init();
 }
@@ -349,8 +351,20 @@ function importFromFile(file) {
       try {
         let text = event.target.result;
         let json = JSON.parse(text);
-        let list = substitutionListFromJSON(json);
-        resolve(list);
+        let check = checkVersion(json);
+
+        if (check.status) {
+          if (check.message) {
+            $('#importWarning .alert').text(check.message);
+            $('#importWarning').toast('show');
+          }
+
+          let list = substitutionListFromJSON(json);
+          resolve(list);
+        }
+        else {
+          reject(Error(check.message));
+        }
       }
       catch (error) {
         reject(error);
@@ -369,8 +383,20 @@ function importFromUrl(url) {
       if (request.status === 200) {
         if (request.response) {
           let json = request.response;
-          let list = substitutionListFromJSON(json);
-          resolve(list);
+          let check = checkVersion(json);
+
+          if (check.status) {
+            if (check.message) {
+              $('#importWarning .alert').text(check.message);
+              $('#importWarning').toast('show');
+            }
+
+            let list = substitutionListFromJSON(json);
+            resolve(list);
+          }
+          else {
+            reject(Error(check.message));
+          }
         }
         else {
           reject(Error(browser.i18n.getMessage('options.error.invalidJson', url)));

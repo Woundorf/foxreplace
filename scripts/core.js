@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -340,4 +340,16 @@ function substitutionListFromJSON(json) {
   let list = [];
   for (let groupJSON of json.groups) list.push(SubstitutionGroup.fromJSON(groupJSON, json.version));
   return list;
+}
+
+/**
+ *  Checks if the version of the given JSON is supported or not and returns a status and an optional message to explain it.
+ */
+function checkVersion(json) {
+  const currentVersion = '2.1';
+  const oldVersions = ['0.14', '0.15'];
+
+  if (json.version == currentVersion) return { status: true };
+  else if (oldVersions.includes(json.version)) return { status: true, message: browser.i18n.getMessage('deprecatedJsonVersion', [json.version, currentVersion]) };
+  else return { status: false, message: browser.i18n.getMessage('unsupportedJsonVersion', [json.version, currentVersion]) };
 }

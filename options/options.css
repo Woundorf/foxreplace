@@ -18,6 +18,10 @@ body {
   padding: 20px;
 }
 
+#importWarning {
+  position: fixed; top: 20px; right: 20px;
+}
+
 #listGrid, #urlsGrid, #substitutionsGrid {
   height: 400px;
 }

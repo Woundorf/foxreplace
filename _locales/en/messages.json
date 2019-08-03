@@ -26,6 +26,34 @@
     }
   },
 
+  "warning": {
+    "message": "Warning"
+  },
+
+  "deprecatedJsonVersion": {
+    "message": "This file uses an old format (version $version$) that will become unsupported in the future. You should update it to the latest version ($currentVersion$).",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      },
+      "currentVersion": {
+        "content": "$2"
+      }
+    }
+  },
+
+  "unsupportedJsonVersion": {
+    "message": "This file uses an unsupported format: version $version$. Current version is $currentVersion$.",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      },
+      "currentVersion": {
+        "content": "$2"
+      }
+    }
+  },
+
   "inputType.text": {
     "message": "Text"
   },
