@@ -1,3 +1,4 @@
+v2.3.1 (2019-08-07)
 * Added a version check when importing from file or URL.
 
 v2.3.0 (2019-07-30)
