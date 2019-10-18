@@ -14,6 +14,10 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
+browser.runtime.onInstalled.addListener(() => {
+  storage.migrateToSparseList();
+});
+
 // Listen to messages from other parts of the WebExtension
 browser.runtime.onMessage.addListener(message => {
   switch (message.key) {

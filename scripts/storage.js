@@ -27,6 +27,66 @@ var storage = {
     return browser.storage.local.set({ list: substitutionListToJSON(list) });
   },
 
+  /// Returns a random group id.
+  getNewGroupId() {
+    // Generates 9-digit base 36 random number in range [0, 36^9)
+    // 36^9 = 101559956668416
+    return `g_${Math.floor(Math.random() * 101559956668416).toString(36).padStart(9, '0')}`;
+  },
+
+  /// Converts the given compact list to sparse and stores it in sparse form.
+  setCompactList(compactListJson) {
+    // 1. Clear current list
+    return browser.storage.local.get().then(data => {
+      for (let key in data) {
+        if (key.startsWith('g_')) browser.storage.local.remove(key);
+      }
+
+      return browser.storage.local.set({ proxy_list: [] });
+    })
+    // 2. Check version and store new list
+    .then(() => {
+      let check = checkVersion(compactListJson);
+
+      if (!check.status) {  // incompatible version
+        return Promise.reject(Error(check.message));
+      }
+
+      if (check.message) {  // compatible but deprecated version
+        console.warn(check.message);
+      }
+
+      // Current version
+      let data = {
+        list_version: CurrentListVersion,
+        proxy_list: []
+      };
+
+      for (let group of compactListJson.groups) {
+        let id;
+        do {
+          id = this.getNewGroupId();
+        } while (data[id] !== undefined);
+
+        SubstitutionGroup.upgradeJson(group, compactListJson.version);
+        data.proxy_list.push({ id: id });
+        data[id] = group;
+      }
+
+      return browser.storage.local.set(data);
+    });
+  },
+
+  /// Migrates the compact list to the sparse list if necessary.
+  migrateToSparseList() {
+    return browser.storage.local.get('list').then(data => {
+      if (data.list !== undefined) {
+        browser.storage.local.remove('list');
+        this.setCompactList(data.list);
+      }
+    });
+  },
+
   getPrefs() {
     return browser.storage.local.get({
       enableContextMenu: false,

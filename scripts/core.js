@@ -14,6 +14,9 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
+/// Current list format version.
+const CurrentListVersion = '2.1';
+
 /**
  *  Represents a single substitution with an input, an output and some additional parameters.
  */
@@ -115,6 +118,11 @@ var Substitution = (() => {
   Substitution.fromJSON = function(json) {
     let inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(json.inputType);
     return new Substitution(json.input, json.output, json.caseSensitive, inputType);
+  };
+
+  /// Upgrades the given JSON in the given version to the latest version. Upgrade is done in place.
+  Substitution.upgradeJson = function(/*json, version*/) {
+    // Nothing needs to be done currently
   };
 
   /**
@@ -277,18 +285,24 @@ var SubstitutionGroup = (() => {
   /**
    *  Creates a substitution group from the given JSON and version.
    */
-  SubstitutionGroup.fromJSON = function(json, version) {
+  SubstitutionGroup.fromJSON = function(json) {
     let substitutions = [];
     for (let substitutionJSON of json.substitutions) substitutions.push(Substitution.fromJSON(substitutionJSON));
 
-    let html;
-    if (version == "0.14") html = json.html ? this.prototype.HTML_INPUT_OUTPUT : this.prototype.HTML_NONE;
-    else html = this.prototype.HTML_STRINGS.indexOf(json.html);
+    return new SubstitutionGroup(json.name, json.urls, substitutions, json.html, json.enabled, json.mode);
+  };
 
-    // check if mode exists to support versions older than 2.1 (i.e. 0.14 and 0.15)
-    let mode = json.mode ? this.prototype.MODE_STRINGS.indexOf(json.mode) : this.prototype.MODE_AUTO_AND_MANUAL;
+  /// Upgrades the given JSON in the given version to the latest version. Upgrade is done in place.
+  SubstitutionGroup.upgradeJson = function(json, version) {
+    if (version == '0.14') {
+      json.html = this.prototype.HTML_STRINGS[json.html ? this.prototype.HTML_INPUT_OUTPUT : this.prototype.HTML_NONE];
+    }
 
-    return new SubstitutionGroup(json.name, json.urls, substitutions, html, json.enabled, mode);
+    if (version == '0.14' || version == '0.15') {
+      json.mode = this.prototype.MODE_STRINGS[this.prototype.MODE_AUTO_AND_MANUAL];
+    }
+
+    json.substitutions.forEach(substitutionJson => { Substitution.upgradeJson(substitutionJson, version); });
   };
 
   /**
@@ -327,7 +341,7 @@ function isExclusionUrl(url) {
  */
 function substitutionListToJSON(list) {
   return {
-    version: "2.1",
+    version: CurrentListVersion,
     groups: list.map(group => group.toJSON())
   };
 }
@@ -336,9 +350,8 @@ function substitutionListToJSON(list) {
  *  Creates a substitution list from the given JSON.
  */
 function substitutionListFromJSON(json) {
-  // if (json.version ... // possible version check
   let list = [];
-  for (let groupJSON of json.groups) list.push(SubstitutionGroup.fromJSON(groupJSON, json.version));
+  for (let groupJSON of json.groups) list.push(SubstitutionGroup.fromJSON(groupJSON));
   return list;
 }
 
@@ -346,10 +359,12 @@ function substitutionListFromJSON(json) {
  *  Checks if the version of the given JSON is supported or not and returns a status and an optional message to explain it.
  */
 function checkVersion(json) {
-  const currentVersion = '2.1';
   const oldVersions = ['0.14', '0.15'];
 
-  if (json.version == currentVersion) return { status: true };
-  else if (oldVersions.includes(json.version)) return { status: true, message: browser.i18n.getMessage('deprecatedJsonVersion', [json.version, currentVersion]) };
-  else return { status: false, message: browser.i18n.getMessage('unsupportedJsonVersion', [json.version, currentVersion]) };
+  if (json.version == CurrentListVersion)
+    return { status: true };
+  else if (oldVersions.includes(json.version))
+    return { status: true, message: browser.i18n.getMessage('deprecatedJsonVersion', [json.version, CurrentListVersion]) };
+  else
+    return { status: false, message: browser.i18n.getMessage('unsupportedJsonVersion', [json.version, CurrentListVersion]) };
 }
