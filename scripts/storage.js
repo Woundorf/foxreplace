@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2018 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -15,10 +15,6 @@
  *  ***** END LICENSE BLOCK ***** */
 
 var storage = {
-
-  hasData() {
-    return browser.storage.local.get().then(results => "list" in results);
-  },
 
   getList() {
     return browser.storage.local.get("list").then(results => {
