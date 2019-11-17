@@ -26,7 +26,7 @@ var gridOptions = {
     },
     {
       headerName: browser.i18n.getMessage("options.group.name"),
-      field: "nonEmptyName"
+      field: 'name'
     },
     {
       headerName: browser.i18n.getMessage("options.group.url"),
@@ -34,11 +34,11 @@ var gridOptions = {
     },
     {
       headerName: browser.i18n.getMessage("list.inputHeader"),
-      valueGetter: (params) => params.data.substitutions.length > 0 ? params.data.substitutions[0].input : ""
+      field: 'input'
     },
     {
       headerName: browser.i18n.getMessage("list.outputHeader"),
-      valueGetter: (params) => params.data.substitutions.length > 0 ? params.data.substitutions[0].output : ""
+      field: 'output'
     },
     {
       headerName: browser.i18n.getMessage("options.group.mode"),
@@ -86,7 +86,7 @@ function onLoad() {
     if (columnState) gridOptions.columnApi.setColumnState(columnState);
   });
 
-  storage.getList().then(list => {
+  storage.getGroupsPreview().then(list => {
     gridOptions.api.setRowData(list);
   });
 

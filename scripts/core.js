@@ -256,10 +256,8 @@ var SubstitutionGroup = (() => {
      *  Returns a non-empty name for this substitution group. If it has a name it is returned. Otherwise a default name is returned.
      */
     get nonEmptyName() {
-      if (this.name) return this.name;
-      else if (this.urls.length === 0) return browser.i18n.getMessage("generalSubstitutions");
-      else if (this.urls.length === 1) return browser.i18n.getMessage("substitutionsForUrl", this.urls[0]);
-      else return browser.i18n.getMessage("substitutionsForUrls", this.urls[0]);
+      // TODO maybe this instance version not needed anymore
+      return SubstitutionGroup.nonEmptyName(this);
     }
 
     /**
@@ -312,6 +310,16 @@ var SubstitutionGroup = (() => {
 
     return new SubstitutionGroup(json.name, json.urls, substitutions, html, json.enabled, mode);
   };
+
+  /**
+   *  Returns a non-empty name for the given substitution group. If it has a name it is returned. Otherwise a default name is returned.
+   */
+  SubstitutionGroup.nonEmptyName = function(group) {
+    if (group.name) return group.name;
+    else if (group.urls.length === 0) return browser.i18n.getMessage("generalSubstitutions");
+    else if (group.urls.length === 1) return browser.i18n.getMessage("substitutionsForUrl", group.urls[0]);
+    else return browser.i18n.getMessage("substitutionsForUrls", group.urls[0]);
+  }
 
   /**
    *  Constants.

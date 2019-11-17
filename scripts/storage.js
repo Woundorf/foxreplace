@@ -30,23 +30,38 @@ var storage = (() => {
     migrateToIndexedDb() {
       return browser.storage.local.get('list').then(data => {
         if (data.list !== undefined) {
-          //browser.storage.local.remove('list');
           return this.setList(data.list);
         }
       });
     },
 
-    getList() {
-      //return browser.storage.local.get("list").then(results => {
-      //  if (results.list) return substitutionListFromJSON(results.list);
-      //  else return [];
-      //});
-      return db.groups.toArray();
+    /// Returns the whole list as a JSON object.
+    async getList() {
+      // TODO convert to export format
+      // await db.transaction('r', db.groups, db.substitutions, async () => {
+      //   for (let i = 0; i < list.groups.length; i++) {
+      //     let group = list.groups[i];
+      //     let groupId = await db.groups.add({
+      //       name: group.name,
+      //       urls: group.urls,
+      //       html: group.html,
+      //       enabled: Number(group.enabled),
+      //       mode: group.mode,
+      //       index: i
+      //     });
+
+      //     await db.substitutions.bulkAdd(group.substitutions.map((substitution, index) => {
+      //       substitution.groupId = groupId;
+      //       substitution.index = index;
+      //       return substitution;
+      //     }));
+      //   }
+      // });
     },
 
+    /// Sets the given list (JSON object) as the current list in the IndexedDb.
     async setList(list) {
-      //return browser.storage.local.set({ list: substitutionListToJSON(list) });
-      // list is json
+      // TODO version checks and upgrades
       await db.delete();
       await db.open();
       await db.transaction('rw', db.groups, db.substitutions, async () => {
@@ -77,12 +92,15 @@ var storage = (() => {
         let firstSubstitutions = await db.substitutions.where({ index: 0}).sortBy('groupId');
         return groups.map((group, index) => {
           group.enabled = Boolean(group.enabled);
+          group.name = SubstitutionGroup.nonEmptyName(group);
           group.input = firstSubstitutions[index].input;
           group.output = firstSubstitutions[index].output;
           return group;
         }).sort((group1, group2) => group1.index - group2.index);
       });
     },
+
+    // TODO getGroup, setGroup, addGroup, deleteGroup
 
     getPrefs() {
       return browser.storage.local.get({
