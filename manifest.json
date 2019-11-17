@@ -29,7 +29,8 @@
   },
 
   "background": {
-    "scripts": ["lib/xregexp-all.js", "scripts/core.js", "scripts/periodicreplace.js", "scripts/storage.js", "scripts/subscription.js", "scripts/background.js"]
+    "scripts": ["lib/dexie.js", "lib/xregexp-all.js", "scripts/core.js", "scripts/periodicreplace.js", "scripts/storage.js", "scripts/subscription.js",
+                "scripts/background.js"]
   },
 
   "content_scripts": [
