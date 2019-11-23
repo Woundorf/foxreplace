@@ -61,6 +61,7 @@ var storage = (() => {
 
     /// Sets the given list (JSON object) as the current list in the IndexedDb.
     async setList(list) {
+      console.log(list);
       // TODO version checks and upgrades
       await db.delete();
       await db.open();
@@ -69,7 +70,7 @@ var storage = (() => {
           let group = list.groups[i];
           let groupId = await db.groups.add({
             name: group.name,
-            urls: group.urls,
+            urls: group.urls.sort(),
             html: group.html,
             enabled: Number(group.enabled),
             mode: group.mode,
@@ -89,7 +90,7 @@ var storage = (() => {
     getGroupsPreview() {
       return db.transaction('r', db.groups, db.substitutions, async () => {
         let groups = await db.groups.orderBy('id').toArray();
-        let firstSubstitutions = await db.substitutions.where({ index: 0}).sortBy('groupId');
+        let firstSubstitutions = await db.substitutions.where({ index: 0 }).sortBy('groupId');
         return groups.map((group, index) => {
           group.enabled = Boolean(group.enabled);
           group.name = SubstitutionGroup.nonEmptyName(group);
@@ -100,7 +101,66 @@ var storage = (() => {
       });
     },
 
-    // TODO getGroup, setGroup, addGroup, deleteGroup
+    /// Adds the given group (JSON object) as a new group. Returns a promise that fulfills with the group preview.
+    addGroup(group) {
+      return db.transaction('rw', db.groups, db.substitutions, async () => {
+        group.enabled = Number(group.enabled);
+        group.index = await db.groups.count();
+        group.urls.sort();
+        group.id = await db.groups.add(group);
+        await db.substitutions.bulkAdd(group.substitutions.map((substitution, index) => {
+          substitution.groupId = group.id;
+          substitution.index = index;
+          return substitution;
+        }));
+        group.enabled = Boolean(group.enabled);
+        group.name = SubstitutionGroup.nonEmptyName(group);
+        group.input = group.substitutions[0].input;
+        group.output = group.substitutions[0].output;
+        return group;
+      });
+    },
+
+    /// Updates the given group (JSON object) with an existing id. Returns a promise that fulfills with the group preview.
+    updateGroup(group) {
+      return db.transaction('rw', db.groups, db.substitutions, async () => {
+        group.enabled = Number(group.enabled);
+        group.urls.sort();
+        await db.groups.put(group);
+        await db.substitutions.where({ groupId: group.id }).delete();
+        await db.substitutions.bulkAdd(group.substitutions.map((substitution, index) => {
+          substitution.groupId = group.id;
+          substitution.index = index;
+          return substitution;
+        }));
+        group.enabled = Boolean(group.enabled);
+        group.name = SubstitutionGroup.nonEmptyName(group);
+        group.input = group.substitutions[0].input;
+        group.output = group.substitutions[0].output;
+        return group;
+      });
+    },
+
+    /// Returns a promise that fulfills with the group (JSON object) with the given id with all its substitutions.
+    getGroup(id) {
+      return db.transaction('r', db.groups, db.substitutions, async () => {
+        let group = await db.groups.get(id);
+        group.enabled = Boolean(group.enabled);
+        group.substitutions = await db.substitutions.where({ groupId: id }).sortBy('index');
+        return group;
+      });
+    },
+
+    /// Deletes the group with the given id. Returns a promise that fulfills when the transaction is finished.
+    deleteGroup(id) {
+      return db.transaction('rw', db.groups, db.substitutions, async () => {
+        await db.groups.delete(id);
+        await db.substitutions.where({ groupId: id }).delete();
+      });
+    },
+
+    // TODO enable/disable group, move group (update index)
+    // TODO LATER update group without recreating all substitutions (update substitutions)
 
     getPrefs() {
       return browser.storage.local.get({

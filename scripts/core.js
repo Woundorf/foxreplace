@@ -319,7 +319,7 @@ var SubstitutionGroup = (() => {
     else if (group.urls.length === 0) return browser.i18n.getMessage("generalSubstitutions");
     else if (group.urls.length === 1) return browser.i18n.getMessage("substitutionsForUrl", group.urls[0]);
     else return browser.i18n.getMessage("substitutionsForUrls", group.urls[0]);
-  }
+  };
 
   /**
    *  Constants.

@@ -60,7 +60,7 @@ var groupEditor = (() => {
    */
   function validateSubstitution(params) {
     try {
-      new Substitution(params.data.input, params.data.output, params.data.caseSensitive, params.data.inputType);
+      Substitution.fromJSON(params.data);
       if (params.node.error) {
         delete params.node.error;
         params.api.refreshCells({ rowNodes: [params.node], force: true });
@@ -159,7 +159,7 @@ var groupEditor = (() => {
         field: "input",
         cellRenderer(params) {
           let text = params.value === "" ? browser.i18n.getMessage("list.inputHint") : escapeHtml(params.value);
-          if (params.node.error) text += ` <i class="warning sign icon" title="${params.node.error}"></i>`;
+          if (params.node.error) text = `<i class="fas fa-exclamation-triangle" title="${params.node.error}"></i> ${text}`;
           return text;
         }
       },
@@ -389,8 +389,7 @@ var groupEditor = (() => {
     },
 
     clear() {
-      this.setGroup(new SubstitutionGroup());
-      this.isEditing = false;
+      this.setGroupData(new SubstitutionGroup().toJSON());
     },
 
     clearUrls() {
@@ -401,9 +400,14 @@ var groupEditor = (() => {
       substitutionsGridOptions.api.setRowData([{ input: "", inputType: 'text', output: "", caseSensitive: false }]);
     },
 
-    setGroup(group) {
-      this.isEditing = true;
+    async setGroup(groupId) {
+      let group = await storage.getGroup(groupId);
+      this.groupId = groupId;
+      this.groupIndex = group.index;
+      this.setGroupData(group);
+    },
 
+    setGroupData(group) {
       document.getElementById('groupEnabled').checked = group.enabled;
       document.getElementById('groupMode').value = group.mode;
       document.getElementById('groupHtml').value = group.html;
@@ -413,28 +417,41 @@ var groupEditor = (() => {
       urls.push({ url: "" });
       urlsGridOptions.api.setRowData(urls);
 
-      let substitutions = group.substitutions.map(s => s);  // shallow copy
-      substitutions.push({ input: "", inputType: 'text', output: "", caseSensitive: false });
-      substitutionsGridOptions.api.setRowData(substitutions);
+      group.substitutions.push({ input: "", inputType: 'text', output: "", caseSensitive: false });
+      substitutionsGridOptions.api.setRowData(group.substitutions);
     },
 
     getGroup() {
-      let enabled = document.getElementById('groupEnabled').checked;
-      let mode = document.getElementById('groupMode').value;
-      let html = document.getElementById('groupHtml').value;
-      let name = document.getElementById('groupName').value;
+      let group = {
+        name: document.getElementById('groupName').value,
+        enabled: document.getElementById('groupEnabled').checked,
+        html: document.getElementById('groupHtml').value,
+        mode: document.getElementById('groupMode').value,
+        urls: [],
+        substitutions: []
+      };
 
-      let urls = [];
+      if (this.groupId) {
+        group.id = this.groupId;
+        group.index = this.groupIndex;
+      }
+
       urlsGridOptions.api.forEachNode(node => {
-        if (node.data.url) urls.push(node.data.url);
+        if (node.data.url) group.urls.push(node.data.url);
       });
 
-      let substitutions = [];
       substitutionsGridOptions.api.forEachNode(node => {
-        if (node.data.input) substitutions.push(new Substitution(node.data.input, node.data.output, node.data.caseSensitive, node.data.inputType));
+        if (node.data.input) {
+          group.substitutions.push({
+            input: node.data.input,
+            inputType: node.data.inputType,
+            output: node.data.output,
+            caseSensitive: node.data.caseSensitive
+          });
+        }
       });
 
-      return new SubstitutionGroup(name, urls, substitutions, html, enabled, mode);
+      return group;
     },
 
     isValidGroup() {

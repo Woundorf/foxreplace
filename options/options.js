@@ -59,7 +59,7 @@ var gridOptions = {
   //enableFilter: true,
   //onRowSelected: // enable/disable buttons
   onRowDoubleClicked(params) {
-    groupEditor.setGroup(params.node.data);
+    groupEditor.setGroup(params.node.data.id);
     $("#groupEditorModal").modal("show");
   },
   onCellFocused(params) {
@@ -226,7 +226,7 @@ function prepareGroupEditor(event) {
   }
 }
 
-function saveGroup(event) {
+async function saveGroup(event) {
   let button = $(event.currentTarget);
   let action = button.data('action');
 
@@ -235,18 +235,21 @@ function saveGroup(event) {
     return;
   }
 
-  if (!groupEditor.isEditing) {
+  let group = groupEditor.getGroup();
+
+  if (!groupEditor.groupId) {
     // Add new group
-    groupEditor.isEditing = true; // needed in case the apply button is used on a new group
-    let result = gridOptions.api.updateRowData({ add: [groupEditor.getGroup()] });
+    let preview = await storage.addGroup(group);
+    groupEditor.groupId = preview.id;
+    groupEditor.groupIndex = preview.index;
+    let result = gridOptions.api.updateRowData({ add: [preview] });
     result.add[0].setSelected(true);
   }
   else {
     // Update current group
-    gridOptions.api.getSelectedNodes()[0].setData(groupEditor.getGroup());
+    let preview = await storage.updateGroup(group);
+    gridOptions.api.getSelectedNodes()[0].setData(preview);
   }
-
-  saveList();
 
   if (action == 'ok') {
     $('#groupEditorModal').modal('hide');

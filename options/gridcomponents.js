@@ -23,15 +23,15 @@ class ButtonsCellRenderer {
     this.edit = ButtonsCellRenderer.createIconButton("edit mr-4");
     this.edit.setAttribute("style", "font-size: large;");
     this.editListener = () => {
-      groupEditor.setGroup(params.node.data);
+      groupEditor.setGroup(params.node.data.id);
       $("#groupEditorModal").modal("show");
     };
     this.edit.addEventListener("click", this.editListener);
 
     this.del = ButtonsCellRenderer.createIconButton("backspace");
     this.deleteListener = () => {
+      storage.deleteGroup(params.node.data.id);
       params.api.updateRowData({ remove: [params.node.data] });
-      params.api.dispatchEvent(new Event("listChanged"));
     };
     this.del.addEventListener("click", this.deleteListener);
 
