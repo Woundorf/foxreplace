@@ -63,15 +63,15 @@ class ButtonsCellRenderer {
 /**
  *  A cell renderer that shows a checkbox and is also able to edit a boolean field.
  */
-class CheckboxCellRenderer {
+class CheckboxCellRenderer {  // TODO change name because now it's tied to the group enabled field
 
   init(params) {
     this.checkbox = document.createElement("input");
     this.checkbox.setAttribute("type", "checkbox");
     this.checkbox.checked = params.value;
     this.listener = (event) => {
+      storage.setEnabledGroup(params.data.id, event.target.checked);
       params.node.setDataValue(params.column, event.target.checked);
-      params.api.dispatchEvent(new Event("listChanged"));
     };
     this.checkbox.addEventListener("input", this.listener);
   }

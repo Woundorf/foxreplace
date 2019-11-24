@@ -159,7 +159,37 @@ var storage = (() => {
       });
     },
 
-    // TODO enable/disable group, move group (update index)
+    setEnabledGroup(id, enabled) {
+      return db.groups.update(id, { enabled });
+    },
+
+    moveGroup(id, from, to) {
+      return db.transaction('rw', db.groups, async () => {
+        if (from == to) return;
+
+        let lower, upper, direction;
+        if (from < to) {
+          lower = from;
+          upper = to;
+          direction = 1;
+        }
+        else {
+          lower = to;
+          upper = from;
+          direction = -1;
+        }
+
+        await db.groups.where('index').between(lower, upper, true, true).modify(group => {
+          if (group.id == id) {
+            group.index += direction;
+          }
+          else {
+            group.index -= direction;
+          }
+        });
+      });
+    },
+
     // TODO LATER update group without recreating all substitutions (update substitutions)
 
     getPrefs() {

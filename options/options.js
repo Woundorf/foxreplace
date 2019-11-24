@@ -80,8 +80,6 @@ function onLoad() {
   let substitutionListGrid = document.getElementById("listGrid");
   new agGrid.Grid(substitutionListGrid, gridOptions);
 
-  gridOptions.api.addEventListener("listChanged", saveList);
-
   storage.getMainColumnState().then(columnState => {
     if (columnState) gridOptions.columnApi.setColumnState(columnState);
   });
@@ -122,30 +120,42 @@ function onUnload() {
 }
 
 var eventListeners = {
-  moveUpGroup() {
+  async moveUpGroup() {
     let api = gridOptions.api;
     let selectedNode = api.getSelectedNodes()[0];
 
     if (selectedNode) {
       let data = selectedNode.data;
-      let newIndex = Math.max(selectedNode.rowIndex - 1, 0);
-      api.updateRowData({ remove: [data] });
-      api.updateRowData({ add: [data], addIndex: newIndex});
-      api.setFocusedCell(newIndex);
-      saveList();
+      let currentIndex = selectedNode.rowIndex;
+      
+      if (currentIndex > 0) {
+        let newIndex = currentIndex - 1;
+        await storage.moveGroup(data.id, currentIndex, newIndex);
+        // TODO fetch from storage to have index property in all rows updated
+        api.updateRowData({ remove: [data] });
+        api.updateRowData({ add: [data], addIndex: newIndex});
+        api.setFocusedCell(newIndex);
+        api.ensureIndexVisible(newIndex); // TODO this puts the row always at the top
+      }
     }
   },
-  moveDownGroup() {
+  async moveDownGroup() {
     let api = gridOptions.api;
     let selectedNode = api.getSelectedNodes()[0];
 
     if (selectedNode) {
       let data = selectedNode.data;
-      let newIndex = Math.min(selectedNode.rowIndex + 1, selectedNode.rowModel.getRowCount() - 1);
-      api.updateRowData({ remove: [data] });
-      api.updateRowData({ add: [data], addIndex: newIndex});
-      api.setFocusedCell(newIndex);
-      saveList();
+      let currentIndex = selectedNode.rowIndex;
+      
+      if (currentIndex < selectedNode.rowModel.getRowCount() - 1) {
+        let newIndex = currentIndex + 1;
+        await storage.moveGroup(data.id, currentIndex, newIndex);
+        // TODO fetch from storage to have index property in all rows updated
+        api.updateRowData({ remove: [data] });
+        api.updateRowData({ add: [data], addIndex: newIndex});
+        api.setFocusedCell(newIndex);
+        api.ensureIndexVisible(newIndex);
+      }
     }
   },
   subscriptionUrlChanged() {
