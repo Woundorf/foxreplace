@@ -20,7 +20,7 @@ var storage = (() => {
 
   let db = new Dexie(DATABASE_NAME);
   db.version(1).stores({
-    groups: '++id, enabled, mode, index',
+    groups: '++id, enabled, mode, [enabled+mode], index',
     substitutions: '++id, groupId, index'
   });
 
@@ -234,7 +234,12 @@ var storage = (() => {
     },
 
     getAutomaticGroups() {
-      return this.getList().then(list => list.filter(group => group.enabled && (group.mode == group.MODE_AUTO_AND_MANUAL || group.mode == group.MODE_AUTO)));
+      return db.transaction('r', db.groups, db.substitutions, async () => {
+        let automaticGroups = db.groups.where(['enabled', 'mode']).anyOf([[1, 'auto&manual'], [1, 'auto']]).toArray();  // TODO not sure if this part works
+        // TODO fetch substitutions and construct objects
+        return automaticGroups;
+      });
+      //return this.getList().then(list => list.filter(group => group.enabled && (group.mode == group.MODE_AUTO_AND_MANUAL || group.mode == group.MODE_AUTO)));
     },
 
     getManualGroups() {
