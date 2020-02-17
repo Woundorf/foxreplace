@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2020 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -233,11 +233,20 @@ var storage = (() => {
       return browser.storage.local.set(sanitizedPrefs);
     },
 
+    // TODO too slow. what is really needed is get automatic groups for given url, thus less substitutions to fetch
+    //      also maybe all relevant substitutions can be fetched at once, sorted by (groupId,index) and then appended to each respective group
     getAutomaticGroups() {
       return db.transaction('r', db.groups, db.substitutions, async () => {
-        let automaticGroups = db.groups.where(['enabled', 'mode']).anyOf([[1, 'auto&manual'], [1, 'auto']]).toArray();  // TODO not sure if this part works
-        // TODO fetch substitutions and construct objects
-        return automaticGroups;
+        let groups = await db.groups.where(['enabled', 'mode']).anyOf([[1, 'auto&manual'], [1, 'auto']]).sortBy('index');
+
+        for (let i = 0; i < groups.length; i++) {
+          let group = groups[i];
+          group.substitutions = await db.substitutions.where({ groupId: group.id }).sortBy('index');
+          groups[i] = SubstitutionGroup.fromJSON(group, '2.1'); // TODO current version should be stored in some central place (core.js?)
+        }
+
+        return groups;
+        //return SubstitutionGroup.fromJSON(groups, '2.1');
       });
       //return this.getList().then(list => list.filter(group => group.enabled && (group.mode == group.MODE_AUTO_AND_MANUAL || group.mode == group.MODE_AUTO)));
     },
