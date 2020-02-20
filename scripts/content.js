@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2017 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2020 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -17,7 +17,8 @@
 // The content has just loaded. Apply the substitution list if auto-replace on load is on.
 storage.getPrefs().then(prefs => {
   if (prefs.autoReplaceOnLoad) {
-    storage.getAutomaticGroups().then(list => {
+    let url = window.document.URL;
+    storage.getAutomaticGroups(url).then(list => {
       replaceWindow(window, list, prefs);
     });
   }

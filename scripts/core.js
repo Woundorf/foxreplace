@@ -298,8 +298,10 @@ var SubstitutionGroup = (() => {
    *  Creates a substitution group from the given JSON and version.
    */
   SubstitutionGroup.fromJSON = function(json, version) {
-    let substitutions = [];
-    for (let substitutionJSON of json.substitutions) substitutions.push(Substitution.fromJSON(substitutionJSON));
+    let substitutions;
+    if (json.substitutions) {
+      substitutions = json.substitutions.map(s => Substitution.fromJSON(s));
+    }
 
     let html;
     if (version == "0.14") html = json.html ? this.prototype.HTML_INPUT_OUTPUT : this.prototype.HTML_NONE;

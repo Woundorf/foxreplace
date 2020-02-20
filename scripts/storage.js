@@ -233,16 +233,23 @@ var storage = (() => {
       return browser.storage.local.set(sanitizedPrefs);
     },
 
-    // TODO too slow. what is really needed is get automatic groups for given url, thus less substitutions to fetch
-    //      also maybe all relevant substitutions can be fetched at once, sorted by (groupId,index) and then appended to each respective group
-    getAutomaticGroups() {
+    // TODO improve indentation
+    // TODO maybe all relevant substitutions can be fetched at once, sorted by (groupId,index) and then appended to each respective group
+    getAutomaticGroups(url) {
       return db.transaction('r', db.groups, db.substitutions, async () => {
-        let groups = await db.groups.where(['enabled', 'mode']).anyOf([[1, 'auto&manual'], [1, 'auto']]).sortBy('index');
+        let groups = await db.groups.where(['enabled', 'mode']).anyOf([[1, 'auto&manual'], [1, 'auto']])
+                                    .sortBy('index')
+                                    .then(result => result.map(dbGroup => {
+                                                      let group = SubstitutionGroup.fromJSON(dbGroup, '2.1'); // TODO current version should be stored in some central place (core.js?)
+                                                        group.id = dbGroup.id;
+                                                        return group;
+                                                      }).filter(g => g.matches(url))); // only groups matching given url
 
         for (let i = 0; i < groups.length; i++) {
           let group = groups[i];
-          group.substitutions = await db.substitutions.where({ groupId: group.id }).sortBy('index');
-          groups[i] = SubstitutionGroup.fromJSON(group, '2.1'); // TODO current version should be stored in some central place (core.js?)
+          group.substitutions = await db.substitutions.where({ groupId: group.id })
+                                                      .sortBy('index')
+                                                      .then(result => result.map(dbSubstitution => Substitution.fromJSON(dbSubstitution)));
         }
 
         return groups;

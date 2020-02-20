@@ -36,7 +36,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["lib/xregexp-all.js", "scripts/core.js", "scripts/replace.js", "scripts/storage.js", "scripts/content.js"],
+      "js": ["lib/dexie.js", "lib/xregexp-all.js", "scripts/core.js", "scripts/replace.js", "scripts/storage.js", "scripts/content.js"],
       "all_frames": true,
       "run_at": "document_end"
     }
