@@ -14,6 +14,9 @@
  *
  *  ***** END LICENSE BLOCK ***** */
 
+/// Current version of the list JSON format.
+const CurrentJsonVersion = '2.1';
+
 /**
  *  Represents a single substitution with an input, an output and some additional parameters.
  */
@@ -357,7 +360,7 @@ function isExclusionUrl(url) {
  */
 function substitutionListToJSON(list) {
   return {
-    version: "2.1",
+    version: CurrentJsonVersion,
     groups: list.map(group => group.toJSON())
   };
 }
@@ -376,10 +379,12 @@ function substitutionListFromJSON(json) {
  *  Checks if the version of the given JSON is supported or not and returns a status and an optional message to explain it.
  */
 function checkVersion(json) {
-  const currentVersion = '2.1';
   const oldVersions = ['0.14', '0.15'];
 
-  if (json.version == currentVersion) return { status: true };
-  else if (oldVersions.includes(json.version)) return { status: true, message: browser.i18n.getMessage('deprecatedJsonVersion', [json.version, currentVersion]) };
-  else return { status: false, message: browser.i18n.getMessage('unsupportedJsonVersion', [json.version, currentVersion]) };
+  if (json.version == CurrentJsonVersion)
+    return { status: true };
+  else if (oldVersions.includes(json.version))
+    return { status: true, message: browser.i18n.getMessage('deprecatedJsonVersion', [json.version, CurrentJsonVersion]) };
+  else
+    return { status: false, message: browser.i18n.getMessage('unsupportedJsonVersion', [json.version, CurrentJsonVersion]) };
 }

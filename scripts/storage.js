@@ -24,6 +24,9 @@ var storage = (() => {
     substitutions: '++id, groupId, index'
   });
 
+  // TODO https://dexie.org/docs/Table/Table.mapToClass()
+  // modify core.js so that this can be used (init method, or whatever)
+
   let storage = {
 
     /// Migrates the local storage list to indexed db if necessary.
@@ -240,7 +243,7 @@ var storage = (() => {
         let groups = await db.groups.where(['enabled', 'mode']).anyOf([[1, 'auto&manual'], [1, 'auto']])
                                     .sortBy('index')
                                     .then(result => result.map(dbGroup => {
-                                                      let group = SubstitutionGroup.fromJSON(dbGroup, '2.1'); // TODO current version should be stored in some central place (core.js?)
+                                                      let group = SubstitutionGroup.fromJSON(dbGroup, CurrentJsonVersion);
                                                         group.id = dbGroup.id;
                                                         return group;
                                                       }).filter(g => g.matches(url))); // only groups matching given url
