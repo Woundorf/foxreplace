@@ -58,11 +58,11 @@
     "message": "Text"
   },
 
-  "inputType.wholeWords": {
+  "inputType.wholewords": {
     "message": "Whole words"
   },
 
-  "inputType.regExp": {
+  "inputType.regexp": {
     "message": "Regular expression"
   },
 
@@ -210,7 +210,7 @@
     "message": "Mode"
   },
 
-  "options.group.mode.autoAndManual": {
+  "options.group.mode.auto&manual": {
     "message": "Auto & manual"
   },
 
@@ -238,7 +238,7 @@
     "message": "Output only"
   },
 
-  "html.inputOutput": {
+  "html.inputoutput": {
     "message": "Input & output"
   },
 

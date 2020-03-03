@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2020 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -130,15 +130,15 @@ class DeleteButtonCellRenderer {
  */
 class InputTypeEditor {
 
-  static getOption(params, value, text) {
-    return '<option value="' + value + '"' + (value == params.value ? ' selected' : '') + '>' + text + '</option>';
+  static getOption(params, value) {
+    return '<option value="' + value + '"' + (value == params.value ? ' selected' : '') + '>' + browser.i18n.getMessage(`inputType.${value}`) + '</option>';
   }
 
   init(params) {
     this.gui = $('<select>' +
-                  InputTypeEditor.getOption(params, 0, browser.i18n.getMessage("inputType.text")) +
-                  InputTypeEditor.getOption(params, 1, browser.i18n.getMessage("inputType.wholeWords")) +
-                  InputTypeEditor.getOption(params, 2, browser.i18n.getMessage("inputType.regExp")) +
+                  InputTypeEditor.getOption(params, 'text') +
+                  InputTypeEditor.getOption(params, 'wholewords') +
+                  InputTypeEditor.getOption(params, 'regexp') +
                  '</select>')[0];
     this.width = params.column.actualWidth;
     this.api = params.api;
