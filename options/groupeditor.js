@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2020 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -166,14 +166,7 @@ var groupEditor = (() => {
       {
         headerName: browser.i18n.getMessage("list.inputTypeHeader"),
         field: "inputType",
-        cellRenderer(params) {  // TODO improve (less hardcoding)
-          switch (Number(params.value)) {
-            case 0: return browser.i18n.getMessage("inputType.text");
-            case 1: return browser.i18n.getMessage("inputType.wholeWords");
-            case 2: return browser.i18n.getMessage("inputType.regExp");
-            default: return params.value;
-          }
-        },
+        cellRenderer: params => browser.i18n.getMessage(`inputType.${params.value}`),
         cellEditor: InputTypeEditor
       },
       {
@@ -209,7 +202,7 @@ var groupEditor = (() => {
         params.api.updateRowData({ remove: [params.data] });
       }
       else if (isLast && !isEmpty) {
-        params.api.updateRowData({ add: [{ input: "", inputType: 0, output: "", caseSensitive: false }] });
+        params.api.updateRowData({ add: [{ input: "", inputType: 'text', output: "", caseSensitive: false }] });
       }
 
       if (!isEmpty) validateSubstitution(params);
@@ -405,15 +398,15 @@ var groupEditor = (() => {
     },
 
     clearSubstitutions() {
-      substitutionsGridOptions.api.setRowData([{ input: "", inputType: 0, output: "", caseSensitive: false }]);
+      substitutionsGridOptions.api.setRowData([{ input: "", inputType: 'text', output: "", caseSensitive: false }]);
     },
 
     setGroup(group) {
       this.isEditing = true;
 
       document.getElementById('groupEnabled').checked = group.enabled;
-      document.getElementById('groupMode').selectedIndex = group.mode;
-      document.getElementById('groupHtml').selectedIndex = group.html;
+      document.getElementById('groupMode').value = group.mode;
+      document.getElementById('groupHtml').value = group.html;
       document.getElementById('groupName').value = group.name;
 
       let urls = group.urls.map(u => ({ url: u}));
@@ -421,14 +414,14 @@ var groupEditor = (() => {
       urlsGridOptions.api.setRowData(urls);
 
       let substitutions = group.substitutions.map(s => s);  // shallow copy
-      substitutions.push({ input: "", inputType: 0, output: "", caseSensitive: false });
+      substitutions.push({ input: "", inputType: 'text', output: "", caseSensitive: false });
       substitutionsGridOptions.api.setRowData(substitutions);
     },
 
     getGroup() {
       let enabled = document.getElementById('groupEnabled').checked;
-      let mode = document.getElementById('groupMode').selectedIndex;
-      let html = document.getElementById('groupHtml').selectedIndex;
+      let mode = document.getElementById('groupMode').value;
+      let html = document.getElementById('groupHtml').value;
       let name = document.getElementById('groupName').value;
 
       let urls = [];

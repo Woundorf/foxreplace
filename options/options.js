@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2020 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -43,14 +43,7 @@ var gridOptions = {
     {
       headerName: browser.i18n.getMessage("options.group.mode"),
       field: "mode",
-      cellRenderer(params) {  // TODO improve (less hardcoding)
-        switch (Number(params.value)) {
-          case 0: return browser.i18n.getMessage("options.group.mode.autoAndManual");
-          case 1: return browser.i18n.getMessage("options.group.mode.auto");
-          case 2: return browser.i18n.getMessage("options.group.mode.manual");
-          default: return params.value;
-        }
-      }
+      cellRenderer: params => browser.i18n.getMessage(`options.group.mode.${params.value}`)
     },
     {
       headerName: "",

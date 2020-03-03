@@ -25,8 +25,9 @@ var Substitution = (() => {
       this.input = input;
       this.output = output;
       this.caseSensitive = Boolean(caseSensitive);
-      this.inputType = +inputType;  // coalesce to number
-      if (this.inputType < this.INPUT_TEXT || this.inputType > this.INPUT_REG_EXP) this.inputType = this.INPUT_TEXT;  // avoid invalid values
+      this.inputType = inputType;
+      if (this.inputType != this.INPUT_TEXT && this.inputType != this.INPUT_WHOLE_WORDS && this.inputType != this.INPUT_REG_EXP)
+        this.inputType = this.INPUT_TEXT; // avoid invalid values
 
       switch (this.inputType) {
         case this.INPUT_TEXT:
@@ -101,7 +102,7 @@ var Substitution = (() => {
     toJSON() {
       return {
         input: this.input,
-        inputType: this.INPUT_TYPE_STRINGS[this.inputType],
+        inputType: this.inputType,
         output: this.output,
         caseSensitive: this.caseSensitive
       };
@@ -113,18 +114,16 @@ var Substitution = (() => {
    *  Creates a substitution from the given JSON.
    */
   Substitution.fromJSON = function(json) {
-    let inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(json.inputType);
-    return new Substitution(json.input, json.output, json.caseSensitive, inputType);
+    return new Substitution(json.input, json.output, json.caseSensitive, json.inputType);
   };
 
   /**
    *  Constants.
    */
   Object.defineProperties(Substitution.prototype, {
-    INPUT_TEXT: { value: 0 },
-    INPUT_WHOLE_WORDS: { value: 1 },
-    INPUT_REG_EXP: { value: 2 },
-    INPUT_TYPE_STRINGS: { value: ["text", "wholewords", "regexp"] }
+    INPUT_TEXT: { value: 'text' },
+    INPUT_WHOLE_WORDS: { value: 'wholewords' },
+    INPUT_REG_EXP: { value: 'regexp' }
   });
 
   // Unescapes backslash-escaped special characters in the given string.
@@ -196,10 +195,12 @@ var SubstitutionGroup = (() => {
       this.urls = urls;
       this.substitutions = substitutions;
       this.html = html;
-      if (this.html < this.HTML_NONE || this.html > this.HTML_INPUT_OUTPUT) this.html = this.HTML_NONE; // avoid invalid values
+      if (this.html != this.HTML_NONE && this.html != this.HTML_OUTPUT && this.html != this.HTML_INPUT_OUTPUT)
+        this.html = this.HTML_NONE; // avoid invalid values
       this.enabled = Boolean(enabled);
       this.mode = mode;
-      if (this.mode < this.MODE_AUTO_AND_MANUAL || this.mode > this.MODE_MANUAL) this.mode = this.MODE_AUTO_AND_MANUAL; // avoid invalid values
+      if (this.mode != this.MODE_AUTO_AND_MANUAL && this.mode != this.MODE_AUTO && this.mode != this.MODE_MANUAL)
+        this.mode = this.MODE_AUTO_AND_MANUAL;  // avoid invalid values
 
       this.urls.sort();
       this.urlRegExps = [];
@@ -266,9 +267,9 @@ var SubstitutionGroup = (() => {
         name: this.name,
         urls: this.urls,
         substitutions: this.substitutions.map(substitution => substitution.toJSON()),
-        html: this.HTML_STRINGS[this.html],
+        html: this.html,
         enabled: this.enabled,
-        mode: this.MODE_STRINGS[this.mode]
+        mode: this.mode
       };
     }
 
@@ -283,10 +284,10 @@ var SubstitutionGroup = (() => {
 
     let html;
     if (version == "0.14") html = json.html ? this.prototype.HTML_INPUT_OUTPUT : this.prototype.HTML_NONE;
-    else html = this.prototype.HTML_STRINGS.indexOf(json.html);
+    else html = json.html;
 
     // check if mode exists to support versions older than 2.1 (i.e. 0.14 and 0.15)
-    let mode = json.mode ? this.prototype.MODE_STRINGS.indexOf(json.mode) : this.prototype.MODE_AUTO_AND_MANUAL;
+    let mode = json.mode ? json.mode : this.prototype.MODE_AUTO_AND_MANUAL;
 
     return new SubstitutionGroup(json.name, json.urls, substitutions, html, json.enabled, mode);
   };
@@ -295,14 +296,12 @@ var SubstitutionGroup = (() => {
    *  Constants.
    */
   Object.defineProperties(SubstitutionGroup.prototype, {
-    HTML_NONE: { value: 0 },
-    HTML_OUTPUT: { value: 1 },
-    HTML_INPUT_OUTPUT: { value: 2 },
-    HTML_STRINGS: { value: ["none", "output", "inputoutput"] },
-    MODE_AUTO_AND_MANUAL: { value: 0 },
-    MODE_AUTO: { value: 1 },
-    MODE_MANUAL: { value: 2 },
-    MODE_STRINGS: { value: ["auto&manual", "auto", "manual"] }
+    HTML_NONE: { value: 'none' },
+    HTML_OUTPUT: { value: 'output' },
+    HTML_INPUT_OUTPUT: { value: 'inputoutput' },
+    MODE_AUTO_AND_MANUAL: { value: 'auto&manual' },
+    MODE_AUTO: { value: 'auto' },
+    MODE_MANUAL: { value: 'manual' }
   });
 
   // Returns the given url removing the exclusion part.
