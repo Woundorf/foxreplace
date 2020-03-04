@@ -24,8 +24,19 @@ var Substitution = (() => {
     constructor(input, output, caseSensitive = false, inputType = this.INPUT_TEXT) {
       this.input = input;
       this.output = output;
-      this.caseSensitive = Boolean(caseSensitive);
+      this.caseSensitive = caseSensitive;
       this.inputType = inputType;
+
+      this.init();
+    }
+
+    /**
+     *  Initializes this object after assigning basic properties.
+     */
+    init() {
+      this.input = String(this.input);
+      this.output = String(this.output);
+      this.caseSensitive = Boolean(this.caseSensitive);
       if (this.inputType != this.INPUT_TEXT && this.inputType != this.INPUT_WHOLE_WORDS && this.inputType != this.INPUT_REG_EXP)
         this.inputType = this.INPUT_TEXT; // avoid invalid values
 
@@ -191,14 +202,24 @@ var SubstitutionGroup = (() => {
   class SubstitutionGroup {
 
     constructor(name = "", urls = [], substitutions = [], html = this.HTML_NONE, enabled = true, mode = this.MODE_AUTO_AND_MANUAL) {
-      this.name = String(name);
+      this.name = name;
       this.urls = urls;
       this.substitutions = substitutions;
       this.html = html;
+      this.enabled = enabled;
+      this.mode = mode;
+
+      this.init();
+    }
+
+    /**
+     *  Initializes this object after assigning basic properties.
+     */
+    init() {
+      this.name = String(name);
+      this.enabled = Boolean(this.enabled);
       if (this.html != this.HTML_NONE && this.html != this.HTML_OUTPUT && this.html != this.HTML_INPUT_OUTPUT)
         this.html = this.HTML_NONE; // avoid invalid values
-      this.enabled = Boolean(enabled);
-      this.mode = mode;
       if (this.mode != this.MODE_AUTO_AND_MANUAL && this.mode != this.MODE_AUTO && this.mode != this.MODE_MANUAL)
         this.mode = this.MODE_AUTO_AND_MANUAL;  // avoid invalid values
 
