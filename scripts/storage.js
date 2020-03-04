@@ -23,9 +23,8 @@ var storage = (() => {
     groups: '++id, enabled, mode, [enabled+mode], index',
     substitutions: '++id, groupId, index'
   });
-
-  // TODO https://dexie.org/docs/Table/Table.mapToClass()
-  // modify core.js so that this can be used (init method, or whatever)
+  db.groups.mapToClass(SubstitutionGroup);
+  db.substitutions.mapToClass(Substitution);
 
   let storage = {
 
@@ -236,29 +235,37 @@ var storage = (() => {
       return browser.storage.local.set(sanitizedPrefs);
     },
 
-    // TODO improve indentation
     // TODO maybe all relevant substitutions can be fetched at once, sorted by (groupId,index) and then appended to each respective group
     getAutomaticGroups(url) {
       return db.transaction('r', db.groups, db.substitutions, async () => {
+        let t0 = performance.now();
+
         let groups = await db.groups.where(['enabled', 'mode']).anyOf([[1, 'auto&manual'], [1, 'auto']])
-                                    .sortBy('index')
-                                    .then(result => result.map(dbGroup => {
-                                                      let group = SubstitutionGroup.fromJSON(dbGroup, CurrentJsonVersion);
-                                                        group.id = dbGroup.id;
-                                                        return group;
-                                                      }).filter(g => g.matches(url))); // only groups matching given url
+                                    .sortBy('index');
+        groups = groups.filter(g => {
+          g.init(); // call init() inside the filter() to avoid a forEach() followed by a filter()
+          return g.matches(url);
+        }); // keep only groups matching given url
+
+        let t1 = performance.now();
+        console.log(`Time to fetch groups: ${t1 - t0} ms`);
 
         for (let i = 0; i < groups.length; i++) {
+          let t10 = performance.now();
           let group = groups[i];
           group.substitutions = await db.substitutions.where({ groupId: group.id })
-                                                      .sortBy('index')
-                                                      .then(result => result.map(dbSubstitution => Substitution.fromJSON(dbSubstitution)));
+                                                      .sortBy('index');
+          let t11 = performance.now();
+          group.substitutions.forEach(s => { s.init(); });
+          let t12 = performance.now();
+          console.log(`${t11 - t10} ms, ${t12 - t11} ms`);
         }
 
+        let t2 = performance.now();
+        console.log(`Time to fetch substitutions: ${t2 - t1} ms`);
+
         return groups;
-        //return SubstitutionGroup.fromJSON(groups, '2.1');
       });
-      //return this.getList().then(list => list.filter(group => group.enabled && (group.mode == group.MODE_AUTO_AND_MANUAL || group.mode == group.MODE_AUTO)));
     },
 
     getManualGroups() {

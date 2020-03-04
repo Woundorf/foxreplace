@@ -48,6 +48,8 @@ var Substitution = (() => {
           {
             let unescapedInput = unescape(this.input);
             this.regExp = new RegExp(stringToUnicode(unescapedInput), this.caseSensitive ? "g" : "gi");
+            // TODO why convert everything to unicode escape? only some characters should be escaped
+            //      can unescape be optimized?
           }
           break;
         case this.INPUT_WHOLE_WORDS:
