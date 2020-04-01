@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2020 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -32,7 +32,7 @@ var Substitution = (() => {
         case this.INPUT_TEXT:
           {
             let unescapedInput = unescape(this.input);
-            this.regExp = new XRegExp(stringToUnicode(unescapedInput), this.caseSensitive ? "g" : "gi");
+            this.regExp = new RegExp(stringToUnicode(unescapedInput), this.caseSensitive ? "g" : "gi");
           }
           break;
         case this.INPUT_WHOLE_WORDS:
