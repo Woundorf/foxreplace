@@ -1,3 +1,4 @@
+v2.3.2 (2020-04-01)
 * Performance improvement with large substitution lists (#126).
 
 v2.3.1 (2019-08-07)
