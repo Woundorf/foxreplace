@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2020 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -110,36 +110,7 @@ function replaceText(aDocument, aGroups, aPrefs) {
   var nValueNodes = valueNodes.snapshotLength;
   for (var i = 0; i < nValueNodes; i++) {
     var valueNode = valueNodes.snapshotItem(i);
-
-    // Special treatment for textareas that still have their default value (issue 63)
-    if (valueNode.type == "textarea" && valueNode.value == valueNode.defaultValue) continue;
-
-    let oldValue = valueNode.value;
-    let newValue = oldValue;
-
-    for (let group of aGroups) {
-      newValue = group.replace(newValue);
-    }
-
-    if (oldValue != newValue) {
-      let selectionStart, selectionEnd, selectionDirection;
-
-      if (valueNode.localName == "input" || valueNode.localName == "textarea") {
-        selectionStart = valueNode.selectionStart;
-        selectionEnd = valueNode.selectionEnd;
-        selectionDirection = valueNode.selectionDirection;
-      }
-
-      valueNode.value = newValue;
-
-      // Restore cursor position or selection (#15) and fire change event (#49) for inputs and textareas
-      if (valueNode.localName == "input" || valueNode.localName == "textarea") {
-        valueNode.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
-        let event = aDocument.createEvent("HTMLEvents");
-        event.initEvent("change", true, false);
-        valueNode.dispatchEvent(event);
-      }
-    }
+    replaceValueNode(valueNode, aGroups);
   }
 
   // Replace scripts
@@ -242,6 +213,43 @@ function replaceHtml(aDocument, aGroups, aPrefs) {
         // scriptNode.text is already the replaced code, but scriptNode still executes the old code, so a new script node has to be created for the change to
         // really work
       }
+    }
+  }
+}
+
+/**
+ * Replaces the value in the given node with the given groups. If the resulting value is the same the node is not modified.
+ * @param {Node} node The node whose value has to be replaced.
+ * @param {SubstitutionGroup[]} groups List of substitution groups to apply.
+ */
+function replaceValueNode(node, groups) {
+  // Special treatment for textareas that still have their default value (#63) (they are replaced as text nodes)
+  if (node.type == 'textarea' && node.value == node.defaultValue) return;
+
+  let oldValue = node.value;
+  let newValue = oldValue;
+
+  for (let group of groups) {
+    newValue = group.replace(newValue);
+  }
+
+  if (oldValue != newValue) {
+    let selectionStart, selectionEnd, selectionDirection;
+
+    // Save selection to restore it after change
+    if (node.localName == 'input' || node.localName == 'textarea') {
+      selectionStart = node.selectionStart;
+      selectionEnd = node.selectionEnd;
+      selectionDirection = node.selectionDirection;
+    }
+
+    node.value = newValue;
+
+    // Restore cursor position or selection (#15) and fire change event (#49) for inputs and textareas
+    if (node.localName == 'input' || node.localName == 'textarea') {
+      node.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
+      let event = new Event('change', { bubbles: true, cancelable: false });
+      node.dispatchEvent(event);
     }
   }
 }
