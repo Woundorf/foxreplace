@@ -68,23 +68,7 @@ function replaceText(aDocument, aGroups, aPrefs) {
   var nTextNodes = textNodes.snapshotLength;
   for (var i = 0; i < nTextNodes; i++) {
     var textNode = textNodes.snapshotItem(i);
-    let oldTextContent = textNode.textContent;
-    let newTextContent = oldTextContent;
-
-    for (let group of aGroups) {
-      newTextContent = group.replace(newTextContent);
-    }
-
-    if (oldTextContent != newTextContent) {
-      textNode.textContent = newTextContent;
-
-      // Fire change event for textareas with default value (issue 49)
-      if (textNode.parentNode.localName == "textarea" && textNode.parentNode.value == textNode.parentNode.defaultValue) {
-        let event = aDocument.createEvent("HTMLEvents");
-        event.initEvent("change", true, false);
-        textNode.parentNode.dispatchEvent(event);
-      }
-    }
+    replaceTextNode(textNode, aGroups);
   }
 
   // Replace nodes with a "value" property
@@ -213,6 +197,41 @@ function replaceHtml(aDocument, aGroups, aPrefs) {
         // scriptNode.text is already the replaced code, but scriptNode still executes the old code, so a new script node has to be created for the change to
         // really work
       }
+    }
+  }
+}
+
+/**
+ * Replaces the text content in the given node with the given groups. If the resulting text is the same the node is not modified.
+ * @param {Node} node The node whose text content has to be replaced.
+ * @param {SubstitutionGroup[]} groups LIst of substitution groups to apply.
+ */
+function replaceTextNode(node, groups) {
+  let oldTextContent = node.textContent;
+  let newTextContent = oldTextContent;
+
+  for (let group of groups) {
+    newTextContent = group.replace(newTextContent);
+  }
+
+  if (oldTextContent != newTextContent) {
+    let parent = node.parentNode;
+    let selectionStart, selectionEnd, selectionDirection;
+
+    // Save selection to restore it after change
+    if (parent.localName == 'textarea' && parent.value == parent.defaultValue) {
+      selectionStart = parent.selectionStart;
+      selectionEnd = parent.selectionEnd;
+      selectionDirection = parent.selectionDirection;
+    }
+
+    node.textContent = newTextContent;
+
+    // Restore cursor position or selection (#15) and fire change event (#49) for textareas with default value
+    if (parent.localName == 'textarea' && parent.value == parent.defaultValue) {
+      parent.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
+      let event = new Event('change', { bubbles: true, cancelable: false });
+      parent.dispatchEvent(event);
     }
   }
 }
