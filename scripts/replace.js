@@ -128,30 +128,7 @@ function replaceTextWithHtml(aDocument, aGroups, aPrefs) {
 
     for (let i = 0; i < nTextNodes; i++) {
       let textNode = textNodes.snapshotItem(i);
-      let originalText = textNode.textContent;
-      let replacedText = group.replace(originalText);
-
-      if (originalText != replacedText) {
-        let parser = new DOMParser();
-        let doc = parser.parseFromString(replacedText, "text/html");
-        let fragment = aDocument.createDocumentFragment();
-        let child = doc.body.firstChild;
-
-        while (child) {
-          fragment.appendChild(child);
-          child = doc.body.firstChild;
-        }
-
-        let parent = textNode.parentNode;
-        parent.replaceChild(fragment, textNode);
-
-        // Fire change event for textareas with default value (issue 49)
-        if (parent.localName == "textarea" && parent.value == parent.defaultValue) {
-          let event = aDocument.createEvent("HTMLEvents");
-          event.initEvent("change", true, false);
-          parent.dispatchEvent(event);
-        }
-      }
+      replaceTextNode(textNode, [group], true);
     }
 
     // Replace scripts
@@ -204,9 +181,10 @@ function replaceHtml(aDocument, aGroups, aPrefs) {
 /**
  * Replaces the text content in the given node with the given groups. If the resulting text is the same the node is not modified.
  * @param {Node} node The node whose text content has to be replaced.
- * @param {SubstitutionGroup[]} groups LIst of substitution groups to apply.
+ * @param {SubstitutionGroup[]} groups List of substitution groups to apply.
+ * @param {boolean} [replaceWithHtml=false] If false, the text is replaced with text; if true it is replaced with HTML.
  */
-function replaceTextNode(node, groups) {
+function replaceTextNode(node, groups, replaceWithHtml = false) {
   let oldTextContent = node.textContent;
   let newTextContent = oldTextContent;
 
@@ -225,7 +203,22 @@ function replaceTextNode(node, groups) {
       selectionDirection = parent.selectionDirection;
     }
 
-    node.textContent = newTextContent;
+    if (replaceWithHtml) {
+      let parser = new DOMParser();
+      let parsedDocument = parser.parseFromString(newTextContent, 'text/html');
+      let fragment = node.ownerDocument.createDocumentFragment();
+      let child = parsedDocument.body.firstChild;
+
+      while (child) {
+        fragment.appendChild(child);
+        child = parsedDocument.body.firstChild;
+      }
+
+      parent.replaceChild(fragment, node);
+    }
+    else {
+      node.textContent = newTextContent;
+    }
 
     // Restore cursor position or selection (#15) and fire change event (#49) for textareas with default value
     if (parent.localName == 'textarea' && parent.value == parent.defaultValue) {
