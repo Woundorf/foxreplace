@@ -25,9 +25,7 @@ var Substitution = (() => {
       this.input = input;
       this.output = output;
       this.caseSensitive = Boolean(caseSensitive);
-      this.inputType = inputType;
-      if (this.inputType != this.INPUT_TEXT && this.inputType != this.INPUT_WHOLE_WORDS && this.inputType != this.INPUT_REG_EXP)
-        this.inputType = this.INPUT_TEXT; // avoid invalid values
+      this.inputType = getValidValue(inputType, VALID_INPUT_TYPES);
 
       switch (this.inputType) {
         case this.INPUT_TEXT:
@@ -125,6 +123,7 @@ var Substitution = (() => {
     INPUT_WHOLE_WORDS: { value: 'wholewords' },
     INPUT_REG_EXP: { value: 'regexp' }
   });
+  const VALID_INPUT_TYPES = [Substitution.prototype.INPUT_TEXT, Substitution.prototype.INPUT_WHOLE_WORDS, Substitution.prototype.INPUT_REG_EXP];
 
   // Unescapes backslash-escaped special characters in the given string.
   function unescape(string) {
@@ -194,13 +193,9 @@ var SubstitutionGroup = (() => {
       this.name = String(name);
       this.urls = urls;
       this.substitutions = substitutions;
-      this.html = html;
-      if (this.html != this.HTML_NONE && this.html != this.HTML_OUTPUT && this.html != this.HTML_INPUT_OUTPUT)
-        this.html = this.HTML_NONE; // avoid invalid values
+      this.html = getValidValue(html, VALID_HTML_MODES);
       this.enabled = Boolean(enabled);
-      this.mode = mode;
-      if (this.mode != this.MODE_AUTO_AND_MANUAL && this.mode != this.MODE_AUTO && this.mode != this.MODE_MANUAL)
-        this.mode = this.MODE_AUTO_AND_MANUAL;  // avoid invalid values
+      this.mode = getValidValue(mode, VALID_MODES);
 
       this.urls.sort();
       this.urlRegExps = [];
@@ -303,6 +298,8 @@ var SubstitutionGroup = (() => {
     MODE_AUTO: { value: 'auto' },
     MODE_MANUAL: { value: 'manual' }
   });
+  const VALID_HTML_MODES = [SubstitutionGroup.prototype.HTML_NONE, SubstitutionGroup.prototype.HTML_OUTPUT, SubstitutionGroup.prototype.HTML_INPUT_OUTPUT];
+  const VALID_MODES = [SubstitutionGroup.prototype.MODE_AUTO_AND_MANUAL, SubstitutionGroup.prototype.MODE_AUTO, SubstitutionGroup.prototype.MODE_MANUAL];
 
   // Returns the given url removing the exclusion part.
   function cleanExclusionUrl(url) {
@@ -351,4 +348,13 @@ function checkVersion(json) {
   if (json.version == currentVersion) return { status: true };
   else if (oldVersions.includes(json.version)) return { status: true, message: browser.i18n.getMessage('deprecatedJsonVersion', [json.version, currentVersion]) };
   else return { status: false, message: browser.i18n.getMessage('unsupportedJsonVersion', [json.version, currentVersion]) };
+}
+
+/**
+ * If validValues contains value, returns value. Otherwise returns the first value in validValues.
+ * @param {*} value Value to validate.
+ * @param {Array} validValues List of valid values.
+ */
+function getValidValue(value, validValues) {
+  return validValues.includes(value) && value || validValues[0];
 }
