@@ -259,7 +259,16 @@ var groupEditor = (() => {
     },
     clear() {
       editor.clearUrls();
-    }
+    },
+	onSearchInput(event) {
+		let api = urlsGridOptions.api;
+		api.setQuickFilter(document.getElementById('urlsSearchBar').value);
+	},
+	onClickClearSearch(event) {
+		document.getElementById('urlsSearchBar').value = '';
+		urlsEventListeners.onSearchInput(event);
+	}
+	
   };
 
   function addUrlsEventListeners() {
@@ -267,13 +276,18 @@ var groupEditor = (() => {
     document.getElementById("urlsGrid").addEventListener("keyup", urlsEventListeners.onKeyUp);
     document.getElementById("urlsGrid").addEventListener("keydown", urlsEventListeners.onKeyDown, true);
     document.getElementById("clearUrlsButton").addEventListener("click", urlsEventListeners.clear);
+	document.getElementById("urlsSearchBar").addEventListener("input", urlsEventListeners.onSearchInput);
+	document.getElementById("urlsSearchClear").addEventListener("click", urlsEventListeners.onClickClearSearch);
   }
 
   function removeUrlsEventListeners() {
     document.getElementById("urlsGrid").removeEventListener("keyup", urlsEventListeners.onKeyUp);
     document.getElementById("urlsGrid").removeEventListener("keydown", urlsEventListeners.onKeyDown, true);
     document.getElementById("clearUrlsButton").removeEventListener("click", urlsEventListeners.clear);
+	document.getElementById("urlsSearchBar").removeEventListener("input", urlsEventListeners.onSearchInput);
+    document.getElementById("urlsSearchClear").removeEventListener("click", urlsEventListeners.onClickClearSearch);
   }
+
 
   var substitutionsEventListeners = {
     onKeyUp(event) {
@@ -348,7 +362,15 @@ var groupEditor = (() => {
       let api = substitutionsGridOptions.api;
       if (!api.getSelectedNodes()) return null;
       else return api.getSelectedNodes()[0];
-    }
+    },
+	onSearchInput(event) {
+		let api = substitutionsGridOptions.api;
+		api.setQuickFilter(document.getElementById('substitutionsSearchBar').value);
+	},
+	onClickClearSearch(event) {
+		document.getElementById('substitutionsSearchBar').value = '';
+		substitutionsEventListeners.onSearchInput(event);
+	}
   };
 
   function addSubstitutionsEventListeners() {
@@ -359,6 +381,9 @@ var groupEditor = (() => {
     document.getElementById("moveDownSubstitutionButton").addEventListener("click", substitutionsEventListeners.moveDown);
     document.getElementById("moveBottomSubstitutionButton").addEventListener("click", substitutionsEventListeners.moveBottom);
     document.getElementById("clearSubstitutionsButton").addEventListener("click", substitutionsEventListeners.clear);
+  	document.getElementById("substitutionsSearchBar").addEventListener("input", substitutionsEventListeners.onSearchInput);
+	document.getElementById("substitutionsSearchClear").addEventListener("click", substitutionsEventListeners.onClickClearSearch);
+
   }
 
   function removeSubstitutionsEventListeners() {
@@ -369,6 +394,9 @@ var groupEditor = (() => {
     document.getElementById("moveDownSubstitutionButton").removeEventListener("click", substitutionsEventListeners.moveDown);
     document.getElementById("moveBottomSubstitutionButton").removeEventListener("click", substitutionsEventListeners.moveBottom);
     document.getElementById("clearSubstitutionsButton").removeEventListener("click", substitutionsEventListeners.clear);
+  	document.getElementById("substitutionsSearchBar").removeEventListener("input", substitutionsEventListeners.onSearchInput);
+	document.getElementById("substitutionsSearchClear").removeEventListener("click", substitutionsEventListeners.onClickClearSearch);
+
   }
 
   var editor = {
@@ -464,7 +492,12 @@ var groupEditor = (() => {
         substitutionsGridOptions.api.sizeColumnsToFit();
         adjustedSubstitutionsColumnWidths = true;
       }
-    }
+    },
+	resetSearch() {
+	  let clearSearchEvent = new Event('click');
+	  document.getElementById("urlsSearchClear").dispatchEvent(clearSearchEvent);
+	  document.getElementById("substitutionsSearchClear").dispatchEvent(clearSearchEvent);
+	}
 
   };
 
