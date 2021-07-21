@@ -67,7 +67,7 @@ var gridOptions = {
   //onRowSelected: // enable/disable buttons
   onRowDoubleClicked(params) {
     groupEditor.setGroup(params.node.data);
-	groupEditor.resetSearch();
+    groupEditor.resetSearch();
     $("#groupEditorModal").modal("show");
   },
   onCellFocused(params) {
@@ -236,8 +236,8 @@ function prepareGroupEditor(event) {
   }
 }
 function closeGroupEditor(event) {
-	groupEditor.resetSearch();
-	$('#groupEditorModal').modal('hide');
+    groupEditor.resetSearch();
+    $('#groupEditorModal').modal('hide');
 }
 
 function saveGroup(event) {
