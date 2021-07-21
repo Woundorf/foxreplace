@@ -474,10 +474,14 @@ var groupEditor = (() => {
 
     isValidGroup() {
       let error = false;
+	  let api = substitutionsGridOptions.api;
+	  api.setQuickFilter(''); //Disable filter temporarly for validation
       substitutionsGridOptions.api.forEachNode(node => {
         if (node.error) error = true;
       });
-      return substitutionsGridOptions.api.getModel().getRowCount() > 1 && !error;
+	  error = error && substitutionsGridOptions.api.getModel().getRowCount() <= 1;
+	  api.setQuickFilter(document.getElementById('substitutionsSearchBar').value);
+      return !error;
     },
 
     adjustUrlsColumnWidths() {
