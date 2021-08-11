@@ -204,7 +204,7 @@ function addEventListeners() {
   });
   $('#groupOk').click(saveGroup);
   $('#groupApply').click(saveGroup);
-  $('#grouCancel').click(closeGroupEditor);
+  $('#groupCancel').click(closeGroupEditor);
   $('#importModal').on('show.bs.modal', prepareImport);
   $('#importModal').on('hide.bs.modal', onHideImport);
   $('#importAppend').click(startImport);

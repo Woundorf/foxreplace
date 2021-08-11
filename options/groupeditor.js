@@ -261,14 +261,13 @@ var groupEditor = (() => {
       editor.clearUrls();
     },
     onSearchInput(event) {
-        let api = urlsGridOptions.api;
-        api.setQuickFilter(document.getElementById('urlsSearchBar').value);
+      let api = urlsGridOptions.api;
+      api.setQuickFilter(document.getElementById('urlsSearchBar').value);
     },
     onClickClearSearch(event) {
-        document.getElementById('urlsSearchBar').value = '';
-        urlsEventListeners.onSearchInput(event);
-    }
-    
+      document.getElementById('urlsSearchBar').value = '';
+      urlsEventListeners.onSearchInput(event);
+    }    
   };
 
   function addUrlsEventListeners() {
@@ -287,7 +286,6 @@ var groupEditor = (() => {
     document.getElementById("urlsSearchBar").removeEventListener("input", urlsEventListeners.onSearchInput);
     document.getElementById("urlsSearchClear").removeEventListener("click", urlsEventListeners.onClickClearSearch);
   }
-
 
   var substitutionsEventListeners = {
     onKeyUp(event) {
@@ -364,12 +362,12 @@ var groupEditor = (() => {
       else return api.getSelectedNodes()[0];
     },
     onSearchInput(event) {
-        let api = substitutionsGridOptions.api;
-        api.setQuickFilter(document.getElementById('substitutionsSearchBar').value);
+      let api = substitutionsGridOptions.api;
+      api.setQuickFilter(document.getElementById('substitutionsSearchBar').value);
     },
     onClickClearSearch(event) {
-        document.getElementById('substitutionsSearchBar').value = '';
-        substitutionsEventListeners.onSearchInput(event);
+      document.getElementById('substitutionsSearchBar').value = '';
+      substitutionsEventListeners.onSearchInput(event);
     }
   };
 
@@ -383,7 +381,6 @@ var groupEditor = (() => {
     document.getElementById("clearSubstitutionsButton").addEventListener("click", substitutionsEventListeners.clear);
     document.getElementById("substitutionsSearchBar").addEventListener("input", substitutionsEventListeners.onSearchInput);
     document.getElementById("substitutionsSearchClear").addEventListener("click", substitutionsEventListeners.onClickClearSearch);
-
   }
 
   function removeSubstitutionsEventListeners() {
@@ -396,7 +393,6 @@ var groupEditor = (() => {
     document.getElementById("clearSubstitutionsButton").removeEventListener("click", substitutionsEventListeners.clear);
     document.getElementById("substitutionsSearchBar").removeEventListener("input", substitutionsEventListeners.onSearchInput);
     document.getElementById("substitutionsSearchClear").removeEventListener("click", substitutionsEventListeners.onClickClearSearch);
-
   }
 
   var editor = {
@@ -475,7 +471,7 @@ var groupEditor = (() => {
     isValidGroup() {
       let error = false;
       let api = substitutionsGridOptions.api;
-      api.setQuickFilter(''); //Disable filter temporarly for validation
+      api.setQuickFilter(''); //Disable filter temporarily for validation
       substitutionsGridOptions.api.forEachNode(node => {
         if (node.error) error = true;
       });
