@@ -263,11 +263,13 @@ var groupEditor = (() => {
     onSearchInput(event) {
       let api = urlsGridOptions.api;
       api.setQuickFilter(document.getElementById('urlsSearchBar').value);
+      editor.disableUrlsButtons();
     },
     onClickClearSearch(event) {
       document.getElementById('urlsSearchBar').value = '';
       urlsEventListeners.onSearchInput(event);
-    }    
+      editor.enableUrlsButtons();
+    }
   };
 
   function addUrlsEventListeners() {
@@ -364,10 +366,12 @@ var groupEditor = (() => {
     onSearchInput(event) {
       let api = substitutionsGridOptions.api;
       api.setQuickFilter(document.getElementById('substitutionsSearchBar').value);
+      editor.disableSubstitutionsButtons();
     },
     onClickClearSearch(event) {
       document.getElementById('substitutionsSearchBar').value = '';
       substitutionsEventListeners.onSearchInput(event);
+      editor.enableSubstitutionsButtons();
     }
   };
 
@@ -430,6 +434,30 @@ var groupEditor = (() => {
 
     clearSubstitutions() {
       substitutionsGridOptions.api.setRowData([{ input: "", inputType: 0, output: "", caseSensitive: false }]);
+    },
+
+    disableUrlsButtons() {
+      document.getElementById('clearUrlsButton').disabled = true;
+    },
+
+    disableSubstitutionsButtons() {
+      document.getElementById('moveTopSubstitutionButton').disabled = true;
+      document.getElementById('moveUpSubstitutionButton').disabled = true;
+      document.getElementById('moveDownSubstitutionButton').disabled = true;
+      document.getElementById('moveBottomSubstitutionButton').disabled = true;
+      document.getElementById('clearSubstitutionsButton').disabled = true;
+    },
+
+    enableUrlsButtons() {
+      document.getElementById('clearUrlsButton').disabled = false;
+    },
+
+    enableSubstitutionsButtons() {
+      document.getElementById('moveTopSubstitutionButton').disabled = false;
+      document.getElementById('moveUpSubstitutionButton').disabled = false;
+      document.getElementById('moveDownSubstitutionButton').disabled = false;
+      document.getElementById('moveBottomSubstitutionButton').disabled = false;
+      document.getElementById('clearSubstitutionsButton').disabled = false;
     },
 
     setGroup(group) {
