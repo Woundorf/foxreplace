@@ -115,7 +115,7 @@ var groupEditor = (() => {
       if (!isLast && isEmpty) {
         params.api.updateRowData({ remove: [params.data] });
       }
-      else if (isLast && !isEmpty) {
+      else if (isLast && !isEmpty && !editor.currentlySearchingUrls()) {
         params.api.updateRowData({ add: [{ url: "" }] });
       }
 
@@ -208,7 +208,7 @@ var groupEditor = (() => {
       if (!isLast && isEmpty) {
         params.api.updateRowData({ remove: [params.data] });
       }
-      else if (isLast && !isEmpty) {
+      else if (isLast && !isEmpty && !editor.currentlySearchingSubstitutions()) {
         params.api.updateRowData({ add: [{ input: "", inputType: 0, output: "", caseSensitive: false }] });
       }
 
@@ -521,12 +521,20 @@ var groupEditor = (() => {
         adjustedSubstitutionsColumnWidths = true;
       }
     },
+
     resetSearch() {
       let clearSearchEvent = new Event('click');
       document.getElementById("urlsSearchClear").dispatchEvent(clearSearchEvent);
       document.getElementById("substitutionsSearchClear").dispatchEvent(clearSearchEvent);
-    }
+    },
 
+    currentlySearchingUrls() {
+      return document.getElementById('urlsSearchBar').value != '';
+    },
+
+    currentlySearchingSubstitutions() {
+      return document.getElementById('substitutionsSearchBar').value != '';
+    },
   };
 
   return editor;
