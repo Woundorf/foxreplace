@@ -65,23 +65,13 @@ i.fa-backspace {
 
 .searchBar {
   position:relative;
+  padding-right:30px;
 }
 .closeIcon {
   position:absolute;
   right:10px;
-  top:9px;
-  vertical-align: middle;
+  top:12px;
   cursor: pointer;
-  display: block;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  color: #c82333;
-  margin: auto;
-  border-radius: 50%;
-  text-align: center;
-  font-weight: normal;
-  font-size: 20px;
-  cursor: pointer;
+  color:red;
   z-index: 3;
 }
