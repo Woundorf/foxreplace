@@ -534,7 +534,8 @@ var groupEditor = (() => {
 
     currentlySearchingSubstitutions() {
       return document.getElementById('substitutionsSearchBar').value != '';
-    },
+    }
+
   };
 
   return editor;

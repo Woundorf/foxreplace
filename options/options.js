@@ -235,9 +235,10 @@ function prepareGroupEditor(event) {
     groupEditor.clear();
   }
 }
+
 function closeGroupEditor(event) {
-    groupEditor.resetSearch();
-    $('#groupEditorModal').modal('hide');
+  groupEditor.resetSearch();
+  $('#groupEditorModal').modal('hide');
 }
 
 function saveGroup(event) {
