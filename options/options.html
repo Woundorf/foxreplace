@@ -196,6 +196,10 @@
             </ul>
             <div class="tab-content">
               <div id="urlsContent" class="tab-pane show active" role="tabpanel">
+                <div class="input-group mb-3">
+                  <input  id="urlsSearchBar" type="search" Placeholder="Search" class="form-control searchBar"/>
+                  <i id="urlsSearchClear" class="fas fa-times-circle closeIcon"></i>
+                </div>
                 <div class="d-flex">
                   <div id="urlsGrid" class="ag-theme-fresh mr-3"></div>
                   <div>
@@ -207,6 +211,10 @@
                 </div>
               </div>
               <div id="substitutionsContent" class="tab-pane" role="tabpanel">
+                <div class="input-group mb-3">
+                    <input id="substitutionsSearchBar" type="search" Placeholder="Search" class="form-control searchBar"/>
+                    <i id="substitutionsSearchClear" class="fas fa-times-circle closeIcon"></i>
+                </div>
                 <div class="d-flex">
                   <div id="substitutionsGrid" class="ag-theme-fresh mr-3"></div>
                   <div>
@@ -241,7 +249,7 @@
           </div>
           <div class="modal-footer">
             <button id="groupOk" class="btn btn-primary i18n" data-action="ok">options.ok</button>
-            <button class="btn btn-secondary i18n" data-dismiss="modal">options.cancel</button>
+            <button id="groupCancel" class="btn btn-secondary i18n" data-action="cancel">options.cancel</button>
             <button id="groupApply" class="btn btn-secondary i18n" data-action="apply">options.apply</button>
           </div>
         </div>

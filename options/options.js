@@ -67,6 +67,7 @@ var gridOptions = {
   //onRowSelected: // enable/disable buttons
   onRowDoubleClicked(params) {
     groupEditor.setGroup(params.node.data);
+    groupEditor.resetSearch();
     $("#groupEditorModal").modal("show");
   },
   onCellFocused(params) {
@@ -203,6 +204,7 @@ function addEventListeners() {
   });
   $('#groupOk').click(saveGroup);
   $('#groupApply').click(saveGroup);
+  $('#groupCancel').click(closeGroupEditor);
   $('#importModal').on('show.bs.modal', prepareImport);
   $('#importModal').on('hide.bs.modal', onHideImport);
   $('#importAppend').click(startImport);
@@ -227,10 +229,16 @@ function removeEventListeners() {
 
 function prepareGroupEditor(event) {
   groupEditor.adjustUrlsColumnWidths();
+  groupEditor.resetSearch();
 
   if (event.relatedTarget == document.getElementById('addGroup')) {
     groupEditor.clear();
   }
+}
+
+function closeGroupEditor(event) {
+  groupEditor.resetSearch();
+  $('#groupEditorModal').modal('hide');
 }
 
 function saveGroup(event) {
@@ -256,7 +264,7 @@ function saveGroup(event) {
   saveList();
 
   if (action == 'ok') {
-    $('#groupEditorModal').modal('hide');
+    closeGroupEditor(event);
   }
 }
 

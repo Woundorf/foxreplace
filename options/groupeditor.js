@@ -115,7 +115,7 @@ var groupEditor = (() => {
       if (!isLast && isEmpty) {
         params.api.updateRowData({ remove: [params.data] });
       }
-      else if (isLast && !isEmpty) {
+      else if (isLast && !isEmpty && !editor.currentlySearchingUrls()) {
         params.api.updateRowData({ add: [{ url: "" }] });
       }
 
@@ -208,7 +208,7 @@ var groupEditor = (() => {
       if (!isLast && isEmpty) {
         params.api.updateRowData({ remove: [params.data] });
       }
-      else if (isLast && !isEmpty) {
+      else if (isLast && !isEmpty && !editor.currentlySearchingSubstitutions()) {
         params.api.updateRowData({ add: [{ input: "", inputType: 0, output: "", caseSensitive: false }] });
       }
 
@@ -259,6 +259,16 @@ var groupEditor = (() => {
     },
     clear() {
       editor.clearUrls();
+    },
+    onSearchInput(event) {
+      let api = urlsGridOptions.api;
+      api.setQuickFilter(document.getElementById('urlsSearchBar').value);
+      editor.disableUrlsButtons();
+    },
+    onClickClearSearch(event) {
+      document.getElementById('urlsSearchBar').value = '';
+      urlsEventListeners.onSearchInput(event);
+      editor.enableUrlsButtons();
     }
   };
 
@@ -267,12 +277,16 @@ var groupEditor = (() => {
     document.getElementById("urlsGrid").addEventListener("keyup", urlsEventListeners.onKeyUp);
     document.getElementById("urlsGrid").addEventListener("keydown", urlsEventListeners.onKeyDown, true);
     document.getElementById("clearUrlsButton").addEventListener("click", urlsEventListeners.clear);
+    document.getElementById("urlsSearchBar").addEventListener("input", urlsEventListeners.onSearchInput);
+    document.getElementById("urlsSearchClear").addEventListener("click", urlsEventListeners.onClickClearSearch);
   }
 
   function removeUrlsEventListeners() {
     document.getElementById("urlsGrid").removeEventListener("keyup", urlsEventListeners.onKeyUp);
     document.getElementById("urlsGrid").removeEventListener("keydown", urlsEventListeners.onKeyDown, true);
     document.getElementById("clearUrlsButton").removeEventListener("click", urlsEventListeners.clear);
+    document.getElementById("urlsSearchBar").removeEventListener("input", urlsEventListeners.onSearchInput);
+    document.getElementById("urlsSearchClear").removeEventListener("click", urlsEventListeners.onClickClearSearch);
   }
 
   var substitutionsEventListeners = {
@@ -348,6 +362,16 @@ var groupEditor = (() => {
       let api = substitutionsGridOptions.api;
       if (!api.getSelectedNodes()) return null;
       else return api.getSelectedNodes()[0];
+    },
+    onSearchInput(event) {
+      let api = substitutionsGridOptions.api;
+      api.setQuickFilter(document.getElementById('substitutionsSearchBar').value);
+      editor.disableSubstitutionsButtons();
+    },
+    onClickClearSearch(event) {
+      document.getElementById('substitutionsSearchBar').value = '';
+      substitutionsEventListeners.onSearchInput(event);
+      editor.enableSubstitutionsButtons();
     }
   };
 
@@ -359,6 +383,8 @@ var groupEditor = (() => {
     document.getElementById("moveDownSubstitutionButton").addEventListener("click", substitutionsEventListeners.moveDown);
     document.getElementById("moveBottomSubstitutionButton").addEventListener("click", substitutionsEventListeners.moveBottom);
     document.getElementById("clearSubstitutionsButton").addEventListener("click", substitutionsEventListeners.clear);
+    document.getElementById("substitutionsSearchBar").addEventListener("input", substitutionsEventListeners.onSearchInput);
+    document.getElementById("substitutionsSearchClear").addEventListener("click", substitutionsEventListeners.onClickClearSearch);
   }
 
   function removeSubstitutionsEventListeners() {
@@ -369,6 +395,8 @@ var groupEditor = (() => {
     document.getElementById("moveDownSubstitutionButton").removeEventListener("click", substitutionsEventListeners.moveDown);
     document.getElementById("moveBottomSubstitutionButton").removeEventListener("click", substitutionsEventListeners.moveBottom);
     document.getElementById("clearSubstitutionsButton").removeEventListener("click", substitutionsEventListeners.clear);
+    document.getElementById("substitutionsSearchBar").removeEventListener("input", substitutionsEventListeners.onSearchInput);
+    document.getElementById("substitutionsSearchClear").removeEventListener("click", substitutionsEventListeners.onClickClearSearch);
   }
 
   var editor = {
@@ -406,6 +434,30 @@ var groupEditor = (() => {
 
     clearSubstitutions() {
       substitutionsGridOptions.api.setRowData([{ input: "", inputType: 0, output: "", caseSensitive: false }]);
+    },
+
+    disableUrlsButtons() {
+      document.getElementById('clearUrlsButton').disabled = true;
+    },
+
+    disableSubstitutionsButtons() {
+      document.getElementById('moveTopSubstitutionButton').disabled = true;
+      document.getElementById('moveUpSubstitutionButton').disabled = true;
+      document.getElementById('moveDownSubstitutionButton').disabled = true;
+      document.getElementById('moveBottomSubstitutionButton').disabled = true;
+      document.getElementById('clearSubstitutionsButton').disabled = true;
+    },
+
+    enableUrlsButtons() {
+      document.getElementById('clearUrlsButton').disabled = false;
+    },
+
+    enableSubstitutionsButtons() {
+      document.getElementById('moveTopSubstitutionButton').disabled = false;
+      document.getElementById('moveUpSubstitutionButton').disabled = false;
+      document.getElementById('moveDownSubstitutionButton').disabled = false;
+      document.getElementById('moveBottomSubstitutionButton').disabled = false;
+      document.getElementById('clearSubstitutionsButton').disabled = false;
     },
 
     setGroup(group) {
@@ -446,10 +498,14 @@ var groupEditor = (() => {
 
     isValidGroup() {
       let error = false;
+      let api = substitutionsGridOptions.api;
+      api.setQuickFilter(''); //Disable filter temporarily for validation
       substitutionsGridOptions.api.forEachNode(node => {
         if (node.error) error = true;
       });
-      return substitutionsGridOptions.api.getModel().getRowCount() > 1 && !error;
+      error = error && substitutionsGridOptions.api.getModel().getRowCount() <= 1;
+      api.setQuickFilter(document.getElementById('substitutionsSearchBar').value);
+      return !error;
     },
 
     adjustUrlsColumnWidths() {
@@ -464,6 +520,20 @@ var groupEditor = (() => {
         substitutionsGridOptions.api.sizeColumnsToFit();
         adjustedSubstitutionsColumnWidths = true;
       }
+    },
+
+    resetSearch() {
+      let clearSearchEvent = new Event('click');
+      document.getElementById("urlsSearchClear").dispatchEvent(clearSearchEvent);
+      document.getElementById("substitutionsSearchClear").dispatchEvent(clearSearchEvent);
+    },
+
+    currentlySearchingUrls() {
+      return document.getElementById('urlsSearchBar').value != '';
+    },
+
+    currentlySearchingSubstitutions() {
+      return document.getElementById('substitutionsSearchBar').value != '';
     }
 
   };

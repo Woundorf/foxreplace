@@ -62,3 +62,16 @@ i.fa-backspace {
 .importFromFile .importFromUrl, .importFromUrl .importFromFile {
   display: none;
 }
+
+.searchBar {
+  position:relative;
+  padding-right:30px;
+}
+.closeIcon {
+  position:absolute;
+  right:10px;
+  top:12px;
+  cursor: pointer;
+  color:red;
+  z-index: 3;
+}
