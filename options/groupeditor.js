@@ -263,7 +263,6 @@ var groupEditor = (() => {
     onSearchInput(event) {
       let api = urlsGridOptions.api;
       let searchBarElem = document.getElementById('urlsSearchBar');
-      console.log('test1');
       api.setQuickFilter(searchBarElem.value);
       //Reenable control buttons if search bar is cleared
       searchBarElem.value == '' ? editor.enableUrlsButtons() : editor.disableUrlsButtons();
