@@ -262,8 +262,10 @@ var groupEditor = (() => {
     },
     onSearchInput(event) {
       let api = urlsGridOptions.api;
-      api.setQuickFilter(document.getElementById('urlsSearchBar').value);
-      editor.disableUrlsButtons();
+      let searchBarElem = document.getElementById('urlsSearchBar');
+      api.setQuickFilter(searchBarElem.value);
+      //Reenable control buttons if search bar is cleared
+      searchBarElem.value == '' ? editor.enableUrlsButtons() : editor.disableUrlsButtons();
     },
     onClickClearSearch(event) {
       document.getElementById('urlsSearchBar').value = '';
@@ -365,8 +367,10 @@ var groupEditor = (() => {
     },
     onSearchInput(event) {
       let api = substitutionsGridOptions.api;
-      api.setQuickFilter(document.getElementById('substitutionsSearchBar').value);
-      editor.disableSubstitutionsButtons();
+      let searchBarElem = document.getElementById('substitutionsSearchBar')
+      api.setQuickFilter(searchBarElem.value);
+      //Reenable control buttons if search bar is cleared
+      searchBarElem.value == '' ? editor.enableSubstitutionsButtons() : editor.disableSubstitutionsButtons();
     },
     onClickClearSearch(event) {
       document.getElementById('substitutionsSearchBar').value = '';
