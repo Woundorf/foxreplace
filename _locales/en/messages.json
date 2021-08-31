@@ -226,6 +226,10 @@
     "message": "Name"
   },
 
+  "options.group.search": {
+    "message": "Search"
+  },
+
   "html": {
     "message": "HTML"
   },

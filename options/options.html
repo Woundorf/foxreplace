@@ -1,6 +1,6 @@
 <!-- ***** BEGIN LICENSE BLOCK *****
   -
-  - Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
+  - Copyright (C) 2021 Marc Ruiz Altisent. All rights reserved.
   -
   - This file is part of FoxReplace.
   -
@@ -197,7 +197,10 @@
             <div class="tab-content">
               <div id="urlsContent" class="tab-pane show active" role="tabpanel">
                 <div class="input-group mb-3">
-                  <input  id="urlsSearchBar" type="search" Placeholder="Search" class="form-control searchBar"/>
+                  <div class="input-group-prepend">
+                    <span class="input-group-text i18n">options.group.search</span>
+                  </div>
+                  <input id="urlsSearchBar" type="search" class="form-control searchBar"></input>
                   <i id="urlsSearchClear" class="fas fa-times-circle closeIcon"></i>
                 </div>
                 <div class="d-flex">
@@ -212,8 +215,11 @@
               </div>
               <div id="substitutionsContent" class="tab-pane" role="tabpanel">
                 <div class="input-group mb-3">
-                    <input id="substitutionsSearchBar" type="search" Placeholder="Search" class="form-control searchBar"/>
-                    <i id="substitutionsSearchClear" class="fas fa-times-circle closeIcon"></i>
+                  <div class="input-group-prepend">
+                    <span class="input-group-text i18n">options.group.search</span>
+                  </div>
+                  <input id="substitutionsSearchBar" type="search" class="form-control searchBar"></input>
+                  <i id="substitutionsSearchClear" class="fas fa-times-circle closeIcon"></i>
                 </div>
                 <div class="d-flex">
                   <div id="substitutionsGrid" class="ag-theme-fresh mr-3"></div>

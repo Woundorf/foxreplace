@@ -226,6 +226,10 @@
     "message": "Nom"
   },
 
+  "options.group.search": {
+    "message": "Cerca"
+  },
+
   "html": {
     "message": "HTML"
   },
