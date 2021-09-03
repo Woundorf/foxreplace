@@ -1,3 +1,4 @@
+v2.4.0 (2021-09-03)
 * Added a search box in substitution group editor to filter URLs and substitutions (#134). Thanks to Sandeep Dcunha.
 
 v2.3.2 (2020-04-01)
