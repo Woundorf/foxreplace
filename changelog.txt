@@ -1,3 +1,5 @@
+* Apply automatic substitutions to all visible tabs with periodic replace (#336).
+
 v2.4.0 (2021-09-03)
 * Added a search box in substitution group editor to filter URLs and substitutions (#134). Thanks to Sandeep Dcunha.
 

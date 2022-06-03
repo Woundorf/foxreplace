@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2022 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -28,11 +28,11 @@ browser.runtime.onMessage.addListener(message => {
  * Applies the substitution list contained in aMessage to the current tab.
  */
 function replaceCurrentTab(aMessage) {
-  browser.tabs.query({
-    currentWindow: true,
-    active: true
-  }).then(tabs => {
-    if (tabs[0]) browser.tabs.sendMessage(tabs[0].id, aMessage);
+  let options = { active: true };
+  if (aMessage.key != 'replaceWithListPeriod') options.currentWindow = true;    // limit to current window except for periodic substitutions
+
+  browser.tabs.query(options).then(tabs => {
+    for (let tab of tabs) browser.tabs.sendMessage(tab.id, aMessage);
   });
 }
 
