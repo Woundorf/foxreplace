@@ -1,3 +1,4 @@
+v2.4.1 (2022-06-03)
 * Apply automatic substitutions to all visible tabs with periodic replace (#336).
 
 v2.4.0 (2021-09-03)
