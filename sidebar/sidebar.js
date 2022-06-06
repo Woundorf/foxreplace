@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2022 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -27,11 +27,11 @@ function onUnload() {
 function onSubmit(event) {
   event.preventDefault(); // we just want to get the values, we don't want to submit anything
 
-  let serialized = $('#form').serializeArray();
+  let formData = new FormData(document.getElementById('form'));
   let formValues = {};
 
-  for (let item of serialized) {
-    formValues[item.name] = item.value;
+  for (let [key, value] of formData) {
+    formValues[key] = value;
   }
   // Checkbox values are returned as 'on' when checked and missing (thus undefined) when unchecked. This works well when converted to Boolean.
 
