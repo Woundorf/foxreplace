@@ -32,14 +32,22 @@ var Substitution = (() => {
         case this.INPUT_TEXT:
           {
             let unescapedInput = unescape(this.input);
-            this.regExp = new RegExp(stringToUnicode(unescapedInput), this.caseSensitive ? "g" : "gi");
+            let unicodeInput = stringToUnicode(unescapedInput);
+            // for newlines, non-breaking spaces, multiple spaces, etc.,
+            // which the browser renders as a single space
+            let spaceyInput = unicodeInput.replaceAll('\\u0020', '\\s+');
+            this.regExp = new RegExp(spaceyInput, this.caseSensitive ? "g" : "gi");
           }
           break;
         case this.INPUT_WHOLE_WORDS:
           {
             let unescapedInput = unescape(this.input);
+            let unicodeInput = stringToUnicode(unescapedInput);
+            // for newlines, non-breaking spaces, multiple spaces, etc.,
+            // which the browser renders as a single space
+            let spaceyInput = unicodeInput.replaceAll('\\u0020', '\\s+');
             let suffix = wordEndRegExpSource(unescapedInput.charAt(unescapedInput.length - 1));
-            this.regExp = new XRegExp(stringToUnicode(unescapedInput) + suffix, this.caseSensitive ? "g" : "gi");
+            this.regExp = new XRegExp(spaceyInput + suffix, this.caseSensitive ? "g" : "gi");
             this.firstCharCategory = charCategory(unescapedInput.charAt(0));
           }
           break;
