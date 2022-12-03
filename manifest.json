@@ -5,7 +5,7 @@
   "version": "2.4.1",
   "default_locale": "en",
 
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "fox@replace.fx",
       "strict_min_version": "57.0"
