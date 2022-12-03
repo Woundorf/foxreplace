@@ -1,3 +1,6 @@
+v2.5.0 (2022-12-03)
+* A space in text and whole words modes matches any number and type of whitespace (#113). Thanks to dan soucy.
+
 v2.4.1 (2022-06-03)
 * Apply automatic substitutions to all visible tabs with periodic replace (#336).
 
