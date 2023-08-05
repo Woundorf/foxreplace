@@ -75,6 +75,7 @@ const Substitution = (() => {
           // necessary according to https://stackoverflow.com/q/1520800
           this.regExp.lastIndex = 0;
           return string.replace(this.regExp, (word, index, string) => {
+            // todo by someone who understands: clarify what the following block does and why it does it
             if (index === 0 || this.firstCharCategory != charCategory(string.charAt(index - 1))) {
               const output = unescape(this.output);
               const re = /\$[\$\&\`\']/g;
@@ -93,18 +94,16 @@ const Substitution = (() => {
               }
               return result;
             }
-            else {
-              return word;
-            }
+            return (this.outputType === this.OUTPUT_FUNCTION) ? this.replaceWithFn(this.output, word) : word;
           });
 
         case this.INPUT_REG_EXP:
           // necessary according to https://stackoverflow.com/q/1520800
           this.regExp.lastIndex = 0;
 
-          return (this.outputType === this.OUTPUT_TEXT) ?
-            string.replace(this.regExp, unescape(this.output)) :
-            this.replaceWithFn(this.regExp, string);
+          return (this.outputType === this.OUTPUT_FUNCTION) ?
+            this.replaceWithFn(this.regExp, string) :
+            string.replace(this.regExp, unescape(this.output));
       }
 
     }
