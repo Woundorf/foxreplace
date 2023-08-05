@@ -145,7 +145,8 @@ const Substitution = (() => {
    */
   Substitution.fromJSON = function(json) {
     const inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(json.inputType);
-    return new Substitution(json.input, json.output, json.caseSensitive, inputType, json.outputTyp);
+    const outputType = this.prototype.OUTPUT_TYPE_STRINGS.indexOf(json.outputType);
+    return new Substitution(json.input, json.output, json.caseSensitive, inputType, outputType);
   };
 
   /**

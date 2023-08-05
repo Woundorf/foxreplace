@@ -60,7 +60,7 @@ var groupEditor = (() => {
    */
   function validateSubstitution(params) {
     try {
-      new Substitution(params.data.input, params.data.output, params.data.caseSensitive, params.data.outputIsFunction, params.data.inputType);
+      new Substitution(params.data.input, params.data.output, params.data.caseSensitive, params.data.inputType, params.data.outputIsFunction);
       if (params.node.error) {
         delete params.node.error;
         params.api.refreshCells({ rowNodes: [params.node], force: true });
@@ -511,8 +511,8 @@ var groupEditor = (() => {
             node.data.input,
             node.data.output,
             node.data.caseSensitive,
-            node.data.outputIsFunction,
-            node.data.inputType
+            node.data.inputType,
+            node.data.outputIsFunction
           ));
         }
       });
