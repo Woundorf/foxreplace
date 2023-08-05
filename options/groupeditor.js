@@ -60,7 +60,7 @@ var groupEditor = (() => {
    */
   function validateSubstitution(params) {
     try {
-      new Substitution(params.data.input, params.data.output, params.data.caseSensitive, params.data.inputType);
+      new Substitution(params.data.input, params.data.output, params.data.caseSensitive, params.data.outputIsFunction, params.data.inputType);
       if (params.node.error) {
         delete params.node.error;
         params.api.refreshCells({ rowNodes: [params.node], force: true });
@@ -109,8 +109,8 @@ var groupEditor = (() => {
     ],
 
     onCellEditingStopped(params) {
-      let isLast = isLastRow(params);
-      let isEmpty = params.value === "";
+      const isLast = isLastRow(params);
+      const isEmpty = params.value === "";
 
       if (!isLast && isEmpty) {
         params.api.updateRowData({ remove: [params.data] });
@@ -132,7 +132,7 @@ var groupEditor = (() => {
   /**
    *  Options for the substitutions grid.
    */
-  var substitutionsGridOptions = {
+  const substitutionsGridOptions = {
 
     enableColResize: true,
     //enableSorting: true,
@@ -184,6 +184,18 @@ var groupEditor = (() => {
         }
       },
       {
+        headerName: browser.i18n.getMessage("list.outputTypeHeader"),
+        field: "outputType",
+        cellRenderer(params) {
+          switch (Number(params.value)) {
+            case 1: return browser.i18n.getMessage("outputType.function");
+            case 0:
+            default: return browser.i18n.getMessage("outputType.text");
+          }
+        },
+        cellEditor: OutputTypeEditor
+      },
+      {
         headerName: browser.i18n.getMessage("list.caseSensitiveHeader"),
         field: "caseSensitive",
         cellRenderer(params) {
@@ -202,14 +214,14 @@ var groupEditor = (() => {
     ],
 
     onRowEditingStopped(params) {
-      let isLast = isLastRow(params);
-      let isEmpty = params.data.input === "";
+      const isLast = isLastRow(params);
+      const isEmpty = params.data.input === "";
 
       if (!isLast && isEmpty) {
         params.api.updateRowData({ remove: [params.data] });
       }
       else if (isLast && !isEmpty && !editor.currentlySearchingSubstitutions()) {
-        params.api.updateRowData({ add: [{ input: "", inputType: 0, output: "", caseSensitive: false }] });
+        params.api.updateRowData({ add: [{ input: "", inputType: 0, output: "", caseSensitive: false, outputIsFunction: false }] });
       }
 
       if (!isEmpty) validateSubstitution(params);
@@ -238,8 +250,8 @@ var groupEditor = (() => {
     }
   };
 
-  var urlsEventListeners = {
-    onShow(event) {
+  const urlsEventListeners = {
+    onShow(_event) {
       document.getElementById("urlsGrid").removeEventListener("show", urlsEventListeners.onShow);
       urlsGridOptions.api.sizeColumnsToFit();
     },
@@ -248,9 +260,9 @@ var groupEditor = (() => {
     },
     onKeyDown(event) {
       if (event.key == "Delete") {
-        let api = urlsGridOptions.api;
+        const api = urlsGridOptions.api;
         if (!api.getSelectedNodes()) return;
-        let selectedNode = api.getSelectedNodes()[0];
+        const selectedNode = api.getSelectedNodes()[0];
         if (selectedNode.rowIndex != selectedNode.rowModel.getRowCount() - 1) { // no last row
           api.updateRowData({ remove: api.getSelectedRows() });
         }
@@ -260,9 +272,9 @@ var groupEditor = (() => {
     clear() {
       editor.clearUrls();
     },
-    onSearchInput(event) {
-      let api = urlsGridOptions.api;
-      let searchBarElem = document.getElementById('urlsSearchBar');
+    onSearchInput(_event) {
+      const api = urlsGridOptions.api;
+      const searchBarElem = document.getElementById('urlsSearchBar');
       api.setQuickFilter(searchBarElem.value);
       //Reenable control buttons if search bar is cleared
       searchBarElem.value == '' ? editor.enableUrlsButtons() : editor.disableUrlsButtons();
@@ -291,7 +303,7 @@ var groupEditor = (() => {
     document.getElementById("urlsSearchClear").removeEventListener("click", urlsEventListeners.onClickClearSearch);
   }
 
-  var substitutionsEventListeners = {
+  const substitutionsEventListeners = {
     onKeyUp(event) {
       if (event.key == "Escape") event.stopPropagation();
     },
@@ -315,43 +327,43 @@ var groupEditor = (() => {
       }
     },
     moveTop() {
-      let api = substitutionsGridOptions.api;
-      let selectedNode = substitutionsEventListeners._getSelectedNode();
+      const api = substitutionsGridOptions.api;
+      const selectedNode = substitutionsEventListeners._getSelectedNode();
       if (selectedNode && !isLastRow(selectedNode)) {
-        let data = selectedNode.data;
+        const data = selectedNode.data;
         api.updateRowData({ remove: [data] });
         api.updateRowData({ add: [data], addIndex: 0});
         api.setFocusedCell(0);
       }
     },
     moveUp() {
-      let api = substitutionsGridOptions.api;
+      const api = substitutionsGridOptions.api;
       let selectedNode = substitutionsEventListeners._getSelectedNode();
       if (selectedNode && !isLastRow(selectedNode)) {
-        let data = selectedNode.data;
-        let newIndex = Math.max(selectedNode.rowIndex - 1, 0);
+        const data = selectedNode.data;
+        const newIndex = Math.max(selectedNode.rowIndex - 1, 0);
         api.updateRowData({ remove: [data] });
         api.updateRowData({ add: [data], addIndex: newIndex});
         api.setFocusedCell(newIndex);
       }
     },
     moveDown() {
-      let api = substitutionsGridOptions.api;
-      let selectedNode = substitutionsEventListeners._getSelectedNode();
+      const api = substitutionsGridOptions.api;
+      const selectedNode = substitutionsEventListeners._getSelectedNode();
       if (selectedNode && !isLastRow(selectedNode)) {
-        let data = selectedNode.data;
-        let newIndex = Math.min(selectedNode.rowIndex + 1, selectedNode.rowModel.getRowCount() - 2);
+        const data = selectedNode.data;
+        const newIndex = Math.min(selectedNode.rowIndex + 1, selectedNode.rowModel.getRowCount() - 2);
         api.updateRowData({ remove: [data] });
         api.updateRowData({ add: [data], addIndex: newIndex});
         api.setFocusedCell(newIndex);
       }
     },
     moveBottom() {
-      let api = substitutionsGridOptions.api;
-      let selectedNode = substitutionsEventListeners._getSelectedNode();
+      const api = substitutionsGridOptions.api;
+      const selectedNode = substitutionsEventListeners._getSelectedNode();
       if (selectedNode && !isLastRow(selectedNode)) {
-        let data = selectedNode.data;
-        let newIndex = selectedNode.rowModel.getRowCount() - 2;
+        const data = selectedNode.data;
+        const newIndex = selectedNode.rowModel.getRowCount() - 2;
         api.updateRowData({ remove: [data] });
         api.updateRowData({ add: [data], addIndex: newIndex});
         api.setFocusedCell(newIndex);
@@ -361,13 +373,13 @@ var groupEditor = (() => {
       editor.clearSubstitutions();
     },
     _getSelectedNode() {
-      let api = substitutionsGridOptions.api;
+      const api = substitutionsGridOptions.api;
       if (!api.getSelectedNodes()) return null;
       else return api.getSelectedNodes()[0];
     },
-    onSearchInput(event) {
-      let api = substitutionsGridOptions.api;
-      let searchBarElem = document.getElementById('substitutionsSearchBar')
+    onSearchInput(_event) {
+      const api = substitutionsGridOptions.api;
+      const searchBarElem = document.getElementById('substitutionsSearchBar')
       api.setQuickFilter(searchBarElem.value);
       //Reenable control buttons if search bar is cleared
       searchBarElem.value == '' ? editor.enableSubstitutionsButtons() : editor.disableSubstitutionsButtons();
@@ -403,7 +415,7 @@ var groupEditor = (() => {
     document.getElementById("substitutionsSearchClear").removeEventListener("click", substitutionsEventListeners.onClickClearSearch);
   }
 
-  var editor = {
+  const editor = {
 
     init() {
       this.initUrls();
@@ -411,13 +423,13 @@ var groupEditor = (() => {
     },
 
     initUrls() {
-      let grid = document.getElementById("urlsGrid");
+      const grid = document.getElementById("urlsGrid");
       new agGrid.Grid(grid, urlsGridOptions);
       addUrlsEventListeners();
     },
 
     initSubstitutions() {
-      let grid = document.getElementById("substitutionsGrid");
+      const grid = document.getElementById("substitutionsGrid");
       new agGrid.Grid(grid, substitutionsGridOptions);
       addSubstitutionsEventListeners();
     },
@@ -472,29 +484,37 @@ var groupEditor = (() => {
       document.getElementById('groupHtml').selectedIndex = group.html;
       document.getElementById('groupName').value = group.name;
 
-      let urls = group.urls.map(u => ({ url: u}));
+      const urls = group.urls.map(u => ({ url: u}));
       urls.push({ url: "" });
       urlsGridOptions.api.setRowData(urls);
 
-      let substitutions = group.substitutions.map(s => s);  // shallow copy
+      const substitutions = group.substitutions.map(s => s);  // shallow copy
       substitutions.push({ input: "", inputType: 0, output: "", caseSensitive: false });
       substitutionsGridOptions.api.setRowData(substitutions);
     },
 
     getGroup() {
-      let enabled = document.getElementById('groupEnabled').checked;
-      let mode = document.getElementById('groupMode').selectedIndex;
-      let html = document.getElementById('groupHtml').selectedIndex;
-      let name = document.getElementById('groupName').value;
+      const enabled = document.getElementById('groupEnabled').checked;
+      const mode = document.getElementById('groupMode').selectedIndex;
+      const html = document.getElementById('groupHtml').selectedIndex;
+      const name = document.getElementById('groupName').value;
 
-      let urls = [];
+      const urls = [];
       urlsGridOptions.api.forEachNode(node => {
         if (node.data.url) urls.push(node.data.url);
       });
 
-      let substitutions = [];
+      const substitutions = [];
       substitutionsGridOptions.api.forEachNode(node => {
-        if (node.data.input) substitutions.push(new Substitution(node.data.input, node.data.output, node.data.caseSensitive, node.data.inputType));
+        if (node.data.input) {
+          substitutions.push(new Substitution(
+            node.data.input,
+            node.data.output,
+            node.data.caseSensitive,
+            node.data.outputIsFunction,
+            node.data.inputType
+          ));
+        }
       });
 
       return new SubstitutionGroup(name, urls, substitutions, html, enabled, mode);
@@ -502,7 +522,7 @@ var groupEditor = (() => {
 
     isValidGroup() {
       let error = false;
-      let api = substitutionsGridOptions.api;
+      const api = substitutionsGridOptions.api;
       api.setQuickFilter(''); //Disable filter temporarily for validation
       substitutionsGridOptions.api.forEachNode(node => {
         if (node.error) error = true;
@@ -527,7 +547,7 @@ var groupEditor = (() => {
     },
 
     resetSearch() {
-      let clearSearchEvent = new Event('click');
+      const clearSearchEvent = new Event('click');
       document.getElementById("urlsSearchClear").dispatchEvent(clearSearchEvent);
       document.getElementById("substitutionsSearchClear").dispatchEvent(clearSearchEvent);
     },

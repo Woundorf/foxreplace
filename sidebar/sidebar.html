@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="../lib/bootstrap.css">
     <script src="../lib/xregexp-all.js"></script>
     <script src="../scripts/core.js"></script>
-    <script src="sidebar.js"></script>
+    <script defer src="./sidebar.js"></script>
     <style type="text/css">
       * {
         min-width: unset !important;
@@ -52,6 +52,12 @@
       <div class="form-group">
         <label class="i18n">toolbar.output</label>
         <input name="output" type="text" class="w-100" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <select name="outputType" class="custom-select">
+          <option value="0" selected="" class="i18n">outputType.text</option>
+          <option value="1" class="i18n">outputType.function</option>
+        </select>
       </div>
       <div class="form-group">
         <label class="i18n">html</label>

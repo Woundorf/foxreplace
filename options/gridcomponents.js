@@ -125,10 +125,12 @@ class DeleteButtonCellRenderer {
 
 }
 
-/**
- *  Cell editor for the input type. Shows a dropdown menu with the options.
- */
-class InputTypeEditor {
+class DropdownEditor {
+
+  /** @type {string} */
+  colId;
+  /** @type {string[]} */
+  options = [];
 
   static getOption(params, value, text) {
     return '<option value="' + value + '"' + (value == params.value ? ' selected' : '') + '>' + text + '</option>';
@@ -136,9 +138,9 @@ class InputTypeEditor {
 
   init(params) {
     this.gui = $('<select>' +
-                  InputTypeEditor.getOption(params, 0, browser.i18n.getMessage("inputType.text")) +
-                  InputTypeEditor.getOption(params, 1, browser.i18n.getMessage("inputType.wholeWords")) +
-                  InputTypeEditor.getOption(params, 2, browser.i18n.getMessage("inputType.regExp")) +
+                  this.options.reduce((accum, curOption, i) =>
+                    DropdownEditor.getOption(params, i, browser.i18n.getMessage(curOption)) + accum
+                  , '') +
                  '</select>')[0];
     this.width = params.column.actualWidth;
     this.api = params.api;
@@ -151,7 +153,7 @@ class InputTypeEditor {
   afterGuiAttached() {
     this.gui.style = `width: ${this.width}px`;
 
-    if (this.api.getFocusedCell().column.colId == "inputType") {
+    if (this.api.getFocusedCell().column.colId == this.colId) {
       this.focusIn(); // special case for when edition starts in this cell
     }
   }
@@ -168,6 +170,33 @@ class InputTypeEditor {
     delete this.gui;
   }
 
+}
+
+/**
+ *  Cell editor for the input type. Shows a dropdown menu with the options.
+ */
+class InputTypeEditor extends DropdownEditor {
+
+  colId = "inputType"
+
+  options = [
+    "inputType.text",
+    "inputType.wholeWords",
+    "inputType.regExp"
+  ];
+}
+
+
+/**
+ *  Cell editor for the output type. Shows a dropdown menu with the options.
+ */
+class OutputTypeEditor extends DropdownEditor {
+  colId = "outputType"
+
+  options = [
+    "outputType.text",
+    "outputType.function",
+  ];
 }
 
 /**
@@ -203,3 +232,4 @@ class CheckboxCellEditor {
   }
 
 }
+

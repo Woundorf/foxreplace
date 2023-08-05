@@ -17,36 +17,38 @@
 /**
  *  Represents a single substitution with an input, an output and some additional parameters.
  */
-var Substitution = (() => {
+const Substitution = (() => {
 
   class Substitution {
 
-    constructor(input, output, caseSensitive = false, inputType = this.INPUT_TEXT) {
+    constructor(input, output, caseSensitive = false, inputType = this.INPUT_TEXT, outputType = this.OUTPUT_FUNCTION) {
       this.input = input;
       this.output = output;
-      this.caseSensitive = Boolean(caseSensitive);
-      this.inputType = +inputType;  // coalesce to number
+      this.caseSensitive = !!caseSensitive;
+      this.outputType = +outputType;
+      this.inputType = +inputType;
+
       if (this.inputType < this.INPUT_TEXT || this.inputType > this.INPUT_REG_EXP) this.inputType = this.INPUT_TEXT;  // avoid invalid values
 
       switch (this.inputType) {
         case this.INPUT_TEXT:
           {
-            let unescapedInput = unescape(this.input);
-            let unicodeInput = stringToUnicode(unescapedInput);
+            const unescapedInput = unescape(this.input);
+            const unicodeInput = stringToUnicode(unescapedInput);
             // for newlines, non-breaking spaces, multiple spaces, etc.,
             // which the browser renders as a single space
-            let spaceyInput = unicodeInput.replaceAll('\\u0020', '\\s+');
+            const spaceyInput = unicodeInput.replaceAll('\\u0020', '\\s+');
             this.regExp = new RegExp(spaceyInput, this.caseSensitive ? "g" : "gi");
           }
           break;
         case this.INPUT_WHOLE_WORDS:
           {
-            let unescapedInput = unescape(this.input);
-            let unicodeInput = stringToUnicode(unescapedInput);
+            const unescapedInput = unescape(this.input);
+            const unicodeInput = stringToUnicode(unescapedInput);
             // for newlines, non-breaking spaces, multiple spaces, etc.,
             // which the browser renders as a single space
-            let spaceyInput = unicodeInput.replaceAll('\\u0020', '\\s+');
-            let suffix = wordEndRegExpSource(unescapedInput.charAt(unescapedInput.length - 1));
+            const spaceyInput = unicodeInput.replaceAll('\\u0020', '\\s+');
+            const suffix = wordEndRegExpSource(unescapedInput.charAt(unescapedInput.length - 1));
             this.regExp = new XRegExp(spaceyInput + suffix, this.caseSensitive ? "g" : "gi");
             this.firstCharCategory = charCategory(unescapedInput.charAt(0));
           }
@@ -74,14 +76,14 @@ var Substitution = (() => {
           this.regExp.lastIndex = 0;
           return string.replace(this.regExp, (word, index, string) => {
             if (index === 0 || this.firstCharCategory != charCategory(string.charAt(index - 1))) {
-              let output = unescape(this.output);
-              let re = /\$[\$\&\`\']/g;
-              let fragments = output.split(re);
-              let nFragments = fragments.length;
-              let result = fragments[0];
-              let i = fragments[0].length + 1;    // index of the char after the $
+              const output = unescape(this.output);
+              const re = /\$[\$\&\`\']/g;
+              const fragments = output.split(re);
+              const nFragments = fragments.length;
+              const result = fragments[0];
+              const i = fragments[0].length + 1;    // index of the char after the $
               for (let j = 1; j < nFragments; j++) {
-                let c = output.charAt(i);
+                const c = output.charAt(i);
                 if (c == "$") result += "$";
                 else if (c == "&") result += word;
                 else if (c == "`") result += string.slice(0, index);
@@ -99,8 +101,31 @@ var Substitution = (() => {
         case this.INPUT_REG_EXP:
           // necessary according to https://stackoverflow.com/q/1520800
           this.regExp.lastIndex = 0;
-          return string.replace(this.regExp, unescape(this.output));
+
+          return (this.outputType === this.OUTPUT_TEXT) ?
+            string.replace(this.regExp, unescape(this.output)) :
+            this.replaceWithFn(this.regExp, string);
       }
+
+    }
+
+    replaceWithFn(userReplaceInput, curStrToReplace) {
+
+      const matchesInStr = curStrToReplace.match(this.regExp)
+      const numCaptureGroups = matchesInStr ? matchesInStr.length : 0;
+      const captureGroupArgs = Array.from(Array(numCaptureGroups)).map((_elt, i) => `p${i+1}`);
+
+      if (!matchesInStr) {
+        return curStrToReplace;
+      }
+
+      // MDN rates Function as more secure than eval. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#Do_not_ever_use_eval!
+      // the user-provided function can refer to the specified variables, along with the above `capture[i]` array
+      // decision to put user-input as the `return` of the function because:
+      //   1. assumption: most users will create simple one-line functions
+      //   2. users can still write complex input via `(() => { /* arbitrary code; return $result */ })()`
+      const fn = Function('match', ...captureGroupArgs, 'offset', 'string', 'groups', `return ${this.output}`);
+      return curStrToReplace.replace(userReplaceInput, fn);
     }
 
     /**
@@ -121,8 +146,8 @@ var Substitution = (() => {
    *  Creates a substitution from the given JSON.
    */
   Substitution.fromJSON = function(json) {
-    let inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(json.inputType);
-    return new Substitution(json.input, json.output, json.caseSensitive, inputType);
+    const inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(json.inputType);
+    return new Substitution(json.input, json.output, json.caseSensitive, inputType, json.outputTyp);
   };
 
   /**
@@ -132,7 +157,10 @@ var Substitution = (() => {
     INPUT_TEXT: { value: 0 },
     INPUT_WHOLE_WORDS: { value: 1 },
     INPUT_REG_EXP: { value: 2 },
-    INPUT_TYPE_STRINGS: { value: ["text", "wholewords", "regexp"] }
+    INPUT_TYPE_STRINGS: { value: ["text", "wholewords", "regexp"] },
+    OUTPUT_TYPE_STRINGS: { value: ["text", "function"] },
+    OUTPUT_TEXT: { value: 3 },
+    OUTPUT_FUNCTION: { value: 4 },
   });
 
   // Unescapes backslash-escaped special characters in the given string.
@@ -195,7 +223,7 @@ var Substitution = (() => {
 /**
  *  Represents a group of substitutions that are applied to the same set of URLs.
  */
-var SubstitutionGroup = (() => {
+const SubstitutionGroup = (() => {
 
   class SubstitutionGroup {
 
@@ -225,7 +253,7 @@ var SubstitutionGroup = (() => {
           exclusion = false;
         }
 
-        let regExp = new RegExp(url.replace(/\*+/g, "*")      // remove multiple wildcards
+        const regExp = new RegExp(url.replace(/\*+/g, "*")      // remove multiple wildcards
                                    .replace(/(\W)/g, "\\$1")  // escape special symbols
                                    .replace(/\\\*/g, ".*")    // replace wildcards by .*
                                    .replace(/^\\\|/, "^")     // process anchor at expression start

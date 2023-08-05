@@ -66,6 +66,14 @@
     "message": "Regular expression"
   },
 
+  "outputType.text": {
+    "message": "Text"
+  },
+
+  "outputType.function": {
+    "message": "Function"
+  },
+
   "options.title": {
     "message": "FoxReplace options"
   },
@@ -278,8 +286,16 @@
     "message": "With"
   },
 
+  "list.outputTypeHeader": {
+    "message": "Output Type"
+  },
+
   "list.outputHint": {
     "message": "Type output..."
+  },
+
+  "list.outputFunction": {
+    "message": "Function output"
   },
 
   "list.caseSensitiveHeader": {
@@ -349,6 +365,10 @@
 
   "toolbar.caseSensitive": {
     "message": "Match case"
+  },
+
+  "toolbar.outputIsFunction": {
+    "message": "Output function"
   },
 
   "toolbar.replace": {

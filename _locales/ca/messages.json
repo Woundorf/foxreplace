@@ -282,6 +282,10 @@
     "message": "Escriviu la sortida..."
   },
 
+  "list.outputFunction": {
+    "message": "Function output"
+  },
+
   "list.caseSensitiveHeader": {
     "message": "Distingeix entre majúscules i minúscules"
   },
