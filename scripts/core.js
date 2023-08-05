@@ -66,10 +66,14 @@ const Substitution = (() => {
       if (string === undefined || string === null) return string;
 
       switch (this.inputType) {
+        case this.INPUT_REG_EXP:
         case this.INPUT_TEXT:
           // necessary according to https://stackoverflow.com/q/1520800
           this.regExp.lastIndex = 0;
-          return string.replace(this.regExp, unescape(this.output));
+
+          return (this.outputType === this.OUTPUT_FUNCTION) ?
+            this.replaceWithFn(this.regExp, string) :
+            string.replace(this.regExp, unescape(this.output));
 
         case this.INPUT_WHOLE_WORDS:
           // necessary according to https://stackoverflow.com/q/1520800
@@ -94,16 +98,11 @@ const Substitution = (() => {
               }
               return result;
             }
-            return (this.outputType === this.OUTPUT_FUNCTION) ? this.replaceWithFn(this.output, word) : word;
+            return (this.outputType === this.OUTPUT_FUNCTION) ?
+              this.replaceWithFn(this.output, word) :
+              word;
           });
 
-        case this.INPUT_REG_EXP:
-          // necessary according to https://stackoverflow.com/q/1520800
-          this.regExp.lastIndex = 0;
-
-          return (this.outputType === this.OUTPUT_FUNCTION) ?
-            this.replaceWithFn(this.regExp, string) :
-            string.replace(this.regExp, unescape(this.output));
       }
 
     }
