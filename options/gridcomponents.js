@@ -194,8 +194,8 @@ class OutputTypeEditor extends DropdownEditor {
   colId = "outputType"
 
   options = [
+    "outputType.text",
     "outputType.function",
-    "outputType.text"
   ];
 }
 

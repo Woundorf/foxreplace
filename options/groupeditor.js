@@ -60,7 +60,7 @@ var groupEditor = (() => {
    */
   function validateSubstitution(params) {
     try {
-      new Substitution(params.data.input, params.data.output, params.data.caseSensitive, params.data.inputType, params.data.outputIsFunction);
+      new Substitution(params.data.input, params.data.output, params.data.caseSensitive, params.data.inputType, params.data.outputType);
       if (params.node.error) {
         delete params.node.error;
         params.api.refreshCells({ rowNodes: [params.node], force: true });
@@ -188,9 +188,9 @@ var groupEditor = (() => {
         field: "outputType",
         cellRenderer(params) {
           switch (Number(params.value)) {
+            case 0: return browser.i18n.getMessage("outputType.text");
             case 1: return browser.i18n.getMessage("outputType.function");
-            case 0:
-            default: return browser.i18n.getMessage("outputType.text");
+            default: return params.value
           }
         },
         cellEditor: OutputTypeEditor
@@ -221,7 +221,7 @@ var groupEditor = (() => {
         params.api.updateRowData({ remove: [params.data] });
       }
       else if (isLast && !isEmpty && !editor.currentlySearchingSubstitutions()) {
-        params.api.updateRowData({ add: [{ input: "", inputType: 0, output: "", caseSensitive: false, outputIsFunction: false }] });
+        params.api.updateRowData({ add: [{ input: "", inputType: 0, output: "", outputType: 0,  caseSensitive: false }] });
       }
 
       if (!isEmpty) validateSubstitution(params);
@@ -449,7 +449,7 @@ var groupEditor = (() => {
     },
 
     clearSubstitutions() {
-      substitutionsGridOptions.api.setRowData([{ input: "", inputType: 0, output: "", caseSensitive: false }]);
+      substitutionsGridOptions.api.setRowData([{ input: "", inputType: 0, outputType: 0, output: "", caseSensitive: false }]);
     },
 
     disableUrlsButtons() {
@@ -489,7 +489,7 @@ var groupEditor = (() => {
       urlsGridOptions.api.setRowData(urls);
 
       const substitutions = group.substitutions.map(s => s);  // shallow copy
-      substitutions.push({ input: "", inputType: 0, output: "", caseSensitive: false });
+      substitutions.push({ input: "", inputType: 0, outputType: 0, output: "", caseSensitive: false });
       substitutionsGridOptions.api.setRowData(substitutions);
     },
 
@@ -512,7 +512,7 @@ var groupEditor = (() => {
             node.data.output,
             node.data.caseSensitive,
             node.data.inputType,
-            node.data.outputIsFunction
+            node.data.outputType
           ));
         }
       });
