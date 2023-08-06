@@ -133,6 +133,7 @@ const Substitution = (() => {
       return {
         input: this.input,
         inputType: this.INPUT_TYPE_STRINGS[this.inputType],
+        outputType: this.OUTPUT_TYPE_STRINGS[this.outputType],
         output: this.output,
         caseSensitive: this.caseSensitive
       };
@@ -153,13 +154,15 @@ const Substitution = (() => {
    *  Constants.
    */
   Object.defineProperties(Substitution.prototype, {
+    // all `value: number` MUST correspond to the indices of the STRINGS
+    // to work correctly with this.toJSON and this.fromJSON
     INPUT_TEXT: { value: 0 },
     INPUT_WHOLE_WORDS: { value: 1 },
     INPUT_REG_EXP: { value: 2 },
     INPUT_TYPE_STRINGS: { value: ["text", "wholewords", "regexp"] },
     OUTPUT_TYPE_STRINGS: { value: ["text", "function"] },
-    OUTPUT_TEXT: { value: 3 },
-    OUTPUT_FUNCTION: { value: 4 },
+    OUTPUT_TEXT: { value: 0 },
+    OUTPUT_FUNCTION: { value: 1 },
   });
 
   // Unescapes backslash-escaped special characters in the given string.
