@@ -110,7 +110,20 @@ const Substitution = (() => {
 
     }
 
-    replaceWithFn(userReplaceInput, curStrToReplace) {
+    /**
+     *
+     * @remarks
+     * `this.output` will run as the `return` statement to `string.replace` and can use the same variables mentioned in
+     *   [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_function_as_the_replacement)
+     *
+     * @param pattern {string|RegExp} - matches against `curStrToReplace`
+     *   @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#parameters
+     * @param curStrToReplace {string}
+     *
+     * @return results of replacing `curStrToReplace` with the output of executing the user-provided JS code `this.output`.
+     *   if `pattern` fails to match `curStrToReplace`, this function returns the original `curStrToReplace`
+     */
+    replaceWithFn(pattern, curStrToReplace) {
 
       const matchesInStr = curStrToReplace.match(this.regExp)
       const numCaptureGroups = matchesInStr ? matchesInStr.length : 0;
@@ -121,12 +134,11 @@ const Substitution = (() => {
       }
 
       // MDN rates Function as more secure than eval. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#Do_not_ever_use_eval!
-      // the user-provided function can refer to the specified variables, along with the above `capture[i]` array
       // decision to put user-input as the `return` of the function because:
       //   1. assumption: most users will create simple one-line functions
       //   2. users can still write complex input via `(() => { /* arbitrary code; return $result */ })()`
       const fn = Function('match', ...captureGroupArgs, 'offset', 'string', 'groups', `return ${this.output}`);
-      return curStrToReplace.replace(userReplaceInput, fn);
+      return curStrToReplace.replace(pattern, fn);
     }
 
     /**
