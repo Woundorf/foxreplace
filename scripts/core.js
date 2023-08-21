@@ -28,7 +28,9 @@ const Substitution = (() => {
       this.outputType = +outputType;
       this.inputType = +inputType;
 
-      if (this.inputType < this.INPUT_TEXT || this.inputType > this.INPUT_REG_EXP) this.inputType = this.INPUT_TEXT;  // avoid invalid values
+      if (![this.INPUT_TEXT, this.INPUT_WHOLE_WORDS, this.INPUT_REG_EXP].includes(this.inputType)) this.inputType = this.INPUT_TEXT;
+      if (![this.OUTPUT_TEXT, this.OUTPUT_FUNCTION].includes(this.outputType)) this.outputType = this.OUTPUT_TEXT;
+
 
       switch (this.inputType) {
         case this.INPUT_TEXT:
