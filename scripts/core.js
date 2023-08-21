@@ -81,7 +81,8 @@ const Substitution = (() => {
           // necessary according to https://stackoverflow.com/q/1520800
           this.regExp.lastIndex = 0;
           return string.replace(this.regExp, (word, index, string) => {
-            // todo by someone who understands: clarify what the following block does and why it does it
+            // the following block has to do with correct functioning of replace whole words with non-ASCII characters
+            // including respecting the special strings $$, $&, etc
             if (index === 0 || this.firstCharCategory != charCategory(string.charAt(index - 1))) {
               const output = unescape(this.output);
               const re = /\$[\$\&\`\']/g;
