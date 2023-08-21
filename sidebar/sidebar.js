@@ -52,3 +52,24 @@ function onSubmit(event) {
 
 document.addEventListener("DOMContentLoaded", onLoad);
 document.addEventListener("unload", onUnload);
+
+(function toggleArbitraryCodeExecWarning() {
+
+  const arbitraryCodeWarningClassList = document.getElementsByClassName("arbitrary-code-warning")[0].classList;
+
+  document
+    .getElementsByName("outputType")[0]
+    .addEventListener("change", (e) => {
+
+      const isOutputTypeFunction = (e.target.value == 1)
+      if (isOutputTypeFunction) {
+        arbitraryCodeWarningClassList.remove("d-none");
+        arbitraryCodeWarningClassList.add("d-inline");
+        return;
+      }
+
+      arbitraryCodeWarningClassList.remove("d-inline");
+      arbitraryCodeWarningClassList.add("d-none");
+    });
+
+})();
