@@ -47,7 +47,6 @@ function replaceWindow(aWindow, aSubstitutionList, aPrefs) {
       case group.HTML_NONE: replaceText(doc, consecutiveGroups, aPrefs); break;
       case group.HTML_OUTPUT: replaceTextWithHtml(doc, consecutiveGroups, aPrefs); break;
       case group.HTML_INPUT_OUTPUT: replaceHtml(doc, consecutiveGroups, aPrefs); break;
-      default: console.error('Fox Replace: Invalid output type');
     }
   }
 }
