@@ -380,7 +380,7 @@ function isExclusionUrl(url) {
  */
 function substitutionListToJSON(list) {
   return {
-    version: "2.1",
+    version: "2.6",
     groups: list.map(group => group.toJSON())
   };
 }
@@ -399,8 +399,8 @@ function substitutionListFromJSON(json) {
  *  Checks if the version of the given JSON is supported or not and returns a status and an optional message to explain it.
  */
 function checkVersion(json) {
-  const currentVersion = '2.1';
-  const oldVersions = ['0.14', '0.15'];
+  const currentVersion = '2.6';
+  const oldVersions = ['0.14', '0.15', '2.1'];
 
   if (json.version == currentVersion) return { status: true };
   else if (oldVersions.includes(json.version)) return { status: true, message: browser.i18n.getMessage('deprecatedJsonVersion', [json.version, currentVersion]) };
