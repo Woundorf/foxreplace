@@ -161,7 +161,7 @@ const Substitution = (() => {
    */
   Substitution.fromJSON = function(json) {
     const inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(json.inputType);
-    const outputType = this.prototype.OUTPUT_TYPE_STRINGS.indexOf(json.outputType);
+    const outputType = Math.max(this.prototype.OUTPUT_TYPE_STRINGS.indexOf(json.outputType), 0);
     return new Substitution(json.input, json.output, json.caseSensitive, inputType, outputType);
   };
 
