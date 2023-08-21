@@ -146,7 +146,7 @@ class DropdownEditor {
   init(params) {
     this.gui = $('<select>' +
                   this.options.reduce((accum, curOption, i) =>
-                    accum + DropdownEditor.getOption(params, i, browser.i18n.getMessage(curOption)) + accum
+                    accum + DropdownEditor.getOption(params, i, browser.i18n.getMessage(curOption))
                   , '') +
                  '</select>')[0];
     this.width = params.column.actualWidth;
