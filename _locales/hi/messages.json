@@ -66,6 +66,14 @@
 		"message": "नियमित अभिव्यक्ति"
 	},
 
+  "outputType.text": {
+    "message": "मूलपाठ"
+  },
+
+  "outputType.function": {
+    "message": "प्रकार्य"
+  },
+
 	"options.title": {
 		"message": "FoxReplace विकल्प"
 	},
@@ -133,6 +141,10 @@
 	"options.subscription.status": {
 		"message": "स्थितिः"
 	},
+
+  "options.output.function.warning": {
+    "message": "चेतावनी: \"फ़ंक्शन के साथ बदलें\" सेटिंग का उपयोग मनमाने ढंग से जावास्क्रिप्ट निष्पादन की अनुमति देता है"
+  },
 
 	"options.subscription.warning.header": {
 		"message": "चेतावनीः केवल विश्वसनीय स्रोतों का उपयोग करें"
@@ -278,6 +290,10 @@
 		"message": "के साथ"
 	},
 
+  "list.outputTypeHeader": {
+    "message": "उत्पादन का प्रकार"
+  },
+
 	"list.outputHint": {
 		"message": "आउटपुट टाइप करें..."
 	},
@@ -292,6 +308,12 @@
 
 	"no": {
 		"message": "नहीं"
+		
+		
+		
+		
+		
+		
 	},
 
 	"options.warning.selectFile": {
@@ -328,7 +350,7 @@
 	},
 
 	"menu.autoReplaceOnLoad": {
-		"message": "पृष्ठ भार पर स्वचालित प्रतिस्थापन लागू करें"
+		"message": "पृष्ठ भार पर स्वचालित प्रतिस्थापन लागू करें" 
 	},
 
 	"menu.options": {
@@ -349,6 +371,10 @@
 
 	"toolbar.caseSensitive": {
 		"message": "मैच का मामला"
+		
+		
+		
+		
 	},
 
 	"toolbar.replace": {
@@ -381,7 +407,6 @@
 	},
 
 	"keys.shift": {
-		"message": "Shift"
+		"message": "Shift"			   
 	}
-
 }
