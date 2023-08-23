@@ -18,20 +18,20 @@
  * Applies aSubstitutionList to the document of aWindow.
  */
 function replaceWindow(aWindow, aSubstitutionList, aPrefs) {
-  var doc = aWindow.document;
+  const doc = aWindow.document;
   if (!doc || !("body" in doc)) return;
 
-  var url = doc.URL;
+  const url = doc.URL;
   if (!url) return;
 
-  let applicableGroups = aSubstitutionList.filter(group => group.matches(url));
+  const applicableGroups = aSubstitutionList.filter(group => group.matches(url));
 
   // Optimization: handle together consecutive groups with the same HTML mode to reduce the number of renders
 
   for (let i = 0; i < applicableGroups.length; i++) {
-    let group = applicableGroups[i];
-    let html = group.html;
-    let consecutiveGroups = [group];
+    const group = applicableGroups[i];
+    const html = group.html;
+    const consecutiveGroups = [group];
 
     for (let j = i + 1; j < applicableGroups.length; j++) {
       if (applicableGroups[j].html == html) {
@@ -62,16 +62,16 @@ function replaceText(aDocument, aGroups, aPrefs) {
   // TODO any other xml document won't be replaced
 
   // Replace text nodes
-  var textNodesXpath = "/html/head/title/text()"
+  const textNodesXpath = "/html/head/title/text()"
                      + "|/html/body//text()[not(parent::script)]";
-  var textNodes = aDocument.evaluate(textNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-  var nTextNodes = textNodes.snapshotLength;
-  for (var i = 0; i < nTextNodes; i++) {
-    var textNode = textNodes.snapshotItem(i);
-    let oldTextContent = textNode.textContent;
+  const textNodes = aDocument.evaluate(textNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+  const nTextNodes = textNodes.snapshotLength;
+  for (let i = 0; i < nTextNodes; i++) {
+    const textNode = textNodes.snapshotItem(i);
+    const oldTextContent = textNode.textContent;
     let newTextContent = oldTextContent;
 
-    for (let group of aGroups) {
+    for (const group of aGroups) {
       newTextContent = group.replace(newTextContent);
     }
 
@@ -80,7 +80,7 @@ function replaceText(aDocument, aGroups, aPrefs) {
 
       // Fire change event for textareas with default value (issue 49)
       if (textNode.parentNode.localName == "textarea" && textNode.parentNode.value == textNode.parentNode.defaultValue) {
-        let event = aDocument.createEvent("HTMLEvents");
+        const event = aDocument.createEvent("HTMLEvents");
         event.initEvent("change", true, false);
         textNode.parentNode.dispatchEvent(event);
       }
@@ -88,7 +88,7 @@ function replaceText(aDocument, aGroups, aPrefs) {
   }
 
   // Replace nodes with a "value" property
-  var valueNodesXpath = "/html/body//input[@type='text']"
+  const valueNodesXpath = "/html/body//input[@type='text']"
                       + "|/html/body//input[not(@type)]"
                       + "|/html/body//textarea"
                       + "|/html/body//@abbr"
@@ -144,13 +144,13 @@ function replaceText(aDocument, aGroups, aPrefs) {
 
   // Replace scripts
   if (aPrefs.replaceScripts) {
-    let scriptNodesXpath = "/html/body/script";
-    let scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-    let nScriptNodes = scriptNodes.snapshotLength;
+    const scriptNodesXpath = "/html/body/script";
+    const scriptNodes = aDocument.evaluate(scriptNodesXpath, aDocument, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+    const nScriptNodes = scriptNodes.snapshotLength;
     for (let i = 0; i < nScriptNodes; i++) {
-      let scriptNode = scriptNodes.snapshotItem(i);
+      const scriptNode = scriptNodes.snapshotItem(i);
       let newText = scriptNode.text;
-      for (let group of aGroups) {
+      for (const group of aGroups) {
         newText = group.replace(newText);
       }
       if (newText != scriptNode.text) replaceScript(aDocument, scriptNode, newText);

@@ -168,10 +168,10 @@ var eventListeners = {
       list.push(node.data);
     });
 
-    let json = substitutionListToJSON(list);
-    let jsonText = JSON.stringify(json, null, 2);
-    let blob = new Blob([jsonText], { type: "application/json" });
-    let url = URL.createObjectURL(blob);
+    const json = substitutionListToJSON(list);
+    const jsonText = JSON.stringify(json, null, 2);
+    const blob = new Blob([jsonText], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
     let downloadId;
 
     browser.downloads.download({
@@ -236,7 +236,7 @@ function prepareGroupEditor(event) {
   }
 }
 
-function closeGroupEditor(event) {
+function closeGroupEditor(_event) {
   groupEditor.resetSearch();
   $('#groupEditorModal').modal('hide');
 }

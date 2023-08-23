@@ -28,7 +28,7 @@ browser.runtime.onMessage.addListener(message => {
   switch (message.key) {
     case "replace":
       storage.getPrefs().then(prefs => {
-        let substitutionList = substitutionListFromJSON(message.list);
+        const substitutionList = substitutionListFromJSON(message.list);
         replaceWindow(window, substitutionList, prefs);
       });
       break;

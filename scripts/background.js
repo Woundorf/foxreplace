@@ -28,11 +28,11 @@ browser.runtime.onMessage.addListener(message => {
  * Applies the substitution list contained in aMessage to the current tab.
  */
 function replaceCurrentTab(aMessage) {
-  let options = { active: true };
+  const options = { active: true };
   if (aMessage.key != 'replaceWithListPeriod') options.currentWindow = true;    // limit to current window except for periodic substitutions
 
   browser.tabs.query(options).then(tabs => {
-    for (let tab of tabs) browser.tabs.sendMessage(tab.id, aMessage);
+    for (const tab of tabs) browser.tabs.sendMessage(tab.id, aMessage);
   });
 }
 

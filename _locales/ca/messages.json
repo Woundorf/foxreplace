@@ -66,6 +66,14 @@
     "message": "Expressió regular"
   },
 
+  "outputType.text": {
+    "message": "Text"
+  },
+
+  "outputType.function": {
+    "message": "Funció"
+  },
+
   "options.title": {
     "message": "Opcions de FoxReplace"
   },
@@ -132,6 +140,10 @@
 
   "options.subscription.status": {
     "message": "Estat:"
+  },
+
+  "options.output.function.warning": {
+    "message": "Avís: L'ús de la configuració \"substitueix per funció\" permet l'execució arbitrària de JavaScript"
   },
 
   "options.subscription.warning.header": {
@@ -278,8 +290,16 @@
     "message": "Amb"
   },
 
+  "list.outputTypeHeader": {
+    "message": "Tipus de sortida"
+  },
+
   "list.outputHint": {
     "message": "Escriviu la sortida..."
+  },
+
+  "list.outputFunction": {
+    "message": "Sortida de la funció"
   },
 
   "list.caseSensitiveHeader": {
@@ -349,6 +369,10 @@
 
   "toolbar.caseSensitive": {
     "message": "Distingeix entre majúscules i minúscules"
+  },
+
+  "toolbar.outputIsFunction": {
+    "message": "Funció de sortida"
   },
 
   "toolbar.replace": {

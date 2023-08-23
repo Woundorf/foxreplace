@@ -17,36 +17,40 @@
 /**
  *  Represents a single substitution with an input, an output and some additional parameters.
  */
-var Substitution = (() => {
+const Substitution = (() => {
 
   class Substitution {
 
-    constructor(input, output, caseSensitive = false, inputType = this.INPUT_TEXT) {
+    constructor(input, output, caseSensitive = false, inputType = this.INPUT_TEXT, outputType = this.OUTPUT_FUNCTION) {
       this.input = input;
       this.output = output;
-      this.caseSensitive = Boolean(caseSensitive);
-      this.inputType = +inputType;  // coalesce to number
-      if (this.inputType < this.INPUT_TEXT || this.inputType > this.INPUT_REG_EXP) this.inputType = this.INPUT_TEXT;  // avoid invalid values
+      this.caseSensitive = !!caseSensitive;
+      this.outputType = +outputType;
+      this.inputType = +inputType;
+
+      if (![this.INPUT_TEXT, this.INPUT_WHOLE_WORDS, this.INPUT_REG_EXP].includes(this.inputType)) this.inputType = this.INPUT_TEXT;
+      if (![this.OUTPUT_TEXT, this.OUTPUT_FUNCTION].includes(this.outputType)) this.outputType = this.OUTPUT_TEXT;
+
 
       switch (this.inputType) {
         case this.INPUT_TEXT:
           {
-            let unescapedInput = unescape(this.input);
-            let unicodeInput = stringToUnicode(unescapedInput);
+            const unescapedInput = unescape(this.input);
+            const unicodeInput = stringToUnicode(unescapedInput);
             // for newlines, non-breaking spaces, multiple spaces, etc.,
             // which the browser renders as a single space
-            let spaceyInput = unicodeInput.replaceAll('\\u0020', '\\s+');
+            const spaceyInput = unicodeInput.replaceAll('\\u0020', '\\s+');
             this.regExp = new RegExp(spaceyInput, this.caseSensitive ? "g" : "gi");
           }
           break;
         case this.INPUT_WHOLE_WORDS:
           {
-            let unescapedInput = unescape(this.input);
-            let unicodeInput = stringToUnicode(unescapedInput);
+            const unescapedInput = unescape(this.input);
+            const unicodeInput = stringToUnicode(unescapedInput);
             // for newlines, non-breaking spaces, multiple spaces, etc.,
             // which the browser renders as a single space
-            let spaceyInput = unicodeInput.replaceAll('\\u0020', '\\s+');
-            let suffix = wordEndRegExpSource(unescapedInput.charAt(unescapedInput.length - 1));
+            const spaceyInput = unicodeInput.replaceAll('\\u0020', '\\s+');
+            const suffix = wordEndRegExpSource(unescapedInput.charAt(unescapedInput.length - 1));
             this.regExp = new XRegExp(spaceyInput + suffix, this.caseSensitive ? "g" : "gi");
             this.firstCharCategory = charCategory(unescapedInput.charAt(0));
           }
@@ -64,24 +68,30 @@ var Substitution = (() => {
       if (string === undefined || string === null) return string;
 
       switch (this.inputType) {
+        case this.INPUT_REG_EXP:
         case this.INPUT_TEXT:
           // necessary according to https://stackoverflow.com/q/1520800
           this.regExp.lastIndex = 0;
-          return string.replace(this.regExp, unescape(this.output));
+
+          return (this.outputType === this.OUTPUT_FUNCTION) ?
+            this.replaceWithFn(this.regExp, string) :
+            string.replace(this.regExp, unescape(this.output));
 
         case this.INPUT_WHOLE_WORDS:
           // necessary according to https://stackoverflow.com/q/1520800
           this.regExp.lastIndex = 0;
           return string.replace(this.regExp, (word, index, string) => {
+            // the following block has to do with correct functioning of replace whole words with non-ASCII characters
+            // including respecting the special strings $$, $&, etc
             if (index === 0 || this.firstCharCategory != charCategory(string.charAt(index - 1))) {
-              let output = unescape(this.output);
-              let re = /\$[\$\&\`\']/g;
-              let fragments = output.split(re);
-              let nFragments = fragments.length;
-              let result = fragments[0];
-              let i = fragments[0].length + 1;    // index of the char after the $
+              const output = unescape(this.output);
+              const re = /\$[\$\&\`\']/g;
+              const fragments = output.split(re);
+              const nFragments = fragments.length;
+              const result = fragments[0];
+              const i = fragments[0].length + 1;    // index of the char after the $
               for (let j = 1; j < nFragments; j++) {
-                let c = output.charAt(i);
+                const c = output.charAt(i);
                 if (c == "$") result += "$";
                 else if (c == "&") result += word;
                 else if (c == "`") result += string.slice(0, index);
@@ -91,16 +101,44 @@ var Substitution = (() => {
               }
               return result;
             }
-            else {
-              return word;
-            }
+            return (this.outputType === this.OUTPUT_FUNCTION) ?
+              this.replaceWithFn(this.output, word) :
+              word;
           });
 
-        case this.INPUT_REG_EXP:
-          // necessary according to https://stackoverflow.com/q/1520800
-          this.regExp.lastIndex = 0;
-          return string.replace(this.regExp, unescape(this.output));
       }
+
+    }
+
+    /**
+     *
+     * @remarks
+     * `this.output` will run as the `return` statement to `string.replace` and can use the same variables mentioned in
+     *   [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_function_as_the_replacement)
+     *
+     * @param pattern {string|RegExp} - matches against `curStrToReplace`
+     *   @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#parameters
+     * @param curStrToReplace {string}
+     *
+     * @return results of replacing `curStrToReplace` with the output of executing the user-provided JS code `this.output`.
+     *   if `pattern` fails to match `curStrToReplace`, this function returns the original `curStrToReplace`
+     */
+    replaceWithFn(pattern, curStrToReplace) {
+
+      const matchesInStr = curStrToReplace.match(this.regExp)
+      const numCaptureGroups = matchesInStr ? matchesInStr.length : 0;
+      const captureGroupArgs = Array.from(Array(numCaptureGroups)).map((_elt, i) => `p${i+1}`);
+
+      if (!matchesInStr) {
+        return curStrToReplace;
+      }
+
+      // MDN rates Function as more secure than eval. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#Do_not_ever_use_eval!
+      // decision to put user-input as the `return` of the function because:
+      //   1. assumption: most users will create simple one-line functions
+      //   2. users can still write complex input via `(() => { /* arbitrary code; return $result */ })()`
+      const fn = Function('match', ...captureGroupArgs, 'offset', 'string', 'groups', `return ${this.output}`);
+      return curStrToReplace.replace(pattern, fn);
     }
 
     /**
@@ -110,6 +148,7 @@ var Substitution = (() => {
       return {
         input: this.input,
         inputType: this.INPUT_TYPE_STRINGS[this.inputType],
+        outputType: this.OUTPUT_TYPE_STRINGS[this.outputType],
         output: this.output,
         caseSensitive: this.caseSensitive
       };
@@ -121,18 +160,24 @@ var Substitution = (() => {
    *  Creates a substitution from the given JSON.
    */
   Substitution.fromJSON = function(json) {
-    let inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(json.inputType);
-    return new Substitution(json.input, json.output, json.caseSensitive, inputType);
+    const inputType = this.prototype.INPUT_TYPE_STRINGS.indexOf(json.inputType);
+    const outputType = Math.max(this.prototype.OUTPUT_TYPE_STRINGS.indexOf(json.outputType), 0);
+    return new Substitution(json.input, json.output, json.caseSensitive, inputType, outputType);
   };
 
   /**
    *  Constants.
    */
   Object.defineProperties(Substitution.prototype, {
+    // all `value: number` MUST correspond to the indices of the STRINGS
+    // to work correctly with this.toJSON and this.fromJSON
     INPUT_TEXT: { value: 0 },
     INPUT_WHOLE_WORDS: { value: 1 },
     INPUT_REG_EXP: { value: 2 },
-    INPUT_TYPE_STRINGS: { value: ["text", "wholewords", "regexp"] }
+    INPUT_TYPE_STRINGS: { value: ["text", "wholewords", "regexp"] },
+    OUTPUT_TYPE_STRINGS: { value: ["text", "function"] },
+    OUTPUT_TEXT: { value: 0 },
+    OUTPUT_FUNCTION: { value: 1 },
   });
 
   // Unescapes backslash-escaped special characters in the given string.
@@ -195,7 +240,7 @@ var Substitution = (() => {
 /**
  *  Represents a group of substitutions that are applied to the same set of URLs.
  */
-var SubstitutionGroup = (() => {
+const SubstitutionGroup = (() => {
 
   class SubstitutionGroup {
 
@@ -225,7 +270,7 @@ var SubstitutionGroup = (() => {
           exclusion = false;
         }
 
-        let regExp = new RegExp(url.replace(/\*+/g, "*")      // remove multiple wildcards
+        const regExp = new RegExp(url.replace(/\*+/g, "*")      // remove multiple wildcards
                                    .replace(/(\W)/g, "\\$1")  // escape special symbols
                                    .replace(/\\\*/g, ".*")    // replace wildcards by .*
                                    .replace(/^\\\|/, "^")     // process anchor at expression start
@@ -335,7 +380,7 @@ function isExclusionUrl(url) {
  */
 function substitutionListToJSON(list) {
   return {
-    version: "2.1",
+    version: "2.6",
     groups: list.map(group => group.toJSON())
   };
 }
@@ -354,8 +399,8 @@ function substitutionListFromJSON(json) {
  *  Checks if the version of the given JSON is supported or not and returns a status and an optional message to explain it.
  */
 function checkVersion(json) {
-  const currentVersion = '2.1';
-  const oldVersions = ['0.14', '0.15'];
+  const currentVersion = '2.6';
+  const oldVersions = ['0.14', '0.15', '2.1'];
 
   if (json.version == currentVersion) return { status: true };
   else if (oldVersions.includes(json.version)) return { status: true, message: browser.i18n.getMessage('deprecatedJsonVersion', [json.version, currentVersion]) };
