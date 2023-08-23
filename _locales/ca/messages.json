@@ -143,7 +143,7 @@
   },
 
   "options.output.function.warning": {
-    "message": "Avís: L'ús de la configuració \"substitueix per funció\" permet l'execució arbitrària de JavaScript"
+    "message": "Avís: l'ús de l'opció «substitueix amb funció» permet l'execució arbitrària de JavaScript"
   },
 
   "options.subscription.warning.header": {
@@ -298,10 +298,6 @@
     "message": "Escriviu la sortida..."
   },
 
-  "list.outputFunction": {
-    "message": "Sortida de la funció"
-  },
-
   "list.caseSensitiveHeader": {
     "message": "Distingeix entre majúscules i minúscules"
   },
@@ -369,10 +365,6 @@
 
   "toolbar.caseSensitive": {
     "message": "Distingeix entre majúscules i minúscules"
-  },
-
-  "toolbar.outputIsFunction": {
-    "message": "Funció de sortida"
   },
 
   "toolbar.replace": {

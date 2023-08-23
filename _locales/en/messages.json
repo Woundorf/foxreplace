@@ -143,7 +143,7 @@
   },
 
   "options.output.function.warning": {
-    "message": "Warning: Using \"replace with function\" setting allows for arbitrary JavaScript execution"
+    "message": "Warning: using \"replace with function\" setting allows for arbitrary JavaScript execution"
   },
 
   "options.subscription.warning.header": {
@@ -291,15 +291,11 @@
   },
 
   "list.outputTypeHeader": {
-    "message": "Output Type"
+    "message": "Output type"
   },
 
   "list.outputHint": {
     "message": "Type output..."
-  },
-
-  "list.outputFunction": {
-    "message": "Function output"
   },
 
   "list.caseSensitiveHeader": {
@@ -369,10 +365,6 @@
 
   "toolbar.caseSensitive": {
     "message": "Match case"
-  },
-
-  "toolbar.outputIsFunction": {
-    "message": "Output function"
   },
 
   "toolbar.replace": {
