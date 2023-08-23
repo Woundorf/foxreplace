@@ -27,16 +27,23 @@ function onUnload() {
 function onSubmit(event) {
   event.preventDefault(); // we just want to get the values, we don't want to submit anything
 
-  let formData = new FormData(document.getElementById('form'));
-  let formValues = {};
+  const formData = new FormData(document.getElementById('form'));
+  const formValues = {};
 
-  for (let [key, value] of formData) {
+  for (const [key, value] of formData) {
     formValues[key] = value;
   }
   // Checkbox values are returned as 'on' when checked and missing (thus undefined) when unchecked. This works well when converted to Boolean.
 
-  let substitutionList = [new SubstitutionGroup("", [], [new Substitution(formValues.input, formValues.output, formValues.caseSensitive, formValues.inputType)],
-                                                formValues.html, true)];
+  const substitutionList = [
+    new SubstitutionGroup(
+      "",
+      [],
+      [new Substitution(formValues.input, formValues.output, formValues.caseSensitive, formValues.inputType, formValues.outputType)],
+      formValues.html,
+      true
+    )
+  ];
   browser.runtime.sendMessage({
     key: "replace",
     list: substitutionListToJSON(substitutionList)
@@ -45,3 +52,24 @@ function onSubmit(event) {
 
 document.addEventListener("DOMContentLoaded", onLoad);
 document.addEventListener("unload", onUnload);
+
+(function toggleArbitraryCodeExecWarning() {
+
+  const arbitraryCodeWarningClassList = document.getElementsByClassName("arbitrary-code-warning")[0].classList;
+
+  document
+    .getElementsByName("outputType")[0]
+    .addEventListener("change", (e) => {
+
+      const isOutputTypeFunction = (e.target.value == 1)
+      if (isOutputTypeFunction) {
+        arbitraryCodeWarningClassList.remove("d-none");
+        arbitraryCodeWarningClassList.add("d-inline");
+        return;
+      }
+
+      arbitraryCodeWarningClassList.remove("d-inline");
+      arbitraryCodeWarningClassList.add("d-none");
+    });
+
+})();

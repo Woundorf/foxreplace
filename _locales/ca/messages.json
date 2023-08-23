@@ -66,6 +66,14 @@
     "message": "Expressió regular"
   },
 
+  "outputType.text": {
+    "message": "Text"
+  },
+
+  "outputType.function": {
+    "message": "Funció"
+  },
+
   "options.title": {
     "message": "Opcions de FoxReplace"
   },
@@ -132,6 +140,10 @@
 
   "options.subscription.status": {
     "message": "Estat:"
+  },
+
+  "options.output.function.warning": {
+    "message": "Avís: l'ús de l'opció «substitueix amb funció» permet l'execució arbitrària de JavaScript"
   },
 
   "options.subscription.warning.header": {
@@ -276,6 +288,10 @@
 
   "list.outputHeader": {
     "message": "Amb"
+  },
+
+  "list.outputTypeHeader": {
+    "message": "Tipus de sortida"
   },
 
   "list.outputHint": {

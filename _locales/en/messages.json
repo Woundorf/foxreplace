@@ -66,6 +66,14 @@
     "message": "Regular expression"
   },
 
+  "outputType.text": {
+    "message": "Text"
+  },
+
+  "outputType.function": {
+    "message": "Function"
+  },
+
   "options.title": {
     "message": "FoxReplace options"
   },
@@ -132,6 +140,10 @@
 
   "options.subscription.status": {
     "message": "Status:"
+  },
+
+  "options.output.function.warning": {
+    "message": "Warning: using \"replace with function\" setting allows for arbitrary JavaScript execution"
   },
 
   "options.subscription.warning.header": {
@@ -276,6 +288,10 @@
 
   "list.outputHeader": {
     "message": "With"
+  },
+
+  "list.outputTypeHeader": {
+    "message": "Output type"
   },
 
   "list.outputHint": {
