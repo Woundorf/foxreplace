@@ -1,0 +1,412 @@
+{
+
+	"extensionDescription": {
+		"message": "वेब पृष्ठों में पाठ को बदलने की सुविधा देता है । आप एक प्रतिस्थापन सूची को परिभाषित कर सकते हैं और इसे स्वचालित रूप से या अपने विवेक से लागू कर सकते हैं या व्यक्तिगत प्रतिस्थापन कर सकते हैं । आप इसे फ़िल्टर के रूप में या सिर्फ मनोरंजन के लिए उपयोग कर सकते हैं :"
+	},
+
+	"generalSubstitutions": {
+		"message": "सामान्य प्रतिस्थापन"
+	},
+
+	"substitutionsForUrl": {
+		"message": "$url$ के लिए प्रतिस्थापन",
+		"placeholders": {
+			"url": {
+				"content": "$1"
+			}
+		}
+	},
+
+	"substitutionsForUrls": {
+		"message": "$url$ और अन्य के लिए प्रतिस्थापन",
+		"placeholders": {
+			"url": {
+				"content": "$1"
+			}
+		}
+	},
+
+	"warning": {
+		"message": "चेतावनी"
+	},
+
+	"deprecatedJsonVersion": {
+		"message": "यह फ़ाइल एक पुराने प्रारूप का उपयोग करती है (संस्करण $version$) जो भविष्य में असमर्थित हो जाएगा. आपको इसे नवीनतम संस्करण में अद्यतन करना चाहिए ($currentVersion$)।",
+		"placeholders": {
+			"version": {
+				"content": "$1"
+			},
+			"currentVersion": {
+				"content": "$2"
+			}
+		}
+	},
+
+	"unsupportedJsonVersion": {
+		"message": "यह फ़ाइल असमर्थित प्रारूपः संस्करण $version$। वर्तमान संस्करण $currentVersion$ का उपयोग करती है।",
+		"placeholders": {
+			"version": {
+				"content": "$1"
+			},
+			"currentVersion": {
+				"content": "$2"
+			}
+		}
+	},
+
+	"inputType.text": {
+		"message": "पाठ"
+	},
+
+	"inputType.wholeWords": {
+		"message": "पूरे शब्द"
+	},
+
+	"inputType.regExp": {
+		"message": "नियमित अभिव्यक्ति"
+	},
+
+  "outputType.text": {
+    "message": "मूलपाठ"
+  },
+
+  "outputType.function": {
+    "message": "प्रकार्य"
+  },
+
+	"options.title": {
+		"message": "FoxReplace विकल्प"
+	},
+
+	"options.substitutionList": {
+		"message": "प्रतिस्थापन सूची"
+	},
+
+	"options.add": {
+		"message": "जोड़ें"
+	},
+
+	"options.clear": {
+		"message": "साफ़ करें"
+	},
+
+	"options.moveTop": {
+		"message": "शीर्ष पर जाएँ"
+	},
+
+	"options.moveUp": {
+		"message": "ऊपर जाएँ"
+	},
+
+	"options.moveDown": {
+		"message": "नीचे जाएँ"
+	},
+
+	"options.moveBottom": {
+		"message": "नीचे की ओर जाएँ"
+	},
+
+	"options.import": {
+		"message": "आयात करें"
+	},
+
+	"options.importFromUrl": {
+		"message": "URL से आयात करें"
+	},
+
+	"options.export": {
+		"message": "निर्यात करें"
+	},
+
+	"options.resetColumns": {
+		"message": "स्तंभों को रीसेट करें"
+	},
+
+	"options.subscription.header": {
+		"message": "URL से समय - समय पर अद्यतन करें"
+	},
+
+	"options.subscription.enable": {
+		"message": "सक्रिय करें"
+	},
+
+	"options.subscription.url": {
+		"message": "URL"
+	},
+
+	"options.subscription.period": {
+		"message": "अवधि (मिनट) "
+	},
+
+	"options.subscription.status": {
+		"message": "स्थितिः"
+	},
+
+  "options.output.function.warning": {
+    "message": "चेतावनी: \"फ़ंक्शन के साथ बदलें\" सेटिंग का उपयोग मनमाने ढंग से जावास्क्रिप्ट निष्पादन की अनुमति देता है"
+  },
+
+	"options.subscription.warning.header": {
+		"message": "चेतावनीः केवल विश्वसनीय स्रोतों का उपयोग करें"
+	},
+
+	"options.subscription.warning.content": {
+		"message": "दूरस्थ सर्वर से प्रतिस्थापन सूची को अद्यतन करने में संभावित सुरक्षा और गोपनीयता समस्याएं हैं. एक दुर्भावनापूर्ण सर्वर आपके ब्राउज़र पर कोड निष्पादित कर सकता है और इसका उपयोग आपकी जानकारी चुराने या किसी अन्य प्रकार के हमले करने के लिए कर सकता है. इस प्रकार आपको केवल उस सर्वर से दूरस्थ यूआरएल का उपयोग करना चाहिए जिस पर आप भरोसा करते हैं।"
+	},
+
+	"options.otherSettings": {
+		"message": "अन्य सेटिंग्स"
+	},
+
+	"options.enableContextMenu": {
+		"message": "संदर्भ मेनू सक्रिय करें"
+	},
+
+	"options.autoReplaceOnLoad": {
+		"message": "पृष्ठ भार पर स्वचालित प्रतिस्थापन लागू करें"
+	},
+
+	"options.autoReplacePeriodically": {
+		"message": "हर बार स्वचालित प्रतिस्थापन लागू करें"
+	},
+
+	"options.autoReplacePeriodUnits": {
+		"message": "सेकंड"
+	},
+
+	"options.replaceUrls": {
+		"message": "URL (लिंक और छवि स्रोत) को बदलें (चेतावनीः यह पृष्ठ व्यवहार को बदल सकता है) "
+	},
+
+	"options.replaceScripts": {
+		"message": "लिपियों को बदलें (चेतावनीः यह पृष्ठ व्यवहार को बदल सकता है) "
+	},
+
+	"options.confirmClearGroups.content": {
+		"message": "इससे पूरी सूची साफ हो जाएगी। क्या आप निश्चित हैं"
+	},
+
+	"options.confirmClearGroups.clear": {
+		"message": "साफ़ करें"
+	},
+
+	"options.confirmClearGroups.cancel": {
+		"message": "रद्द करें"
+	},
+
+	"options.importAndAppend": {
+		"message": "आयात और परिशिष्ट"
+	},
+
+	"options.importAndOverwrite": {
+		"message": "आयात और ओवरराइट करें"
+	},
+
+	"options.ok": {
+		"message": "ठीक है"
+	},
+
+	"options.cancel": {
+		"message": "रद्द करें"
+	},
+
+	"options.apply": {
+		"message": "आवेदन करें"
+	},
+
+	"options.group.enabled": {
+		"message": "सक्रिय करें"
+	},
+
+	"options.group.mode": {
+		"message": "मोड"
+	},
+
+	"options.group.mode.autoAndManual": {
+		"message": "स्वचालित और मैनुअल"
+	},
+
+	"options.group.mode.auto": {
+		"message": "ऑटो"
+	},
+
+	"options.group.mode.manual": {
+		"message": "मैनुअल"
+	},
+
+	"options.group.name": {
+		"message": "नाम"
+	},
+
+	"options.group.search": {
+		"message": "खोजें"
+	},
+
+	"html": {
+		"message": "HTML"
+	},
+
+	"html.none": {
+		"message": "नहीं"
+	},
+
+	"html.output": {
+		"message": "केवल आउटपुट"
+	},
+
+	"html.inputOutput": {
+		"message": "इनपुट और आउटपुट"
+	},
+
+	"options.group.url": {
+		"message": "URL"
+	},
+
+	"options.group.urls": {
+		"message": "URLs"
+	},
+
+	"options.group.substitutions": {
+		"message": "प्रतिस्थापन"
+	},
+
+	"list.urlHint": {
+		"message": "URL टाइप करें..."
+	},
+
+	"list.inputHeader": {
+		"message": "बदलें"
+	},
+
+	"list.inputHint": {
+		"message": "टाइप करें इनपुट ...(आवश्यक) "
+	},
+
+	"list.inputTypeHeader": {
+		"message": "टाइप करें"
+	},
+
+	"list.outputHeader": {
+		"message": "के साथ"
+	},
+
+  "list.outputTypeHeader": {
+    "message": "उत्पादन का प्रकार"
+  },
+
+	"list.outputHint": {
+		"message": "आउटपुट टाइप करें..."
+	},
+
+	"list.caseSensitiveHeader": {
+		"message": "मैच का मामला"
+	},
+
+	"yes": {
+		"message": "हां"
+	},
+
+	"no": {
+		"message": "नहीं"
+		
+		
+		
+		
+		
+		
+	},
+
+	"options.warning.selectFile": {
+		"message": "एक फ़ाइल चुनें"
+	},
+
+	"options.warning.enterUrl": {
+		"message": "URL दर्ज करें"
+	},
+
+	"options.warning.atLeastOneSubstitutionAndNoErrors": {
+		"message": "आपको कम से कम एक प्रतिस्थापन जोड़ना होगा और सभी त्रुटियों को ठीक करना होगा"
+	},
+
+	"options.error.invalidJson": {
+		"message": "$url$ पर अमान्य JSON",
+		"placeholders": {
+			"url": {
+				"content": "$1"
+			}
+		}
+	},
+
+	"options.error.cantConnect": {
+		"message": "सर्वर से जुड़ नहीं सकता है"
+	},
+
+	"menu.replace": {
+		"message": "प्रतिस्थापित करें..."
+	},
+
+	"menu.replaceWithList": {
+		"message": "हस्तचालित प्रतिस्थापन लागू करें"
+	},
+
+	"menu.autoReplaceOnLoad": {
+		"message": "पृष्ठ भार पर स्वचालित प्रतिस्थापन लागू करें" 
+	},
+
+	"menu.options": {
+		"message": "विकल्प..."
+	},
+
+	"menu.help": {
+		"message": "मदद करें"
+	},
+
+	"toolbar.input": {
+		"message": "बदलें"
+	},
+
+	"toolbar.output": {
+		"message": "के साथ"
+	},
+
+	"toolbar.caseSensitive": {
+		"message": "मैच का मामला"
+		
+		
+		
+		
+	},
+
+	"toolbar.replace": {
+		"message": "बदलें"
+	},
+
+	"subscriptionStatus.disabled": {
+		"message": "अक्षम"
+	},
+
+	"subscriptionStatus.updating": {
+		"message": "अद्यतन..."
+	},
+
+	"subscriptionStatus.lastUpdate": {
+		"message": "अंतिम अद्यतनः $dateTime$",
+		"placeholders": {
+			"dateTime": {
+				"content": "$1"
+			}
+		}
+	},
+
+	"keys.cmd": {
+		"message": "Cmd"
+	},
+
+	"keys.ctrl": {
+		"message": "Ctrl"
+	},
+
+	"keys.shift": {
+		"message": "Shift"			   
+	}
+}
