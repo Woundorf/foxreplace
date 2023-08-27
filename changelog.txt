@@ -1,4 +1,5 @@
 * Replace with function (#214). Thanks to Styx Meiseles.
+* Hindi translation. Thanks to Prasanta Hembram.
 
 v2.5.0 (2022-12-03)
 * A space in text and whole words modes matches any number and type of whitespace (#113). Thanks to dan soucy.
