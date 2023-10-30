@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2020 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2023 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -88,8 +88,8 @@ const Substitution = (() => {
               const re = /\$[\$\&\`\']/g;
               const fragments = output.split(re);
               const nFragments = fragments.length;
-              const result = fragments[0];
-              const i = fragments[0].length + 1;    // index of the char after the $
+              let result = fragments[0];
+              let i = fragments[0].length + 1;    // index of the char after the $
               for (let j = 1; j < nFragments; j++) {
                 const c = output.charAt(i);
                 if (c == "$") result += "$";

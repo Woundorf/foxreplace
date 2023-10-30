@@ -1,3 +1,6 @@
+v2.6.1 (2023-10-30)
+* Fix URL and some whole words replacements not working since last update (#355).
+
 v2.6.0 (2023-08-30)
 * Replace with function (#214). Thanks to Styx Meiseles.
 * Hindi translation. Thanks to Prasanta Hembram.
