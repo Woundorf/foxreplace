@@ -68,14 +68,11 @@ const Substitution = (() => {
       if (string === undefined || string === null) return string;
 
       switch (this.inputType) {
-        case this.INPUT_REG_EXP:
         case this.INPUT_TEXT:
+        case this.INPUT_REG_EXP:
           // necessary according to https://stackoverflow.com/q/1520800
           this.regExp.lastIndex = 0;
-
-          return (this.outputType === this.OUTPUT_FUNCTION) ?
-            this.replaceWithFn(this.regExp, string) :
-            string.replace(this.regExp, unescape(this.output));
+          return (this.outputType === this.OUTPUT_FUNCTION) ? replaceWithFunction(string, this.regExp, this.output) : string.replace(this.regExp, unescape(this.output));
 
         case this.INPUT_WHOLE_WORDS:
           // necessary according to https://stackoverflow.com/q/1520800
@@ -101,44 +98,11 @@ const Substitution = (() => {
               }
               return result;
             }
-            return (this.outputType === this.OUTPUT_FUNCTION) ?
-              this.replaceWithFn(this.output, word) :
-              word;
+            else {
+              return word;
+            }
           });
-
       }
-
-    }
-
-    /**
-     *
-     * @remarks
-     * `this.output` will run as the `return` statement to `string.replace` and can use the same variables mentioned in
-     *   [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_function_as_the_replacement)
-     *
-     * @param pattern {string|RegExp} - matches against `curStrToReplace`
-     *   @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#parameters
-     * @param curStrToReplace {string}
-     *
-     * @return results of replacing `curStrToReplace` with the output of executing the user-provided JS code `this.output`.
-     *   if `pattern` fails to match `curStrToReplace`, this function returns the original `curStrToReplace`
-     */
-    replaceWithFn(pattern, curStrToReplace) {
-
-      const matchesInStr = this.regExp.exec(curStrToReplace);
-      const numCaptureGroups = matchesInStr ? matchesInStr.length - 1 : 0;
-      const captureGroupArgs = Array.from(Array(numCaptureGroups)).map((_elt, i) => `p${i+1}`);
-
-      if (!matchesInStr) {
-        return curStrToReplace;
-      }
-
-      // MDN rates Function as more secure than eval. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#Do_not_ever_use_eval!
-      // decision to put user-input as the `return` of the function because:
-      //   1. assumption: most users will create simple one-line functions
-      //   2. users can still write complex input via `(() => { /* arbitrary code; return $result */ })()`
-      const fn = Function('match', ...captureGroupArgs, 'offset', 'string', 'groups', `return ${this.output}`);
-      return curStrToReplace.replace(pattern, fn);
     }
 
     /**
@@ -231,6 +195,39 @@ const Substitution = (() => {
   // Returns the regular expression source for testing the end of a "word" ending with the given character.
   function wordEndRegExpSource(character) {
     return WORD_END_REGEXP_SOURCES[charCategory(character)];
+  }
+
+  /**
+   * Returns the given string with all occurrences of the given regexp replaced with a function created with the given returnExpression.
+   *
+   * @remarks
+   * `returnExpression` will run as the `return` statement to `string.replace` and can use the same variables mentioned in
+   *   [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_function_as_the_replacement)
+   *
+   * @param string {string} - input string to be replaced
+   * @param regExp {RegExp} - regular expression that is to be matched against `string`; it must have the global flag
+   * @param returnExpression {string} - JavaScript expression to be used as the return statement of the replacing function
+   *
+   * @return results of replacing `string` with the output of executing the user-provided JS code `returnExpression`.
+   *         If `regExp` fails to match `string`, this function returns the original `string`.
+   */
+  function replaceWithFunction(string, regExp, returnExpression) {
+    const matchesInString = regExp.exec(string);
+
+    if (!matchesInString) {
+      return string;
+    }
+
+    const numCaptureGroups = matchesInString.length - 1;  // -1 because the first item is the full matched text
+    const captureGroupArgs = Array.from({ length: numCaptureGroups }, (e, i) => `p${i+1}`);
+
+    // MDN rates Function as more secure than eval. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#Do_not_ever_use_eval!
+    // decision to put user-input as the `return` of the function because:
+    //   1. assumption: most users will create simple one-line functions
+    //   2. users can still write complex input via `(() => { /* arbitrary code; return $result */ })()`
+    const replacer = Function('match', ...captureGroupArgs, 'offset', 'string', 'groups', `return ${returnExpression};`);
+
+    return string.replace(regExp, replacer);
   }
 
   return Substitution;
