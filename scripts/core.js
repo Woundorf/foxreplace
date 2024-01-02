@@ -72,33 +72,48 @@ const Substitution = (() => {
         case this.INPUT_REG_EXP:
           // necessary according to https://stackoverflow.com/q/1520800
           this.regExp.lastIndex = 0;
-          return (this.outputType === this.OUTPUT_FUNCTION) ? replaceWithFunction(string, this.regExp, this.output) : string.replace(this.regExp, unescape(this.output));
+          if (this.outputType === this.OUTPUT_FUNCTION) {
+            return replaceWithFunction(string, this.regExp, this.output);
+          }
+          else {
+            return string.replace(this.regExp, unescape(this.output));
+          }
 
         case this.INPUT_WHOLE_WORDS:
           // necessary according to https://stackoverflow.com/q/1520800
           this.regExp.lastIndex = 0;
           return string.replace(this.regExp, (word, index, string) => {
-            // the following block has to do with correct functioning of replace whole words with non-ASCII characters
-            // including respecting the special strings $$, $&, etc
             if (index === 0 || this.firstCharCategory != charCategory(string.charAt(index - 1))) {
-              const output = unescape(this.output);
-              const re = /\$[\$\&\`\']/g;
-              const fragments = output.split(re);
-              const nFragments = fragments.length;
-              let result = fragments[0];
-              let i = fragments[0].length + 1;    // index of the char after the $
-              for (let j = 1; j < nFragments; j++) {
-                const c = output.charAt(i);
-                if (c == "$") result += "$";
-                else if (c == "&") result += word;
-                else if (c == "`") result += string.slice(0, index);
-                else if (c == "'") result += string.slice(index + word.length);
-                result += fragments[j];
-                i += 2 + fragments[j].length;
+              // The match is actually a whole word (match at the beginning of the string or
+              // the first matched character belongs in a different category than the preceding one)
+              if (this.outputType === this.OUTPUT_FUNCTION) {
+                // Replace the word with the user function
+                const replacer = Function('match', 'offset', 'string', `return ${this.output};`);
+                return replacer(word, index, string);
               }
-              return result;
+              else {
+                // We have to deal with the special patterns because they are not applied inside the function
+                const output = unescape(this.output);
+                const re = /\$[\$\&\`\']/g;
+                const fragments = output.split(re);
+                const nFragments = fragments.length;
+                let result = fragments[0];
+                let i = fragments[0].length + 1;    // index of the char after the $
+                for (let j = 1; j < nFragments; j++) {
+                  const c = output.charAt(i);
+                  if (c == "$") result += "$";
+                  else if (c == "&") result += word;
+                  else if (c == "`") result += string.slice(0, index);
+                  else if (c == "'") result += string.slice(index + word.length);
+                  result += fragments[j];
+                  i += 2 + fragments[j].length;
+                }
+                return result;
+              }
             }
             else {
+              // The match is not a whole word (the first matched character belongs in the same cateory that the preceding one)
+              // Return the word unmodified
               return word;
             }
           });
@@ -205,7 +220,7 @@ const Substitution = (() => {
    *   [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_function_as_the_replacement)
    *
    * @param string {string} - input string to be replaced
-   * @param regExp {RegExp} - regular expression that is to be matched against `string`; it must have the global flag
+   * @param regExp {RegExp} - regular expression that is to be matched against `string`
    * @param returnExpression {string} - JavaScript expression to be used as the return statement of the replacing function
    *
    * @return results of replacing `string` with the output of executing the user-provided JS code `returnExpression`.
