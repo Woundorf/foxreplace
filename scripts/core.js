@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2023 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2024 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -125,8 +125,8 @@ const Substitution = (() => {
      */
     replaceWithFn(pattern, curStrToReplace) {
 
-      const matchesInStr = curStrToReplace.match(this.regExp)
-      const numCaptureGroups = matchesInStr ? matchesInStr.length : 0;
+      const matchesInStr = this.regExp.exec(curStrToReplace);
+      const numCaptureGroups = matchesInStr ? matchesInStr.length - 1 : 0;
       const captureGroupArgs = Array.from(Array(numCaptureGroups)).map((_elt, i) => `p${i+1}`);
 
       if (!matchesInStr) {
