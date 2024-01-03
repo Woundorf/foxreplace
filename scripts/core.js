@@ -50,9 +50,9 @@ const Substitution = (() => {
             // for newlines, non-breaking spaces, multiple spaces, etc.,
             // which the browser renders as a single space
             const spaceyInput = unicodeInput.replaceAll('\\u0020', '\\s+');
+            const prefix = wordBeginRegExpSource(unescapedInput.charAt(0));
             const suffix = wordEndRegExpSource(unescapedInput.charAt(unescapedInput.length - 1));
-            this.regExp = new XRegExp(spaceyInput + suffix, this.caseSensitive ? "g" : "gi");
-            this.firstCharCategory = charCategory(unescapedInput.charAt(0));
+            this.regExp = new XRegExp(prefix + spaceyInput + suffix, this.caseSensitive ? "g" : "gi");
           }
           break;
         case this.INPUT_REG_EXP:
@@ -72,55 +72,14 @@ const Substitution = (() => {
         this.#createOutputFunction(string);
       }
 
-      switch (this.inputType) {
-        case this.INPUT_TEXT:
-        case this.INPUT_REG_EXP:
-          // necessary according to https://stackoverflow.com/q/1520800
-          this.regExp.lastIndex = 0;
-          if (this.outputType === this.OUTPUT_FUNCTION) {
-            return string.replace(this.regExp, this.#outputFunction);
-          }
-          else {
-            return string.replace(this.regExp, unescape(this.output));
-          }
+      // necessary according to https://stackoverflow.com/q/1520800
+      this.regExp.lastIndex = 0;
 
-        case this.INPUT_WHOLE_WORDS:
-          // necessary according to https://stackoverflow.com/q/1520800
-          this.regExp.lastIndex = 0;
-          return string.replace(this.regExp, (word, index, string) => {
-            if (index === 0 || this.firstCharCategory != charCategory(string.charAt(index - 1))) {
-              // The match is actually a whole word (match at the beginning of the string or
-              // the first matched character belongs in a different category than the preceding one)
-              if (this.outputType === this.OUTPUT_FUNCTION) {
-                // Replace the word with the user function
-                return this.#outputFunction(word, index, string);
-              }
-              else {
-                // We have to deal with the special patterns because they are not applied inside the function
-                const output = unescape(this.output);
-                const re = /\$[\$\&\`\']/g;
-                const fragments = output.split(re);
-                const nFragments = fragments.length;
-                let result = fragments[0];
-                let i = fragments[0].length + 1;    // index of the char after the $
-                for (let j = 1; j < nFragments; j++) {
-                  const c = output.charAt(i);
-                  if (c == "$") result += "$";
-                  else if (c == "&") result += word;
-                  else if (c == "`") result += string.slice(0, index);
-                  else if (c == "'") result += string.slice(index + word.length);
-                  result += fragments[j];
-                  i += 2 + fragments[j].length;
-                }
-                return result;
-              }
-            }
-            else {
-              // The match is not a whole word (the first matched character belongs in the same cateory that the preceding one)
-              // Return the word unmodified
-              return word;
-            }
-          });
+      if (this.outputType === this.OUTPUT_FUNCTION) {
+        return string.replace(this.regExp, this.#outputFunction);
+      }
+      else {
+        return string.replace(this.regExp, unescape(this.output));
       }
     }
 
@@ -244,12 +203,24 @@ const Substitution = (() => {
     else return SEPARATOR_CHAR;
   }
 
+  // Regular expression sources for testing "word" begins.
+  const WORD_BEGIN_REGEXP_SOURCES = [
+    "(?<!" + WORD_CHAR_REGEXP_SOURCE + ")",     // word begin
+    "(?<!" + NON_WORD_CHAR_REGEXP_SOURCE + ")", // non-word "word" begin
+    "(?<!" + SEPARATOR_CHAR_REGEXP_SOURCE + ")" // separator "word" begin
+  ];
+
   // Regular expression sources for testing "word" ends.
   const WORD_END_REGEXP_SOURCES = [
     "(?!" + WORD_CHAR_REGEXP_SOURCE + ")",      // word end
     "(?!" + NON_WORD_CHAR_REGEXP_SOURCE + ")",  // non-word "word" end
     "(?!" + SEPARATOR_CHAR_REGEXP_SOURCE + ")"  // separator "word" end
   ];
+
+  // Returns the regular expression source for testing the begin of a "word" beginning with the given character.
+  function wordBeginRegExpSource(character) {
+    return WORD_BEGIN_REGEXP_SOURCES[charCategory(character)];
+  }
 
   // Returns the regular expression source for testing the end of a "word" ending with the given character.
   function wordEndRegExpSource(character) {
