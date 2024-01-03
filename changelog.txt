@@ -1,3 +1,4 @@
+v2.6.2 (2024-01-03)
 * Fixed bug related to unrecognized parameters of the substitution function (#362).
 * Fixed bug when replacing whole words with a function.
 * Optimizations and code simplification.
