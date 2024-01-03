@@ -1,3 +1,8 @@
+* Fixed bug related to unrecognized parameters of the substitution function (#362).
+* Fixed bug when replacing whole words with a function.
+* Optimizations and code simplification.
+* Compatibility with Firefox 90 and later.
+
 v2.6.1 (2023-10-30)
 * Fix URL and some whole words replacements not working since last update (#355).
 
