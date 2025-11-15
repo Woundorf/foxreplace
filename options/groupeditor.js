@@ -1,6 +1,6 @@
 /** ***** BEGIN LICENSE BLOCK *****
  *
- *  Copyright (C) 2019 Marc Ruiz Altisent. All rights reserved.
+ *  Copyright (C) 2025 Marc Ruiz Altisent. All rights reserved.
  *
  *  This file is part of FoxReplace.
  *
@@ -159,7 +159,7 @@ var groupEditor = (() => {
         field: "input",
         cellRenderer(params) {
           let text = params.value === "" ? browser.i18n.getMessage("list.inputHint") : escapeHtml(params.value);
-          if (params.node.error) text += ` <i class="warning sign icon" title="${params.node.error}"></i>`;
+          if (params.node.error) text += ` <i class="fas fa-exclamation-triangle" title="${params.node.error}"></i>`;
           return text;
         }
       },
@@ -527,7 +527,7 @@ var groupEditor = (() => {
       substitutionsGridOptions.api.forEachNode(node => {
         if (node.error) error = true;
       });
-      error = error && substitutionsGridOptions.api.getModel().getRowCount() <= 1;
+      error = error || substitutionsGridOptions.api.getModel().getRowCount() <= 1;
       api.setQuickFilter(document.getElementById('substitutionsSearchBar').value);
       return !error;
     },
